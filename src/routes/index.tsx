@@ -1475,6 +1475,14 @@ function Beliefs() {
 function FAQ() {
   const faqs = [
     {
+      q: "Where do I park?",
+      a: "Park near 212 Valley Brook Road and follow the group toward the Montour Peters Trail.",
+    },
+    {
+      q: "Are there bathrooms?",
+      a: "Check the meeting-point details before you come, since restroom access can depend on what is open at that hour.",
+    },
+    {
       q: "Do I need to be fast?",
       a: "No. We have walkers, joggers, comeback runners, and people training for races. If you can move for 30 minutes, you can come.",
     },
