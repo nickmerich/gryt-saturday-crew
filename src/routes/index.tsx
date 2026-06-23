@@ -1,10 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import heroImgAsset from "@/assets/hero-night-run.png.asset.json";
-import heroImg from "@/assets/hero-run.jpg";
-import circleImg from "@/assets/circle-up.jpg";
-import foundersImg from "@/assets/founders.jpg";
+import photo1 from "@/assets/photos/run-club-1.jpg.asset.json";
+import photo2 from "@/assets/photos/run-club-2.jpg.asset.json";
+import photo3 from "@/assets/photos/run-club-3.jpg.asset.json";
+import photo4 from "@/assets/photos/run-club-4.jpg.asset.json";
+import photo5 from "@/assets/photos/run-club-5.jpg.asset.json";
+import photo6 from "@/assets/photos/run-club-6.jpg.asset.json";
 import grytBearAsset from "@/assets/gryt-bear.png.asset.json";
+
+const heroImgAsset = photo1;
+const heroImg = photo4.url;
+const circleImg = photo6.url;
+const foundersImg = photo2.url;
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -866,6 +873,21 @@ function Community() {
             </span>
           </div>
         </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
+          <img
+            src={photo3.url}
+            alt="Cooling down on the trail after a Saturday run"
+            className="block w-full h-[clamp(220px,30vw,360px)] object-cover border border-paper/15"
+          />
+          <img
+            src={photo5.url}
+            alt="Three runners heading down the trail at sunrise"
+            className="block w-full h-[clamp(220px,30vw,360px)] object-cover border border-paper/15"
+          />
+        </div>
+
+
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="border border-paper/15 p-7 flex flex-col">
