@@ -193,8 +193,8 @@ function Hero() {
           <div className="absolute left-[18px] top-[18px] -right-[18px] -bottom-[18px] bg-blue" />
           <div className="relative overflow-hidden border border-paper/10">
             <img
-              src={heroImg}
-              alt="GRYT runners on the Montour Trail"
+              src={heroImgAsset.url}
+              alt="GRYT runner at night — motion, grit, and forward momentum"
               className="block w-full h-[520px] object-cover"
             />
             <div className="absolute left-0 right-0 bottom-0 flex items-end justify-between gap-3 px-4 pt-5 pb-4 bg-gradient-to-t from-black/85 to-transparent">
