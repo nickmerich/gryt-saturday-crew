@@ -434,7 +434,7 @@ function Founders() {
             width={1280}
             height={1600}
             loading="lazy"
-            className="w-full aspect-[4/5] object-cover grayscale border-2 border-paper/15 relative"
+            className="w-full aspect-[4/5] object-cover grayscale border-2 border-paper/15"
           />
         </div>
         <div className="md:col-span-7">
