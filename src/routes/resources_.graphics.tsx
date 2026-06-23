@@ -179,9 +179,9 @@ function GraphicsPage() {
                       Notify Me
                     </span>
                   ) : (
-                    <a href="#" className="btn-primary">
-                      Download {g.format.split(" ")[0]} →
-                    </a>
+                    <span className="inline-flex items-center px-5 py-2.5 text-xs font-bold uppercase tracking-[0.12em] border border-paper/25 text-paper/55">
+                      Coming soon
+                    </span>
                   )}
                 </div>
               </div>

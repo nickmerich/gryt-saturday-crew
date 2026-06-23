@@ -238,7 +238,9 @@ export function SiteFooter() {
                 Resources
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/grytclub/"
+                target="_blank"
+                rel="noopener"
                 className="eyebrow text-paper/75 hover:text-blue transition-colors"
               >
                 Instagram

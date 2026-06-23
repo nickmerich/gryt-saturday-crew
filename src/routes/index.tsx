@@ -1450,11 +1450,14 @@ function Community() {
         </div>
 
         <div className="flex flex-wrap gap-3.5 mt-9">
-          <a href={STRAVA_CLUB} target="_blank" rel="noopener" className="btn-primary">
-            Join the chat
+          <a href="/#join" className="btn-primary">
+            RSVP for this Saturday →
+          </a>
+          <a href={STRAVA_CLUB} target="_blank" rel="noopener" className="btn-ghost">
+            Join the Strava club
           </a>
           <a href={STRAVA_EVENT} target="_blank" rel="noopener" className="btn-ghost">
-            View the Strava event
+            View this week's Strava event
           </a>
         </div>
       </div>
@@ -1616,11 +1619,11 @@ function FinalCTA() {
           Saturday. 7 AM. McMurray.
         </p>
         <div className="flex gap-3.5 justify-center flex-wrap">
-          <a href={STRAVA_EVENT} target="_blank" rel="noopener" className="btn-primary">
+          <a href="/#join" className="btn-primary">
             I'm coming this Saturday →
           </a>
           <a href={STRAVA_CLUB} target="_blank" rel="noopener" className="btn-ghost">
-            Join the chat
+            Join the Strava club
           </a>
         </div>
         <p className="mt-8 text-[13px] text-paper/55">We'll be by the trailhead.</p>
@@ -1756,7 +1759,9 @@ function Footer() {
                 Group Message
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/grytclub/"
+                target="_blank"
+                rel="noopener"
                 className="eyebrow text-paper/75 hover:text-blue transition-colors"
               >
                 Instagram

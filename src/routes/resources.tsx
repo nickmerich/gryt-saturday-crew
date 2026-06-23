@@ -442,7 +442,9 @@ function Merch() {
                     </span>
                   ) : (
                     <a
-                      href="#"
+                      href="https://cidbxi-3p.myshopify.com/"
+                      target="_blank"
+                      rel="noopener"
                       className="btn-primary"
                       style={{ fontFamily: "var(--font-body)" }}
                     >
