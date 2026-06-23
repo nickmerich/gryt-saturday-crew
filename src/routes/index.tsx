@@ -388,19 +388,6 @@ function RSVP() {
     }
   };
 
-  const calHref =
-    "https://calendar.google.com/calendar/render?action=TEMPLATE" +
-    "&text=" +
-    encodeURIComponent("GRYT Run #11") +
-    "&dates=20260627T110000Z/20260627T120000Z" +
-    "&details=" +
-    encodeURIComponent(
-      "GRYT Run Club — Saturday 7 AM. Walk, jog, or run the Montour/Peters Trail. No one gets dropped. " +
-        STRAVA_CLUB,
-    ) +
-    "&location=" +
-    encodeURIComponent("212 Valley Brook Road, McMurray, PA");
-
   return (
     <section
       id="join"
