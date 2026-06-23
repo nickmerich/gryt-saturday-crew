@@ -1,4 +1,5 @@
-import { createFileRoute, Link, useServerFn } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { useMemo, useState, type FormEvent } from "react";
 import { signWaiver } from "@/lib/waiver.functions";
 import grytBearAsset from "@/assets/gryt-bear.png.asset.json";

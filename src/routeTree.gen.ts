@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WaiverRouteImport } from './routes/waiver'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
@@ -19,6 +20,11 @@ import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/e
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
 
+const WaiverRoute = WaiverRouteImport.update({
+  id: '/waiver',
+  path: '/waiver',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -70,6 +76,7 @@ const LovableEmailAuthPreviewRoute = LovableEmailAuthPreviewRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/waiver': typeof WaiverRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
@@ -81,6 +88,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/waiver': typeof WaiverRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
@@ -93,6 +101,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/waiver': typeof WaiverRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
@@ -106,6 +115,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/waiver'
     | '/email/unsubscribe'
     | '/api/public/rsvp'
     | '/lovable/email/suppression'
@@ -117,6 +127,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/waiver'
     | '/email/unsubscribe'
     | '/api/public/rsvp'
     | '/lovable/email/suppression'
@@ -128,6 +139,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/waiver'
     | '/email/unsubscribe'
     | '/api/public/rsvp'
     | '/lovable/email/suppression'
@@ -140,6 +152,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  WaiverRoute: typeof WaiverRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   ApiPublicRsvpRoute: typeof ApiPublicRsvpRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
@@ -152,6 +165,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/waiver': {
+      id: '/waiver'
+      path: '/waiver'
+      fullPath: '/waiver'
+      preLoaderRoute: typeof WaiverRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -220,6 +240,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  WaiverRoute: WaiverRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   ApiPublicRsvpRoute: ApiPublicRsvpRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
