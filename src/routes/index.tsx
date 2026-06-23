@@ -772,7 +772,7 @@ function TheRun() {
 
 function Founders() {
   const stats: Array<[string, string]> = [
-    ["27", "marathons finished combined"],
+    ["27", "marathons — Nick & Laura, combined"],
     ["2014", "running together since"],
     ["7–15", "regulars each Saturday"],
     ["33", "total Strava members"],
