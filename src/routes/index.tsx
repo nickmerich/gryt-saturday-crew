@@ -1808,6 +1808,9 @@ function Footer() {
             <p className="text-sm leading-[1.6] text-paper/70 max-w-[340px]">
               Pittsburgh, PA · Saturdays · 7 AM · Montour / Peters Trail.
             </p>
+            <p className="text-sm leading-[1.6] text-paper/70 max-w-[340px] mt-3">
+              Built for Pittsburgh runners, South Hills parents, former athletes, and anyone trying to get consistent again.
+            </p>
           </div>
           <div>
             <MissionStamp size="md" align="left" className="text-paper" />
