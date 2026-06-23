@@ -187,4 +187,14 @@
   }
 
   .stamp-rule { border-top: 2px solid var(--paper); }
+
+  @keyframes grytmarq {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: grytmarq 32s linear infinite;
+  }
 }

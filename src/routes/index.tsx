@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 import heroImg from "@/assets/hero-run.jpg";
 import circleImg from "@/assets/circle-up.jpg";
 import foundersImg from "@/assets/founders.jpg";
@@ -10,7 +11,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "The Saturday run club for people getting their edge back. Former athletes, busy parents, comeback runners. Free, all paces, Montour / Peters Trail.",
+          "A Pittsburgh run club for former athletes, busy parents, and comeback runners. Every Saturday at 7 AM on the Montour / Peters Trail. Walk, jog, or run. No one gets dropped.",
       },
       { property: "og:title", content: "gryt run club · Saturdays 7 AM" },
       {
@@ -24,12 +25,9 @@ export const Route = createFileRoute("/")({
   component: Landing,
 });
 
-const PRIMARY_CTA = "I'm coming this Saturday";
-const SECONDARY_CTA = "Join the chat";
-
-function Wordmark({ className = "" }: { className?: string }) {
-  return <span className={`wordmark text-2xl ${className}`}>gryt</span>;
-}
+const STRAVA_CLUB = "https://www.strava.com/clubs/1708552";
+const STRAVA_EVENT =
+  "https://www.strava.com/clubs/1708552/group_events/3480014931408029926";
 
 function MonogramG({ className = "" }: { className?: string }) {
   return (
@@ -55,121 +53,417 @@ function MonogramG({ className = "" }: { className?: string }) {
   );
 }
 
-function MissionStamp({ size = "md" }: { size?: "sm" | "md" | "lg" }) {
-  const text =
-    size === "lg"
-      ? "text-4xl md:text-5xl"
-      : size === "sm"
-        ? "text-lg"
-        : "text-2xl md:text-3xl";
-  return (
-    <div className="inline-flex flex-col items-start gap-1">
-      <span className={`display-condensed text-paper ${text} tracking-[0.04em]`}>DO HARD</span>
-      <span className={`display-condensed text-paper ${text} tracking-[0.04em]`}>THINGS</span>
-      <span className={`display-condensed text-paper ${text} tracking-[0.04em]`}>TOGETHER</span>
-      <span className={`${size === "sm" ? "slash" : "slash-lg"} mt-2`} />
-    </div>
-  );
-}
-
-function GrytPoster({ className = "" }: { className?: string }) {
-  return (
-    <div className={`relative inline-block ${className}`}>
-      <span className="display-condensed text-paper text-7xl md:text-9xl tracking-[0.01em] block leading-none">
-        GRYT
-      </span>
-      <span
-        className="absolute left-0 right-0 top-1/2 h-2 bg-blue"
-        style={{ transform: "translateY(-50%) skewY(-6deg)" }}
-        aria-hidden="true"
-      />
-    </div>
-  );
-}
-
 function Nav() {
   return (
-    <header className="absolute top-0 left-0 right-0 z-30">
-      <div className="mx-auto max-w-7xl px-6 py-6 flex items-center justify-between">
-        <a href="/" className="flex items-center gap-3">
-          <MonogramG className="h-8 w-8" />
-          <Wordmark />
+    <nav className="sticky top-0 z-50 bg-ink border-b border-paper/15">
+      <div className="flex items-center justify-between px-5 sm:px-8 md:px-12 h-[68px]">
+        <a href="#top" className="flex items-center gap-3">
+          <MonogramG className="h-11 w-11" />
+          <span className="eyebrow text-blue !tracking-[0.22em]">Run Club</span>
         </a>
-        <nav className="hidden md:flex items-center gap-8 eyebrow text-paper">
-          <a href="#run" className="hover:text-blue transition-colors">The Run</a>
-          <a href="#who" className="hover:text-blue transition-colors">Who It's For</a>
-          <a href="#first" className="hover:text-blue transition-colors">First Time</a>
-          <a href="#faq" className="hover:text-blue transition-colors">FAQ</a>
-        </nav>
-        <a href="#rsvp" className="hidden sm:inline-flex btn-primary !py-2 !px-4 !text-sm">RSVP</a>
+        <div className="hidden md:flex items-center gap-8">
+          <a href="#details" className="eyebrow text-paper/80 hover:text-blue transition-colors">
+            The Run
+          </a>
+          <a href="#first" className="eyebrow text-paper/80 hover:text-blue transition-colors">
+            First Time
+          </a>
+          <a href="#founders" className="eyebrow text-paper/80 hover:text-blue transition-colors">
+            Who We Are
+          </a>
+          <a href="#faq" className="eyebrow text-paper/80 hover:text-blue transition-colors">
+            FAQ
+          </a>
+        </div>
+        <a
+          href="#join"
+          className="bg-blue text-ink px-4 sm:px-5 py-3 text-xs font-bold uppercase tracking-[0.1em] hover:bg-paper transition-colors"
+          style={{ fontFamily: "var(--font-body)" }}
+        >
+          RSVP Saturday
+        </a>
       </div>
-    </header>
+    </nav>
   );
 }
 
 function Hero() {
+  const stats: Array<[string, string]> = [
+    ["7–15", "regulars each Saturday"],
+    ["33", "on the Strava club"],
+    ["27", "marathons combined"],
+    ["0", "runners dropped, ever"],
+  ];
+
   return (
-    <section className="relative min-h-screen w-full overflow-hidden">
-      <img
-        src={heroImg}
-        alt="Group of runners on a tree-lined trail at dawn"
-        width={1920}
-        height={1280}
-        className="absolute inset-0 h-full w-full object-cover opacity-60"
+    <section
+      id="top"
+      className="relative overflow-hidden text-paper bg-ink py-16 md:py-24 lg:py-28 px-6 sm:px-12 lg:px-24"
+    >
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse at 18% 22%, rgba(70,70,70,0.5), transparent 55%), radial-gradient(ellipse at 88% 85%, rgba(4,4,4,0.95), transparent 60%), #0a0a0a",
+        }}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/50 to-ink" />
-      <div className="absolute top-1/3 -left-10 w-[60%] h-3 diag-stripes opacity-70 rotate-[-8deg]" />
+      <div
+        className="absolute inset-0 pointer-events-none mix-blend-overlay"
+        style={{
+          backgroundImage:
+            "radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1.2px), radial-gradient(rgba(0,0,0,0.55) 1px, transparent 1.2px)",
+          backgroundSize: "3px 3px, 5px 5px",
+        }}
+      />
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(82deg, transparent 12%, rgba(137,207,240,0.6) 12.4%, rgba(137,207,240,0.6) 13.0%, transparent 13.4%), linear-gradient(82deg, transparent 63%, rgba(137,207,240,0.4) 63.4%, rgba(137,207,240,0.4) 64.0%, transparent 64.4%)",
+        }}
+      />
 
-      <Nav />
+      <div className="relative max-w-[1240px] mx-auto flex flex-wrap items-center gap-10 lg:gap-16">
+        <div className="flex-1 min-w-[300px] basis-[480px]">
+          <div className="eyebrow-blue eyebrow mb-6 flex items-center gap-2.5 flex-wrap">
+            <span className="w-2 h-2 bg-blue rounded-full" />
+            Live in Pittsburgh · Saturdays at 7 AM · McMurray, PA
+          </div>
+          <h1 className="display-condensed text-paper text-[clamp(48px,7.2vw,108px)] leading-[0.9]">
+            You used to have a team.
+            <br />
+            Now you have{" "}
+            <span className="relative inline-block">
+              Saturday.
+              <span
+                className="absolute left-[-2px] right-[-2px] bottom-[0.06em] h-[0.11em] bg-blue"
+                style={{ transform: "skewX(-8deg)" }}
+              />
+            </span>
+          </h1>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 pt-40 pb-24 md:pt-48 md:pb-32">
-        <div className="eyebrow eyebrow-blue mb-8">
-          LIVE IN PITTSBURGH · SATURDAYS AT 7 AM · MCMURRAY, PA
+          <div className="mt-7 max-w-[540px] flex flex-col gap-3.5">
+            <p className="text-lg leading-[1.55] text-paper/85">
+              A Pittsburgh run club for former athletes, busy parents, and comeback runners. Every
+              Saturday at 7 AM on the Montour / Peters Trail in McMurray — walk, jog, or run, then
+              hang in the lot after.
+            </p>
+            <p className="text-base md:text-[17px] font-semibold leading-[1.5] text-paper">
+              No pace requirement. No awkward first day. No one gets dropped.
+            </p>
+          </div>
+
+          <div className="mt-7 flex flex-wrap border border-paper/20 max-w-[560px]">
+            {stats.map(([n, l], i) => (
+              <div
+                key={l}
+                className={`flex-1 basis-[130px] px-4 py-4 ${
+                  i !== stats.length - 1 ? "border-r border-paper/15" : ""
+                }`}
+              >
+                <div className="display-condensed text-blue text-[34px] leading-[0.85]">{n}</div>
+                <div className="text-[11px] font-semibold tracking-[0.06em] text-paper/70 mt-1.5 uppercase">
+                  {l}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-7 flex flex-wrap gap-3.5">
+            <a href="#join" className="btn-primary">
+              RSVP for this Saturday →
+            </a>
+            <a
+              href={STRAVA_CLUB}
+              target="_blank"
+              rel="noopener"
+              className="btn-ghost"
+            >
+              Join the Strava chat
+            </a>
+          </div>
+          <p className="mt-5 text-[13px] leading-[1.5] text-paper/60">
+            Most people come alone the first time. New? Come 10 minutes early — we'll be by the
+            trailhead.
+          </p>
         </div>
 
-        <h1 className="display text-paper text-5xl sm:text-6xl md:text-8xl max-w-5xl">
-          You used to have a team.
-          <br />
-          <span className="text-blue">Now you have Saturday.</span>
-        </h1>
-
-        <p className="mt-8 max-w-2xl text-lg md:text-xl text-paper/80 leading-relaxed">
-          gryt is a Pittsburgh run club for former athletes, busy parents, comeback runners, and
-          anyone trying to get their edge back. We meet every Saturday at 7 AM on the Montour /
-          Peters Trail. Walk, jog, run, talk through mile two, and stay for coffee after.
-        </p>
-
-        <p className="mt-4 max-w-2xl text-base text-paper/60">
-          No pace requirement. No awkward first day. No one gets dropped.
-        </p>
-
-        <div className="mt-10 flex flex-wrap items-center gap-4">
-          <a href="#rsvp" className="btn-primary">{PRIMARY_CTA}</a>
-          <a href="#community" className="btn-ghost">{SECONDARY_CTA}</a>
-        </div>
-
-        <p className="mt-6 eyebrow text-paper/70">
-          First time? Arrive 10 minutes early. We'll be by the trailhead.
-        </p>
-
-        <div className="hidden lg:block absolute right-12 top-44 z-10">
-          <MissionStamp size="lg" />
+        <div className="relative flex-[0_1_400px] min-w-[260px]">
+          <div className="absolute left-[18px] top-[18px] -right-[18px] -bottom-[18px] bg-blue" />
+          <div className="relative overflow-hidden border border-paper/10">
+            <img
+              src={heroImg}
+              alt="GRYT runners on the Montour Trail"
+              className="block w-full h-[520px] object-cover"
+            />
+            <div className="absolute left-0 right-0 bottom-0 flex items-end justify-between gap-3 px-4 pt-5 pb-4 bg-gradient-to-t from-black/85 to-transparent">
+              <span className="display-condensed text-paper text-[22px] leading-none">
+                Montour / Peters Trail
+              </span>
+              <span className="text-[11px] font-semibold tracking-[0.16em] uppercase text-ink bg-blue px-2 py-1.5 whitespace-nowrap">
+                Sat · 7 AM
+              </span>
+            </div>
+          </div>
         </div>
       </div>
+    </section>
+  );
+}
 
-      <div className="relative z-10 border-t border-paper/15 bg-ink/60 backdrop-blur-sm">
-        <div className="mx-auto max-w-7xl px-6 py-5 flex flex-wrap items-center gap-x-8 gap-y-2">
-          <span className="eyebrow eyebrow-blue">REAL PEOPLE · REAL MILES · EVERY SATURDAY</span>
-          <span className="hidden md:inline text-paper/30">·</span>
-          {[
-            "25+ regulars",
-            "All paces welcome",
-            "Free forever",
-            "Coffee after",
-            "No one gets dropped",
-          ].map((item) => (
-            <span key={item} className="eyebrow text-paper/80">{item}</span>
-          ))}
+function Marquee() {
+  const items = [
+    "Real people",
+    "Real miles",
+    "7–15 regulars",
+    "All paces welcome",
+    "Free forever",
+    "Coffee after",
+    "No one gets dropped",
+  ];
+  const Row = ({ ariaHidden = false }: { ariaHidden?: boolean }) => (
+    <span className="flex" aria-hidden={ariaHidden}>
+      {items.map((t) => (
+        <span key={t} className="flex items-center">
+          <span
+            className="display-condensed text-ink px-5 text-[19px] tracking-[0.05em]"
+            style={{ fontWeight: 700 }}
+          >
+            {t}
+          </span>
+          <span className="text-ink/40">●</span>
+        </span>
+      ))}
+    </span>
+  );
+  return (
+    <>
+      <div className="bg-blue border-t-2 border-b-2 border-ink overflow-hidden py-4">
+        <div className="marquee-track">
+          <Row />
+          <Row ariaHidden />
+        </div>
+      </div>
+      <div className="bg-ink text-center py-3.5 px-6 border-b border-paper/10">
+        <span className="eyebrow text-paper/55">Built by Laura & Nick Merich</span>
+      </div>
+    </>
+  );
+}
+
+function RSVP() {
+  const [name, setName] = useState("");
+  const [contact, setContact] = useState("");
+  const [source, setSource] = useState("");
+  const [error, setError] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [invited, setInvited] = useState(false);
+
+  const submit = () => {
+    if (!name.trim() || !contact.trim()) {
+      setError(true);
+      return;
+    }
+    setError(false);
+    setSubmitted(true);
+  };
+
+  const invite = () => {
+    const text =
+      "Come run with GRYT this Saturday — 7 AM, Montour/Peters Trail in McMurray. Walk, jog, or run. No one gets dropped.";
+    const url = typeof location !== "undefined" ? location.href : STRAVA_CLUB;
+    if (typeof navigator !== "undefined" && navigator.share) {
+      navigator.share({ title: "GRYT Run Club", text, url }).catch(() => {});
+    } else if (typeof navigator !== "undefined" && navigator.clipboard) {
+      navigator.clipboard
+        .writeText(text + " " + url)
+        .then(() => setInvited(true))
+        .catch(() => setInvited(true));
+    } else {
+      setInvited(true);
+    }
+  };
+
+  const firstName = name.trim().split(" ")[0];
+  const calHref =
+    "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+    "&text=" +
+    encodeURIComponent("GRYT Run #11") +
+    "&dates=20260627T110000Z/20260627T120000Z" +
+    "&details=" +
+    encodeURIComponent(
+      "GRYT Run Club — Saturday 7 AM. Walk, jog, or run the Montour/Peters Trail. No one gets dropped. " +
+        STRAVA_CLUB,
+    ) +
+    "&location=" +
+    encodeURIComponent("212 Valley Brook Road, McMurray, PA");
+
+  return (
+    <section
+      id="join"
+      className="relative overflow-hidden bg-ink text-paper py-16 md:py-24 px-6 sm:px-12 lg:px-24 border-b border-paper/10"
+    >
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage:
+            "radial-gradient(rgba(137,207,240,0.12) 1.5px, transparent 2px)",
+          backgroundSize: "12px 12px",
+          maskImage: "radial-gradient(ellipse at 85% 10%, #000, transparent 60%)",
+          WebkitMaskImage: "radial-gradient(ellipse at 85% 10%, #000, transparent 60%)",
+        }}
+      />
+      <div className="relative max-w-[1080px] mx-auto flex flex-wrap gap-10 lg:gap-16 items-start">
+        <div className="flex-1 min-w-[300px] basis-[380px]">
+          <div className="eyebrow eyebrow-blue mb-4">Save your spot</div>
+          <h2 className="display-condensed text-paper text-[clamp(38px,5vw,68px)] mb-5">
+            RSVP for this Saturday.
+          </h2>
+          <p className="text-[17px] leading-[1.6] text-paper/80 max-w-[440px] mb-6">
+            Tell us you're coming and we'll send one nudge Friday and a wave Saturday morning.
+            That's it. No spam, no funnel — just a standing invite to the trailhead.
+          </p>
+          <div className="border-t border-paper/20 pt-5 flex flex-col gap-3 max-w-[440px]">
+            {[
+              ["WHEN", "GRYT Run #11 · Sat, Jun 27 · 7:00 AM"],
+              ["WHERE", "212 Valley Brook Road, McMurray · trail parking"],
+              ["FIRST?", "Most people come alone. Show up 10 min early."],
+            ].map(([k, v]) => (
+              <div key={k} className="flex gap-3 items-baseline">
+                <span className="display-condensed text-blue text-[15px] tracking-[0.06em] basis-[86px] shrink-0">
+                  {k}
+                </span>
+                <span className="text-[15px] text-paper/90">{v}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex-1 min-w-[300px] basis-[360px] bg-[#f4f2ed] text-ink p-7 md:p-9">
+          {!submitted ? (
+            <div>
+              <div className="display-condensed text-ink text-[26px] mb-5">
+                I'm in for Saturday
+              </div>
+              {[
+                {
+                  label: "First name",
+                  placeholder: "What do we call you?",
+                  value: name,
+                  set: setName,
+                  type: "text",
+                },
+                {
+                  label: "Email or phone",
+                  placeholder: "So we can send the reminder",
+                  value: contact,
+                  set: setContact,
+                  type: "text",
+                },
+              ].map((f) => (
+                <div key={f.label}>
+                  <label className="block text-[11px] font-bold tracking-[0.14em] uppercase text-ink/55 mb-1.5">
+                    {f.label}
+                  </label>
+                  <input
+                    value={f.value}
+                    onChange={(e) => f.set(e.target.value)}
+                    placeholder={f.placeholder}
+                    className="w-full text-base text-ink bg-white border-[1.5px] border-[#cfcabe] px-3.5 py-3 mb-4 outline-none focus:border-ink"
+                  />
+                </div>
+              ))}
+              <label className="block text-[11px] font-bold tracking-[0.14em] uppercase text-ink/55 mb-1.5">
+                How'd you find us?
+              </label>
+              <select
+                value={source}
+                onChange={(e) => setSource(e.target.value)}
+                className="w-full text-base text-ink bg-white border-[1.5px] border-[#cfcabe] px-3.5 py-3 mb-4 outline-none focus:border-ink"
+              >
+                <option value="">Pick one</option>
+                <option value="Friend">A friend</option>
+                <option value="Instagram">Instagram</option>
+                <option value="Strava">Strava</option>
+                <option value="Google">Google</option>
+                <option value="Trail">Saw you on the trail</option>
+                <option value="Other">Other</option>
+              </select>
+              {error && (
+                <div className="text-[13px] text-[#b23a2e] mb-3.5">
+                  Add your name and an email or phone so we can send the reminder.
+                </div>
+              )}
+              <button
+                onClick={submit}
+                className="w-full text-sm font-bold tracking-[0.1em] uppercase py-4 bg-ink text-paper hover:bg-[#3a7ca5] transition-colors"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                RSVP for this Saturday →
+              </button>
+              <p className="mt-3.5 text-xs leading-[1.5] text-ink/55 text-center">
+                Free, always. One reminder Friday, one Saturday. Unsubscribe anytime.
+              </p>
+            </div>
+          ) : (
+            <div>
+              <div className="flex items-center gap-2.5 mb-3.5">
+                <span className="w-[34px] h-[34px] bg-blue flex items-center justify-center display-condensed text-ink text-xl">
+                  ✓
+                </span>
+                <span className="display-condensed text-ink text-[24px]">
+                  {firstName ? `You're in, ${firstName}.` : "You're in."}
+                </span>
+              </div>
+              <p className="mb-4 text-[15px] leading-[1.6] text-ink/80">
+                We've got you down for <strong>GRYT Run #11</strong> — Saturday, Jun 27 at 7:00 AM.
+                Look for the group near the trail sign at 212 Valley Brook Road.
+              </p>
+              <div className="border-y border-[#d8d4cb] py-4 mb-5 flex flex-col gap-2">
+                <div className="text-[11px] font-bold tracking-[0.14em] uppercase text-ink/55">
+                  What to expect Saturday
+                </div>
+                {[
+                  "Park free at the trailhead lot — come 10 min early if it's your first time",
+                  "Quick circle-up at 7, then we move — walk, jog, or run your pace",
+                  "About 4 miles out and back · nobody gets dropped",
+                  "Coffee, water, and sometimes fruit in the lot after",
+                ].map((t) => (
+                  <div key={t} className="text-sm leading-[1.5] text-ink/80">
+                    · {t}
+                  </div>
+                ))}
+              </div>
+              <div className="flex flex-col gap-2.5">
+                <a
+                  href={calHref}
+                  target="_blank"
+                  rel="noopener"
+                  className="text-[13px] font-bold tracking-[0.1em] uppercase py-4 bg-ink text-paper text-center hover:bg-[#3a7ca5] transition-colors"
+                >
+                  Add to calendar
+                </a>
+                <button
+                  onClick={invite}
+                  className="text-[13px] font-bold tracking-[0.1em] uppercase py-4 bg-transparent text-ink border-[1.5px] border-ink hover:bg-ink hover:text-paper transition-colors"
+                >
+                  {invited ? "Copied — go send it" : "Invite a friend"}
+                </button>
+              </div>
+              <button
+                onClick={() => {
+                  setSubmitted(false);
+                  setName("");
+                  setContact("");
+                  setSource("");
+                  setInvited(false);
+                }}
+                className="mt-4 w-full bg-transparent text-xs font-semibold text-ink/55 underline"
+              >
+                RSVP someone else
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </section>
@@ -184,42 +478,44 @@ function QuickDetails() {
     ["Distance", "About 4 miles · out and back"],
     ["Pace", "Walk, jog, run · all welcome"],
     ["Cost", "$0 · always"],
-    ["After", "Coffee nearby"],
+    ["After", "Coffee, water, sometimes fruit in the lot"],
   ];
-
   return (
-    <section id="rsvp" className="relative concrete grain py-24 md:py-32">
-      <div className="relative mx-auto max-w-7xl px-6">
-        <div className="grid md:grid-cols-12 gap-12 items-start">
-          <div className="md:col-span-5">
-            <div className="eyebrow eyebrow-blue mb-5">SATURDAY · 7 AM</div>
-            <h2 className="display text-paper text-4xl md:text-6xl">
-              Saturday is <span className="text-blue">already planned.</span>
-            </h2>
-            <p className="mt-6 text-paper/75 text-lg leading-relaxed">
-              You do not need a training plan, a perfect week, or a fast pace. You just need shoes
-              and the decision to show up.
-            </p>
-            <a href="#community" className="mt-8 btn-primary">{PRIMARY_CTA}</a>
+    <section id="details" className="bg-[#f4f2ed] text-ink py-20 md:py-28 px-6 sm:px-12 lg:px-24">
+      <div className="max-w-[1100px] mx-auto flex flex-wrap gap-12 lg:gap-20 items-start">
+        <div className="flex-1 min-w-[280px] basis-[320px]">
+          <div className="eyebrow mb-4" style={{ color: "#3a7ca5" }}>
+            The plan is simple
           </div>
-
-          <div className="md:col-span-7">
-            <div className="border-2 border-paper/20 bg-ink/40">
-              {rows.map(([k, v], i) => (
-                <div
-                  key={k}
-                  className={`flex items-baseline gap-6 px-6 py-5 ${
-                    i !== rows.length - 1 ? "border-b border-paper/10" : ""
-                  }`}
-                >
-                  <span className="eyebrow text-blue w-24 shrink-0">{k}</span>
-                  <span className="font-[var(--font-display)] text-paper text-lg md:text-xl">
-                    {v}
-                  </span>
-                </div>
-              ))}
+          <h2 className="display-condensed text-ink text-[clamp(40px,5vw,68px)] mb-5">
+            Saturday is already planned.
+          </h2>
+          <p className="text-[17px] leading-[1.6] text-ink/75 max-w-[440px] mb-7">
+            You do not need a training plan, a perfect week, or a fast pace. You just need shoes and
+            the decision to show up.
+          </p>
+          <a
+            href="#join"
+            className="inline-block text-sm font-bold tracking-[0.1em] uppercase px-7 py-4 bg-ink text-paper hover:bg-[#3a7ca5] transition-colors"
+            style={{ fontFamily: "var(--font-body)" }}
+          >
+            I'm coming this Saturday
+          </a>
+        </div>
+        <div className="flex-1 min-w-[300px] basis-[420px] border-t-2 border-ink">
+          {rows.map(([k, v], i) => (
+            <div
+              key={k}
+              className={`flex justify-between gap-5 py-4 ${
+                i !== rows.length - 1 ? "border-b border-[#d8d4cb]" : ""
+              }`}
+            >
+              <span className="text-[11px] font-bold tracking-[0.16em] uppercase text-ink/45 shrink-0 basis-[78px]">
+                {k}
+              </span>
+              <span className="text-[17px] font-semibold text-right">{v}</span>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
@@ -228,23 +524,36 @@ function QuickDetails() {
 
 function CorePromise() {
   return (
-    <section className="bg-ink py-24 md:py-36 border-t border-paper/10">
-      <div className="mx-auto max-w-5xl px-6 text-center">
-        <div className="eyebrow eyebrow-blue mb-6">THE CORE PROMISE</div>
-        <h2 className="display text-paper text-4xl md:text-7xl">
+    <section className="relative overflow-hidden bg-ink text-paper py-24 md:py-32 px-6 sm:px-12 lg:px-24">
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: "radial-gradient(rgba(137,207,240,0.14) 1.5px, transparent 2px)",
+          backgroundSize: "11px 11px",
+          maskImage: "radial-gradient(ellipse at 90% 0%, #000, transparent 65%)",
+          WebkitMaskImage: "radial-gradient(ellipse at 90% 0%, #000, transparent 65%)",
+        }}
+      />
+      <div className="relative max-w-[960px] mx-auto">
+        <div className="eyebrow eyebrow-blue mb-6">The core promise</div>
+        <h2 className="display-condensed text-paper text-[clamp(40px,6vw,86px)] max-w-[880px] mb-9">
           At some point, fitness got <span className="text-blue">lonely.</span>
         </h2>
-        <p className="mt-10 text-paper/80 text-lg md:text-xl leading-relaxed max-w-3xl mx-auto">
-          You started squeezing workouts between work, kids, errands, and everything else on the
-          calendar. gryt gives you one standing appointment that does not move. Same time. Same
-          trail. Same kind of people. The ones who still want to push, even if life looks different
-          now.
-        </p>
-        <p className="mt-8 display-condensed text-blue text-3xl md:text-5xl">
-          You do not have to be fast.
-          <br />
-          You just have to be willing.
-        </p>
+        <div className="flex flex-col gap-5 max-w-[680px]">
+          <p className="text-[19px] leading-[1.6] text-paper/80">
+            You started squeezing workouts between work, kids, errands, and everything else on the
+            calendar. At some point, you used to have a team — and then you didn't.
+          </p>
+          <p className="text-[19px] leading-[1.6] text-paper/80">
+            GRYT gives you one standing appointment that does not move. Same time. Same trail. Same
+            kind of people. The ones who still want to push, even if life looks different now.
+          </p>
+          <p className="display-condensed text-paper text-[clamp(24px,3vw,38px)] pt-2">
+            You do not have to be fast.
+            <br />
+            You just have to be willing.
+          </p>
+        </div>
       </div>
     </section>
   );
@@ -253,46 +562,47 @@ function CorePromise() {
 function WhoItsFor() {
   const cards = [
     {
-      tag: "FORMER ATHLETE",
-      title: "You miss being around people who get it.",
-      body: "The quiet competitiveness. The jokes before the work. The part where nobody needs a speech because everyone already knows why they came. GRYT brings that back without making it complicated.",
+      tag: "01 — The comeback",
+      title: "You're a former athlete.",
+      body: "You miss being around people who get it. The quiet competitiveness. The jokes before the work. The part where nobody needs a speech because everyone already knows why they came. GRYT brings that back without making it complicated.",
     },
     {
-      tag: "PARENT",
-      title: "You need something that is yours.",
-      body: "Early enough that the day still works for everyone else. Saturday at 7 AM gives you the workout, the headspace, and the reset before most people are fully awake. Home before the day gets away from you.",
+      tag: "02 — The early hour",
+      title: "You're a parent.",
+      body: "You need something that is yours, early enough that the day still works for everyone else. Saturday at 7 AM gives you the workout, the headspace, and the reset before most people are fully awake. You can be home before the day gets away from you.",
     },
     {
-      tag: "COMEBACK",
+      tag: "03 — The rhythm",
       title: "You're getting consistent again.",
-      body: "Maybe you used to run. Maybe you're starting over. One Saturday is a run. Twelve Saturdays is a rhythm. Fifty Saturdays changes how you see yourself.",
+      body: "Maybe you used to run. Maybe you are starting over. Maybe you just need a reason not to bail when the alarm goes off. One Saturday is a run. Twelve Saturdays is a rhythm. Fifty Saturdays changes how you see yourself.",
     },
     {
-      tag: "COMMUNITY",
-      title: "You want a real crew.",
-      body: "Not another group chat you ignore. Not a networking event disguised as fitness. People who learn your name, notice when you miss, and make the miles go faster.",
+      tag: "04 — The crew",
+      title: "You want real community.",
+      body: "Not another group chat you ignore. Not a networking event disguised as fitness. Not a pack of strangers sprinting away from you. A real crew. People who learn your name, notice when you miss, and make the miles go faster.",
     },
   ];
 
   return (
-    <section id="who" className="bg-ink py-24 md:py-32 border-t border-paper/10">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="max-w-3xl mb-16">
-          <div className="eyebrow eyebrow-blue mb-5">WHO IT'S FOR</div>
-          <h2 className="display text-paper text-4xl md:text-6xl">
-            If this sounds like you, <span className="text-blue">you belong here.</span>
-          </h2>
+    <section id="who" className="bg-white text-ink py-20 md:py-28 px-6 sm:px-12 lg:px-24">
+      <div className="max-w-[1180px] mx-auto">
+        <div className="eyebrow mb-4" style={{ color: "#3a7ca5" }}>
+          Who it's for
         </div>
-
-        <div className="grid md:grid-cols-2 gap-px bg-paper/10 border-2 border-paper/15">
+        <h2 className="display-condensed text-ink text-[clamp(36px,5vw,72px)] max-w-[900px] mb-12">
+          If this sounds like you, you belong here.
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 border-t-2 border-l-2 border-ink">
           {cards.map((c) => (
-            <article key={c.tag} className="bg-vintage p-8 md:p-10 relative grain overflow-hidden">
-              <div className="flex items-center gap-3 mb-6">
-                <span className="slash" />
-                <span className="eyebrow text-blue">{c.tag}</span>
+            <article key={c.tag} className="border-r-2 border-b-2 border-ink p-7 md:p-10">
+              <div
+                className="text-[11px] font-bold tracking-[0.16em] uppercase mb-3.5"
+                style={{ color: "#3a7ca5" }}
+              >
+                {c.tag}
               </div>
-              <h3 className="display text-paper text-2xl md:text-3xl">{c.title}</h3>
-              <p className="mt-4 text-paper/70 leading-relaxed">{c.body}</p>
+              <h3 className="display-condensed text-ink text-[30px] mb-3.5">{c.title}</h3>
+              <p className="text-[15px] leading-[1.6] text-ink/70">{c.body}</p>
             </article>
           ))}
         </div>
@@ -304,65 +614,58 @@ function WhoItsFor() {
 function FirstTimer() {
   const steps = [
     {
-      n: "01",
+      n: "1",
       h: "Park at the trailhead.",
-      b: "Pull into 212 Valley Brook Road in McMurray. Parking is free and easy. Look for the group near the trail sign. If you're new, come 10 minutes early. Someone will say hey.",
+      b: "Pull into 212 Valley Brook Road in McMurray. Parking is free and easy. Look for the group near the trail sign. If you are new, come 10 minutes early. Someone will say hey.",
     },
     {
-      n: "02",
+      n: "2",
       h: "We circle up at 7.",
-      b: "Quick names, quick route, quick check for new people. Nothing formal. Just enough so you know who you're running with. Then we move.",
+      b: "Quick names, quick route, quick check for new people. Nothing formal. Just enough so you know who you are running with. Then we move.",
     },
     {
-      n: "03",
+      n: "3",
       h: "You find your pace.",
       b: "Walkers, joggers, and runners naturally split into small groups. You can push, cruise, or take it easy. Nobody gets dropped. Nobody cares what your watch says.",
     },
     {
-      n: "04",
+      n: "4",
       h: "We finish together.",
-      b: "The route is an out-and-back, so everyone ends up back at the same place. Stay for coffee if you can. That's where strangers become regulars.",
+      b: "The route is an out-and-back, so everyone ends up back at the same place. Stay for coffee if you can. That is where strangers become regulars.",
     },
   ];
 
   return (
-    <section id="first" className="relative bg-ink py-24 md:py-32 border-t border-paper/10">
-      <div className="mx-auto max-w-7xl px-6 grid lg:grid-cols-12 gap-12">
-        <div className="lg:col-span-4">
-          <div className="eyebrow eyebrow-blue mb-5">FIRST SATURDAY</div>
-          <h2 className="display text-paper text-4xl md:text-5xl">
-            Your first Saturday is <span className="text-blue">simple.</span>
-          </h2>
-          <p className="mt-6 text-paper/70 leading-relaxed">
-            No insider rules. No awkward guessing. Here's exactly what happens.
-          </p>
-          <img
-            src={circleImg}
-            alt="Runners circled up at a foggy trailhead"
-            width={1280}
-            height={1280}
-            loading="lazy"
-            className="mt-10 w-full aspect-square object-cover grayscale border-2 border-paper/15"
-          />
-        </div>
-
-        <ol className="lg:col-span-8 space-y-px bg-paper/10 border-2 border-paper/15">
+    <section
+      id="first"
+      className="bg-blue text-ink py-20 md:py-28 px-6 sm:px-12 lg:px-24"
+    >
+      <div className="max-w-[1180px] mx-auto">
+        <div className="eyebrow text-ink/70 mb-4">First time?</div>
+        <h2 className="display-condensed text-ink text-[clamp(38px,5.4vw,76px)] mb-3">
+          Your first Saturday is simple.
+        </h2>
+        <p className="text-lg leading-[1.55] text-ink font-medium max-w-[560px] mb-12">
+          No insider rules. No awkward guessing. Here is exactly what happens.
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[2px] bg-ink border-2 border-ink">
           {steps.map((s) => (
-            <li key={s.n} className="bg-vintage p-8 md:p-10 flex gap-6 md:gap-10">
-              <div className="display-condensed text-blue text-5xl md:text-6xl leading-none">
-                {s.n}
-              </div>
-              <div>
-                <h3 className="display text-paper text-2xl md:text-3xl">{s.h}</h3>
-                <p className="mt-3 text-paper/70 leading-relaxed">{s.b}</p>
-              </div>
-            </li>
+            <div key={s.n} className="bg-blue p-7 md:p-9">
+              <div className="display-condensed text-ink text-6xl leading-[0.85] mb-4">{s.n}</div>
+              <h3 className="display-condensed text-ink text-[24px] mb-2.5">{s.h}</h3>
+              <p className="text-[15px] leading-[1.6] text-[#13313f]">{s.b}</p>
+            </div>
           ))}
-        </ol>
-      </div>
-
-      <div className="mx-auto max-w-7xl px-6 mt-12">
-        <a href="#rsvp" className="btn-primary">{PRIMARY_CTA}</a>
+        </div>
+        <div className="mt-10">
+          <a
+            href="#join"
+            className="inline-block text-sm font-bold tracking-[0.1em] uppercase px-7 py-4 bg-ink text-paper hover:bg-white hover:text-ink transition-colors"
+            style={{ fontFamily: "var(--font-body)" }}
+          >
+            I'm coming this Saturday →
+          </a>
+        </div>
       </div>
     </section>
   );
@@ -370,52 +673,44 @@ function FirstTimer() {
 
 function TheRun() {
   return (
-    <section id="run" className="relative concrete grain py-24 md:py-32 border-t border-paper/10">
-      <div className="relative mx-auto max-w-7xl px-6 grid md:grid-cols-12 gap-12 items-center">
-        <div className="md:col-span-7">
-          <div className="eyebrow eyebrow-blue mb-5">THE RUN</div>
-          <h2 className="display text-paper text-4xl md:text-7xl">
-            The route is easy.
-            <br />
-            <span className="text-blue">Showing up</span> is the hard part.
-          </h2>
-          <p className="mt-8 text-paper/80 text-lg leading-relaxed">
-            We run the Montour / Peters Trail because it's flat, wide, simple, and friendly for
-            every pace. The usual route is about four miles out and back, but you can turn around
-            whenever you need.
-          </p>
-          <p className="mt-4 text-paper/70 leading-relaxed">
-            Bring a friend, a stroller, a dog, or just yourself. Most people come alone the first
-            time.
-          </p>
+    <section
+      id="run"
+      className="bg-ink text-paper py-20 md:py-28 px-6 sm:px-12 lg:px-24"
+    >
+      <div className="max-w-[1180px] mx-auto flex flex-wrap gap-10 lg:gap-16 items-center">
+        <div className="relative flex-1 min-w-[280px] basis-[380px]">
+          <div className="absolute -left-4 -top-4 bottom-4 w-[60%] bg-blue" />
+          <img
+            src={circleImg}
+            alt="On the trail with GRYT"
+            className="relative block w-full h-[440px] object-cover border border-paper/10"
+          />
         </div>
-
-        <div className="md:col-span-5">
-          <div className="border-2 border-blue/40 p-8 bg-ink/60">
-            <div className="eyebrow text-blue mb-4">TRAIL CARD</div>
-            <div className="display-condensed text-paper text-3xl md:text-4xl">
-              MONTOUR / PETERS
-              <br />
-              <span className="text-blue">TRAIL</span>
-            </div>
-            <div className="mt-6 space-y-3 text-paper/80">
-              <div className="flex justify-between border-b border-paper/10 pb-2">
-                <span className="eyebrow">Surface</span>
-                <span>Paved · flat</span>
-              </div>
-              <div className="flex justify-between border-b border-paper/10 pb-2">
-                <span className="eyebrow">Distance</span>
-                <span>~4 mi out & back</span>
-              </div>
-              <div className="flex justify-between border-b border-paper/10 pb-2">
-                <span className="eyebrow">Start</span>
-                <span>212 Valley Brook Rd</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="eyebrow">Vibes</span>
-                <span>Quiet · piney · early</span>
-              </div>
-            </div>
+        <div className="flex-1 min-w-[280px] basis-[380px]">
+          <div className="eyebrow eyebrow-blue mb-4">The run</div>
+          <h2 className="display-condensed text-paper text-[clamp(34px,4.4vw,62px)] mb-6">
+            The route is easy. Showing up is the hard part.
+          </h2>
+          <div className="flex flex-col gap-4 max-w-[480px]">
+            <p className="text-[17px] leading-[1.6] text-paper/80">
+              We run the Montour / Peters Trail because it is flat, wide, simple, and friendly for
+              every pace. The usual route is about four miles out and back — but you can turn around
+              whenever you need.
+            </p>
+            <p className="text-[17px] leading-[1.6] text-paper/80">
+              You can bring a friend, a stroller, a dog, or just yourself. Most people come alone
+              the first time.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2.5 mt-6">
+            {["Flat, simple, out and back", "Walkers, joggers, runners"].map((t) => (
+              <span
+                key={t}
+                className="text-xs font-semibold tracking-[0.08em] uppercase text-paper border border-paper/30 px-3.5 py-2"
+              >
+                {t}
+              </span>
+            ))}
           </div>
         </div>
       </div>
@@ -424,46 +719,57 @@ function TheRun() {
 }
 
 function Founders() {
-  return (
-    <section className="bg-ink py-24 md:py-32 border-t border-paper/10">
-      <div className="mx-auto max-w-7xl px-6 grid md:grid-cols-12 gap-12 items-center">
-        <div className="md:col-span-5">
-          <img
-            src={foundersImg}
-            alt="Nick and Laura Merich at the trailhead"
-            width={1280}
-            height={1600}
-            loading="lazy"
-            className="w-full aspect-[4/5] object-cover grayscale border-2 border-paper/15"
-          />
-        </div>
-        <div className="md:col-span-7">
-          <div className="eyebrow eyebrow-blue mb-5">FOUNDERS</div>
-          <h2 className="display text-paper text-4xl md:text-6xl">
-            Started by <span className="text-blue">Laura & Nick Merich.</span>
-          </h2>
-          <p className="mt-8 text-paper/80 text-lg leading-relaxed">
-            gryt started because we needed it too. Between work, family, training, and everything
-            that fills a week, we wanted one non-negotiable place to keep showing up. Not a race
-            team. Not a social club with running attached. A real Saturday morning ritual for people
-            who still want to do hard things together.
-          </p>
-          <p className="mt-4 text-paper/70 leading-relaxed">
-            Laura and Nick have finished 27 marathons combined, but gryt isn't about medals. It's
-            about consistency, community, and becoming the kind of person who keeps promises to
-            themselves.
-          </p>
+  const stats: Array<[string, string]> = [
+    ["27", "marathons finished combined"],
+    ["2014", "running together since"],
+    ["7–15", "regulars each Saturday"],
+    ["33", "total Strava members"],
+  ];
 
-          <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-px bg-paper/10 border-2 border-paper/15">
-            {[
-              ["27", "Marathons finished combined"],
-              ["2024", "Running weekly since"],
-              ["25+", "Regulars and growing"],
-              ["ALL", "Paces, every Saturday"],
-            ].map(([n, l]) => (
-              <div key={l} className="bg-vintage p-6 md:p-8 relative grain overflow-hidden">
-                <div className="display-condensed text-blue text-4xl">{n}</div>
-                <div className="eyebrow text-paper/70 mt-2 leading-snug">{l}</div>
+  return (
+    <section id="founders" className="bg-[#f4f2ed] text-ink py-20 md:py-28 px-6 sm:px-12 lg:px-24">
+      <div className="max-w-[1100px] mx-auto flex flex-wrap gap-8 lg:gap-16 items-start">
+        <div className="flex-1 min-w-[300px] basis-[420px]">
+          <div className="eyebrow mb-4" style={{ color: "#3a7ca5" }}>
+            The people behind it
+          </div>
+          <h2 className="display-condensed text-ink text-[clamp(38px,5vw,72px)] mb-6">
+            Started by Laura & Nick Merich.
+          </h2>
+          <div className="flex flex-col gap-4 max-w-[520px]">
+            <p className="text-[17px] leading-[1.6] text-ink/80">
+              GRYT started because we needed it too. Between work, family, training, and everything
+              that fills a week, we wanted one non-negotiable place to keep showing up.
+            </p>
+            <p className="text-[17px] leading-[1.6] text-ink/80">
+              Not a race team. Not a social club with running attached. A real Saturday morning
+              ritual for people who still want to do hard things together.
+            </p>
+            <p className="text-[17px] leading-[1.6] text-ink/80">
+              Laura and Nick have finished 27 marathons combined, but GRYT is not about medals. It
+              is about consistency, community, and becoming the kind of person who keeps promises to
+              themselves.
+            </p>
+          </div>
+        </div>
+        <div className="flex-[0_1_320px] min-w-[240px] bg-ink text-paper flex flex-col">
+          <div className="relative">
+            <img
+              src={foundersImg}
+              alt="Laura and Nick Merich"
+              className="block w-full h-[320px] object-cover"
+              style={{ objectPosition: "center 30%" }}
+            />
+            <div className="absolute left-0 right-0 bottom-0 px-4 py-4 bg-gradient-to-t from-black/85 to-transparent flex items-center justify-between gap-2">
+              <span className="display-condensed text-paper text-[20px]">Laura & Nick</span>
+              <MonogramG className="h-7 w-7" />
+            </div>
+          </div>
+          <div className="px-8">
+            {stats.map(([n, l]) => (
+              <div key={l} className="border-t border-paper/15 py-4">
+                <div className="display-condensed text-blue text-[44px] leading-[0.9]">{n}</div>
+                <div className="text-[13px] text-paper/75 mt-1">{l}</div>
               </div>
             ))}
           </div>
@@ -475,52 +781,99 @@ function Founders() {
 
 function Community() {
   return (
-    <section
-      id="community"
-      className="relative py-24 md:py-32 border-t border-paper/10 overflow-hidden bg-blue text-ink"
-    >
-      <div
-        className="absolute inset-0 opacity-[0.08] pointer-events-none"
-        style={{
-          backgroundImage:
-            "repeating-linear-gradient(-20deg, #000 0 14px, transparent 14px 36px)",
-        }}
-      />
-      <div className="relative mx-auto max-w-7xl px-6">
-        <div className="eyebrow text-ink/70 mb-5">THE COMMUNITY</div>
-        <h2 className="display text-ink text-4xl md:text-7xl max-w-4xl">
+    <section id="community" className="bg-ink text-paper py-20 md:py-28 px-6 sm:px-12 lg:px-24">
+      <div className="max-w-[1100px] mx-auto">
+        <div className="eyebrow eyebrow-blue mb-4">The community</div>
+        <h2 className="display-condensed text-paper text-[clamp(38px,5.2vw,76px)] max-w-[760px] mb-6">
           This is not about one run.
         </h2>
-        <p className="mt-8 text-ink/80 text-lg md:text-xl leading-relaxed max-w-3xl">
-          The run is the entry point. The community is the reason people come back. We use Strava
-          for weekly events and Heylo for the group chat. You don't need either app to show up the
-          first time — but once you come once, you'll probably want to join both.
-        </p>
+        <div className="flex flex-col gap-4 max-w-[640px] mb-12">
+          <p className="text-lg leading-[1.6] text-paper/80">
+            The run is the entry point. The community is the reason people come back.
+          </p>
+          <p className="text-lg leading-[1.6] text-paper/80">
+            We use Strava for weekly events and the Strava Group Message for the group chat. You do
+            not need the app to show up the first time. But once you come once, you will probably
+            want to join in.
+          </p>
+        </div>
 
-        <div className="mt-12 flex flex-wrap gap-4">
-          <a
-            href="#"
-            className="inline-flex items-center gap-2 bg-ink text-paper px-7 py-4 hover:bg-vintage transition-colors"
-            style={{
-              fontFamily: "var(--font-condensed)",
-              fontWeight: 700,
-              textTransform: "uppercase",
-              letterSpacing: "0.04em",
-            }}
-          >
-            Join the group chat
+        <div className="relative mb-12 overflow-hidden border border-paper/15">
+          <img
+            src={heroImg}
+            alt="The GRYT crew at the trailhead before a Saturday run"
+            className="block w-full h-[clamp(280px,42vw,520px)] object-cover"
+            style={{ objectPosition: "center 38%" }}
+          />
+          <div className="absolute left-0 right-0 bottom-0 px-6 py-6 bg-gradient-to-t from-black/85 to-transparent flex items-end justify-between gap-4 flex-wrap">
+            <span className="display-condensed text-paper text-[clamp(22px,3vw,38px)]">
+              This is the crew.
+            </span>
+            <span className="text-[11px] font-bold tracking-[0.16em] uppercase text-ink bg-blue px-3 py-1.5 whitespace-nowrap">
+              Saturday · 7 AM · McMurray
+            </span>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="border border-paper/15 p-7 flex flex-col">
+            <div className="display-condensed text-paper text-[26px] mb-2.5">Strava</div>
+            <p className="text-[15px] leading-[1.6] text-paper/75 mb-5 flex-1">
+              See the run, RSVP, and track the activity. Strava is where the weekly event lives.
+            </p>
+            <div className="flex items-center gap-2.5 mb-6 border-t border-paper/15 pt-4">
+              <span className="text-[10px] font-bold tracking-[0.16em] uppercase text-ink bg-blue px-2 py-1 whitespace-nowrap">
+                Next up
+              </span>
+              <span className="text-sm font-semibold text-paper">
+                GRYT Run #11 · Sat, Jun 27 · 7 AM
+              </span>
+            </div>
+            <a
+              href={STRAVA_EVENT}
+              target="_blank"
+              rel="noopener"
+              className="text-[13px] font-bold tracking-[0.1em] uppercase text-blue hover:text-paper transition-colors"
+            >
+              View this week's run →
+            </a>
+          </div>
+          <div className="border border-paper/15 p-7 flex flex-col">
+            <div className="display-condensed text-paper text-[26px] mb-2.5">Group Message</div>
+            <p className="text-[15px] leading-[1.6] text-paper/75 mb-6 flex-1">
+              The Strava Group Message is where people coordinate, ask questions, share photos, and
+              stay connected between Saturdays.
+            </p>
+            <a
+              href={STRAVA_CLUB}
+              target="_blank"
+              rel="noopener"
+              className="text-[13px] font-bold tracking-[0.1em] uppercase text-blue hover:text-paper transition-colors"
+            >
+              Join the group chat →
+            </a>
+          </div>
+        </div>
+
+        <div className="mt-5 border border-paper/15 p-5 md:p-7">
+          <div className="eyebrow eyebrow-blue mb-4">Live from the club · Strava</div>
+          <iframe
+            allowTransparency
+            frameBorder={0}
+            height={454}
+            scrolling="no"
+            src="https://www.strava.com/clubs/1708552/latest-rides/b76ca42ddb400c392ceee3ee06c641b84d840862?show_rides=true"
+            className="w-full max-w-[340px] block border-0"
+            title="GRYT latest activities on Strava"
+          />
+        </div>
+
+        <div className="flex flex-wrap gap-3.5 mt-9">
+          <a href={STRAVA_CLUB} target="_blank" rel="noopener" className="btn-primary">
+            Join the chat
           </a>
-          <a
-            href="#"
-            className="inline-flex items-center gap-2 border-2 border-ink text-ink px-7 py-4 hover:bg-ink hover:text-paper transition-colors"
-            style={{
-              fontFamily: "var(--font-condensed)",
-              fontWeight: 700,
-              textTransform: "uppercase",
-              letterSpacing: "0.04em",
-            }}
-          >
-            View this week's run
+          <a href={STRAVA_EVENT} target="_blank" rel="noopener" className="btn-ghost">
+            View the Strava event
           </a>
         </div>
       </div>
@@ -529,34 +882,36 @@ function Community() {
 }
 
 function Beliefs() {
-  const beliefs = [
+  const items = [
     "Hard things are easier together.",
     "You do not need to be fast to be serious.",
     "Parents are still athletes.",
-    "Former athletes are not finished.",
+    <>
+      Former athletes are <span className="text-blue">not finished.</span>
+    </>,
     "Consistency beats intensity.",
     "The best conversations happen around mile two.",
     "Coffee after counts.",
     "If you keep showing up, you become someone different.",
   ];
-
   return (
-    <section className="bg-ink py-24 md:py-32 border-t border-paper/10">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="eyebrow eyebrow-blue mb-5">WHAT WE BELIEVE</div>
-        <h2 className="display text-paper text-4xl md:text-6xl mb-14">
-          Eight things, repeated <span className="text-blue">every Saturday.</span>
-        </h2>
-        <ul className="grid md:grid-cols-2 gap-px bg-paper/10 border-2 border-paper/15">
-          {beliefs.map((b, i) => (
-            <li key={b} className="bg-vintage p-6 md:p-8 flex items-start gap-5">
-              <span className="display-condensed text-blue text-2xl shrink-0 w-10">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <span className="display text-paper text-xl md:text-2xl">{b}</span>
-            </li>
+    <section className="bg-white text-ink py-20 md:py-28 px-6 sm:px-12 lg:px-24">
+      <div className="max-w-[1080px] mx-auto">
+        <div className="eyebrow mb-4" style={{ color: "#3a7ca5" }}>
+          What we believe
+        </div>
+        <div className="flex flex-col border-t-2 border-ink">
+          {items.map((b, i) => (
+            <div
+              key={i}
+              className={`display-condensed text-ink py-5 text-[clamp(26px,3.4vw,46px)] leading-[1.02] ${
+                i !== items.length - 1 ? "border-b border-[#e0ddd4]" : ""
+              }`}
+            >
+              {b}
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </section>
   );
@@ -570,7 +925,7 @@ function FAQ() {
     },
     {
       q: "Can I come alone?",
-      a: "Yes. Most people come alone the first time. Arrive 10 minutes early and introduce yourself. You'll know people before the run is over.",
+      a: "Yes. Most people come alone the first time. Arrive 10 minutes early and introduce yourself. You will know people before the run is over.",
     },
     {
       q: "What if I cannot run four miles?",
@@ -581,45 +936,68 @@ function FAQ() {
       a: "No. Strava is helpful for RSVPs and weekly event details, but you can show up without it.",
     },
     {
-      q: "What is Heylo for?",
-      a: "Heylo is the group chat. That's where we post updates, answer questions, and keep the community moving between runs.",
+      q: "What is the Group Message for?",
+      a: "The Strava Group Message is the group chat. That is where we post updates, answer questions, and keep the community moving between runs.",
     },
     {
       q: "What happens if it rains?",
       a: "We still run in normal rain, cold, and imperfect weather. If conditions are unsafe, like ice or lightning, we update the group chat.",
     },
     { q: "Can I bring a friend?", a: "Yes. Bring someone who needs this." },
-    { q: "Can I bring a stroller or dog?", a: "Yes. The trail is flat, wide, and friendly for both." },
-    { q: "Is this free?", a: "Yes. gryt is free." },
     {
-      q: "Where do you get coffee?",
-      a: "We usually grab coffee nearby after the run. Stay for 10 minutes or stay for an hour. Either way, you're invited.",
+      q: "Can I bring a stroller or dog?",
+      a: "Yes. The trail is flat, wide, and friendly for both.",
+    },
+    { q: "Is this free?", a: "Yes. GRYT is free." },
+    {
+      q: "What is the after like?",
+      a: "We hang in the parking lot after the run with coffee, water, and sometimes fruit. Stay for 10 minutes or stay for an hour. Either way, you are invited.",
     },
   ];
+  const [open, setOpen] = useState(0);
 
   return (
-    <section id="faq" className="bg-ink py-24 md:py-32 border-t border-paper/10">
-      <div className="mx-auto max-w-5xl px-6">
-        <div className="eyebrow eyebrow-blue mb-5">FAQ</div>
-        <h2 className="display text-paper text-4xl md:text-6xl mb-12">
-          Questions before <span className="text-blue">you show up.</span>
-        </h2>
-
-        <div className="border-t-2 border-paper/15">
-          {faqs.map((f) => (
-            <details key={f.q} className="group border-b-2 border-paper/15 py-6">
-              <summary className="flex justify-between items-start gap-6 cursor-pointer list-none">
-                <span className="display text-paper text-lg md:text-2xl">{f.q}</span>
-                <span className="display-condensed text-blue text-2xl shrink-0 transition-transform group-open:rotate-45">
-                  +
-                </span>
-              </summary>
-              <p className="mt-4 text-paper/70 text-base md:text-lg leading-relaxed max-w-3xl">
-                {f.a}
-              </p>
-            </details>
-          ))}
+    <section id="faq" className="bg-[#f4f2ed] text-ink py-20 md:py-28 px-6 sm:px-12 lg:px-24">
+      <div className="max-w-[920px] mx-auto">
+        <div className="flex justify-between items-end border-b-[3px] border-ink pb-3.5 mb-2 flex-wrap gap-3">
+          <h2 className="display-condensed text-ink text-[clamp(36px,5vw,66px)] leading-[0.92] m-0">
+            Questions before
+            <br />
+            you show up
+          </h2>
+          <span
+            className="text-xs font-bold tracking-[0.16em] uppercase"
+            style={{ color: "#3a7ca5" }}
+          >
+            Ask in the chat →
+          </span>
         </div>
+        {faqs.map((f, i) => {
+          const isOpen = i === open;
+          return (
+            <div key={f.q} className="border-b-[1.5px] border-ink">
+              <button
+                onClick={() => setOpen(isOpen ? -1 : i)}
+                className="w-full py-6 bg-transparent border-0 flex justify-between items-center gap-5 cursor-pointer text-left"
+              >
+                <span className="display-condensed text-ink text-[clamp(20px,2.4vw,28px)]">
+                  {f.q}
+                </span>
+                <span
+                  className="display-condensed text-[30px] leading-none shrink-0"
+                  style={{ color: "#3a7ca5" }}
+                >
+                  {isOpen ? "–" : "+"}
+                </span>
+              </button>
+              {isOpen && (
+                <p className="m-0 mb-6 text-base leading-[1.65] text-ink/70 max-w-[720px]">
+                  {f.a}
+                </p>
+              )}
+            </div>
+          );
+        })}
       </div>
     </section>
   );
@@ -627,30 +1005,44 @@ function FAQ() {
 
 function FinalCTA() {
   return (
-    <section className="relative concrete grain py-32 md:py-44 border-t border-paper/10">
-      <div className="absolute top-10 right-0 w-[70%] h-4 diag-stripes opacity-60 rotate-[-6deg]" />
-      <div className="relative mx-auto max-w-5xl px-6 text-center">
-        <div className="eyebrow eyebrow-blue mb-6">YOUR MOVE</div>
-        <h2 className="display text-paper text-5xl md:text-8xl">
-          Stop waiting <br /> to feel <span className="text-blue">ready.</span>
+    <section
+      id="ready"
+      className="relative overflow-hidden bg-ink text-paper py-24 md:py-36 px-6 sm:px-12 lg:px-24"
+    >
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse at 22% 28%, rgba(70,70,70,0.5), transparent 55%), radial-gradient(ellipse at 85% 82%, rgba(4,4,4,0.95), transparent 60%), #0a0a0a",
+        }}
+      />
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(82deg, transparent 20%, rgba(137,207,240,0.55) 20.4%, rgba(137,207,240,0.55) 21.1%, transparent 21.5%), linear-gradient(82deg, transparent 78%, rgba(137,207,240,0.4) 78.4%, rgba(137,207,240,0.4) 79.1%, transparent 79.5%)",
+        }}
+      />
+      <div className="relative max-w-[920px] mx-auto text-center">
+        <h2 className="display-condensed text-paper text-[clamp(44px,7vw,104px)] leading-[0.9] mb-6">
+          Stop waiting to feel ready.
         </h2>
-        <p className="mt-10 text-paper/80 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-          You don't need to be in better shape first. You don't need to know someone. You don't need
-          the perfect Saturday. You just need to show up once.
+        <p className="text-lg leading-[1.6] text-paper/80 max-w-[580px] mx-auto mb-3.5">
+          You do not need to be in better shape first. You do not need to know someone. You do not
+          need the perfect Saturday. You just need to show up once.
         </p>
-
-        <div className="mt-14 flex justify-center">
-          <GrytPoster />
+        <p className="display-condensed text-blue text-[clamp(26px,3.6vw,44px)] mb-9">
+          Saturday. 7 AM. McMurray.
+        </p>
+        <div className="flex gap-3.5 justify-center flex-wrap">
+          <a href={STRAVA_EVENT} target="_blank" rel="noopener" className="btn-primary">
+            I'm coming this Saturday →
+          </a>
+          <a href={STRAVA_CLUB} target="_blank" rel="noopener" className="btn-ghost">
+            Join the chat
+          </a>
         </div>
-        <div className="mt-6 display-condensed text-paper text-3xl md:text-5xl">
-          SATURDAY · 7 AM · <span className="text-blue">MCMURRAY</span>
-        </div>
-        <p className="mt-4 text-paper/60">We'll be by the trailhead.</p>
-
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-          <a href="#" className="btn-primary">{PRIMARY_CTA}</a>
-          <a href="#" className="btn-ghost">{SECONDARY_CTA}</a>
-        </div>
+        <p className="mt-8 text-[13px] text-paper/55">We'll be by the trailhead.</p>
       </div>
     </section>
   );
@@ -658,38 +1050,54 @@ function FinalCTA() {
 
 function Footer() {
   return (
-    <footer className="bg-vintage border-t border-paper/10 py-16">
-      <div className="mx-auto max-w-7xl px-6 grid md:grid-cols-12 gap-10">
-        <div className="md:col-span-5">
-          <div className="flex items-center gap-3">
-            <MonogramG className="h-10 w-10" />
-            <Wordmark className="!text-4xl" />
+    <footer className="bg-black text-paper py-14 md:py-20 px-6 sm:px-12 lg:px-24">
+      <div className="max-w-[1180px] mx-auto">
+        <div className="flex justify-between gap-10 flex-wrap items-start pb-12 border-b border-paper/15">
+          <div className="flex-1 min-w-[260px] basis-[320px]">
+            <div className="flex items-center gap-3.5 mb-4">
+              <MonogramG className="h-14 w-14" />
+              <span className="eyebrow text-blue !tracking-[0.22em]">Run Club</span>
+            </div>
+            <p className="text-sm leading-[1.6] text-paper/70 max-w-[340px]">
+              Pittsburgh, PA · Saturdays · 7 AM · Montour / Peters Trail.
+            </p>
           </div>
-          <p className="mt-6 text-paper/70 leading-relaxed max-w-sm">
-            gryt run club
-            <br />
-            Pittsburgh, PA
-            <br />
-            Saturdays · 7 AM · Montour / Peters Trail
-          </p>
+          <div>
+            <div className="display-condensed text-paper text-[clamp(28px,3.4vw,44px)] leading-[0.95]">
+              Do hard things
+              <br />
+              together.
+            </div>
+            <div className="flex gap-6 mt-6">
+              <a
+                href={STRAVA_CLUB}
+                target="_blank"
+                rel="noopener"
+                className="eyebrow text-paper/75 hover:text-blue transition-colors"
+              >
+                Strava
+              </a>
+              <a
+                href={STRAVA_CLUB}
+                target="_blank"
+                rel="noopener"
+                className="eyebrow text-paper/75 hover:text-blue transition-colors"
+              >
+                Group Message
+              </a>
+              <a
+                href="#"
+                className="eyebrow text-paper/75 hover:text-blue transition-colors"
+              >
+                Instagram
+              </a>
+            </div>
+          </div>
         </div>
-
-        <div className="md:col-span-4">
-          <MissionStamp />
+        <div className="flex justify-between gap-4 pt-6 flex-wrap eyebrow text-paper/40">
+          <span>© 2026 GRYT Run Club. All rights reserved.</span>
+          <span>Built by Laura & Nick Merich.</span>
         </div>
-
-        <div className="md:col-span-3">
-          <div className="eyebrow text-blue mb-4">FIND US</div>
-          <ul className="space-y-2 text-paper/80">
-            <li><a href="#" className="hover:text-blue transition-colors">Strava</a></li>
-            <li><a href="#" className="hover:text-blue transition-colors">Heylo</a></li>
-            <li><a href="#" className="hover:text-blue transition-colors">Instagram</a></li>
-          </ul>
-        </div>
-      </div>
-      <div className="mx-auto max-w-7xl px-6 mt-14 pt-6 border-t border-paper/10 flex flex-wrap justify-between gap-4 eyebrow text-paper/40">
-        <span>© 2026 gryt. All rights reserved.</span>
-        <span>Built by Laura & Nick Merich</span>
       </div>
     </footer>
   );
@@ -698,7 +1106,10 @@ function Footer() {
 function Landing() {
   return (
     <main className="bg-ink text-paper">
+      <Nav />
       <Hero />
+      <Marquee />
+      <RSVP />
       <QuickDetails />
       <CorePromise />
       <WhoItsFor />
