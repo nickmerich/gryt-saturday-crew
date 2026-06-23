@@ -239,7 +239,7 @@ export function SiteFooter() {
                 Resources
               </a>
               <a
-                href="https://www.instagram.com/grytclub/"
+                href="https://www.instagram.com/grytrunclub/"
                 target="_blank"
                 rel="noopener"
                 className="eyebrow text-paper/75 hover:text-blue transition-colors"
