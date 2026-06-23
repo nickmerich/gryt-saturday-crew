@@ -1,25 +1,35 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav, SiteFooter, MonogramG } from "@/components/site/Chrome";
+import ogImage from "@/assets/og-graphics.jpg";
+
+const SITE = "https://gryt-saturday-crew.lovable.app";
+const URL = `${SITE}/resources/graphics`;
+const TITLE = "Graphics · gryt run club";
+const DESCRIPTION =
+  "Free downloadable graphics from gryt run club — logos, printable posters, pace cards, and social kits. Free to use, free to share.";
 
 export const Route = createFileRoute("/resources_/graphics")({
   head: () => ({
     meta: [
-      { title: "Graphics · gryt run club" },
-      {
-        name: "description",
-        content:
-          "Free downloadable graphics from gryt run club — logos, posters, social kits, and pace cards.",
-      },
-      { property: "og:title", content: "Graphics · gryt run club" },
-      {
-        property: "og:description",
-        content:
-          "Free to use, free to share. Brand assets and run-day printables from gryt run club.",
-      },
+      { title: TITLE },
+      { name: "description", content: DESCRIPTION },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESCRIPTION },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: URL },
+      { property: "og:image", content: `${SITE}${ogImage}` },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: TITLE },
+      { name: "twitter:description", content: DESCRIPTION },
+      { name: "twitter:image", content: `${SITE}${ogImage}` },
     ],
+    links: [{ rel: "canonical", href: URL }],
   }),
   component: GraphicsPage,
 });
+
 
 type Graphic = {
   slug: string;
