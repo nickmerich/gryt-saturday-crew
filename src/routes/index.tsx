@@ -1118,7 +1118,6 @@ function Footer() {
           </div>
           <div>
             <MissionStamp size="md" align="left" className="text-paper" />
-          </div>
             <div className="flex gap-6 mt-6">
               <a
                 href={STRAVA_CLUB}
