@@ -139,7 +139,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             addressRegion: "PA",
             addressCountry: "US",
           },
-          sameAs: ["https://www.strava.com/clubs/1708552"],
+          sameAs: [
+            "https://www.strava.com/clubs/1708552",
+            "https://www.instagram.com/grytrunclub/",
+          ],
         }),
       },
     ],

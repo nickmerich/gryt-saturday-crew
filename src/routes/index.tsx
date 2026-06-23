@@ -102,7 +102,10 @@ export const Route = createFileRoute("/")({
               closes: "08:30",
             },
           ],
-          sameAs: ["https://www.strava.com/clubs/1708552"],
+          sameAs: [
+            "https://www.strava.com/clubs/1708552",
+            "https://www.instagram.com/grytrunclub/",
+          ],
         }),
       },
       {
@@ -140,7 +143,10 @@ export const Route = createFileRoute("/")({
             "@id": "https://grytrunclub.com/#organization",
             name: "GRYT Run Club",
             url: SITE_URL,
-            sameAs: ["https://www.strava.com/clubs/1708552"],
+            sameAs: [
+              "https://www.strava.com/clubs/1708552",
+              "https://www.instagram.com/grytrunclub/",
+            ],
           },
           location: {
             "@type": "Place",
@@ -1823,7 +1829,7 @@ function Footer() {
                 Group Message
               </a>
               <a
-                href="https://www.instagram.com/grytclub/"
+                href="https://www.instagram.com/grytrunclub/"
                 target="_blank"
                 rel="noopener"
                 className="eyebrow text-paper/75 hover:text-blue transition-colors"
