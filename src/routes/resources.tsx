@@ -180,7 +180,7 @@ function Playbooks() {
                     to="/resources/playbooks"
                     className="eyebrow text-blue hover:text-paper transition-colors"
                   >
-                    Read →
+                    Read the playbook collection →
                   </Link>
                 )}
               </div>
