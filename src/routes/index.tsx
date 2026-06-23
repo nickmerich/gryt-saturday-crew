@@ -707,7 +707,7 @@ function FirstTimer() {
     {
       n: "1",
       h: "Park at the trailhead.",
-      b: "Pull into 212 Valley Brook Road in McMurray. Parking is free and easy. Look for the group near the trail sign. If you are new, come 10 minutes early. Someone will say hey.",
+      b: <>Pull into <a href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Road%2C%20McMurray%2C%20PA" target="_blank" rel="noopener noreferrer" className="underline hover:text-ink">212 Valley Brook Road in McMurray</a>. Parking is free and easy. Look for the group near the trail sign. If you are new, come 10 minutes early. Someone will say hey.</>,
     },
     {
       n: "2",
