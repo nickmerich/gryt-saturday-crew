@@ -872,7 +872,7 @@ function InlineWaiver() {
         {[1, 2, 3].map((n) => {
           const labels = ["Read", "Your info", "Sign"];
           const active = step === n;
-          const done = step > n;
+          const past = step > n;
           return (
             <button
               key={n}
@@ -881,7 +881,7 @@ function InlineWaiver() {
                 if (n < step) setStep(n as 1 | 2 | 3);
               }}
               className={`flex-1 px-4 py-4 text-left border-r border-paper/15 last:border-r-0 transition-colors ${
-                active ? "bg-blue text-ink" : done ? "bg-ink text-paper" : "bg-ink text-paper/50"
+                active ? "bg-blue text-ink" : past ? "bg-ink text-paper" : "bg-ink text-paper/50"
               }`}
             >
               <div className="text-[11px] font-bold tracking-[0.14em] uppercase opacity-80">
