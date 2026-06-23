@@ -356,7 +356,6 @@ function RSVP() {
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [invited, setInvited] = useState(false);
 
   const submit = async () => {
     if (!name.trim() || !contact.trim()) {
@@ -389,23 +388,6 @@ function RSVP() {
     }
   };
 
-  const invite = () => {
-    const text =
-      "Come run with GRYT this Saturday — 7 AM, Montour/Peters Trail in McMurray. Walk, jog, or run. No one gets dropped.";
-    const url = typeof location !== "undefined" ? location.href : STRAVA_CLUB;
-    if (typeof navigator !== "undefined" && navigator.share) {
-      navigator.share({ title: "GRYT Run Club", text, url }).catch(() => {});
-    } else if (typeof navigator !== "undefined" && navigator.clipboard) {
-      navigator.clipboard
-        .writeText(text + " " + url)
-        .then(() => setInvited(true))
-        .catch(() => setInvited(true));
-    } else {
-      setInvited(true);
-    }
-  };
-
-  const firstName = name.trim().split(" ")[0];
   const calHref =
     "https://calendar.google.com/calendar/render?action=TEMPLATE" +
     "&text=" +
