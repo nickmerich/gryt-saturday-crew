@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import photo1 from "@/assets/photos/run-club-1.jpg.asset.json";
 import photo2 from "@/assets/photos/run-club-2.jpg.asset.json";
@@ -718,14 +718,21 @@ function FirstTimer() {
             </div>
           ))}
         </div>
-        <div className="mt-10">
+        <div className="mt-10 flex flex-col sm:flex-row flex-wrap gap-3">
           <a
             href="#join"
             className="inline-block text-sm font-bold tracking-[0.1em] uppercase px-7 py-4 bg-ink text-paper hover:bg-white hover:text-ink transition-colors"
             style={{ fontFamily: "var(--font-body)" }}
           >
-            I'm coming this Saturday →
+            I'm coming this Saturday
           </a>
+          <Link
+            to="/waiver"
+            className="inline-block text-sm font-bold tracking-[0.1em] uppercase px-7 py-4 border-2 border-ink text-ink hover:bg-ink hover:text-paper transition-colors"
+            style={{ fontFamily: "var(--font-body)" }}
+          >
+            Sign the 2026 waiver
+          </Link>
         </div>
       </div>
     </section>

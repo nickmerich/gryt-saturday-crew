@@ -158,6 +158,57 @@ export type Database = {
         }
         Relationships: []
       }
+      waiver_signatures: {
+        Row: {
+          created_at: string
+          date_of_birth: string
+          email: string
+          emergency_contact_name: string
+          emergency_contact_phone: string
+          full_name: string
+          id: string
+          ip_hash: string | null
+          phone: string | null
+          season: number
+          signature_text: string
+          signed_on: string
+          user_agent: string | null
+          waiver_version: string
+        }
+        Insert: {
+          created_at?: string
+          date_of_birth: string
+          email: string
+          emergency_contact_name: string
+          emergency_contact_phone: string
+          full_name: string
+          id?: string
+          ip_hash?: string | null
+          phone?: string | null
+          season?: number
+          signature_text: string
+          signed_on?: string
+          user_agent?: string | null
+          waiver_version?: string
+        }
+        Update: {
+          created_at?: string
+          date_of_birth?: string
+          email?: string
+          emergency_contact_name?: string
+          emergency_contact_phone?: string
+          full_name?: string
+          id?: string
+          ip_hash?: string | null
+          phone?: string | null
+          season?: number
+          signature_text?: string
+          signed_on?: string
+          user_agent?: string | null
+          waiver_version?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
