@@ -1722,29 +1722,83 @@ function Footer() {
 }
 
 function Testimonial() {
+  const testimonials = [
+    {
+      quote:
+        "Gryt RC is a game changer. I never really considered myself a serious runner, but I’ve found a new enjoyment in it through the run club. Doing hard things together makes everyone better, and it’s something I’d recommend to anyone.",
+      name: "Aaron Maize",
+      title: "Sr Manager, Retail Sciences & Optimization, DICK’S Sporting Goods",
+    },
+    {
+      quote:
+        "GRYT Run Club has been a source of inspiration for me. It keeps me accountable once a week to push myself out of my comfort zone. I love the feeling of being connected to a community of like-minded people doing hard things together.",
+      name: "Dr. Michael DiVella",
+      title: "Orthopedic surgeon and sports medicine specialist, UPMC Orthopaedic Care, Washington, Pennsylvania",
+    },
+  ];
+
+  const [index, setIndex] = useState(0);
+  const active = testimonials[index];
+
+  const prev = () => setIndex((i) => (i === 0 ? testimonials.length - 1 : i - 1));
+  const next = () => setIndex((i) => (i === testimonials.length - 1 ? 0 : i + 1));
+
   return (
     <section className="bg-ink text-paper py-14 md:py-16 px-6 sm:px-12 lg:px-24 border-t border-paper/10">
       <div className="max-w-[780px] mx-auto text-center">
         <div className="eyebrow eyebrow-blue mb-6">From the community</div>
 
-        <div className="relative mb-6">
-          <span
-            className="display-condensed text-blue text-[clamp(56px,7vw,84px)] leading-none absolute -top-3 -left-1 md:-left-5 opacity-25 select-none"
-            aria-hidden="true"
+        <div className="relative">
+          <button
+            onClick={prev}
+            aria-label="Previous testimonial"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-10 text-paper/40 hover:text-blue transition-colors hidden sm:block"
           >
-            &ldquo;
-          </span>
-          <blockquote className="text-[clamp(20px,2.4vw,28px)] leading-[1.5] font-light text-paper/95 italic">
-            GRYT Run Club has been a source of inspiration for me. It keeps me accountable once a week to push myself out of my comfort zone. I love the feeling of being connected to a community of like-minded people doing hard things together.
-          </blockquote>
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+
+          <div className="px-2 sm:px-8">
+            <div className="relative mb-6">
+              <span
+                className="display-condensed text-blue text-[clamp(56px,7vw,84px)] leading-none absolute -top-3 left-0 md:-left-4 opacity-25 select-none"
+                aria-hidden="true"
+              >
+                &ldquo;
+              </span>
+              <blockquote className="text-[clamp(20px,2.4vw,28px)] leading-[1.5] font-light text-paper/95 italic">
+                {active.quote}
+              </blockquote>
+            </div>
+
+            <div className="flex flex-col items-center gap-3">
+              <div className="slash mx-auto" />
+              <span className="display-condensed text-paper text-[22px]">{active.name}</span>
+              <span className="text-[13px] text-paper/60 max-w-[420px] leading-[1.5]">
+                {active.title}
+              </span>
+            </div>
+          </div>
+
+          <button
+            onClick={next}
+            aria-label="Next testimonial"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-10 text-paper/40 hover:text-blue transition-colors hidden sm:block"
+          >
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
         </div>
 
-        <div className="flex flex-col items-center gap-3">
-          <div className="slash mx-auto" />
-          <span className="display-condensed text-paper text-[22px]">Dr. Michael DiVella</span>
-          <span className="text-[13px] text-paper/60 max-w-[420px] leading-[1.5]">
-            Orthopedic surgeon and sports medicine specialist, UPMC Orthopaedic Care, Washington, Pennsylvania
-          </span>
+        <div className="mt-8 flex items-center justify-center gap-2.5">
+          {testimonials.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setIndex(i)}
+              aria-label={`Go to testimonial ${i + 1}`}
+              className={`w-2.5 h-2.5 rounded-full transition-colors ${
+                i === index ? "bg-blue" : "bg-paper/30 hover:bg-paper/50"
+              }`}
+            />
+          ))}
         </div>
       </div>
     </section>
