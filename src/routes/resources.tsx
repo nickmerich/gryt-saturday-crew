@@ -344,15 +344,16 @@ function Graphics() {
                   {g.comingSoon ? (
                     <span className="eyebrow text-paper/40">Coming Soon</span>
                   ) : (
-                    <a
-                      href="#"
+                    <Link
+                      to="/resources/graphics"
                       className="eyebrow text-blue hover:text-paper transition-colors"
                     >
                       Download →
-                    </a>
+                    </Link>
                   )}
                 </div>
               </div>
+
             </article>
           ))}
         </div>
