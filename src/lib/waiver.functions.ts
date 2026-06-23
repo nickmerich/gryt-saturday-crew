@@ -2,7 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { createClient } from "@supabase/supabase-js";
 import { createHash } from "crypto";
 import { z } from "zod";
-import type { Database } from "@/integrations/supabase/types";
+
 
 const WaiverInput = z.object({
   full_name: z.string().trim().min(1).max(120),
@@ -36,7 +36,7 @@ export const signWaiver = createServerFn({ method: "POST" })
       throw new Error("Your typed signature must match your full legal name exactly.");
     }
 
-    const supabase = createClient<Database>(
+    const supabase = createClient(
       process.env.SUPABASE_URL!,
       process.env.SUPABASE_PUBLISHABLE_KEY!,
       {
