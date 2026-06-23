@@ -1722,6 +1722,24 @@ function Footer() {
 }
 
 function Testimonial() {
+  const testimonials = [
+    {
+      quote:
+        "Gryt RC is a game changer. I never really considered myself a serious runner, but I’ve found a new enjoyment in it through the run club. Doing hard things together makes everyone better, and it’s something I’d recommend to anyone.",
+      name: "Aaron Maize",
+      title: "Sr Manager, Retail Sciences & Optimization, DICK’S Sporting Goods",
+    },
+    {
+      quote:
+        "GRYT Run Club has been a source of inspiration for me. It keeps me accountable once a week to push myself out of my comfort zone. I love the feeling of being connected to a community of like-minded people doing hard things together.",
+      name: "Dr. Michael DiVella",
+      title: "Orthopedic surgeon and sports medicine specialist, UPMC Orthopaedic Care, Washington, Pennsylvania",
+    },
+  ];
+
+  const [index, setIndex] = useState(0);
+  const active = testimonials[index];
+
   return (
     <section className="bg-ink text-paper py-14 md:py-16 px-6 sm:px-12 lg:px-24 border-t border-paper/10">
       <div className="max-w-[780px] mx-auto text-center">
