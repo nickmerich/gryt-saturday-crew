@@ -1,25 +1,35 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
+import ogImage from "@/assets/og-conversations.jpg";
+
+const SITE = "https://gryt-saturday-crew.lovable.app";
+const URL = `${SITE}/resources/conversations`;
+const TITLE = "Conversations · gryt run club";
+const DESCRIPTION =
+  "Interviews and Q&As with the founders, members, and partners of gryt run club — the people behind the miles.";
 
 export const Route = createFileRoute("/resources_/conversations")({
   head: () => ({
     meta: [
-      { title: "Conversations · gryt run club" },
-      {
-        name: "description",
-        content:
-          "Interviews and Q&As with the founders, members, and partners of gryt run club.",
-      },
-      { property: "og:title", content: "Conversations · gryt run club" },
-      {
-        property: "og:description",
-        content:
-          "The full library of interviews from the people behind gryt run club.",
-      },
+      { title: TITLE },
+      { name: "description", content: DESCRIPTION },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESCRIPTION },
+      { property: "og:type", content: "article" },
+      { property: "og:url", content: URL },
+      { property: "og:image", content: `${SITE}${ogImage}` },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: TITLE },
+      { name: "twitter:description", content: DESCRIPTION },
+      { name: "twitter:image", content: `${SITE}${ogImage}` },
     ],
+    links: [{ rel: "canonical", href: URL }],
   }),
   component: ConversationsPage,
 });
+
 
 type Conversation = {
   slug: string;

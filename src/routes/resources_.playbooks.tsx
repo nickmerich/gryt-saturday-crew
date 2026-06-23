@@ -1,25 +1,35 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
+import ogImage from "@/assets/og-playbooks.jpg";
+
+const SITE = "https://gryt-saturday-crew.lovable.app";
+const URL = `${SITE}/resources/playbooks`;
+const TITLE = "Playbooks · gryt run club";
+const DESCRIPTION =
+  "Long-form playbooks from Nick on building a run club from zero, the Saturday system, and training for the comeback. Free to read.";
 
 export const Route = createFileRoute("/resources_/playbooks")({
   head: () => ({
     meta: [
-      { title: "Playbooks · gryt run club" },
-      {
-        name: "description",
-        content:
-          "Long-form playbooks from Nick on building a run club, training consistency, and the Saturday system.",
-      },
-      { property: "og:title", content: "Playbooks · gryt run club" },
-      {
-        property: "og:description",
-        content:
-          "The full library of long-form playbooks from the founder of gryt run club.",
-      },
+      { title: TITLE },
+      { name: "description", content: DESCRIPTION },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESCRIPTION },
+      { property: "og:type", content: "article" },
+      { property: "og:url", content: URL },
+      { property: "og:image", content: `${SITE}${ogImage}` },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: TITLE },
+      { name: "twitter:description", content: DESCRIPTION },
+      { name: "twitter:image", content: `${SITE}${ogImage}` },
     ],
+    links: [{ rel: "canonical", href: URL }],
   }),
   component: PlaybooksPage,
 });
+
 
 type Playbook = {
   slug: string;
