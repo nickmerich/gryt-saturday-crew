@@ -356,7 +356,6 @@ function RSVP() {
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [invited, setInvited] = useState(false);
 
   const submit = async () => {
     if (!name.trim() || !contact.trim()) {
@@ -388,36 +387,6 @@ function RSVP() {
       setSubmitting(false);
     }
   };
-
-  const invite = () => {
-    const text =
-      "Come run with GRYT this Saturday — 7 AM, Montour/Peters Trail in McMurray. Walk, jog, or run. No one gets dropped.";
-    const url = typeof location !== "undefined" ? location.href : STRAVA_CLUB;
-    if (typeof navigator !== "undefined" && navigator.share) {
-      navigator.share({ title: "GRYT Run Club", text, url }).catch(() => {});
-    } else if (typeof navigator !== "undefined" && navigator.clipboard) {
-      navigator.clipboard
-        .writeText(text + " " + url)
-        .then(() => setInvited(true))
-        .catch(() => setInvited(true));
-    } else {
-      setInvited(true);
-    }
-  };
-
-  const firstName = name.trim().split(" ")[0];
-  const calHref =
-    "https://calendar.google.com/calendar/render?action=TEMPLATE" +
-    "&text=" +
-    encodeURIComponent("GRYT Run #11") +
-    "&dates=20260627T110000Z/20260627T120000Z" +
-    "&details=" +
-    encodeURIComponent(
-      "GRYT Run Club — Saturday 7 AM. Walk, jog, or run the Montour/Peters Trail. No one gets dropped. " +
-        STRAVA_CLUB,
-    ) +
-    "&location=" +
-    encodeURIComponent("212 Valley Brook Road, McMurray, PA");
 
   return (
     <section
@@ -524,6 +493,14 @@ function RSVP() {
               <p className="mt-3.5 text-xs leading-[1.5] text-ink/55 text-center">
                 Free, always. One reminder Friday, one Saturday. Unsubscribe anytime.
               </p>
+              <p className="mt-2 text-xs leading-[1.5] text-ink/50 text-center">
+                We'll only use this to send run reminders and GRYT updates. No spam.
+              </p>
+              <p className="mt-2 text-xs text-center">
+                <Link to="/privacy" className="text-ink/50 underline hover:text-ink transition-colors">
+                  Privacy Policy
+                </Link>
+              </p>
             </div>
           ) : (
             <div>
@@ -532,22 +509,17 @@ function RSVP() {
                   ✓
                 </span>
                 <span className="display-condensed text-ink text-[24px]">
-                  {firstName ? `You're in, ${firstName}.` : "You're in."}
+                  You're in for Saturday.
                 </span>
               </div>
-              <p className="mb-4 text-[15px] leading-[1.6] text-ink/80">
-                We've got you down for <strong>GRYT Run #11</strong> — Saturday, Jun 27 at 7:00 AM.
-                Look for the group near the trail sign at 212 Valley Brook Road.
-              </p>
               <div className="border-y border-[#d8d4cb] py-4 mb-5 flex flex-col gap-2">
                 <div className="text-[11px] font-bold tracking-[0.14em] uppercase text-ink/55">
-                  What to expect Saturday
+                  Next steps
                 </div>
                 {[
-                  "Park free at the trailhead lot — come 10 min early if it's your first time",
-                  "Quick circle-up at 7, then we move — walk, jog, or run your pace",
-                  "About 4 miles out and back · nobody gets dropped",
-                  "Coffee, water, and sometimes fruit in the lot after",
+                  "Sign the 2026 waiver.",
+                  "Join the Strava club if you want updates and photos.",
+                  "Come 10 minutes early if it's your first time.",
                 ].map((t) => (
                   <div key={t} className="text-sm leading-[1.5] text-ink/80">
                     · {t}
@@ -555,20 +527,20 @@ function RSVP() {
                 ))}
               </div>
               <div className="flex flex-col gap-2.5">
+                <Link
+                  to="/waiver"
+                  className="text-[13px] font-bold tracking-[0.1em] uppercase py-4 bg-ink text-paper text-center hover:bg-[#3a7ca5] transition-colors block"
+                >
+                  Sign the waiver
+                </Link>
                 <a
-                  href={calHref}
+                  href={STRAVA_CLUB}
                   target="_blank"
                   rel="noopener"
-                  className="text-[13px] font-bold tracking-[0.1em] uppercase py-4 bg-ink text-paper text-center hover:bg-[#3a7ca5] transition-colors"
+                  className="text-[13px] font-bold tracking-[0.1em] uppercase py-4 bg-transparent text-ink border-[1.5px] border-ink text-center hover:bg-ink hover:text-paper transition-colors block"
                 >
-                  Add to calendar
+                  Join the Strava club
                 </a>
-                <button
-                  onClick={invite}
-                  className="text-[13px] font-bold tracking-[0.1em] uppercase py-4 bg-transparent text-ink border-[1.5px] border-ink hover:bg-ink hover:text-paper transition-colors"
-                >
-                  {invited ? "Copied — go send it" : "Invite a friend"}
-                </button>
               </div>
               <button
                 onClick={() => {
@@ -576,7 +548,6 @@ function RSVP() {
                   setName("");
                   setContact("");
                   setSource("");
-                  setInvited(false);
                 }}
                 className="mt-4 w-full bg-transparent text-xs font-semibold text-ink/55 underline"
               >
