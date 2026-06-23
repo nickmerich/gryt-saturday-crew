@@ -416,7 +416,7 @@ function RSVP() {
           <div className="border-t border-paper/20 pt-5 flex flex-col gap-3 max-w-[440px]">
             {[
               ["WHEN", "GRYT Run #11 · Sat, Jun 27 · 7:00 AM"],
-              ["WHERE", "212 Valley Brook Road, McMurray · trail parking"],
+              ["WHERE", <>212 Valley Brook Road, McMurray · trail parking · <a href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Road%2C%20McMurray%2C%20PA" target="_blank" rel="noopener noreferrer" className="text-blue hover:underline">Get directions</a></>],
               ["FIRST?", "Most people come alone. Show up 10 min early."],
             ].map(([k, v]) => (
               <div key={k} className="flex gap-3 items-baseline">
