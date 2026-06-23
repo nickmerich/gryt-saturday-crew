@@ -430,7 +430,7 @@ function Founders() {
         <div className="md:col-span-5">
           <img
             src={foundersImg}
-            alt="Laura and Nick Merich running and laughing"
+            alt="Nick and Laura Merich at the trailhead"
             width={1280}
             height={1600}
             loading="lazy"
