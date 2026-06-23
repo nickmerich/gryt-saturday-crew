@@ -6,17 +6,19 @@ import foundersImg from "@/assets/founders.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "GRYT Run Club · Saturdays 7 AM · McMurray, PA" },
+      { title: "gryt run club · Saturdays 7 AM · McMurray, PA" },
       {
         name: "description",
         content:
           "The Saturday run club for people getting their edge back. Former athletes, busy parents, comeback runners. Free, all paces, Montour / Peters Trail.",
       },
-      { property: "og:title", content: "GRYT Run Club · Saturdays 7 AM" },
+      { property: "og:title", content: "gryt run club · Saturdays 7 AM" },
       {
         property: "og:description",
         content: "Do hard things together. Saturday mornings on the Montour / Peters Trail.",
       },
+      { property: "og:image", content: heroImg },
+      { name: "twitter:image", content: heroImg },
     ],
   }),
   component: Landing,
@@ -29,15 +31,58 @@ function Wordmark({ className = "" }: { className?: string }) {
   return <span className={`wordmark text-2xl ${className}`}>gryt</span>;
 }
 
-function MissionStamp() {
+function MonogramG({ className = "" }: { className?: string }) {
   return (
-    <div className="inline-flex flex-col items-start">
-      <span className="display-condensed text-paper text-xs tracking-[0.18em]">DO HARD</span>
-      <span className="display-condensed text-paper text-xs tracking-[0.18em]">THINGS</span>
-      <div className="flex items-center gap-2 mt-1">
-        <span className="display-condensed text-paper text-xs tracking-[0.18em]">TOGETHER</span>
-        <span className="slash" />
-      </div>
+    <svg viewBox="0 0 64 64" className={className} aria-hidden="true">
+      <rect width="64" height="64" fill="#000000" />
+      <path
+        d="M40 18 H24 a10 10 0 0 0 -10 10 v8 a10 10 0 0 0 10 10 h12 a4 4 0 0 0 4 -4 v-10 H28"
+        fill="none"
+        stroke="#89CFF0"
+        strokeWidth="5"
+        strokeLinejoin="miter"
+        strokeLinecap="square"
+      />
+      <path
+        d="M46 14 L36 30 L44 30 L34 50"
+        fill="none"
+        stroke="#89CFF0"
+        strokeWidth="3"
+        strokeLinejoin="miter"
+        strokeLinecap="square"
+      />
+    </svg>
+  );
+}
+
+function MissionStamp({ size = "md" }: { size?: "sm" | "md" | "lg" }) {
+  const text =
+    size === "lg"
+      ? "text-4xl md:text-5xl"
+      : size === "sm"
+        ? "text-lg"
+        : "text-2xl md:text-3xl";
+  return (
+    <div className="inline-flex flex-col items-start gap-1">
+      <span className={`display-condensed text-paper ${text} tracking-[0.04em]`}>DO HARD</span>
+      <span className={`display-condensed text-paper ${text} tracking-[0.04em]`}>THINGS</span>
+      <span className={`display-condensed text-paper ${text} tracking-[0.04em]`}>TOGETHER</span>
+      <span className={`${size === "sm" ? "slash" : "slash-lg"} mt-2`} />
+    </div>
+  );
+}
+
+function GrytPoster({ className = "" }: { className?: string }) {
+  return (
+    <div className={`relative inline-block ${className}`}>
+      <span className="display-condensed text-paper text-7xl md:text-9xl tracking-[0.01em] block leading-none">
+        GRYT
+      </span>
+      <span
+        className="absolute left-0 right-0 top-1/2 h-2 bg-blue"
+        style={{ transform: "translateY(-50%) skewY(-6deg)" }}
+        aria-hidden="true"
+      />
     </div>
   );
 }
