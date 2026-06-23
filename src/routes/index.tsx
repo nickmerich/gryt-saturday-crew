@@ -1723,7 +1723,7 @@ function Footer() {
 
 function Testimonial() {
   return (
-    <section className="bg-ink text-paper py-14 md:py-18 px-6 sm:px-12 lg:px-24 border-t border-paper/10">
+    <section className="bg-ink text-paper py-14 md:py-16 px-6 sm:px-12 lg:px-24 border-t border-paper/10">
       <div className="max-w-[780px] mx-auto text-center">
         <div className="eyebrow eyebrow-blue mb-6">From the community</div>
 
