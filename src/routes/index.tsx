@@ -788,6 +788,49 @@ function WhoItsFor() {
   );
 }
 
+function MeetingPointMap() {
+  return (
+    <div className="mt-10 border-2 border-ink">
+      <div className="flex items-center justify-between gap-3 px-5 py-3.5 bg-ink flex-wrap">
+        <div className="flex items-center gap-2.5">
+          <MonogramG className="h-8 w-8" />
+          <span className="display-condensed text-paper text-[15px] tracking-[0.05em]">
+            Meeting Point
+          </span>
+        </div>
+        <span className="text-[11px] font-bold tracking-[0.14em] uppercase text-blue">
+          212 Valley Brook Rd · McMurray
+        </span>
+      </div>
+      <div className="relative bg-n-100">
+        <iframe
+          src="https://maps.google.com/maps?q=212+Valley+Brook+Road,McMurray,PA&z=15&ie=UTF8&iwloc=&output=embed"
+          width="100%"
+          height="320"
+          style={{ border: 0, display: "block", filter: "grayscale(30%) contrast(110%)" }}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          title="GRYT Run Club meeting point near 212 Valley Brook Road, McMurray, PA"
+        />
+      </div>
+      <div className="px-5 py-3 bg-ink flex flex-wrap items-center justify-between gap-2">
+        <span className="text-[12px] text-paper/70">
+          Look for the group near the trail sign on the Montour / Peters Trail.
+        </span>
+        <a
+          href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Road%2C%20McMurray%2C%20PA"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[11px] font-bold tracking-[0.1em] uppercase text-blue hover:text-paper transition-colors"
+        >
+          Get directions →
+        </a>
+      </div>
+    </div>
+  );
+}
+
 function FirstTimer() {
   const steps = [
     {
