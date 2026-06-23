@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 
-export const Route = createFileRoute("/resources/playbooks")({
+export const Route = createFileRoute("/resources_/playbooks")({
   head: () => ({
     meta: [
       { title: "Playbooks · gryt run club" },
