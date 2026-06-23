@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useMemo, useState, type FormEvent } from "react";
+import { useServerFn } from "@tanstack/react-start";
+import { signWaiver } from "@/lib/waiver.functions";
 import photo1 from "@/assets/photos/run-club-1.jpg.asset.json";
 import photo2 from "@/assets/photos/run-club-2.jpg.asset.json";
 import photo3 from "@/assets/photos/run-club-3.jpg.asset.json";
@@ -726,16 +728,445 @@ function FirstTimer() {
           >
             I'm coming this Saturday
           </a>
-          <Link
-            to="/waiver"
-            className="inline-block text-sm font-bold tracking-[0.1em] uppercase px-7 py-4 border-2 border-ink text-ink hover:bg-ink hover:text-paper transition-colors"
-            style={{ fontFamily: "var(--font-body)" }}
-          >
-            Sign the 2026 waiver
-          </Link>
         </div>
+        <InlineWaiver />
       </div>
     </section>
+  );
+}
+
+// ---------- Inline waiver flow ----------
+
+const TODAY_ISO = () => new Date().toISOString().slice(0, 10);
+
+type WaiverForm = {
+  full_name: string;
+  email: string;
+  phone: string;
+  date_of_birth: string;
+  emergency_contact_name: string;
+  emergency_contact_phone: string;
+  signature_text: string;
+  agree_release: boolean;
+  agree_fitness: boolean;
+  agree_adult: boolean;
+};
+
+const EMPTY_FORM: WaiverForm = {
+  full_name: "",
+  email: "",
+  phone: "",
+  date_of_birth: "",
+  emergency_contact_name: "",
+  emergency_contact_phone: "",
+  signature_text: "",
+  agree_release: false,
+  agree_fitness: false,
+  agree_adult: false,
+};
+
+function InlineWaiver() {
+  const sign = useServerFn(signWaiver);
+  const [open, setOpen] = useState(false);
+  const [step, setStep] = useState<1 | 2 | 3>(1);
+  const [form, setForm] = useState<WaiverForm>(EMPTY_FORM);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [done, setDone] = useState<{ id: string; signed_on: string; name: string } | null>(null);
+
+  const set = <K extends keyof WaiverForm>(k: K, v: WaiverForm[K]) =>
+    setForm((f) => ({ ...f, [k]: v }));
+
+  const age = useMemo(() => {
+    if (!form.date_of_birth) return null;
+    const d = new Date(form.date_of_birth);
+    const now = new Date();
+    let a = now.getFullYear() - d.getFullYear();
+    const m = now.getMonth() - d.getMonth();
+    if (m < 0 || (m === 0 && now.getDate() < d.getDate())) a--;
+    return a;
+  }, [form.date_of_birth]);
+
+  const isMinor = age !== null && age < 18;
+  const sigMatches =
+    form.signature_text.trim().length > 0 &&
+    form.signature_text.trim().toLowerCase() === form.full_name.trim().toLowerCase();
+
+  const step2Valid =
+    form.full_name.trim().length > 1 &&
+    /.+@.+\..+/.test(form.email) &&
+    form.date_of_birth.length > 0 &&
+    !isMinor &&
+    form.emergency_contact_name.trim().length > 0 &&
+    form.emergency_contact_phone.trim().length > 0;
+
+  const onSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setSubmitting(true);
+    try {
+      const res = await sign({
+        data: {
+          full_name: form.full_name,
+          email: form.email,
+          phone: form.phone,
+          date_of_birth: form.date_of_birth,
+          emergency_contact_name: form.emergency_contact_name,
+          emergency_contact_phone: form.emergency_contact_phone,
+          signature_text: form.signature_text,
+          agree_release: form.agree_release as true,
+          agree_fitness: form.agree_fitness as true,
+          agree_adult: form.agree_adult as true,
+        },
+      });
+      setDone({ id: res.id, signed_on: res.signed_on, name: form.full_name.trim() });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  if (!open) {
+    return (
+      <div className="mt-6">
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          className="inline-block text-sm font-bold tracking-[0.1em] uppercase px-7 py-4 border-2 border-ink text-ink hover:bg-ink hover:text-paper transition-colors"
+          style={{ fontFamily: "var(--font-body)" }}
+        >
+          Sign the 2026 waiver →
+        </button>
+        <p className="mt-3 text-[13px] text-[#13313f]">
+          One signature covers you through Dec 31, 2026. Takes about a minute.
+        </p>
+      </div>
+    );
+  }
+
+  if (done) {
+    return (
+      <div className="mt-10 border-2 border-ink bg-ink text-paper p-8 md:p-10">
+        <div className="eyebrow eyebrow-blue mb-3">Signed · 2026 season</div>
+        <h3 className="display-condensed text-paper text-[clamp(28px,4vw,44px)] leading-[0.95] mb-4">
+          You're in, {done.name.split(" ")[0]}.{" "}
+          <span className="text-blue">See you Saturday.</span>
+        </h3>
+        <p className="text-paper/80 mb-5 max-w-[560px]">
+          Your 2026 waiver is on file. One signature covers you for the whole season.
+        </p>
+        <div className="border border-paper/20 p-5 bg-ink/40 text-[13px] font-mono text-paper/70 flex flex-col gap-1">
+          <div><span className="text-paper/40">Signer:</span> {done.name}</div>
+          <div><span className="text-paper/40">Signed on:</span> {done.signed_on}</div>
+          <div><span className="text-paper/40">Confirmation:</span> {done.id}</div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="mt-10 border-2 border-ink bg-ink text-paper">
+      {/* Step header */}
+      <div className="flex items-stretch border-b border-paper/15">
+        {[1, 2, 3].map((n) => {
+          const labels = ["Read", "Your info", "Sign"];
+          const active = step === n;
+          const past = step > n;
+          return (
+            <button
+              key={n}
+              type="button"
+              onClick={() => {
+                if (n < step) setStep(n as 1 | 2 | 3);
+              }}
+              className={`flex-1 px-4 py-4 text-left border-r border-paper/15 last:border-r-0 transition-colors ${
+                active ? "bg-blue text-ink" : past ? "bg-ink text-paper" : "bg-ink text-paper/50"
+              }`}
+            >
+              <div className="text-[11px] font-bold tracking-[0.14em] uppercase opacity-80">
+                Step {n}
+              </div>
+              <div className="display-condensed text-[20px] leading-tight">{labels[n - 1]}</div>
+            </button>
+          );
+        })}
+      </div>
+
+      <div className="p-7 md:p-10">
+        {step === 1 && (
+          <div>
+            <h3 className="display-condensed text-paper text-[26px] mb-2">
+              Release of liability · 2026 season
+            </h3>
+            <p className="text-[12px] tracking-[0.14em] uppercase text-paper/50 mb-5">
+              gryt run club · v1
+            </p>
+            <div className="max-h-[320px] overflow-y-auto pr-4 border border-paper/15 p-5 bg-ink/40 flex flex-col gap-4 text-[14px] leading-[1.65] text-paper/85">
+              <p>
+                In consideration of being permitted to participate in any activity organized by{" "}
+                <strong>gryt run club</strong>, I acknowledge that running and related activity
+                involve inherent risks — falls, weather, traffic, trail conditions, and the actions
+                of others — and I assume all such risks, known and unknown.
+              </p>
+              <p>
+                I represent that I am physically able to participate and have consulted a physician
+                as needed. I <strong>release, waive, and covenant not to sue</strong> the Club, its
+                founders, volunteers, members, and any landowner whose property is used, from any
+                liability arising out of my participation, to the fullest extent permitted by law.
+              </p>
+              <p>
+                I agree to indemnify the released parties for any loss they incur due to my
+                participation. I authorize the Club to seek emergency medical care on my behalf if
+                I am unable to do so, and I am responsible for resulting expenses.
+              </p>
+              <p>
+                I grant the Club permission to use photos, video, or audio of me taken during
+                activities for promotional purposes, revocable in writing. Participants under 18
+                must sign in person with a parent or guardian — the online form is for adults 18+.
+              </p>
+              <p>
+                This agreement is effective from signing through <strong>December 31, 2026</strong>{" "}
+                and is governed by the laws of the Commonwealth of Pennsylvania.
+              </p>
+              <p className="italic text-paper/70">
+                By typing my name as a signature in step 3, I confirm I have read, understood, and
+                agreed to this waiver, and that my electronic signature has the same legal effect
+                as a handwritten signature.
+              </p>
+            </div>
+            <div className="mt-6 flex flex-wrap gap-3 justify-between items-center">
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                className="text-[12px] font-bold tracking-[0.14em] uppercase text-paper/60 hover:text-paper"
+              >
+                ← Cancel
+              </button>
+              <button
+                type="button"
+                onClick={() => setStep(2)}
+                className="text-sm font-bold tracking-[0.1em] uppercase px-6 py-3 bg-blue text-ink hover:bg-paper transition-colors"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                I've read it → Your info
+              </button>
+            </div>
+          </div>
+        )}
+
+        {step === 2 && (
+          <div>
+            <h3 className="display-condensed text-paper text-[26px] mb-1">Your info</h3>
+            <p className="text-[14px] text-paper/70 mb-6">
+              We use this for the waiver record and to reach you if there's a schedule change.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <InlineField label="Full legal name" required>
+                <input
+                  type="text"
+                  maxLength={120}
+                  value={form.full_name}
+                  onChange={(e) => set("full_name", e.target.value)}
+                  className={inlineInputCls}
+                  autoComplete="name"
+                />
+              </InlineField>
+              <InlineField label="Email" required>
+                <input
+                  type="email"
+                  maxLength={200}
+                  value={form.email}
+                  onChange={(e) => set("email", e.target.value)}
+                  className={inlineInputCls}
+                  autoComplete="email"
+                />
+              </InlineField>
+              <InlineField label="Phone (optional)">
+                <input
+                  type="tel"
+                  maxLength={40}
+                  value={form.phone}
+                  onChange={(e) => set("phone", e.target.value)}
+                  className={inlineInputCls}
+                  autoComplete="tel"
+                />
+              </InlineField>
+              <InlineField label="Date of birth" required>
+                <input
+                  type="date"
+                  max={TODAY_ISO()}
+                  value={form.date_of_birth}
+                  onChange={(e) => set("date_of_birth", e.target.value)}
+                  className={inlineInputCls}
+                />
+                {isMinor && (
+                  <p className="mt-1.5 text-[13px] text-blue font-semibold">
+                    Minors must sign in person with a parent or guardian.
+                  </p>
+                )}
+              </InlineField>
+              <InlineField label="Emergency contact" required>
+                <input
+                  type="text"
+                  maxLength={120}
+                  value={form.emergency_contact_name}
+                  onChange={(e) => set("emergency_contact_name", e.target.value)}
+                  className={inlineInputCls}
+                />
+              </InlineField>
+              <InlineField label="Their phone" required>
+                <input
+                  type="tel"
+                  maxLength={40}
+                  value={form.emergency_contact_phone}
+                  onChange={(e) => set("emergency_contact_phone", e.target.value)}
+                  className={inlineInputCls}
+                />
+              </InlineField>
+            </div>
+            <div className="mt-6 flex flex-wrap gap-3 justify-between items-center">
+              <button
+                type="button"
+                onClick={() => setStep(1)}
+                className="text-[12px] font-bold tracking-[0.14em] uppercase text-paper/60 hover:text-paper"
+              >
+                ← Back
+              </button>
+              <button
+                type="button"
+                disabled={!step2Valid}
+                onClick={() => setStep(3)}
+                className="text-sm font-bold tracking-[0.1em] uppercase px-6 py-3 bg-blue text-ink hover:bg-paper transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                Continue → Sign
+              </button>
+            </div>
+          </div>
+        )}
+
+        {step === 3 && (
+          <form onSubmit={onSubmit}>
+            <h3 className="display-condensed text-paper text-[26px] mb-1">Sign</h3>
+            <p className="text-[14px] text-paper/70 mb-6">
+              Confirm the three statements and type your full legal name to sign.
+            </p>
+            <div className="flex flex-col gap-3 mb-6">
+              <InlineCheck
+                checked={form.agree_release}
+                onChange={(v) => set("agree_release", v)}
+                label="I have read and agree to the release of liability."
+              />
+              <InlineCheck
+                checked={form.agree_fitness}
+                onChange={(v) => set("agree_fitness", v)}
+                label="I am physically able to participate and have consulted a physician as needed."
+              />
+              <InlineCheck
+                checked={form.agree_adult}
+                onChange={(v) => set("agree_adult", v)}
+                label="I am 18 years or older."
+              />
+            </div>
+            <InlineField label="Type your full name to sign" required>
+              <input
+                type="text"
+                maxLength={120}
+                value={form.signature_text}
+                onChange={(e) => set("signature_text", e.target.value)}
+                className={`${inlineInputCls} font-serif italic text-[20px]`}
+                placeholder={form.full_name || "Your full legal name"}
+                autoComplete="off"
+              />
+              {form.signature_text.length > 0 && !sigMatches && (
+                <p className="mt-1.5 text-[13px] text-blue font-semibold">
+                  Signature must match your full legal name exactly.
+                </p>
+              )}
+            </InlineField>
+            <div className="text-[13px] text-paper/60 mt-4">
+              Signing date: <span className="text-paper">{TODAY_ISO()}</span>
+            </div>
+            {error && (
+              <div className="mt-4 border border-blue bg-blue/10 px-4 py-3 text-[14px] text-paper">
+                {error}
+              </div>
+            )}
+            <div className="mt-6 flex flex-wrap gap-3 justify-between items-center">
+              <button
+                type="button"
+                onClick={() => setStep(2)}
+                className="text-[12px] font-bold tracking-[0.14em] uppercase text-paper/60 hover:text-paper"
+              >
+                ← Back
+              </button>
+              <button
+                type="submit"
+                disabled={
+                  submitting ||
+                  !sigMatches ||
+                  !form.agree_release ||
+                  !form.agree_fitness ||
+                  !form.agree_adult
+                }
+                className="text-sm font-bold tracking-[0.1em] uppercase px-7 py-4 bg-blue text-ink hover:bg-paper transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                {submitting ? "Signing…" : "Sign the 2026 waiver"}
+              </button>
+            </div>
+          </form>
+        )}
+      </div>
+    </div>
+  );
+}
+
+const inlineInputCls =
+  "w-full bg-ink border border-paper/25 px-3.5 py-2.5 text-paper text-[15px] focus:outline-none focus:border-blue";
+
+function InlineField({
+  label,
+  required,
+  children,
+}: {
+  label: string;
+  required?: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <label className="flex flex-col gap-1.5">
+      <span className="text-[11px] font-bold tracking-[0.14em] uppercase text-paper/70">
+        {label}
+        {required && <span className="text-blue"> *</span>}
+      </span>
+      {children}
+    </label>
+  );
+}
+
+function InlineCheck({
+  checked,
+  onChange,
+  label,
+}: {
+  checked: boolean;
+  onChange: (v: boolean) => void;
+  label: string;
+}) {
+  return (
+    <label className="flex items-start gap-3 cursor-pointer group">
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={(e) => onChange(e.target.checked)}
+        className="mt-1 h-4 w-4 accent-blue cursor-pointer"
+      />
+      <span className="text-[14px] leading-[1.5] text-paper/85 group-hover:text-paper">
+        {label}
+      </span>
+    </label>
   );
 }
 
