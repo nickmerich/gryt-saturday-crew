@@ -37,15 +37,45 @@ export const submitRecommendation = createServerFn({ method: "POST" })
       // not fatal
     }
 
-    const { error } = await supabase.from("recommendations").insert({
-      category: data.category,
-      message: data.message,
-      ip_hash: ipHash,
-    });
+    const { data: inserted, error } = await supabase
+      .from("recommendations")
+      .insert({
+        category: data.category,
+        message: data.message,
+        ip_hash: ipHash,
+      })
+      .select("id, created_at")
+      .maybeSingle();
 
     if (error) {
       console.error("recommendation insert failed", error);
       throw new Error("We couldn't save your idea. Please try again.");
+    }
+
+    // Fire-and-forget owner notifications. Don't block the user response if email fails.
+    try {
+      const { sendInternalTransactionalEmail } = await import(
+        "./email/send-internal.server"
+      );
+      const recipients = ["merichnick@gmail.com", "tlumackl@gmail.com"];
+      const submittedAt = inserted?.created_at ?? new Date().toISOString();
+      const baseKey = inserted?.id ?? crypto.randomUUID();
+      await Promise.all(
+        recipients.map((to) =>
+          sendInternalTransactionalEmail({
+            templateName: "recommendation-notification",
+            recipientEmail: to,
+            idempotencyKey: `recommendation-${baseKey}-${to}`,
+            templateData: {
+              category: data.category,
+              message: data.message,
+              submittedAt,
+            },
+          }),
+        ),
+      );
+    } catch (e) {
+      console.error("recommendation notification email failed", e);
     }
 
     return { ok: true };
