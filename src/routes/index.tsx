@@ -1573,6 +1573,97 @@ function FinalCTA() {
   );
 }
 
+function RecommendationsBar() {
+  const submitRec = useServerFn(submitRecommendation);
+  const [submitting, setSubmitting] = useState(false);
+  const [done, setDone] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [custom, setCustom] = useState("");
+
+  const pills = [
+    { label: "I want merch!", category: "merch" },
+    { label: "Run longer", category: "distance" },
+    { label: "Different route", category: "route" },
+    { label: "Post-run coffee", category: "social" },
+    { label: "Bring-a-friend promo", category: "growth" },
+    { label: "Trail cleanup day", category: "event" },
+    { label: "Earlier start", category: "time" },
+    { label: "Later start", category: "time" },
+  ];
+
+  async function send(category: string, message: string) {
+    setSubmitting(true);
+    setError(null);
+    try {
+      await submitRec({ data: { category, message } });
+      setDone(true);
+    } catch (e: any) {
+      setError(e?.message || "Something went wrong.");
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  if (done) {
+    return (
+      <div className="border-t border-paper/15 pt-10 pb-2">
+        <p className="eyebrow text-blue">THANKS — WE GOT IT.</p>
+        <p className="text-sm text-paper/70 mt-2">Nick and Laura read every suggestion.</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="border-t border-paper/15 pt-10 pb-2">
+      <p className="eyebrow text-paper/55 mb-4">WHAT SHOULD WE DO NEXT?</p>
+      <div className="flex flex-wrap gap-2.5 mb-4">
+        {pills.map((p) => (
+          <button
+            key={p.label}
+            disabled={submitting}
+            onClick={() => send(p.category, p.label)}
+            className="inline-flex items-center px-3.5 py-2 text-sm font-medium uppercase tracking-wide border border-paper/25 text-paper/90 hover:bg-blue hover:text-ink hover:border-blue transition-colors disabled:opacity-40"
+          >
+            {p.label}
+          </button>
+        ))}
+      </div>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          const msg = custom.trim();
+          if (!msg) return;
+          send("other", msg);
+        }}
+        className="flex gap-3 flex-wrap items-end"
+      >
+        <div className="flex-1 min-w-[240px]">
+          <label htmlFor="rec-custom" className="eyebrow text-paper/40 block mb-1.5">
+            OR WRITE YOUR OWN
+          </label>
+          <input
+            id="rec-custom"
+            type="text"
+            maxLength={500}
+            value={custom}
+            onChange={(e) => setCustom(e.target.value)}
+            placeholder="I wish we had..."
+            className="w-full bg-transparent border-0 border-b-2 border-paper/20 text-paper placeholder:text-paper/30 pb-2 pt-1 text-base focus:outline-none focus:border-blue transition-colors"
+          />
+        </div>
+        <button
+          type="submit"
+          disabled={submitting || !custom.trim()}
+          className="btn-primary disabled:opacity-40"
+        >
+          {submitting ? "Sending..." : "Send idea →"}
+        </button>
+      </form>
+      {error && <p className="text-sm text-red-400 mt-3">{error}</p>}
+    </div>
+  );
+}
+
 function Footer() {
   return (
     <footer className="bg-black text-paper py-14 md:py-20 px-6 sm:px-12 lg:px-24">
@@ -1617,7 +1708,8 @@ function Footer() {
             </div>
           </div>
         </div>
-        <div className="flex justify-between gap-4 pt-6 flex-wrap eyebrow text-paper/40">
+        <RecommendationsBar />
+        <div className="flex justify-between gap-4 pt-8 flex-wrap eyebrow text-paper/40">
           <span>© 2026 GRYT Run Club. All rights reserved.</span>
           <span>Built by Laura & Nick Merich.</span>
         </div>
