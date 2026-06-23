@@ -101,6 +101,39 @@ export type Database = {
         }
         Relationships: []
       }
+      rsvps: {
+        Row: {
+          contact: string
+          created_at: string
+          event_label: string | null
+          id: string
+          ip_hash: string | null
+          name: string
+          source: string | null
+          user_agent: string | null
+        }
+        Insert: {
+          contact: string
+          created_at?: string
+          event_label?: string | null
+          id?: string
+          ip_hash?: string | null
+          name: string
+          source?: string | null
+          user_agent?: string | null
+        }
+        Update: {
+          contact?: string
+          created_at?: string
+          event_label?: string | null
+          id?: string
+          ip_hash?: string | null
+          name?: string
+          source?: string | null
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
       suppressed_emails: {
         Row: {
           created_at: string
