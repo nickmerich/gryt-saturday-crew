@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import grytBearAsset from "@/assets/gryt-bear.png.asset.json";
 
 export const Route = createFileRoute("/privacy")({
   head: () => ({
