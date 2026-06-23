@@ -817,9 +817,9 @@ function Founders() {
           <div className="relative">
             <img
               src={foundersImg}
-              alt="Laura and Nick Merich"
-              className="block w-full h-[320px] object-cover"
-              style={{ objectPosition: "center 30%" }}
+              alt="Laura and Nick Merich at the Pittsburgh Marathon finish"
+              className="block w-full h-[420px] object-cover"
+              style={{ objectPosition: "center 20%" }}
             />
             <div className="absolute left-0 right-0 bottom-0 px-4 py-4 bg-gradient-to-t from-black/85 to-transparent flex items-center justify-between gap-2">
               <span className="display-condensed text-paper text-[20px]">Laura & Nick</span>
