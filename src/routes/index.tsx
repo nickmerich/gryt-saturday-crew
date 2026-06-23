@@ -241,10 +241,12 @@ function Hero() {
 
 function Marquee() {
   const items = [
+    "Do hard things together",
     "Real people",
     "Real miles",
     "7–15 regulars",
     "All paces welcome",
+    "Do hard things together",
     "Free forever",
     "Coffee after",
     "No one gets dropped",
@@ -1115,11 +1117,8 @@ function Footer() {
             </p>
           </div>
           <div>
-            <div className="display-condensed text-paper text-[clamp(28px,3.4vw,44px)] leading-[0.95]">
-              Do hard things
-              <br />
-              together.
-            </div>
+            <MissionStamp size="md" align="left" className="text-paper" />
+          </div>
             <div className="flex gap-6 mt-6">
               <a
                 href={STRAVA_CLUB}
