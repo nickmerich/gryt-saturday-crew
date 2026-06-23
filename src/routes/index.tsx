@@ -18,6 +18,19 @@ const heroImg = photo4.url;
 const circleImg = photo6.url;
 const foundersImg = nickLauraAsset.url;
 
+const FAQ_ITEMS: { q: string; a: string }[] = [
+  { q: "Do I need to be fast?", a: "No. We have walkers, joggers, comeback runners, and people training for races. If you can move for 30 minutes, you can come." },
+  { q: "Can I come alone?", a: "Yes. Most people come alone the first time. Arrive 10 minutes early and introduce yourself. You will know people before the run is over." },
+  { q: "What if I cannot run four miles?", a: "No problem. The route is out and back, so you can turn around whenever you want. Walk, jog, run, or mix all three." },
+  { q: "Do I need Strava?", a: "No. Strava is helpful for RSVPs and weekly event details, but you can show up without it." },
+  { q: "What is the Group Message for?", a: "The Strava Group Message is the group chat. That is where we post updates, answer questions, and keep the community moving between runs." },
+  { q: "What happens if it rains?", a: "We still run in normal rain, cold, and imperfect weather. If conditions are unsafe, like ice or lightning, we update the group chat." },
+  { q: "Can I bring a friend?", a: "Yes. Bring someone who needs this." },
+  { q: "Can I bring a stroller or dog?", a: "Yes. The trail is flat, wide, and friendly for both." },
+  { q: "Is this free?", a: "Yes. GRYT is free." },
+  { q: "What is the after like?", a: "We hang in the parking lot after the run with coffee, water, and sometimes fruit. Stay for 10 minutes or stay for an hour. Either way, you are invited." },
+];
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -25,15 +38,55 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "A Pittsburgh run club for former athletes, busy parents, and comeback runners. Every Saturday at 7 AM on the Montour / Peters Trail. Walk, jog, or run. No one gets dropped.",
+          "Pittsburgh Saturday 7 AM run club on the Montour / Peters Trail. Walk, jog, or run. No pace requirement. No one gets dropped.",
       },
       { property: "og:title", content: "gryt run club · Saturdays 7 AM" },
       {
         property: "og:description",
         content: "Do hard things together. Saturday mornings on the Montour / Peters Trail.",
       },
+      { property: "og:url", content: "https://grytrunclub.com" },
       { property: "og:image", content: heroImg },
       { name: "twitter:image", content: heroImg },
+    ],
+    links: [{ rel: "canonical", href: "https://grytrunclub.com" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          name: "GRYT Run Club",
+          url: "https://grytrunclub.com",
+          image: "https://grytrunclub.com/icon-512.png",
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "McMurray",
+            addressRegion: "PA",
+            addressCountry: "US",
+          },
+          openingHoursSpecification: [
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: "Saturday",
+              opens: "07:00",
+              closes: "08:30",
+            },
+          ],
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: FAQ_ITEMS.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        }),
+      },
     ],
   }),
   component: Landing,
