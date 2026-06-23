@@ -48,9 +48,11 @@ function Nav() {
   return (
     <nav className="sticky top-0 z-50 bg-ink border-b border-paper/15">
       <div className="flex items-center justify-between px-5 sm:px-8 md:px-12 h-[68px]">
-        <a href="#top" className="flex items-center gap-3">
+        <a href="#top" className="flex items-center gap-2">
           <MonogramG className="h-11 w-11" />
-          <span className="eyebrow text-blue !tracking-[0.22em]">Run Club</span>
+          <span className="wordmark uppercase text-[20px] leading-none [text-shadow:2px_2px_0_var(--blue)]">
+            Run Club
+          </span>
         </a>
         <div className="hidden md:flex items-center gap-8">
           <a href="#details" className="eyebrow text-paper/80 hover:text-blue transition-colors">
@@ -1067,9 +1069,11 @@ function Footer() {
       <div className="max-w-[1180px] mx-auto">
         <div className="flex justify-between gap-10 flex-wrap items-start pb-12 border-b border-paper/15">
           <div className="flex-1 min-w-[260px] basis-[320px]">
-            <div className="flex items-center gap-3.5 mb-4">
+            <div className="flex items-center gap-2.5 mb-4">
               <MonogramG className="h-14 w-14" />
-              <span className="eyebrow text-blue !tracking-[0.22em]">Run Club</span>
+              <span className="wordmark uppercase text-[26px] leading-none [text-shadow:3px_3px_0_var(--blue)]">
+                Run Club
+              </span>
             </div>
             <p className="text-sm leading-[1.6] text-paper/70 max-w-[340px]">
               Pittsburgh, PA · Saturdays · 7 AM · Montour / Peters Trail.
