@@ -101,6 +101,30 @@ export type Database = {
         }
         Relationships: []
       }
+      recommendations: {
+        Row: {
+          category: string
+          created_at: string
+          id: string
+          ip_hash: string | null
+          message: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          id?: string
+          ip_hash?: string | null
+          message: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          id?: string
+          ip_hash?: string | null
+          message?: string
+        }
+        Relationships: []
+      }
       rsvps: {
         Row: {
           contact: string
