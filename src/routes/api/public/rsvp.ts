@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { render as renderAsync } from '@react-email/components'
-import { createClient } from '@supabase/supabase-js'
+import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import { createFileRoute } from '@tanstack/react-router'
 import { z } from 'zod'
 import { TEMPLATES } from '@/lib/email-templates/registry'
@@ -34,7 +34,7 @@ function redactEmail(email: string | null | undefined): string {
 }
 
 async function enqueueTemplate(
-  supabase: ReturnType<typeof createClient>,
+  supabase: SupabaseClient<any, 'public', any>,
   templateName: string,
   recipientEmail: string,
   templateData: Record<string, any>,
@@ -165,7 +165,7 @@ export const Route = createFileRoute('/api/public/rsvp')({
         }
 
         const { name, contact, source, eventLabel } = parsed.data
-        const supabase = createClient(supabaseUrl, supabaseServiceKey)
+        const supabase: SupabaseClient<any, 'public', any> = createClient(supabaseUrl, supabaseServiceKey)
         const userAgent = request.headers.get('user-agent')?.slice(0, 300) ?? null
         const submittedAt = new Date().toISOString()
 
