@@ -561,7 +561,6 @@ function RSVP() {
                   setName("");
                   setContact("");
                   setSource("");
-                  setInvited(false);
                 }}
                 className="mt-4 w-full bg-transparent text-xs font-semibold text-ink/55 underline"
               >
