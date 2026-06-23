@@ -474,7 +474,8 @@ const PARTNER_PILLS = [
 
 function GetInvolved() {
   return (
-    <section className="bg-ink text-paper px-6 sm:px-12 lg:px-24 py-24 md:py-32 border-b border-paper/15">
+    <section id="get-involved" className="bg-ink text-paper px-6 sm:px-12 lg:px-24 py-24 md:py-32 border-b border-paper/15">
+
       <div className="max-w-[1180px] mx-auto">
         <SectionHeader
           kicker="PARTNERS & COLLABORATORS"
