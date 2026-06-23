@@ -524,6 +524,14 @@ function RSVP() {
               <p className="mt-3.5 text-xs leading-[1.5] text-ink/55 text-center">
                 Free, always. One reminder Friday, one Saturday. Unsubscribe anytime.
               </p>
+              <p className="mt-2 text-xs leading-[1.5] text-ink/50 text-center">
+                We'll only use this to send run reminders and GRYT updates. No spam.
+              </p>
+              <p className="mt-2 text-xs text-center">
+                <Link to="/privacy" className="text-ink/50 underline hover:text-ink transition-colors">
+                  Privacy Policy
+                </Link>
+              </p>
             </div>
           ) : (
             <div>
