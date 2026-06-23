@@ -255,17 +255,40 @@ function RSVP() {
   const [name, setName] = useState("");
   const [contact, setContact] = useState("");
   const [source, setSource] = useState("");
-  const [error, setError] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [invited, setInvited] = useState(false);
 
-  const submit = () => {
+  const submit = async () => {
     if (!name.trim() || !contact.trim()) {
-      setError(true);
+      setError("Add your name and an email or phone so we can send the reminder.");
       return;
     }
-    setError(false);
-    setSubmitted(true);
+    setError(null);
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/public/rsvp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name.trim(),
+          contact: contact.trim(),
+          source: source || null,
+          eventLabel: "GRYT Run #11 · Sat, Jun 27 · 7 AM",
+        }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        setError(data?.error || "Something went wrong. Try again in a moment.");
+        return;
+      }
+      setSubmitted(true);
+    } catch {
+      setError("Network error. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const invite = () => {
