@@ -874,6 +874,21 @@ function Community() {
           </div>
         </div>
 
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
+          <img
+            src={photo3.url}
+            alt="Cooling down on the trail after a Saturday run"
+            className="block w-full h-[clamp(220px,30vw,360px)] object-cover border border-paper/15"
+          />
+          <img
+            src={photo5.url}
+            alt="Three runners heading down the trail at sunrise"
+            className="block w-full h-[clamp(220px,30vw,360px)] object-cover border border-paper/15"
+          />
+        </div>
+
+
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="border border-paper/15 p-7 flex flex-col">
             <div className="display-condensed text-paper text-[26px] mb-2.5">Strava</div>
