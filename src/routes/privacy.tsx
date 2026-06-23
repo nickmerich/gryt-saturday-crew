@@ -21,7 +21,7 @@ function PrivacyPage() {
         <div className="flex items-center justify-between px-5 sm:px-8 md:px-12 h-[68px]">
           <Link to="/" className="flex items-center gap-2">
             <img
-              src="/gryt-bear.png"
+              src={grytBearAsset.url}
               alt="gryt club bear"
               className="h-11 w-11"
               width={44}
