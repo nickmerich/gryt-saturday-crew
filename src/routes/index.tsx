@@ -1,10 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import heroImgAsset from "@/assets/hero-night-run.png.asset.json";
-import heroImg from "@/assets/hero-run.jpg";
-import circleImg from "@/assets/circle-up.jpg";
-import foundersImg from "@/assets/founders.jpg";
+import photo1 from "@/assets/photos/run-club-1.jpg.asset.json";
+import photo2 from "@/assets/photos/run-club-2.jpg.asset.json";
+import photo3 from "@/assets/photos/run-club-3.jpg.asset.json";
+import photo4 from "@/assets/photos/run-club-4.jpg.asset.json";
+import photo5 from "@/assets/photos/run-club-5.jpg.asset.json";
+import photo6 from "@/assets/photos/run-club-6.jpg.asset.json";
 import grytBearAsset from "@/assets/gryt-bear.png.asset.json";
+
+const heroImgAsset = photo1;
+const heroImg = photo4.url;
+const circleImg = photo6.url;
+const foundersImg = photo2.url;
 
 export const Route = createFileRoute("/")({
   head: () => ({
