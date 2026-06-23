@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WaiverRouteImport } from './routes/waiver'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ResourcesRouteImport } from './routes/resources'
 import { Route as PrivacyRouteImport } from './routes/privacy'
@@ -29,6 +30,11 @@ import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/em
 const WaiverRoute = WaiverRouteImport.update({
   id: '/waiver',
   path: '/waiver',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -115,6 +121,7 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/resources': typeof ResourcesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
   '/waiver': typeof WaiverRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/resources/conversations': typeof ResourcesConversationsRoute
@@ -133,6 +140,7 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/resources': typeof ResourcesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
   '/waiver': typeof WaiverRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/resources/conversations': typeof ResourcesConversationsRoute
@@ -152,6 +160,7 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/resources': typeof ResourcesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
   '/waiver': typeof WaiverRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/resources_/conversations': typeof ResourcesConversationsRoute
@@ -172,6 +181,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/resources'
     | '/sitemap.xml'
+    | '/terms'
     | '/waiver'
     | '/email/unsubscribe'
     | '/resources/conversations'
@@ -190,6 +200,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/resources'
     | '/sitemap.xml'
+    | '/terms'
     | '/waiver'
     | '/email/unsubscribe'
     | '/resources/conversations'
@@ -208,6 +219,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/resources'
     | '/sitemap.xml'
+    | '/terms'
     | '/waiver'
     | '/email/unsubscribe'
     | '/resources_/conversations'
@@ -227,6 +239,7 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   ResourcesRoute: typeof ResourcesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  TermsRoute: typeof TermsRoute
   WaiverRoute: typeof WaiverRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   ResourcesConversationsRoute: typeof ResourcesConversationsRoute
@@ -248,6 +261,13 @@ declare module '@tanstack/react-router' {
       path: '/waiver'
       fullPath: '/waiver'
       preLoaderRoute: typeof WaiverRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -363,6 +383,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   ResourcesRoute: ResourcesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  TermsRoute: TermsRoute,
   WaiverRoute: WaiverRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   ResourcesConversationsRoute: ResourcesConversationsRoute,

@@ -52,33 +52,31 @@ function PrivacyPage() {
           <section>
             <h2 className="display-condensed text-paper text-[22px] mb-2">What we collect</h2>
             <p>
-              When you RSVP or sign the waiver, we collect your name, contact info (email or phone),
-              and how you found us. That's it. We don't use cookies for tracking and we don't sell
-              your data.
+              When you RSVP or sign the waiver, we collect your name, email, phone, how you found GRYT, and RSVP details. That's it.
             </p>
           </section>
 
           <section>
-            <h2 className="display-condensed text-paper text-[22px] mb-2">How we use it</h2>
+            <h2 className="display-condensed text-paper text-[22px] mb-2">Why we collect it</h2>
             <ul className="list-disc pl-5 flex flex-col gap-1">
-              <li>Send run reminders and GRYT updates</li>
-              <li>Keep a headcount so we know who to expect</li>
-              <li>Contact you in case of a last-minute change</li>
+              <li>Run reminders</li>
+              <li>Safety updates</li>
+              <li>Community updates</li>
+              <li>Event coordination</li>
             </ul>
           </section>
 
           <section>
-            <h2 className="display-condensed text-paper text-[22px] mb-2">Who sees it</h2>
+            <h2 className="display-condensed text-paper text-[22px] mb-2">We do not sell your information</h2>
             <p>
-              Only the organizers — Laura and Nick — have access. We do not share RSVP or waiver
-              data with third parties, advertisers, or sponsors.
+              We do not sell, rent, or trade personal information. Only the organizers — Laura and Nick — have access. We do not share RSVP or waiver data with third parties, advertisers, or sponsors.
             </p>
           </section>
 
           <section>
-            <h2 className="display-condensed text-paper text-[22px] mb-2">Unsubscribe</h2>
+            <h2 className="display-condensed text-paper text-[22px] mb-2">Unsubscribe or be removed</h2>
             <p>
-              Every message includes an unsubscribe link. Or email us anytime at{" "}
+              Every message includes an unsubscribe link. You can also email us anytime at{" "}
               <a
                 href="mailto:hello@grytrunclub.com"
                 className="text-blue underline hover:text-paper transition-colors"
@@ -92,8 +90,7 @@ function PrivacyPage() {
           <section>
             <h2 className="display-condensed text-paper text-[22px] mb-2">Waiver records</h2>
             <p>
-              Waiver signatures are stored securely and retained for the calendar year. They are
-              used only for liability coverage and are not shared outside the club.
+              Waiver signatures are stored securely and retained for the calendar year. They are used only for liability coverage and are not shared outside the club.
             </p>
           </section>
 

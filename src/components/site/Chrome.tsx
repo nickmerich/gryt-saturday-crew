@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { submitRecommendation } from "@/lib/recommendations.functions";
 import grytBearAsset from "@/assets/gryt-bear.png.asset.json";
@@ -245,6 +246,18 @@ export function SiteFooter() {
               >
                 Instagram
               </a>
+              <Link
+                to="/privacy"
+                className="eyebrow text-paper/75 hover:text-blue transition-colors"
+              >
+                Privacy
+              </Link>
+              <Link
+                to="/terms"
+                className="eyebrow text-paper/75 hover:text-blue transition-colors"
+              >
+                Terms
+              </Link>
             </div>
           </div>
         </div>
