@@ -4,6 +4,7 @@ import heroImgAsset from "@/assets/hero-night-run.png.asset.json";
 import heroImg from "@/assets/hero-run.jpg";
 import circleImg from "@/assets/circle-up.jpg";
 import foundersImg from "@/assets/founders.jpg";
+import grytBearAsset from "@/assets/gryt-bear.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -32,25 +33,14 @@ const STRAVA_EVENT =
 
 function MonogramG({ className = "" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 64 64" className={className} aria-hidden="true">
-      <rect width="64" height="64" fill="#000000" />
-      <path
-        d="M40 18 H24 a10 10 0 0 0 -10 10 v8 a10 10 0 0 0 10 10 h12 a4 4 0 0 0 4 -4 v-10 H28"
-        fill="none"
-        stroke="#89CFF0"
-        strokeWidth="5"
-        strokeLinejoin="miter"
-        strokeLinecap="square"
-      />
-      <path
-        d="M46 14 L36 30 L44 30 L34 50"
-        fill="none"
-        stroke="#89CFF0"
-        strokeWidth="3"
-        strokeLinejoin="miter"
-        strokeLinecap="square"
-      />
-    </svg>
+    <img
+      src={grytBearAsset.url}
+      alt="gryt club bear"
+      className={className}
+      width={124}
+      height={124}
+      loading="lazy"
+    />
   );
 }
 
