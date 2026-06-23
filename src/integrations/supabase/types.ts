@@ -101,6 +101,39 @@ export type Database = {
         }
         Relationships: []
       }
+      partner_inquiries: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          involvement: string
+          ip_hash: string | null
+          message: string | null
+          name: string
+          organization: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          involvement: string
+          ip_hash?: string | null
+          message?: string | null
+          name: string
+          organization?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          involvement?: string
+          ip_hash?: string | null
+          message?: string | null
+          name?: string
+          organization?: string | null
+        }
+        Relationships: []
+      }
       recommendations: {
         Row: {
           category: string
