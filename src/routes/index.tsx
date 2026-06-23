@@ -1723,13 +1723,24 @@ function Footer() {
 
 function Testimonial() {
   return (
-    <section className="bg-ink text-paper py-20 md:py-28 px-6 sm:px-12 lg:px-24 border-t border-paper/10">
-      <div className="max-w-[860px] mx-auto text-center">
-        <div className="eyebrow eyebrow-blue mb-8">From the community</div>
-        <blockquote className="text-[clamp(20px,2.6vw,30px)] leading-[1.45] font-light text-paper/90 mb-10">
-          “GRYT Run Club has been a source of inspiration for me. It keeps me accountable once a week to push myself out of my comfort zone. I love the feeling of being connected to a community of like-minded people doing hard things together.”
-        </blockquote>
-        <div className="flex flex-col items-center gap-2">
+    <section className="bg-ink text-paper py-14 md:py-16 px-6 sm:px-12 lg:px-24 border-t border-paper/10">
+      <div className="max-w-[780px] mx-auto text-center">
+        <div className="eyebrow eyebrow-blue mb-6">From the community</div>
+
+        <div className="relative mb-6">
+          <span
+            className="display-condensed text-blue text-[clamp(56px,7vw,84px)] leading-none absolute -top-3 -left-1 md:-left-5 opacity-25 select-none"
+            aria-hidden="true"
+          >
+            &ldquo;
+          </span>
+          <blockquote className="text-[clamp(20px,2.4vw,28px)] leading-[1.5] font-light text-paper/95 italic">
+            GRYT Run Club has been a source of inspiration for me. It keeps me accountable once a week to push myself out of my comfort zone. I love the feeling of being connected to a community of like-minded people doing hard things together.
+          </blockquote>
+        </div>
+
+        <div className="flex flex-col items-center gap-3">
+          <div className="slash mx-auto" />
           <span className="display-condensed text-paper text-[22px]">Dr. Michael DiVella</span>
           <span className="text-[13px] text-paper/60 max-w-[420px] leading-[1.5]">
             Orthopedic surgeon and sports medicine specialist, UPMC Orthopaedic Care, Washington, Pennsylvania
