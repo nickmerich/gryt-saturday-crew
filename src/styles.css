@@ -151,6 +151,13 @@
     background: var(--blue);
     transform: skewX(-20deg);
   }
+  .slash-lg {
+    display: block;
+    width: 8rem;
+    height: 6px;
+    background: var(--blue);
+    transform: skewX(-20deg);
+  }
 
   .concrete {
     background-color: var(--vintage);
