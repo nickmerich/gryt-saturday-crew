@@ -834,6 +834,7 @@ function FirstTimer() {
             </div>
           ))}
         </div>
+        <MeetingPointMap />
         <div className="mt-8 border-2 border-ink p-6 md:p-8 max-w-[720px]">
           <p className="text-[15px] leading-[1.6] text-[#13313f]">
             <span className="font-semibold">First time? Come 10 minutes early.</span> Nick, Laura, or one of the regulars will introduce you to someone before we start.
