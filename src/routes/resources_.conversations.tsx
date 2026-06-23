@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 
-export const Route = createFileRoute("/resources/conversations")({
+export const Route = createFileRoute("/resources_/conversations")({
   head: () => ({
     meta: [
       { title: "Conversations · gryt run club" },

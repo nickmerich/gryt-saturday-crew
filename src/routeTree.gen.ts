@@ -13,6 +13,7 @@ import { Route as WaiverRouteImport } from './routes/waiver'
 import { Route as ResourcesRouteImport } from './routes/resources'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ResourcesPlaybooksRouteImport } from './routes/resources_.playbooks'
+import { Route as ResourcesConversationsRouteImport } from './routes/resources_.conversations'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as ApiPublicRsvpRouteImport } from './routes/api/public/rsvp'
@@ -40,6 +41,11 @@ const IndexRoute = IndexRouteImport.update({
 const ResourcesPlaybooksRoute = ResourcesPlaybooksRouteImport.update({
   id: '/resources_/playbooks',
   path: '/resources/playbooks',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResourcesConversationsRoute = ResourcesConversationsRouteImport.update({
+  id: '/resources_/conversations',
+  path: '/resources/conversations',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EmailUnsubscribeRoute = EmailUnsubscribeRouteImport.update({
@@ -91,6 +97,7 @@ export interface FileRoutesByFullPath {
   '/resources': typeof ResourcesRoute
   '/waiver': typeof WaiverRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
+  '/resources/conversations': typeof ResourcesConversationsRoute
   '/resources/playbooks': typeof ResourcesPlaybooksRoute
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
@@ -105,6 +112,7 @@ export interface FileRoutesByTo {
   '/resources': typeof ResourcesRoute
   '/waiver': typeof WaiverRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
+  '/resources/conversations': typeof ResourcesConversationsRoute
   '/resources/playbooks': typeof ResourcesPlaybooksRoute
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
@@ -120,6 +128,7 @@ export interface FileRoutesById {
   '/resources': typeof ResourcesRoute
   '/waiver': typeof WaiverRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
+  '/resources_/conversations': typeof ResourcesConversationsRoute
   '/resources_/playbooks': typeof ResourcesPlaybooksRoute
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
@@ -136,6 +145,7 @@ export interface FileRouteTypes {
     | '/resources'
     | '/waiver'
     | '/email/unsubscribe'
+    | '/resources/conversations'
     | '/resources/playbooks'
     | '/api/public/rsvp'
     | '/lovable/email/suppression'
@@ -150,6 +160,7 @@ export interface FileRouteTypes {
     | '/resources'
     | '/waiver'
     | '/email/unsubscribe'
+    | '/resources/conversations'
     | '/resources/playbooks'
     | '/api/public/rsvp'
     | '/lovable/email/suppression'
@@ -164,6 +175,7 @@ export interface FileRouteTypes {
     | '/resources'
     | '/waiver'
     | '/email/unsubscribe'
+    | '/resources_/conversations'
     | '/resources_/playbooks'
     | '/api/public/rsvp'
     | '/lovable/email/suppression'
@@ -179,6 +191,7 @@ export interface RootRouteChildren {
   ResourcesRoute: typeof ResourcesRoute
   WaiverRoute: typeof WaiverRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
+  ResourcesConversationsRoute: typeof ResourcesConversationsRoute
   ResourcesPlaybooksRoute: typeof ResourcesPlaybooksRoute
   ApiPublicRsvpRoute: typeof ApiPublicRsvpRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
@@ -217,6 +230,13 @@ declare module '@tanstack/react-router' {
       path: '/resources/playbooks'
       fullPath: '/resources/playbooks'
       preLoaderRoute: typeof ResourcesPlaybooksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resources_/conversations': {
+      id: '/resources_/conversations'
+      path: '/resources/conversations'
+      fullPath: '/resources/conversations'
+      preLoaderRoute: typeof ResourcesConversationsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/email/unsubscribe': {
@@ -283,6 +303,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResourcesRoute: ResourcesRoute,
   WaiverRoute: WaiverRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
+  ResourcesConversationsRoute: ResourcesConversationsRoute,
   ResourcesPlaybooksRoute: ResourcesPlaybooksRoute,
   ApiPublicRsvpRoute: ApiPublicRsvpRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
