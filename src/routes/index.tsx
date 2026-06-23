@@ -19,7 +19,7 @@ const circleImg = photo6.url;
 const foundersImg = nickLauraAsset.url;
 
 const FAQ_ITEMS: { q: string; a: string }[] = [
-  { q: "Where do I park?", a: "Park near 212 Valley Brook Road and follow the group toward the Montour Peters Trail." },
+  { q: "Where do I park?", a: "Park near 212 Valley Brook Road in the South Hills and follow the group toward the Montour Peters Trail." },
   { q: "Are there bathrooms?", a: "Check the meeting-point details before you come, since restroom access can depend on what is open at that hour." },
   { q: "Do I need to be fast?", a: "No. We have walkers, joggers, comeback runners, and people training for races. If you can move for 30 minutes, you can come." },
   { q: "Can I come alone?", a: "Yes. Most people come alone the first time. Arrive 10 minutes early and introduce yourself. You will know people before the run is over." },
@@ -326,7 +326,7 @@ function Hero() {
 
           <div className="mt-7 max-w-[540px] flex flex-col gap-3.5">
             <p className="text-lg leading-[1.55] text-paper/85">
-              A Pittsburgh run club for former athletes, busy parents, and comeback runners. Every
+              A Pittsburgh run club in the South Hills for former athletes, busy parents, and comeback runners. Every
               Saturday at 7 AM on the Montour / Peters Trail in McMurray — walk, jog, or run, then
               hang in the lot after.
             </p>
@@ -651,7 +651,7 @@ function QuickDetails() {
   const rows: Array<[string, React.ReactNode]> = [
     ["When", "Saturday · 7:00 AM"],
     ["Where", <>212 Valley Brook Road · McMurray, PA · <a href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Road%2C%20McMurray%2C%20PA" target="_blank" rel="noopener noreferrer" className="underline hover:text-ink/70">Get directions</a></>],
-    ["Route", "Montour / Peters Trail"],
+    ["Route", "Montour / Peters Trail · Peters Township & Upper St. Clair"],
     ["Distance", "About 4 miles · out and back"],
     ["Pace", "Walk, jog, run · all welcome"],
     ["Cost", "$0 · always"],
@@ -793,7 +793,7 @@ function FirstTimer() {
     {
       n: "1",
       h: "Park at the trailhead.",
-      b: <>Pull into <a href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Road%2C%20McMurray%2C%20PA" target="_blank" rel="noopener noreferrer" className="underline hover:text-ink">212 Valley Brook Road in McMurray</a>. Parking is free and easy. Look for the group near the trail sign. If you are new, come 10 minutes early. Someone will say hey.</>,
+      b: <>Pull into <a href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Road%2C%20McMurray%2C%20PA" target="_blank" rel="noopener noreferrer" className="underline hover:text-ink">212 Valley Brook Road in McMurray, Peters Township</a>. Parking is free and easy. Look for the group near the trail sign. If you are new, come 10 minutes early. Someone will say hey.</>,
     },
     {
       n: "2",
@@ -1807,6 +1807,9 @@ function Footer() {
             </div>
             <p className="text-sm leading-[1.6] text-paper/70 max-w-[340px]">
               Pittsburgh, PA · Saturdays · 7 AM · Montour / Peters Trail.
+            </p>
+            <p className="text-sm leading-[1.6] text-paper/70 max-w-[340px] mt-3">
+              Built for Pittsburgh runners, South Hills parents, former athletes, and anyone trying to get consistent again.
             </p>
           </div>
           <div>
