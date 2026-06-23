@@ -562,9 +562,9 @@ function RSVP() {
 }
 
 function QuickDetails() {
-  const rows: Array<[string, string]> = [
+  const rows: Array<[string, React.ReactNode]> = [
     ["When", "Saturday · 7:00 AM"],
-    ["Where", "212 Valley Brook Road · McMurray, PA"],
+    ["Where", <>212 Valley Brook Road · McMurray, PA · <a href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Road%2C%20McMurray%2C%20PA" target="_blank" rel="noopener noreferrer" className="underline hover:text-ink/70">Get directions</a></>],
     ["Route", "Montour / Peters Trail"],
     ["Distance", "About 4 miles · out and back"],
     ["Pace", "Walk, jog, run · all welcome"],
