@@ -44,6 +44,41 @@ function MonogramG({ className = "" }: { className?: string }) {
   );
 }
 
+function MissionStamp({
+  size = "md",
+  align = "left",
+  className = "",
+}: {
+  size?: "sm" | "md" | "lg";
+  align?: "left" | "center";
+  className?: string;
+}) {
+  const scale =
+    size === "lg"
+      ? "text-[clamp(40px,5.6vw,72px)]"
+      : size === "md"
+      ? "text-[clamp(24px,2.6vw,36px)]"
+      : "text-[15px]";
+  const alignCls = align === "center" ? "items-center text-center" : "items-start text-left";
+  return (
+    <div
+      className={`display-condensed inline-flex flex-col leading-[0.92] ${alignCls} ${scale} ${className}`}
+      aria-label="Do hard things together"
+    >
+      <span>Do hard</span>
+      <span>things</span>
+      <span className="relative inline-block">
+        together.
+        <span
+          className="absolute left-[-2px] right-[-2px] bottom-[0.1em] h-[0.12em] bg-blue"
+          style={{ transform: "skewX(-8deg)" }}
+          aria-hidden
+        />
+      </span>
+    </div>
+  );
+}
+
 function Nav() {
   return (
     <nav className="sticky top-0 z-50 bg-ink border-b border-paper/15">
@@ -206,10 +241,12 @@ function Hero() {
 
 function Marquee() {
   const items = [
+    "Do hard things together",
     "Real people",
     "Real miles",
     "7–15 regulars",
     "All paces welcome",
+    "Do hard things together",
     "Free forever",
     "Coffee after",
     "No one gets dropped",
@@ -1080,11 +1117,7 @@ function Footer() {
             </p>
           </div>
           <div>
-            <div className="display-condensed text-paper text-[clamp(28px,3.4vw,44px)] leading-[0.95]">
-              Do hard things
-              <br />
-              together.
-            </div>
+            <MissionStamp size="md" align="left" className="text-paper" />
             <div className="flex gap-6 mt-6">
               <a
                 href={STRAVA_CLUB}
