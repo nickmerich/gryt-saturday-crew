@@ -1,8 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { SiteNav, SiteFooter, MonogramG } from "@/components/site/Chrome";
 import { submitPartnerInquiry } from "@/lib/partner-inquiries.functions";
+
 
 export const Route = createFileRoute("/resources")({
   head: () => ({
@@ -175,15 +176,16 @@ function Playbooks() {
                 {p.comingSoon ? (
                   <span className="eyebrow text-paper/40">Coming Soon</span>
                 ) : (
-                  <a
-                    href="#"
+                  <Link
+                    to="/resources/playbooks"
                     className="eyebrow text-blue hover:text-paper transition-colors"
                   >
                     Read →
-                  </a>
+                  </Link>
                 )}
               </div>
             </article>
+
           ))}
         </div>
       </div>
@@ -251,15 +253,16 @@ function Conversations() {
                 {c.comingSoon ? (
                   <span className="eyebrow text-paper/40">Coming Soon</span>
                 ) : (
-                  <a
-                    href="#"
+                  <Link
+                    to="/resources/conversations"
                     className="eyebrow text-blue hover:text-paper transition-colors"
                   >
                     Read →
-                  </a>
+                  </Link>
                 )}
               </div>
             </article>
+
           ))}
         </div>
       </div>
@@ -341,15 +344,16 @@ function Graphics() {
                   {g.comingSoon ? (
                     <span className="eyebrow text-paper/40">Coming Soon</span>
                   ) : (
-                    <a
-                      href="#"
+                    <Link
+                      to="/resources/graphics"
                       className="eyebrow text-blue hover:text-paper transition-colors"
                     >
                       Download →
-                    </a>
+                    </Link>
                   )}
                 </div>
               </div>
+
             </article>
           ))}
         </div>
@@ -470,7 +474,8 @@ const PARTNER_PILLS = [
 
 function GetInvolved() {
   return (
-    <section className="bg-ink text-paper px-6 sm:px-12 lg:px-24 py-24 md:py-32 border-b border-paper/15">
+    <section id="get-involved" className="bg-ink text-paper px-6 sm:px-12 lg:px-24 py-24 md:py-32 border-b border-paper/15">
+
       <div className="max-w-[1180px] mx-auto">
         <SectionHeader
           kicker="PARTNERS & COLLABORATORS"
