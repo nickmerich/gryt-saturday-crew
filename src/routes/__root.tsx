@@ -96,6 +96,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "apple-mobile-web-app-capable", content: "yes" },
       { name: "apple-mobile-web-app-status-bar-style", content: "black" },
       { name: "apple-mobile-web-app-title", content: "gryt" },
+      { name: "twitter:title", content: "GRYT Run Club · Saturdays 7 AM · McMurray, PA" },
+      { name: "description", content: "Gryt Run Club is a Pittsburgh Saturday morning run club on the Montour / Peters Trail in McMurray for former athletes, busy parents, and comeback runners. All p" },
+      { property: "og:description", content: "Gryt Run Club is a Pittsburgh Saturday morning run club on the Montour / Peters Trail in McMurray for former athletes, busy parents, and comeback runners. All p" },
+      { name: "twitter:description", content: "Gryt Run Club is a Pittsburgh Saturday morning run club on the Montour / Peters Trail in McMurray for former athletes, busy parents, and comeback runners. All p" },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/d9453e83-accf-45b7-aa22-28bb004995ee" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/d9453e83-accf-45b7-aa22-28bb004995ee" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
