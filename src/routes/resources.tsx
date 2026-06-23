@@ -253,15 +253,16 @@ function Conversations() {
                 {c.comingSoon ? (
                   <span className="eyebrow text-paper/40">Coming Soon</span>
                 ) : (
-                  <a
-                    href="#"
+                  <Link
+                    to="/resources/conversations"
                     className="eyebrow text-blue hover:text-paper transition-colors"
                   >
                     Read →
-                  </a>
+                  </Link>
                 )}
               </div>
             </article>
+
           ))}
         </div>
       </div>
