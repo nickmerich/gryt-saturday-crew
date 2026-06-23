@@ -91,7 +91,10 @@ function Nav() {
   return (
     <header className="absolute top-0 left-0 right-0 z-30">
       <div className="mx-auto max-w-7xl px-6 py-6 flex items-center justify-between">
-        <Wordmark />
+        <a href="/" className="flex items-center gap-3">
+          <MonogramG className="h-8 w-8" />
+          <Wordmark />
+        </a>
         <nav className="hidden md:flex items-center gap-8 eyebrow text-paper">
           <a href="#run" className="hover:text-blue transition-colors">The Run</a>
           <a href="#who" className="hover:text-blue transition-colors">Who It's For</a>
@@ -131,7 +134,7 @@ function Hero() {
         </h1>
 
         <p className="mt-8 max-w-2xl text-lg md:text-xl text-paper/80 leading-relaxed">
-          GRYT is a Pittsburgh run club for former athletes, busy parents, comeback runners, and
+          gryt is a Pittsburgh run club for former athletes, busy parents, comeback runners, and
           anyone trying to get their edge back. We meet every Saturday at 7 AM on the Montour /
           Peters Trail. Walk, jog, run, talk through mile two, and stay for coffee after.
         </p>
@@ -148,6 +151,10 @@ function Hero() {
         <p className="mt-6 eyebrow text-paper/70">
           First time? Arrive 10 minutes early. We'll be by the trailhead.
         </p>
+
+        <div className="hidden lg:block absolute right-12 top-44 z-10">
+          <MissionStamp size="lg" />
+        </div>
       </div>
 
       <div className="relative z-10 border-t border-paper/15 bg-ink/60 backdrop-blur-sm">
@@ -229,7 +236,7 @@ function CorePromise() {
         </h2>
         <p className="mt-10 text-paper/80 text-lg md:text-xl leading-relaxed max-w-3xl mx-auto">
           You started squeezing workouts between work, kids, errands, and everything else on the
-          calendar. GRYT gives you one standing appointment that does not move. Same time. Same
+          calendar. gryt gives you one standing appointment that does not move. Same time. Same
           trail. Same kind of people. The ones who still want to push, even if life looks different
           now.
         </p>
@@ -436,13 +443,13 @@ function Founders() {
             Started by <span className="text-blue">Laura & Nick Merich.</span>
           </h2>
           <p className="mt-8 text-paper/80 text-lg leading-relaxed">
-            GRYT started because we needed it too. Between work, family, training, and everything
+            gryt started because we needed it too. Between work, family, training, and everything
             that fills a week, we wanted one non-negotiable place to keep showing up. Not a race
             team. Not a social club with running attached. A real Saturday morning ritual for people
             who still want to do hard things together.
           </p>
           <p className="mt-4 text-paper/70 leading-relaxed">
-            Laura and Nick have finished 27 marathons combined, but GRYT isn't about medals. It's
+            Laura and Nick have finished 27 marathons combined, but gryt isn't about medals. It's
             about consistency, community, and becoming the kind of person who keeps promises to
             themselves.
           </p>
@@ -501,7 +508,7 @@ function Community() {
               letterSpacing: "0.04em",
             }}
           >
-            Join the group chat →
+            Join the group chat
           </a>
           <a
             href="#"
@@ -583,7 +590,7 @@ function FAQ() {
     },
     { q: "Can I bring a friend?", a: "Yes. Bring someone who needs this." },
     { q: "Can I bring a stroller or dog?", a: "Yes. The trail is flat, wide, and friendly for both." },
-    { q: "Is this free?", a: "Yes. GRYT is free." },
+    { q: "Is this free?", a: "Yes. gryt is free." },
     {
       q: "Where do you get coffee?",
       a: "We usually grab coffee nearby after the run. Stay for 10 minutes or stay for an hour. Either way, you're invited.",
@@ -632,7 +639,10 @@ function FinalCTA() {
           the perfect Saturday. You just need to show up once.
         </p>
 
-        <div className="mt-12 display-condensed text-paper text-4xl md:text-6xl">
+        <div className="mt-14 flex justify-center">
+          <GrytPoster />
+        </div>
+        <div className="mt-6 display-condensed text-paper text-3xl md:text-5xl">
           SATURDAY · 7 AM · <span className="text-blue">MCMURRAY</span>
         </div>
         <p className="mt-4 text-paper/60">We'll be by the trailhead.</p>
@@ -651,9 +661,12 @@ function Footer() {
     <footer className="bg-vintage border-t border-paper/10 py-16">
       <div className="mx-auto max-w-7xl px-6 grid md:grid-cols-12 gap-10">
         <div className="md:col-span-5">
-          <Wordmark className="!text-4xl" />
+          <div className="flex items-center gap-3">
+            <MonogramG className="h-10 w-10" />
+            <Wordmark className="!text-4xl" />
+          </div>
           <p className="mt-6 text-paper/70 leading-relaxed max-w-sm">
-            GRYT Run Club
+            gryt run club
             <br />
             Pittsburgh, PA
             <br />
