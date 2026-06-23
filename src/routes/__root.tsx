@@ -124,12 +124,22 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "SportsOrganization",
+          "@id": "https://grytrunclub.com/#organization",
           name: "GRYT Run Club",
           url: "https://grytrunclub.com",
+          logo: "https://grytrunclub.com/icon-512.png",
           description:
             "A Pittsburgh run club for former athletes, busy parents, and comeback runners. Saturdays at 7 AM on the Montour / Peters Trail.",
           sport: "Running",
           areaServed: "Pittsburgh, PA",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "212 Valley Brook Road",
+            addressLocality: "McMurray",
+            addressRegion: "PA",
+            addressCountry: "US",
+          },
+          sameAs: ["https://www.strava.com/clubs/1708552"],
         }),
       },
     ],
