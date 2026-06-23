@@ -677,3 +677,137 @@ function PartnerForm() {
     </form>
   );
 }
+
+/* ──────────────────────  NEXT PLAYBOOK SIGNUP  ─────────────────── */
+
+const CONTACT_EMAIL = "hello@grytrunclub.com";
+
+function NextPlaybook() {
+  const submit = useServerFn(submitPartnerInquiry);
+  const [firstName, setFirstName] = useState("");
+  const [email, setEmail] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [done, setDone] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function onSubmit(e: FormEvent) {
+    e.preventDefault();
+    setError(null);
+    if (!firstName.trim() || !email.trim()) {
+      setError("First name and email are required.");
+      return;
+    }
+    setSubmitting(true);
+    try {
+      await submit({
+        data: {
+          name: firstName.trim(),
+          email: email.trim(),
+          organization: "",
+          involvement: "Other",
+          message: "Playbook list signup — send the next GRYT resource when it's ready.",
+        },
+      });
+      setDone(true);
+    } catch (e: any) {
+      setError(e?.message || "Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  return (
+    <section className="bg-ink text-paper px-6 sm:px-12 lg:px-24 py-20 md:py-28 border-b border-paper/15">
+      <div className="max-w-[760px] mx-auto">
+        <p className="eyebrow text-blue mb-4">STAY IN THE LOOP</p>
+        <h2 className="display-condensed uppercase text-[clamp(32px,5vw,60px)] leading-[0.95]">
+          Want the next playbook?
+        </h2>
+        <p className="mt-6 text-paper/75 text-[16px] leading-[1.65] max-w-[560px]">
+          We'll send new GRYT resources when they're ready. No spam.
+        </p>
+
+        {done ? (
+          <div className="mt-8 p-6 border border-blue bg-black/40">
+            <p className="eyebrow text-blue mb-2">YOU'RE ON THE LIST</p>
+            <p className="text-paper/80 text-[15px] leading-[1.6]">
+              We'll email <span className="text-paper">{email}</span> when the next one drops.
+            </p>
+          </div>
+        ) : (
+          <form
+            onSubmit={onSubmit}
+            className="mt-8 flex flex-col sm:flex-row gap-4 sm:items-end"
+          >
+            <div className="flex-1 min-w-0">
+              <label htmlFor="np-name" className="eyebrow text-paper/55 block mb-2">
+                First name
+              </label>
+              <input
+                id="np-name"
+                type="text"
+                maxLength={80}
+                required
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                className={partnerInputCls}
+                placeholder="First name"
+              />
+            </div>
+            <div className="flex-1 min-w-0">
+              <label htmlFor="np-email" className="eyebrow text-paper/55 block mb-2">
+                Email
+              </label>
+              <input
+                id="np-email"
+                type="email"
+                maxLength={255}
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className={partnerInputCls}
+                placeholder="you@email.com"
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={submitting}
+              className="btn-primary disabled:opacity-40 whitespace-nowrap"
+              style={{ fontFamily: "var(--font-body)" }}
+            >
+              {submitting ? "Sending..." : "Send me the next one"}
+            </button>
+          </form>
+        )}
+        {error && <p className="mt-4 text-sm text-red-400">{error}</p>}
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────  PARTNER CTA  ───────────────────────── */
+
+function PartnerCTA() {
+  return (
+    <section className="bg-black text-paper px-6 sm:px-12 lg:px-24 py-20 md:py-28 border-b border-paper/15">
+      <div className="max-w-[760px] mx-auto">
+        <p className="eyebrow text-blue mb-4">PARTNERSHIPS</p>
+        <h2 className="display-condensed uppercase text-[clamp(32px,5vw,60px)] leading-[0.95]">
+          Want to build something with GRYT?
+        </h2>
+        <p className="mt-6 text-paper/75 text-[16px] leading-[1.65] max-w-[560px]">
+          Coffee shops, gyms, brands, coaches, and local builders — if it helps the crew, we're open.
+        </p>
+        <div className="mt-8">
+          <a
+            href={`mailto:${CONTACT_EMAIL}?subject=GRYT%20partnership`}
+            className="btn-primary"
+            style={{ fontFamily: "var(--font-body)" }}
+          >
+            Start a partnership conversation
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
