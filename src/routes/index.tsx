@@ -1737,6 +1737,18 @@ function Footer() {
               >
                 Instagram
               </a>
+              <Link
+                to="/privacy"
+                className="eyebrow text-paper/75 hover:text-blue transition-colors"
+              >
+                Privacy
+              </Link>
+              <Link
+                to="/terms"
+                className="eyebrow text-paper/75 hover:text-blue transition-colors"
+              >
+                Terms
+              </Link>
             </div>
           </div>
         </div>

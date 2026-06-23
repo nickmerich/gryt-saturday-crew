@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { submitRecommendation } from "@/lib/recommendations.functions";
 import grytBearAsset from "@/assets/gryt-bear.png.asset.json";
