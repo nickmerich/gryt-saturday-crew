@@ -540,22 +540,17 @@ function RSVP() {
                   ✓
                 </span>
                 <span className="display-condensed text-ink text-[24px]">
-                  {firstName ? `You're in, ${firstName}.` : "You're in."}
+                  You're in for Saturday.
                 </span>
               </div>
-              <p className="mb-4 text-[15px] leading-[1.6] text-ink/80">
-                We've got you down for <strong>GRYT Run #11</strong> — Saturday, Jun 27 at 7:00 AM.
-                Look for the group near the trail sign at 212 Valley Brook Road.
-              </p>
               <div className="border-y border-[#d8d4cb] py-4 mb-5 flex flex-col gap-2">
                 <div className="text-[11px] font-bold tracking-[0.14em] uppercase text-ink/55">
-                  What to expect Saturday
+                  Next steps
                 </div>
                 {[
-                  "Park free at the trailhead lot — come 10 min early if it's your first time",
-                  "Quick circle-up at 7, then we move — walk, jog, or run your pace",
-                  "About 4 miles out and back · nobody gets dropped",
-                  "Coffee, water, and sometimes fruit in the lot after",
+                  "Sign the 2026 waiver.",
+                  "Join the Strava club if you want updates and photos.",
+                  "Come 10 minutes early if it's your first time.",
                 ].map((t) => (
                   <div key={t} className="text-sm leading-[1.5] text-ink/80">
                     · {t}
@@ -563,20 +558,20 @@ function RSVP() {
                 ))}
               </div>
               <div className="flex flex-col gap-2.5">
+                <Link
+                  to="/waiver"
+                  className="text-[13px] font-bold tracking-[0.1em] uppercase py-4 bg-ink text-paper text-center hover:bg-[#3a7ca5] transition-colors block"
+                >
+                  Sign the waiver
+                </Link>
                 <a
-                  href={calHref}
+                  href={STRAVA_CLUB}
                   target="_blank"
                   rel="noopener"
-                  className="text-[13px] font-bold tracking-[0.1em] uppercase py-4 bg-ink text-paper text-center hover:bg-[#3a7ca5] transition-colors"
+                  className="text-[13px] font-bold tracking-[0.1em] uppercase py-4 bg-transparent text-ink border-[1.5px] border-ink text-center hover:bg-ink hover:text-paper transition-colors block"
                 >
-                  Add to calendar
+                  Join the Strava club
                 </a>
-                <button
-                  onClick={invite}
-                  className="text-[13px] font-bold tracking-[0.1em] uppercase py-4 bg-transparent text-ink border-[1.5px] border-ink hover:bg-ink hover:text-paper transition-colors"
-                >
-                  {invited ? "Copied — go send it" : "Invite a friend"}
-                </button>
               </div>
               <button
                 onClick={() => {
