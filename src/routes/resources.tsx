@@ -257,7 +257,7 @@ function Conversations() {
                     to="/resources/conversations"
                     className="eyebrow text-blue hover:text-paper transition-colors"
                   >
-                    Read →
+                    Read founder conversations →
                   </Link>
                 )}
               </div>
