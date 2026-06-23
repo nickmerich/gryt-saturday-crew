@@ -33,6 +33,25 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
   { q: "What is the after like?", a: "We hang in the parking lot after the run with coffee, water, and sometimes fruit. Stay for 10 minutes or stay for an hour. Either way, you are invited." },
 ];
 
+const SITE_URL = "https://grytrunclub.com";
+const ABS_HERO_IMG = heroImg.startsWith("http") ? heroImg : `${SITE_URL}${heroImg}`;
+
+// Next 12 Saturday 7am occurrences for the recurring event schema.
+function nextSaturdayISOs(count: number): string[] {
+  const out: string[] = [];
+  const d = new Date();
+  d.setUTCHours(11, 0, 0, 0); // 7:00 AM America/New_York ~= 11:00 UTC (EST). Best-effort.
+  const day = d.getUTCDay();
+  const add = (6 - day + 7) % 7 || 7;
+  d.setUTCDate(d.getUTCDate() + add);
+  for (let i = 0; i < count; i++) {
+    out.push(d.toISOString());
+    d.setUTCDate(d.getUTCDate() + 7);
+  }
+  return out;
+}
+const EVENT_DATES = nextSaturdayISOs(12);
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -47,22 +66,30 @@ export const Route = createFileRoute("/")({
         property: "og:description",
         content: "Do hard things together. Saturday mornings on the Montour / Peters Trail.",
       },
-      { property: "og:url", content: "https://grytrunclub.com" },
-      { property: "og:image", content: heroImg },
-      { name: "twitter:image", content: heroImg },
+      { property: "og:url", content: SITE_URL },
+      { property: "og:image", content: ABS_HERO_IMG },
+      { name: "twitter:image", content: ABS_HERO_IMG },
     ],
-    links: [{ rel: "canonical", href: "https://grytrunclub.com" }],
+    links: [{ rel: "canonical", href: SITE_URL }],
     scripts: [
       {
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "LocalBusiness",
+          "@type": ["SportsActivityLocation", "LocalBusiness"],
+          "@id": "https://grytrunclub.com/#location",
           name: "GRYT Run Club",
-          url: "https://grytrunclub.com",
-          image: "https://grytrunclub.com/icon-512.png",
+          description:
+            "A Pittsburgh run club for former athletes, busy parents, and comeback runners.",
+          url: SITE_URL,
+          image: ABS_HERO_IMG,
+          logo: `${SITE_URL}/icon-512.png`,
+          telephone: "",
+          sport: "Running",
+          priceRange: "Free",
           address: {
             "@type": "PostalAddress",
+            streetAddress: "212 Valley Brook Road",
             addressLocality: "McMurray",
             addressRegion: "PA",
             addressCountry: "US",
@@ -75,6 +102,57 @@ export const Route = createFileRoute("/")({
               closes: "08:30",
             },
           ],
+          sameAs: ["https://www.strava.com/clubs/1708552"],
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Event",
+          name: "GRYT Saturday Run",
+          description:
+            "Free Saturday morning group run on the Montour / Peters Trail. Walk, jog, or run — no pace requirement, no one gets dropped.",
+          eventSchedule: {
+            "@type": "Schedule",
+            repeatFrequency: "P1W",
+            byDay: "https://schema.org/Saturday",
+            startTime: "07:00",
+            endTime: "08:30",
+            scheduleTimezone: "America/New_York",
+          },
+          startDate: EVENT_DATES[0],
+          endDate: EVENT_DATES[0]?.replace("T11:00", "T12:30"),
+          eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+          eventStatus: "https://schema.org/EventScheduled",
+          url: SITE_URL,
+          image: ABS_HERO_IMG,
+          isAccessibleForFree: true,
+          offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "USD",
+            availability: "https://schema.org/InStock",
+            url: SITE_URL,
+          },
+          organizer: {
+            "@type": "SportsOrganization",
+            "@id": "https://grytrunclub.com/#organization",
+            name: "GRYT Run Club",
+            url: SITE_URL,
+            sameAs: ["https://www.strava.com/clubs/1708552"],
+          },
+          location: {
+            "@type": "Place",
+            name: "Montour / Peters Trail trailhead",
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: "212 Valley Brook Road",
+              addressLocality: "McMurray",
+              addressRegion: "PA",
+              addressCountry: "US",
+            },
+          },
         }),
       },
       {
