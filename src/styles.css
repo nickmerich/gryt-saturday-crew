@@ -198,3 +198,12 @@
     animation: grytmarq 32s linear infinite;
   }
 }
+
+/* Baby-blue surfaces get the dotted-grid texture overlay */
+.bg-blue {
+  background-image: url("/__l5e/assets-v1/6ee5da28-0dd7-45d2-a772-488451cf0bc3/texture-blue.png");
+  background-size: 220px 220px;
+  background-repeat: repeat;
+  background-blend-mode: multiply;
+}
+
