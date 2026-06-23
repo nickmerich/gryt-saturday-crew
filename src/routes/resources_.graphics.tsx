@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav, SiteFooter, MonogramG } from "@/components/site/Chrome";
 
-export const Route = createFileRoute("/resources/graphics")({
+export const Route = createFileRoute("/resources_/graphics")({
   head: () => ({
     meta: [
       { title: "Graphics · gryt run club" },

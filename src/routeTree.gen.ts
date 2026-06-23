@@ -13,6 +13,7 @@ import { Route as WaiverRouteImport } from './routes/waiver'
 import { Route as ResourcesRouteImport } from './routes/resources'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ResourcesPlaybooksRouteImport } from './routes/resources_.playbooks'
+import { Route as ResourcesGraphicsRouteImport } from './routes/resources_.graphics'
 import { Route as ResourcesConversationsRouteImport } from './routes/resources_.conversations'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
@@ -41,6 +42,11 @@ const IndexRoute = IndexRouteImport.update({
 const ResourcesPlaybooksRoute = ResourcesPlaybooksRouteImport.update({
   id: '/resources_/playbooks',
   path: '/resources/playbooks',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResourcesGraphicsRoute = ResourcesGraphicsRouteImport.update({
+  id: '/resources_/graphics',
+  path: '/resources/graphics',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResourcesConversationsRoute = ResourcesConversationsRouteImport.update({
@@ -98,6 +104,7 @@ export interface FileRoutesByFullPath {
   '/waiver': typeof WaiverRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/resources/conversations': typeof ResourcesConversationsRoute
+  '/resources/graphics': typeof ResourcesGraphicsRoute
   '/resources/playbooks': typeof ResourcesPlaybooksRoute
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
@@ -113,6 +120,7 @@ export interface FileRoutesByTo {
   '/waiver': typeof WaiverRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/resources/conversations': typeof ResourcesConversationsRoute
+  '/resources/graphics': typeof ResourcesGraphicsRoute
   '/resources/playbooks': typeof ResourcesPlaybooksRoute
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
@@ -129,6 +137,7 @@ export interface FileRoutesById {
   '/waiver': typeof WaiverRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/resources_/conversations': typeof ResourcesConversationsRoute
+  '/resources_/graphics': typeof ResourcesGraphicsRoute
   '/resources_/playbooks': typeof ResourcesPlaybooksRoute
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
@@ -146,6 +155,7 @@ export interface FileRouteTypes {
     | '/waiver'
     | '/email/unsubscribe'
     | '/resources/conversations'
+    | '/resources/graphics'
     | '/resources/playbooks'
     | '/api/public/rsvp'
     | '/lovable/email/suppression'
@@ -161,6 +171,7 @@ export interface FileRouteTypes {
     | '/waiver'
     | '/email/unsubscribe'
     | '/resources/conversations'
+    | '/resources/graphics'
     | '/resources/playbooks'
     | '/api/public/rsvp'
     | '/lovable/email/suppression'
@@ -176,6 +187,7 @@ export interface FileRouteTypes {
     | '/waiver'
     | '/email/unsubscribe'
     | '/resources_/conversations'
+    | '/resources_/graphics'
     | '/resources_/playbooks'
     | '/api/public/rsvp'
     | '/lovable/email/suppression'
@@ -192,6 +204,7 @@ export interface RootRouteChildren {
   WaiverRoute: typeof WaiverRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   ResourcesConversationsRoute: typeof ResourcesConversationsRoute
+  ResourcesGraphicsRoute: typeof ResourcesGraphicsRoute
   ResourcesPlaybooksRoute: typeof ResourcesPlaybooksRoute
   ApiPublicRsvpRoute: typeof ApiPublicRsvpRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
@@ -230,6 +243,13 @@ declare module '@tanstack/react-router' {
       path: '/resources/playbooks'
       fullPath: '/resources/playbooks'
       preLoaderRoute: typeof ResourcesPlaybooksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resources_/graphics': {
+      id: '/resources_/graphics'
+      path: '/resources/graphics'
+      fullPath: '/resources/graphics'
+      preLoaderRoute: typeof ResourcesGraphicsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/resources_/conversations': {
@@ -304,6 +324,7 @@ const rootRouteChildren: RootRouteChildren = {
   WaiverRoute: WaiverRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   ResourcesConversationsRoute: ResourcesConversationsRoute,
+  ResourcesGraphicsRoute: ResourcesGraphicsRoute,
   ResourcesPlaybooksRoute: ResourcesPlaybooksRoute,
   ApiPublicRsvpRoute: ApiPublicRsvpRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
