@@ -6,12 +6,14 @@ import photo3 from "@/assets/photos/run-club-3.jpg.asset.json";
 import photo4 from "@/assets/photos/run-club-4.jpg.asset.json";
 import photo5 from "@/assets/photos/run-club-5.jpg.asset.json";
 import photo6 from "@/assets/photos/run-club-6.jpg.asset.json";
+import photoBridge from "@/assets/photos/run-club-bridge.jpg.asset.json";
+import nickLauraAsset from "@/assets/photos/nick-laura.jpg.asset.json";
 import grytBearAsset from "@/assets/gryt-bear.png.asset.json";
 
 const heroImgAsset = photo1;
 const heroImg = photo4.url;
 const circleImg = photo6.url;
-const foundersImg = photo2.url;
+const foundersImg = nickLauraAsset.url;
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -815,9 +817,9 @@ function Founders() {
           <div className="relative">
             <img
               src={foundersImg}
-              alt="Laura and Nick Merich"
-              className="block w-full h-[320px] object-cover"
-              style={{ objectPosition: "center 30%" }}
+              alt="Laura and Nick Merich at the Pittsburgh Marathon finish"
+              className="block w-full h-[420px] object-cover"
+              style={{ objectPosition: "center 20%" }}
             />
             <div className="absolute left-0 right-0 bottom-0 px-4 py-4 bg-gradient-to-t from-black/85 to-transparent flex items-center justify-between gap-2">
               <span className="display-condensed text-paper text-[20px]">Laura & Nick</span>
@@ -874,16 +876,26 @@ function Community() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-12">
+          <img
+            src={photo2.url}
+            alt="Sunny morning crew before heading out"
+            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15"
+          />
           <img
             src={photo3.url}
             alt="Cooling down on the trail after a Saturday run"
-            className="block w-full h-[clamp(220px,30vw,360px)] object-cover border border-paper/15"
+            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15"
+          />
+          <img
+            src={photoBridge.url}
+            alt="The crew running over the bridge on the Montour Trail"
+            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15"
           />
           <img
             src={photo5.url}
             alt="Three runners heading down the trail at sunrise"
-            className="block w-full h-[clamp(220px,30vw,360px)] object-cover border border-paper/15"
+            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15"
           />
         </div>
 
