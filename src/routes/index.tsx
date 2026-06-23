@@ -454,14 +454,14 @@ function Founders() {
             themselves.
           </p>
 
-          <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-px bg-paper/10 border-2 border-paper/15">
+          <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-px bg-paper/10 border-2 border-paper/15">
             {[
               ["27", "Marathons finished combined"],
               ["2024", "Running weekly since"],
               ["25+", "Regulars and growing"],
               ["ALL", "Paces, every Saturday"],
             ].map(([n, l]) => (
-              <div key={l} className="bg-vintage p-5">
+              <div key={l} className="bg-vintage p-6 md:p-8 relative grain overflow-hidden">
                 <div className="display-condensed text-blue text-4xl">{n}</div>
                 <div className="eyebrow text-paper/70 mt-2 leading-snug">{l}</div>
               </div>
