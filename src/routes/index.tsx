@@ -111,6 +111,9 @@ function Nav() {
           <a href="#founders" className="eyebrow text-paper/80 hover:text-blue transition-colors">
             Who We Are
           </a>
+          <Link to="/resources" className="eyebrow text-paper/80 hover:text-blue transition-colors">
+            Resources
+          </Link>
           <a href="#faq" className="eyebrow text-paper/80 hover:text-blue transition-colors">
             FAQ
           </a>

@@ -18,7 +18,9 @@ export interface TemplateEntry {
  *   // then add to TEMPLATES: 'welcome': welcomeTemplate
  */
 import { template as recommendationNotification } from './recommendation-notification'
+import { template as partnerInquiryNotification } from './partner-inquiry-notification'
 
 export const TEMPLATES: Record<string, TemplateEntry> = {
   'recommendation-notification': recommendationNotification,
+  'partner-inquiry-notification': partnerInquiryNotification,
 }
