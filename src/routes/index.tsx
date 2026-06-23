@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState, type FormEvent } from "react";
+import { useMemo, useState, type FormEvent, type ReactNode } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { signWaiver } from "@/lib/waiver.functions";
 import { submitRecommendation } from "@/lib/recommendations.functions";
@@ -19,6 +19,8 @@ const circleImg = photo6.url;
 const foundersImg = nickLauraAsset.url;
 
 const FAQ_ITEMS: { q: string; a: string }[] = [
+  { q: "Where do I park?", a: "Park near 212 Valley Brook Road and follow the group toward the Montour Peters Trail." },
+  { q: "Are there bathrooms?", a: "Check the meeting-point details before you come, since restroom access can depend on what is open at that hour." },
   { q: "Do I need to be fast?", a: "No. We have walkers, joggers, comeback runners, and people training for races. If you can move for 30 minutes, you can come." },
   { q: "Can I come alone?", a: "Yes. Most people come alone the first time. Arrive 10 minutes early and introduce yourself. You will know people before the run is over." },
   { q: "What if I cannot run four miles?", a: "No problem. The route is out and back, so you can turn around whenever you want. Walk, jog, run, or mix all three." },
@@ -414,11 +416,11 @@ function RSVP() {
             That's it. No spam, no funnel — just a standing invite to the trailhead.
           </p>
           <div className="border-t border-paper/20 pt-5 flex flex-col gap-3 max-w-[440px]">
-            {[
+            {([
               ["WHEN", "GRYT Run #11 · Sat, Jun 27 · 7:00 AM"],
-              ["WHERE", "212 Valley Brook Road, McMurray · trail parking"],
+              ["WHERE", <>212 Valley Brook Road, McMurray · trail parking · <a href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Road%2C%20McMurray%2C%20PA" target="_blank" rel="noopener noreferrer" className="text-blue hover:underline">Get directions</a></>],
               ["FIRST?", "Most people come alone. Show up 10 min early."],
-            ].map(([k, v]) => (
+            ] as [string, ReactNode][]).map(([k, v]) => (
               <div key={k} className="flex gap-3 items-baseline">
                 <span className="display-condensed text-blue text-[15px] tracking-[0.06em] basis-[86px] shrink-0">
                   {k}
@@ -562,9 +564,9 @@ function RSVP() {
 }
 
 function QuickDetails() {
-  const rows: Array<[string, string]> = [
+  const rows: Array<[string, React.ReactNode]> = [
     ["When", "Saturday · 7:00 AM"],
-    ["Where", "212 Valley Brook Road · McMurray, PA"],
+    ["Where", <>212 Valley Brook Road · McMurray, PA · <a href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Road%2C%20McMurray%2C%20PA" target="_blank" rel="noopener noreferrer" className="underline hover:text-ink/70">Get directions</a></>],
     ["Route", "Montour / Peters Trail"],
     ["Distance", "About 4 miles · out and back"],
     ["Pace", "Walk, jog, run · all welcome"],
@@ -707,7 +709,7 @@ function FirstTimer() {
     {
       n: "1",
       h: "Park at the trailhead.",
-      b: "Pull into 212 Valley Brook Road in McMurray. Parking is free and easy. Look for the group near the trail sign. If you are new, come 10 minutes early. Someone will say hey.",
+      b: <>Pull into <a href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Road%2C%20McMurray%2C%20PA" target="_blank" rel="noopener noreferrer" className="underline hover:text-ink">212 Valley Brook Road in McMurray</a>. Parking is free and easy. Look for the group near the trail sign. If you are new, come 10 minutes early. Someone will say hey.</>,
     },
     {
       n: "2",
@@ -747,6 +749,11 @@ function FirstTimer() {
               <p className="text-[15px] leading-[1.6] text-[#13313f]">{s.b}</p>
             </div>
           ))}
+        </div>
+        <div className="mt-8 border-2 border-ink p-6 md:p-8 max-w-[720px]">
+          <p className="text-[15px] leading-[1.6] text-[#13313f]">
+            <span className="font-semibold">First time? Come 10 minutes early.</span> Nick, Laura, or one of the regulars will introduce you to someone before we start.
+          </p>
         </div>
         <div className="mt-10 flex flex-col sm:flex-row flex-wrap gap-3">
           <a
@@ -1474,6 +1481,14 @@ function Beliefs() {
 
 function FAQ() {
   const faqs = [
+    {
+      q: "Where do I park?",
+      a: "Park near 212 Valley Brook Road and follow the group toward the Montour Peters Trail.",
+    },
+    {
+      q: "Are there bathrooms?",
+      a: "Check the meeting-point details before you come, since restroom access can depend on what is open at that hour.",
+    },
     {
       q: "Do I need to be fast?",
       a: "No. We have walkers, joggers, comeback runners, and people training for races. If you can move for 30 minutes, you can come.",
