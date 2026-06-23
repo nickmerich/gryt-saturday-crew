@@ -41,6 +41,8 @@ function ResourcesPage() {
       <Conversations />
       <Graphics />
       <Merch />
+      <NextPlaybook />
+      <PartnerCTA />
       <GetInvolved />
       <SiteFooter />
     </main>
