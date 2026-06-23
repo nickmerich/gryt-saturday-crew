@@ -90,10 +90,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content: "Do hard things together. Saturday mornings on the Montour / Peters Trail.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "gryt run club" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
+      { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
