@@ -19,6 +19,8 @@ const circleImg = photo6.url;
 const foundersImg = nickLauraAsset.url;
 
 const FAQ_ITEMS: { q: string; a: string }[] = [
+  { q: "Where do I park?", a: "Park near 212 Valley Brook Road and follow the group toward the Montour Peters Trail." },
+  { q: "Are there bathrooms?", a: "Check the meeting-point details before you come, since restroom access can depend on what is open at that hour." },
   { q: "Do I need to be fast?", a: "No. We have walkers, joggers, comeback runners, and people training for races. If you can move for 30 minutes, you can come." },
   { q: "Can I come alone?", a: "Yes. Most people come alone the first time. Arrive 10 minutes early and introduce yourself. You will know people before the run is over." },
   { q: "What if I cannot run four miles?", a: "No problem. The route is out and back, so you can turn around whenever you want. Walk, jog, run, or mix all three." },
