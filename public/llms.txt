@@ -1,0 +1,14 @@
+# GRYT Run Club
+
+> A Pittsburgh run club for former athletes, busy parents, and comeback runners. Saturdays at 7 AM on the Montour / Peters Trail in McMurray, PA. Walk, jog, or run — no pace requirement, no one gets dropped.
+
+GRYT is a free Saturday-morning community run. The mission is simple: do hard things together. Members coordinate through Strava and show up rain or shine.
+
+## Pages
+
+- [Home](/): What GRYT is, when and where we run, how to show up, and FAQ.
+- [Resources](/resources): Hub for playbooks, conversations, and graphics that help other run clubs get started.
+- [Playbooks](/resources/playbooks): Step-by-step guides for starting and running a community run club.
+- [Conversations](/resources/conversations): Interviews and Q&As with founders and community members.
+- [Graphics](/resources/graphics): Downloadable logos, posters, pace cards, and social kits.
+- [Waiver](/waiver): Liability waiver for first-time runners.

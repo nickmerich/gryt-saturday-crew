@@ -81,7 +81,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "A Pittsburgh run club for former athletes, busy parents, and comeback runners. Saturdays at 7 AM on the Montour / Peters Trail. No pace requirement. No one gets dropped.",
+          "Pittsburgh Saturday 7 AM run club on the Montour / Peters Trail for former athletes, busy parents, and comeback runners. No pace requirement.",
       },
       { name: "author", content: "GRYT Run Club" },
       { property: "og:title", content: "GRYT Run Club · Saturdays 7 AM · McMurray, PA" },
@@ -91,15 +91,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "gryt run club" },
+      { property: "og:url", content: "https://grytrunclub.com" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "theme-color", content: "#000000" },
       { name: "apple-mobile-web-app-capable", content: "yes" },
       { name: "apple-mobile-web-app-status-bar-style", content: "black" },
       { name: "apple-mobile-web-app-title", content: "gryt" },
       { name: "twitter:title", content: "GRYT Run Club · Saturdays 7 AM · McMurray, PA" },
-      { name: "description", content: "Gryt Run Club is a Pittsburgh Saturday morning run club on the Montour / Peters Trail in McMurray for former athletes, busy parents, and comeback runners. All p" },
-      { property: "og:description", content: "Gryt Run Club is a Pittsburgh Saturday morning run club on the Montour / Peters Trail in McMurray for former athletes, busy parents, and comeback runners. All p" },
-      { name: "twitter:description", content: "Gryt Run Club is a Pittsburgh Saturday morning run club on the Montour / Peters Trail in McMurray for former athletes, busy parents, and comeback runners. All p" },
+      {
+        name: "twitter:description",
+        content: "Do hard things together. Saturday mornings on the Montour / Peters Trail.",
+      },
       { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/d9453e83-accf-45b7-aa22-28bb004995ee" },
       { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/d9453e83-accf-45b7-aa22-28bb004995ee" },
     ],
@@ -114,6 +116,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap",
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "SportsOrganization",
+          name: "GRYT Run Club",
+          url: "https://grytrunclub.com",
+          description:
+            "A Pittsburgh run club for former athletes, busy parents, and comeback runners. Saturdays at 7 AM on the Montour / Peters Trail.",
+          sport: "Running",
+          areaServed: "Pittsburgh, PA",
+        }),
       },
     ],
   }),
