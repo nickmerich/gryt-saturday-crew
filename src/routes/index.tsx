@@ -413,16 +413,15 @@ function RSVP() {
                 <option value="Other">Other</option>
               </select>
               {error && (
-                <div className="text-[13px] text-[#b23a2e] mb-3.5">
-                  Add your name and an email or phone so we can send the reminder.
-                </div>
+                <div className="text-[13px] text-[#b23a2e] mb-3.5">{error}</div>
               )}
               <button
                 onClick={submit}
-                className="w-full text-sm font-bold tracking-[0.1em] uppercase py-4 bg-ink text-paper hover:bg-[#3a7ca5] transition-colors"
+                disabled={submitting}
+                className="w-full text-sm font-bold tracking-[0.1em] uppercase py-4 bg-ink text-paper hover:bg-[#3a7ca5] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                 style={{ fontFamily: "var(--font-body)" }}
               >
-                RSVP for this Saturday →
+                {submitting ? "Sending…" : "RSVP for this Saturday →"}
               </button>
               <p className="mt-3.5 text-xs leading-[1.5] text-ink/55 text-center">
                 Free, always. One reminder Friday, one Saturday. Unsubscribe anytime.
