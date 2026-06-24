@@ -210,17 +210,6 @@ export function SiteFooter() {
     <footer className="bg-black text-paper py-14 md:py-20 px-6 sm:px-12 lg:px-24">
       <div className="max-w-[1180px] mx-auto">
         <div className="flex justify-between gap-10 flex-wrap items-start pb-12 border-b border-paper/15">
-          <div className="flex-1 min-w-[260px] basis-[320px]">
-            <div className="flex items-center gap-2.5 mb-4">
-              <MonogramG className="h-14 w-14" />
-              <span className="wordmark uppercase text-[26px] leading-none [text-shadow:3px_3px_0_var(--blue)]">
-                Run Club
-              </span>
-            </div>
-            <p className="text-sm leading-[1.6] text-paper/70 max-w-[340px]">
-              Pittsburgh, PA · Saturdays · 7 AM · Montour / Peters Trail.
-            </p>
-          </div>
           <div>
             <MissionStamp size="md" align="left" className="text-paper" />
             <div className="flex gap-6 mt-6">
@@ -259,6 +248,17 @@ export function SiteFooter() {
                 Terms
               </Link>
             </div>
+          </div>
+          <div className="flex-1 min-w-[260px] basis-[320px]">
+            <div className="flex items-center gap-2.5 mb-4">
+              <MonogramG className="h-14 w-14" />
+              <span className="wordmark uppercase text-[26px] leading-none [text-shadow:3px_3px_0_var(--blue)]">
+                Run Club
+              </span>
+            </div>
+            <p className="text-sm leading-[1.6] text-paper/70 max-w-[340px]">
+              Pittsburgh, PA · Saturdays · 7 AM · Montour / Peters Trail.
+            </p>
           </div>
         </div>
         <RecommendationsBar />
