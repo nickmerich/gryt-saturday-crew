@@ -2048,6 +2048,7 @@ function Landing() {
       <QuickDetails />
       <CorePromise />
       <WhoItsFor />
+      <MemberNamesMarquee />
       <FirstTimer />
       <TheRun />
       <Founders />
