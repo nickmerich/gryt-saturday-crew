@@ -4,6 +4,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { SiteNav, SiteFooter, MonogramG } from "@/components/site/Chrome";
 import { submitPartnerInquiry } from "@/lib/partner-inquiries.functions";
 import { submitStorySubmission } from "@/lib/story-submissions.functions";
+import lookbookAsset from "@/assets/lookbook-merch.png.asset.json";
 
 
 export const Route = createFileRoute("/resources")({
@@ -384,39 +385,11 @@ function Graphics() {
 
 /* ─────────────────────────────  MERCH  ─────────────────────────── */
 
-const MERCH: Array<{
-  name: string;
-  description: string;
-  price: string;
-  cta: string;
-  comingSoon?: boolean;
-}> = [
-  {
-    name: "GRYT Bear Tee",
-    description: "The classic. Unisex, heavyweight, made to run in.",
-    price: "$32",
-    cta: "Shop →",
-  },
-  {
-    name: "Saturday Morning Quarter-Zip",
-    description: "For cold starts. GRYT across the chest.",
-    price: "$65",
-    cta: "Notify Me",
-    comingSoon: true,
-  },
-  {
-    name: "Finisher Hat",
-    description:
-      "Run 10 Saturdays, earn the hat. Structured, curved brim.",
-    price: "$28",
-    cta: "Shop →",
-  },
-  {
-    name: "GRYT Sticker Pack",
-    description: "5-sticker set. Bear, wordmark, motivational phrases.",
-    price: "$8",
-    cta: "Shop →",
-  },
+const MERCH_ITEMS = [
+  { name: "Technical Running Singlet", position: "0% 0%" },
+  { name: "Compression Half-Zip", position: "33% 0%" },
+  { name: "Packable Windbreaker Jacket", position: "66% 0%" },
+  { name: "5-Panel Running Cap", position: "0% 50%" },
 ];
 
 function Merch() {
@@ -424,53 +397,38 @@ function Merch() {
     <section className="bg-black text-paper px-6 sm:px-12 lg:px-24 py-24 md:py-32 border-b border-paper/15">
       <div className="max-w-[1180px] mx-auto">
         <SectionHeader kicker="WEAR IT ON THE TRAIL" title="Merch" />
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6">
-          {MERCH.map((m) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
+          {MERCH_ITEMS.map((item) => (
             <article
-              key={m.name}
-              className={`flex flex-col border border-paper/15 bg-ink hover:border-blue transition-colors ${
-                m.comingSoon ? "opacity-65" : ""
-              }`}
+              key={item.name}
+              className="group relative flex flex-col border border-paper/15 bg-ink overflow-hidden"
             >
-              <div className="relative aspect-square bg-black flex items-center justify-center overflow-hidden border-b border-paper/15">
-                <div
-                  className="absolute inset-0 opacity-[0.08]"
-                  style={{
-                    backgroundImage:
-                      "repeating-linear-gradient(45deg, var(--blue) 0 1px, transparent 1px 10px)",
-                  }}
-                  aria-hidden
+              <div className="relative aspect-square overflow-hidden border-b border-paper/15">
+                <img
+                  src={lookbookAsset.url}
+                  alt={item.name}
+                  className="absolute inset-0 w-full h-full object-cover blur-[12px] brightness-50 scale-110"
+                  style={{ objectPosition: item.position }}
+                  loading="lazy"
                 />
-                <MonogramG className="h-28 w-28 relative" />
+                <div className="absolute inset-0 bg-ink/40" />
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
+                  <span className="eyebrow text-blue tracking-[0.2em]">
+                    COMING SOON
+                  </span>
+                  <h3 className="display-condensed uppercase text-[clamp(20px,3vw,28px)] leading-[0.95] text-paper text-center px-4">
+                    {item.name}
+                  </h3>
+                </div>
               </div>
               <div className="flex flex-col gap-3 p-5 flex-1">
-                <div className="flex items-baseline justify-between gap-3">
-                  <h3 className="text-[17px] font-bold leading-[1.2] tracking-tight">
-                    {m.name}
-                  </h3>
-                  <span className="eyebrow text-blue whitespace-nowrap">
-                    {m.price}
-                  </span>
-                </div>
-                <p className="text-paper/65 text-[14px] leading-[1.55] flex-1">
-                  {m.description}
+                <p className="text-paper/55 text-[13px] leading-[1.55]">
+                  Part of the GRYT Running Supply collection. Drops soon.
                 </p>
-                <div className="pt-2">
-                  {m.comingSoon ? (
-                    <span className="inline-flex items-center px-3 py-2 text-xs font-bold uppercase tracking-[0.1em] border border-paper/25 text-paper/55">
-                      {m.cta}
-                    </span>
-                  ) : (
-                    <a
-                      href="https://cidbxi-3p.myshopify.com/"
-                      target="_blank"
-                      rel="noopener"
-                      className="btn-primary"
-                      style={{ fontFamily: "var(--font-body)" }}
-                    >
-                      {m.cta}
-                    </a>
-                  )}
+                <div className="pt-2 mt-auto">
+                  <span className="inline-flex items-center px-3 py-2 text-xs font-bold uppercase tracking-[0.1em] border border-paper/25 text-paper/55">
+                    Notify Me
+                  </span>
                 </div>
               </div>
             </article>
