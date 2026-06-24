@@ -287,12 +287,16 @@ const GRAPHICS: Array<{
   format: string;
   description: string;
   comingSoon?: boolean;
+  href?: string;
+  cta?: string;
 }> = [
   {
     name: "Recap Run Graphic Generator",
     format: "INTERACTIVE",
     description:
       "Build your own GRYT-branded recap. Upload a photo, drop in your splits, download a share-ready image.",
+    href: "/resources/recap",
+    cta: "Open the generator →",
   },
   {
     name: "GRYT Run Club Logo Pack",
