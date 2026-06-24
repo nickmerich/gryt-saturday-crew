@@ -166,6 +166,11 @@ export type Database = {
           id: string
           ip_hash: string | null
           name: string
+          notion_attendance_page_id: string | null
+          notion_last_error: string | null
+          notion_member_page_id: string | null
+          notion_synced: boolean
+          notion_synced_at: string | null
           source: string | null
           user_agent: string | null
         }
@@ -176,6 +181,11 @@ export type Database = {
           id?: string
           ip_hash?: string | null
           name: string
+          notion_attendance_page_id?: string | null
+          notion_last_error?: string | null
+          notion_member_page_id?: string | null
+          notion_synced?: boolean
+          notion_synced_at?: string | null
           source?: string | null
           user_agent?: string | null
         }
@@ -186,6 +196,11 @@ export type Database = {
           id?: string
           ip_hash?: string | null
           name?: string
+          notion_attendance_page_id?: string | null
+          notion_last_error?: string | null
+          notion_member_page_id?: string | null
+          notion_synced?: boolean
+          notion_synced_at?: string | null
           source?: string | null
           user_agent?: string | null
         }

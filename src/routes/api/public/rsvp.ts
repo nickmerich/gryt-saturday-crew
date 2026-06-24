@@ -246,6 +246,35 @@ export const Route = createFileRoute('/api/public/rsvp')({
           }
         }
 
+        // 4. Notion sync — best-effort, log on failure
+        try {
+          const { syncRsvpToNotion } = await import('@/lib/notion/sync.server')
+          const { memberPageId, attendancePageId } = await syncRsvpToNotion({
+            name,
+            contact,
+            source: source ?? null,
+            eventLabel: resolvedEventLabel,
+            submittedAt,
+          })
+          await supabase
+            .from('rsvps')
+            .update({
+              notion_synced: true,
+              notion_member_page_id: memberPageId,
+              notion_attendance_page_id: attendancePageId,
+              notion_synced_at: new Date().toISOString(),
+              notion_last_error: null,
+            })
+            .eq('id', rsvpId)
+        } catch (err) {
+          const msg = err instanceof Error ? err.message : String(err)
+          console.error('Notion sync failed', { rsvpId, error: msg })
+          await supabase
+            .from('rsvps')
+            .update({ notion_last_error: msg.slice(0, 1000) })
+            .eq('id', rsvpId)
+        }
+
         return Response.json({ success: true, confirmationSent: contactIsEmail })
       },
     },
