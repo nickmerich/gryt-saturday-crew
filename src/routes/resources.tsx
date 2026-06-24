@@ -365,10 +365,10 @@ function Graphics() {
                     <span className="eyebrow text-paper/40">Coming Soon</span>
                   ) : (
                     <Link
-                      to="/resources/graphics"
+                      to={g.href ?? "/resources/graphics"}
                       className="eyebrow text-blue hover:text-paper transition-colors"
                     >
-                      Download →
+                      {g.cta ?? "Download →"}
                     </Link>
                   )}
                 </div>
