@@ -818,4 +818,214 @@ function PartnerCTA() {
       </div>
     </section>
   );
+
+/* ──────────────────────  SHARE YOUR STORY  ─────────────────────── */
+
+function ShareYourStory() {
+  const submit = useServerFn(submitStorySubmission);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [location, setLocation] = useState("");
+  const [story, setStory] = useState("");
+  const [whyInterview, setWhyInterview] = useState("");
+  const [links, setLinks] = useState("");
+  const [consentContact, setConsentContact] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
+  const [done, setDone] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function onSubmit(e: FormEvent) {
+    e.preventDefault();
+    setError(null);
+    if (!name.trim() || !email.trim() || !story.trim() || !whyInterview.trim()) {
+      setError("Name, email, your story, and why we should interview you are required.");
+      return;
+    }
+    setSubmitting(true);
+    try {
+      await submit({
+        data: {
+          name: name.trim(),
+          email: email.trim(),
+          location: location.trim(),
+          story: story.trim(),
+          whyInterview: whyInterview.trim(),
+          links: links.trim(),
+          consentContact,
+        },
+      });
+      setDone(true);
+    } catch (e: any) {
+      setError(e?.message || "Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  return (
+    <section
+      id="share-your-story"
+      className="bg-ink text-paper px-6 sm:px-12 lg:px-24 py-24 md:py-32 border-b border-paper/15"
+    >
+      <div className="max-w-[1180px] mx-auto">
+        <SectionHeader kicker="WE WANT TO HEAR FROM YOU" title="Share Your Story" />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          <div>
+            <h3 className="display-condensed uppercase text-[clamp(32px,4.5vw,56px)] leading-[0.95]">
+              Got a story worth telling?
+            </h3>
+            <p className="mt-7 text-paper/75 text-[16px] leading-[1.65] max-w-[520px]">
+              Comeback runners. First-timers. People who built community out of nothing.
+              If running changed something for you and you think your story could help
+              someone else show up — tell us about it. Nick reads every submission.
+            </p>
+            <ul className="mt-8 space-y-3 text-paper/75 text-[15px] leading-[1.6] max-w-[520px]">
+              <li className="flex gap-3">
+                <span className="text-blue">→</span>
+                You don't have to be fast, experienced, or a "real" runner.
+              </li>
+              <li className="flex gap-3">
+                <span className="text-blue">→</span>
+                The best interviews come from people doing hard things on ordinary days.
+              </li>
+              <li className="flex gap-3">
+                <span className="text-blue">→</span>
+                Features can run as written Q&amp;A, podcast, or short video.
+              </li>
+            </ul>
+          </div>
+
+          {done ? (
+            <div className="p-8 border border-blue bg-black/40">
+              <p className="eyebrow text-blue mb-3">STORY RECEIVED</p>
+              <h3 className="text-2xl font-bold leading-tight mb-3">
+                Thanks for sharing.
+              </h3>
+              <p className="text-paper/75 text-[15px] leading-[1.6]">
+                Nick reads every story personally. If it's a fit, we'll reach out
+                to <span className="text-paper">{email}</span> about an interview.
+              </p>
+            </div>
+          ) : (
+            <form
+              onSubmit={onSubmit}
+              className="p-7 md:p-9 border border-paper/15 bg-black/40 flex flex-col gap-6"
+            >
+              <div>
+                <label htmlFor="s-name" className="eyebrow text-paper/55 block mb-2">
+                  Name
+                </label>
+                <input
+                  id="s-name"
+                  type="text"
+                  maxLength={120}
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className={partnerInputCls}
+                  placeholder="Your name"
+                />
+              </div>
+              <div>
+                <label htmlFor="s-email" className="eyebrow text-paper/55 block mb-2">
+                  Email
+                </label>
+                <input
+                  id="s-email"
+                  type="email"
+                  maxLength={255}
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className={partnerInputCls}
+                  placeholder="you@email.com"
+                />
+              </div>
+              <div>
+                <label htmlFor="s-location" className="eyebrow text-paper/55 block mb-2">
+                  Location <span className="text-paper/35 normal-case">(optional)</span>
+                </label>
+                <input
+                  id="s-location"
+                  type="text"
+                  maxLength={160}
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                  className={partnerInputCls}
+                  placeholder="City, state, or club"
+                />
+              </div>
+              <div>
+                <label htmlFor="s-story" className="eyebrow text-paper/55 block mb-2">
+                  Your story
+                </label>
+                <textarea
+                  id="s-story"
+                  required
+                  maxLength={4000}
+                  rows={5}
+                  value={story}
+                  onChange={(e) => setStory(e.target.value)}
+                  className={`${partnerInputCls} resize-none`}
+                  placeholder="What's the short version? Where you started, what changed, where you are now."
+                />
+                <p className="mt-2 text-xs text-paper/40">{story.length}/4000</p>
+              </div>
+              <div>
+                <label htmlFor="s-why" className="eyebrow text-paper/55 block mb-2">
+                  Why should we interview you?
+                </label>
+                <textarea
+                  id="s-why"
+                  required
+                  maxLength={2000}
+                  rows={4}
+                  value={whyInterview}
+                  onChange={(e) => setWhyInterview(e.target.value)}
+                  className={`${partnerInputCls} resize-none`}
+                  placeholder="What would other runners get out of hearing it?"
+                />
+                <p className="mt-2 text-xs text-paper/40">{whyInterview.length}/2000</p>
+              </div>
+              <div>
+                <label htmlFor="s-links" className="eyebrow text-paper/55 block mb-2">
+                  Links <span className="text-paper/35 normal-case">(optional)</span>
+                </label>
+                <input
+                  id="s-links"
+                  type="text"
+                  maxLength={600}
+                  value={links}
+                  onChange={(e) => setLinks(e.target.value)}
+                  className={partnerInputCls}
+                  placeholder="Strava, Instagram, blog — anything that adds context"
+                />
+              </div>
+              <label className="flex items-start gap-3 text-[14px] text-paper/75 leading-[1.5] cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={consentContact}
+                  onChange={(e) => setConsentContact(e.target.checked)}
+                  className="mt-1 h-4 w-4 accent-[var(--blue)]"
+                />
+                <span>
+                  It's okay to email me about featuring this story.
+                </span>
+              </label>
+              {error && <p className="text-sm text-red-400">{error}</p>}
+              <button
+                type="submit"
+                disabled={submitting}
+                className="btn-primary disabled:opacity-40 self-start"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                {submitting ? "Sending..." : "SUBMIT MY STORY →"}
+              </button>
+            </form>
+          )}
+        </div>
+      </div>
+    </section>
+  );
 }
+
