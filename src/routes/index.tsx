@@ -435,6 +435,52 @@ function Marquee() {
   );
 }
 
+function MemberNamesMarquee() {
+  const names = [
+    "Wilton Gorske",
+    "Aaron Maize",
+    "Michael DiVella",
+    "Dave Friedman",
+    "Maria Friedman",
+    "Ian Baun",
+    "Nick Merich",
+    "Matt Pardon",
+    "Kyle Bloser",
+    "Jeana DeNardo",
+    "Zac Kuch",
+    "Pete Ross",
+    "Matthew Bianco",
+    "Nathan James",
+    "Matt Messerley",
+    "Laura Merich",
+    "Jay Wysocki",
+    "Eli Wysocki",
+    "Caleb Wysocki",
+  ];
+
+  const Row = ({ ariaHidden = false }: { ariaHidden?: boolean }) => (
+    <span className="flex" aria-hidden={ariaHidden}>
+      {names.map((n) => (
+        <span key={n} className="flex items-center shrink-0">
+          <span className="display-condensed text-paper px-5 text-[clamp(18px,2.2vw,24px)] tracking-[0.05em] whitespace-nowrap">
+            {n}
+          </span>
+          <span className="text-blue">/</span>
+        </span>
+      ))}
+    </span>
+  );
+
+  return (
+    <div className="bg-ink border-t border-b border-paper/15 overflow-hidden py-4">
+      <div className="member-marquee-track">
+        <Row />
+        <Row ariaHidden />
+      </div>
+    </div>
+  );
+}
+
 function RSVP() {
   const [name, setName] = useState("");
   const [contact, setContact] = useState("");
