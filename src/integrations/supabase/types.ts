@@ -206,6 +206,45 @@ export type Database = {
         }
         Relationships: []
       }
+      story_submissions: {
+        Row: {
+          consent_contact: boolean
+          created_at: string
+          email: string
+          id: string
+          ip_hash: string | null
+          links: string | null
+          location: string | null
+          name: string
+          story: string
+          why_interview: string
+        }
+        Insert: {
+          consent_contact?: boolean
+          created_at?: string
+          email: string
+          id?: string
+          ip_hash?: string | null
+          links?: string | null
+          location?: string | null
+          name: string
+          story: string
+          why_interview: string
+        }
+        Update: {
+          consent_contact?: boolean
+          created_at?: string
+          email?: string
+          id?: string
+          ip_hash?: string | null
+          links?: string | null
+          location?: string | null
+          name?: string
+          story?: string
+          why_interview?: string
+        }
+        Relationships: []
+      }
       suppressed_emails: {
         Row: {
           created_at: string
