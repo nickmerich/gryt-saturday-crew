@@ -287,7 +287,17 @@ const GRAPHICS: Array<{
   format: string;
   description: string;
   comingSoon?: boolean;
+  href?: string;
+  cta?: string;
 }> = [
+  {
+    name: "Recap Run Graphic Generator",
+    format: "INTERACTIVE",
+    description:
+      "Build your own GRYT-branded recap. Upload a photo, drop in your splits, download a share-ready image.",
+    href: "/resources/recap",
+    cta: "Open the generator →",
+  },
   {
     name: "GRYT Run Club Logo Pack",
     format: "PNG + SVG",
@@ -355,10 +365,10 @@ function Graphics() {
                     <span className="eyebrow text-paper/40">Coming Soon</span>
                   ) : (
                     <Link
-                      to="/resources/graphics"
+                      to={g.href ?? "/resources/graphics"}
                       className="eyebrow text-blue hover:text-paper transition-colors"
                     >
-                      Download →
+                      {g.cta ?? "Download →"}
                     </Link>
                   )}
                 </div>
