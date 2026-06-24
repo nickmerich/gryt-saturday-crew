@@ -40,6 +40,7 @@ function ResourcesPage() {
       <Hero />
       <Playbooks />
       <Conversations />
+      <ShareYourStory />
       <Graphics />
       <Merch />
       <NextPlaybook />
