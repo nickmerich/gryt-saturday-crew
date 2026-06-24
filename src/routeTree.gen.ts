@@ -14,11 +14,14 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ResourcesRouteImport } from './routes/resources'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as MembersRouteImport } from './routes/members'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ResourcesPlaybooksRouteImport } from './routes/resources_.playbooks'
 import { Route as ResourcesGraphicsRouteImport } from './routes/resources_.graphics'
 import { Route as ResourcesConversationsRouteImport } from './routes/resources_.conversations'
+import { Route as MembersKeyRouteImport } from './routes/members.$key'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
+import { Route as AdminMembersRouteImport } from './routes/admin.members'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as ApiPublicRsvpRouteImport } from './routes/api/public/rsvp'
 import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
@@ -52,6 +55,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MembersRoute = MembersRouteImport.update({
+  id: '/members',
+  path: '/members',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -72,9 +80,19 @@ const ResourcesConversationsRoute = ResourcesConversationsRouteImport.update({
   path: '/resources/conversations',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MembersKeyRoute = MembersKeyRouteImport.update({
+  id: '/$key',
+  path: '/$key',
+  getParentRoute: () => MembersRoute,
+} as any)
 const EmailUnsubscribeRoute = EmailUnsubscribeRouteImport.update({
   id: '/email/unsubscribe',
   path: '/email/unsubscribe',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminMembersRoute = AdminMembersRouteImport.update({
+  id: '/admin/members',
+  path: '/admin/members',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
@@ -118,12 +136,15 @@ const LovableEmailAuthPreviewRoute = LovableEmailAuthPreviewRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/members': typeof MembersRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/resources': typeof ResourcesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/waiver': typeof WaiverRoute
+  '/admin/members': typeof AdminMembersRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
+  '/members/$key': typeof MembersKeyRoute
   '/resources/conversations': typeof ResourcesConversationsRoute
   '/resources/graphics': typeof ResourcesGraphicsRoute
   '/resources/playbooks': typeof ResourcesPlaybooksRoute
@@ -137,12 +158,15 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/members': typeof MembersRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/resources': typeof ResourcesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/waiver': typeof WaiverRoute
+  '/admin/members': typeof AdminMembersRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
+  '/members/$key': typeof MembersKeyRoute
   '/resources/conversations': typeof ResourcesConversationsRoute
   '/resources/graphics': typeof ResourcesGraphicsRoute
   '/resources/playbooks': typeof ResourcesPlaybooksRoute
@@ -157,12 +181,15 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/members': typeof MembersRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/resources': typeof ResourcesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/waiver': typeof WaiverRoute
+  '/admin/members': typeof AdminMembersRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
+  '/members/$key': typeof MembersKeyRoute
   '/resources_/conversations': typeof ResourcesConversationsRoute
   '/resources_/graphics': typeof ResourcesGraphicsRoute
   '/resources_/playbooks': typeof ResourcesPlaybooksRoute
@@ -178,12 +205,15 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/members'
     | '/privacy'
     | '/resources'
     | '/sitemap.xml'
     | '/terms'
     | '/waiver'
+    | '/admin/members'
     | '/email/unsubscribe'
+    | '/members/$key'
     | '/resources/conversations'
     | '/resources/graphics'
     | '/resources/playbooks'
@@ -197,12 +227,15 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/members'
     | '/privacy'
     | '/resources'
     | '/sitemap.xml'
     | '/terms'
     | '/waiver'
+    | '/admin/members'
     | '/email/unsubscribe'
+    | '/members/$key'
     | '/resources/conversations'
     | '/resources/graphics'
     | '/resources/playbooks'
@@ -216,12 +249,15 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/members'
     | '/privacy'
     | '/resources'
     | '/sitemap.xml'
     | '/terms'
     | '/waiver'
+    | '/admin/members'
     | '/email/unsubscribe'
+    | '/members/$key'
     | '/resources_/conversations'
     | '/resources_/graphics'
     | '/resources_/playbooks'
@@ -236,11 +272,13 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  MembersRoute: typeof MembersRouteWithChildren
   PrivacyRoute: typeof PrivacyRoute
   ResourcesRoute: typeof ResourcesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
   WaiverRoute: typeof WaiverRoute
+  AdminMembersRoute: typeof AdminMembersRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   ResourcesConversationsRoute: typeof ResourcesConversationsRoute
   ResourcesGraphicsRoute: typeof ResourcesGraphicsRoute
@@ -291,6 +329,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/members': {
+      id: '/members'
+      path: '/members'
+      fullPath: '/members'
+      preLoaderRoute: typeof MembersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -319,11 +364,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResourcesConversationsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/members/$key': {
+      id: '/members/$key'
+      path: '/$key'
+      fullPath: '/members/$key'
+      preLoaderRoute: typeof MembersKeyRouteImport
+      parentRoute: typeof MembersRoute
+    }
     '/email/unsubscribe': {
       id: '/email/unsubscribe'
       path: '/email/unsubscribe'
       fullPath: '/email/unsubscribe'
       preLoaderRoute: typeof EmailUnsubscribeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/members': {
+      id: '/admin/members'
+      path: '/admin/members'
+      fullPath: '/admin/members'
+      preLoaderRoute: typeof AdminMembersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lovable/email/suppression': {
@@ -378,13 +437,26 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface MembersRouteChildren {
+  MembersKeyRoute: typeof MembersKeyRoute
+}
+
+const MembersRouteChildren: MembersRouteChildren = {
+  MembersKeyRoute: MembersKeyRoute,
+}
+
+const MembersRouteWithChildren =
+  MembersRoute._addFileChildren(MembersRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  MembersRoute: MembersRouteWithChildren,
   PrivacyRoute: PrivacyRoute,
   ResourcesRoute: ResourcesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
   WaiverRoute: WaiverRoute,
+  AdminMembersRoute: AdminMembersRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   ResourcesConversationsRoute: ResourcesConversationsRoute,
   ResourcesGraphicsRoute: ResourcesGraphicsRoute,
