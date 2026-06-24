@@ -1,42 +1,114 @@
-# Brand alignment pass
 
-The landing page is already in the right visual world (black + baby blue, Space Grotesk + Oswald + Inter, concrete texture, diagonal slashes). What's drifting from the brand system, and what to fix.
+# GRYT Notion-as-Source-of-Truth
 
-## Issues found
+Notion holds the canonical member + attendance records. The website is a thin client that writes through to Notion via server functions. No second CRM in Supabase.
 
-1. **Brand name casing in body copy.** The page writes `GRYT` (uppercase) inside sentences ("GRYT is a Pittsburgh run club…", "GRYT started because…", "GRYT gives you…", "GRYT is free."). Brand rule: wordmark is always lowercase `gryt`; uppercase `GRYT` is reserved for the condensed-display poster treatment, never inline in body.
-2. **MissionStamp is too small / too quiet.** Currently `text-xs` Oswald with a tiny slash. Brand says it's the recurring north-star stamp on hero, footer, posters — should read as a stacked condensed-display block with a prominent diagonal baby-blue slash under `TOGETHER`.
-3. **No condensed-uppercase poster treatment in the hero.** Brand reserves Oswald-700 uppercase for hero callouts/posters/event lines. Hero H1 is fine as Space Grotesk manifesto, but it should be paired with a `GRYT` condensed-uppercase poster lockup somewhere prominent (hero + final CTA), and the section eyebrows that read like event lines (e.g. `SATURDAY · 7 AM`) should use the condensed face, not the Inter eyebrow.
-4. **Decorative unicode in CTAs.** "Join the group chat →" uses a right-arrow glyph. Brand rule: no decorative unicode except `©` and `·`. Remove the arrows.
-5. **Wordmark outline direction.** Current `.wordmark` uses `text-shadow: 3px 3px 0 var(--blue)` → outline is bottom-**right**. Brand says "offset baby-blue outline visible at bottom-right" — this is correct, keep. But the `.wordmark-ink` variant (black fill on light) is defined and never used; the footer/nav force white fill on dark which is right, so just confirm the rule.
-6. **Monogram G is missing.** Brand calls for a `G` monogram (baby-blue on black, lightning-bolt inside) for avatar/favicon/small lockups. The page has no favicon and no monogram lockup. Add an SVG monogram component and wire it as the favicon + a small lockup beside the footer wordmark.
-7. **OG image / favicon links.** `__root.tsx` has no `icon` link and no `og:image`. Add favicon (monogram SVG) and an og:image meta pointing at the hero image URL.
-8. **"Run", "First Time", etc. nav labels** use Inter eyebrow — fine, but the in-page section H2s mix title case ("Saturday is already planned.") which is on-brand for manifesto, and condensed-uppercase poster blocks (final CTA `SATURDAY · 7 AM · MCMURRAY`). Keep both, just make sure the condensed blocks consistently use `.display-condensed` (they do) at the right scale.
+## 1. Notion databases (I create fresh)
 
-## Changes
+I'll pick a sensible parent (a new top-level page called **"GRYT Ops"** in your Notion workspace) and create two linked databases.
 
-### `src/routes/index.tsx`
-- Replace every inline-body `GRYT` with lowercase `gryt`. Affected strings:
-  - Hero p: "GRYT is a Pittsburgh run club…" → "gryt is a Pittsburgh run club…"
-  - CorePromise p: "GRYT gives you one standing appointment…" → "gryt gives you…"
-  - Founders p: "GRYT started because we needed it too." / "GRYT isn't about medals." → lowercase
-  - FAQ: "GRYT is free." → "gryt is free."
-- Rebuild `MissionStamp`: stacked `DO HARD` / `THINGS` / `TOGETHER` in `.display-condensed` at ~`text-2xl` (footer) / `text-4xl` (hero stamp variant), with a wider, thicker baby-blue slash drawn under the `TOGETHER` line (not inline next to it). Accept a `size` prop so footer can use a smaller version.
-- Place the `MissionStamp` (large variant) inside the Hero, top-right or above the H1, so it earns its "north star" role.
-- Add a `GrytPoster` element (Oswald uppercase, very large `GRYT` with a baby-blue slash through it) inside the FinalCTA section above `SATURDAY · 7 AM · MCMURRAY`.
-- Community section CTAs: remove the `→` glyph. Buttons should read `Join the group chat` and `View this week's run`. Keep the styling.
-- Add `MonogramG` inline SVG component (baby-blue circle/square on black, white `G` with a lightning bolt cutout). Render it small (24–32px) next to the footer wordmark and inside the Nav as a mobile fallback.
+### A. GRYT Members
+Properties match your spec exactly:
+- Name (title), Email, Phone, Strava Handle, Instagram Handle
+- First Run Date, Last Run Date, Total Runs (number)
+- Lifecycle State (select: Prospect, First-Timer, Regular, Bringer, Anchor, Drifter, Paused, Archived)
+- Last Contacted (date), Outreach Status (select: Not contacted, Invite needed, Invited, Follow-up needed, Replied, Coming Saturday, Not now, Do not contact), Outreach Channel (select: SMS, IG DM, Email, In person, Strava)
+- Brought By (relation → Members, self), Friends Brought (rollup count of reverse relation)
+- Notes (rich text), Source (select: Website RSVP, Manual, Strava, Photo, Referral)
+- Waiver Status (select: Not signed, 2026 Signed, Expired)
+- RSVP History (relation → Attendance)
+- Created At, Updated At
 
-### `src/routes/__root.tsx`
-- Add favicon link using an inline SVG data URL of the monogram (or `/favicon.svg` file we create).
-- Add `og:image` + `twitter:image` meta pointing at `/og-image.jpg` (use the existing hero image asset path — already a CDN-served import, so reference its URL via the asset import in a small adjustment).
+### B. GRYT Attendance
+- Run Date (title or date+formula title like "2026-06-27 #43")
+- Run Number, Route, Location, Weather Note
+- Member (relation → Members)
+- Attendance Status (select: RSVP, Attended, No-show, Maybe)
+- First Timer (checkbox), Brought By (relation → Members)
+- Notes, Source (select: Website RSVP, Manual, Strava, Photo review)
 
-### `src/styles.css`
-- Strengthen `.slash` defaults (current 2.5rem × 4px is fine for small inline use). Add a `.slash-lg` modifier (~8rem × 6px, skew −20deg) for the MissionStamp under-rule and the GrytPoster slash.
-- No font/color/radius changes — palette and type already match the brand tokens.
+### Notion views I'll create
+- **This Saturday RSVPs** (Attendance, filter: Run Date = next Saturday, Status = RSVP)
+- **Drifter Outreach** (Members, filter per spec §6)
+- **First-Timers (last 30d)**, **Bringers**, **Near-Anchor**, **Missing data**, **Recent outreach**
 
-### New asset
-- `src/assets/monogram-g.svg` — small SVG: black background square, baby-blue `G` glyph with a lightning-bolt notch. Referenced by `MonogramG` and as `/favicon.svg` (or inline data URL in head).
+I share both DB URLs back in chat after creation.
 
-## Out of scope
-- No new sections, no copy rewrites beyond the casing fixes above, no layout reshuffles. No imagery swaps. No new dependencies.
+## 2. Website → Notion sync (direct server-side writes)
+
+All Notion access goes through Notion connector gateway from `createServerFn` handlers. No Supabase mirror of member/attendance data.
+
+### `rsvpForSaturday` server fn
+Input: `{ name, email?, phone?, strava?, instagram?, runDate }`
+
+1. Query Members DB filtered by email OR phone OR strava OR instagram OR (name + no other match).
+2. If match → update that member. If none → create with Lifecycle State = Prospect, Source = Website RSVP.
+3. Upsert an Attendance row for `runDate` + member, Status = RSVP, Source = Website RSVP.
+4. Set member Outreach Status = "Coming Saturday", Updated At = now.
+
+Existing `rsvps` Supabase table: keep as a write-through audit log only (already there from waiver flow). Mark each row `notion_synced bool` + `notion_page_id`. If Notion write fails, row stays `notion_synced=false` and surfaces in the admin "Missing data" view.
+
+### Waiver flow
+On successful waiver signature, also call the same upsert path with Waiver Status = "2026 Signed".
+
+## 3. Admin dashboard (`/admin`)
+
+Gated by **email allowlist** in a server fn middleware (`ADMIN_EMAILS` env var = "nick@…,laura@…"). Uses existing Supabase auth + `requireSupabaseAuth`; middleware checks `context.claims.email` ∈ allowlist or throws 403. Route lives under `src/routes/_authenticated/admin/`.
+
+Sections (each one = one server fn reading Notion live):
+1. **This Saturday RSVPs** — list from Attendance.
+2. **First-timers to welcome** — Lifecycle = First-Timer.
+3. **Drifters to check in on** — per §6 filter.
+4. **Regulars close to becoming Anchor** — Regulars with 4–5 runs in 90d.
+5. **Bringers to recognize** — Friends Brought ≥ 1 in last 30d.
+6. **Missing data to clean up** — members with no email+phone, unsynced RSVPs.
+7. **Recent outreach sent** — Last Contacted in last 14d.
+
+### Post-run update workflow (`/admin/run/:date`)
+- Pick run date → loads RSVP list + recent regulars.
+- Checkboxes: Attended / No-show / Maybe / Add first-timer.
+- Inline "Brought by" picker (Member search).
+- Notes field per run.
+- Submit → batch update Attendance rows + recompute member Last Run / Total Runs / Lifecycle State server-side (Notion writes).
+
+### Outreach logger (`/admin/outreach/:memberId`)
+Form: Date, Channel, Message summary, Outreach Status, Next follow-up, Owner. Writes to member + appends a row to a small **Outreach Log** Notion DB (3rd DB) for history. **No drafting, no auto-send.**
+
+## 4. Lifecycle recompute (server fn, deterministic)
+
+Pure function `computeLifecycle(member, attendance[])` applied:
+- After post-run update
+- After RSVP if member moved to a new bucket
+- On demand via "Recompute all" admin button
+
+Rules from §5 implemented exactly. Skips members where Lifecycle = Paused or Archived.
+
+## 5. Constraints honored
+
+- Notion is canonical. Supabase only holds: auth users, waiver signatures (legal), RSVP audit log w/ `notion_synced` flag.
+- Every Notion write logged; failures bubble to "Missing data".
+- No emoji, brand-correct copy in admin UI (lowercase headings, condensed display for section titles, baby blue accents).
+
+## Technical notes
+
+- Notion API via gateway: `https://connector-gateway.lovable.dev/notion/v1/...` with `Authorization: Bearer $LOVABLE_API_KEY` + `X-Connection-Api-Key: $NOTION_API_KEY`. Notion connector already linked (MCP confirms).
+- New env var: `ADMIN_EMAILS` (comma-separated). I'll request via `add_secret` after approval.
+- New files: `src/lib/notion/{client,members,attendance,lifecycle}.server.ts`, `src/lib/notion/*.functions.ts`, `src/routes/_authenticated/admin/*`, `src/integrations/admin-middleware.ts`.
+- Supabase migration: add `notion_synced bool default false`, `notion_page_id text`, `notion_last_error text` to `rsvps`. No new tables.
+- Database IDs captured at creation time and stored as env vars (`NOTION_MEMBERS_DB_ID`, `NOTION_ATTENDANCE_DB_ID`, `NOTION_OUTREACH_DB_ID`) via `add_secret`.
+
+## Out of scope (call out explicitly)
+
+- Strava OAuth ingestion (manual entry only for now).
+- Photo OCR / auto attendance from images.
+- Automated message sending (logging only).
+- SMS/email outreach delivery infra.
+
+## Build order
+
+1. Create the 3 Notion DBs + views; capture IDs.
+2. Add env vars + admin middleware.
+3. Notion client + members/attendance helpers + lifecycle calc.
+4. Wire website RSVP form to new `rsvpForSaturday` server fn; migrate `rsvps` table.
+5. Admin dashboard + post-run workflow + outreach logger.
+6. Backfill any existing `rsvps` rows into Notion (one-shot script).
