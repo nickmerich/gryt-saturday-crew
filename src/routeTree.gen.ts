@@ -21,6 +21,7 @@ import { Route as ResourcesGraphicsRouteImport } from './routes/resources_.graph
 import { Route as ResourcesConversationsRouteImport } from './routes/resources_.conversations'
 import { Route as MembersKeyRouteImport } from './routes/members.$key'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
+import { Route as AdminMembersRouteImport } from './routes/admin.members'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as ApiPublicRsvpRouteImport } from './routes/api/public/rsvp'
 import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
@@ -89,6 +90,11 @@ const EmailUnsubscribeRoute = EmailUnsubscribeRouteImport.update({
   path: '/email/unsubscribe',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminMembersRoute = AdminMembersRouteImport.update({
+  id: '/admin/members',
+  path: '/admin/members',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
   id: '/lovable/email/suppression',
   path: '/lovable/email/suppression',
@@ -136,6 +142,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/waiver': typeof WaiverRoute
+  '/admin/members': typeof AdminMembersRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/members/$key': typeof MembersKeyRoute
   '/resources/conversations': typeof ResourcesConversationsRoute
@@ -157,6 +164,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/waiver': typeof WaiverRoute
+  '/admin/members': typeof AdminMembersRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/members/$key': typeof MembersKeyRoute
   '/resources/conversations': typeof ResourcesConversationsRoute
@@ -179,6 +187,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/waiver': typeof WaiverRoute
+  '/admin/members': typeof AdminMembersRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/members/$key': typeof MembersKeyRoute
   '/resources_/conversations': typeof ResourcesConversationsRoute
@@ -202,6 +211,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/waiver'
+    | '/admin/members'
     | '/email/unsubscribe'
     | '/members/$key'
     | '/resources/conversations'
@@ -223,6 +233,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/waiver'
+    | '/admin/members'
     | '/email/unsubscribe'
     | '/members/$key'
     | '/resources/conversations'
@@ -244,6 +255,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/waiver'
+    | '/admin/members'
     | '/email/unsubscribe'
     | '/members/$key'
     | '/resources_/conversations'
@@ -266,6 +278,7 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
   WaiverRoute: typeof WaiverRoute
+  AdminMembersRoute: typeof AdminMembersRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   ResourcesConversationsRoute: typeof ResourcesConversationsRoute
   ResourcesGraphicsRoute: typeof ResourcesGraphicsRoute
@@ -365,6 +378,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EmailUnsubscribeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/members': {
+      id: '/admin/members'
+      path: '/admin/members'
+      fullPath: '/admin/members'
+      preLoaderRoute: typeof AdminMembersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lovable/email/suppression': {
       id: '/lovable/email/suppression'
       path: '/lovable/email/suppression'
@@ -436,6 +456,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
   WaiverRoute: WaiverRoute,
+  AdminMembersRoute: AdminMembersRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   ResourcesConversationsRoute: ResourcesConversationsRoute,
   ResourcesGraphicsRoute: ResourcesGraphicsRoute,
