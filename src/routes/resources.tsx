@@ -818,8 +818,10 @@ function PartnerCTA() {
       </div>
     </section>
   );
+}
 
 /* ──────────────────────  SHARE YOUR STORY  ─────────────────────── */
+
 
 function ShareYourStory() {
   const submit = useServerFn(submitStorySubmission);
