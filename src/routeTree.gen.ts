@@ -16,6 +16,7 @@ import { Route as ResourcesRouteImport } from './routes/resources'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as MembersRouteImport } from './routes/members'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ResourcesRecapRouteImport } from './routes/resources_.recap'
 import { Route as ResourcesPlaybooksRouteImport } from './routes/resources_.playbooks'
 import { Route as ResourcesGraphicsRouteImport } from './routes/resources_.graphics'
 import { Route as ResourcesConversationsRouteImport } from './routes/resources_.conversations'
@@ -63,6 +64,11 @@ const MembersRoute = MembersRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResourcesRecapRoute = ResourcesRecapRouteImport.update({
+  id: '/resources_/recap',
+  path: '/resources/recap',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResourcesPlaybooksRoute = ResourcesPlaybooksRouteImport.update({
@@ -148,6 +154,7 @@ export interface FileRoutesByFullPath {
   '/resources/conversations': typeof ResourcesConversationsRoute
   '/resources/graphics': typeof ResourcesGraphicsRoute
   '/resources/playbooks': typeof ResourcesPlaybooksRoute
+  '/resources/recap': typeof ResourcesRecapRoute
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
@@ -170,6 +177,7 @@ export interface FileRoutesByTo {
   '/resources/conversations': typeof ResourcesConversationsRoute
   '/resources/graphics': typeof ResourcesGraphicsRoute
   '/resources/playbooks': typeof ResourcesPlaybooksRoute
+  '/resources/recap': typeof ResourcesRecapRoute
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
@@ -193,6 +201,7 @@ export interface FileRoutesById {
   '/resources_/conversations': typeof ResourcesConversationsRoute
   '/resources_/graphics': typeof ResourcesGraphicsRoute
   '/resources_/playbooks': typeof ResourcesPlaybooksRoute
+  '/resources_/recap': typeof ResourcesRecapRoute
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
@@ -217,6 +226,7 @@ export interface FileRouteTypes {
     | '/resources/conversations'
     | '/resources/graphics'
     | '/resources/playbooks'
+    | '/resources/recap'
     | '/api/public/rsvp'
     | '/lovable/email/suppression'
     | '/lovable/email/auth/preview'
@@ -239,6 +249,7 @@ export interface FileRouteTypes {
     | '/resources/conversations'
     | '/resources/graphics'
     | '/resources/playbooks'
+    | '/resources/recap'
     | '/api/public/rsvp'
     | '/lovable/email/suppression'
     | '/lovable/email/auth/preview'
@@ -261,6 +272,7 @@ export interface FileRouteTypes {
     | '/resources_/conversations'
     | '/resources_/graphics'
     | '/resources_/playbooks'
+    | '/resources_/recap'
     | '/api/public/rsvp'
     | '/lovable/email/suppression'
     | '/lovable/email/auth/preview'
@@ -283,6 +295,7 @@ export interface RootRouteChildren {
   ResourcesConversationsRoute: typeof ResourcesConversationsRoute
   ResourcesGraphicsRoute: typeof ResourcesGraphicsRoute
   ResourcesPlaybooksRoute: typeof ResourcesPlaybooksRoute
+  ResourcesRecapRoute: typeof ResourcesRecapRoute
   ApiPublicRsvpRoute: typeof ApiPublicRsvpRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
@@ -341,6 +354,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resources_/recap': {
+      id: '/resources_/recap'
+      path: '/resources/recap'
+      fullPath: '/resources/recap'
+      preLoaderRoute: typeof ResourcesRecapRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/resources_/playbooks': {
@@ -461,6 +481,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResourcesConversationsRoute: ResourcesConversationsRoute,
   ResourcesGraphicsRoute: ResourcesGraphicsRoute,
   ResourcesPlaybooksRoute: ResourcesPlaybooksRoute,
+  ResourcesRecapRoute: ResourcesRecapRoute,
   ApiPublicRsvpRoute: ApiPublicRsvpRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,

@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ChangeEvent } from "react";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 
-export const Route = createFileRoute("/resources/recap")({
+export const Route = createFileRoute("/resources_/recap")({
   head: () => ({
     meta: [
       { title: "Recap Run Graphic Generator · gryt run club" },
