@@ -197,6 +197,15 @@
     width: max-content;
     animation: grytmarq 32s linear infinite;
   }
+  @keyframes grytmarq-slow {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .member-marquee-track {
+    display: flex;
+    width: max-content;
+    animation: grytmarq-slow 45s linear infinite;
+  }
 }
 
 /* Baby-blue surfaces get the dotted-grid texture overlay */
