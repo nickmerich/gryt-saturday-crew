@@ -160,6 +160,29 @@ function PlaybooksPage() {
         </div>
       </section>
 
+      <section className="px-6 sm:px-12 lg:px-24 pt-16 pb-8 border-b border-paper/15">
+        <div className="max-w-[900px] mx-auto">
+          <p className="eyebrow text-paper/55 mb-5">Jump to a playbook</p>
+          <nav aria-label="Playbook table of contents">
+            <ul className="flex flex-col gap-3">
+              {PLAYBOOKS.filter((p) => !p.comingSoon).map((p) => (
+                <li key={p.slug}>
+                  <a
+                    href={`#${p.slug}`}
+                    className="group flex items-center gap-3 text-paper/80 hover:text-blue transition-colors"
+                  >
+                    <span className="w-2 h-2 bg-paper/40 group-hover:bg-blue transition-colors" />
+                    <span className="text-[16px] md:text-[17px] leading-[1.5]">
+                      {p.title}
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+      </section>
+
       <section className="px-6 sm:px-12 lg:px-24 py-20 md:py-28 border-b border-paper/15">
         <div className="max-w-[900px] mx-auto flex flex-col gap-16 md:gap-20">
           {PLAYBOOKS.map((p) => (
