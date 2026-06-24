@@ -125,6 +125,12 @@ const PLAYBOOKS: Array<{
   comingSoon?: boolean;
 }> = [
   {
+    title: "How to Find a Running Club That Actually Fits Your Life",
+    description:
+      "The no-BS guide to picking a run club: schedule, pace, cost, post-run culture, and what to watch out for.",
+    category: "Community",
+  },
+  {
     title: "How to Start a Run Club From Zero",
     description:
       "The full playbook Nick used to launch GRYT: picking a location, setting a time, finding the first 10 members, and keeping them coming back.",
