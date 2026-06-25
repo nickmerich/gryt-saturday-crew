@@ -977,6 +977,28 @@ const EMPTY_FORM: WaiverForm = {
   agree_adult: false,
 };
 
+const WAIVER_STORAGE_KEY = "gryt_waiver_2026";
+
+function readStoredWaiver(): { id: string; signed_on: string; name: string } | null {
+  try {
+    const raw = localStorage.getItem(WAIVER_STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (parsed && parsed.id && parsed.signed_on && parsed.name) return parsed;
+  } catch {
+    // ignore
+  }
+  return null;
+}
+
+function saveStoredWaiver(v: { id: string; signed_on: string; name: string }) {
+  try {
+    localStorage.setItem(WAIVER_STORAGE_KEY, JSON.stringify(v));
+  } catch {
+    // ignore
+  }
+}
+
 function InlineWaiver() {
   const sign = useServerFn(signWaiver);
   const [open, setOpen] = useState(false);
@@ -985,6 +1007,11 @@ function InlineWaiver() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState<{ id: string; signed_on: string; name: string } | null>(null);
+
+  useEffect(() => {
+    const stored = readStoredWaiver();
+    if (stored) setDone(stored);
+  }, []);
 
   const set = <K extends keyof WaiverForm>(k: K, v: WaiverForm[K]) =>
     setForm((f) => ({ ...f, [k]: v }));
@@ -1031,13 +1058,31 @@ function InlineWaiver() {
           agree_adult: form.agree_adult as true,
         },
       });
-      setDone({ id: res.id, signed_on: res.signed_on, name: form.full_name.trim() });
+      const result = { id: res.id, signed_on: res.signed_on, name: form.full_name.trim() };
+      setDone(result);
+      saveStoredWaiver(result);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
     } finally {
       setSubmitting(false);
     }
   };
+
+  if (done) {
+    return (
+      <div className="mt-6" role="status" aria-live="polite">
+        <div className="inline-flex items-center gap-2.5 bg-ink text-paper px-4 py-3 border border-paper/20">
+          <span className="w-6 h-6 bg-blue flex items-center justify-center text-ink text-[13px] font-bold">✓</span>
+          <span className="text-[13px] font-semibold tracking-[0.04em]">
+            Waiver completed — covered through Dec 31, 2026
+          </span>
+        </div>
+        <p className="mt-2 text-[12px] text-[#13313f]">
+          Signed on {done.signed_on} · {done.name}
+        </p>
+      </div>
+    );
+  }
 
   if (!open) {
     return (
@@ -1053,26 +1098,6 @@ function InlineWaiver() {
         <p className="mt-3 text-[13px] text-[#13313f]">
           One signature covers you through Dec 31, 2026. Takes about a minute.
         </p>
-      </div>
-    );
-  }
-
-  if (done) {
-    return (
-      <div className="mt-10 border-2 border-ink bg-ink text-paper p-8 md:p-10" role="status" aria-live="polite">
-        <div className="eyebrow eyebrow-blue mb-3">Signed · 2026 season</div>
-        <h3 className="display-condensed text-paper text-[clamp(28px,4vw,44px)] leading-[0.95] mb-4">
-          Waiver signed —{" "}
-          <span className="text-blue">you're covered through Dec 31, 2026.</span>
-        </h3>
-        <p className="text-paper/80 mb-5 max-w-[560px]">
-          Nice work, {done.name.split(" ")[0]}. One signature covers you for the whole 2026 season — see you Saturday.
-        </p>
-        <div className="border border-paper/20 p-5 bg-ink/40 text-[13px] font-mono text-paper/70 flex flex-col gap-1">
-          <div><span className="text-paper/40">Signer:</span> {done.name}</div>
-          <div><span className="text-paper/40">Signed on:</span> {done.signed_on}</div>
-          <div><span className="text-paper/40">Confirmation:</span> {done.id}</div>
-        </div>
       </div>
     );
   }
