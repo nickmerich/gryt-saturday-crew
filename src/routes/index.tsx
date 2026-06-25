@@ -953,6 +953,41 @@ type WaiverForm = {
   agree_adult: boolean;
 };
 
+function RSVPWaiverBlock() {
+  const [waiver, setWaiver] = useState<{ id: string; signed_on: string; name: string } | null>(null);
+
+  useEffect(() => {
+    const stored = readStoredWaiver();
+    if (stored) setWaiver(stored);
+  }, []);
+
+  if (waiver) {
+    return (
+      <div className="border border-ink p-4 flex items-center gap-3 bg-ink/5">
+        <span className="w-7 h-7 bg-blue flex items-center justify-center text-ink text-[12px] font-bold shrink-0">✓</span>
+        <div>
+          <p className="text-[13px] font-semibold text-ink">Waiver completed</p>
+          <p className="text-[11px] text-ink/60">Signed {waiver.signed_on} · Covered through Dec 31, 2026</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col gap-2.5">
+      <Link
+        to="/waiver"
+        className="text-[13px] font-bold tracking-[0.1em] uppercase py-4 bg-ink text-paper text-center hover:bg-[#3a7ca5] transition-colors block"
+      >
+        Sign the waiver
+      </Link>
+      <p className="text-[12px] text-ink/60 text-center -mt-1">
+        One signature covers you through Dec 31, 2026. Takes about a minute.
+      </p>
+    </div>
+  );
+}
+
 const EMPTY_FORM: WaiverForm = {
   full_name: "",
   email: "",
