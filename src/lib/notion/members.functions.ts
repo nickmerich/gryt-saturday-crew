@@ -13,12 +13,15 @@ const requireAdmin = createMiddleware({ type: 'function' })
     return next({ context: { adminEmail: email! } })
   })
 
-export const listMembers = createServerFn({ method: 'GET' }).handler(async () => {
-  const { listMembersServer } = await import('./members.server')
-  return listMembersServer()
-})
+export const listMembers = createServerFn({ method: 'GET' })
+  .middleware([requireAdmin])
+  .handler(async () => {
+    const { listMembersServer } = await import('./members.server')
+    return listMembersServer()
+  })
 
 export const getMemberByKey = createServerFn({ method: 'GET' })
+  .middleware([requireAdmin])
   .inputValidator((data: { key: string }) => {
     if (!data?.key || typeof data.key !== 'string') throw new Error('key required')
     return data
