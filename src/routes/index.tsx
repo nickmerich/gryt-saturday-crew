@@ -59,7 +59,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Pittsburgh Saturday 7 AM run club on the Montour / Peters Trail. Walk, jog, or run. No pace requirement. No one gets dropped.",
+          "Pittsburgh run club for former athletes, busy parents & comeback runners. Saturdays 7 AM on the Montour Trail. No one gets dropped.",
       },
       { property: "og:title", content: "gryt run club · Saturdays 7 AM" },
       {
@@ -548,7 +548,7 @@ function RSVP() {
           <div className="border-t border-paper/20 pt-5 flex flex-col gap-3 max-w-[440px]">
             {([
               ["WHEN", "GRYT Run #11 · Sat, Jun 27 · 7:00 AM"],
-              ["WHERE", <>212 Valley Brook Road, McMurray · trail parking · <a href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Road%2C%20McMurray%2C%20PA" target="_blank" rel="noopener noreferrer" className="text-blue hover:underline">Get directions</a></>],
+              ["WHERE", <><a href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Road%2C%20McMurray%2C%20PA" target="_blank" rel="noopener noreferrer" className="text-blue hover:underline">Get directions</a></>],
               ["FIRST?", "Most people come alone. Show up 10 min early."],
             ] as [string, ReactNode][]).map(([k, v]) => (
               <div key={k} className="flex gap-3 items-baseline">
@@ -688,7 +688,7 @@ function RSVP() {
 function QuickDetails() {
   const rows: Array<[string, React.ReactNode]> = [
     ["When", "Saturday · 7:00 AM"],
-    ["Where", <>212 Valley Brook Road · McMurray, PA · <a href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Road%2C%20McMurray%2C%20PA" target="_blank" rel="noopener noreferrer" className="underline hover:text-ink/70">Get directions</a></>],
+    ["Where", <><a href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Road%2C%20McMurray%2C%20PA" target="_blank" rel="noopener noreferrer" className="underline hover:text-ink/70">Get directions</a></>],
     ["Route", "Montour / Peters Trail · Peters Township & Upper St. Clair"],
     ["Distance", "About 4 miles · out and back"],
     ["Pace", "Walk, jog, run · all welcome"],
@@ -874,7 +874,7 @@ function FirstTimer() {
     {
       n: "1",
       h: "Park at the trailhead.",
-      b: <>Pull into <a href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Road%2C%20McMurray%2C%20PA" target="_blank" rel="noopener noreferrer" className="underline hover:text-ink">212 Valley Brook Road in McMurray, Peters Township</a>. Parking is free and easy. Look for the group near the trail sign. If you are new, come 10 minutes early. Someone will say hey.</>,
+      b: <><a href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Road%2C%20McMurray%2C%20PA" target="_blank" rel="noopener noreferrer" className="underline hover:text-ink">212 Valley Brook Road in McMurray, Peters Township</a>. Parking is free and easy. Look for the group near the trail sign. If you are new, come 10 minutes early. Someone will say hey.</>,
     },
     {
       n: "2",
@@ -2010,9 +2010,9 @@ function Testimonial() {
   const testimonials = [
     {
       quote:
-        "Gryt RC is a game changer. I never really considered myself a serious runner, but I’ve found a new enjoyment in it through the run club. Doing hard things together makes everyone better, and it’s something I’d recommend to anyone.",
+        "Gryt RC is a game changer. I never really considered myself a serious runner, but I've found a new enjoyment in it through the run club. Doing hard things together makes everyone better, and it's something I'd recommend to anyone.",
       name: "Aaron Maize",
-      title: "Sr Manager, Retail Sciences & Optimization, DICK’S Sporting Goods",
+      title: "Sr Manager, Retail Sciences & Optimization, DICK'S Sporting Goods",
     },
     {
       quote:
