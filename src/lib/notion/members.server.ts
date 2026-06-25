@@ -27,7 +27,8 @@ async function notionFetch(path: string, init: RequestInit = {}): Promise<any> {
   let json: any = null
   try { json = text ? JSON.parse(text) : null } catch { /* noop */ }
   if (!res.ok) {
-    throw new Error(`Notion ${path} failed [${res.status}]: ${text.slice(0, 500)}`)
+    console.error(`[notion] ${path} failed [${res.status}]: ${text.slice(0, 500)}`)
+    throw new Error('Failed to load member data')
   }
   return json
 }
