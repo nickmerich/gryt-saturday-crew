@@ -649,7 +649,6 @@ function RSVP() {
                   Next steps
                 </div>
                 {[
-                  "Sign the 2026 waiver.",
                   "Join the Strava club if you want updates and photos.",
                   "Come 10 minutes early if it's your first time.",
                 ].map((t) => (
@@ -658,25 +657,15 @@ function RSVP() {
                   </div>
                 ))}
               </div>
-              <div className="flex flex-col gap-2.5">
-                <Link
-                  to="/waiver"
-                  className="text-[13px] font-bold tracking-[0.1em] uppercase py-4 bg-ink text-paper text-center hover:bg-[#3a7ca5] transition-colors block"
-                >
-                  Sign the waiver
-                </Link>
-                <p className="text-[12px] text-ink/60 text-center -mt-1">
-                  One signature covers you through Dec 31, 2026. Takes about a minute.
-                </p>
-                <a
-                  href={STRAVA_CLUB}
-                  target="_blank"
-                  rel="noopener"
-                  className="text-[13px] font-bold tracking-[0.1em] uppercase py-4 bg-transparent text-ink border-[1.5px] border-ink text-center hover:bg-ink hover:text-paper transition-colors block"
-                >
-                  Join the Strava club
-                </a>
-              </div>
+              <RSVPWaiverBlock />
+              <a
+                href={STRAVA_CLUB}
+                target="_blank"
+                rel="noopener"
+                className="text-[13px] font-bold tracking-[0.1em] uppercase py-4 bg-transparent text-ink border-[1.5px] border-ink text-center hover:bg-ink hover:text-paper transition-colors block mt-4"
+              >
+                Join the Strava club
+              </a>
               <button
                 onClick={() => {
                   setSubmitted(false);
