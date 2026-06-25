@@ -386,10 +386,10 @@ function Graphics() {
 /* ─────────────────────────────  MERCH  ─────────────────────────── */
 
 const MERCH_ITEMS = [
-  { name: "Technical Running Singlet", position: "0% 0%" },
-  { name: "Compression Half-Zip", position: "33% 0%" },
-  { name: "Packable Windbreaker Jacket", position: "66% 0%" },
-  { name: "5-Panel Running Cap", position: "0% 50%" },
+  { name: "Technical Running Singlet", position: "0% 0%", nextDrop: "Ships in September" },
+  { name: "Compression Half-Zip", position: "33% 0%", nextDrop: "Ships in October" },
+  { name: "Packable Windbreaker Jacket", position: "66% 0%", nextDrop: "Estimated November" },
+  { name: "5-Panel Running Cap", position: "0% 50%", nextDrop: "Ships in September" },
 ];
 
 function Merch() {
