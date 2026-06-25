@@ -3,6 +3,10 @@ import { createClient } from "@supabase/supabase-js";
 import { createHash } from "crypto";
 import { z } from "zod";
 
+const EmailInput = z.object({
+  email: z.string().trim().email().max(200),
+});
+
 
 const WaiverInput = z.object({
   full_name: z.string().trim().min(1).max(120),
