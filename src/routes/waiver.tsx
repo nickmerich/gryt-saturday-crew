@@ -113,13 +113,12 @@ function WaiverPage() {
         <section className="px-6 sm:px-12 lg:px-24 py-20 md:py-28">
           <div className="max-w-[760px] mx-auto">
             <div className="eyebrow eyebrow-blue mb-4">Signed · 2026 season</div>
-            <h1 className="display-condensed text-paper text-[clamp(44px,6vw,92px)] leading-[0.92] mb-6">
-              You're in, {done.name.split(" ")[0]}.<br />
-              <span className="text-blue">See you Saturday.</span>
+            <h1 className="display-condensed text-paper text-[clamp(44px,6vw,92px)] leading-[0.92] mb-6" aria-live="polite">
+              Waiver signed —<br />
+              <span className="text-blue">you're covered through Dec 31, 2026.</span>
             </h1>
             <p className="text-lg text-paper/80 mb-10 max-w-[560px]">
-              Your 2026 waiver is on file. One signature covers you for the whole season —
-              you don't need to do this again until January 2027.
+              Nice work, {done.name.split(" ")[0]}. One signature covers you for the whole 2026 season — you don't need to do this again until January 2027. See you Saturday.
             </p>
             <div className="border border-paper/20 p-6 md:p-8 bg-ink/40 mb-10 text-[14px] font-mono text-paper/70 flex flex-col gap-1.5">
               <div>
