@@ -116,7 +116,7 @@ function MembersPage() {
       </div>
 
       {isLoading && <div className="px-6 sm:px-12 py-12 text-muted-foreground">Loading from Notion…</div>}
-      {error && <div className="px-6 sm:px-12 py-12 text-red-400">{(error as Error).message}</div>}
+      {error && <div className="px-6 sm:px-12 py-12 text-red-400">Couldn't load members. Please try again later.</div>}
 
       {data && (
         <div className="divide-y divide-white/5">
