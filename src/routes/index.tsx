@@ -665,6 +665,9 @@ function RSVP() {
                 >
                   Sign the waiver
                 </Link>
+                <p className="text-[12px] text-ink/60 text-center -mt-1">
+                  One signature covers you through Dec 31, 2026. Takes about a minute.
+                </p>
                 <a
                   href={STRAVA_CLUB}
                   target="_blank"
