@@ -3,6 +3,10 @@ import { createClient } from "@supabase/supabase-js";
 import { createHash } from "crypto";
 import { z } from "zod";
 
+const EmailInput = z.object({
+  email: z.string().trim().email().max(200),
+});
+
 
 const WaiverInput = z.object({
   full_name: z.string().trim().min(1).max(120),
@@ -89,4 +93,34 @@ export const signWaiver = createServerFn({ method: "POST" })
     }
 
     return { id: row.id as string, signed_on: row.signed_on as string };
+  });
+
+export const checkWaiverStatus = createServerFn({ method: "GET" })
+  .inputValidator((data: unknown) => EmailInput.parse(data))
+  .handler(async ({ data }) => {
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: rows, error } = await supabaseAdmin
+      .from("waiver_signatures")
+      .select("id, signed_on, full_name")
+      .eq("email", data.email.toLowerCase())
+      .eq("season", 2026)
+      .order("signed_on", { ascending: false })
+      .limit(1);
+
+    if (error) {
+      console.error("waiver lookup failed", error);
+      throw new Error("Unable to verify waiver status.");
+    }
+
+    const row = rows?.[0];
+    if (!row) {
+      return { signed: false as const };
+    }
+
+    return {
+      signed: true as const,
+      id: row.id as string,
+      signed_on: row.signed_on as string,
+      full_name: row.full_name as string,
+    };
   });

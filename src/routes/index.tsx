@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type FormEvent, type ReactNode } from "react";
 import { useServerFn } from "@tanstack/react-start";
-import { signWaiver } from "@/lib/waiver.functions";
+import { signWaiver, checkWaiverStatus } from "@/lib/waiver.functions";
 import { submitRecommendation } from "@/lib/recommendations.functions";
 import photo1 from "@/assets/photos/run-club-1.jpg.asset.json";
 import photo2 from "@/assets/photos/run-club-2.jpg.asset.json";
@@ -649,7 +649,6 @@ function RSVP() {
                   Next steps
                 </div>
                 {[
-                  "Sign the 2026 waiver.",
                   "Join the Strava club if you want updates and photos.",
                   "Come 10 minutes early if it's your first time.",
                 ].map((t) => (
@@ -658,25 +657,15 @@ function RSVP() {
                   </div>
                 ))}
               </div>
-              <div className="flex flex-col gap-2.5">
-                <Link
-                  to="/waiver"
-                  className="text-[13px] font-bold tracking-[0.1em] uppercase py-4 bg-ink text-paper text-center hover:bg-[#3a7ca5] transition-colors block"
-                >
-                  Sign the waiver
-                </Link>
-                <p className="text-[12px] text-ink/60 text-center -mt-1">
-                  One signature covers you through Dec 31, 2026. Takes about a minute.
-                </p>
-                <a
-                  href={STRAVA_CLUB}
-                  target="_blank"
-                  rel="noopener"
-                  className="text-[13px] font-bold tracking-[0.1em] uppercase py-4 bg-transparent text-ink border-[1.5px] border-ink text-center hover:bg-ink hover:text-paper transition-colors block"
-                >
-                  Join the Strava club
-                </a>
-              </div>
+              <RSVPWaiverBlock />
+              <a
+                href={STRAVA_CLUB}
+                target="_blank"
+                rel="noopener"
+                className="text-[13px] font-bold tracking-[0.1em] uppercase py-4 bg-transparent text-ink border-[1.5px] border-ink text-center hover:bg-ink hover:text-paper transition-colors block mt-4"
+              >
+                Join the Strava club
+              </a>
               <button
                 onClick={() => {
                   setSubmitted(false);
@@ -964,6 +953,41 @@ type WaiverForm = {
   agree_adult: boolean;
 };
 
+function RSVPWaiverBlock() {
+  const [waiver, setWaiver] = useState<{ id: string; signed_on: string; name: string } | null>(null);
+
+  useEffect(() => {
+    const stored = readStoredWaiver();
+    if (stored) setWaiver(stored);
+  }, []);
+
+  if (waiver) {
+    return (
+      <div className="border border-ink p-4 flex items-center gap-3 bg-ink/5">
+        <span className="w-7 h-7 bg-blue flex items-center justify-center text-ink text-[12px] font-bold shrink-0">✓</span>
+        <div>
+          <p className="text-[13px] font-semibold text-ink">Waiver completed</p>
+          <p className="text-[11px] text-ink/60">Signed {waiver.signed_on} · Covered through Dec 31, 2026</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col gap-2.5">
+      <Link
+        to="/waiver"
+        className="text-[13px] font-bold tracking-[0.1em] uppercase py-4 bg-ink text-paper text-center hover:bg-[#3a7ca5] transition-colors block"
+      >
+        Sign the waiver
+      </Link>
+      <p className="text-[12px] text-ink/60 text-center -mt-1">
+        One signature covers you through Dec 31, 2026. Takes about a minute.
+      </p>
+    </div>
+  );
+}
+
 const EMPTY_FORM: WaiverForm = {
   full_name: "",
   email: "",
@@ -977,6 +1001,28 @@ const EMPTY_FORM: WaiverForm = {
   agree_adult: false,
 };
 
+const WAIVER_STORAGE_KEY = "gryt_waiver_2026";
+
+function readStoredWaiver(): { id: string; signed_on: string; name: string } | null {
+  try {
+    const raw = localStorage.getItem(WAIVER_STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (parsed && parsed.id && parsed.signed_on && parsed.name) return parsed;
+  } catch {
+    // ignore
+  }
+  return null;
+}
+
+function saveStoredWaiver(v: { id: string; signed_on: string; name: string }) {
+  try {
+    localStorage.setItem(WAIVER_STORAGE_KEY, JSON.stringify(v));
+  } catch {
+    // ignore
+  }
+}
+
 function InlineWaiver() {
   const sign = useServerFn(signWaiver);
   const [open, setOpen] = useState(false);
@@ -985,6 +1031,11 @@ function InlineWaiver() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState<{ id: string; signed_on: string; name: string } | null>(null);
+
+  useEffect(() => {
+    const stored = readStoredWaiver();
+    if (stored) setDone(stored);
+  }, []);
 
   const set = <K extends keyof WaiverForm>(k: K, v: WaiverForm[K]) =>
     setForm((f) => ({ ...f, [k]: v }));
@@ -1031,13 +1082,31 @@ function InlineWaiver() {
           agree_adult: form.agree_adult as true,
         },
       });
-      setDone({ id: res.id, signed_on: res.signed_on, name: form.full_name.trim() });
+      const result = { id: res.id, signed_on: res.signed_on, name: form.full_name.trim() };
+      setDone(result);
+      saveStoredWaiver(result);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
     } finally {
       setSubmitting(false);
     }
   };
+
+  if (done) {
+    return (
+      <div className="mt-6" role="status" aria-live="polite">
+        <div className="inline-flex items-center gap-2.5 bg-ink text-paper px-4 py-3 border border-paper/20">
+          <span className="w-6 h-6 bg-blue flex items-center justify-center text-ink text-[13px] font-bold">✓</span>
+          <span className="text-[13px] font-semibold tracking-[0.04em]">
+            Waiver completed — covered through Dec 31, 2026
+          </span>
+        </div>
+        <p className="mt-2 text-[12px] text-[#13313f]">
+          Signed on {done.signed_on} · {done.name}
+        </p>
+      </div>
+    );
+  }
 
   if (!open) {
     return (
@@ -1053,26 +1122,6 @@ function InlineWaiver() {
         <p className="mt-3 text-[13px] text-[#13313f]">
           One signature covers you through Dec 31, 2026. Takes about a minute.
         </p>
-      </div>
-    );
-  }
-
-  if (done) {
-    return (
-      <div className="mt-10 border-2 border-ink bg-ink text-paper p-8 md:p-10" role="status" aria-live="polite">
-        <div className="eyebrow eyebrow-blue mb-3">Signed · 2026 season</div>
-        <h3 className="display-condensed text-paper text-[clamp(28px,4vw,44px)] leading-[0.95] mb-4">
-          Waiver signed —{" "}
-          <span className="text-blue">you're covered through Dec 31, 2026.</span>
-        </h3>
-        <p className="text-paper/80 mb-5 max-w-[560px]">
-          Nice work, {done.name.split(" ")[0]}. One signature covers you for the whole 2026 season — see you Saturday.
-        </p>
-        <div className="border border-paper/20 p-5 bg-ink/40 text-[13px] font-mono text-paper/70 flex flex-col gap-1">
-          <div><span className="text-paper/40">Signer:</span> {done.name}</div>
-          <div><span className="text-paper/40">Signed on:</span> {done.signed_on}</div>
-          <div><span className="text-paper/40">Confirmation:</span> {done.id}</div>
-        </div>
       </div>
     );
   }
