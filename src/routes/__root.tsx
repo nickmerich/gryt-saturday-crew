@@ -11,6 +11,9 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
+const GOOGLE_FONTS_URL =
+  "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap";
+
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -108,6 +111,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:description", content: "Free Tuesday and Saturday morning run club on the Montour Trail in McMurray, PA. All paces welcome. No signup, no fee — just show up at 7 AM Saturday and 9pm T" },
     ],
     links: [
+      { rel: "preload", href: appCss, as: "style" },
       { rel: "stylesheet", href: appCss },
       { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32.png" },
       { rel: "icon", type: "image/png", sizes: "192x192", href: "/icon-192.png" },
@@ -115,10 +119,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "manifest", href: "/site.webmanifest" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap",
-      },
+      // Google Fonts loaded asynchronously in RootShell to avoid render-blocking
     ],
     scripts: [
       {
@@ -160,6 +161,26 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
+        {/* Critical above-the-fold CSS — prevents flash of unstyled background before main CSS loads */}
+        <style>{`
+          html,body{margin:0;background:#0a0a0a;color:#fff;font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+          nav{background:#000;border-bottom:1px solid rgba(255,255,255,0.15);height:68px;display:flex;align-items:center}
+          h1{margin:0}
+        `}</style>
+        {/* Google Fonts loaded asynchronously — avoids render-blocking from external stylesheet */}
+        <link
+          rel="preload"
+          href={GOOGLE_FONTS_URL}
+          as="style"
+          onLoad={(e) => {
+            e.currentTarget.rel = "stylesheet";
+          }}
+        />
+        <noscript
+          dangerouslySetInnerHTML={{
+            __html: `<link rel="stylesheet" href="${GOOGLE_FONTS_URL}" />`,
+          }}
+        />
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-P32BTLV84G"></script>
         <script
           dangerouslySetInnerHTML={{
