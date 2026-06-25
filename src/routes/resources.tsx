@@ -425,6 +425,10 @@ function Merch() {
                 <p className="text-paper/55 text-[13px] leading-[1.55]">
                   Part of the GRYT Running Supply collection. Drops soon.
                 </p>
+                <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.14em] text-blue">
+                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-blue" />
+                  <span>Next drop · {item.nextDrop}</span>
+                </div>
                 <div className="pt-2 mt-auto">
                   <span className="inline-flex items-center px-3 py-2 text-xs font-bold uppercase tracking-[0.1em] border border-paper/25 text-paper/55">
                     Notify Me
