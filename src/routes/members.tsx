@@ -1,10 +1,13 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { createFileRoute, Link, redirect } from '@tanstack/react-router'
 import { useQuery } from '@tanstack/react-query'
 import { useServerFn } from '@tanstack/react-start'
 import { listMembers } from '@/lib/notion/members.functions'
 import { useMemo, useState } from 'react'
 
 export const Route = createFileRoute('/members')({
+  beforeLoad: () => {
+    throw redirect({ to: '/admin/members' })
+  },
   head: () => ({
     meta: [
       { title: 'Members · gryt run club' },
@@ -13,10 +16,10 @@ export const Route = createFileRoute('/members')({
     ],
   }),
   component: MembersPage,
-  errorComponent: ({ error }) => (
+  errorComponent: () => (
     <div className="min-h-screen bg-ink text-paper p-12">
       <h1 className="display-condensed text-3xl">Members didn't load</h1>
-      <p className="mt-2 text-sm text-muted-foreground">{error.message}</p>
+      <p className="mt-2 text-sm text-muted-foreground">Something went wrong. Please try again later.</p>
     </div>
   ),
   notFoundComponent: () => <div className="p-12 text-paper">Not found.</div>,
@@ -113,7 +116,7 @@ function MembersPage() {
       </div>
 
       {isLoading && <div className="px-6 sm:px-12 py-12 text-muted-foreground">Loading from Notion…</div>}
-      {error && <div className="px-6 sm:px-12 py-12 text-red-400">{(error as Error).message}</div>}
+      {error && <div className="px-6 sm:px-12 py-12 text-red-400">Couldn't load members. Please try again later.</div>}
 
       {data && (
         <div className="divide-y divide-white/5">

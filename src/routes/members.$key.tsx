@@ -1,9 +1,12 @@
-import { createFileRoute, Link, notFound } from '@tanstack/react-router'
+import { createFileRoute, Link, notFound, redirect } from '@tanstack/react-router'
 import { useQuery } from '@tanstack/react-query'
 import { useServerFn } from '@tanstack/react-start'
 import { getMemberByKey } from '@/lib/notion/members.functions'
 
 export const Route = createFileRoute('/members/$key')({
+  beforeLoad: () => {
+    throw redirect({ to: '/admin/members' })
+  },
   head: ({ params }) => ({
     meta: [
       { title: `Member ${params.key} · gryt run club` },
@@ -11,10 +14,10 @@ export const Route = createFileRoute('/members/$key')({
     ],
   }),
   component: MemberDetailPage,
-  errorComponent: ({ error }) => (
+  errorComponent: () => (
     <div className="min-h-screen bg-ink text-paper p-12">
       <h1 className="display-condensed text-3xl">Couldn't load member</h1>
-      <p className="mt-2 text-sm text-muted-foreground">{error.message}</p>
+      <p className="mt-2 text-sm text-muted-foreground">Something went wrong. Please try again later.</p>
       <Link to="/members" className="mt-6 inline-block underline text-blue">Back to members</Link>
     </div>
   ),
