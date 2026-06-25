@@ -1056,14 +1056,14 @@ function InlineWaiver() {
 
   if (done) {
     return (
-      <div className="mt-10 border-2 border-ink bg-ink text-paper p-8 md:p-10">
+      <div className="mt-10 border-2 border-ink bg-ink text-paper p-8 md:p-10" role="status" aria-live="polite">
         <div className="eyebrow eyebrow-blue mb-3">Signed · 2026 season</div>
         <h3 className="display-condensed text-paper text-[clamp(28px,4vw,44px)] leading-[0.95] mb-4">
-          You're in, {done.name.split(" ")[0]}.{" "}
-          <span className="text-blue">See you Saturday.</span>
+          Waiver signed —{" "}
+          <span className="text-blue">you're covered through Dec 31, 2026.</span>
         </h3>
         <p className="text-paper/80 mb-5 max-w-[560px]">
-          Your 2026 waiver is on file. One signature covers you for the whole season.
+          Nice work, {done.name.split(" ")[0]}. One signature covers you for the whole 2026 season — see you Saturday.
         </p>
         <div className="border border-paper/20 p-5 bg-ink/40 text-[13px] font-mono text-paper/70 flex flex-col gap-1">
           <div><span className="text-paper/40">Signer:</span> {done.name}</div>
