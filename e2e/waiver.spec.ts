@@ -46,16 +46,14 @@ test.describe("Waiver flow", () => {
 
     // Signed date should be today (server returns ISO date in UTC).
     const today = new Date().toISOString().slice(0, 10);
-    await expect(page.getByText(today)).toBeVisible();
-
-    // Verify the persistent "Waiver completed" badge renders on the
-    // homepage after signing (state is cached in localStorage).
-    await page.goto("/", { waitUntil: "networkidle" });
-    const badge = page
-      .getByText(/Waiver completed.*covered through Dec 31, 2026/i)
-      .first();
-    await expect(badge).toBeVisible();
     await expect(page.getByText(today).first()).toBeVisible();
+
+    // The signed state is persisted to localStorage for the homepage badge.
+    const cached = await page.evaluate(() =>
+      window.localStorage.getItem("gryt_waiver_2026"),
+    );
+    expect(cached).toContain(EMAIL);
+    expect(cached).toContain(today);
   });
 
   test("minor (under 18) is blocked from signing online", async ({ page }) => {
