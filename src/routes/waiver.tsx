@@ -7,19 +7,22 @@ import grytBearAsset from "@/assets/gryt-bear.png.asset.json";
 export const Route = createFileRoute("/waiver")({
   head: () => ({
     meta: [
-      { title: "2026 Waiver · gryt run club" },
+      { title: "Gryt Run Club Waiver 2026 — Sign Your Release of Liability" },
       {
         name: "description",
         content:
-          "Sign the gryt run club release of liability for the 2026 season. One signature covers you all year.",
+          "Sign the official Gryt Run Club waiver for the 2026 season. One release of liability covers all runs, events, and activities all year long.",
       },
-      { property: "og:title", content: "2026 Waiver · gryt run club" },
+      { property: "og:title", content: "Gryt Run Club Waiver 2026 — Sign Your Release of Liability" },
       {
         property: "og:description",
         content:
           "Read it, sign it once, you're good through Dec 31, 2026.",
       },
       { name: "robots", content: "noindex" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://grytrunclub.com/waiver" },
     ],
   }),
   component: WaiverPage,
@@ -174,7 +177,7 @@ function WaiverPage() {
         <div className="max-w-[1100px] mx-auto">
           <div className="eyebrow eyebrow-blue mb-4">2026 season</div>
           <h1 className="display-condensed text-paper text-[clamp(46px,7vw,104px)] leading-[0.9] mb-5">
-            Run club waiver.
+            Gryt Run Club Waiver — 2026 Season
           </h1>
           <p className="text-lg text-paper/80 max-w-[620px]">
             Read it. Sign it once. You're good through December 31, 2026.
