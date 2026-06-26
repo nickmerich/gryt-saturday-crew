@@ -1,5 +1,4 @@
 import { createServerFn } from "@tanstack/react-start";
-import { createClient } from "@supabase/supabase-js";
 import { createHash } from "crypto";
 import { z } from "zod";
 
@@ -40,16 +39,11 @@ export const signWaiver = createServerFn({ method: "POST" })
       throw new Error("Your typed signature must match your full legal name exactly.");
     }
 
-    const supabase = createClient(
-      process.env.SUPABASE_URL!,
-      process.env.SUPABASE_PUBLISHABLE_KEY!,
-      {
-        auth: {
-          storage: undefined,
-          persistSession: false,
-          autoRefreshToken: false,
-        },
-      },
+    // Use service-role client: Zod + the checks above already validate input,
+    // and Lovable Cloud's publishable key does not reliably map to a
+    // PostgREST role that satisfies the table's INSERT policy.
+    const { supabaseAdmin: supabase } = await import(
+      "@/integrations/supabase/client.server"
     );
 
     // Best-effort request metadata
