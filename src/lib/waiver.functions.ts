@@ -20,14 +20,57 @@ const WaiverInput = z.object({
   agree_adult: z.literal(true),
 });
 
+// Hash an email for log correlation without leaking PII into logs.
+function hashEmail(email: string): string {
+  return createHash("sha256")
+    .update(email.trim().toLowerCase())
+    .digest("hex")
+    .slice(0, 16);
+}
+
+function logWaiver(
+  event: string,
+  fields: Record<string, unknown>,
+) {
+  // Structured single-line log so it's greppable in worker logs.
+  try {
+    console.log(
+      JSON.stringify({
+        scope: "waiver",
+        event,
+        at: new Date().toISOString(),
+        ...fields,
+      }),
+    );
+  } catch {
+    console.log(`[waiver] ${event}`, fields);
+  }
+}
+
 export const signWaiver = createServerFn({ method: "POST" })
-  .inputValidator((data: unknown) => WaiverInput.parse(data))
+  .inputValidator((data: unknown) => {
+    try {
+      return WaiverInput.parse(data);
+    } catch (err) {
+      const issues =
+        err instanceof z.ZodError
+          ? err.issues.map((i) => `${i.path.join(".")}:${i.code}`)
+          : ["unknown"];
+      logWaiver("validation_failed", { issues });
+      throw err;
+    }
+  })
   .handler(async ({ data }) => {
+    const emailHash = hashEmail(data.email);
+    const startedAt = Date.now();
+    logWaiver("attempt", { emailHash });
+
     // Age 18+ check (also enforced server-side by trigger)
     const dob = new Date(data.date_of_birth);
     const cutoff = new Date();
     cutoff.setFullYear(cutoff.getFullYear() - 18);
     if (dob > cutoff) {
+      logWaiver("rejected", { emailHash, reason: "under_18" });
       throw new Error("You must be at least 18 to sign online. Minors must sign in person with a parent or guardian.");
     }
 
@@ -36,6 +79,7 @@ export const signWaiver = createServerFn({ method: "POST" })
       data.signature_text.trim().toLowerCase() !==
       data.full_name.trim().toLowerCase()
     ) {
+      logWaiver("rejected", { emailHash, reason: "signature_mismatch" });
       throw new Error("Your typed signature must match your full legal name exactly.");
     }
 
@@ -82,9 +126,25 @@ export const signWaiver = createServerFn({ method: "POST" })
       .single();
 
     if (error) {
+      logWaiver("insert_failed", {
+        emailHash,
+        durationMs: Date.now() - startedAt,
+        code: (error as { code?: string }).code ?? null,
+        message: error.message,
+        details: (error as { details?: string }).details ?? null,
+        hint: (error as { hint?: string }).hint ?? null,
+      });
       console.error("waiver insert failed", error);
       throw new Error("We couldn't save your signature. Please try again.");
     }
+
+    logWaiver("signed", {
+      emailHash,
+      id: row.id,
+      signed_on: row.signed_on,
+      season: 2026,
+      durationMs: Date.now() - startedAt,
+    });
 
     return { id: row.id as string, signed_on: row.signed_on as string };
   });
@@ -92,6 +152,7 @@ export const signWaiver = createServerFn({ method: "POST" })
 export const checkWaiverStatus = createServerFn({ method: "GET" })
   .inputValidator((data: unknown) => EmailInput.parse(data))
   .handler(async ({ data }) => {
+    const emailHash = hashEmail(data.email);
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { data: rows, error } = await supabaseAdmin
       .from("waiver_signatures")
@@ -102,14 +163,27 @@ export const checkWaiverStatus = createServerFn({ method: "GET" })
       .limit(1);
 
     if (error) {
+      logWaiver("status_lookup_failed", {
+        emailHash,
+        code: (error as { code?: string }).code ?? null,
+        message: error.message,
+      });
       console.error("waiver lookup failed", error);
       throw new Error("Unable to verify waiver status.");
     }
 
     const row = rows?.[0];
     if (!row) {
+      logWaiver("status_lookup", { emailHash, signed: false });
       return { signed: false as const };
     }
+
+    logWaiver("status_lookup", {
+      emailHash,
+      signed: true,
+      id: row.id,
+      signed_on: row.signed_on,
+    });
 
     return {
       signed: true as const,
