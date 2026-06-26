@@ -1671,17 +1671,15 @@ function Community() {
 
 function Beliefs() {
   const items = [
-    "Hard things are easier together.",
-    "You do not need to be fast to be serious.",
-    "Parents are still athletes.",
+    "Growth is the goal.",
+    "We show up no matter what.",
     <>
-      Former athletes are <span className="text-blue">not finished.</span>
+      Progress <span className="text-blue">{">"}</span> perfection.
     </>,
-    "Consistency beats intensity.",
-    "The best conversations happen around mile two.",
-    "Coffee after counts.",
-    "If you keep showing up, you become someone different.",
+    "Hard is the point.",
+    "Earn daily.",
   ];
+
   return (
     <section className="bg-white text-ink py-20 md:py-28 px-6 sm:px-12 lg:px-24">
       <div className="max-w-[1080px] mx-auto">
