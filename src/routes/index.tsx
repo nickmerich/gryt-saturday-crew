@@ -1690,11 +1690,20 @@ function Beliefs() {
           {items.map((b, i) => (
             <div
               key={i}
-              className={`display-condensed text-ink py-5 text-[clamp(26px,3.4vw,46px)] leading-[1.02] ${
+              className={`flex items-center gap-4 sm:gap-6 py-5 ${
                 i !== items.length - 1 ? "border-b border-[#e0ddd4]" : ""
               }`}
             >
-              {b}
+              <span
+                aria-hidden="true"
+                className="display-condensed shrink-0 inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-ink text-white text-[18px] sm:text-[22px] leading-none"
+                style={{ boxShadow: "3px 3px 0 var(--blue)" }}
+              >
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <div className="display-condensed text-ink text-[clamp(26px,3.4vw,46px)] leading-[1.02]">
+                {b}
+              </div>
             </div>
           ))}
         </div>
