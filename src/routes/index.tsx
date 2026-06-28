@@ -513,6 +513,21 @@ function RSVP() {
         return;
       }
       setSubmitted(true);
+      // Save a tiny prefill so the waiver page can auto-populate.
+      try {
+        const contactStr = contact.trim();
+        const looksLikeEmail = /@/.test(contactStr);
+        localStorage.setItem(
+          "gryt_rsvp_prefill",
+          JSON.stringify({
+            name: name.trim(),
+            email: looksLikeEmail ? contactStr.toLowerCase() : "",
+            phone: looksLikeEmail ? "" : contactStr,
+          }),
+        );
+      } catch {
+        // ignore
+      }
     } catch {
       setError("Network error. Please try again.");
     } finally {
