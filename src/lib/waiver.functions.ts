@@ -146,6 +146,36 @@ export const signWaiver = createServerFn({ method: "POST" })
       durationMs: Date.now() - startedAt,
     });
 
+    // Fire-and-forget confirmation email — never block the response.
+    try {
+      const { sendInternalTransactionalEmail } = await import(
+        "@/lib/email/send-internal.server"
+      );
+      void sendInternalTransactionalEmail({
+        templateName: "waiver-confirmation",
+        recipientEmail: data.email.trim().toLowerCase(),
+        idempotencyKey: `waiver-confirm-${row.id}`,
+        templateData: {
+          name: data.full_name.trim(),
+          signedOn: row.signed_on,
+          confirmationId: row.id,
+          waiverUrl: "https://grytrunclub.com/waiver",
+        },
+      }).catch((err) => {
+        logWaiver("email_enqueue_failed", {
+          emailHash,
+          id: row.id,
+          message: err instanceof Error ? err.message : String(err),
+        });
+      });
+    } catch (err) {
+      logWaiver("email_enqueue_failed", {
+        emailHash,
+        id: row.id,
+        message: err instanceof Error ? err.message : String(err),
+      });
+    }
+
     return { id: row.id as string, signed_on: row.signed_on as string };
   });
 
