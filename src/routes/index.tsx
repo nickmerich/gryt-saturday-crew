@@ -2196,7 +2196,7 @@ function WeeklyRhythm() {
 
               <dl className="mt-7 border-t border-paper/15">
                 {[
-                  ["When", "Tuesdays · after dark"],
+                  ["When", "Tuesdays · 9:00 PM"],
                   ["Meet", "Mt. Lebanon Public Library"],
                   ["Distance", "TBD — confirm on Strava"],
                   ["Pace", "All paces · no one left behind"],
