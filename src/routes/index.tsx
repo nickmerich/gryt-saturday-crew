@@ -766,6 +766,7 @@ function RSVP() {
               <button
                 onClick={() => {
                   setSubmitted(false);
+                  setSubmittedDays([]);
                   setName("");
                   setContact("");
                   setSource("");
