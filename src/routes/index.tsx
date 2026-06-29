@@ -2306,20 +2306,18 @@ function WeeklyRhythm() {
 
               <div className="mt-7 flex flex-wrap gap-3">
                 <a
-                  href={satCal}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#join"
                   className="inline-flex items-center px-5 py-3 text-[12px] font-bold uppercase tracking-[0.12em] bg-ink text-paper hover:bg-[#3a7ca5] transition-colors"
                 >
-                  Add Saturday to Calendar
+                  RSVP Saturday
                 </a>
                 <a
-                  href={stravaUrl}
+                  href={satCal}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center px-5 py-3 text-[12px] font-bold uppercase tracking-[0.12em] border border-ink/50 text-ink hover:bg-ink hover:text-paper transition-colors"
                 >
-                  Follow on Strava
+                  Add to Calendar
                 </a>
               </div>
             </div>
