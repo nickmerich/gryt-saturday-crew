@@ -245,7 +245,9 @@ function ArticlePage() {
             </div>
           </div>
 
-          <div className="mt-16 flex flex-wrap gap-4">
+          <ShareBar className="mt-12" label="Share this playbook" />
+
+          <div className="mt-12 flex flex-wrap gap-4">
             <Link to="/" hash="first-time" className="btn-primary">
               RSVP for Saturday →
             </Link>
@@ -256,6 +258,7 @@ function ArticlePage() {
               Back to Playbooks
             </Link>
           </div>
+
         </div>
       </article>
       <SiteFooter />
