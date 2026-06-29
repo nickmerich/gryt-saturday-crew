@@ -2464,6 +2464,24 @@ function WeeklyRhythm() {
                 Saturday · 7:00 AM
               </a>
             </div>
+            <div className="flex flex-wrap gap-x-5 gap-y-1 justify-center mt-1">
+              <a
+                href={STRAVA_EVENT_URL.tue}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[11px] font-bold uppercase tracking-[0.14em] text-paper/70 hover:text-blue underline underline-offset-4"
+              >
+                Tuesday on Strava →
+              </a>
+              <a
+                href={STRAVA_EVENT_URL.sat}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[11px] font-bold uppercase tracking-[0.14em] text-paper/70 hover:text-blue underline underline-offset-4"
+              >
+                Saturday on Strava →
+              </a>
+            </div>
           </div>
 
           <p className="mt-2 text-paper/55 text-[13px] tracking-[0.04em] max-w-[520px]">
