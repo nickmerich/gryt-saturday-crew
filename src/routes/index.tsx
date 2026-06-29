@@ -2121,6 +2121,7 @@ function Landing() {
       <RSVP />
       <QuickDetails />
       <CorePromise />
+      <WeeklyRhythm />
       <WhoItsFor />
       <MemberNamesMarquee />
       <FirstTimer />
