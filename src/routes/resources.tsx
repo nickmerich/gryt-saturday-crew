@@ -10,18 +10,21 @@ import lookbookAsset from "@/assets/lookbook-merch.png.asset.json";
 export const Route = createFileRoute("/resources")({
   head: () => ({
     meta: [
-      { title: "Resources · gryt run club" },
+      { title: "Gryt Run Club Resources — Playbooks, Graphics & Merch" },
       {
         name: "description",
         content:
-          "Playbooks, interviews, free graphics, merch, and partner opportunities from the founders of gryt run club.",
+          "Explore gryt run club resources: free run club playbooks, interview conversations, downloadable running club graphics, merch, and partner opportunities from Pittsburgh's GRYT founders.",
       },
-      { property: "og:title", content: "Resources · gryt run club" },
+      { property: "og:title", content: "Gryt Run Club Resources — Playbooks, Graphics & Merch" },
       {
         property: "og:description",
         content:
           "Everything we've learned from showing up every Saturday — shared freely.",
       },
+    ],
+    links: [
+      { rel: "canonical", href: "https://grytrunclub.com/resources" },
     ],
   }),
   component: ResourcesPage,
@@ -67,7 +70,7 @@ function Hero() {
       <div className="relative max-w-[1180px] mx-auto">
         <p className="eyebrow text-blue mb-5">FROM THE FOUNDERS</p>
         <h1 className="display-condensed uppercase text-[clamp(64px,12vw,180px)] leading-[0.88] tracking-tight">
-          Resources
+          Gryt Run Club Resources
         </h1>
         <p className="mt-8 text-paper/75 text-lg md:text-xl max-w-[640px] leading-[1.55]">
           Everything we've learned from showing up every Saturday — shared
@@ -1002,4 +1005,3 @@ function ShareYourStory() {
     </section>
   );
 }
-
