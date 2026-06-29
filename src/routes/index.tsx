@@ -723,21 +723,36 @@ function RSVP() {
                   ✓
                 </span>
                 <span className="display-condensed text-ink text-[24px]">
-                  You're in for Saturday.
+                  {submittedDays.length === 2
+                    ? "You're in for Tue + Sat."
+                    : submittedDays[0] === "tue"
+                      ? "You're in for Tuesday."
+                      : "You're in for Saturday."}
                 </span>
               </div>
-              <div className="border-y border-[#d8d4cb] py-4 mb-5 flex flex-col gap-2">
+              <div className="border-y border-[#d8d4cb] py-4 mb-5 flex flex-col gap-3">
                 <div className="text-[11px] font-bold tracking-[0.14em] uppercase text-ink/55">
-                  Next steps
+                  Add to your calendar
                 </div>
-                {[
-                  "Join the Strava club if you want updates and photos.",
-                  "Come 10 minutes early if it's your first time.",
-                ].map((t) => (
-                  <div key={t} className="text-sm leading-[1.5] text-ink/80">
-                    · {t}
-                  </div>
-                ))}
+                <div className="flex flex-col gap-2">
+                  {submittedDays.map((d) => (
+                    <a
+                      key={d}
+                      href={DAY_CAL[d]}
+                      target="_blank"
+                      rel="noopener"
+                      className="flex items-center justify-between gap-3 border-[1.5px] border-ink px-3.5 py-2.5 text-sm font-semibold text-ink hover:bg-ink hover:text-paper transition-colors"
+                    >
+                      <span>Add {DAY_LABEL[d]}</span>
+                      <span className="text-xs tracking-[0.1em] uppercase opacity-70">
+                        {d === "sat" ? "7:00 AM" : "9:00 PM"}
+                      </span>
+                    </a>
+                  ))}
+                </div>
+                <div className="text-xs text-ink/55">
+                  Recurring weekly event — shows up every {submittedDays.length === 2 ? "Tuesday and Saturday" : submittedDays[0] === "tue" ? "Tuesday" : "Saturday"}.
+                </div>
               </div>
               <RSVPWaiverBlock />
               <a
