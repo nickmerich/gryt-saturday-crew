@@ -702,7 +702,7 @@ function RSVP() {
                 className="w-full text-sm font-bold tracking-[0.1em] uppercase py-4 bg-ink text-paper hover:bg-[#3a7ca5] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                 style={{ fontFamily: "var(--font-body)" }}
               >
-                {submitting ? "Sending…" : "RSVP for this Saturday →"}
+                {submitting ? "Sending…" : "Lock it in →"}
               </button>
               <p className="mt-3.5 text-xs leading-[1.5] text-ink/55 text-center">
                 Free, always. One reminder Friday, one Saturday. Unsubscribe anytime.
