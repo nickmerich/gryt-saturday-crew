@@ -55,11 +55,11 @@ const EVENT_DATES = nextSaturdayISOs(12);
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "gryt run club · Saturdays 7 AM · McMurray, PA" },
+      { title: "GRYT Run Club — Pittsburgh Run Club | Saturdays 7 AM in McMurray, PA" },
       {
         name: "description",
         content:
-          "Pittsburgh Saturday 7 AM run club on the Montour / Peters Trail. Walk, jog, or run. No pace requirement. No one gets dropped.",
+          "GRYT is a free Pittsburgh run club meeting every Saturday at 7 AM on the Montour / Peters Trail in McMurray, PA. Walk, jog, or run — no pace requirement, no one gets dropped.",
       },
       { property: "og:title", content: "gryt run club · Saturdays 7 AM" },
       {
@@ -171,6 +171,16 @@ export const Route = createFileRoute("/")({
             name: f.q,
             acceptedAnswer: { "@type": "Answer", text: f.a },
           })),
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "SportsClub",
+          name: "GRYT Run Club — Pittsburgh Run Club",
+          description:
+            "Free Saturday morning run club in McMurray, PA serving the greater Pittsburgh area.",
         }),
       },
     ],
@@ -312,16 +322,16 @@ function Hero() {
             Live in Pittsburgh · Saturdays at 7 AM · McMurray, PA
           </div>
           <h1 className="display-condensed text-paper text-[clamp(48px,7.2vw,108px)] leading-[0.9]">
-            You used to have a team.
-            <br />
-            Now you have{" "}
+            Pittsburgh's Saturday{" "}
             <span className="relative inline-block">
-              Saturday.
+              Run Club
               <span
                 className="absolute left-[-2px] right-[-2px] bottom-[0.06em] h-[0.11em] bg-blue"
                 style={{ transform: "skewX(-8deg)" }}
               />
             </span>
+            <br />
+            — No Pace Required, No One Gets Dropped.
           </h1>
 
           <div className="mt-7 max-w-[540px] flex flex-col gap-3.5">
@@ -1689,7 +1699,7 @@ function Beliefs() {
     "Growth is the goal.",
     "We show up no matter what.",
     <>
-      Progress <span className="text-blue">{">"}</span> perfection.
+      Progress <span className="text-blue">{">"}  </span> perfection.
     </>,
     "Hard is the point.",
     "Earn daily.",
@@ -2032,9 +2042,9 @@ function Testimonial() {
   const testimonials = [
     {
       quote:
-        "Gryt RC is a game changer. I never really considered myself a serious runner, but I’ve found a new enjoyment in it through the run club. Doing hard things together makes everyone better, and it’s something I’d recommend to anyone.",
+        "Gryt RC is a game changer. I never really considered myself a serious runner, but I've found a new enjoyment in it through the run club. Doing hard things together makes everyone better, and it's something I'd recommend to anyone.",
       name: "Aaron Maize",
-      title: "Sr Manager, Retail Sciences & Optimization, DICK’S Sporting Goods",
+      title: "Sr Manager, Retail Sciences & Optimization, DICK'S Sporting Goods",
     },
     {
       quote:
