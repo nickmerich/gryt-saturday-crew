@@ -2339,7 +2339,8 @@ function WeeklyRhythm() {
         <figure className="mt-14 md:mt-16 max-w-[820px] mx-auto text-center">
           <blockquote className="display-condensed text-paper text-[clamp(24px,3.2vw,40px)] leading-[1.1]">
             <span className="text-blue">"</span>
-            Tuesday made me a runner again. Saturday made me part of something.
+            Tuesday made me a runner again. Saturday made me part of something. Together they made
+            me consistent.
             <span className="text-blue">"</span>
           </blockquote>
           <figcaption className="mt-5 eyebrow text-paper/55">
@@ -2349,17 +2350,17 @@ function WeeklyRhythm() {
 
         {/* Primary CTA */}
         <div className="mt-12 md:mt-14 flex flex-col items-center text-center gap-5">
-          <p className="display-condensed text-paper text-[clamp(22px,2.6vw,32px)] leading-[1.15] max-w-[640px]">
-            Show up Tuesday <span className="text-blue">AND</span> Saturday.
+          <p className="display-condensed text-paper text-[clamp(22px,2.6vw,32px)] leading-[1.15] max-w-[720px]">
+            Tuesday <span className="text-blue">AND</span> Saturday.
             <br />
-            Become a regular.
+            That's how we do hard things together.
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
             <a
               href="#join"
               className="inline-flex items-center px-7 py-4 text-[12px] font-bold uppercase tracking-[0.14em] bg-blue text-ink hover:bg-paper transition-colors"
             >
-              RSVP for Saturday →
+              Lock in this week →
             </a>
             <a
               href={stravaUrl}
@@ -2370,6 +2371,11 @@ function WeeklyRhythm() {
               Join the Strava club
             </a>
           </div>
+          <p className="mt-2 text-paper/55 text-[13px] tracking-[0.04em] max-w-[520px]">
+            One RSVP. One crew. Both runs on your calendar before you can talk yourself out of it.
+          </p>
+        </div>
+
         </div>
       </div>
     </section>
