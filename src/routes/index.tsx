@@ -2221,20 +2221,18 @@ function WeeklyRhythm() {
 
               <div className="mt-7 flex flex-wrap gap-3">
                 <a
-                  href={tueCal}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#join"
                   className="inline-flex items-center px-5 py-3 text-[12px] font-bold uppercase tracking-[0.12em] bg-blue text-ink hover:bg-paper transition-colors"
                 >
-                  Add Tuesday to Calendar
+                  RSVP Tuesday
                 </a>
                 <a
-                  href={stravaUrl}
+                  href={tueCal}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center px-5 py-3 text-[12px] font-bold uppercase tracking-[0.12em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors"
                 >
-                  Follow on Strava
+                  Add to Calendar
                 </a>
               </div>
             </div>
