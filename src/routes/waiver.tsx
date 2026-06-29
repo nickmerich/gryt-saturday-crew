@@ -576,7 +576,7 @@ function PageHeader() {
   return (
     <header className="px-6 sm:px-12 lg:px-24 py-6 border-b border-paper/15">
       <Link to="/" className="inline-flex items-center gap-2 group">
-        <img src={grytBearAsset.url} alt="" className="h-9 w-9" />
+        <img src={grytBearAsset.url} alt="" className="h-9 w-9" width={36} height={36} />
         <span
           className="wordmark uppercase text-[18px] leading-none text-paper"
           style={{ textShadow: "2px 2px 0 var(--blue)" }}
