@@ -76,15 +76,14 @@ export const Route = createFileRoute("/")({
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": ["SportsActivityLocation", "LocalBusiness"],
+          "@type": ["SportsClub", "SportsActivityLocation", "LocalBusiness"],
           "@id": "https://grytrunclub.com/#location",
           name: "GRYT Run Club",
           description:
-            "A Pittsburgh run club for former athletes, busy parents, and comeback runners.",
+            "Free Pittsburgh run club meeting every Saturday at 7 AM on the Montour / Peters Trail in McMurray, PA. Walk, jog, or run — no pace requirement.",
           url: SITE_URL,
           image: ABS_HERO_IMG,
           logo: `${SITE_URL}/icon-512.png`,
-          telephone: "",
           sport: "Running",
           priceRange: "Free",
           address: {
@@ -92,8 +91,19 @@ export const Route = createFileRoute("/")({
             streetAddress: "212 Valley Brook Road",
             addressLocality: "McMurray",
             addressRegion: "PA",
+            postalCode: "15317",
             addressCountry: "US",
           },
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: 40.2676,
+            longitude: -80.097,
+          },
+          areaServed: "Pittsburgh, PA",
+          founder: [
+            { "@type": "Person", name: "Laura Merich" },
+            { "@type": "Person", name: "Nick Merich" },
+          ],
           openingHoursSpecification: [
             {
               "@type": "OpeningHoursSpecification",
@@ -1689,7 +1699,7 @@ function Beliefs() {
     "Growth is the goal.",
     "We show up no matter what.",
     <>
-      Progress <span className="text-blue">{">"}</span> perfection.
+      Progress <span className="text-blue">{">"}  </span> perfection.
     </>,
     "Hard is the point.",
     "Earn daily.",
@@ -2013,6 +2023,9 @@ function Footer() {
             <p className="text-sm leading-[1.6] text-paper/70 max-w-[340px]">
               Pittsburgh, PA · Saturdays · 7 AM · Montour / Peters Trail.
             </p>
+            <address className="not-italic text-sm leading-[1.6] text-paper/70 max-w-[340px] mt-1">
+              GRYT Run Club · McMurray, PA 15317 · grytrunclub.com
+            </address>
             <p className="text-sm leading-[1.6] text-paper/70 max-w-[340px] mt-3">
               Built for Pittsburgh runners, South Hills parents, former athletes, and anyone trying to get consistent again.
             </p>
@@ -2032,9 +2045,9 @@ function Testimonial() {
   const testimonials = [
     {
       quote:
-        "Gryt RC is a game changer. I never really considered myself a serious runner, but I’ve found a new enjoyment in it through the run club. Doing hard things together makes everyone better, and it’s something I’d recommend to anyone.",
+        "Gryt RC is a game changer. I never really considered myself a serious runner, but I've found a new enjoyment in it through the run club. Doing hard things together makes everyone better, and it's something I'd recommend to anyone.",
       name: "Aaron Maize",
-      title: "Sr Manager, Retail Sciences & Optimization, DICK’S Sporting Goods",
+      title: "Sr Manager, Retail Sciences & Optimization, DICK'S Sporting Goods",
     },
     {
       quote:
