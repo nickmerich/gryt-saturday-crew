@@ -2198,7 +2198,7 @@ function WeeklyRhythm() {
                 {[
                   ["When", "Tuesdays · 9:00 PM"],
                   ["Meet", "Mt. Lebanon Public Library"],
-                  ["Distance", "TBD — confirm on Strava"],
+                  ["Distance", "4 miles · Beadling Loop"],
                   ["Pace", "All paces · no one left behind"],
                   ["Bring", "Light + reflective gear + a friend"],
                   ["After", "TBD — post-run spot"],
