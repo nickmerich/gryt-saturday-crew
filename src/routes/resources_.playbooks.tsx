@@ -39,6 +39,7 @@ type Playbook = {
   description: string;
   body: string[];
   comingSoon?: boolean;
+  href?: string;
 };
 
 const PLAYBOOKS: Playbook[] = [
