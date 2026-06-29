@@ -277,19 +277,36 @@ function PlaybooksPage() {
           <p className="eyebrow text-paper/55 mb-5">Jump to a playbook</p>
           <nav aria-label="Playbook table of contents">
             <ul className="flex flex-col gap-3">
-              {PLAYBOOKS.filter((p) => !p.comingSoon).map((p) => (
-                <li key={p.slug}>
-                  <a
-                    href={`#${p.slug}`}
-                    className="group flex items-center gap-3 text-paper/80 hover:text-blue transition-colors"
-                  >
-                    <span className="w-2 h-2 bg-paper/40 group-hover:bg-blue transition-colors" />
-                    <span className="text-[16px] md:text-[17px] leading-[1.5]">
-                      {p.title}
-                    </span>
-                  </a>
-                </li>
-              ))}
+              {PLAYBOOKS.filter((p) => !p.comingSoon).map((p) => {
+                const isExternalArticle =
+                  p.slug === "best-free-running-clubs-pittsburgh-2026";
+                return (
+                  <li key={p.slug}>
+                    {isExternalArticle ? (
+                      <Link
+                        to="/resources/playbooks/best-free-running-clubs-pittsburgh-2026"
+                        className="group flex items-center gap-3 text-paper/80 hover:text-blue transition-colors"
+                      >
+                        <span className="w-2 h-2 bg-paper/40 group-hover:bg-blue transition-colors" />
+                        <span className="text-[16px] md:text-[17px] leading-[1.5]">
+                          {p.title}
+                        </span>
+                      </Link>
+                    ) : (
+                      <a
+                        href={`#${p.slug}`}
+                        className="group flex items-center gap-3 text-paper/80 hover:text-blue transition-colors"
+                      >
+                        <span className="w-2 h-2 bg-paper/40 group-hover:bg-blue transition-colors" />
+                        <span className="text-[16px] md:text-[17px] leading-[1.5]">
+                          {p.title}
+                        </span>
+                      </a>
+                    )}
+                  </li>
+                );
+              })}
+
             </ul>
           </nav>
         </div>
