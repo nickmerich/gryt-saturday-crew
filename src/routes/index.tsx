@@ -512,33 +512,49 @@ function RSVP() {
   const [name, setName] = useState("");
   const [contact, setContact] = useState("");
   const [source, setSource] = useState("");
+  const [days, setDays] = useState<Record<RsvpDay, boolean>>({ tue: false, sat: true });
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submittedDays, setSubmittedDays] = useState<RsvpDay[]>([]);
+
+  const toggleDay = (d: RsvpDay) => setDays((p) => ({ ...p, [d]: !p[d] }));
 
   const submit = async () => {
     if (!name.trim() || !contact.trim()) {
       setError("Add your name and an email or phone so we can send the reminder.");
       return;
     }
+    const selected = (Object.keys(days) as RsvpDay[]).filter((d) => days[d]);
+    if (selected.length === 0) {
+      setError("Pick at least one run — Tuesday, Saturday, or both.");
+      return;
+    }
     setError(null);
     setSubmitting(true);
     try {
-      const res = await fetch("/api/public/rsvp", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: name.trim(),
-          contact: contact.trim(),
-          source: source || null,
-          eventLabel: "GRYT Run #11 · Sat, Jun 27 · 7 AM",
-        }),
-      });
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
+      // One RSVP per selected day so each gets the right event label + calendar.
+      const results = await Promise.all(
+        selected.map((d) =>
+          fetch("/api/public/rsvp", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              name: name.trim(),
+              contact: contact.trim(),
+              source: source || null,
+              eventLabel: DAY_EVENT_LABEL[d],
+            }),
+          }),
+        ),
+      );
+      const failed = results.find((r) => !r.ok);
+      if (failed) {
+        const data = await failed.json().catch(() => ({}));
         setError(data?.error || "Something went wrong. Try again in a moment.");
         return;
       }
+      setSubmittedDays(selected);
       setSubmitted(true);
       // Save a tiny prefill so the waiver page can auto-populate.
       try {
