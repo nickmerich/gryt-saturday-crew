@@ -2311,6 +2311,14 @@ function WeeklyRhythm() {
                 >
                   Add to Calendar
                 </a>
+                <a
+                  href={STRAVA_EVENT_URL.tue}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-5 py-3 text-[12px] font-bold uppercase tracking-[0.12em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors"
+                >
+                  Strava event →
+                </a>
               </div>
             </div>
           </article>
@@ -2395,6 +2403,14 @@ function WeeklyRhythm() {
                   className="inline-flex items-center px-5 py-3 text-[12px] font-bold uppercase tracking-[0.12em] border border-ink/50 text-ink hover:bg-ink hover:text-paper transition-colors"
                 >
                   Add to Calendar
+                </a>
+                <a
+                  href={STRAVA_EVENT_URL.sat}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-5 py-3 text-[12px] font-bold uppercase tracking-[0.12em] border border-ink/50 text-ink hover:bg-ink hover:text-paper transition-colors"
+                >
+                  Strava event →
                 </a>
               </div>
             </div>
