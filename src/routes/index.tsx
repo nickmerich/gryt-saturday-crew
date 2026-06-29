@@ -2222,8 +2222,9 @@ function WeeklyRhythm() {
               <div
                 className="mt-7 inline-flex items-center gap-2 px-3.5 py-2 border border-blue/40 text-blue text-[11px] font-bold tracking-[0.14em] uppercase"
               >
-                Bring a friend · two-for-one crew
+                Half the cadence · bring a friend
               </div>
+
 
               <div className="mt-7 flex flex-wrap gap-3">
                 <a
