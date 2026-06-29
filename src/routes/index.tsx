@@ -2125,11 +2125,11 @@ function WeeklyRhythm() {
     "&location=" + encodeURIComponent("212 Valley Brook Rd, McMurray, PA 15317") +
     "&details=" + encodeURIComponent("All paces. All parents. 7 AM sharp. Coffee in the lot after. Strava: " + stravaUrl);
 
-  // Tuesday — time TBD. Default placeholder 8:30 PM, 60 min. Easy to swap.
+  // Tuesday Night Shift — 9:00 PM, 60 min.
   const tueCal =
     "https://www.google.com/calendar/render?action=TEMPLATE" +
     "&text=" + encodeURIComponent("GRYT Night Shift — Tuesday Run") +
-    "&dates=20251230T203000/20251230T213000" +
+    "&dates=20251230T210000/20251230T220000" +
     "&recur=" + encodeURIComponent("RRULE:FREQ=WEEKLY;BYDAY=TU") +
     "&ctz=America/New_York" +
     "&location=" + encodeURIComponent("Mt. Lebanon Public Library, 16 Castle Shannon Blvd, Pittsburgh, PA 15228") +
@@ -2196,7 +2196,7 @@ function WeeklyRhythm() {
 
               <dl className="mt-7 border-t border-paper/15">
                 {[
-                  ["When", "Tuesdays · after dark"],
+                  ["When", "Tuesdays · 9:00 PM"],
                   ["Meet", "Mt. Lebanon Public Library"],
                   ["Distance", "TBD — confirm on Strava"],
                   ["Pace", "All paces · no one left behind"],
