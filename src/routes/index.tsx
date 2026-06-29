@@ -2145,6 +2145,12 @@ function WeeklyRhythm() {
           Twice a week.
         </h2>
 
+        <p className="mt-6 max-w-[760px] text-paper/80 text-lg md:text-xl leading-relaxed">
+          One crew. One rhythm. Tuesday and Saturday aren't two events — they're the same standing appointment, twice a week. Same people. Same promise. Show up once and you're halfway. Show up for both and you're in.
+        </p>
+
+
+
 
 
 
