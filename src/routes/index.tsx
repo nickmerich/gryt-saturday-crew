@@ -756,6 +756,19 @@ function RSVP() {
                     </a>
                   ))}
                 </div>
+                <div className="flex flex-wrap gap-x-4 gap-y-1">
+                  {submittedDays.map((d) => (
+                    <a
+                      key={d}
+                      href={STRAVA_EVENT_URL[d]}
+                      target="_blank"
+                      rel="noopener"
+                      className="text-[11px] font-bold uppercase tracking-[0.14em] text-ink/70 hover:text-ink underline underline-offset-4"
+                    >
+                      Open {d === "sat" ? "Saturday" : "Tuesday"} on Strava →
+                    </a>
+                  ))}
+                </div>
                 <div className="text-xs text-ink/55">
                   Recurring weekly event — shows up every {submittedDays.length === 2 ? "Tuesday and Saturday" : submittedDays[0] === "tue" ? "Tuesday" : "Saturday"}.
                 </div>
