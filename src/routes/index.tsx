@@ -2112,6 +2112,264 @@ function Testimonial() {
   );
 }
 
+function WeeklyRhythm() {
+  const stravaUrl = "https://www.strava.com/clubs/1708552";
+
+  // Recurring Google Calendar links (America/New_York). Saturday 7-8 AM weekly.
+  const satCal =
+    "https://www.google.com/calendar/render?action=TEMPLATE" +
+    "&text=" + encodeURIComponent("GRYT Run — Saturday Morning") +
+    "&dates=20260103T070000/20260103T080000" +
+    "&recur=" + encodeURIComponent("RRULE:FREQ=WEEKLY;BYDAY=SA") +
+    "&ctz=America/New_York" +
+    "&location=" + encodeURIComponent("212 Valley Brook Rd, McMurray, PA 15317") +
+    "&details=" + encodeURIComponent("All paces. All parents. 7 AM sharp. Coffee in the lot after. Strava: " + stravaUrl);
+
+  // Tuesday — time TBD. Default placeholder 8:30 PM, 60 min. Easy to swap.
+  const tueCal =
+    "https://www.google.com/calendar/render?action=TEMPLATE" +
+    "&text=" + encodeURIComponent("GRYT Night Shift — Tuesday Run") +
+    "&dates=20251230T203000/20251230T213000" +
+    "&recur=" + encodeURIComponent("RRULE:FREQ=WEEKLY;BYDAY=TU") +
+    "&ctz=America/New_York" +
+    "&location=" + encodeURIComponent("Mt. Lebanon Public Library, 16 Castle Shannon Blvd, Pittsburgh, PA 15228") +
+    "&details=" + encodeURIComponent("After dark. Bring a light and a friend. All paces. No one left behind. Strava: " + stravaUrl);
+
+  return (
+    <section id="rhythm" className="bg-ink text-paper py-20 md:py-28 px-6 sm:px-12 lg:px-24 border-t border-paper/10">
+      <div className="max-w-[1180px] mx-auto">
+        <div className="eyebrow eyebrow-blue mb-4">Two runs · one crew</div>
+        <h2 className="display-condensed text-paper text-[clamp(40px,6vw,80px)] leading-[0.95] max-w-[900px]">
+          Your week with <span className="text-blue">GRYT.</span>
+        </h2>
+        <div className="mt-7 max-w-[680px] flex flex-col gap-3 text-[18px] md:text-[19px] leading-[1.55] text-paper/80">
+          <p>Night Shift keeps you in it.</p>
+          <p>Saturday is where it counts.</p>
+          <p className="text-paper/65">
+            Two standing appointments. One crew. The bridge from "I used to be an athlete" back to
+            "I run with these people every week."
+          </p>
+        </div>
+
+        <div className="mt-14 grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-7">
+          {/* TUESDAY — NIGHT SHIFT */}
+          <article
+            className="relative overflow-hidden border border-paper/15 p-7 md:p-10 flex flex-col"
+            style={{
+              background:
+                "linear-gradient(160deg, #07080d 0%, #0d1220 55%, #111a2e 100%)",
+            }}
+          >
+            <div
+              aria-hidden
+              className="absolute inset-0 pointer-events-none opacity-60"
+              style={{
+                backgroundImage:
+                  "radial-gradient(rgba(137,207,240,0.18) 1px, transparent 1.5px), radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1.4px)",
+                backgroundSize: "22px 22px, 9px 9px",
+                backgroundPosition: "0 0, 4px 7px",
+                maskImage:
+                  "radial-gradient(ellipse at 85% 10%, #000 0%, transparent 70%)",
+                WebkitMaskImage:
+                  "radial-gradient(ellipse at 85% 10%, #000 0%, transparent 70%)",
+              }}
+            />
+            <div
+              aria-hidden
+              className="absolute top-6 right-6 text-[44px] leading-none select-none"
+              style={{ filter: "drop-shadow(0 0 14px rgba(137,207,240,0.45))" }}
+            >
+              🌙
+            </div>
+
+            <div className="relative">
+              <div className="eyebrow text-blue mb-3">Tuesday · Night Shift</div>
+              <h3 className="display-condensed text-paper text-[clamp(34px,4.6vw,56px)] leading-[0.95]">
+                Midweek pulse.
+                <br />
+                After dark.
+              </h3>
+              <p className="mt-5 text-paper/75 text-[16px] leading-[1.6] max-w-[460px]">
+                The run that keeps the week from getting away from you. Lights on. Reflective gear.
+                Same crew, different shift.
+              </p>
+
+              <dl className="mt-7 border-t border-paper/15">
+                {[
+                  ["When", "Tuesdays · after dark"],
+                  ["Meet", "Mt. Lebanon Public Library"],
+                  ["Distance", "TBD — confirm on Strava"],
+                  ["Pace", "All paces · no one left behind"],
+                  ["Bring", "Light + reflective gear + a friend"],
+                  ["After", "TBD — post-run spot"],
+                ].map(([k, v]) => (
+                  <div
+                    key={k}
+                    className="flex justify-between gap-4 py-3 border-b border-paper/12"
+                  >
+                    <dt className="text-[11px] font-bold tracking-[0.16em] uppercase text-paper/45 shrink-0 basis-[88px]">
+                      {k}
+                    </dt>
+                    <dd className="text-[15px] text-right text-paper/90">{v}</dd>
+                  </div>
+                ))}
+              </dl>
+
+              <div
+                className="mt-7 inline-flex items-center gap-2 px-3.5 py-2 border border-blue/40 text-blue text-[11px] font-bold tracking-[0.14em] uppercase"
+              >
+                Bring a friend · two-for-one crew
+              </div>
+
+              <div className="mt-7 flex flex-wrap gap-3">
+                <a
+                  href={tueCal}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-5 py-3 text-[12px] font-bold uppercase tracking-[0.12em] bg-blue text-ink hover:bg-paper transition-colors"
+                >
+                  Add Tuesday to Calendar
+                </a>
+                <a
+                  href={stravaUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-5 py-3 text-[12px] font-bold uppercase tracking-[0.12em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors"
+                >
+                  Follow on Strava
+                </a>
+              </div>
+            </div>
+          </article>
+
+          {/* SATURDAY — GRYT RUN */}
+          <article
+            className="relative overflow-hidden border border-ink/10 p-7 md:p-10 flex flex-col text-ink"
+            style={{
+              background:
+                "linear-gradient(160deg, #ffe8b8 0%, #ffd28a 35%, #f8b15a 70%, #e88f4a 100%)",
+            }}
+          >
+            <div
+              aria-hidden
+              className="absolute -top-24 -right-24 w-[280px] h-[280px] rounded-full"
+              style={{
+                background:
+                  "radial-gradient(circle, rgba(255,255,255,0.85) 0%, rgba(255,210,138,0) 65%)",
+              }}
+            />
+            <div
+              aria-hidden
+              className="absolute top-6 right-7 text-[44px] leading-none select-none"
+            >
+              ☀️
+            </div>
+
+            <div className="relative">
+              <div
+                className="eyebrow mb-3"
+                style={{ color: "#7a3a0e" }}
+              >
+                Saturday · GRYT Run
+              </div>
+              <h3 className="display-condensed text-ink text-[clamp(34px,4.6vw,56px)] leading-[0.95]">
+                The weekend
+                <br />
+                anchor.
+              </h3>
+              <p className="mt-5 text-ink/80 text-[16px] leading-[1.6] max-w-[460px]">
+                7 AM sharp. One hour. The big effort. The crew. Home before the day gets away from
+                you.
+              </p>
+
+              <dl className="mt-7 border-t border-ink/20">
+                {[
+                  ["When", "Saturdays · 7:00 AM"],
+                  ["Meet", "212 Valley Brook Rd, McMurray"],
+                  ["Distance", "~4 miles out & back"],
+                  ["Pace", "All paces · all parents welcome"],
+                  ["Hosts", "Nick & Laura Merich"],
+                  ["After", "Coffee in the lot"],
+                ].map(([k, v]) => (
+                  <div
+                    key={k}
+                    className="flex justify-between gap-4 py-3 border-b border-ink/15"
+                  >
+                    <dt className="text-[11px] font-bold tracking-[0.16em] uppercase text-ink/55 shrink-0 basis-[88px]">
+                      {k}
+                    </dt>
+                    <dd className="text-[15px] text-right text-ink/90 font-medium">{v}</dd>
+                  </div>
+                ))}
+              </dl>
+
+              <div className="mt-7 inline-flex items-center gap-2 px-3.5 py-2 border border-ink/40 text-ink text-[11px] font-bold tracking-[0.14em] uppercase">
+                Bring a friend · they need this too
+              </div>
+
+              <div className="mt-7 flex flex-wrap gap-3">
+                <a
+                  href={satCal}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-5 py-3 text-[12px] font-bold uppercase tracking-[0.12em] bg-ink text-paper hover:bg-[#3a7ca5] transition-colors"
+                >
+                  Add Saturday to Calendar
+                </a>
+                <a
+                  href={stravaUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-5 py-3 text-[12px] font-bold uppercase tracking-[0.12em] border border-ink/50 text-ink hover:bg-ink hover:text-paper transition-colors"
+                >
+                  Follow on Strava
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        {/* Pull quote */}
+        <figure className="mt-14 md:mt-16 max-w-[820px] mx-auto text-center">
+          <blockquote className="display-condensed text-paper text-[clamp(24px,3.2vw,40px)] leading-[1.1]">
+            <span className="text-blue">"</span>
+            Tuesday made me a runner again. Saturday made me part of something.
+            <span className="text-blue">"</span>
+          </blockquote>
+          <figcaption className="mt-5 eyebrow text-paper/55">
+            — GRYT regular · two runs a week
+          </figcaption>
+        </figure>
+
+        {/* Primary CTA */}
+        <div className="mt-12 md:mt-14 flex flex-col items-center text-center gap-5">
+          <p className="display-condensed text-paper text-[clamp(22px,2.6vw,32px)] leading-[1.15] max-w-[640px]">
+            Show up Tuesday <span className="text-blue">AND</span> Saturday.
+            <br />
+            Become a regular.
+          </p>
+          <div className="flex flex-wrap gap-3 justify-center">
+            <a
+              href="#join"
+              className="inline-flex items-center px-7 py-4 text-[12px] font-bold uppercase tracking-[0.14em] bg-blue text-ink hover:bg-paper transition-colors"
+            >
+              RSVP for Saturday →
+            </a>
+            <a
+              href={stravaUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-7 py-4 text-[12px] font-bold uppercase tracking-[0.14em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors"
+            >
+              Join the Strava club
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Landing() {
   return (
     <main className="bg-ink text-paper">
