@@ -2138,18 +2138,22 @@ function WeeklyRhythm() {
   return (
     <section id="rhythm" className="bg-ink text-paper py-20 md:py-28 px-6 sm:px-12 lg:px-24 border-t border-paper/10">
       <div className="max-w-[1180px] mx-auto">
-        <div className="eyebrow eyebrow-blue mb-4">Two runs · one crew</div>
+        <div className="eyebrow eyebrow-blue mb-4">Two runs · one crew · one cadence</div>
         <h2 className="display-condensed text-paper text-[clamp(40px,6vw,80px)] leading-[0.95] max-w-[900px]">
-          Your week with <span className="text-blue">GRYT.</span>
+          Do hard things. <span className="text-blue">Together.</span>
+          <br />
+          Twice a week.
         </h2>
         <div className="mt-7 max-w-[680px] flex flex-col gap-3 text-[18px] md:text-[19px] leading-[1.55] text-paper/80">
-          <p>Night Shift keeps you in it.</p>
-          <p>Saturday is where it counts.</p>
+          <p>Tuesday is the promise. Saturday is the proof.</p>
+          <p>One crew. One rhythm. No solo heroes.</p>
           <p className="text-paper/65">
-            Two standing appointments. One crew. The bridge from "I used to be an athlete" back to
-            "I run with these people every week."
+            Night Shift and the Saturday run aren't two events — they're the same standing
+            appointment, twice a week. Show up for one and you're halfway. Show up for both and
+            you're in.
           </p>
         </div>
+
 
         <div className="mt-14 grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-7">
           {/* TUESDAY — NIGHT SHIFT */}
@@ -2218,8 +2222,9 @@ function WeeklyRhythm() {
               <div
                 className="mt-7 inline-flex items-center gap-2 px-3.5 py-2 border border-blue/40 text-blue text-[11px] font-bold tracking-[0.14em] uppercase"
               >
-                Bring a friend · two-for-one crew
+                Half the cadence · bring a friend
               </div>
+
 
               <div className="mt-7 flex flex-wrap gap-3">
                 <a
@@ -2304,8 +2309,9 @@ function WeeklyRhythm() {
               </dl>
 
               <div className="mt-7 inline-flex items-center gap-2 px-3.5 py-2 border border-ink/40 text-ink text-[11px] font-bold tracking-[0.14em] uppercase">
-                Bring a friend · they need this too
+                The other half · close the loop
               </div>
+
 
               <div className="mt-7 flex flex-wrap gap-3">
                 <a
@@ -2333,7 +2339,8 @@ function WeeklyRhythm() {
         <figure className="mt-14 md:mt-16 max-w-[820px] mx-auto text-center">
           <blockquote className="display-condensed text-paper text-[clamp(24px,3.2vw,40px)] leading-[1.1]">
             <span className="text-blue">"</span>
-            Tuesday made me a runner again. Saturday made me part of something.
+            Tuesday made me a runner again. Saturday made me part of something. Together they made
+            me consistent.
             <span className="text-blue">"</span>
           </blockquote>
           <figcaption className="mt-5 eyebrow text-paper/55">
@@ -2343,17 +2350,17 @@ function WeeklyRhythm() {
 
         {/* Primary CTA */}
         <div className="mt-12 md:mt-14 flex flex-col items-center text-center gap-5">
-          <p className="display-condensed text-paper text-[clamp(22px,2.6vw,32px)] leading-[1.15] max-w-[640px]">
-            Show up Tuesday <span className="text-blue">AND</span> Saturday.
+          <p className="display-condensed text-paper text-[clamp(22px,2.6vw,32px)] leading-[1.15] max-w-[720px]">
+            Tuesday <span className="text-blue">AND</span> Saturday.
             <br />
-            Become a regular.
+            That's how we do hard things together.
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
             <a
               href="#join"
               className="inline-flex items-center px-7 py-4 text-[12px] font-bold uppercase tracking-[0.14em] bg-blue text-ink hover:bg-paper transition-colors"
             >
-              RSVP for Saturday →
+              Lock in this week →
             </a>
             <a
               href={stravaUrl}
@@ -2364,7 +2371,12 @@ function WeeklyRhythm() {
               Join the Strava club
             </a>
           </div>
+          <p className="mt-2 text-paper/55 text-[13px] tracking-[0.04em] max-w-[520px]">
+            One RSVP. One crew. Both runs on your calendar before you can talk yourself out of it.
+          </p>
         </div>
+
+
       </div>
     </section>
   );
