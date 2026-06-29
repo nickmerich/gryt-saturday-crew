@@ -179,6 +179,16 @@ const PLAYBOOKS: Playbook[] = [
     body: [],
     href: "/resources/playbooks/best-free-running-clubs-pittsburgh-2026",
   },
+  {
+    slug: "gryt-vs-yinz-run-club",
+    title: "GRYT vs Yinz Run Club: Which Pittsburgh Run Club Is Right for You?",
+    category: "Community",
+    readTime: "8 min read",
+    description:
+      "An honest comparison of Yinz Run Club and GRYT Run Club — location, schedule, group size, and post-run culture. Figure out which Pittsburgh run club actually fits your life.",
+    body: [],
+    href: "/resources/playbooks/gryt-vs-yinz-run-club",
+  },
 
 ];
 
@@ -211,13 +221,11 @@ function PlaybooksPage() {
           <nav aria-label="Playbook table of contents">
             <ul className="flex flex-col gap-3">
               {PLAYBOOKS.filter((p) => !p.comingSoon).map((p) => {
-                const isExternalArticle =
-                  p.slug === "best-free-running-clubs-pittsburgh-2026";
                 return (
                   <li key={p.slug}>
-                    {isExternalArticle ? (
+                    {p.href ? (
                       <Link
-                        to="/resources/playbooks/best-free-running-clubs-pittsburgh-2026"
+                        to={p.href}
                         className="group flex items-center gap-3 text-paper/80 hover:text-blue transition-colors"
                       >
                         <span className="w-2 h-2 bg-paper/40 group-hover:bg-blue transition-colors" />
