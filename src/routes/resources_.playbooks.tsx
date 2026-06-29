@@ -279,6 +279,14 @@ function PlaybooksPage() {
                   ))}
                 </div>
               )}
+              {p.href && (
+                <Link
+                  to={p.href}
+                  className="mt-8 inline-flex items-center gap-2 text-blue hover:text-paper transition-colors text-sm font-bold uppercase tracking-[0.12em]"
+                >
+                  Read the full article →
+                </Link>
+              )}
               {p.comingSoon && (
                 <p className="mt-6 eyebrow text-paper/40">Coming Soon</p>
               )}
