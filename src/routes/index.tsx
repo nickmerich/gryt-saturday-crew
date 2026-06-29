@@ -208,6 +208,12 @@ const DAY_EVENT_LABEL: Record<RsvpDay, string> = {
 };
 const STRAVA_EVENT =
   "https://www.strava.com/clubs/1708552/group_events/3480014931408029926";
+// Per-day Strava destination. Saturday points at the recurring group event;
+// Tuesday falls back to the club's group_events list until a recurring Tue event ID is set.
+const STRAVA_EVENT_URL: Record<RsvpDay, string> = {
+  sat: STRAVA_EVENT,
+  tue: "https://www.strava.com/clubs/1708552/group_events",
+};
 
 function MonogramG({ className = "" }: { className?: string }) {
   return (
@@ -747,6 +753,19 @@ function RSVP() {
                       <span className="text-xs tracking-[0.1em] uppercase opacity-70">
                         {d === "sat" ? "7:00 AM" : "9:00 PM"}
                       </span>
+                    </a>
+                  ))}
+                </div>
+                <div className="flex flex-wrap gap-x-4 gap-y-1">
+                  {submittedDays.map((d) => (
+                    <a
+                      key={d}
+                      href={STRAVA_EVENT_URL[d]}
+                      target="_blank"
+                      rel="noopener"
+                      className="text-[11px] font-bold uppercase tracking-[0.14em] text-ink/70 hover:text-ink underline underline-offset-4"
+                    >
+                      Open {d === "sat" ? "Saturday" : "Tuesday"} on Strava →
                     </a>
                   ))}
                 </div>
@@ -2305,6 +2324,14 @@ function WeeklyRhythm() {
                 >
                   Add to Calendar
                 </a>
+                <a
+                  href={STRAVA_EVENT_URL.tue}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-5 py-3 text-[12px] font-bold uppercase tracking-[0.12em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors"
+                >
+                  Strava event →
+                </a>
               </div>
             </div>
           </article>
@@ -2390,6 +2417,14 @@ function WeeklyRhythm() {
                 >
                   Add to Calendar
                 </a>
+                <a
+                  href={STRAVA_EVENT_URL.sat}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-5 py-3 text-[12px] font-bold uppercase tracking-[0.12em] border border-ink/50 text-ink hover:bg-ink hover:text-paper transition-colors"
+                >
+                  Strava event →
+                </a>
               </div>
             </div>
           </article>
@@ -2440,6 +2475,24 @@ function WeeklyRhythm() {
                 className="inline-flex items-center px-6 py-3 text-[12px] font-bold uppercase tracking-[0.14em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors"
               >
                 Saturday · 7:00 AM
+              </a>
+            </div>
+            <div className="flex flex-wrap gap-x-5 gap-y-1 justify-center mt-1">
+              <a
+                href={STRAVA_EVENT_URL.tue}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[11px] font-bold uppercase tracking-[0.14em] text-paper/70 hover:text-blue underline underline-offset-4"
+              >
+                Tuesday on Strava →
+              </a>
+              <a
+                href={STRAVA_EVENT_URL.sat}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[11px] font-bold uppercase tracking-[0.14em] text-paper/70 hover:text-blue underline underline-offset-4"
+              >
+                Saturday on Strava →
               </a>
             </div>
           </div>
