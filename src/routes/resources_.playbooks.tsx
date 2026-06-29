@@ -39,6 +39,7 @@ type Playbook = {
   description: string;
   body: string[];
   comingSoon?: boolean;
+  href?: string;
 };
 
 const PLAYBOOKS: Playbook[] = [
@@ -175,78 +176,10 @@ const PLAYBOOKS: Playbook[] = [
     readTime: "9 min read",
     description:
       "A no-BS guide to Pittsburgh's free running clubs in 2026 — Yinz, Fleet Feet, Steel City, Kool, Pharaoh Hounds, and GRYT. Who they're for, when they meet, and what makes each one worth your Saturday.",
-    body: [
-      "You used to have a team. Then life got complicated — kids, commutes, a schedule that treats anything non-urgent as optional. But the part of you that needs to move, that needs people to move with, doesn't really disappear. It just waits.",
-      "Pittsburgh has a real running community. It's spread across neighborhoods and suburbs, split between early risers and evening runners, trail people and road people. Some clubs cost money. Most are city-centric. A few are genuinely free and genuinely welcoming.",
-      "Here's what's actually out there in 2026 — who each club is for, when and where they meet, and what makes each one worth considering.",
-      "Yinz Run Club",
-      "Yinz is Pittsburgh's largest free running community, with more than 2,500 members. If you've spent any time in the city's running scene, you've probably already heard the name.",
-      "They meet Wednesday evenings and bi-weekly Saturdays at 10 AM, rotating routes through city neighborhoods. The group is inclusive and well-organized, with a strong social culture built around post-run hangs.",
-      "Best for: City-based runners who can make a weeknight work, or who want a large, established group with a real social scene.",
-      "Cost: Free.",
-      "Limitation: Every run is city-centric. If you're in the South Hills, Peters Township, or Washington County, you're adding a commute before you even lace up. The Saturday 10 AM slot also doesn't work well for parents who need to be back before the day takes over.",
-      "Fleet Feet Pittsburgh",
-      "Fleet Feet runs a free weekly group run out of their East End location. The retail backing shows — solid infrastructure, mapped routes, consistent scheduling.",
-      "Best for: Runners who want a structured, beginner-friendly setup with gear and coaching resources close by.",
-      "Cost: Free with registration.",
-      "Limitation: Anchored to the East End. If you're in Bethel Park, Upper St. Clair, or McMurray, this isn't your neighborhood option — it's a trip.",
-      "Steel City Road Runners",
-      "One of Pittsburgh's older running organizations. They host events and group runs throughout the year, with a suggested $20 annual donation rather than a hard membership fee.",
-      "Best for: Runners who want to connect with a broader Pittsburgh racing community and get involved in organized events.",
-      "Cost: $20 suggested donation per year.",
-      "Limitation: Meets only a few times per year. If you're looking for something that shows up on your calendar every single Saturday and holds you to it, this isn't that.",
-      "Kool Run Club",
-      "Kool Run Club brings a different energy to Pittsburgh running — free, community-oriented, with a following built around runners who want the social side of the sport front and center.",
-      "Best for: Runners who want a personality-driven group with a strong social identity.",
-      "Cost: Free.",
-      "Limitation: Check their current schedule directly, as meeting times and locations can shift. Not a South Hills option.",
-      "Pittsburgh Pharaoh Hounds",
-      "The Pharaoh Hounds meet Tuesday evenings and have a reputation for being welcoming at every pace. They've built a consistent following among Pittsburgh runners who want a midweek group run with real regulars.",
-      "Best for: Runners who can commit to a Tuesday evening and want a group with history behind it.",
-      "Cost: Free.",
-      "Limitation: Tuesday evenings are hard for a lot of parents and people with demanding schedules. And like most Pittsburgh clubs, the Pharaoh Hounds don't have a South Hills or Washington County presence.",
-      "GRYT Run Club — McMurray / South Hills",
-      "Here's the honest gap in Pittsburgh's running scene: almost nothing consistently serves the South Hills suburbs on a Saturday morning.",
-      "McMurray, Peters Township, Upper St. Clair, Bethel Park — these neighborhoods are full of former athletes, busy parents, and people who used to run and want to again. They don't need another Wednesday evening option that requires driving into the city first. They need something close, early, and free.",
-      "That's what GRYT Run Club is.",
-      "GRYT meets every Saturday at 7 AM on the Montour / Peters Trail in McMurray. The route is an out-and-back covering roughly four miles on a flat, beginner-friendly trail. Walkers, joggers, and runners all show up. No one gets dropped. No one has ever been dropped.",
-      "After the run, people hang out in the parking lot with coffee. No agenda. No pitch. Just the natural end of a Saturday morning well spent.",
-      "Who Started It",
-      "GRYT was founded by Laura and Nick Merich, who have 27 combined marathon finishes between them. They're not coaches with a program to sell. They're former athletes who got busy, missed having a team, and decided to build something instead of waiting for someone else to.",
-      "What Makes It Different",
-      "The combination is specific: zero cost, 7 AM Saturday, a flat trail in the South Hills, and coffee after. No Pittsburgh-area club currently owns that combination.",
-      "The 7 AM start matters more than it sounds. You're done by 8:15. The rest of Saturday is still yours — kids' activities, errands, whatever the day demands. You didn't sacrifice the morning. You started it.",
-      "The Montour / Peters Trail matters too. It's accessible, well-maintained, and close to home for anyone in the Peters Township and South Hills corridor. You're not driving 30 minutes to run.",
-      "What to Expect Your First Time",
-      "Show up ten minutes early. A founder or regular will find you before the run starts. You won't be standing at the edge of a group mid-warmup wondering where to put yourself.",
-      "By mile two, the conversations are usually less about running and more about everything else — work, kids, the week you just had. That's the part people come back for.",
-      "The RSVP system is simple: fill out the form at grytrunclub.com, get one reminder Friday evening, and one nudge Saturday morning. That's it. No inbox flooding, no upsell.",
-      "GRYT also has a Strava club (ID 1708552) where members log activity and stay connected between runs. Low-key and useful if you're already on Strava.",
-      "Best for: Former athletes, busy parents, and comeback runners in Pittsburgh's South Hills and Washington County who want a free, weekly, early Saturday run with real people and coffee after.",
-      "Cost: Always free. No membership. No fees.",
-      "How These Clubs Compare",
-      "Yinz Run Club — Free · Wed evenings & Sat 10 AM · City · Social post-run.",
-      "Fleet Feet Pittsburgh — Free · Varies · East End · Varies.",
-      "Steel City Road Runners — $20/yr donation · Occasional · City · Varies.",
-      "Kool Run Club — Free · Varies · City · Social.",
-      "Pittsburgh Pharaoh Hounds — Free · Tuesday evenings · City · Social.",
-      "GRYT Run Club — Free · Saturday 7 AM · McMurray / South Hills · Coffee.",
-      "If you're in the city and free on a Wednesday evening, Yinz Run Club is a strong choice. If you're in the South Hills and Saturday mornings are your window, GRYT is the only consistent free option on the Montour / Peters Trail corridor.",
-      "The One Thing Worth Saying",
-      "Most people who show up to GRYT for the first time come alone. That's fine. So did everyone else.",
-      "The trail is flat. The coffee is real. The 7 AM start means you're back home before most people have had breakfast.",
-      "If you've been waiting for a reason to start again, Saturday is a good one.",
-      "RSVP for this Saturday at grytrunclub.com.",
-      "Frequently Asked Questions",
-      "Are there free running clubs in Pittsburgh? Yes. Several Pittsburgh-area running clubs are free, including Yinz Run Club, Kool Run Club, Pittsburgh Pharaoh Hounds, Fleet Feet Pittsburgh's group runs, and GRYT Run Club. Steel City Road Runners asks for a $20 annual donation but doesn't require it.",
-      "What is the best running club for beginners in Pittsburgh? GRYT Run Club in McMurray is a strong option for beginners. The Montour / Peters Trail route is flat and forgiving, there are no pace requirements, and no one gets dropped. Walkers, joggers, and runners all go out together. Yinz Run Club and Fleet Feet Pittsburgh also welcome beginners.",
-      "Is there a running club in Pittsburgh's South Hills? Yes. GRYT Run Club meets every Saturday at 7 AM on the Montour / Peters Trail in McMurray, PA, serving the South Hills and Washington County suburbs including Peters Township, Upper St. Clair, and Bethel Park. It's free and open to all paces.",
-      "What time does GRYT Run Club meet? Every Saturday at 7 AM at the Montour / Peters Trail in McMurray, PA. First-timers are asked to arrive ten minutes early so a founder or regular can introduce themselves before the run starts.",
-      "Does GRYT Run Club cost anything? No. GRYT Run Club is always free. No membership fees, no registration costs, no upsells.",
-      "How do I join GRYT Run Club? Fill out the RSVP form at grytrunclub.com. You'll get one reminder Friday evening and one nudge Saturday morning. Show up ten minutes early your first time and someone will find you.",
-      "What happens after the run at GRYT? People hang out in the parking lot with coffee. No agenda, no pitch — just a natural end to a Saturday morning run. It's one of the things that sets GRYT apart from every other Pittsburgh-area club.",
-    ],
+    body: [],
+    href: "/resources/playbooks/best-free-running-clubs-pittsburgh-2026",
   },
+
 ];
 
 function PlaybooksPage() {
@@ -277,19 +210,36 @@ function PlaybooksPage() {
           <p className="eyebrow text-paper/55 mb-5">Jump to a playbook</p>
           <nav aria-label="Playbook table of contents">
             <ul className="flex flex-col gap-3">
-              {PLAYBOOKS.filter((p) => !p.comingSoon).map((p) => (
-                <li key={p.slug}>
-                  <a
-                    href={`#${p.slug}`}
-                    className="group flex items-center gap-3 text-paper/80 hover:text-blue transition-colors"
-                  >
-                    <span className="w-2 h-2 bg-paper/40 group-hover:bg-blue transition-colors" />
-                    <span className="text-[16px] md:text-[17px] leading-[1.5]">
-                      {p.title}
-                    </span>
-                  </a>
-                </li>
-              ))}
+              {PLAYBOOKS.filter((p) => !p.comingSoon).map((p) => {
+                const isExternalArticle =
+                  p.slug === "best-free-running-clubs-pittsburgh-2026";
+                return (
+                  <li key={p.slug}>
+                    {isExternalArticle ? (
+                      <Link
+                        to="/resources/playbooks/best-free-running-clubs-pittsburgh-2026"
+                        className="group flex items-center gap-3 text-paper/80 hover:text-blue transition-colors"
+                      >
+                        <span className="w-2 h-2 bg-paper/40 group-hover:bg-blue transition-colors" />
+                        <span className="text-[16px] md:text-[17px] leading-[1.5]">
+                          {p.title}
+                        </span>
+                      </Link>
+                    ) : (
+                      <a
+                        href={`#${p.slug}`}
+                        className="group flex items-center gap-3 text-paper/80 hover:text-blue transition-colors"
+                      >
+                        <span className="w-2 h-2 bg-paper/40 group-hover:bg-blue transition-colors" />
+                        <span className="text-[16px] md:text-[17px] leading-[1.5]">
+                          {p.title}
+                        </span>
+                      </a>
+                    )}
+                  </li>
+                );
+              })}
+
             </ul>
           </nav>
         </div>
@@ -328,6 +278,14 @@ function PlaybooksPage() {
                     </p>
                   ))}
                 </div>
+              )}
+              {p.href && (
+                <Link
+                  to={p.href}
+                  className="mt-8 inline-flex items-center gap-2 text-blue hover:text-paper transition-colors text-sm font-bold uppercase tracking-[0.12em]"
+                >
+                  Read the full article →
+                </Link>
               )}
               {p.comingSoon && (
                 <p className="mt-6 eyebrow text-paper/40">Coming Soon</p>
