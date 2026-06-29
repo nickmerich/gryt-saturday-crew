@@ -179,6 +179,33 @@ export const Route = createFileRoute("/")({
 });
 
 const STRAVA_CLUB = "https://www.strava.com/clubs/1708552";
+
+// Recurring Google Calendar links (America/New_York).
+export const SAT_CAL_URL =
+  "https://www.google.com/calendar/render?action=TEMPLATE" +
+  "&text=" + encodeURIComponent("GRYT Run — Saturday Morning") +
+  "&dates=20260103T070000/20260103T080000" +
+  "&recur=" + encodeURIComponent("RRULE:FREQ=WEEKLY;BYDAY=SA") +
+  "&ctz=America/New_York" +
+  "&location=" + encodeURIComponent("212 Valley Brook Rd, McMurray, PA 15317") +
+  "&details=" + encodeURIComponent("All paces. All parents. 7 AM sharp. Coffee in the lot after. Strava: " + STRAVA_CLUB);
+
+export const TUE_CAL_URL =
+  "https://www.google.com/calendar/render?action=TEMPLATE" +
+  "&text=" + encodeURIComponent("GRYT Night Shift — Tuesday Run") +
+  "&dates=20251230T210000/20251230T220000" +
+  "&recur=" + encodeURIComponent("RRULE:FREQ=WEEKLY;BYDAY=TU") +
+  "&ctz=America/New_York" +
+  "&location=" + encodeURIComponent("Mt. Lebanon Public Library, 16 Castle Shannon Blvd, Pittsburgh, PA 15228") +
+  "&details=" + encodeURIComponent("After dark. Bring a light and a friend. All paces. No one left behind. Strava: " + STRAVA_CLUB);
+
+type RsvpDay = "tue" | "sat";
+const DAY_LABEL: Record<RsvpDay, string> = { tue: "Tuesday · Night Shift", sat: "Saturday · GRYT Run" };
+const DAY_CAL: Record<RsvpDay, string> = { tue: TUE_CAL_URL, sat: SAT_CAL_URL };
+const DAY_EVENT_LABEL: Record<RsvpDay, string> = {
+  tue: "GRYT Night Shift · Tuesday · 9 PM",
+  sat: "GRYT Run #12 · Sat, July 4th · 7 AM",
+};
 const STRAVA_EVENT =
   "https://www.strava.com/clubs/1708552/group_events/3480014931408029926";
 
@@ -485,33 +512,49 @@ function RSVP() {
   const [name, setName] = useState("");
   const [contact, setContact] = useState("");
   const [source, setSource] = useState("");
+  const [days, setDays] = useState<Record<RsvpDay, boolean>>({ tue: false, sat: true });
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submittedDays, setSubmittedDays] = useState<RsvpDay[]>([]);
+
+  const toggleDay = (d: RsvpDay) => setDays((p) => ({ ...p, [d]: !p[d] }));
 
   const submit = async () => {
     if (!name.trim() || !contact.trim()) {
       setError("Add your name and an email or phone so we can send the reminder.");
       return;
     }
+    const selected = (Object.keys(days) as RsvpDay[]).filter((d) => days[d]);
+    if (selected.length === 0) {
+      setError("Pick at least one run — Tuesday, Saturday, or both.");
+      return;
+    }
     setError(null);
     setSubmitting(true);
     try {
-      const res = await fetch("/api/public/rsvp", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: name.trim(),
-          contact: contact.trim(),
-          source: source || null,
-          eventLabel: "GRYT Run #11 · Sat, Jun 27 · 7 AM",
-        }),
-      });
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
+      // One RSVP per selected day so each gets the right event label + calendar.
+      const results = await Promise.all(
+        selected.map((d) =>
+          fetch("/api/public/rsvp", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              name: name.trim(),
+              contact: contact.trim(),
+              source: source || null,
+              eventLabel: DAY_EVENT_LABEL[d],
+            }),
+          }),
+        ),
+      );
+      const failed = results.find((r) => !r.ok);
+      if (failed) {
+        const data = await failed.json().catch(() => ({}));
         setError(data?.error || "Something went wrong. Try again in a moment.");
         return;
       }
+      setSubmittedDays(selected);
       setSubmitted(true);
       // Save a tiny prefill so the waiver page can auto-populate.
       try {
@@ -580,7 +623,31 @@ function RSVP() {
           {!submitted ? (
             <div>
               <div className="display-condensed text-ink text-[26px] mb-5">
-                I'm in for Saturday
+                I'm in this week
+              </div>
+              <label className="block text-[11px] font-bold tracking-[0.14em] uppercase text-ink/55 mb-2">
+                Which run(s)?
+              </label>
+              <div className="flex flex-col gap-2 mb-4">
+                {(["sat", "tue"] as RsvpDay[]).map((d) => (
+                  <label
+                    key={d}
+                    className={`flex items-center gap-3 border-[1.5px] px-3.5 py-3 cursor-pointer transition-colors ${
+                      days[d] ? "border-ink bg-white" : "border-[#cfcabe] bg-white/60 hover:border-ink/60"
+                    }`}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={days[d]}
+                      onChange={() => toggleDay(d)}
+                      className="w-4 h-4 accent-[#3a7ca5]"
+                    />
+                    <span className="text-sm font-semibold text-ink">{DAY_LABEL[d]}</span>
+                    <span className="text-xs text-ink/55 ml-auto">
+                      {d === "sat" ? "7:00 AM" : "9:00 PM"}
+                    </span>
+                  </label>
+                ))}
               </div>
               {[
                 {
@@ -635,7 +702,7 @@ function RSVP() {
                 className="w-full text-sm font-bold tracking-[0.1em] uppercase py-4 bg-ink text-paper hover:bg-[#3a7ca5] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                 style={{ fontFamily: "var(--font-body)" }}
               >
-                {submitting ? "Sending…" : "RSVP for this Saturday →"}
+                {submitting ? "Sending…" : "Lock it in →"}
               </button>
               <p className="mt-3.5 text-xs leading-[1.5] text-ink/55 text-center">
                 Free, always. One reminder Friday, one Saturday. Unsubscribe anytime.
@@ -656,21 +723,36 @@ function RSVP() {
                   ✓
                 </span>
                 <span className="display-condensed text-ink text-[24px]">
-                  You're in for Saturday.
+                  {submittedDays.length === 2
+                    ? "You're in for Tue + Sat."
+                    : submittedDays[0] === "tue"
+                      ? "You're in for Tuesday."
+                      : "You're in for Saturday."}
                 </span>
               </div>
-              <div className="border-y border-[#d8d4cb] py-4 mb-5 flex flex-col gap-2">
+              <div className="border-y border-[#d8d4cb] py-4 mb-5 flex flex-col gap-3">
                 <div className="text-[11px] font-bold tracking-[0.14em] uppercase text-ink/55">
-                  Next steps
+                  Add to your calendar
                 </div>
-                {[
-                  "Join the Strava club if you want updates and photos.",
-                  "Come 10 minutes early if it's your first time.",
-                ].map((t) => (
-                  <div key={t} className="text-sm leading-[1.5] text-ink/80">
-                    · {t}
-                  </div>
-                ))}
+                <div className="flex flex-col gap-2">
+                  {submittedDays.map((d) => (
+                    <a
+                      key={d}
+                      href={DAY_CAL[d]}
+                      target="_blank"
+                      rel="noopener"
+                      className="flex items-center justify-between gap-3 border-[1.5px] border-ink px-3.5 py-2.5 text-sm font-semibold text-ink hover:bg-ink hover:text-paper transition-colors"
+                    >
+                      <span>Add {DAY_LABEL[d]}</span>
+                      <span className="text-xs tracking-[0.1em] uppercase opacity-70">
+                        {d === "sat" ? "7:00 AM" : "9:00 PM"}
+                      </span>
+                    </a>
+                  ))}
+                </div>
+                <div className="text-xs text-ink/55">
+                  Recurring weekly event — shows up every {submittedDays.length === 2 ? "Tuesday and Saturday" : submittedDays[0] === "tue" ? "Tuesday" : "Saturday"}.
+                </div>
               </div>
               <RSVPWaiverBlock />
               <a
@@ -684,6 +766,7 @@ function RSVP() {
               <button
                 onClick={() => {
                   setSubmitted(false);
+                  setSubmittedDays([]);
                   setName("");
                   setContact("");
                   setSource("");
@@ -2113,27 +2196,9 @@ function Testimonial() {
 }
 
 function WeeklyRhythm() {
-  const stravaUrl = "https://www.strava.com/clubs/1708552";
-
-  // Recurring Google Calendar links (America/New_York). Saturday 7-8 AM weekly.
-  const satCal =
-    "https://www.google.com/calendar/render?action=TEMPLATE" +
-    "&text=" + encodeURIComponent("GRYT Run — Saturday Morning") +
-    "&dates=20260103T070000/20260103T080000" +
-    "&recur=" + encodeURIComponent("RRULE:FREQ=WEEKLY;BYDAY=SA") +
-    "&ctz=America/New_York" +
-    "&location=" + encodeURIComponent("212 Valley Brook Rd, McMurray, PA 15317") +
-    "&details=" + encodeURIComponent("All paces. All parents. 7 AM sharp. Coffee in the lot after. Strava: " + stravaUrl);
-
-  // Tuesday Night Shift — 9:00 PM, 60 min.
-  const tueCal =
-    "https://www.google.com/calendar/render?action=TEMPLATE" +
-    "&text=" + encodeURIComponent("GRYT Night Shift — Tuesday Run") +
-    "&dates=20251230T210000/20251230T220000" +
-    "&recur=" + encodeURIComponent("RRULE:FREQ=WEEKLY;BYDAY=TU") +
-    "&ctz=America/New_York" +
-    "&location=" + encodeURIComponent("Mt. Lebanon Public Library, 16 Castle Shannon Blvd, Pittsburgh, PA 15228") +
-    "&details=" + encodeURIComponent("After dark. Bring a light and a friend. All paces. No one left behind. Strava: " + stravaUrl);
+  const stravaUrl = STRAVA_CLUB;
+  const satCal = SAT_CAL_URL;
+  const tueCal = TUE_CAL_URL;
 
   return (
     <section id="rhythm" className="bg-ink text-paper py-20 md:py-28 px-6 sm:px-12 lg:px-24 border-t border-paper/10">
