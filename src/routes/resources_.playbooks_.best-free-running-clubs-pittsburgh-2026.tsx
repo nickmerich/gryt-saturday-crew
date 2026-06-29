@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link as LinkIcon, Check, Facebook, Linkedin } from "lucide-react";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 import ogImage from "@/assets/og-playbooks.jpg";
 
@@ -147,6 +149,9 @@ function ArticlePage() {
             {DESCRIPTION}
           </p>
 
+          <ShareBar className="mt-8" />
+
+
           <div className="mt-12 space-y-5 text-paper/85 text-[16px] md:text-[17px] leading-[1.7]">
             <p>You used to have a team. Then life got complicated — kids, commutes, a schedule that treats anything non-urgent as optional. But the part of you that needs to move, that needs people to move with, doesn't really disappear. It just waits.</p>
             <p>Pittsburgh has a real running community. It's spread across neighborhoods and suburbs, split between early risers and evening runners, trail people and road people. Some clubs cost money. Most are city-centric. A few are genuinely free and genuinely welcoming.</p>
@@ -240,7 +245,9 @@ function ArticlePage() {
             </div>
           </div>
 
-          <div className="mt-16 flex flex-wrap gap-4">
+          <ShareBar className="mt-12" label="Share this playbook" />
+
+          <div className="mt-12 flex flex-wrap gap-4">
             <Link to="/" hash="first-time" className="btn-primary">
               RSVP for Saturday →
             </Link>
@@ -251,9 +258,111 @@ function ArticlePage() {
               Back to Playbooks
             </Link>
           </div>
+
         </div>
       </article>
       <SiteFooter />
     </main>
+  );
+}
+
+function ShareBar({
+  className = "",
+  label = "Share",
+}: {
+  className?: string;
+  label?: string;
+}) {
+  const [copied, setCopied] = useState(false);
+  const shareUrl = URL;
+  const shareText = `${TITLE} — ${DESCRIPTION}`;
+
+  const xHref = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+    TITLE,
+  )}&url=${encodeURIComponent(shareUrl)}`;
+  const fbHref = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+    shareUrl,
+  )}`;
+  const liHref = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
+    shareUrl,
+  )}`;
+
+  async function onCopy() {
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(shareUrl);
+      } else {
+        const el = document.createElement("textarea");
+        el.value = shareUrl;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand("copy");
+        document.body.removeChild(el);
+      }
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      // ignore
+    }
+  }
+
+  const btn =
+    "inline-flex items-center gap-2 px-3.5 py-2 text-[12px] font-bold uppercase tracking-[0.12em] border border-paper/30 text-paper hover:border-blue hover:text-blue transition-colors";
+
+  return (
+    <div className={className} aria-label={label}>
+      <p className="eyebrow text-paper/55 mb-3">{label}</p>
+      <div className="flex flex-wrap gap-2.5">
+        <button type="button" onClick={onCopy} className={btn} aria-live="polite">
+          {copied ? (
+            <>
+              <Check size={14} aria-hidden="true" /> Copied
+            </>
+          ) : (
+            <>
+              <LinkIcon size={14} aria-hidden="true" /> Copy link
+            </>
+          )}
+        </button>
+        <a
+          href={xHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={btn}
+          aria-label="Share on X"
+        >
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path d="M18.244 2H21l-6.51 7.44L22 22h-6.83l-4.77-6.23L4.8 22H2l6.96-7.95L2 2h6.91l4.33 5.73L18.24 2Zm-1.197 18h1.671L7.05 4h-1.79l11.787 16Z" />
+          </svg>
+          X
+        </a>
+        <a
+          href={fbHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={btn}
+          aria-label="Share on Facebook"
+        >
+          <Facebook size={14} aria-hidden="true" /> Facebook
+        </a>
+        <a
+          href={liHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={btn}
+          aria-label="Share on LinkedIn"
+        >
+          <Linkedin size={14} aria-hidden="true" /> LinkedIn
+        </a>
+      </div>
+      {/* shareText is used only when native share is available */}
+      <span hidden>{shareText}</span>
+    </div>
   );
 }
