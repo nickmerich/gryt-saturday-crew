@@ -208,6 +208,12 @@ const DAY_EVENT_LABEL: Record<RsvpDay, string> = {
 };
 const STRAVA_EVENT =
   "https://www.strava.com/clubs/1708552/group_events/3480014931408029926";
+// Per-day Strava destination. Saturday points at the recurring group event;
+// Tuesday falls back to the club's group_events list until a recurring Tue event ID is set.
+const STRAVA_EVENT_URL: Record<RsvpDay, string> = {
+  sat: STRAVA_EVENT,
+  tue: "https://www.strava.com/clubs/1708552/group_events",
+};
 
 function MonogramG({ className = "" }: { className?: string }) {
   return (
