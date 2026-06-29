@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link as LinkIcon, Check, Facebook, Linkedin } from "lucide-react";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 import ogImage from "@/assets/og-playbooks.jpg";
 
