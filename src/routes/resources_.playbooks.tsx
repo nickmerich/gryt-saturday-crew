@@ -179,6 +179,16 @@ const PLAYBOOKS: Playbook[] = [
     body: [],
     href: "/resources/playbooks/best-free-running-clubs-pittsburgh-2026",
   },
+  {
+    slug: "gryt-vs-yinz-run-club",
+    title: "GRYT vs Yinz Run Club: Which Pittsburgh Run Club Is Right for You?",
+    category: "Community",
+    readTime: "8 min read",
+    description:
+      "An honest comparison of Yinz Run Club and GRYT Run Club — location, schedule, group size, and post-run culture. Figure out which Pittsburgh run club actually fits your life.",
+    body: [],
+    href: "/resources/playbooks/gryt-vs-yinz-run-club",
+  },
 
 ];
 

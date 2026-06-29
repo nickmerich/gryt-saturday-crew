@@ -23,6 +23,7 @@ import { Route as ResourcesConversationsRouteImport } from './routes/resources_.
 import { Route as MembersKeyRouteImport } from './routes/members.$key'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as AdminMembersRouteImport } from './routes/admin.members'
+import { Route as ResourcesPlaybooksGrytVsYinzRunClubRouteImport } from './routes/resources_.playbooks_.gryt-vs-yinz-run-club'
 import { Route as ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026RouteImport } from './routes/resources_.playbooks_.best-free-running-clubs-pittsburgh-2026'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as ApiPublicRsvpRouteImport } from './routes/api/public/rsvp'
@@ -102,6 +103,12 @@ const AdminMembersRoute = AdminMembersRouteImport.update({
   path: '/admin/members',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResourcesPlaybooksGrytVsYinzRunClubRoute =
+  ResourcesPlaybooksGrytVsYinzRunClubRouteImport.update({
+    id: '/resources_/playbooks_/gryt-vs-yinz-run-club',
+    path: '/resources/playbooks/gryt-vs-yinz-run-club',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route =
   ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026RouteImport.update({
     id: '/resources_/playbooks_/best-free-running-clubs-pittsburgh-2026',
@@ -165,6 +172,7 @@ export interface FileRoutesByFullPath {
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/resources/playbooks/best-free-running-clubs-pittsburgh-2026': typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route
+  '/resources/playbooks/gryt-vs-yinz-run-club': typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -189,6 +197,7 @@ export interface FileRoutesByTo {
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/resources/playbooks/best-free-running-clubs-pittsburgh-2026': typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route
+  '/resources/playbooks/gryt-vs-yinz-run-club': typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -214,6 +223,7 @@ export interface FileRoutesById {
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/resources_/playbooks_/best-free-running-clubs-pittsburgh-2026': typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route
+  '/resources_/playbooks_/gryt-vs-yinz-run-club': typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -240,6 +250,7 @@ export interface FileRouteTypes {
     | '/api/public/rsvp'
     | '/lovable/email/suppression'
     | '/resources/playbooks/best-free-running-clubs-pittsburgh-2026'
+    | '/resources/playbooks/gryt-vs-yinz-run-club'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
@@ -264,6 +275,7 @@ export interface FileRouteTypes {
     | '/api/public/rsvp'
     | '/lovable/email/suppression'
     | '/resources/playbooks/best-free-running-clubs-pittsburgh-2026'
+    | '/resources/playbooks/gryt-vs-yinz-run-club'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
@@ -288,6 +300,7 @@ export interface FileRouteTypes {
     | '/api/public/rsvp'
     | '/lovable/email/suppression'
     | '/resources_/playbooks_/best-free-running-clubs-pittsburgh-2026'
+    | '/resources_/playbooks_/gryt-vs-yinz-run-club'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
@@ -312,6 +325,7 @@ export interface RootRouteChildren {
   ApiPublicRsvpRoute: typeof ApiPublicRsvpRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
   ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route: typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route
+  ResourcesPlaybooksGrytVsYinzRunClubRoute: typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
@@ -419,6 +433,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminMembersRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/resources_/playbooks_/gryt-vs-yinz-run-club': {
+      id: '/resources_/playbooks_/gryt-vs-yinz-run-club'
+      path: '/resources/playbooks/gryt-vs-yinz-run-club'
+      fullPath: '/resources/playbooks/gryt-vs-yinz-run-club'
+      preLoaderRoute: typeof ResourcesPlaybooksGrytVsYinzRunClubRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/resources_/playbooks_/best-free-running-clubs-pittsburgh-2026': {
       id: '/resources_/playbooks_/best-free-running-clubs-pittsburgh-2026'
       path: '/resources/playbooks/best-free-running-clubs-pittsburgh-2026'
@@ -507,6 +528,8 @@ const rootRouteChildren: RootRouteChildren = {
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
   ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route:
     ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route,
+  ResourcesPlaybooksGrytVsYinzRunClubRoute:
+    ResourcesPlaybooksGrytVsYinzRunClubRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
@@ -516,13 +539,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
