@@ -49,7 +49,12 @@ export const submitRecommendation = createServerFn({ method: "POST" })
 
     if (error) {
       console.error("recommendation insert failed", error);
-      throw new Error("We couldn't save your idea. Please try again.");
+      const details = [error.message, error.details, error.hint]
+        .filter(Boolean)
+        .join(" — ");
+      throw new Error(
+        `Couldn't save your idea: ${details || "unknown database error"} (code ${error.code ?? "n/a"})`,
+      );
     }
 
     // Fire-and-forget owner notifications. Don't block the user response if email fails.
