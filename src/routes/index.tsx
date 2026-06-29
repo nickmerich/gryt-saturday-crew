@@ -2309,8 +2309,9 @@ function WeeklyRhythm() {
               </dl>
 
               <div className="mt-7 inline-flex items-center gap-2 px-3.5 py-2 border border-ink/40 text-ink text-[11px] font-bold tracking-[0.14em] uppercase">
-                Bring a friend · they need this too
+                The other half · close the loop
               </div>
+
 
               <div className="mt-7 flex flex-wrap gap-3">
                 <a
