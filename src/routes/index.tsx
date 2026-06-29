@@ -2376,7 +2376,7 @@ function WeeklyRhythm() {
           </p>
         </div>
 
-        </div>
+
       </div>
     </section>
   );
