@@ -2343,38 +2343,44 @@ function WeeklyRhythm() {
           </figcaption>
         </figure>
 
-        {/* Primary CTA — one cadence */}
+        {/* Primary CTA — one "RSVP for both" with day buttons */}
         <div className="mt-12 md:mt-14 flex flex-col items-center text-center gap-5">
           <div className="eyebrow eyebrow-blue">Lock in this week</div>
           <p className="display-condensed text-paper text-[clamp(22px,2.6vw,32px)] leading-[1.15] max-w-[720px]">
-            Tuesday <span className="text-blue">AND</span> Saturday.
+            One crew. One cadence.
             <br />
-            That's how we do hard things together.
+            <span className="text-blue">RSVP for both.</span>
           </p>
-          <div className="flex flex-wrap gap-3 justify-center">
-            <a
-              href="#join"
-              className="inline-flex items-center px-7 py-4 text-[12px] font-bold uppercase tracking-[0.14em] bg-blue text-ink hover:bg-paper transition-colors"
-            >
-              RSVP Tuesday →
-            </a>
-            <a
-              href="#join"
-              className="inline-flex items-center px-7 py-4 text-[12px] font-bold uppercase tracking-[0.14em] bg-paper text-ink hover:bg-blue transition-colors"
-            >
-              RSVP Saturday →
-            </a>
-            <a
-              href={stravaUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-7 py-4 text-[12px] font-bold uppercase tracking-[0.14em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors"
-            >
-              Join the Strava club
-            </a>
+
+          {/* Primary action */}
+          <a
+            href="#join"
+            className="inline-flex items-center px-9 py-5 text-[13px] font-bold uppercase tracking-[0.16em] bg-blue text-ink hover:bg-paper transition-colors"
+          >
+            RSVP for both runs →
+          </a>
+
+          {/* Day-specific options underneath */}
+          <div className="flex flex-col items-center gap-3 mt-2">
+            <div className="eyebrow text-paper/55">Or pick a day</div>
+            <div className="flex flex-wrap gap-3 justify-center">
+              <a
+                href="#join"
+                className="inline-flex items-center px-6 py-3 text-[12px] font-bold uppercase tracking-[0.14em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors"
+              >
+                Tuesday · 9:00 PM
+              </a>
+              <a
+                href="#join"
+                className="inline-flex items-center px-6 py-3 text-[12px] font-bold uppercase tracking-[0.14em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors"
+              >
+                Saturday · 7:00 AM
+              </a>
+            </div>
           </div>
+
           <p className="mt-2 text-paper/55 text-[13px] tracking-[0.04em] max-w-[520px]">
-            One crew. One cadence. Both runs on your calendar before you can talk yourself out of it.
+            Both runs on your calendar before you can talk yourself out of it.
           </p>
         </div>
 
