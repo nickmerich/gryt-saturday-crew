@@ -2337,8 +2337,9 @@ function WeeklyRhythm() {
           </figcaption>
         </figure>
 
-        {/* Primary CTA */}
+        {/* Primary CTA — one cadence */}
         <div className="mt-12 md:mt-14 flex flex-col items-center text-center gap-5">
+          <div className="eyebrow eyebrow-blue">Lock in this week</div>
           <p className="display-condensed text-paper text-[clamp(22px,2.6vw,32px)] leading-[1.15] max-w-[720px]">
             Tuesday <span className="text-blue">AND</span> Saturday.
             <br />
@@ -2349,7 +2350,13 @@ function WeeklyRhythm() {
               href="#join"
               className="inline-flex items-center px-7 py-4 text-[12px] font-bold uppercase tracking-[0.14em] bg-blue text-ink hover:bg-paper transition-colors"
             >
-              Lock in this week →
+              RSVP Tuesday →
+            </a>
+            <a
+              href="#join"
+              className="inline-flex items-center px-7 py-4 text-[12px] font-bold uppercase tracking-[0.14em] bg-paper text-ink hover:bg-blue transition-colors"
+            >
+              RSVP Saturday →
             </a>
             <a
               href={stravaUrl}
@@ -2361,9 +2368,10 @@ function WeeklyRhythm() {
             </a>
           </div>
           <p className="mt-2 text-paper/55 text-[13px] tracking-[0.04em] max-w-[520px]">
-            One RSVP. One crew. Both runs on your calendar before you can talk yourself out of it.
+            One crew. One cadence. Both runs on your calendar before you can talk yourself out of it.
           </p>
         </div>
+
 
 
       </div>
