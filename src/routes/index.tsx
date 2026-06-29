@@ -2144,15 +2144,8 @@ function WeeklyRhythm() {
           <br />
           Twice a week.
         </h2>
-        <div className="mt-7 max-w-[680px] flex flex-col gap-3 text-[18px] md:text-[19px] leading-[1.55] text-paper/80">
-          <p>Tuesday is the promise. Saturday is the proof.</p>
-          <p>One crew. One rhythm. No solo heroes.</p>
-          <p className="text-paper/65">
-            Night Shift and the Saturday run aren't two events — they're the same standing
-            appointment, twice a week. Show up for one and you're halfway. Show up for both and
-            you're in.
-          </p>
-        </div>
+
+
 
 
         <div className="mt-14 grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-7">
