@@ -2140,27 +2140,9 @@ function Testimonial() {
 }
 
 function WeeklyRhythm() {
-  const stravaUrl = "https://www.strava.com/clubs/1708552";
-
-  // Recurring Google Calendar links (America/New_York). Saturday 7-8 AM weekly.
-  const satCal =
-    "https://www.google.com/calendar/render?action=TEMPLATE" +
-    "&text=" + encodeURIComponent("GRYT Run — Saturday Morning") +
-    "&dates=20260103T070000/20260103T080000" +
-    "&recur=" + encodeURIComponent("RRULE:FREQ=WEEKLY;BYDAY=SA") +
-    "&ctz=America/New_York" +
-    "&location=" + encodeURIComponent("212 Valley Brook Rd, McMurray, PA 15317") +
-    "&details=" + encodeURIComponent("All paces. All parents. 7 AM sharp. Coffee in the lot after. Strava: " + stravaUrl);
-
-  // Tuesday Night Shift — 9:00 PM, 60 min.
-  const tueCal =
-    "https://www.google.com/calendar/render?action=TEMPLATE" +
-    "&text=" + encodeURIComponent("GRYT Night Shift — Tuesday Run") +
-    "&dates=20251230T210000/20251230T220000" +
-    "&recur=" + encodeURIComponent("RRULE:FREQ=WEEKLY;BYDAY=TU") +
-    "&ctz=America/New_York" +
-    "&location=" + encodeURIComponent("Mt. Lebanon Public Library, 16 Castle Shannon Blvd, Pittsburgh, PA 15228") +
-    "&details=" + encodeURIComponent("After dark. Bring a light and a friend. All paces. No one left behind. Strava: " + stravaUrl);
+  const stravaUrl = STRAVA_CLUB;
+  const satCal = SAT_CAL_URL;
+  const tueCal = TUE_CAL_URL;
 
   return (
     <section id="rhythm" className="bg-ink text-paper py-20 md:py-28 px-6 sm:px-12 lg:px-24 border-t border-paper/10">
