@@ -189,6 +189,17 @@ const PLAYBOOKS: Playbook[] = [
     body: [],
     href: "/resources/playbooks/gryt-vs-yinz-run-club",
   },
+  {
+    slug: "fleet-feet-pittsburgh-vs-independent-run-clubs",
+    title: "Fleet Feet Pittsburgh Running Group vs Independent Run Clubs — Which Should You Join?",
+    category: "Community",
+    readTime: "9 min read",
+    description:
+      "An honest breakdown of Fleet Feet Pittsburgh's running group, independent run clubs, and where GRYT fits if you're a South Hills runner who wants community without the commute.",
+    body: [],
+    href: "/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs",
+  },
+
 
 ];
 
