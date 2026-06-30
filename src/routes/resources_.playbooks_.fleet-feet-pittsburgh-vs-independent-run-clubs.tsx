@@ -335,25 +335,42 @@ function ShareBar({
   // Bump SHARE_VERSION when og:image / title / description change to force
   // X, Facebook, and LinkedIn to re-scrape instead of serving a cached preview.
   const SHARE_VERSION = "2026-02-03";
-  const shareUrl = `${URL}?v=${SHARE_VERSION}`;
+  const UTM_CAMPAIGN = "fleet-feet-vs-independent";
+
+  function withUtm(medium: string) {
+    const params = new URLSearchParams({
+      v: SHARE_VERSION,
+      utm_source: medium === "copy" ? "direct" : medium,
+      utm_medium: medium === "copy" ? "copy-link" : "social",
+      utm_campaign: UTM_CAMPAIGN,
+      utm_content: "playbook-share-bar",
+    });
+    return `${URL}?${params.toString()}`;
+  }
+
+  const copyUrl = withUtm("copy");
+  const xUrl = withUtm("twitter");
+  const fbUrl = withUtm("facebook");
+  const liUrl = withUtm("linkedin");
 
   const xHref = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
     TITLE,
-  )}&url=${encodeURIComponent(shareUrl)}`;
+  )}&url=${encodeURIComponent(xUrl)}`;
   const fbHref = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-    shareUrl,
+    fbUrl,
   )}`;
   const liHref = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
-    shareUrl,
+    liUrl,
   )}`;
 
   async function onCopy() {
     try {
       if (navigator.clipboard?.writeText) {
-        await navigator.clipboard.writeText(shareUrl);
+        await navigator.clipboard.writeText(copyUrl);
       } else {
         const el = document.createElement("textarea");
-        el.value = shareUrl;
+        el.value = copyUrl;
+
         document.body.appendChild(el);
         el.select();
         document.execCommand("copy");
