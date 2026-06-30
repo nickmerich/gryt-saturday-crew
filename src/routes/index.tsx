@@ -893,22 +893,22 @@ function WhoItsFor() {
     {
       tag: "01 — The comeback",
       title: "You're a former athlete.",
-      body: "You miss being around people who get it. The quiet competitiveness. The jokes before the work. The part where nobody needs a speech because everyone already knows why they came. GRYT brings that back without making it complicated.",
+      body: "You miss being around people who get it — the quiet competitiveness, the jokes before the work, and the feeling that nobody needs a speech because everyone already knows why they came. GRYT brings that back without making it complicated.",
     },
     {
       tag: "02 — The early hour",
       title: "You're a parent.",
-      body: "You need something that is yours, early enough that the day still works for everyone else. Saturday at 7 AM gives you the workout, the headspace, and the reset before most people are fully awake. You can be home before the day gets away from you.",
+      body: "You need something that is yours, early enough that the rest of the day still works. Saturday at 7 AM gives you the workout, the headspace, and the reset before most people are fully awake.",
     },
     {
       tag: "03 — The rhythm",
       title: "You're getting consistent again.",
-      body: "Maybe you used to run. Maybe you are starting over. Maybe you just need a reason not to bail when the alarm goes off. One Saturday is a run. Twelve Saturdays is a rhythm. Fifty Saturdays changes how you see yourself.",
+      body: "Maybe you used to run. Maybe you are starting over. Maybe you just need a reason not to bail when the alarm goes off. One Saturday is a run; twelve Saturdays is a rhythm.",
     },
     {
       tag: "04 — The crew",
-      title: "You want real community.",
-      body: "Not another group chat you ignore. Not a networking event disguised as fitness. Not a pack of strangers sprinting away from you. A real crew. People who learn your name, notice when you miss, and make the miles go faster.",
+      title: "You want a real crew.",
+      body: "Not another group chat you ignore. Not a networking event disguised as fitness. Just real people who learn your name, notice when you miss, and make the miles go faster.",
     },
   ];
 
