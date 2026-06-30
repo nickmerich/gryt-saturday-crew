@@ -305,8 +305,8 @@ function Nav() {
 function Hero() {
   const stats: Array<[string, string]> = [
     ["7–15", "regulars each Saturday"],
-    ["33", "on the Strava club"],
-    ["27", "gryt founders total marathons"],
+    ["33", "runners on Strava"],
+    ["27", "marathons — Laura & Nick combined"],
     ["0", "runners dropped, ever"],
   ];
 
@@ -359,9 +359,7 @@ function Hero() {
 
           <div className="mt-7 max-w-[540px] flex flex-col gap-3.5">
             <p className="text-lg leading-[1.55] text-paper/85">
-              A Pittsburgh run club in the South Hills for former athletes, busy parents, and comeback runners. Every
-              Saturday at 7 AM on the Montour / Peters Trail in McMurray — walk, jog, or run, then
-              hang in the lot after.
+              A Pittsburgh run club in the South Hills for former athletes, busy parents, comeback runners, and anyone who wants a real crew again. We meet every Saturday at 7 AM in McMurray to walk, jog, or run, then hang in the lot after.
             </p>
             <p className="text-base md:text-[17px] font-semibold leading-[1.5] text-paper">
               No pace requirement. No awkward first day. No one gets dropped.
@@ -386,7 +384,7 @@ function Hero() {
 
           <div className="mt-7 flex flex-wrap gap-3.5">
             <a href="#join" className="btn-primary">
-              RSVP for this Saturday →
+              RSVP for Saturday →
             </a>
             <a
               href={STRAVA_CLUB}
@@ -398,8 +396,7 @@ function Hero() {
             </a>
           </div>
           <p className="mt-5 text-[13px] leading-[1.5] text-paper/60">
-            Most people come alone the first time. New? Come 10 minutes early — we'll be by the
-            trailhead.
+            One reminder on Friday. One wave at the trailhead. That's it.
           </p>
         </div>
 
@@ -809,7 +806,7 @@ function QuickDetails() {
     ["Route", "Montour / Peters Trail · Peters Township & Upper St. Clair"],
     ["Distance", "About 4 miles · out and back"],
     ["Pace", "Walk, jog, run · all welcome"],
-    ["Cost", "$0 · always"],
+    ["Cost", "Free, always"],
     ["After", "Coffee, water, sometimes fruit in the lot"],
   ];
   return (
@@ -896,22 +893,22 @@ function WhoItsFor() {
     {
       tag: "01 — The comeback",
       title: "You're a former athlete.",
-      body: "You miss being around people who get it. The quiet competitiveness. The jokes before the work. The part where nobody needs a speech because everyone already knows why they came. GRYT brings that back without making it complicated.",
+      body: "You miss being around people who get it — the quiet competitiveness, the jokes before the work, and the feeling that nobody needs a speech because everyone already knows why they came. GRYT brings that back without making it complicated.",
     },
     {
       tag: "02 — The early hour",
       title: "You're a parent.",
-      body: "You need something that is yours, early enough that the day still works for everyone else. Saturday at 7 AM gives you the workout, the headspace, and the reset before most people are fully awake. You can be home before the day gets away from you.",
+      body: "You need something that is yours, early enough that the rest of the day still works. Saturday at 7 AM gives you the workout, the headspace, and the reset before most people are fully awake.",
     },
     {
       tag: "03 — The rhythm",
       title: "You're getting consistent again.",
-      body: "Maybe you used to run. Maybe you are starting over. Maybe you just need a reason not to bail when the alarm goes off. One Saturday is a run. Twelve Saturdays is a rhythm. Fifty Saturdays changes how you see yourself.",
+      body: "Maybe you used to run. Maybe you are starting over. Maybe you just need a reason not to bail when the alarm goes off. One Saturday is a run; twelve Saturdays is a rhythm.",
     },
     {
       tag: "04 — The crew",
-      title: "You want real community.",
-      body: "Not another group chat you ignore. Not a networking event disguised as fitness. Not a pack of strangers sprinting away from you. A real crew. People who learn your name, notice when you miss, and make the miles go faster.",
+      title: "You want a real crew.",
+      body: "Not another group chat you ignore. Not a networking event disguised as fitness. Just real people who learn your name, notice when you miss, and make the miles go faster.",
     },
   ];
 
@@ -1948,15 +1945,14 @@ function FinalCTA() {
           Stop waiting to feel ready.
         </h2>
         <p className="text-lg leading-[1.6] text-paper/80 max-w-[580px] mx-auto mb-3.5">
-          You do not need to be in better shape first. You do not need to know someone. You do not
-          need the perfect Saturday. You just need to show up once.
+          You do not need to get in better shape first. You do not need to know someone. You do not need the perfect Saturday. You just need to show up once.
         </p>
         <p className="display-condensed text-blue text-[clamp(26px,3.6vw,44px)] mb-9">
           Saturday. 7 AM. McMurray.
         </p>
         <div className="flex gap-3.5 justify-center flex-wrap">
           <a href="/#join" className="btn-primary">
-            I'm coming this Saturday →
+            RSVP for Saturday →
           </a>
           <a href={STRAVA_CLUB} target="_blank" rel="noopener" className="btn-ghost">
             Join the Strava club
