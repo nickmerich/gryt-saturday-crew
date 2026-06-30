@@ -332,7 +332,10 @@ function ShareBar({
   label?: string;
 }) {
   const [copied, setCopied] = useState(false);
-  const shareUrl = URL;
+  // Bump SHARE_VERSION when og:image / title / description change to force
+  // X, Facebook, and LinkedIn to re-scrape instead of serving a cached preview.
+  const SHARE_VERSION = "2026-02-03";
+  const shareUrl = `${URL}?v=${SHARE_VERSION}`;
 
   const xHref = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
     TITLE,
