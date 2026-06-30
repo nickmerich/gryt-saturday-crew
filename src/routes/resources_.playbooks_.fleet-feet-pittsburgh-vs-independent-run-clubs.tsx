@@ -340,7 +340,7 @@ function ShareBar({
   function withUtm(medium: string) {
     const params = new URLSearchParams({
       v: SHARE_VERSION,
-      utm_source: medium === "copy" ? "direct" : medium,
+      utm_source: medium === "copy" ? "copy" : medium,
       utm_medium: medium === "copy" ? "copy-link" : "social",
       utm_campaign: UTM_CAMPAIGN,
       utm_content: "playbook-share-bar",
