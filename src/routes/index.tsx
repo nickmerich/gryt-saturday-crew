@@ -359,9 +359,7 @@ function Hero() {
 
           <div className="mt-7 max-w-[540px] flex flex-col gap-3.5">
             <p className="text-lg leading-[1.55] text-paper/85">
-              A Pittsburgh run club in the South Hills for former athletes, busy parents, and comeback runners. Every
-              Saturday at 7 AM on the Montour / Peters Trail in McMurray — walk, jog, or run, then
-              hang in the lot after.
+              A Pittsburgh run club in the South Hills for former athletes, busy parents, comeback runners, and anyone who wants a real crew again. We meet every Saturday at 7 AM in McMurray to walk, jog, or run, then hang in the lot after.
             </p>
             <p className="text-base md:text-[17px] font-semibold leading-[1.5] text-paper">
               No pace requirement. No awkward first day. No one gets dropped.
