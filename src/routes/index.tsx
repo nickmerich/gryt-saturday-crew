@@ -264,34 +264,66 @@ function MissionStamp({
 }
 
 function Nav() {
+  const [open, setOpen] = useState(false);
+  const links: Array<[string, string]> = [
+    ["#details", "Saturday"],
+    ["#first", "First Time"],
+    ["#community", "Community"],
+  ];
   return (
     <nav className="sticky top-0 z-50 bg-ink border-b border-paper/15">
       <div className="flex items-center justify-between px-5 sm:px-8 md:px-12 h-[68px]">
-        <a href="#top" className="flex items-center gap-2">
+        <a href="#top" className="flex items-center gap-2" onClick={() => setOpen(false)}>
           <MonogramG className="h-11 w-11" />
           <span className="wordmark uppercase text-[20px] leading-none [text-shadow:2px_2px_0_var(--blue)]">
             Run Club
           </span>
         </a>
         <div className="hidden md:flex items-center gap-6 lg:gap-8">
-          <a href="#details" className="eyebrow text-paper/80 hover:text-blue transition-colors">
-            Saturday
-          </a>
-          <a href="#first" className="eyebrow text-paper/80 hover:text-blue transition-colors">
-            First Time
-          </a>
-          <a href="#community" className="eyebrow text-paper/80 hover:text-blue transition-colors">
-            Community
-          </a>
+          {links.map(([href, label]) => (
+            <a key={href} href={href} className="eyebrow text-paper/80 hover:text-blue transition-colors">
+              {label}
+            </a>
+          ))}
         </div>
-        <a
-          href="#join"
-          className="bg-blue text-ink px-4 sm:px-5 py-3 text-xs font-bold uppercase tracking-[0.1em] hover:bg-paper transition-colors"
-          style={{ fontFamily: "var(--font-body)" }}
-        >
-          RSVP Saturday
-        </a>
+        <div className="flex items-center gap-2">
+          <a
+            href="#join"
+            className="bg-blue text-ink px-4 sm:px-5 py-3 text-xs font-bold uppercase tracking-[0.1em] hover:bg-paper transition-colors"
+            style={{ fontFamily: "var(--font-body)" }}
+          >
+            RSVP Saturday
+          </a>
+          <button
+            type="button"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+            onClick={() => setOpen((v) => !v)}
+            className="md:hidden inline-flex flex-col justify-center items-center w-11 h-11 border border-paper/25 text-paper hover:border-blue hover:text-blue transition-colors"
+          >
+            <span className={`block h-[2px] w-5 bg-current transition-transform ${open ? "translate-y-[5px] rotate-45" : ""}`} />
+            <span className={`block h-[2px] w-5 bg-current mt-1 transition-opacity ${open ? "opacity-0" : ""}`} />
+            <span className={`block h-[2px] w-5 bg-current mt-1 transition-transform ${open ? "-translate-y-[5px] -rotate-45" : ""}`} />
+          </button>
+        </div>
       </div>
+      {open && (
+        <div id="mobile-nav" className="md:hidden border-t border-paper/15 bg-ink">
+          <div className="flex flex-col px-5 py-3">
+            {links.map(([href, label]) => (
+              <a
+                key={href}
+                href={href}
+                onClick={() => setOpen(false)}
+                className="eyebrow text-paper/85 hover:text-blue transition-colors py-3 border-b border-paper/10 last:border-b-0"
+              >
+                {label}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
