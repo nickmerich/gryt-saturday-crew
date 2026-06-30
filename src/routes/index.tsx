@@ -384,7 +384,7 @@ function Hero() {
 
           <div className="mt-7 flex flex-wrap gap-3.5">
             <a href="#join" className="btn-primary">
-              RSVP for this Saturday →
+              RSVP for Saturday →
             </a>
             <a
               href={STRAVA_CLUB}
@@ -396,8 +396,7 @@ function Hero() {
             </a>
           </div>
           <p className="mt-5 text-[13px] leading-[1.5] text-paper/60">
-            Most people come alone the first time. New? Come 10 minutes early — we'll be by the
-            trailhead.
+            One reminder on Friday. One wave at the trailhead. That's it.
           </p>
         </div>
 
