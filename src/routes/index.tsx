@@ -1795,7 +1795,7 @@ function Beliefs() {
   ];
 
   return (
-    <section className="bg-white text-ink py-20 md:py-28 px-6 sm:px-12 lg:px-24">
+    <section id="why" className="bg-white text-ink py-20 md:py-28 px-6 sm:px-12 lg:px-24">
       <div className="max-w-[1080px] mx-auto">
         <div className="eyebrow mb-4" style={{ color: "#3a7ca5" }}>
           What we believe
