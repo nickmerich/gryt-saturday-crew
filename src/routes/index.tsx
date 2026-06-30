@@ -273,16 +273,7 @@ function Nav() {
             Run Club
           </span>
         </a>
-        <div className="hidden lg:flex items-center gap-6">
-          <a href="#top" className="eyebrow text-paper/80 hover:text-blue transition-colors">
-            Hero
-          </a>
-          <a href="#why" className="eyebrow text-paper/80 hover:text-blue transition-colors">
-            Why
-          </a>
-          <a href="#who" className="eyebrow text-paper/80 hover:text-blue transition-colors">
-            Who It's For
-          </a>
+        <div className="hidden md:flex items-center gap-6 lg:gap-8">
           <a href="#details" className="eyebrow text-paper/80 hover:text-blue transition-colors">
             Saturday
           </a>
@@ -291,9 +282,6 @@ function Nav() {
           </a>
           <a href="#community" className="eyebrow text-paper/80 hover:text-blue transition-colors">
             Community
-          </a>
-          <a href="#join" className="eyebrow text-paper/80 hover:text-blue transition-colors">
-            RSVP
           </a>
         </div>
         <a
