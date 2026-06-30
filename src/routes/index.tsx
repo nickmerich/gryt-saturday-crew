@@ -806,7 +806,7 @@ function QuickDetails() {
     ["Route", "Montour / Peters Trail · Peters Township & Upper St. Clair"],
     ["Distance", "About 4 miles · out and back"],
     ["Pace", "Walk, jog, run · all welcome"],
-    ["Cost", "$0 · always"],
+    ["Cost", "Free, always"],
     ["After", "Coffee, water, sometimes fruit in the lot"],
   ];
   return (
