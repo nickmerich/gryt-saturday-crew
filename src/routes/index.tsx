@@ -1945,15 +1945,14 @@ function FinalCTA() {
           Stop waiting to feel ready.
         </h2>
         <p className="text-lg leading-[1.6] text-paper/80 max-w-[580px] mx-auto mb-3.5">
-          You do not need to be in better shape first. You do not need to know someone. You do not
-          need the perfect Saturday. You just need to show up once.
+          You do not need to get in better shape first. You do not need to know someone. You do not need the perfect Saturday. You just need to show up once.
         </p>
         <p className="display-condensed text-blue text-[clamp(26px,3.6vw,44px)] mb-9">
           Saturday. 7 AM. McMurray.
         </p>
         <div className="flex gap-3.5 justify-center flex-wrap">
           <a href="/#join" className="btn-primary">
-            I'm coming this Saturday →
+            RSVP for Saturday →
           </a>
           <a href={STRAVA_CLUB} target="_blank" rel="noopener" className="btn-ghost">
             Join the Strava club
