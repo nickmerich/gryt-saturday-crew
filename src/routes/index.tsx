@@ -2453,77 +2453,8 @@ function WeeklyRhythm() {
           </article>
         </div>
 
-        {/* Pull quote */}
-        <figure className="mt-14 md:mt-16 max-w-[820px] mx-auto text-center">
-          <blockquote className="display-condensed text-paper text-[clamp(24px,3.2vw,40px)] leading-[1.1]">
-            <span className="text-blue">"</span>
-            Tuesday made me a runner again. Saturday made me part of something. Together they made
-            me consistent.
-            <span className="text-blue">"</span>
-          </blockquote>
-          <figcaption className="mt-5 eyebrow text-paper/55">
-            — GRYT regular · two runs a week
-          </figcaption>
-        </figure>
 
-        {/* Primary CTA — one "RSVP for both" with day buttons */}
-        <div className="mt-12 md:mt-14 flex flex-col items-center text-center gap-5">
-          <div className="eyebrow eyebrow-blue">Lock in this week</div>
-          <p className="display-condensed text-paper text-[clamp(22px,2.6vw,32px)] leading-[1.15] max-w-[720px]">
-            One crew. One cadence.
-            <br />
-            <span className="text-blue">RSVP for both.</span>
-          </p>
 
-          {/* Primary action */}
-          <a
-            href="#join"
-            className="inline-flex items-center px-9 py-5 text-[13px] font-bold uppercase tracking-[0.16em] bg-blue text-ink hover:bg-paper transition-colors"
-          >
-            RSVP for both runs →
-          </a>
-
-          {/* Day-specific options underneath */}
-          <div className="flex flex-col items-center gap-3 mt-2">
-            <div className="eyebrow text-paper/55">Or pick a day</div>
-            <div className="flex flex-wrap gap-3 justify-center">
-              <a
-                href="#join"
-                className="inline-flex items-center px-6 py-3 text-[12px] font-bold uppercase tracking-[0.14em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors"
-              >
-                Tuesday · 9:00 PM
-              </a>
-              <a
-                href="#join"
-                className="inline-flex items-center px-6 py-3 text-[12px] font-bold uppercase tracking-[0.14em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors"
-              >
-                Saturday · 7:00 AM
-              </a>
-            </div>
-            <div className="flex flex-wrap gap-x-5 gap-y-1 justify-center mt-1">
-              <a
-                href={STRAVA_EVENT_URL.tue}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[11px] font-bold uppercase tracking-[0.14em] text-paper/70 hover:text-blue underline underline-offset-4"
-              >
-                Tuesday on Strava →
-              </a>
-              <a
-                href={STRAVA_EVENT_URL.sat}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[11px] font-bold uppercase tracking-[0.14em] text-paper/70 hover:text-blue underline underline-offset-4"
-              >
-                Saturday on Strava →
-              </a>
-            </div>
-          </div>
-
-          <p className="mt-2 text-paper/55 text-[13px] tracking-[0.04em] max-w-[520px]">
-            Both runs on your calendar before you can talk yourself out of it.
-          </p>
-        </div>
 
 
 
