@@ -954,13 +954,74 @@ function CorePromise() {
 
 
   const scrollerRef = useRef<HTMLDivElement | null>(null);
+  const cardRefs = useRef<Array<HTMLElement | null>>([]);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const focusCard = (index: number) => {
+    const clamped = Math.max(0, Math.min(cards.length - 1, index));
+    const el = cardRefs.current[clamped];
+    if (!el) return;
+    el.focus();
+    el.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
+    setActiveIndex(clamped);
+  };
+
   const scrollBy = (dir: 1 | -1) => {
+    focusCard(activeIndex + dir);
+  };
+
+  // Track active card as user scrolls (touch / trackpad)
+  useEffect(() => {
     const el = scrollerRef.current;
     if (!el) return;
-    const card = el.querySelector<HTMLElement>("[data-stat-card]");
-    const step = card ? card.offsetWidth + 24 : el.clientWidth * 0.85;
-    el.scrollBy({ left: dir * step, behavior: "smooth" });
+    let raf = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const scrollerRect = el.getBoundingClientRect();
+        let best = 0;
+        let bestDist = Infinity;
+        cardRefs.current.forEach((card, i) => {
+          if (!card) return;
+          const r = card.getBoundingClientRect();
+          const d = Math.abs(r.left - scrollerRect.left);
+          if (d < bestDist) {
+            bestDist = d;
+            best = i;
+          }
+        });
+        setActiveIndex(best);
+      });
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      el.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  const onCardKeyDown = (e: React.KeyboardEvent<HTMLElement>, index: number) => {
+    switch (e.key) {
+      case "ArrowRight":
+        e.preventDefault();
+        focusCard(index + 1);
+        break;
+      case "ArrowLeft":
+        e.preventDefault();
+        focusCard(index - 1);
+        break;
+      case "Home":
+        e.preventDefault();
+        focusCard(0);
+        break;
+      case "End":
+        e.preventDefault();
+        focusCard(cards.length - 1);
+        break;
+    }
   };
+
+  const active = cards[activeIndex];
 
   return (
     <section className="relative overflow-hidden bg-ink text-paper py-24 md:py-32">
@@ -991,6 +1052,7 @@ function CorePromise() {
               type="button"
               onClick={() => scrollBy(-1)}
               aria-label="Previous stat"
+              aria-controls="stats-carousel"
               className="h-11 w-11 border-2 border-paper/30 text-paper hover:border-blue hover:text-blue transition-colors inline-flex items-center justify-center"
             >
               ←
@@ -999,6 +1061,7 @@ function CorePromise() {
               type="button"
               onClick={() => scrollBy(1)}
               aria-label="Next stat"
+              aria-controls="stats-carousel"
               className="h-11 w-11 border-2 border-paper/30 text-paper hover:border-blue hover:text-blue transition-colors inline-flex items-center justify-center"
             >
               →
@@ -1007,7 +1070,11 @@ function CorePromise() {
         </div>
 
         <div
+          id="stats-carousel"
           ref={scrollerRef}
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Data on loneliness and connection"
           className="mt-4 flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth px-6 sm:px-12 lg:px-24 pb-6"
           style={{ scrollbarWidth: "none" }}
         >
@@ -1015,7 +1082,17 @@ function CorePromise() {
             <article
               key={i}
               data-stat-card
-              className="snap-start shrink-0 w-[85vw] sm:w-[440px] md:w-[460px] border-2 border-paper/20 bg-black/40 p-8 md:p-10 flex flex-col"
+              ref={(el) => {
+                cardRefs.current[i] = el;
+              }}
+              tabIndex={i === activeIndex ? 0 : -1}
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`${i + 1} of ${cards.length}: ${c.headline}`}
+              aria-current={i === activeIndex ? "true" : undefined}
+              onKeyDown={(e) => onCardKeyDown(e, i)}
+              onFocus={() => setActiveIndex(i)}
+              className="snap-start shrink-0 w-[85vw] sm:w-[440px] md:w-[460px] border-2 border-paper/20 bg-black/40 p-8 md:p-10 flex flex-col focus:outline-none focus-visible:border-blue focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
             >
               <div className="display-condensed text-blue text-[clamp(44px,5.6vw,72px)] leading-[0.92] whitespace-pre-line mb-6">
                 {c.stat}
@@ -1037,6 +1114,11 @@ function CorePromise() {
               </a>
             </article>
           ))}
+        </div>
+
+        {/* Screen-reader-only live region announcing the active card */}
+        <div className="sr-only" aria-live="polite" aria-atomic="true">
+          {`Card ${activeIndex + 1} of ${cards.length}: ${active.stat.replace(/\n/g, " ")}. ${active.headline}`}
         </div>
 
 
