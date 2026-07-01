@@ -394,7 +394,8 @@ const MERCH_ITEMS = [
 
 function Merch() {
   return (
-    <section className="bg-black text-paper px-6 sm:px-12 lg:px-24 py-24 md:py-32 border-b border-paper/15">
+    <section id="merch" className="bg-black text-paper px-6 sm:px-12 lg:px-24 py-24 md:py-32 border-b border-paper/15">
+
       <div className="max-w-[1180px] mx-auto">
         <SectionHeader kicker="WEAR IT ON THE TRAIL" title="Merch" />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
