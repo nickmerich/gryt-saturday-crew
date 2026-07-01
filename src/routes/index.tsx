@@ -954,89 +954,86 @@ function CorePromise() {
 
 
   const scrollerRef = useRef<HTMLDivElement | null>(null);
+  const cardRefs = useRef<Array<HTMLElement | null>>([]);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const focusCard = (index: number) => {
+    const clamped = Math.max(0, Math.min(cards.length - 1, index));
+    const el = cardRefs.current[clamped];
+    if (!el) return;
+    el.focus();
+    el.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
+    setActiveIndex(clamped);
+  };
+
   const scrollBy = (dir: 1 | -1) => {
+    focusCard(activeIndex + dir);
+  };
+
+  // Track active card as user scrolls (touch / trackpad)
+  useEffect(() => {
     const el = scrollerRef.current;
     if (!el) return;
-    const card = el.querySelector<HTMLElement>("[data-stat-card]");
-    const step = card ? card.offsetWidth + 24 : el.clientWidth * 0.85;
-    el.scrollBy({ left: dir * step, behavior: "smooth" });
+    let raf = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const scrollerRect = el.getBoundingClientRect();
+        let best = 0;
+        let bestDist = Infinity;
+        cardRefs.current.forEach((card, i) => {
+          if (!card) return;
+          const r = card.getBoundingClientRect();
+          const d = Math.abs(r.left - scrollerRect.left);
+          if (d < bestDist) {
+            bestDist = d;
+            best = i;
+          }
+        });
+        setActiveIndex(best);
+      });
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      el.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  const onCardKeyDown = (e: React.KeyboardEvent<HTMLElement>, index: number) => {
+    switch (e.key) {
+      case "ArrowRight":
+        e.preventDefault();
+        focusCard(index + 1);
+        break;
+      case "ArrowLeft":
+        e.preventDefault();
+        focusCard(index - 1);
+        break;
+      case "Home":
+        e.preventDefault();
+        focusCard(0);
+        break;
+      case "End":
+        e.preventDefault();
+        focusCard(cards.length - 1);
+        break;
+    }
   };
+
+  const active = cards[activeIndex];
 
   return (
     <section className="relative overflow-hidden bg-ink text-paper py-24 md:py-32">
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage: "radial-gradient(rgba(137,207,240,0.14) 1.5px, transparent 2px)",
-          backgroundSize: "11px 11px",
-          maskImage: "radial-gradient(ellipse at 90% 0%, #000, transparent 65%)",
-          WebkitMaskImage: "radial-gradient(ellipse at 90% 0%, #000, transparent 65%)",
-        }}
-      />
-      <div className="relative">
-        <div className="max-w-[1180px] mx-auto px-6 sm:px-12 lg:px-24">
-          <div className="eyebrow eyebrow-blue mb-6">The data behind the feeling</div>
-          <h2 className="display-condensed text-paper text-[clamp(36px,5.4vw,78px)] leading-[0.95] max-w-[980px] mb-8">
-            Loneliness is not a you problem. It is what adult life looks like when everything gets{" "}
-            <span className="text-blue">fragmented.</span>
-          </h2>
-          <p className="text-[18px] leading-[1.6] text-paper/75 max-w-[720px]">
-            Work. Kids. Screens. Commutes. Group chats that are not real community. Most adults are
-            not failing at connection — they are living in a system that makes real connection
-            harder to keep. That is why IRL clubs like GRYT matter.
-          </p>
-
-          <div className="hidden md:flex items-center gap-3 justify-end mt-10 mb-4">
-            <button
-              type="button"
-              onClick={() => scrollBy(-1)}
-              aria-label="Previous stat"
-              className="h-11 w-11 border-2 border-paper/30 text-paper hover:border-blue hover:text-blue transition-colors inline-flex items-center justify-center"
-            >
-              ←
-            </button>
-            <button
-              type="button"
-              onClick={() => scrollBy(1)}
-              aria-label="Next stat"
-              className="h-11 w-11 border-2 border-paper/30 text-paper hover:border-blue hover:text-blue transition-colors inline-flex items-center justify-center"
-            >
-              →
-            </button>
-          </div>
-        </div>
-
-        <div
-          ref={scrollerRef}
-          className="mt-4 flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth px-6 sm:px-12 lg:px-24 pb-6"
-          style={{ scrollbarWidth: "none" }}
-        >
-          {cards.map((c, i) => (
-            <article
-              key={i}
-              data-stat-card
-              className="snap-start shrink-0 w-[85vw] sm:w-[440px] md:w-[460px] border-2 border-paper/20 bg-black/40 p-8 md:p-10 flex flex-col"
-            >
-              <div className="display-condensed text-blue text-[clamp(44px,5.6vw,72px)] leading-[0.92] whitespace-pre-line mb-6">
-                {c.stat}
-              </div>
-              <h3 className="display-condensed text-paper text-[22px] md:text-[26px] leading-[1.1] mb-4 uppercase">
-                {c.headline}
-              </h3>
-              <p className="text-[15px] leading-[1.6] text-paper/75 mb-6">{c.body}</p>
-              <a
-                href={c.sourceUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                title={c.sourceDetail}
-                aria-label={`Source: ${c.source}. ${c.sourceDetail} Opens in a new tab.`}
-                className="mt-auto inline-flex items-center gap-1.5 self-start eyebrow text-paper/50 border-b border-paper/20 pb-0.5 hover:text-blue hover:border-blue focus-visible:text-blue focus-visible:border-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ink transition-colors"
-              >
-                <span>Source · {c.source}</span>
-                <span aria-hidden="true">↗</span>
+...
               </a>
             </article>
           ))}
+        </div>
+
+        {/* Screen-reader-only live region announcing the active card */}
+        <div className="sr-only" aria-live="polite" aria-atomic="true">
+          {`Card ${activeIndex + 1} of ${cards.length}: ${active.stat.replace(/\n/g, " ")}. ${active.headline}`}
         </div>
 
 
