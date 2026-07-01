@@ -907,32 +907,51 @@ function CorePromise() {
       headline: "Feel lonely or isolated most or all of the time.",
       body: "This is not rare, and it is not just a bad week. A meaningful share of Americans say loneliness is part of normal life now.",
       source: "Pew Research Center, 2025",
+      sourceUrl:
+        "https://www.pewresearch.org/short-reads/2025/03/06/how-many-americans-say-they-are-lonely/",
+      sourceDetail:
+        "Pew Research Center survey on how often U.S. adults report feeling lonely or isolated (2025).",
     },
     {
       stat: "UNDER 50\nGETS HIT HARDER",
       headline: "Adults in the busy years feel it most.",
       body: "Pew found 22% of adults under 50 feel lonely or isolated all or most of the time, versus 9% of adults 50 and older. That is the exact life stage where routines break and community gets thin.",
       source: "Pew Research Center, 2025",
+      sourceUrl:
+        "https://www.pewresearch.org/short-reads/2025/03/06/how-many-americans-say-they-are-lonely/",
+      sourceDetail:
+        "Age breakdown of loneliness rates from Pew Research Center's 2025 survey of U.S. adults.",
     },
     {
       stat: "73%",
       headline: "Say technology contributes to loneliness.",
       body: "We are more connected digitally and less connected in real life. More notifications did not give people a crew, a ritual, or someone to notice when they stopped showing up.",
       source: "Harvard Making Caring Common, 2024",
+      sourceUrl: "https://mcc.gse.harvard.edu/reports/on-edge",
+      sourceDetail:
+        "Harvard Graduate School of Education, Making Caring Common — 'On Edge' report on loneliness and technology (2024).",
     },
     {
       stat: "75%",
       headline: "Say more community events would help.",
       body: "People are not asking for more content. They are asking for more places to go, more reasons to gather, and more ways to see the same people every week.",
       source: "Harvard Making Caring Common, 2024",
+      sourceUrl: "https://mcc.gse.harvard.edu/reports/on-edge",
+      sourceDetail:
+        "Harvard Making Caring Common survey on what Americans say would reduce loneliness (2024).",
     },
     {
       stat: "CONNECTION\nIS HEALTH",
       headline: "Social connection is not extra. It is foundational.",
       body: "CDC says social connection supports mental and physical health, and the Surgeon General warns that loneliness and isolation raise the risk of serious health harms. A run club is not just fitness. It is protective structure.",
       source: "CDC + U.S. Surgeon General",
+      sourceUrl:
+        "https://www.hhs.gov/surgeongeneral/priorities/connection/index.html",
+      sourceDetail:
+        "U.S. Surgeon General's Advisory on the Healing Effects of Social Connection and Community, plus CDC guidance on social connection and health.",
     },
   ];
+
 
   const scrollerRef = useRef<HTMLDivElement | null>(null);
   const scrollBy = (dir: 1 | -1) => {
