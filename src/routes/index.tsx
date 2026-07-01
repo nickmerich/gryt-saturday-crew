@@ -556,9 +556,14 @@ function RSVP() {
     if (typeof window === "undefined") return;
     const applyHash = () => {
       const h = window.location.hash.replace("#", "").toLowerCase();
+      let matched = true;
       if (h === "join-sat") setDays({ tue: false, sat: true });
       else if (h === "join-tue") setDays({ tue: true, sat: false });
       else if (h === "join-both") setDays({ tue: true, sat: true });
+      else matched = false;
+      if (matched) {
+        document.getElementById("join")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     };
     applyHash();
     window.addEventListener("hashchange", applyHash);
