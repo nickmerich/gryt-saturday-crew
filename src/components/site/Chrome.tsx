@@ -98,11 +98,13 @@ export function SiteNav() {
           </a>
         </div>
         <a
-          href="/#join"
+          href={STRAVA_CLUB}
+          target="_blank"
+          rel="noopener"
           className="bg-blue text-ink px-4 sm:px-5 py-3 text-xs font-bold uppercase tracking-[0.1em] hover:bg-paper transition-colors"
           style={{ fontFamily: "var(--font-body)" }}
         >
-          RSVP Saturday
+          Join Club
         </a>
       </div>
     </nav>
