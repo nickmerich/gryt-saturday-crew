@@ -550,6 +550,26 @@ function RSVP() {
 
   const toggleDay = (d: RsvpDay) => setDays((p) => ({ ...p, [d]: !p[d] }));
 
+  // Allow "RSVP Saturday" / "RSVP Tuesday" buttons elsewhere on the page to
+  // deep-link into this form with the right day preselected.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const applyHash = () => {
+      const h = window.location.hash.replace("#", "").toLowerCase();
+      let matched = true;
+      if (h === "join-sat") setDays({ tue: false, sat: true });
+      else if (h === "join-tue") setDays({ tue: true, sat: false });
+      else if (h === "join-both") setDays({ tue: true, sat: true });
+      else matched = false;
+      if (matched) {
+        document.getElementById("join")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    };
+    applyHash();
+    window.addEventListener("hashchange", applyHash);
+    return () => window.removeEventListener("hashchange", applyHash);
+  }, []);
+
   const submit = async () => {
     if (!name.trim() || !contact.trim()) {
       setError("Add your name and an email or phone so we can send the reminder.");
@@ -2334,7 +2354,7 @@ function WeeklyRhythm() {
 
               <div className="mt-7 flex flex-wrap gap-3">
                 <a
-                  href="#join"
+                  href="#join-tue"
                   className="inline-flex items-center px-5 py-3 text-[12px] font-bold uppercase tracking-[0.12em] bg-blue text-ink hover:bg-paper transition-colors"
                 >
                   RSVP Tuesday
@@ -2427,7 +2447,7 @@ function WeeklyRhythm() {
 
               <div className="mt-7 flex flex-wrap gap-3">
                 <a
-                  href="#join"
+                  href="#join-sat"
                   className="inline-flex items-center px-5 py-3 text-[12px] font-bold uppercase tracking-[0.12em] bg-ink text-paper hover:bg-[#3a7ca5] transition-colors"
                 >
                   RSVP Saturday
