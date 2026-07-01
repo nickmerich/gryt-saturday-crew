@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 import ogImage from "@/assets/og-conversations.jpg";
 
-const SITE = "https://gryt-saturday-crew.lovable.app";
+const SITE = "https://grytrunclub.com";
 const URL = `${SITE}/resources/conversations`;
 const TITLE = "Conversations · gryt run club";
 const DESCRIPTION =
