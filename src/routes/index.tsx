@@ -1024,10 +1024,21 @@ function CorePromise() {
                 {c.headline}
               </h3>
               <p className="text-[15px] leading-[1.6] text-paper/75 mb-6">{c.body}</p>
-              <div className="mt-auto eyebrow text-paper/40">{c.source}</div>
+              <a
+                href={c.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={c.sourceDetail}
+                aria-label={`Source: ${c.source}. ${c.sourceDetail} Opens in a new tab.`}
+                className="mt-auto inline-flex items-center gap-1.5 self-start eyebrow text-paper/50 border-b border-paper/20 pb-0.5 hover:text-blue hover:border-blue focus-visible:text-blue focus-visible:border-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ink transition-colors"
+              >
+                <span>Source · {c.source}</span>
+                <span aria-hidden="true">↗</span>
+              </a>
             </article>
           ))}
         </div>
+
 
         <div className="max-w-[1180px] mx-auto px-6 sm:px-12 lg:px-24 mt-14 md:mt-20">
           <p className="display-condensed text-paper text-[clamp(28px,3.8vw,52px)] leading-[1.02] max-w-[900px]">
