@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useMemo, useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { signWaiver, checkWaiverStatus } from "@/lib/waiver.functions";
 import { submitRecommendation } from "@/lib/recommendations.functions";
@@ -901,8 +901,50 @@ function QuickDetails() {
 }
 
 function CorePromise() {
+  const cards = [
+    {
+      stat: "1 IN 5",
+      headline: "Feel lonely or isolated most or all of the time.",
+      body: "This is not rare, and it is not just a bad week. A meaningful share of Americans say loneliness is part of normal life now.",
+      source: "Pew Research Center, 2025",
+    },
+    {
+      stat: "UNDER 50\nGETS HIT HARDER",
+      headline: "Adults in the busy years feel it most.",
+      body: "Pew found 22% of adults under 50 feel lonely or isolated all or most of the time, versus 9% of adults 50 and older. That is the exact life stage where routines break and community gets thin.",
+      source: "Pew Research Center, 2025",
+    },
+    {
+      stat: "73%",
+      headline: "Say technology contributes to loneliness.",
+      body: "We are more connected digitally and less connected in real life. More notifications did not give people a crew, a ritual, or someone to notice when they stopped showing up.",
+      source: "Harvard Making Caring Common, 2024",
+    },
+    {
+      stat: "75%",
+      headline: "Say more community events would help.",
+      body: "People are not asking for more content. They are asking for more places to go, more reasons to gather, and more ways to see the same people every week.",
+      source: "Harvard Making Caring Common, 2024",
+    },
+    {
+      stat: "CONNECTION\nIS HEALTH",
+      headline: "Social connection is not extra. It is foundational.",
+      body: "CDC says social connection supports mental and physical health, and the Surgeon General warns that loneliness and isolation raise the risk of serious health harms. A run club is not just fitness. It is protective structure.",
+      source: "CDC + U.S. Surgeon General",
+    },
+  ];
+
+  const scrollerRef = useRef<HTMLDivElement | null>(null);
+  const scrollBy = (dir: 1 | -1) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const card = el.querySelector<HTMLElement>("[data-stat-card]");
+    const step = card ? card.offsetWidth + 24 : el.clientWidth * 0.85;
+    el.scrollBy({ left: dir * step, behavior: "smooth" });
+  };
+
   return (
-    <section className="relative overflow-hidden bg-ink text-paper py-24 md:py-32 px-6 sm:px-12 lg:px-24">
+    <section className="relative overflow-hidden bg-ink text-paper py-24 md:py-32">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -912,30 +954,77 @@ function CorePromise() {
           WebkitMaskImage: "radial-gradient(ellipse at 90% 0%, #000, transparent 65%)",
         }}
       />
-      <div className="relative max-w-[960px] mx-auto">
-        <div className="eyebrow eyebrow-blue mb-6">The core promise</div>
-        <h2 className="display-condensed text-paper text-[clamp(40px,6vw,86px)] max-w-[880px] mb-9">
-          At some point, fitness got <span className="text-blue">lonely.</span>
-        </h2>
-        <div className="flex flex-col gap-5 max-w-[680px]">
-          <p className="text-[19px] leading-[1.6] text-paper/80">
-            You started squeezing workouts between work, kids, errands, and everything else on the
-            calendar. At some point, you used to have a team — and then you didn't.
+      <div className="relative">
+        <div className="max-w-[1180px] mx-auto px-6 sm:px-12 lg:px-24">
+          <div className="eyebrow eyebrow-blue mb-6">The data behind the feeling</div>
+          <h2 className="display-condensed text-paper text-[clamp(36px,5.4vw,78px)] leading-[0.95] max-w-[980px] mb-8">
+            Loneliness is not a you problem. It is what adult life looks like when everything gets{" "}
+            <span className="text-blue">fragmented.</span>
+          </h2>
+          <p className="text-[18px] leading-[1.6] text-paper/75 max-w-[720px]">
+            Work. Kids. Screens. Commutes. Group chats that are not real community. Most adults are
+            not failing at connection — they are living in a system that makes real connection
+            harder to keep. That is why IRL clubs like GRYT matter.
           </p>
-          <p className="text-[19px] leading-[1.6] text-paper/80">
-            GRYT gives you one standing appointment that does not move. Same time. Same trail. Same
-            kind of people. The ones who still want to push, even if life looks different now.
-          </p>
-          <p className="display-condensed text-paper text-[clamp(24px,3vw,38px)] pt-2">
-            You do not have to be fast.
+
+          <div className="hidden md:flex items-center gap-3 justify-end mt-10 mb-4">
+            <button
+              type="button"
+              onClick={() => scrollBy(-1)}
+              aria-label="Previous stat"
+              className="h-11 w-11 border-2 border-paper/30 text-paper hover:border-blue hover:text-blue transition-colors inline-flex items-center justify-center"
+            >
+              ←
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollBy(1)}
+              aria-label="Next stat"
+              className="h-11 w-11 border-2 border-paper/30 text-paper hover:border-blue hover:text-blue transition-colors inline-flex items-center justify-center"
+            >
+              →
+            </button>
+          </div>
+        </div>
+
+        <div
+          ref={scrollerRef}
+          className="mt-4 flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth px-6 sm:px-12 lg:px-24 pb-6"
+          style={{ scrollbarWidth: "none" }}
+        >
+          {cards.map((c, i) => (
+            <article
+              key={i}
+              data-stat-card
+              className="snap-start shrink-0 w-[85vw] sm:w-[440px] md:w-[460px] border-2 border-paper/20 bg-black/40 p-8 md:p-10 flex flex-col"
+            >
+              <div className="display-condensed text-blue text-[clamp(44px,5.6vw,72px)] leading-[0.92] whitespace-pre-line mb-6">
+                {c.stat}
+              </div>
+              <h3 className="display-condensed text-paper text-[22px] md:text-[26px] leading-[1.1] mb-4 uppercase">
+                {c.headline}
+              </h3>
+              <p className="text-[15px] leading-[1.6] text-paper/75 mb-6">{c.body}</p>
+              <div className="mt-auto eyebrow text-paper/40">{c.source}</div>
+            </article>
+          ))}
+        </div>
+
+        <div className="max-w-[1180px] mx-auto px-6 sm:px-12 lg:px-24 mt-14 md:mt-20">
+          <p className="display-condensed text-paper text-[clamp(28px,3.8vw,52px)] leading-[1.02] max-w-[900px]">
+            You do not need another app.
             <br />
-            You just have to be willing.
+            <span className="text-blue">You need a place to be expected.</span>
+          </p>
+          <p className="text-[17px] leading-[1.6] text-paper/70 mt-5 max-w-[680px]">
+            Same trail. Same time. Same people. That is how strangers become regulars.
           </p>
         </div>
       </div>
     </section>
   );
 }
+
 
 function WhoItsFor() {
   const cards = [
