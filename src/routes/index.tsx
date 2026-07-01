@@ -289,11 +289,13 @@ function Nav() {
         </div>
         <div className="flex items-center gap-2">
           <a
-            href="#join"
+            href="https://www.strava.com/clubs/1708552"
+            target="_blank"
+            rel="noopener"
             className="bg-blue text-ink px-4 sm:px-5 py-3 text-xs font-bold uppercase tracking-[0.1em] hover:bg-paper transition-colors"
             style={{ fontFamily: "var(--font-body)" }}
           >
-            RSVP Saturday
+            Join Club
           </a>
           <button
             type="button"
