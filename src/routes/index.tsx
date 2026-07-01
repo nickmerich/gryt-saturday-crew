@@ -550,6 +550,21 @@ function RSVP() {
 
   const toggleDay = (d: RsvpDay) => setDays((p) => ({ ...p, [d]: !p[d] }));
 
+  // Allow "RSVP Saturday" / "RSVP Tuesday" buttons elsewhere on the page to
+  // deep-link into this form with the right day preselected.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const applyHash = () => {
+      const h = window.location.hash.replace("#", "").toLowerCase();
+      if (h === "join-sat") setDays({ tue: false, sat: true });
+      else if (h === "join-tue") setDays({ tue: true, sat: false });
+      else if (h === "join-both") setDays({ tue: true, sat: true });
+    };
+    applyHash();
+    window.addEventListener("hashchange", applyHash);
+    return () => window.removeEventListener("hashchange", applyHash);
+  }, []);
+
   const submit = async () => {
     if (!name.trim() || !contact.trim()) {
       setError("Add your name and an email or phone so we can send the reminder.");
