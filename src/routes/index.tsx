@@ -270,8 +270,6 @@ function Nav() {
     ["#first", "First Time"],
     ["#community", "Community"],
     ["/resources", "Resources"],
-    ["/resources/playbooks", "Articles"],
-    ["/resources#merch", "Merch"],
   ];
   return (
     <nav className="sticky top-0 z-50 bg-ink border-b border-paper/15">
