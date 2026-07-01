@@ -2447,7 +2447,7 @@ function WeeklyRhythm() {
 
               <div className="mt-7 flex flex-wrap gap-3">
                 <a
-                  href="#join"
+                  href="#join-sat"
                   className="inline-flex items-center px-5 py-3 text-[12px] font-bold uppercase tracking-[0.12em] bg-ink text-paper hover:bg-[#3a7ca5] transition-colors"
                 >
                   RSVP Saturday
