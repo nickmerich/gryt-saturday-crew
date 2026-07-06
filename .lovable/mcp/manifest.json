@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "sdk_version": "0.20.0",
+  "path": "/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "gryt-run-club-mcp",
+      "version": "0.1.0",
+      "title": "GRYT Run Club"
+    },
+    "tools": [
+      {
+        "name": "get_run_schedule",
+        "title": "Get run schedule",
+        "description": "Return GRYT Run Club's weekly meet-up schedule, including day, time, and meeting location.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_club_info",
+        "title": "Get club info",
+        "description": "Return general information about GRYT Run Club: mission, location, links, and how to join.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}

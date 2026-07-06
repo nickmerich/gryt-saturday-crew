@@ -15,6 +15,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ResourcesRouteImport } from './routes/resources'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as MembersRouteImport } from './routes/members'
+import { Route as McpRouteImport } from './routes/mcp'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ResourcesRecapRouteImport } from './routes/resources_.recap'
 import { Route as ResourcesPlaybooksRouteImport } from './routes/resources_.playbooks'
@@ -23,11 +24,14 @@ import { Route as ResourcesConversationsRouteImport } from './routes/resources_.
 import { Route as MembersKeyRouteImport } from './routes/members.$key'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as AdminMembersRouteImport } from './routes/admin.members'
+import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
+import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as ResourcesPlaybooksGrytVsYinzRunClubRouteImport } from './routes/resources_.playbooks_.gryt-vs-yinz-run-club'
 import { Route as ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRouteImport } from './routes/resources_.playbooks_.fleet-feet-pittsburgh-vs-independent-run-clubs'
 import { Route as ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026RouteImport } from './routes/resources_.playbooks_.best-free-running-clubs-pittsburgh-2026'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as ApiPublicRsvpRouteImport } from './routes/api/public/rsvp'
+import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
@@ -62,6 +66,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const MembersRoute = MembersRouteImport.update({
   id: '/members',
   path: '/members',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const McpRoute = McpRouteImport.update({
+  id: '/mcp',
+  path: '/mcp',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -104,6 +113,18 @@ const AdminMembersRoute = AdminMembersRouteImport.update({
   path: '/admin/members',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Char91DotwellKnownChar93OauthProtectedResourceRoute =
+  Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
+    id: '/.well-known/oauth-protected-resource',
+    path: '/.well-known/oauth-protected-resource',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const Char91DotmcpChar93ListToolsRoute =
+  Char91DotmcpChar93ListToolsRouteImport.update({
+    id: '/.mcp/list-tools',
+    path: '/.mcp/list-tools',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ResourcesPlaybooksGrytVsYinzRunClubRoute =
   ResourcesPlaybooksGrytVsYinzRunClubRouteImport.update({
     id: '/resources_/playbooks_/gryt-vs-yinz-run-club',
@@ -132,6 +153,12 @@ const ApiPublicRsvpRoute = ApiPublicRsvpRouteImport.update({
   path: '/api/public/rsvp',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Char91DotmcpChar93InvokeToolToolRoute =
+  Char91DotmcpChar93InvokeToolToolRouteImport.update({
+    id: '/.mcp/invoke-tool/$tool',
+    path: '/.mcp/invoke-tool/$tool',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const LovableEmailTransactionalSendRoute =
   LovableEmailTransactionalSendRouteImport.update({
     id: '/lovable/email/transactional/send',
@@ -163,12 +190,15 @@ const LovableEmailAuthPreviewRoute = LovableEmailAuthPreviewRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/mcp': typeof McpRoute
   '/members': typeof MembersRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/resources': typeof ResourcesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/waiver': typeof WaiverRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/members': typeof AdminMembersRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/members/$key': typeof MembersKeyRoute
@@ -176,6 +206,7 @@ export interface FileRoutesByFullPath {
   '/resources/graphics': typeof ResourcesGraphicsRoute
   '/resources/playbooks': typeof ResourcesPlaybooksRoute
   '/resources/recap': typeof ResourcesRecapRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/resources/playbooks/best-free-running-clubs-pittsburgh-2026': typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route
@@ -189,12 +220,15 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/mcp': typeof McpRoute
   '/members': typeof MembersRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/resources': typeof ResourcesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/waiver': typeof WaiverRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/members': typeof AdminMembersRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/members/$key': typeof MembersKeyRoute
@@ -202,6 +236,7 @@ export interface FileRoutesByTo {
   '/resources/graphics': typeof ResourcesGraphicsRoute
   '/resources/playbooks': typeof ResourcesPlaybooksRoute
   '/resources/recap': typeof ResourcesRecapRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/resources/playbooks/best-free-running-clubs-pittsburgh-2026': typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route
@@ -216,12 +251,15 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/mcp': typeof McpRoute
   '/members': typeof MembersRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/resources': typeof ResourcesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/waiver': typeof WaiverRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/members': typeof AdminMembersRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/members/$key': typeof MembersKeyRoute
@@ -229,6 +267,7 @@ export interface FileRoutesById {
   '/resources_/graphics': typeof ResourcesGraphicsRoute
   '/resources_/playbooks': typeof ResourcesPlaybooksRoute
   '/resources_/recap': typeof ResourcesRecapRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/resources_/playbooks_/best-free-running-clubs-pittsburgh-2026': typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route
@@ -244,12 +283,15 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/mcp'
     | '/members'
     | '/privacy'
     | '/resources'
     | '/sitemap.xml'
     | '/terms'
     | '/waiver'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/admin/members'
     | '/email/unsubscribe'
     | '/members/$key'
@@ -257,6 +299,7 @@ export interface FileRouteTypes {
     | '/resources/graphics'
     | '/resources/playbooks'
     | '/resources/recap'
+    | '/.mcp/invoke-tool/$tool'
     | '/api/public/rsvp'
     | '/lovable/email/suppression'
     | '/resources/playbooks/best-free-running-clubs-pittsburgh-2026'
@@ -270,12 +313,15 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/mcp'
     | '/members'
     | '/privacy'
     | '/resources'
     | '/sitemap.xml'
     | '/terms'
     | '/waiver'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/admin/members'
     | '/email/unsubscribe'
     | '/members/$key'
@@ -283,6 +329,7 @@ export interface FileRouteTypes {
     | '/resources/graphics'
     | '/resources/playbooks'
     | '/resources/recap'
+    | '/.mcp/invoke-tool/$tool'
     | '/api/public/rsvp'
     | '/lovable/email/suppression'
     | '/resources/playbooks/best-free-running-clubs-pittsburgh-2026'
@@ -296,12 +343,15 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/mcp'
     | '/members'
     | '/privacy'
     | '/resources'
     | '/sitemap.xml'
     | '/terms'
     | '/waiver'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/admin/members'
     | '/email/unsubscribe'
     | '/members/$key'
@@ -309,6 +359,7 @@ export interface FileRouteTypes {
     | '/resources_/graphics'
     | '/resources_/playbooks'
     | '/resources_/recap'
+    | '/.mcp/invoke-tool/$tool'
     | '/api/public/rsvp'
     | '/lovable/email/suppression'
     | '/resources_/playbooks_/best-free-running-clubs-pittsburgh-2026'
@@ -323,18 +374,22 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  McpRoute: typeof McpRoute
   MembersRoute: typeof MembersRouteWithChildren
   PrivacyRoute: typeof PrivacyRoute
   ResourcesRoute: typeof ResourcesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
   WaiverRoute: typeof WaiverRoute
+  Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
+  Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   AdminMembersRoute: typeof AdminMembersRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   ResourcesConversationsRoute: typeof ResourcesConversationsRoute
   ResourcesGraphicsRoute: typeof ResourcesGraphicsRoute
   ResourcesPlaybooksRoute: typeof ResourcesPlaybooksRoute
   ResourcesRecapRoute: typeof ResourcesRecapRoute
+  Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
   ApiPublicRsvpRoute: typeof ApiPublicRsvpRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
   ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route: typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route
@@ -389,6 +444,13 @@ declare module '@tanstack/react-router' {
       path: '/members'
       fullPath: '/members'
       preLoaderRoute: typeof MembersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mcp': {
+      id: '/mcp'
+      path: '/mcp'
+      fullPath: '/mcp'
+      preLoaderRoute: typeof McpRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -447,6 +509,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminMembersRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/.well-known/oauth-protected-resource': {
+      id: '/.well-known/oauth-protected-resource'
+      path: '/.well-known/oauth-protected-resource'
+      fullPath: '/.well-known/oauth-protected-resource'
+      preLoaderRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.mcp/list-tools': {
+      id: '/.mcp/list-tools'
+      path: '/.mcp/list-tools'
+      fullPath: '/.mcp/list-tools'
+      preLoaderRoute: typeof Char91DotmcpChar93ListToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/resources_/playbooks_/gryt-vs-yinz-run-club': {
       id: '/resources_/playbooks_/gryt-vs-yinz-run-club'
       path: '/resources/playbooks/gryt-vs-yinz-run-club'
@@ -480,6 +556,13 @@ declare module '@tanstack/react-router' {
       path: '/api/public/rsvp'
       fullPath: '/api/public/rsvp'
       preLoaderRoute: typeof ApiPublicRsvpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.mcp/invoke-tool/$tool': {
+      id: '/.mcp/invoke-tool/$tool'
+      path: '/.mcp/invoke-tool/$tool'
+      fullPath: '/.mcp/invoke-tool/$tool'
+      preLoaderRoute: typeof Char91DotmcpChar93InvokeToolToolRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lovable/email/transactional/send': {
@@ -533,18 +616,23 @@ const MembersRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  McpRoute: McpRoute,
   MembersRoute: MembersRouteWithChildren,
   PrivacyRoute: PrivacyRoute,
   ResourcesRoute: ResourcesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
   WaiverRoute: WaiverRoute,
+  Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
+  Char91DotwellKnownChar93OauthProtectedResourceRoute:
+    Char91DotwellKnownChar93OauthProtectedResourceRoute,
   AdminMembersRoute: AdminMembersRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   ResourcesConversationsRoute: ResourcesConversationsRoute,
   ResourcesGraphicsRoute: ResourcesGraphicsRoute,
   ResourcesPlaybooksRoute: ResourcesPlaybooksRoute,
   ResourcesRecapRoute: ResourcesRecapRoute,
+  Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
   ApiPublicRsvpRoute: ApiPublicRsvpRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
   ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route:
