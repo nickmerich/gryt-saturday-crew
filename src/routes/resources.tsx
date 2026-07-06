@@ -419,6 +419,8 @@ function ManifestoCallout() {
   );
 }
 
+/* ─────────────────  ARTIFACTS & TOOLS (Graphics)  ────────── */
+
 const GRAPHICS: Array<{
   name: string;
   format: string;
