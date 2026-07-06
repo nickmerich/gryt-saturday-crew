@@ -106,14 +106,19 @@ const PRESETS: Array<{ label: string; hint: string; values: FormState }> = [
 const CANVAS_W = 1080;
 const CANVAS_H = 1350; // 4:5 portrait, IG-friendly
 
+type PhotoTransform = { scale: number; offsetX: number; offsetY: number };
+const DEFAULT_TRANSFORM: PhotoTransform = { scale: 1, offsetX: 0, offsetY: 0 };
+
 function RecapGeneratorPage() {
   const [form, setForm] = useState<FormState>(DEFAULTS);
   const [photoUrl, setPhotoUrl] = useState<string | null>(null);
   const [photoImg, setPhotoImg] = useState<HTMLImageElement | null>(null);
+  const [transform, setTransform] = useState<PhotoTransform>(DEFAULT_TRANSFORM);
   const [activePreset, setActivePreset] = useState<string | null>(null);
   const [status, setStatus] = useState<"idle" | "saving" | "saved">("idle");
   const [savedFile, setSavedFile] = useState<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const dragState = useRef<{ x: number; y: number; ox: number; oy: number } | null>(null);
 
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((f) => ({ ...f, [key]: value }));
@@ -135,6 +140,11 @@ function RecapGeneratorPage() {
     }
     const url = URL.createObjectURL(file);
     setPhotoUrl(url);
+    setTransform(DEFAULT_TRANSFORM);
+  }
+
+  function updateTransform(patch: Partial<PhotoTransform>) {
+    setTransform((t) => ({ ...t, ...patch }));
   }
 
   // Load image whenever photoUrl changes
@@ -151,12 +161,43 @@ function RecapGeneratorPage() {
     };
   }, [photoUrl]);
 
-  // Redraw whenever form or image changes
+  // Redraw whenever form, image, or transform changes
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    drawRecap(canvas, form, photoImg);
-  }, [form, photoImg]);
+    drawRecap(canvas, form, photoImg, transform);
+  }, [form, photoImg, transform]);
+
+  // Drag on canvas to reposition the photo
+  function onCanvasPointerDown(e: React.PointerEvent<HTMLCanvasElement>) {
+    if (!photoImg) return;
+    (e.target as HTMLCanvasElement).setPointerCapture(e.pointerId);
+    dragState.current = {
+      x: e.clientX,
+      y: e.clientY,
+      ox: transform.offsetX,
+      oy: transform.offsetY,
+    };
+  }
+  function onCanvasPointerMove(e: React.PointerEvent<HTMLCanvasElement>) {
+    const d = dragState.current;
+    if (!d) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const rect = canvas.getBoundingClientRect();
+    // Normalize drag delta to canvas pixel space, then to -1..1 offset units
+    const dx = ((e.clientX - d.x) / rect.width) * CANVAS_W;
+    const dy = ((e.clientY - d.y) / rect.height) * CANVAS_H;
+    const photoH = Math.floor(CANVAS_H * 0.68);
+    updateTransform({
+      offsetX: clamp(d.ox + dx / (CANVAS_W / 2), -1.5, 1.5),
+      offsetY: clamp(d.oy + dy / (photoH / 2), -1.5, 1.5),
+    });
+  }
+  function onCanvasPointerUp() {
+    dragState.current = null;
+  }
+
 
   // Auto-clear the "saved" confirmation
   useEffect(() => {
@@ -245,8 +286,20 @@ function RecapGeneratorPage() {
             <PhotoPicker
               onChange={onPhoto}
               hasPhoto={!!photoUrl}
-              onClear={() => setPhotoUrl(null)}
+              onClear={() => {
+                setPhotoUrl(null);
+                setTransform(DEFAULT_TRANSFORM);
+              }}
             />
+
+            {photoUrl && (
+              <PhotoControls
+                transform={transform}
+                onChange={updateTransform}
+                onReset={() => setTransform(DEFAULT_TRANSFORM)}
+              />
+            )}
+
 
             <Grid2>
               <Field
@@ -340,6 +393,7 @@ function RecapGeneratorPage() {
                 onClick={() => {
                   setForm(DEFAULTS);
                   setPhotoUrl(null);
+                  setTransform(DEFAULT_TRANSFORM);
                   setActivePreset(null);
                   setStatus("idle");
                 }}
@@ -388,8 +442,12 @@ function RecapGeneratorPage() {
                 ref={canvasRef}
                 width={CANVAS_W}
                 height={CANVAS_H}
-                className="block w-full h-auto"
-                aria-label="Live preview of your recap graphic. This is exactly what will download."
+                onPointerDown={onCanvasPointerDown}
+                onPointerMove={onCanvasPointerMove}
+                onPointerUp={onCanvasPointerUp}
+                onPointerCancel={onCanvasPointerUp}
+                className={`block w-full h-auto ${photoImg ? "cursor-move touch-none" : ""}`}
+                aria-label="Live preview of your recap graphic. This is exactly what will download. Drag to reposition the photo."
               />
               <div className="absolute top-3 left-3 bg-ink/85 backdrop-blur-sm border border-paper/20 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-paper">
                 1080 × 1350 · PNG
@@ -491,6 +549,7 @@ function drawRecap(
   canvas: HTMLCanvasElement,
   form: FormState,
   photo: HTMLImageElement | null,
+  transform: PhotoTransform = DEFAULT_TRANSFORM,
 ) {
   const ctx = canvas.getContext("2d");
   if (!ctx) return;
@@ -505,7 +564,7 @@ function drawRecap(
   // Photo (covers top ~65%)
   const photoArea = { x: 0, y: 0, w: W, h: Math.floor(H * 0.68) };
   if (photo) {
-    drawCover(ctx, photo, photoArea.x, photoArea.y, photoArea.w, photoArea.h);
+    drawCover(ctx, photo, photoArea.x, photoArea.y, photoArea.w, photoArea.h, transform);
     // Darken bottom of photo for legibility
     const grad = ctx.createLinearGradient(
       0,
@@ -638,22 +697,125 @@ function drawCover(
   y: number,
   w: number,
   h: number,
+  transform: PhotoTransform = DEFAULT_TRANSFORM,
 ) {
+  const scale = Math.max(0.1, transform.scale);
   const ir = img.width / img.height;
   const tr = w / h;
-  let sx = 0,
-    sy = 0,
-    sw = img.width,
-    sh = img.height;
+  // Base "cover" source rect, then shrink by scale to zoom in
+  let sw: number, sh: number;
   if (ir > tr) {
-    sw = img.height * tr;
-    sx = (img.width - sw) / 2;
+    sh = img.height / scale;
+    sw = (img.height * tr) / scale;
   } else {
-    sh = img.width / tr;
-    sy = (img.height - sh) / 2;
+    sw = img.width / scale;
+    sh = (img.width / tr) / scale;
   }
+  // Center then apply user offsets (normalized -1..1 across the overflow)
+  const maxOffX = (img.width - sw) / 2;
+  const maxOffY = (img.height - sh) / 2;
+  const sx = clamp((img.width - sw) / 2 + transform.offsetX * maxOffX, 0, img.width - sw);
+  const sy = clamp((img.height - sh) / 2 + transform.offsetY * maxOffY, 0, img.height - sh);
   ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h);
 }
+
+function clamp(v: number, min: number, max: number) {
+  return Math.min(max, Math.max(min, v));
+}
+
+function PhotoControls({
+  transform,
+  onChange,
+  onReset,
+}: {
+  transform: PhotoTransform;
+  onChange: (patch: Partial<PhotoTransform>) => void;
+  onReset: () => void;
+}) {
+  return (
+    <div className="border border-paper/15 p-4 flex flex-col gap-3">
+      <div className="flex items-center justify-between">
+        <p className="eyebrow text-paper/55">PHOTO CROP</p>
+        <button
+          type="button"
+          onClick={onReset}
+          className="text-[11px] uppercase tracking-[0.12em] font-bold text-paper/60 hover:text-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+        >
+          Recenter
+        </button>
+      </div>
+      <RangeControl
+        label="Zoom"
+        value={transform.scale}
+        min={1}
+        max={3}
+        step={0.01}
+        format={(v) => `${v.toFixed(2)}×`}
+        onChange={(v) => onChange({ scale: v })}
+      />
+      <RangeControl
+        label="Horizontal"
+        value={transform.offsetX}
+        min={-1}
+        max={1}
+        step={0.01}
+        format={(v) => `${Math.round(v * 100)}%`}
+        onChange={(v) => onChange({ offsetX: v })}
+      />
+      <RangeControl
+        label="Vertical"
+        value={transform.offsetY}
+        min={-1}
+        max={1}
+        step={0.01}
+        format={(v) => `${Math.round(v * 100)}%`}
+        onChange={(v) => onChange({ offsetY: v })}
+      />
+      <p className="text-[11px] text-paper/55 leading-[1.5]">
+        Tip: drag the preview to nudge the photo into place.
+      </p>
+    </div>
+  );
+}
+
+function RangeControl({
+  label,
+  value,
+  min,
+  max,
+  step,
+  format,
+  onChange,
+}: {
+  label: string;
+  value: number;
+  min: number;
+  max: number;
+  step: number;
+  format: (v: number) => string;
+  onChange: (v: number) => void;
+}) {
+  return (
+    <label className="block">
+      <span className="flex items-baseline justify-between mb-1.5">
+        <span className="text-[11px] uppercase tracking-[0.12em] font-bold text-paper/70">
+          {label}
+        </span>
+        <span className="text-[11px] font-mono text-blue">{format(value)}</span>
+      </span>
+      <input
+        type="range"
+        min={min}
+        max={max}
+        step={step}
+        value={value}
+        onChange={(e) => onChange(parseFloat(e.target.value))}
+        className="w-full accent-blue cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+      />
+    </label>
+  );
+}
+
 
 function drawFittedText(
   ctx: CanvasRenderingContext2D,
