@@ -699,23 +699,23 @@ function PartnerSplit() {
   return (
     <div className="bg-blue text-ink p-10 md:p-14 flex flex-col justify-between min-h-[360px]">
       <div>
-        <span className="text-ink/60 text-[11px] tracking-[0.22em] uppercase mb-4 block" style={mono}>
+        <span className="text-ink/85 text-[12px] tracking-[0.22em] uppercase mb-4 block" style={mono}>
           § 06 · Partnerships
         </span>
         <h2
-          className="uppercase text-[clamp(28px,3.6vw,44px)] leading-[0.95] tracking-tight"
+          className="uppercase text-[clamp(28px,3.6vw,44px)] leading-[1.02] tracking-tight"
           style={{ fontFamily: "var(--font-condensed)" }}
         >
           Build with GRYT.
         </h2>
-        <p className="mt-5 text-[15px] leading-[1.65] text-ink/80 max-w-[380px]">
+        <p className="mt-5 text-[15px] leading-[1.65] text-ink/90 max-w-[380px]">
           Coffee shops, gyms, brands, coaches, local builders — if it helps
           the crew, we're open.
         </p>
       </div>
       <a
         href="#get-involved"
-        className="mt-10 self-start px-7 py-4 bg-ink text-paper text-[11px] tracking-[0.22em] uppercase hover:bg-paper hover:text-ink transition-colors"
+        className={`mt-10 self-start px-7 py-4 min-h-[44px] bg-ink text-paper text-[12px] tracking-[0.22em] uppercase hover:bg-paper hover:text-ink transition-colors ${focusRingLight}`}
         style={{ fontFamily: "var(--font-condensed)" }}
       >
         Start the conversation →
