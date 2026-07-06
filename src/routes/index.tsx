@@ -84,7 +84,7 @@ export const Route = createFileRoute("/")({
           "@id": "https://grytrunclub.com/#location",
           name: "GRYT Run Club",
           description:
-            "A Pittsburgh run club for former athletes, busy parents, and comeback runners.",
+            "GRYT is a free Pittsburgh running group and South Hills run club for former athletes, busy parents, and comeback runners. Saturdays at 7 AM on the Montour / Peters Trail in McMurray.",
           url: SITE_URL,
           image: ABS_HERO_IMG,
           logo: `${SITE_URL}/icon-512.png`,
