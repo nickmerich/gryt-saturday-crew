@@ -58,16 +58,17 @@ const EVENT_DATES = nextSaturdayISOs(12);
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "gryt run club · Saturdays 7 AM · McMurray, PA" },
+      { title: "Pittsburgh Running Group · South Hills Run Club · Saturdays 7 AM · gryt" },
       {
         name: "description",
         content:
-          "Pittsburgh Saturday 7 AM run club on the Montour / Peters Trail. Walk, jog, or run. No pace requirement. No one gets dropped.",
+          "GRYT is a free Pittsburgh running group and South Hills run club meeting Saturdays at 7 AM on the Montour / Peters Trail in McMurray. Walk, jog, or run — no pace requirement, no one gets dropped.",
       },
-      { property: "og:title", content: "gryt run club · Saturdays 7 AM" },
+      { property: "og:title", content: "Pittsburgh Running Group · South Hills Run Club · Saturdays 7 AM" },
       {
         property: "og:description",
-        content: "Do hard things together. Saturday mornings on the Montour / Peters Trail.",
+        content:
+          "Free Pittsburgh run club in the South Hills. Saturdays 7 AM on the Montour / Peters Trail. Do hard things together.",
       },
       { property: "og:url", content: SITE_URL },
       { property: "og:image", content: ABS_HERO_IMG },
@@ -83,7 +84,7 @@ export const Route = createFileRoute("/")({
           "@id": "https://grytrunclub.com/#location",
           name: "GRYT Run Club",
           description:
-            "A Pittsburgh run club for former athletes, busy parents, and comeback runners.",
+            "GRYT is a free Pittsburgh running group and South Hills run club for former athletes, busy parents, and comeback runners. Saturdays at 7 AM on the Montour / Peters Trail in McMurray.",
           url: SITE_URL,
           image: ABS_HERO_IMG,
           logo: `${SITE_URL}/icon-512.png`,
@@ -382,7 +383,7 @@ function Hero() {
         <div className="flex-1 min-w-[300px] basis-[480px]">
           <div className="eyebrow-blue eyebrow mb-6 flex items-center gap-2.5 flex-wrap">
             <span className="w-2 h-2 bg-blue rounded-full" />
-            Live in Pittsburgh · Saturdays at 7 AM · McMurray, PA
+            Pittsburgh Running Group · South Hills Run Club · Saturdays 7 AM · McMurray, PA
           </div>
           <h1 className="display-condensed text-paper text-[clamp(48px,7.2vw,108px)] leading-[0.9]">
             {isB ? (
@@ -417,8 +418,8 @@ function Hero() {
           <div className="mt-7 max-w-[540px] flex flex-col gap-3.5">
             <p className="text-lg leading-[1.55] text-paper/85">
               {isB
-                ? "7 AM sharp on the Montour / Peters Trail. 7 to 15 regulars, coffee after, zero pressure. Built for former athletes, busy parents, and comeback runners who want a real crew again."
-                : "A Pittsburgh run club in the South Hills for former athletes, busy parents, comeback runners, and anyone who wants a real crew again. We meet every Saturday at 7 AM in McMurray to walk, jog, or run, then hang in the lot after."}
+                ? "GRYT is a free Pittsburgh running group and South Hills run club — 7 AM sharp Saturdays on the Montour / Peters Trail in McMurray. 7 to 15 regulars, coffee after, zero pressure. Built for former athletes, busy parents, and comeback runners who want a real crew again."
+                : "GRYT is a free Pittsburgh running group and South Hills run club for former athletes, busy parents, comeback runners, and anyone who wants a real crew again. We meet every Saturday at 7 AM on the Montour / Peters Trail in McMurray to walk, jog, or run, then hang in the lot after."}
             </p>
             <p className="text-base md:text-[17px] font-semibold leading-[1.5] text-paper">
               No pace requirement. No awkward first day. No one gets dropped.
