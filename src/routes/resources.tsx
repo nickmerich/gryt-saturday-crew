@@ -971,20 +971,20 @@ function ShareYourStory() {
           >
             Got a story worth telling?
           </h3>
-          <p className="mt-6 text-paper/70 text-[15px] leading-[1.65] max-w-[440px]">
+          <p className="mt-6 text-paper/85 text-[15px] leading-[1.65] max-w-[440px]">
             Comeback runners. First-timers. People who built community out of
             nothing. If running changed something for you and you think your
             story could help someone else show up — tell us about it. Nick
             reads every submission.
           </p>
-          <ul className="mt-8 space-y-3 text-paper/70 text-[14px] leading-[1.6] max-w-[440px]">
+          <ul className="mt-8 space-y-3 text-paper/85 text-[14.5px] leading-[1.6] max-w-[440px]">
             {[
               "You don't have to be fast, experienced, or a \"real\" runner.",
               "The best interviews come from people doing hard things on ordinary days.",
               "Features can run as written Q&A, podcast, or short video.",
             ].map((line) => (
               <li key={line} className="flex gap-3">
-                <span className="text-blue shrink-0" style={mono}>→</span>
+                <span className="text-blue shrink-0" style={mono} aria-hidden="true">→</span>
                 <span>{line}</span>
               </li>
             ))}
