@@ -384,21 +384,40 @@ function Hero() {
             Live in Pittsburgh · Saturdays at 7 AM · McMurray, PA
           </div>
           <h1 className="display-condensed text-paper text-[clamp(48px,7.2vw,108px)] leading-[0.9]">
-            You used to have a team.
-            <br />
-            Now you have{" "}
-            <span className="relative inline-block">
-              Saturday.
-              <span
-                className="absolute left-[-2px] right-[-2px] bottom-[0.06em] h-[0.11em] bg-blue"
-                style={{ transform: "skewX(-8deg)" }}
-              />
-            </span>
+            {isB ? (
+              <>
+                One Saturday.
+                <br />
+                One{" "}
+                <span className="relative inline-block">
+                  crew.
+                  <span
+                    className="absolute left-[-2px] right-[-2px] bottom-[0.06em] h-[0.11em] bg-blue"
+                    style={{ transform: "skewX(-8deg)" }}
+                  />
+                </span>
+              </>
+            ) : (
+              <>
+                You used to have a team.
+                <br />
+                Now you have{" "}
+                <span className="relative inline-block">
+                  Saturday.
+                  <span
+                    className="absolute left-[-2px] right-[-2px] bottom-[0.06em] h-[0.11em] bg-blue"
+                    style={{ transform: "skewX(-8deg)" }}
+                  />
+                </span>
+              </>
+            )}
           </h1>
 
           <div className="mt-7 max-w-[540px] flex flex-col gap-3.5">
             <p className="text-lg leading-[1.55] text-paper/85">
-              A Pittsburgh run club in the South Hills for former athletes, busy parents, comeback runners, and anyone who wants a real crew again. We meet every Saturday at 7 AM in McMurray to walk, jog, or run, then hang in the lot after.
+              {isB
+                ? "7 AM sharp on the Montour / Peters Trail. 7 to 15 regulars, coffee after, zero pressure. Built for former athletes, busy parents, and comeback runners who want a real crew again."
+                : "A Pittsburgh run club in the South Hills for former athletes, busy parents, comeback runners, and anyone who wants a real crew again. We meet every Saturday at 7 AM in McMurray to walk, jog, or run, then hang in the lot after."}
             </p>
             <p className="text-base md:text-[17px] font-semibold leading-[1.5] text-paper">
               No pace requirement. No awkward first day. No one gets dropped.
