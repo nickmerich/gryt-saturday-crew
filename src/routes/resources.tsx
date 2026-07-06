@@ -40,22 +40,37 @@ type Involvement =
 
 function ResourcesPage() {
   return (
-    <main className="bg-ink text-paper">
-      <SiteNav />
-      <div className="mx-auto max-w-[1240px] px-6 lg:px-10 pt-16 md:pt-24 pb-24">
-        <Masthead />
-        <Playbooks />
-        <Conversations />
-        <ShareYourStory />
-        <ArtifactsAndTools />
-        <Merch />
-        <NextIssueAndPartner />
-        <GetInvolved />
-      </div>
-      <SiteFooter />
-    </main>
+    <>
+      <a
+        href="#resources-main"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue focus:text-ink focus:text-[12px] focus:tracking-[0.2em] focus:uppercase focus:outline-none focus-visible:ring-2 focus-visible:ring-paper"
+        style={mono}
+      >
+        Skip to content
+      </a>
+      <main id="resources-main" className="bg-ink text-paper">
+        <SiteNav />
+        <div className="mx-auto max-w-[1240px] px-6 lg:px-10 pt-16 md:pt-24 pb-24">
+          <Masthead />
+          <Playbooks />
+          <Conversations />
+          <ShareYourStory />
+          <ArtifactsAndTools />
+          <Merch />
+          <NextIssueAndPartner />
+          <GetInvolved />
+        </div>
+        <SiteFooter />
+      </main>
+    </>
   );
 }
+
+/* Shared a11y helpers */
+const focusRing =
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ink";
+const focusRingLight =
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:ring-offset-blue";
 
 /* ─────────────────────────  SHARED  ───────────────────────── */
 
