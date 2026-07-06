@@ -388,11 +388,11 @@ function Hero() {
           <h1 className="display-condensed text-paper text-[clamp(48px,7.2vw,108px)] leading-[0.9]">
             {isB ? (
               <>
-                One Saturday.
+                Do hard
                 <br />
-                One{" "}
+                things{" "}
                 <span className="relative inline-block">
-                  crew.
+                  together.
                   <span
                     className="absolute left-[-2px] right-[-2px] bottom-[0.06em] h-[0.11em] bg-blue"
                     style={{ transform: "skewX(-8deg)" }}
