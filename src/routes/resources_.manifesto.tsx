@@ -51,7 +51,7 @@ const INTRO: string[] = [
 const PULL_QUOTES = [
   "Not more software. More structure.",
   "Not more acquisition. More retention.",
-  "Not more \u201Cwe are beginner-friendly.\u201D More proof that a beginner can show up, run the pace they actually run, get their name remembered, appear in the recap, and receive a real follow-up from a real person.",
+  "Not more “we are beginner-friendly.” More proof that a beginner can show up, run the pace they actually run, get their name remembered, appear in the recap, and receive a real follow-up from a real person.",
 ];
 
 const SECTIONS: Section[] = [
@@ -63,7 +63,7 @@ const SECTIONS: Section[] = [
       "The mistake is thinking the tech stack creates the community. It does not. The tech stack scales the community.",
       "It scales the photo. It scales the story. It scales the attendance signal. It scales the follow-up. It scales the member journey. It scales the proof.",
       "But it cannot create the signal by itself. The signal is human.",
-      "It is someone standing in the parking lot looking for the newcomer who is not sure where to go. It is someone saying, \u201CI have the back today.\u201D It is someone introducing the first-timer to the regular before the run starts. It is someone taking the photo before everyone disappears into their cars. It is someone sending the DM within 24 hours that says, \u201CI saw you on that last hill. Come back Saturday.\u201D",
+      "It is someone standing in the parking lot looking for the newcomer who is not sure where to go. It is someone saying, “I have the back today.” It is someone introducing the first-timer to the regular before the run starts. It is someone taking the photo before everyone disappears into their cars. It is someone sending the DM within 24 hours that says, “I saw you on that last hill. Come back Saturday.”",
       "That is the operating system underneath the software. If that layer is weak, everything leaks. If that layer is strong, everything compounds.",
     ],
   },
@@ -73,7 +73,7 @@ const SECTIONS: Section[] = [
     heading: "Values are slogans until they become mechanics.",
     paragraphs: [
       "We say GRYT is beginner-friendly. That is not enough. Every run club says that. Every gym says that. Every community says that.",
-      "The audit forced us to separate the value from the mechanic. \u201CBeginner-friendly\u201D is a value. A named pace lead is a mechanic. \u201CNo drop\u201D is a value. A tail walker is a mechanic. \u201CEveryone belongs\u201D is a value. A welcome lead who knows exactly what to say in the first 15 seconds is a mechanic.",
+      "The audit forced us to separate the value from the mechanic. “Beginner-friendly” is a value. A named pace lead is a mechanic. “No drop” is a value. A tail walker is a mechanic. “Everyone belongs” is a value. A welcome lead who knows exactly what to say in the first 15 seconds is a mechanic.",
       "If someone shows up in McMurray running a 12-minute mile and there is no structural guarantee that they will not get dropped, then we have not earned the right to call the run beginner-friendly yet. That does not mean the intention is wrong. It means the intention is not operational.",
       "The fix is simple, but it has to be explicit:",
       [
@@ -83,7 +83,7 @@ const SECTIONS: Section[] = [
         "Someone owns the welcome. They greet new people before the awkwardness has time to settle.",
         "Someone owns the photo. They capture proof before the moment disappears.",
       ],
-      "That is the difference between a promise and a system. We do not need to say \u201Cno one gets left behind\u201D louder. We need to build the mechanics that make it impossible to leave someone behind.",
+      "That is the difference between a promise and a system. We do not need to say “no one gets left behind” louder. We need to build the mechanics that make it impossible to leave someone behind.",
     ],
   },
   {
@@ -95,7 +95,7 @@ const SECTIONS: Section[] = [
       "But at this stage, infrastructure can create a dangerous illusion of progress. You can spend hours improving the dashboard while the newcomer is standing by their car wondering if they are in the right place. You can refine the email flow while the first-timer leaves without anyone asking if they are coming back. You can build the recap engine before there is a consistent human responsible for taking the photos.",
       "That is the infrastructure trap. The tools make it feel like the community is more mature than the in-person experience actually is.",
       "So the priority has to flip. The tech stack stays. But it stops leading. The human mechanics lead now. The tools exist to support the ritual, not replace it.",
-      "Our next operating question is not, \u201CWhat else can we automate?\u201D It is, \u201CWhat human moment has to happen every single Saturday, no matter what?\u201D Once we answer that, the software becomes powerful again. Because then it is scaling something real.",
+      "Our next operating question is not, “What else can we automate?” It is, “What human moment has to happen every single Saturday, no matter what?” Once we answer that, the software becomes powerful again. Because then it is scaling something real.",
     ],
   },
   {
@@ -104,7 +104,7 @@ const SECTIONS: Section[] = [
     heading: "The photo is not content. The photo is proof.",
     paragraphs: [
       "Run #10 told the truth. The recap system was ready. The content engine was ready. The automation was ready. But the recap could not post because the human signal failed. No photos. No captured moments. No synced details. Nothing real for the machine to work with.",
-      "The photo matters because it tells the member, \u201CYou were here. This counted. We saw you.\u201D That is retention. People come back to places where they are remembered.",
+      "The photo matters because it tells the member, “You were here. This counted. We saw you.” That is retention. People come back to places where they are remembered.",
       "The photo gives us proof of participation. It gives us proof of belonging. It gives us proof that the hard thing actually happened. The recap does not create the community. The recap reflects the community back to itself.",
       "That means capture is now an operational role, not a creative afterthought. Every Saturday needs a human sensor. One person whose job is to take the group photo, get three candid moments, notice the first-timer, capture the coffee table, and hand the signal to the system before the day goes cold. The fix is not more automation. The fix is one person with a phone who knows the assignment.",
     ],
@@ -120,7 +120,7 @@ const SECTIONS: Section[] = [
       [
         "Welcome Lead — owns the first 15 seconds and makes sure no newcomer is invisible.",
         "Pace Leads — own the front, middle, and back so every runner knows where they fit.",
-        "Tail Walker — owns the final runner and makes \u201Cno drop\u201D real.",
+        "Tail Walker — owns the final runner and makes “no drop” real.",
         "Photographer — owns proof of participation and same-day handoff.",
         "Backup Captain — owns the ritual when the founders cannot.",
       ],
@@ -150,7 +150,7 @@ const SECTIONS: Section[] = [
     heading: "Named humans. Named moments. Repeatable every Saturday.",
     paragraphs: [
       "Build the no-drop system. No-drop has to become visible, named, and repeatable. Every Saturday needs named pace ownership before the run starts. Pace leads, a tail walker, regroup points, and language that makes the system clear before the first step. No one has to be brave just to avoid being left alone.",
-      "Own the first 15 seconds. The newcomer experience starts before the run starts. \u201CHey, you new to GRYT? I\u2019m Nick. What\u2019s your name? Glad you\u2019re here. We run easy, nobody gets left, and we hang after. I\u2019m going to pair you with Sarah today.\u201D A person who is named in the first minute is more likely to come back than a person who quietly survives the run.",
+      "Own the first 15 seconds. The newcomer experience starts before the run starts. “Hey, you new to GRYT? I’m Nick. What’s your name? Glad you’re here. We run easy, nobody gets left, and we hang after. I’m going to pair you with Sarah today.” A person who is named in the first minute is more likely to come back than a person who quietly survives the run.",
       "Make capture a role. Group photo. First-timer in the middle. Two or three candid moments. Coffee table. One member quote if it shows up naturally. That is enough. The automation can take it from there. But the human has to capture the moment first.",
       "Protect the Saturday ritual. Same day. Same time. Same anchor. Same expectation. Weather can shape the route. Holidays can shape the turnout. Life can shape who shows up. But silent cancellation cannot become part of the culture.",
       "Grow the crew before the crowd. The next unlock is not 100 more prospects. It is five reliable people who each own one part of the Saturday experience. The crew is belonging with responsibility attached.",
@@ -161,9 +161,9 @@ const SECTIONS: Section[] = [
     eyebrow: "The next 90 days",
     heading: "Stabilize, then staff, then scale.",
     paragraphs: [
-      "Days 1\u201330 \u00B7 Stabilize the ritual. Name pace roles before every run. Assign a tail walker every Saturday. Designate a welcome lead. Designate a photo owner. Send every first-timer a personal 24-hour DM. Keep the post-run hang protected. The goal is repeatability.",
-      "Days 31\u201360 \u00B7 Build the crew. Identify three to five regulars who already behave like anchors. Give each person a small role with a clear job. Rotate responsibilities without overcomplicating the system. Recognize the crew publicly so responsibility feels like identity, not labor. Start tracking first-timer return rate and missed-three-week drifters.",
-      "Days 61\u201390 \u00B7 Turn on growth. Bring-a-friend starts to matter. Partnerships become more valuable. The content engine becomes powerful. September becomes the next chapter. But we only turn on the faucet when the bucket is no longer leaking.",
+      "Days 1–30 · Stabilize the ritual. Name pace roles before every run. Assign a tail walker every Saturday. Designate a welcome lead. Designate a photo owner. Send every first-timer a personal 24-hour DM. Keep the post-run hang protected. The goal is repeatability.",
+      "Days 31–60 · Build the crew. Identify three to five regulars who already behave like anchors. Give each person a small role with a clear job. Rotate responsibilities without overcomplicating the system. Recognize the crew publicly so responsibility feels like identity, not labor. Start tracking first-timer return rate and missed-three-week drifters.",
+      "Days 61–90 · Turn on growth. Bring-a-friend starts to matter. Partnerships become more valuable. The content engine becomes powerful. September becomes the next chapter. But we only turn on the faucet when the bucket is no longer leaking.",
     ],
   },
   {
@@ -171,7 +171,7 @@ const SECTIONS: Section[] = [
     eyebrow: "What we believe now",
     heading: "The back of the pack is a growth channel.",
     paragraphs: [
-      "Community is not built by saying \u201Ccommunity.\u201D It is built by designing the moments where someone decides if they belong.",
+      "Community is not built by saying “community.” It is built by designing the moments where someone decides if they belong.",
       "If the newest, slowest, most nervous runner feels protected, the whole club gets stronger.",
       "The photo is proof. Not vanity. Proof that people showed up. Proof that the hard thing happened. Proof that someone was part of it.",
       "Founders should start the fire, not become the oxygen. If GRYT only works when Nick and Laura carry every piece, then GRYT is not strong enough yet.",
@@ -194,10 +194,10 @@ function ManifestoPage() {
             className="eyebrow text-blue hover:text-paper transition-colors"
             style={mono}
           >
-            \u2190 All resources
+            ← All resources
           </Link>
           <p className="eyebrow text-blue mt-8 mb-5" style={mono}>
-            SELF-REFLECTION \u00B7 AUDIT MANIFESTO \u00B7 FROM NICK
+            SELF-REFLECTION · AUDIT MANIFESTO · FROM NICK
           </p>
           <h1
             className="uppercase text-[clamp(48px,9vw,140px)] leading-[0.88] tracking-tight"
@@ -211,7 +211,7 @@ function ManifestoPage() {
           </p>
           <div className="mt-8 flex items-center gap-3 text-[11px] tracking-[0.22em] uppercase text-paper/60" style={mono}>
             <span>By Nick Merich</span>
-            <span aria-hidden>\u00B7</span>
+            <span aria-hidden>·</span>
             <span>Founder, GRYT Run Club</span>
           </div>
         </div>
@@ -335,7 +335,7 @@ function ManifestoPage() {
 
           <div className="mt-14 flex flex-wrap gap-4">
             <Link to="/resources" className="btn-primary">
-              Back to Resources \u2192
+              Back to Resources →
             </Link>
             <Link
               to="/resources/conversations"
