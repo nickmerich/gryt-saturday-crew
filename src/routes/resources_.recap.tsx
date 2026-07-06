@@ -286,8 +286,20 @@ function RecapGeneratorPage() {
             <PhotoPicker
               onChange={onPhoto}
               hasPhoto={!!photoUrl}
-              onClear={() => setPhotoUrl(null)}
+              onClear={() => {
+                setPhotoUrl(null);
+                setTransform(DEFAULT_TRANSFORM);
+              }}
             />
+
+            {photoUrl && (
+              <PhotoControls
+                transform={transform}
+                onChange={updateTransform}
+                onReset={() => setTransform(DEFAULT_TRANSFORM)}
+              />
+            )}
+
 
             <Grid2>
               <Field
