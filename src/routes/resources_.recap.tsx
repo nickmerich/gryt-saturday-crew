@@ -44,6 +44,65 @@ const DEFAULTS: FormState = {
   note: "DO HARD THINGS TOGETHER",
 };
 
+const PRESETS: Array<{ label: string; hint: string; values: FormState }> = [
+  {
+    label: "Saturday Long Run",
+    hint: "Weekly crew miles",
+    values: {
+      title: "SATURDAY LONG RUN",
+      date: "JUN 21 · 2026",
+      location: "MONTOUR TRAIL · PGH",
+      distance: "10.0",
+      time: "1:24:30",
+      pace: "8:27",
+      athlete: "@yourhandle",
+      note: "DO HARD THINGS TOGETHER",
+    },
+  },
+  {
+    label: "Race Day PR",
+    hint: "Half marathon effort",
+    values: {
+      title: "PITTSBURGH HALF",
+      date: "MAY 04 · 2026",
+      location: "PITTSBURGH, PA",
+      distance: "13.1",
+      time: "1:42:11",
+      pace: "7:48",
+      athlete: "@yourhandle",
+      note: "NEW PR · GRYT",
+    },
+  },
+  {
+    label: "Tuesday Tempo",
+    hint: "Mid-week burner",
+    values: {
+      title: "TUESDAY TEMPO",
+      date: "JUN 17 · 2026",
+      location: "SOUTH HILLS LOOP",
+      distance: "5.0",
+      time: "37:45",
+      pace: "7:33",
+      athlete: "@yourhandle",
+      note: "SHOWED UP · GRYT",
+    },
+  },
+  {
+    label: "First 5K",
+    hint: "New runner win",
+    values: {
+      title: "FIRST 5K",
+      date: "APR 12 · 2026",
+      location: "PITTSBURGH, PA",
+      distance: "3.1",
+      time: "32:04",
+      pace: "10:20",
+      athlete: "@yourhandle",
+      note: "DAY ONE · GRYT",
+    },
+  },
+];
+
 const CANVAS_W = 1080;
 const CANVAS_H = 1350; // 4:5 portrait, IG-friendly
 
