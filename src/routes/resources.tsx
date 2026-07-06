@@ -515,9 +515,9 @@ const MERCH_ITEMS = [
 function Merch() {
   return (
     <section id="merch" className="mb-24 md:mb-32">
-      <div className="flex items-baseline justify-between gap-6 mb-10 md:mb-14 border-b border-paper/15 pb-5">
+      <div className="flex items-baseline justify-between gap-6 mb-10 md:mb-14 border-b border-paper/30 pb-5">
         <div className="flex items-baseline gap-5">
-          <span className="text-blue text-[11px] tracking-[0.22em] uppercase" style={mono}>
+          <span className="text-blue text-[12px] tracking-[0.22em] uppercase" style={mono}>
             § 04
           </span>
           <h2
@@ -527,47 +527,49 @@ function Merch() {
             The Drop
           </h2>
         </div>
-        <span className="text-[10px] tracking-[0.24em] uppercase text-paper/50 hidden sm:block" style={mono}>
+        <span className="text-[11px] tracking-[0.24em] uppercase text-paper/75 hidden sm:block" style={mono}>
           Collection 01 · Notify me
         </span>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+      <ul className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 list-none p-0">
         {MERCH_ITEMS.map((item, i) => (
-          <article key={item.name} className="group cursor-pointer">
-            <div className="relative aspect-[3/4] overflow-hidden bg-vintage border border-paper/10 group-hover:border-blue transition-colors">
-              <img
-                src={lookbookAsset.url}
-                alt={item.name}
-                className="absolute inset-0 w-full h-full object-cover brightness-75 group-hover:brightness-100 group-hover:scale-105 transition-all duration-500"
-                style={{ objectPosition: item.position }}
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-ink/25 group-hover:bg-ink/10 transition-colors" />
-              <span
-                className="absolute top-3 left-3 text-[10px] tracking-[0.22em] uppercase text-paper bg-ink/70 px-2 py-1"
-                style={mono}
-              >
-                0{i + 1} / SS26
-              </span>
-            </div>
-            <div className="pt-4 flex items-baseline justify-between gap-3">
-              <h5
-                className="text-[15px] font-bold tracking-tight"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
-                {item.name}
-              </h5>
-              <span className="text-blue text-[11px] tracking-[0.14em] uppercase shrink-0" style={mono}>
-                {item.drop}
-              </span>
-            </div>
-            <p className="mt-1 text-[12px] uppercase tracking-[0.18em] text-paper/45" style={mono}>
-              {item.price}
-            </p>
-          </article>
+          <li key={item.name} className="group">
+            <article aria-label={`${item.name}, drops ${item.drop}, ${item.price}`}>
+              <div className="relative aspect-[3/4] overflow-hidden bg-vintage border border-paper/25 group-hover:border-blue transition-colors">
+                <img
+                  src={lookbookAsset.url}
+                  alt=""
+                  className="absolute inset-0 w-full h-full object-cover brightness-75 group-hover:brightness-100 group-hover:scale-105 transition-all duration-500"
+                  style={{ objectPosition: item.position }}
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-ink/25 group-hover:bg-ink/10 transition-colors" aria-hidden="true" />
+                <span
+                  className="absolute top-3 left-3 text-[11px] tracking-[0.22em] uppercase text-paper bg-ink/85 px-2 py-1"
+                  style={mono}
+                >
+                  0{i + 1} / SS26
+                </span>
+              </div>
+              <div className="pt-4 flex items-baseline justify-between gap-3">
+                <h5
+                  className="text-[16px] font-bold tracking-tight"
+                  style={{ fontFamily: "var(--font-display)" }}
+                >
+                  {item.name}
+                </h5>
+                <span className="text-blue text-[12px] tracking-[0.14em] uppercase shrink-0" style={mono}>
+                  {item.drop}
+                </span>
+              </div>
+              <p className="mt-1 text-[12px] uppercase tracking-[0.18em] text-paper/75" style={mono}>
+                {item.price}
+              </p>
+            </article>
+          </li>
         ))}
-      </div>
+      </ul>
       <p className="mt-8 text-paper/50 text-[13px] leading-[1.6] max-w-[560px]">
         Ships from Pittsburgh. 100% of proceeds support trail events and club gear.
       </p>
