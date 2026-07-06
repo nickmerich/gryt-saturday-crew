@@ -425,6 +425,56 @@ function ManifestoPage() {
         </div>
       </section>
 
+      {/* HUMAN LAYER — PHOTOS */}
+      <section className="px-6 sm:px-12 lg:px-24 py-20 md:py-28 border-b border-paper/15">
+        <div className="max-w-[1180px] mx-auto">
+          <div className="max-w-[720px] mb-14">
+            <p className="eyebrow text-blue mb-5" style={mono}>
+              The human layer
+            </p>
+            <h2
+              className="uppercase text-[clamp(32px,5vw,72px)] leading-[0.92] tracking-tight"
+              style={{ fontFamily: "var(--font-condensed)" }}
+            >
+              People. Family. Love.
+            </h2>
+            <p className="mt-6 text-paper/80 text-[17px] leading-[1.7]">
+              The dashboards do not remember anyone. The photos do. This is
+              what the system is built to protect.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-6">
+            {HUMAN_LAYER_PHOTOS.map((p) => (
+              <figure
+                key={p.src}
+                className={`${p.span} group relative overflow-hidden bg-black border border-paper/10`}
+              >
+                <div className={`${p.ratio} w-full overflow-hidden`}>
+                  <img
+                    src={p.src}
+                    alt={p.alt}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                  />
+                </div>
+                <figcaption className="p-5 md:p-6 border-t border-paper/10">
+                  <p
+                    className="text-[10px] tracking-[0.24em] uppercase text-blue mb-2"
+                    style={mono}
+                  >
+                    {p.eyebrow}
+                  </p>
+                  <p className="text-paper/90 text-[15px] md:text-[16px] leading-[1.5]">
+                    {p.caption}
+                  </p>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* SECTIONS */}
       <section className="px-6 sm:px-12 lg:px-24 py-20 md:py-28 border-b border-paper/15">
         <div className="max-w-[820px] mx-auto flex flex-col gap-20">
