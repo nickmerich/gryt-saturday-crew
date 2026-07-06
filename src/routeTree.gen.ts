@@ -13,6 +13,7 @@ import { Route as WaiverRouteImport } from './routes/waiver'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ResourcesRouteImport } from './routes/resources'
+import { Route as RacesRouteImport } from './routes/races'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as MembersRouteImport } from './routes/members'
 import { Route as McpRouteImport } from './routes/mcp'
@@ -57,6 +58,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const ResourcesRoute = ResourcesRouteImport.update({
   id: '/resources',
   path: '/resources',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RacesRoute = RacesRouteImport.update({
+  id: '/races',
+  path: '/races',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyRoute = PrivacyRouteImport.update({
@@ -199,6 +205,7 @@ export interface FileRoutesByFullPath {
   '/mcp': typeof McpRoute
   '/members': typeof MembersRouteWithChildren
   '/privacy': typeof PrivacyRoute
+  '/races': typeof RacesRoute
   '/resources': typeof ResourcesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
@@ -230,6 +237,7 @@ export interface FileRoutesByTo {
   '/mcp': typeof McpRoute
   '/members': typeof MembersRouteWithChildren
   '/privacy': typeof PrivacyRoute
+  '/races': typeof RacesRoute
   '/resources': typeof ResourcesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
@@ -262,6 +270,7 @@ export interface FileRoutesById {
   '/mcp': typeof McpRoute
   '/members': typeof MembersRouteWithChildren
   '/privacy': typeof PrivacyRoute
+  '/races': typeof RacesRoute
   '/resources': typeof ResourcesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
@@ -295,6 +304,7 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/members'
     | '/privacy'
+    | '/races'
     | '/resources'
     | '/sitemap.xml'
     | '/terms'
@@ -326,6 +336,7 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/members'
     | '/privacy'
+    | '/races'
     | '/resources'
     | '/sitemap.xml'
     | '/terms'
@@ -357,6 +368,7 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/members'
     | '/privacy'
+    | '/races'
     | '/resources'
     | '/sitemap.xml'
     | '/terms'
@@ -389,6 +401,7 @@ export interface RootRouteChildren {
   McpRoute: typeof McpRoute
   MembersRoute: typeof MembersRouteWithChildren
   PrivacyRoute: typeof PrivacyRoute
+  RacesRoute: typeof RacesRoute
   ResourcesRoute: typeof ResourcesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
@@ -443,6 +456,13 @@ declare module '@tanstack/react-router' {
       path: '/resources'
       fullPath: '/resources'
       preLoaderRoute: typeof ResourcesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/races': {
+      id: '/races'
+      path: '/races'
+      fullPath: '/races'
+      preLoaderRoute: typeof RacesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy': {
@@ -639,6 +659,7 @@ const rootRouteChildren: RootRouteChildren = {
   McpRoute: McpRoute,
   MembersRoute: MembersRouteWithChildren,
   PrivacyRoute: PrivacyRoute,
+  RacesRoute: RacesRoute,
   ResourcesRoute: ResourcesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
