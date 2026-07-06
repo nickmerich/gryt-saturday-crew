@@ -4,7 +4,7 @@ import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 import { track } from "@/lib/analytics";
 import crewTrail from "@/assets/photos/manifesto/crew-trail.jpg.asset.json";
 import marathonStreet from "@/assets/photos/manifesto/marathon-street.jpg.asset.json";
-import fourFriends from "@/assets/photos/manifesto/four-friends.jpg.asset.json";
+import fourFriends from "@/assets/photos/manifesto/brotherhood-crew.jpg.asset.json";
 import halftonePortrait from "@/assets/photos/manifesto/halftone-portrait.jpg.asset.json";
 import dadsAndKids from "@/assets/photos/manifesto/dads-and-kids.jpg.asset.json";
 
