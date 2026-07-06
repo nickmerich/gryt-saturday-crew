@@ -3,10 +3,13 @@
 // - Override with ?v=a or ?v=b (also persisted) for QA and stakeholder demos.
 // - SSR-safe: returns null on the server; components render variant A until
 //   the client hydrates and picks up the assignment.
+// - Fires GA4 events so the split and per-variant view counts are observable.
 
 import { useEffect, useState } from "react";
+import { track } from "@/lib/analytics";
 
 export type HeroVariant = "a" | "b";
+type AssignSource = "random" | "stored" | "override";
 
 const KEY = "gryt.hero_variant.v1";
 
@@ -42,19 +45,33 @@ export function useHeroVariant(): HeroVariant | null {
 
   useEffect(() => {
     const override = readOverride();
-    if (override) {
-      writeStored(override);
-      setVariant(override);
-      return;
-    }
     const stored = readStored();
-    if (stored) {
-      setVariant(stored);
-      return;
+    let picked: HeroVariant;
+    let source: AssignSource;
+
+    if (override) {
+      picked = override;
+      source = "override";
+      writeStored(picked);
+    } else if (stored) {
+      picked = stored;
+      source = "stored";
+    } else {
+      picked = assign();
+      source = "random";
+      writeStored(picked);
     }
-    const fresh = assign();
-    writeStored(fresh);
-    setVariant(fresh);
+
+    setVariant(picked);
+
+    // `hero_variant_assigned` fires only when the visitor gets a fresh
+    // random pick or an explicit override — used to sanity-check the split.
+    if (source !== "stored") {
+      track("hero_variant_assigned", { hero_variant: picked, source });
+    }
+    // `hero_variant_view` fires on every landing so per-variant impression
+    // counts can be paired against RSVP conversions.
+    track("hero_variant_view", { hero_variant: picked, source });
   }, []);
 
   return variant;
