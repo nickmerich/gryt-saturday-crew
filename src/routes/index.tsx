@@ -570,6 +570,7 @@ function MemberNamesMarquee() {
 }
 
 function RSVP() {
+  const heroVariant = useHeroVariant();
   const [name, setName] = useState("");
   const [contact, setContact] = useState("");
   const [source, setSource] = useState("");
