@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
+import { track } from "@/lib/analytics";
 
 const SITE = "https://gryt-saturday-crew.lovable.app";
 const URL = `${SITE}/resources/manifesto`;
