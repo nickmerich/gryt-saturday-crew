@@ -163,6 +163,7 @@ export type Database = {
           contact: string
           created_at: string
           event_label: string | null
+          hero_variant: string | null
           id: string
           ip_hash: string | null
           name: string
@@ -178,6 +179,7 @@ export type Database = {
           contact: string
           created_at?: string
           event_label?: string | null
+          hero_variant?: string | null
           id?: string
           ip_hash?: string | null
           name: string
@@ -193,6 +195,7 @@ export type Database = {
           contact?: string
           created_at?: string
           event_label?: string | null
+          hero_variant?: string | null
           id?: string
           ip_hash?: string | null
           name?: string
