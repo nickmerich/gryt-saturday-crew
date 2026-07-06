@@ -2,6 +2,61 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 import { track } from "@/lib/analytics";
+import crewTrail from "@/assets/photos/manifesto/crew-trail.jpg.asset.json";
+import marathonStreet from "@/assets/photos/manifesto/marathon-street.jpg.asset.json";
+import fourFriends from "@/assets/photos/manifesto/four-friends.jpg.asset.json";
+import halftonePortrait from "@/assets/photos/manifesto/halftone-portrait.jpg.asset.json";
+import dadsAndKids from "@/assets/photos/manifesto/dads-and-kids.jpg.asset.json";
+
+const HUMAN_LAYER_PHOTOS: {
+  src: string;
+  alt: string;
+  caption: string;
+  eyebrow: string;
+  span: string;
+  ratio: string;
+}[] = [
+  {
+    src: crewTrail.url,
+    alt: "GRYT crew gathered on the trail before a Saturday run",
+    caption: "The crew before the run. Names remembered. Nobody invisible.",
+    eyebrow: "The people",
+    span: "md:col-span-8",
+    ratio: "aspect-[16/9]",
+  },
+  {
+    src: dadsAndKids.url,
+    alt: "Two GRYT dads at the ballpark holding their kids",
+    caption: "Why we protect the ritual. The people we run home to.",
+    eyebrow: "The family",
+    span: "md:col-span-4",
+    ratio: "aspect-[4/5]",
+  },
+  {
+    src: marathonStreet.url,
+    alt: "Two runners crossing the city together mid-race",
+    caption: "Do hard things together. Side by side, every mile.",
+    eyebrow: "The love",
+    span: "md:col-span-5",
+    ratio: "aspect-[4/5]",
+  },
+  {
+    src: fourFriends.url,
+    alt: "Four GRYT members after a run, arm in arm",
+    caption: "Belonging with responsibility attached. This is the crew.",
+    eyebrow: "The brotherhood",
+    span: "md:col-span-7",
+    ratio: "aspect-[16/10]",
+  },
+  {
+    src: halftonePortrait.url,
+    alt: "Halftone portrait of a runner",
+    caption: "One person, seen. That is where community begins.",
+    eyebrow: "The one",
+    span: "md:col-span-12",
+    ratio: "aspect-[21/9]",
+  },
+];
 
 const SITE = "https://grytrunclub.com";
 const URL = `${SITE}/resources/manifesto`;
@@ -367,6 +422,56 @@ function ManifestoPage() {
               {q}
             </blockquote>
           ))}
+        </div>
+      </section>
+
+      {/* HUMAN LAYER — PHOTOS */}
+      <section className="px-6 sm:px-12 lg:px-24 py-20 md:py-28 border-b border-paper/15">
+        <div className="max-w-[1180px] mx-auto">
+          <div className="max-w-[720px] mb-14">
+            <p className="eyebrow text-blue mb-5" style={mono}>
+              The human layer
+            </p>
+            <h2
+              className="uppercase text-[clamp(32px,5vw,72px)] leading-[0.92] tracking-tight"
+              style={{ fontFamily: "var(--font-condensed)" }}
+            >
+              People. Family. Love.
+            </h2>
+            <p className="mt-6 text-paper/80 text-[17px] leading-[1.7]">
+              The dashboards do not remember anyone. The photos do. This is
+              what the system is built to protect.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-6">
+            {HUMAN_LAYER_PHOTOS.map((p) => (
+              <figure
+                key={p.src}
+                className={`${p.span} group relative overflow-hidden bg-black border border-paper/10`}
+              >
+                <div className={`${p.ratio} w-full overflow-hidden`}>
+                  <img
+                    src={p.src}
+                    alt={p.alt}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                  />
+                </div>
+                <figcaption className="p-5 md:p-6 border-t border-paper/10">
+                  <p
+                    className="text-[10px] tracking-[0.24em] uppercase text-blue mb-2"
+                    style={mono}
+                  >
+                    {p.eyebrow}
+                  </p>
+                  <p className="text-paper/90 text-[15px] md:text-[16px] leading-[1.5]">
+                    {p.caption}
+                  </p>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
         </div>
       </section>
 
