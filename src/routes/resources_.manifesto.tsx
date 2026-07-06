@@ -422,7 +422,11 @@ function ManifestoPage() {
             </p>
           </div>
 
-          <div className="mt-14 flex flex-wrap gap-4">
+          <div className="mt-12">
+            <ShareBar />
+          </div>
+
+          <div className="mt-10 flex flex-wrap gap-4">
             <Link to="/resources" className="btn-primary">
               Back to Resources →
             </Link>
