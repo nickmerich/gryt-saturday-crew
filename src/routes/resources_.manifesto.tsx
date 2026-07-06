@@ -2,6 +2,61 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 import { track } from "@/lib/analytics";
+import crewTrail from "@/assets/photos/manifesto/crew-trail.jpg.asset.json";
+import marathonStreet from "@/assets/photos/manifesto/marathon-street.jpg.asset.json";
+import fourFriends from "@/assets/photos/manifesto/four-friends.jpg.asset.json";
+import halftonePortrait from "@/assets/photos/manifesto/halftone-portrait.jpg.asset.json";
+import dadsAndKids from "@/assets/photos/manifesto/dads-and-kids.jpg.asset.json";
+
+const HUMAN_LAYER_PHOTOS: {
+  src: string;
+  alt: string;
+  caption: string;
+  eyebrow: string;
+  span: string;
+  ratio: string;
+}[] = [
+  {
+    src: crewTrail.url,
+    alt: "GRYT crew gathered on the trail before a Saturday run",
+    caption: "The crew before the run. Names remembered. Nobody invisible.",
+    eyebrow: "The people",
+    span: "md:col-span-8",
+    ratio: "aspect-[16/9]",
+  },
+  {
+    src: dadsAndKids.url,
+    alt: "Two GRYT dads at the ballpark holding their kids",
+    caption: "Why we protect the ritual. The people we run home to.",
+    eyebrow: "The family",
+    span: "md:col-span-4",
+    ratio: "aspect-[4/5]",
+  },
+  {
+    src: marathonStreet.url,
+    alt: "Two runners crossing the city together mid-race",
+    caption: "Do hard things together. Side by side, every mile.",
+    eyebrow: "The love",
+    span: "md:col-span-5",
+    ratio: "aspect-[4/5]",
+  },
+  {
+    src: fourFriends.url,
+    alt: "Four GRYT members after a run, arm in arm",
+    caption: "Belonging with responsibility attached. This is the crew.",
+    eyebrow: "The brotherhood",
+    span: "md:col-span-7",
+    ratio: "aspect-[16/10]",
+  },
+  {
+    src: halftonePortrait.url,
+    alt: "Halftone portrait of a runner",
+    caption: "One person, seen. That is where community begins.",
+    eyebrow: "The one",
+    span: "md:col-span-12",
+    ratio: "aspect-[21/9]",
+  },
+];
 
 const SITE = "https://grytrunclub.com";
 const URL = `${SITE}/resources/manifesto`;
