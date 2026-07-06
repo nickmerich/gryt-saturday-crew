@@ -42,7 +42,7 @@ const HUMAN_LAYER_PHOTOS: {
   },
   {
     src: fourFriends.url,
-    alt: "Four GRYT members after a run, arm in arm",
+    alt: "GRYT crew smiling together on the trail after a Saturday run",
     caption: "Belonging with responsibility attached. This is the crew.",
     eyebrow: "The brotherhood",
     span: "md:col-span-7",
