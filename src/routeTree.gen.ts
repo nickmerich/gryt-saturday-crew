@@ -20,6 +20,7 @@ import { Route as McpRouteImport } from './routes/mcp'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ResourcesRecapRouteImport } from './routes/resources_.recap'
 import { Route as ResourcesPlaybooksRouteImport } from './routes/resources_.playbooks'
+import { Route as ResourcesManifestoRouteImport } from './routes/resources_.manifesto'
 import { Route as ResourcesGraphicsRouteImport } from './routes/resources_.graphics'
 import { Route as ResourcesConversationsRouteImport } from './routes/resources_.conversations'
 import { Route as MembersKeyRouteImport } from './routes/members.$key'
@@ -93,6 +94,11 @@ const ResourcesRecapRoute = ResourcesRecapRouteImport.update({
 const ResourcesPlaybooksRoute = ResourcesPlaybooksRouteImport.update({
   id: '/resources_/playbooks',
   path: '/resources/playbooks',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResourcesManifestoRoute = ResourcesManifestoRouteImport.update({
+  id: '/resources_/manifesto',
+  path: '/resources/manifesto',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResourcesGraphicsRoute = ResourcesGraphicsRouteImport.update({
@@ -217,6 +223,7 @@ export interface FileRoutesByFullPath {
   '/members/$key': typeof MembersKeyRoute
   '/resources/conversations': typeof ResourcesConversationsRoute
   '/resources/graphics': typeof ResourcesGraphicsRoute
+  '/resources/manifesto': typeof ResourcesManifestoRoute
   '/resources/playbooks': typeof ResourcesPlaybooksRoute
   '/resources/recap': typeof ResourcesRecapRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -249,6 +256,7 @@ export interface FileRoutesByTo {
   '/members/$key': typeof MembersKeyRoute
   '/resources/conversations': typeof ResourcesConversationsRoute
   '/resources/graphics': typeof ResourcesGraphicsRoute
+  '/resources/manifesto': typeof ResourcesManifestoRoute
   '/resources/playbooks': typeof ResourcesPlaybooksRoute
   '/resources/recap': typeof ResourcesRecapRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -282,6 +290,7 @@ export interface FileRoutesById {
   '/members/$key': typeof MembersKeyRoute
   '/resources_/conversations': typeof ResourcesConversationsRoute
   '/resources_/graphics': typeof ResourcesGraphicsRoute
+  '/resources_/manifesto': typeof ResourcesManifestoRoute
   '/resources_/playbooks': typeof ResourcesPlaybooksRoute
   '/resources_/recap': typeof ResourcesRecapRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -316,6 +325,7 @@ export interface FileRouteTypes {
     | '/members/$key'
     | '/resources/conversations'
     | '/resources/graphics'
+    | '/resources/manifesto'
     | '/resources/playbooks'
     | '/resources/recap'
     | '/.mcp/invoke-tool/$tool'
@@ -348,6 +358,7 @@ export interface FileRouteTypes {
     | '/members/$key'
     | '/resources/conversations'
     | '/resources/graphics'
+    | '/resources/manifesto'
     | '/resources/playbooks'
     | '/resources/recap'
     | '/.mcp/invoke-tool/$tool'
@@ -380,6 +391,7 @@ export interface FileRouteTypes {
     | '/members/$key'
     | '/resources_/conversations'
     | '/resources_/graphics'
+    | '/resources_/manifesto'
     | '/resources_/playbooks'
     | '/resources_/recap'
     | '/.mcp/invoke-tool/$tool'
@@ -412,6 +424,7 @@ export interface RootRouteChildren {
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   ResourcesConversationsRoute: typeof ResourcesConversationsRoute
   ResourcesGraphicsRoute: typeof ResourcesGraphicsRoute
+  ResourcesManifestoRoute: typeof ResourcesManifestoRoute
   ResourcesPlaybooksRoute: typeof ResourcesPlaybooksRoute
   ResourcesRecapRoute: typeof ResourcesRecapRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -505,6 +518,13 @@ declare module '@tanstack/react-router' {
       path: '/resources/playbooks'
       fullPath: '/resources/playbooks'
       preLoaderRoute: typeof ResourcesPlaybooksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resources_/manifesto': {
+      id: '/resources_/manifesto'
+      path: '/resources/manifesto'
+      fullPath: '/resources/manifesto'
+      preLoaderRoute: typeof ResourcesManifestoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/resources_/graphics': {
@@ -671,6 +691,7 @@ const rootRouteChildren: RootRouteChildren = {
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   ResourcesConversationsRoute: ResourcesConversationsRoute,
   ResourcesGraphicsRoute: ResourcesGraphicsRoute,
+  ResourcesManifestoRoute: ResourcesManifestoRoute,
   ResourcesPlaybooksRoute: ResourcesPlaybooksRoute,
   ResourcesRecapRoute: ResourcesRecapRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
