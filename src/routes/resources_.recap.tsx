@@ -106,14 +106,19 @@ const PRESETS: Array<{ label: string; hint: string; values: FormState }> = [
 const CANVAS_W = 1080;
 const CANVAS_H = 1350; // 4:5 portrait, IG-friendly
 
+type PhotoTransform = { scale: number; offsetX: number; offsetY: number };
+const DEFAULT_TRANSFORM: PhotoTransform = { scale: 1, offsetX: 0, offsetY: 0 };
+
 function RecapGeneratorPage() {
   const [form, setForm] = useState<FormState>(DEFAULTS);
   const [photoUrl, setPhotoUrl] = useState<string | null>(null);
   const [photoImg, setPhotoImg] = useState<HTMLImageElement | null>(null);
+  const [transform, setTransform] = useState<PhotoTransform>(DEFAULT_TRANSFORM);
   const [activePreset, setActivePreset] = useState<string | null>(null);
   const [status, setStatus] = useState<"idle" | "saving" | "saved">("idle");
   const [savedFile, setSavedFile] = useState<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const dragState = useRef<{ x: number; y: number; ox: number; oy: number } | null>(null);
 
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((f) => ({ ...f, [key]: value }));
@@ -135,6 +140,11 @@ function RecapGeneratorPage() {
     }
     const url = URL.createObjectURL(file);
     setPhotoUrl(url);
+    setTransform(DEFAULT_TRANSFORM);
+  }
+
+  function updateTransform(patch: Partial<PhotoTransform>) {
+    setTransform((t) => ({ ...t, ...patch }));
   }
 
   // Load image whenever photoUrl changes
@@ -151,12 +161,43 @@ function RecapGeneratorPage() {
     };
   }, [photoUrl]);
 
-  // Redraw whenever form or image changes
+  // Redraw whenever form, image, or transform changes
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    drawRecap(canvas, form, photoImg);
-  }, [form, photoImg]);
+    drawRecap(canvas, form, photoImg, transform);
+  }, [form, photoImg, transform]);
+
+  // Drag on canvas to reposition the photo
+  function onCanvasPointerDown(e: React.PointerEvent<HTMLCanvasElement>) {
+    if (!photoImg) return;
+    (e.target as HTMLCanvasElement).setPointerCapture(e.pointerId);
+    dragState.current = {
+      x: e.clientX,
+      y: e.clientY,
+      ox: transform.offsetX,
+      oy: transform.offsetY,
+    };
+  }
+  function onCanvasPointerMove(e: React.PointerEvent<HTMLCanvasElement>) {
+    const d = dragState.current;
+    if (!d) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const rect = canvas.getBoundingClientRect();
+    // Normalize drag delta to canvas pixel space, then to -1..1 offset units
+    const dx = ((e.clientX - d.x) / rect.width) * CANVAS_W;
+    const dy = ((e.clientY - d.y) / rect.height) * CANVAS_H;
+    const photoH = Math.floor(CANVAS_H * 0.68);
+    updateTransform({
+      offsetX: clamp(d.ox + dx / (CANVAS_W / 2), -1.5, 1.5),
+      offsetY: clamp(d.oy + dy / (photoH / 2), -1.5, 1.5),
+    });
+  }
+  function onCanvasPointerUp() {
+    dragState.current = null;
+  }
+
 
   // Auto-clear the "saved" confirmation
   useEffect(() => {
