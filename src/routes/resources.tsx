@@ -993,37 +993,37 @@ function ShareYourStory() {
 
         <div className="md:col-span-3">
           {done ? (
-            <div className="p-8 border border-blue bg-vintage">
-              <p className="text-blue text-[11px] tracking-[0.22em] uppercase mb-3" style={mono}>
+            <div role="status" aria-live="polite" className="p-8 border border-blue bg-vintage">
+              <p className="text-blue text-[12px] tracking-[0.22em] uppercase mb-3" style={mono}>
                 Story received
               </p>
               <h3 className="text-2xl font-bold leading-tight mb-3" style={{ fontFamily: "var(--font-display)" }}>
                 Thanks for sharing.
               </h3>
-              <p className="text-paper/75 text-[14px] leading-[1.6]">
+              <p className="text-paper/90 text-[15px] leading-[1.65]">
                 Nick reads every story personally. If it's a fit, we'll reach out
                 to <span className="text-paper">{email}</span> about an interview.
               </p>
             </div>
           ) : (
-            <form onSubmit={onSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <form onSubmit={onSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-5" noValidate>
               <div>
                 <label htmlFor="s-name" className={swissLabel} style={mono}>Name</label>
-                <input id="s-name" type="text" maxLength={120} required
+                <input id="s-name" type="text" maxLength={120} required autoComplete="name"
                   value={name} onChange={(e) => setName(e.target.value)}
                   className={swissInput} placeholder="Your name" />
               </div>
               <div>
                 <label htmlFor="s-email" className={swissLabel} style={mono}>Email</label>
-                <input id="s-email" type="email" maxLength={255} required
+                <input id="s-email" type="email" maxLength={255} required autoComplete="email"
                   value={email} onChange={(e) => setEmail(e.target.value)}
                   className={swissInput} placeholder="you@email.com" />
               </div>
               <div className="sm:col-span-2">
                 <label htmlFor="s-loc" className={swissLabel} style={mono}>
-                  Location <span className="text-paper/35 normal-case tracking-normal">(optional)</span>
+                  Location <span className="text-paper/70 normal-case tracking-normal">(optional)</span>
                 </label>
-                <input id="s-loc" type="text" maxLength={160}
+                <input id="s-loc" type="text" maxLength={160} autoComplete="address-level2"
                   value={location} onChange={(e) => setLocation(e.target.value)}
                   className={swissInput} placeholder="City, state, or club" />
               </div>
@@ -1033,7 +1033,7 @@ function ShareYourStory() {
                   value={story} onChange={(e) => setStory(e.target.value)}
                   className={`${swissInput} resize-none`}
                   placeholder="Where you started, what changed, where you are now." />
-                <p className="mt-1.5 text-[11px] text-paper/40" style={mono}>{story.length}/4000</p>
+                <p className="mt-1.5 text-[12px] text-paper/75" style={mono} aria-live="polite">{story.length}/4000</p>
               </div>
               <div className="sm:col-span-2">
                 <label htmlFor="s-why" className={swissLabel} style={mono}>Why should we interview you?</label>
@@ -1041,27 +1041,27 @@ function ShareYourStory() {
                   value={whyInterview} onChange={(e) => setWhyInterview(e.target.value)}
                   className={`${swissInput} resize-none`}
                   placeholder="What would other runners get out of hearing it?" />
-                <p className="mt-1.5 text-[11px] text-paper/40" style={mono}>{whyInterview.length}/2000</p>
+                <p className="mt-1.5 text-[12px] text-paper/75" style={mono} aria-live="polite">{whyInterview.length}/2000</p>
               </div>
               <div className="sm:col-span-2">
                 <label htmlFor="s-links" className={swissLabel} style={mono}>
-                  Links <span className="text-paper/35 normal-case tracking-normal">(optional)</span>
+                  Links <span className="text-paper/70 normal-case tracking-normal">(optional)</span>
                 </label>
-                <input id="s-links" type="text" maxLength={600}
+                <input id="s-links" type="url" maxLength={600} autoComplete="url"
                   value={links} onChange={(e) => setLinks(e.target.value)}
                   className={swissInput}
                   placeholder="Strava, Instagram, blog — anything that adds context" />
               </div>
-              <label className="sm:col-span-2 flex items-start gap-3 text-[14px] text-paper/70 leading-[1.5] cursor-pointer">
+              <label className="sm:col-span-2 flex items-start gap-3 text-[14.5px] text-paper/90 leading-[1.5] cursor-pointer">
                 <input type="checkbox" checked={consentContact}
                   onChange={(e) => setConsentContact(e.target.checked)}
-                  className="mt-1 h-4 w-4 accent-[var(--blue)]" />
+                  className={`mt-1 h-4 w-4 accent-[var(--blue)] ${focusRing}`} />
                 <span>It's okay to email me about featuring this story.</span>
               </label>
-              {error && <p className="sm:col-span-2 text-[13px] text-red-400">{error}</p>}
+              {error && <p role="alert" className="sm:col-span-2 text-[14px] text-red-300">{error}</p>}
               <div className="sm:col-span-2">
                 <button type="submit" disabled={submitting}
-                  className="px-7 py-4 border border-paper text-[11px] tracking-[0.22em] uppercase hover:bg-blue hover:border-blue hover:text-ink transition-colors disabled:opacity-40"
+                  className={`px-7 py-4 min-h-[44px] border border-paper text-[12px] tracking-[0.22em] uppercase hover:bg-blue hover:border-blue hover:text-ink transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${focusRing}`}
                   style={{ fontFamily: "var(--font-condensed)" }}>
                   {submitting ? "Sending…" : "Submit My Story →"}
                 </button>
