@@ -44,6 +44,65 @@ const DEFAULTS: FormState = {
   note: "DO HARD THINGS TOGETHER",
 };
 
+const PRESETS: Array<{ label: string; hint: string; values: FormState }> = [
+  {
+    label: "Saturday Long Run",
+    hint: "Weekly crew miles",
+    values: {
+      title: "SATURDAY LONG RUN",
+      date: "JUN 21 · 2026",
+      location: "MONTOUR TRAIL · PGH",
+      distance: "10.0",
+      time: "1:24:30",
+      pace: "8:27",
+      athlete: "@yourhandle",
+      note: "DO HARD THINGS TOGETHER",
+    },
+  },
+  {
+    label: "Race Day PR",
+    hint: "Half marathon effort",
+    values: {
+      title: "PITTSBURGH HALF",
+      date: "MAY 04 · 2026",
+      location: "PITTSBURGH, PA",
+      distance: "13.1",
+      time: "1:42:11",
+      pace: "7:48",
+      athlete: "@yourhandle",
+      note: "NEW PR · GRYT",
+    },
+  },
+  {
+    label: "Tuesday Tempo",
+    hint: "Mid-week burner",
+    values: {
+      title: "TUESDAY TEMPO",
+      date: "JUN 17 · 2026",
+      location: "SOUTH HILLS LOOP",
+      distance: "5.0",
+      time: "37:45",
+      pace: "7:33",
+      athlete: "@yourhandle",
+      note: "SHOWED UP · GRYT",
+    },
+  },
+  {
+    label: "First 5K",
+    hint: "New runner win",
+    values: {
+      title: "FIRST 5K",
+      date: "APR 12 · 2026",
+      location: "PITTSBURGH, PA",
+      distance: "3.1",
+      time: "32:04",
+      pace: "10:20",
+      athlete: "@yourhandle",
+      note: "DAY ONE · GRYT",
+    },
+  },
+];
+
 const CANVAS_W = 1080;
 const CANVAS_H = 1350; // 4:5 portrait, IG-friendly
 
@@ -51,10 +110,20 @@ function RecapGeneratorPage() {
   const [form, setForm] = useState<FormState>(DEFAULTS);
   const [photoUrl, setPhotoUrl] = useState<string | null>(null);
   const [photoImg, setPhotoImg] = useState<HTMLImageElement | null>(null);
+  const [activePreset, setActivePreset] = useState<string | null>(null);
+  const [status, setStatus] = useState<"idle" | "saving" | "saved">("idle");
+  const [savedFile, setSavedFile] = useState<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((f) => ({ ...f, [key]: value }));
+    setActivePreset(null);
+  }
+
+  function applyPreset(p: (typeof PRESETS)[number]) {
+    setForm(p.values);
+    setActivePreset(p.label);
+    setStatus("idle");
   }
 
   function onPhoto(e: ChangeEvent<HTMLInputElement>) {
@@ -89,13 +158,31 @@ function RecapGeneratorPage() {
     drawRecap(canvas, form, photoImg);
   }, [form, photoImg]);
 
-  function download() {
+  // Auto-clear the "saved" confirmation
+  useEffect(() => {
+    if (status !== "saved") return;
+    const t = setTimeout(() => setStatus("idle"), 5000);
+    return () => clearTimeout(t);
+  }, [status]);
+
+  async function download() {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const link = document.createElement("a");
-    link.download = `gryt-recap-${Date.now()}.png`;
-    link.href = canvas.toDataURL("image/png");
-    link.click();
+    setStatus("saving");
+    // Let the button state paint before we encode the PNG.
+    await new Promise((r) => setTimeout(r, 350));
+    try {
+      const filename = `gryt-recap-${Date.now()}.png`;
+      const link = document.createElement("a");
+      link.download = filename;
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+      setSavedFile(filename);
+      setStatus("saved");
+    } catch {
+      setStatus("idle");
+      alert("Something went wrong saving your recap. Please try again.");
+    }
   }
 
   return (
@@ -123,6 +210,36 @@ function RecapGeneratorPage() {
         <div className="max-w-[1180px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr,1.1fr] gap-10 lg:gap-16 items-start">
           {/* Form */}
           <div className="flex flex-col gap-6 order-2 lg:order-1">
+            <div>
+              <p className="eyebrow text-blue mb-3">Start from an example</p>
+              <div className="flex flex-wrap gap-2" role="group" aria-label="Example runs">
+                {PRESETS.map((p) => {
+                  const active = activePreset === p.label;
+                  return (
+                    <button
+                      key={p.label}
+                      type="button"
+                      onClick={() => applyPreset(p)}
+                      aria-pressed={active}
+                      title={p.hint}
+                      className={`px-3.5 py-2 text-xs font-bold uppercase tracking-[0.14em] border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ink ${
+                        active
+                          ? "border-blue bg-blue text-ink"
+                          : "border-paper/30 text-paper/85 hover:border-blue hover:text-blue"
+                      }`}
+                    >
+                      {p.label}
+                    </button>
+                  );
+                })}
+              </div>
+              <p className="mt-2 text-xs text-paper/70">
+                Tap one, then tweak. Your edits update the preview instantly.
+              </p>
+            </div>
+
+            <div className="h-px bg-paper/15" aria-hidden="true" />
+
             <p className="eyebrow text-blue">RUN DETAILS</p>
 
             <PhotoPicker
@@ -201,24 +318,57 @@ function RecapGeneratorPage() {
               <button
                 type="button"
                 onClick={download}
-                className="btn-primary"
+                disabled={status === "saving"}
+                aria-busy={status === "saving"}
+                className="btn-primary inline-flex items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                 style={{ fontFamily: "var(--font-body)" }}
               >
-                DOWNLOAD PNG ↓
+                {status === "saving" && (
+                  <span
+                    aria-hidden="true"
+                    className="inline-block h-3.5 w-3.5 rounded-full border-2 border-current border-r-transparent animate-spin"
+                  />
+                )}
+                {status === "saving"
+                  ? "SAVING…"
+                  : status === "saved"
+                  ? "SAVED · DOWNLOAD AGAIN ↓"
+                  : "DOWNLOAD PNG ↓"}
               </button>
               <button
                 type="button"
                 onClick={() => {
                   setForm(DEFAULTS);
                   setPhotoUrl(null);
+                  setActivePreset(null);
+                  setStatus("idle");
                 }}
-                className="px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-paper/30 text-paper/80 hover:border-blue hover:text-blue transition-colors"
+                className="px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-paper/30 text-paper/85 hover:border-blue hover:text-blue transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
               >
                 Reset
               </button>
             </div>
 
-            <p className="text-paper/45 text-xs leading-[1.5] pt-2">
+            <div className="min-h-[64px]" aria-live="polite">
+              {status === "saved" && (
+                <div className="flex items-start gap-3 border border-blue/60 bg-blue/10 px-4 py-3">
+                  <span
+                    aria-hidden="true"
+                    className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue text-ink text-[11px] font-bold"
+                  >
+                    ✓
+                  </span>
+                  <div className="text-sm leading-[1.5]">
+                    <p className="font-bold text-paper">Recap saved to your device.</p>
+                    <p className="text-paper/70 text-xs mt-0.5 break-all">
+                      {savedFile ?? "gryt-recap.png"} · Check your Downloads folder, then share it anywhere.
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <p className="text-paper/70 text-xs leading-[1.5]">
               Everything runs in your browser. Photos never upload anywhere.
               1080 × 1350px (Instagram-ready).
             </p>
