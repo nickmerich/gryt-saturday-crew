@@ -52,7 +52,7 @@ const HUMAN_LAYER_PHOTOS: {
 
 const SITE = "https://grytrunclub.com";
 const URL = `${SITE}/resources/manifesto`;
-const TITLE = "The Human Layer Comes First · GRYT Manifesto";
+const TITLE = "July 2026 Audit: The Human Layer Comes First · GRYT Manifesto";
 const DESCRIPTION =
   "A GRYT Club audit manifesto from Nick Merich on what we learned, what we missed, and what we are building next.";
 const PUBLISHED = "2026-07-01T00:00:00Z";
