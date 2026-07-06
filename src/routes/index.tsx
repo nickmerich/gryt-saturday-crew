@@ -2824,16 +2824,33 @@ function NewsletterBar() {
               type="submit"
               disabled={disableSubmit}
               aria-disabled={disableSubmit}
-              className="bg-ink text-blue px-4 py-2 text-xs font-bold uppercase tracking-[0.1em] hover:bg-paper hover:text-ink transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              aria-busy={status === "loading"}
+              aria-describedby="nl-status"
+              className="bg-ink text-blue px-4 py-2 text-xs font-bold uppercase tracking-[0.1em] hover:bg-paper hover:text-ink transition-colors disabled:opacity-40 disabled:cursor-not-allowed inline-flex items-center gap-2"
               style={{ fontFamily: "var(--font-body)" }}
             >
-              {status === "loading" ? "Sending..." : "Subscribe"}
+              {status === "loading" && (
+                <span
+                  aria-hidden="true"
+                  className="inline-block h-3 w-3 rounded-full border-2 border-blue border-t-transparent animate-spin"
+                />
+              )}
+              <span>{status === "loading" ? "Sending" : "Subscribe"}</span>
             </button>
           </form>
         )}
         <span id="nl-email-hint" className="sr-only">
           Enter your email to receive the weekly Saturday brief.
         </span>
+        <p
+          id="nl-status"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+          className="sr-only"
+        >
+          {status === "loading" ? "Submitting your email, please wait." : ""}
+        </p>
         <p
           id="nl-email-error"
           role="alert"
@@ -2842,6 +2859,7 @@ function NewsletterBar() {
         >
           {errorMessage ?? ""}
         </p>
+
       </div>
     </div>
   );
