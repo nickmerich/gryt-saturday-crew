@@ -366,7 +366,7 @@ function ManifestoPage() {
             className="uppercase text-[clamp(48px,9vw,140px)] leading-[0.88] tracking-tight"
             style={{ fontFamily: "var(--font-condensed)" }}
           >
-            The Human Layer<br />Comes First
+            July 2026 Audit:<br />The Human Layer<br />Comes First
           </h1>
           <p className="mt-8 text-paper/85 text-[18px] md:text-[22px] leading-[1.5] max-w-[720px]">
             A GRYT Club audit manifesto on what we learned, what we missed,
