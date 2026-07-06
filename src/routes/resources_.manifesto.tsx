@@ -183,6 +183,90 @@ const SECTIONS: Section[] = [
   },
 ];
 
+const SHARE_TEXT = "The Human Layer Comes First — a GRYT Club audit manifesto from Nick Merich.";
+
+function ShareBar({ variant = "dark" }: { variant?: "dark" | "vintage" }) {
+  const [copied, setCopied] = useState(false);
+  const url = URL;
+  const encodedUrl = encodeURIComponent(url);
+  const encodedText = encodeURIComponent(SHARE_TEXT);
+  const encodedTitle = encodeURIComponent(TITLE);
+
+  const links = [
+    {
+      key: "twitter",
+      label: "X",
+      href: `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`,
+    },
+    {
+      key: "facebook",
+      label: "Facebook",
+      href: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+    },
+    {
+      key: "linkedin",
+      label: "LinkedIn",
+      href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
+    },
+    {
+      key: "email",
+      label: "Email",
+      href: `mailto:?subject=${encodedTitle}&body=${encodedText}%0A%0A${encodedUrl}`,
+    },
+  ];
+
+  async function copyLink() {
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      track("share", { method: "copy_link", content_id: "manifesto" });
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      /* noop */
+    }
+  }
+
+  const borderCls = variant === "vintage" ? "border-ink/25" : "border-paper/25";
+  const hoverCls = "hover:border-blue hover:text-blue";
+  const textCls = variant === "vintage" ? "text-ink/80" : "text-paper/80";
+  const labelCls = variant === "vintage" ? "text-ink/60" : "text-paper/60";
+
+  return (
+    <div className={`flex flex-wrap items-center gap-3 ${textCls}`}>
+      <span
+        className={`text-[11px] tracking-[0.22em] uppercase ${labelCls}`}
+        style={mono}
+      >
+        Share
+      </span>
+      {links.map((l) => (
+        <a
+          key={l.key}
+          href={l.href}
+          target={l.key === "email" ? undefined : "_blank"}
+          rel={l.key === "email" ? undefined : "noopener noreferrer"}
+          onClick={() =>
+            track("share", { method: l.key, content_id: "manifesto" })
+          }
+          className={`inline-flex items-center px-3 py-2 text-[11px] font-bold tracking-[0.18em] uppercase border ${borderCls} ${hoverCls} transition-colors`}
+          style={mono}
+        >
+          {l.label}
+        </a>
+      ))}
+      <button
+        type="button"
+        onClick={copyLink}
+        className={`inline-flex items-center px-3 py-2 text-[11px] font-bold tracking-[0.18em] uppercase border ${borderCls} ${hoverCls} transition-colors`}
+        style={mono}
+        aria-live="polite"
+      >
+        {copied ? "Copied" : "Copy link"}
+      </button>
+    </div>
+  );
+}
+
 function ManifestoPage() {
   return (
     <main className="bg-ink text-paper">
