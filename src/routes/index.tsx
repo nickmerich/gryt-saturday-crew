@@ -2686,10 +2686,78 @@ function WeeklyRhythm() {
   );
 }
 
+function NewsletterBar() {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
+  const [msg, setMsg] = useState<string | null>(null);
+
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const value = email.trim();
+    if (!value) return;
+    setStatus("loading");
+    setMsg(null);
+    try {
+      const res = await fetch("/api/newsletter/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: value, source: "homepage_bar" }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.ok) throw new Error(data.error || "Sign-up failed");
+      setStatus("done");
+      setEmail("");
+    } catch (err: any) {
+      setStatus("error");
+      setMsg(err?.message || "Something went wrong.");
+    }
+  }
+
+  return (
+    <div className="sticky top-[68px] z-40 bg-blue text-ink border-b border-ink/15">
+      <div className="max-w-[1180px] mx-auto flex items-center gap-4 px-5 sm:px-8 md:px-12 py-2.5 flex-wrap">
+        <span className="eyebrow text-ink/80 shrink-0">
+          Saturday brief · every Friday
+        </span>
+        {status === "done" ? (
+          <span className="text-sm font-medium">You're in. Watch your inbox.</span>
+        ) : (
+          <form onSubmit={onSubmit} className="flex flex-1 min-w-[240px] items-center gap-2">
+            <label htmlFor="nl-email" className="sr-only">Email address</label>
+            <input
+              id="nl-email"
+              type="email"
+              required
+              maxLength={255}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@email.com"
+              disabled={status === "loading"}
+              className="flex-1 min-w-0 bg-transparent border-0 border-b border-ink/40 text-ink placeholder:text-ink/50 py-1.5 text-sm focus:outline-none focus:border-ink"
+            />
+            <button
+              type="submit"
+              disabled={status === "loading" || !email.trim()}
+              className="bg-ink text-blue px-4 py-2 text-xs font-bold uppercase tracking-[0.1em] hover:bg-paper hover:text-ink transition-colors disabled:opacity-40"
+              style={{ fontFamily: "var(--font-body)" }}
+            >
+              {status === "loading" ? "Sending..." : "Subscribe"}
+            </button>
+          </form>
+        )}
+        {status === "error" && msg && (
+          <span className="text-xs text-ink/80 basis-full">{msg}</span>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function Landing() {
   return (
     <main className="bg-ink text-paper">
       <Nav />
+      <NewsletterBar />
       <Hero />
       <Marquee />
       <RSVP />
