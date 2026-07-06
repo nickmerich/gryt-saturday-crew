@@ -300,6 +300,9 @@ function ManifestoPage() {
             <span aria-hidden>·</span>
             <span>Founder, GRYT Run Club</span>
           </div>
+          <div className="mt-8">
+            <ShareBar />
+          </div>
         </div>
       </section>
 
