@@ -3,26 +3,56 @@ import { useState } from "react";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 import { track } from "@/lib/analytics";
 
-const SITE = "https://gryt-saturday-crew.lovable.app";
+const SITE = "https://grytrunclub.com";
 const URL = `${SITE}/resources/manifesto`;
 const TITLE = "The Human Layer Comes First · GRYT Manifesto";
 const DESCRIPTION =
   "A GRYT Club audit manifesto from Nick Merich on what we learned, what we missed, and what we are building next.";
+const PUBLISHED = "2026-07-01T00:00:00Z";
 
 export const Route = createFileRoute("/resources_/manifesto")({
   head: () => ({
     meta: [
       { title: TITLE },
       { name: "description", content: DESCRIPTION },
+      { name: "author", content: "Nick Merich" },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "article" },
       { property: "og:url", content: URL },
+      { property: "og:site_name", content: "GRYT Run Club" },
+      { property: "article:author", content: "Nick Merich" },
+      { property: "article:section", content: "Resources" },
+      { property: "article:published_time", content: PUBLISHED },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESCRIPTION },
     ],
     links: [{ rel: "canonical", href: URL }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Article",
+          headline: "The Human Layer Comes First",
+          description: DESCRIPTION,
+          author: {
+            "@type": "Person",
+            name: "Nick Merich",
+            jobTitle: "Founder, GRYT Run Club",
+          },
+          publisher: {
+            "@type": "Organization",
+            name: "GRYT Run Club",
+            url: SITE,
+          },
+          datePublished: PUBLISHED,
+          mainEntityOfPage: URL,
+          url: URL,
+        }),
+      },
+    ],
   }),
   component: ManifestoPage,
 });
