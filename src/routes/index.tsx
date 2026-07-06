@@ -456,7 +456,7 @@ function Hero() {
             </a>
           </div>
           <p className="mt-5 text-[13px] leading-[1.5] text-paper/60">
-            One reminder on Friday. One wave at the trailhead. That's it.
+            Do hard things together — starts at the trailhead, Saturday 7 AM.
           </p>
         </div>
 
