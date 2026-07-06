@@ -5,6 +5,7 @@ import { signWaiver, checkWaiverStatus } from "@/lib/waiver.functions";
 import { submitRecommendation } from "@/lib/recommendations.functions";
 import { captureAttribution, getSignupAttribution } from "@/lib/attribution";
 import { useHeroVariant } from "@/lib/ab-hero";
+import { track } from "@/lib/analytics";
 import photo1 from "@/assets/photos/run-club-1.jpg.asset.json";
 import photo2 from "@/assets/photos/run-club-2.jpg.asset.json";
 import photo3 from "@/assets/photos/run-club-3.jpg.asset.json";
@@ -605,15 +606,31 @@ function RSVP() {
   const submit = async () => {
     if (!name.trim() || !contact.trim()) {
       setError("Add your name and an email or phone so we can send the reminder.");
+      track("rsvp_submit_blocked", {
+        reason: "missing_contact",
+        hero_variant: heroVariant ?? "unknown",
+      });
       return;
     }
     const selected = (Object.keys(days) as RsvpDay[]).filter((d) => days[d]);
     if (selected.length === 0) {
       setError("Pick at least one run — Tuesday, Saturday, or both.");
+      track("rsvp_submit_blocked", {
+        reason: "no_day_selected",
+        hero_variant: heroVariant ?? "unknown",
+      });
       return;
     }
     setError(null);
     setSubmitting(true);
+    const contactIsEmail = /@/.test(contact.trim());
+    track("rsvp_submit_attempt", {
+      hero_variant: heroVariant ?? "unknown",
+      days: selected.join(","),
+      day_count: selected.length,
+      contact_kind: contactIsEmail ? "email" : "phone",
+      source: source || "unspecified",
+    });
     try {
       // One RSVP per selected day so each gets the right event label + calendar.
       const results = await Promise.all(
@@ -635,10 +652,28 @@ function RSVP() {
       if (failed) {
         const data = await failed.json().catch(() => ({}));
         setError(data?.error || "Something went wrong. Try again in a moment.");
+        track("rsvp_submit_error", {
+          hero_variant: heroVariant ?? "unknown",
+          status: failed.status,
+          reason: "server_error",
+        });
         return;
       }
       setSubmittedDays(selected);
       setSubmitted(true);
+      track("rsvp_submit_success", {
+        hero_variant: heroVariant ?? "unknown",
+        days: selected.join(","),
+        day_count: selected.length,
+        contact_kind: contactIsEmail ? "email" : "phone",
+        source: source || "unspecified",
+      });
+      // Also emit a Saturday-only conversion so GA4 goals can key off it.
+      if (selected.includes("sat")) {
+        track("rsvp_saturday_success", {
+          hero_variant: heroVariant ?? "unknown",
+        });
+      }
       // Save a tiny prefill so the waiver page can auto-populate.
       try {
         const contactStr = contact.trim();
@@ -656,6 +691,10 @@ function RSVP() {
       }
     } catch {
       setError("Network error. Please try again.");
+      track("rsvp_submit_error", {
+        hero_variant: heroVariant ?? "unknown",
+        reason: "network_error",
+      });
     } finally {
       setSubmitting(false);
     }
