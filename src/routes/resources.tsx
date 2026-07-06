@@ -54,6 +54,7 @@ function ResourcesPage() {
           <Masthead />
           <Playbooks />
           <Conversations />
+          <ManifestoCallout />
           <ShareYourStory />
           <ArtifactsAndTools />
           <Merch />
