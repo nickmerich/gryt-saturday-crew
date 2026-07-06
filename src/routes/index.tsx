@@ -4,6 +4,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { signWaiver, checkWaiverStatus } from "@/lib/waiver.functions";
 import { submitRecommendation } from "@/lib/recommendations.functions";
 import { captureAttribution, getSignupAttribution } from "@/lib/attribution";
+import { useHeroVariant } from "@/lib/ab-hero";
 import photo1 from "@/assets/photos/run-club-1.jpg.asset.json";
 import photo2 from "@/assets/photos/run-club-2.jpg.asset.json";
 import photo3 from "@/assets/photos/run-club-3.jpg.asset.json";
@@ -340,9 +341,17 @@ function Hero() {
     ["0", "runners dropped, ever"],
   ];
 
+  // Sticky 50/50 A/B on the hero headline + subcopy. Variant A is the current
+  // "You used to have a team" line; variant B leads with the specific
+  // Saturday commitment. Falls back to A during SSR and until the hook
+  // hydrates so the layout never shifts.
+  const variant = useHeroVariant();
+  const isB = variant === "b";
+
   return (
     <section
       id="top"
+      data-hero-variant={variant ?? "a"}
       className="relative overflow-hidden text-paper bg-ink py-16 md:py-24 lg:py-28 px-6 sm:px-12 lg:px-24"
     >
       <div
@@ -375,21 +384,40 @@ function Hero() {
             Live in Pittsburgh · Saturdays at 7 AM · McMurray, PA
           </div>
           <h1 className="display-condensed text-paper text-[clamp(48px,7.2vw,108px)] leading-[0.9]">
-            You used to have a team.
-            <br />
-            Now you have{" "}
-            <span className="relative inline-block">
-              Saturday.
-              <span
-                className="absolute left-[-2px] right-[-2px] bottom-[0.06em] h-[0.11em] bg-blue"
-                style={{ transform: "skewX(-8deg)" }}
-              />
-            </span>
+            {isB ? (
+              <>
+                One Saturday.
+                <br />
+                One{" "}
+                <span className="relative inline-block">
+                  crew.
+                  <span
+                    className="absolute left-[-2px] right-[-2px] bottom-[0.06em] h-[0.11em] bg-blue"
+                    style={{ transform: "skewX(-8deg)" }}
+                  />
+                </span>
+              </>
+            ) : (
+              <>
+                You used to have a team.
+                <br />
+                Now you have{" "}
+                <span className="relative inline-block">
+                  Saturday.
+                  <span
+                    className="absolute left-[-2px] right-[-2px] bottom-[0.06em] h-[0.11em] bg-blue"
+                    style={{ transform: "skewX(-8deg)" }}
+                  />
+                </span>
+              </>
+            )}
           </h1>
 
           <div className="mt-7 max-w-[540px] flex flex-col gap-3.5">
             <p className="text-lg leading-[1.55] text-paper/85">
-              A Pittsburgh run club in the South Hills for former athletes, busy parents, comeback runners, and anyone who wants a real crew again. We meet every Saturday at 7 AM in McMurray to walk, jog, or run, then hang in the lot after.
+              {isB
+                ? "7 AM sharp on the Montour / Peters Trail. 7 to 15 regulars, coffee after, zero pressure. Built for former athletes, busy parents, and comeback runners who want a real crew again."
+                : "A Pittsburgh run club in the South Hills for former athletes, busy parents, comeback runners, and anyone who wants a real crew again. We meet every Saturday at 7 AM in McMurray to walk, jog, or run, then hang in the lot after."}
             </p>
             <p className="text-base md:text-[17px] font-semibold leading-[1.5] text-paper">
               No pace requirement. No awkward first day. No one gets dropped.
@@ -542,6 +570,7 @@ function MemberNamesMarquee() {
 }
 
 function RSVP() {
+  const heroVariant = useHeroVariant();
   const [name, setName] = useState("");
   const [contact, setContact] = useState("");
   const [source, setSource] = useState("");
@@ -597,6 +626,7 @@ function RSVP() {
               contact: contact.trim(),
               source: source || null,
               eventLabel: DAY_EVENT_LABEL[d],
+              heroVariant: heroVariant ?? null,
             }),
           }),
         ),
