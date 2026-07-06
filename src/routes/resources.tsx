@@ -103,12 +103,6 @@ const mono = {
 function Masthead() {
   return (
     <header className="border-b-2 border-paper pb-10 md:pb-14 mb-20 md:mb-28">
-      <p
-        className="text-blue text-[11px] tracking-[0.28em] uppercase mb-6"
-        style={mono}
-      >
-        Volume 01 · Issue 03 · From the founders
-      </p>
       <h1
         className="uppercase leading-[0.82] tracking-tight text-[clamp(84px,13vw,200px)]"
         style={{ fontFamily: "var(--font-condensed)" }}
