@@ -2687,8 +2687,42 @@ function WeeklyRhythm() {
   );
 }
 
+// RFC-5322-lite: local@domain.tld, no whitespace, TLD >= 2 chars.
+const EMAIL_RE = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+const DISPOSABLE_DOMAINS = new Set([
+  "mailinator.com",
+  "tempmail.com",
+  "10minutemail.com",
+  "guerrillamail.com",
+  "trashmail.com",
+  "yopmail.com",
+  "getnada.com",
+  "sharklasers.com",
+  "dispostable.com",
+  "throwawaymail.com",
+]);
+
+function validateEmail(raw: string): { ok: boolean; error?: string } {
+  const value = raw.trim();
+  if (!value) return { ok: false };
+  if (value.length > 255) return { ok: false, error: "Email is too long." };
+  if (/\s/.test(value)) return { ok: false, error: "No spaces allowed." };
+  if ((value.match(/@/g) || []).length !== 1) return { ok: false, error: "Enter a valid email." };
+  if (!EMAIL_RE.test(value)) return { ok: false, error: "Enter a valid email." };
+  const [local, domain] = value.toLowerCase().split("@");
+  if (local.length > 64) return { ok: false, error: "Email is too long." };
+  if (local.startsWith(".") || local.endsWith(".") || local.includes(".."))
+    return { ok: false, error: "Enter a valid email." };
+  if (!domain.includes(".") || domain.startsWith("-") || domain.endsWith("-"))
+    return { ok: false, error: "Enter a valid email." };
+  if (DISPOSABLE_DOMAINS.has(domain))
+    return { ok: false, error: "Use a permanent email address." };
+  return { ok: true };
+}
+
 function NewsletterBar() {
   const [email, setEmail] = useState("");
+  const [touched, setTouched] = useState(false);
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [msg, setMsg] = useState<string | null>(null);
 
@@ -2696,10 +2730,18 @@ function NewsletterBar() {
     captureAttribution();
   }, []);
 
+  const validation = useMemo(() => validateEmail(email), [email]);
+  const showFieldError = touched && !validation.ok && email.trim().length > 0;
+
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
+    setTouched(true);
+    if (!validation.ok) {
+      setStatus("error");
+      setMsg(validation.error || "Enter a valid email.");
+      return;
+    }
     const value = email.trim();
-    if (!value) return;
     setStatus("loading");
     setMsg(null);
     try {
@@ -2717,12 +2759,14 @@ function NewsletterBar() {
       if (!res.ok || !data.ok) throw new Error(data.error || "Sign-up failed");
       setStatus("done");
       setEmail("");
+      setTouched(false);
     } catch (err: any) {
       setStatus("error");
       setMsg(err?.message || "Something went wrong.");
     }
   }
 
+  const disableSubmit = status === "loading" || !validation.ok;
 
   return (
     <div className="sticky top-[68px] z-40 bg-blue text-ink border-b border-ink/15">
@@ -2733,36 +2777,50 @@ function NewsletterBar() {
         {status === "done" ? (
           <span className="text-sm font-medium">You're in. Watch your inbox.</span>
         ) : (
-          <form onSubmit={onSubmit} className="flex flex-1 min-w-[240px] items-center gap-2">
+          <form onSubmit={onSubmit} noValidate className="flex flex-1 min-w-[240px] items-center gap-2">
             <label htmlFor="nl-email" className="sr-only">Email address</label>
             <input
               id="nl-email"
               type="email"
+              inputMode="email"
+              autoComplete="email"
+              spellCheck={false}
               required
               maxLength={255}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              onBlur={() => setTouched(true)}
               placeholder="you@email.com"
               disabled={status === "loading"}
-              className="flex-1 min-w-0 bg-transparent border-0 border-b border-ink/40 text-ink placeholder:text-ink/50 py-1.5 text-sm focus:outline-none focus:border-ink"
+              aria-invalid={showFieldError || undefined}
+              aria-describedby={showFieldError ? "nl-email-error" : undefined}
+              className={`flex-1 min-w-0 bg-transparent border-0 border-b text-ink placeholder:text-ink/50 py-1.5 text-sm focus:outline-none ${
+                showFieldError ? "border-red-800 focus:border-red-800" : "border-ink/40 focus:border-ink"
+              }`}
             />
             <button
               type="submit"
-              disabled={status === "loading" || !email.trim()}
-              className="bg-ink text-blue px-4 py-2 text-xs font-bold uppercase tracking-[0.1em] hover:bg-paper hover:text-ink transition-colors disabled:opacity-40"
+              disabled={disableSubmit}
+              className="bg-ink text-blue px-4 py-2 text-xs font-bold uppercase tracking-[0.1em] hover:bg-paper hover:text-ink transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
               style={{ fontFamily: "var(--font-body)" }}
             >
               {status === "loading" ? "Sending..." : "Subscribe"}
             </button>
           </form>
         )}
-        {status === "error" && msg && (
+        {showFieldError && (
+          <span id="nl-email-error" className="text-xs text-ink/80 basis-full">
+            {validation.error || "Enter a valid email."}
+          </span>
+        )}
+        {status === "error" && msg && !showFieldError && (
           <span className="text-xs text-ink/80 basis-full">{msg}</span>
         )}
       </div>
     </div>
   );
 }
+
 
 function Landing() {
   return (
