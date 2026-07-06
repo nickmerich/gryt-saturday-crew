@@ -78,7 +78,7 @@ function SectionRule({ number, title }: { number: string; title: string }) {
   return (
     <div className="flex items-baseline gap-5 mb-10 md:mb-14">
       <span
-        className="text-blue font-mono text-[11px] tracking-[0.22em] uppercase shrink-0"
+        className="text-blue font-mono text-[12px] tracking-[0.22em] uppercase shrink-0"
         style={{ fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace" }}
       >
         {number}
@@ -89,7 +89,7 @@ function SectionRule({ number, title }: { number: string; title: string }) {
       >
         {title}
       </h2>
-      <div className="h-px flex-1 bg-paper/20 mb-3" />
+      <div className="h-px flex-1 bg-paper/35 mb-3" aria-hidden="true" />
     </div>
   );
 }
