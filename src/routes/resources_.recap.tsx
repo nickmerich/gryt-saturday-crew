@@ -393,6 +393,7 @@ function RecapGeneratorPage() {
                 onClick={() => {
                   setForm(DEFAULTS);
                   setPhotoUrl(null);
+                  setTransform(DEFAULT_TRANSFORM);
                   setActivePreset(null);
                   setStatus("idle");
                 }}
