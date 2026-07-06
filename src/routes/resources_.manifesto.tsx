@@ -5,7 +5,7 @@ import { track } from "@/lib/analytics";
 import crewTrail from "@/assets/photos/manifesto/crew-trail.jpg.asset.json";
 import marathonStreet from "@/assets/photos/manifesto/marathon-street.jpg.asset.json";
 import fourFriends from "@/assets/photos/manifesto/brotherhood-crew.jpg.asset.json";
-import halftonePortrait from "@/assets/photos/manifesto/halftone-portrait.jpg.asset.json";
+
 import dadsAndKids from "@/assets/photos/manifesto/dads-and-kids.jpg.asset.json";
 
 const HUMAN_LAYER_PHOTOS: {
@@ -47,14 +47,6 @@ const HUMAN_LAYER_PHOTOS: {
     eyebrow: "The brotherhood",
     span: "md:col-span-7",
     ratio: "aspect-[16/10]",
-  },
-  {
-    src: halftonePortrait.url,
-    alt: "Halftone portrait of a runner",
-    caption: "One person, seen. That is where community begins.",
-    eyebrow: "The one",
-    span: "md:col-span-12",
-    ratio: "aspect-[21/9]",
   },
 ];
 
