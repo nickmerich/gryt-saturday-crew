@@ -442,8 +442,12 @@ function RecapGeneratorPage() {
                 ref={canvasRef}
                 width={CANVAS_W}
                 height={CANVAS_H}
-                className="block w-full h-auto"
-                aria-label="Live preview of your recap graphic. This is exactly what will download."
+                onPointerDown={onCanvasPointerDown}
+                onPointerMove={onCanvasPointerMove}
+                onPointerUp={onCanvasPointerUp}
+                onPointerCancel={onCanvasPointerUp}
+                className={`block w-full h-auto ${photoImg ? "cursor-move touch-none" : ""}`}
+                aria-label="Live preview of your recap graphic. This is exactly what will download. Drag to reposition the photo."
               />
               <div className="absolute top-3 left-3 bg-ink/85 backdrop-blur-sm border border-paper/20 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-paper">
                 1080 × 1350 · PNG
