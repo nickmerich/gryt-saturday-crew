@@ -570,7 +570,7 @@ function Merch() {
           </li>
         ))}
       </ul>
-      <p className="mt-8 text-paper/50 text-[13px] leading-[1.6] max-w-[560px]">
+      <p className="mt-8 text-paper/75 text-[14px] leading-[1.65] max-w-[560px]">
         Ships from Pittsburgh. 100% of proceeds support trail events and club gear.
       </p>
     </section>
