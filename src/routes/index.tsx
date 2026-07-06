@@ -3,6 +3,7 @@ import { useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } 
 import { useServerFn } from "@tanstack/react-start";
 import { signWaiver, checkWaiverStatus } from "@/lib/waiver.functions";
 import { submitRecommendation } from "@/lib/recommendations.functions";
+import { captureAttribution, getSignupAttribution } from "@/lib/attribution";
 import photo1 from "@/assets/photos/run-club-1.jpg.asset.json";
 import photo2 from "@/assets/photos/run-club-2.jpg.asset.json";
 import photo3 from "@/assets/photos/run-club-3.jpg.asset.json";
@@ -2691,6 +2692,10 @@ function NewsletterBar() {
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [msg, setMsg] = useState<string | null>(null);
 
+  useEffect(() => {
+    captureAttribution();
+  }, []);
+
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     const value = email.trim();
@@ -2698,10 +2703,15 @@ function NewsletterBar() {
     setStatus("loading");
     setMsg(null);
     try {
+      const attribution = getSignupAttribution("homepage_bar");
       const res = await fetch("/api/newsletter/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: value, source: "homepage_bar" }),
+        body: JSON.stringify({
+          email: value,
+          source: "homepage_bar",
+          ...attribution,
+        }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok || !data.ok) throw new Error(data.error || "Sign-up failed");
@@ -2712,6 +2722,7 @@ function NewsletterBar() {
       setMsg(err?.message || "Something went wrong.");
     }
   }
+
 
   return (
     <div className="sticky top-[68px] z-40 bg-blue text-ink border-b border-ink/15">
