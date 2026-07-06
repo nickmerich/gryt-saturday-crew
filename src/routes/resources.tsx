@@ -126,9 +126,6 @@ function Masthead() {
         <p className="text-[12px] tracking-[0.24em] uppercase text-paper/70 shrink-0" style={mono}>
           An open field manual<br className="hidden md:block" /> · Pittsburgh, PA
         </p>
-        <p className="text-[11px] tracking-[0.24em] uppercase text-paper/45 shrink-0" style={mono}>
-          An open field manual<br className="hidden md:block" /> · Pittsburgh, PA
-        </p>
       </div>
     </header>
   );
