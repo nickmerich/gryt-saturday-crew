@@ -58,16 +58,17 @@ const EVENT_DATES = nextSaturdayISOs(12);
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "gryt run club · Saturdays 7 AM · McMurray, PA" },
+      { title: "Pittsburgh Running Group · South Hills Run Club · Saturdays 7 AM · gryt" },
       {
         name: "description",
         content:
-          "Pittsburgh Saturday 7 AM run club on the Montour / Peters Trail. Walk, jog, or run. No pace requirement. No one gets dropped.",
+          "GRYT is a free Pittsburgh running group and South Hills run club meeting Saturdays at 7 AM on the Montour / Peters Trail in McMurray. Walk, jog, or run — no pace requirement, no one gets dropped.",
       },
-      { property: "og:title", content: "gryt run club · Saturdays 7 AM" },
+      { property: "og:title", content: "Pittsburgh Running Group · South Hills Run Club · Saturdays 7 AM" },
       {
         property: "og:description",
-        content: "Do hard things together. Saturday mornings on the Montour / Peters Trail.",
+        content:
+          "Free Pittsburgh run club in the South Hills. Saturdays 7 AM on the Montour / Peters Trail. Do hard things together.",
       },
       { property: "og:url", content: SITE_URL },
       { property: "og:image", content: ABS_HERO_IMG },
