@@ -369,12 +369,31 @@ function RecapGeneratorPage() {
               />
             </Grid2>
 
+            <label className="flex items-start gap-3 pt-2 cursor-pointer group">
+              <input
+                type="checkbox"
+                checked={acceptedTerms}
+                onChange={(e) => setAcceptedTerms(e.target.checked)}
+                className="mt-1 h-4 w-4 shrink-0 accent-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ink cursor-pointer"
+                aria-describedby="terms-desc"
+              />
+              <span id="terms-desc" className="text-xs leading-[1.55] text-paper/80 group-hover:text-paper transition-colors">
+                I confirm I have the right to use this photo and I agree to the{" "}
+                <Link to="/terms" target="_blank" className="text-blue underline hover:text-paper transition-colors">
+                  GRYT terms &amp; conditions
+                </Link>
+                .
+              </span>
+            </label>
+
             <div className="flex flex-wrap gap-3 pt-2">
               <button
                 type="button"
                 onClick={download}
-                disabled={status === "saving"}
+                disabled={status === "saving" || !acceptedTerms}
                 aria-busy={status === "saving"}
+                aria-disabled={!acceptedTerms}
+                title={!acceptedTerms ? "Accept the terms to download" : undefined}
                 className="btn-primary inline-flex items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                 style={{ fontFamily: "var(--font-body)" }}
               >
