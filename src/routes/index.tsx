@@ -2725,6 +2725,7 @@ function NewsletterBar() {
   const [touched, setTouched] = useState(false);
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [msg, setMsg] = useState<string | null>(null);
+  const emailRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     captureAttribution();
@@ -2732,6 +2733,15 @@ function NewsletterBar() {
 
   const validation = useMemo(() => validateEmail(email), [email]);
   const showFieldError = touched && !validation.ok && email.trim().length > 0;
+  const showRequestError = status === "error" && !!msg && !showFieldError;
+  const errorMessage = showFieldError
+    ? validation.error || "Enter a valid email."
+    : showRequestError
+    ? msg
+    : null;
+  const describedBy = errorMessage
+    ? "nl-email-error"
+    : "nl-email-hint";
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -2739,6 +2749,8 @@ function NewsletterBar() {
     if (!validation.ok) {
       setStatus("error");
       setMsg(validation.error || "Enter a valid email.");
+      // Move focus back to the invalid field so screen readers announce the error.
+      requestAnimationFrame(() => emailRef.current?.focus());
       return;
     }
     const value = email.trim();
@@ -2763,6 +2775,7 @@ function NewsletterBar() {
     } catch (err: any) {
       setStatus("error");
       setMsg(err?.message || "Something went wrong.");
+      requestAnimationFrame(() => emailRef.current?.focus());
     }
   }
 
@@ -2775,11 +2788,19 @@ function NewsletterBar() {
           Saturday brief · every Friday
         </span>
         {status === "done" ? (
-          <span className="text-sm font-medium">You're in. Watch your inbox.</span>
+          <p role="status" aria-live="polite" className="text-sm font-medium">
+            You're in. Watch your inbox.
+          </p>
         ) : (
-          <form onSubmit={onSubmit} noValidate className="flex flex-1 min-w-[240px] items-center gap-2">
+          <form
+            onSubmit={onSubmit}
+            noValidate
+            aria-label="Subscribe to the GRYT Saturday brief"
+            className="flex flex-1 min-w-[240px] items-center gap-2"
+          >
             <label htmlFor="nl-email" className="sr-only">Email address</label>
             <input
+              ref={emailRef}
               id="nl-email"
               type="email"
               inputMode="email"
@@ -2792,15 +2813,17 @@ function NewsletterBar() {
               onBlur={() => setTouched(true)}
               placeholder="you@email.com"
               disabled={status === "loading"}
-              aria-invalid={showFieldError || undefined}
-              aria-describedby={showFieldError ? "nl-email-error" : undefined}
+              aria-invalid={errorMessage ? true : undefined}
+              aria-describedby={describedBy}
+              aria-errormessage={errorMessage ? "nl-email-error" : undefined}
               className={`flex-1 min-w-0 bg-transparent border-0 border-b text-ink placeholder:text-ink/50 py-1.5 text-sm focus:outline-none ${
-                showFieldError ? "border-red-800 focus:border-red-800" : "border-ink/40 focus:border-ink"
+                errorMessage ? "border-red-800 focus:border-red-800" : "border-ink/40 focus:border-ink"
               }`}
             />
             <button
               type="submit"
               disabled={disableSubmit}
+              aria-disabled={disableSubmit}
               className="bg-ink text-blue px-4 py-2 text-xs font-bold uppercase tracking-[0.1em] hover:bg-paper hover:text-ink transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
               style={{ fontFamily: "var(--font-body)" }}
             >
@@ -2808,18 +2831,22 @@ function NewsletterBar() {
             </button>
           </form>
         )}
-        {showFieldError && (
-          <span id="nl-email-error" className="text-xs text-ink/80 basis-full">
-            {validation.error || "Enter a valid email."}
-          </span>
-        )}
-        {status === "error" && msg && !showFieldError && (
-          <span className="text-xs text-ink/80 basis-full">{msg}</span>
-        )}
+        <span id="nl-email-hint" className="sr-only">
+          Enter your email to receive the weekly Saturday brief.
+        </span>
+        <p
+          id="nl-email-error"
+          role="alert"
+          aria-live="assertive"
+          className={`text-xs text-ink/80 basis-full ${errorMessage ? "" : "sr-only"}`}
+        >
+          {errorMessage ?? ""}
+        </p>
       </div>
     </div>
   );
 }
+
 
 
 function Landing() {
