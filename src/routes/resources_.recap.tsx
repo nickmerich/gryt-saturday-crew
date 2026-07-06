@@ -210,6 +210,7 @@ function RecapGeneratorPage() {
   async function download() {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    if (!acceptedTerms) return;
     setStatus("saving");
     // Let the button state paint before we encode the PNG.
     await new Promise((r) => setTimeout(r, 350));
