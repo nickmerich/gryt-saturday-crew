@@ -383,7 +383,7 @@ function Hero() {
         <div className="flex-1 min-w-[300px] basis-[480px]">
           <div className="eyebrow-blue eyebrow mb-6 flex items-center gap-2.5 flex-wrap">
             <span className="w-2 h-2 bg-blue rounded-full" />
-            Live in Pittsburgh · Saturdays at 7 AM · McMurray, PA
+            Pittsburgh Running Group · South Hills Run Club · Saturdays 7 AM · McMurray, PA
           </div>
           <h1 className="display-condensed text-paper text-[clamp(48px,7.2vw,108px)] leading-[0.9]">
             {isB ? (
