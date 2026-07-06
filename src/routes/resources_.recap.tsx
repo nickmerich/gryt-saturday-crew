@@ -549,6 +549,7 @@ function drawRecap(
   canvas: HTMLCanvasElement,
   form: FormState,
   photo: HTMLImageElement | null,
+  transform: PhotoTransform = DEFAULT_TRANSFORM,
 ) {
   const ctx = canvas.getContext("2d");
   if (!ctx) return;
@@ -563,7 +564,7 @@ function drawRecap(
   // Photo (covers top ~65%)
   const photoArea = { x: 0, y: 0, w: W, h: Math.floor(H * 0.68) };
   if (photo) {
-    drawCover(ctx, photo, photoArea.x, photoArea.y, photoArea.w, photoArea.h);
+    drawCover(ctx, photo, photoArea.x, photoArea.y, photoArea.w, photoArea.h, transform);
     // Darken bottom of photo for legibility
     const grad = ctx.createLinearGradient(
       0,
