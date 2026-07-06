@@ -318,24 +318,57 @@ function RecapGeneratorPage() {
               <button
                 type="button"
                 onClick={download}
-                className="btn-primary"
+                disabled={status === "saving"}
+                aria-busy={status === "saving"}
+                className="btn-primary inline-flex items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                 style={{ fontFamily: "var(--font-body)" }}
               >
-                DOWNLOAD PNG ↓
+                {status === "saving" && (
+                  <span
+                    aria-hidden="true"
+                    className="inline-block h-3.5 w-3.5 rounded-full border-2 border-current border-r-transparent animate-spin"
+                  />
+                )}
+                {status === "saving"
+                  ? "SAVING…"
+                  : status === "saved"
+                  ? "SAVED · DOWNLOAD AGAIN ↓"
+                  : "DOWNLOAD PNG ↓"}
               </button>
               <button
                 type="button"
                 onClick={() => {
                   setForm(DEFAULTS);
                   setPhotoUrl(null);
+                  setActivePreset(null);
+                  setStatus("idle");
                 }}
-                className="px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-paper/30 text-paper/80 hover:border-blue hover:text-blue transition-colors"
+                className="px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-paper/30 text-paper/85 hover:border-blue hover:text-blue transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
               >
                 Reset
               </button>
             </div>
 
-            <p className="text-paper/45 text-xs leading-[1.5] pt-2">
+            <div className="min-h-[64px]" aria-live="polite">
+              {status === "saved" && (
+                <div className="flex items-start gap-3 border border-blue/60 bg-blue/10 px-4 py-3">
+                  <span
+                    aria-hidden="true"
+                    className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue text-ink text-[11px] font-bold"
+                  >
+                    ✓
+                  </span>
+                  <div className="text-sm leading-[1.5]">
+                    <p className="font-bold text-paper">Recap saved to your device.</p>
+                    <p className="text-paper/70 text-xs mt-0.5 break-all">
+                      {savedFile ?? "gryt-recap.png"} · Check your Downloads folder, then share it anywhere.
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <p className="text-paper/70 text-xs leading-[1.5]">
               Everything runs in your browser. Photos never upload anywhere.
               1080 × 1350px (Instagram-ready).
             </p>
