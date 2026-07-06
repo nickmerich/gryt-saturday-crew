@@ -626,6 +626,7 @@ function RSVP() {
               contact: contact.trim(),
               source: source || null,
               eventLabel: DAY_EVENT_LABEL[d],
+              heroVariant: heroVariant ?? null,
             }),
           }),
         ),
