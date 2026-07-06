@@ -4,6 +4,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { signWaiver, checkWaiverStatus } from "@/lib/waiver.functions";
 import { submitRecommendation } from "@/lib/recommendations.functions";
 import { captureAttribution, getSignupAttribution } from "@/lib/attribution";
+import { useHeroVariant } from "@/lib/ab-hero";
 import photo1 from "@/assets/photos/run-club-1.jpg.asset.json";
 import photo2 from "@/assets/photos/run-club-2.jpg.asset.json";
 import photo3 from "@/assets/photos/run-club-3.jpg.asset.json";
@@ -339,6 +340,13 @@ function Hero() {
     ["27", "marathons — Laura & Nick combined"],
     ["0", "runners dropped, ever"],
   ];
+
+  // Sticky 50/50 A/B on the hero headline + subcopy. Variant A is the current
+  // "You used to have a team" line; variant B leads with the specific
+  // Saturday commitment. Falls back to A during SSR and until the hook
+  // hydrates so the layout never shifts.
+  const variant = useHeroVariant();
+  const isB = variant === "b";
 
   return (
     <section
