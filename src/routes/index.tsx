@@ -385,12 +385,11 @@ function Hero() {
             <span className="w-2 h-2 bg-blue rounded-full" />
             Pittsburgh Running Group · South Hills Run Club · Saturdays 7 AM · McMurray, PA
           </div>
-          <h1 className="display-condensed text-paper text-[clamp(48px,7.2vw,108px)] leading-[0.9]">
+          <h1 className="display-condensed text-paper text-[clamp(44px,7.2vw,108px)] leading-[0.9] [word-spacing:-0.02em] break-words">
             {isB ? (
               <>
-                Do hard
+                Do hard things
                 <br />
-                things{" "}
                 <span className="relative inline-block">
                   together.
                   <span
