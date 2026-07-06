@@ -700,9 +700,16 @@ function drawCover(
   transform: PhotoTransform = DEFAULT_TRANSFORM,
 ) {
   const scale = Math.max(0.1, transform.scale);
+  const rot = (transform.rotation * Math.PI) / 180;
+  const cos = Math.abs(Math.cos(rot));
+  const sin = Math.abs(Math.sin(rot));
+  // Enlarged dest rect that fully covers w×h at this rotation angle
+  const dw = w * cos + h * sin;
+  const dh = w * sin + h * cos;
+
   const ir = img.width / img.height;
-  const tr = w / h;
-  // Base "cover" source rect, then shrink by scale to zoom in
+  const tr = dw / dh;
+  // Base "cover" source rect (against rotated dest aspect), shrunk by zoom
   let sw: number, sh: number;
   if (ir > tr) {
     sh = img.height / scale;
@@ -711,12 +718,20 @@ function drawCover(
     sw = img.width / scale;
     sh = (img.width / tr) / scale;
   }
-  // Center then apply user offsets (normalized -1..1 across the overflow)
   const maxOffX = (img.width - sw) / 2;
   const maxOffY = (img.height - sh) / 2;
   const sx = clamp((img.width - sw) / 2 + transform.offsetX * maxOffX, 0, img.width - sw);
   const sy = clamp((img.height - sh) / 2 + transform.offsetY * maxOffY, 0, img.height - sh);
-  ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h);
+
+  ctx.save();
+  // Clip so rotated overflow stays inside the photo band
+  ctx.beginPath();
+  ctx.rect(x, y, w, h);
+  ctx.clip();
+  ctx.translate(x + w / 2, y + h / 2);
+  ctx.rotate(rot);
+  ctx.drawImage(img, sx, sy, sw, sh, -dw / 2, -dh / 2, dw, dh);
+  ctx.restore();
 }
 
 function clamp(v: number, min: number, max: number) {
