@@ -210,6 +210,36 @@ function RecapGeneratorPage() {
         <div className="max-w-[1180px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr,1.1fr] gap-10 lg:gap-16 items-start">
           {/* Form */}
           <div className="flex flex-col gap-6 order-2 lg:order-1">
+            <div>
+              <p className="eyebrow text-blue mb-3">Start from an example</p>
+              <div className="flex flex-wrap gap-2" role="group" aria-label="Example runs">
+                {PRESETS.map((p) => {
+                  const active = activePreset === p.label;
+                  return (
+                    <button
+                      key={p.label}
+                      type="button"
+                      onClick={() => applyPreset(p)}
+                      aria-pressed={active}
+                      title={p.hint}
+                      className={`px-3.5 py-2 text-xs font-bold uppercase tracking-[0.14em] border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ink ${
+                        active
+                          ? "border-blue bg-blue text-ink"
+                          : "border-paper/30 text-paper/85 hover:border-blue hover:text-blue"
+                      }`}
+                    >
+                      {p.label}
+                    </button>
+                  );
+                })}
+              </div>
+              <p className="mt-2 text-xs text-paper/70">
+                Tap one, then tweak. Your edits update the preview instantly.
+              </p>
+            </div>
+
+            <div className="h-px bg-paper/15" aria-hidden="true" />
+
             <p className="eyebrow text-blue">RUN DETAILS</p>
 
             <PhotoPicker
