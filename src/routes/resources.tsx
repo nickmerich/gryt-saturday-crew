@@ -249,26 +249,27 @@ function PlaybookMini({ p }: { p: (typeof PLAYBOOKS)[number] }) {
       {...wrapProps}
       className={`h-full block bg-vintage p-7 md:p-8 flex flex-col justify-between min-h-[220px] transition-colors ${
         p.comingSoon
-          ? "opacity-60 cursor-default"
-          : "hover:bg-blue hover:text-ink group cursor-pointer"
+          ? "opacity-70 cursor-default"
+          : `hover:bg-blue hover:text-ink group cursor-pointer ${focusRing}`
       }`}
+      {...(p.comingSoon ? { "aria-disabled": true } : {})}
     >
       <span
-        className="text-[11px] tracking-[0.22em] uppercase text-paper/50 group-hover:text-ink/60"
+        className="text-[12px] tracking-[0.22em] uppercase text-paper/75 group-hover:text-ink/80"
         style={mono}
       >
         {p.n} / {p.category}
       </span>
       <h4
-        className="text-[22px] md:text-[26px] font-bold leading-[1.1] tracking-tight mt-4"
+        className="text-[22px] md:text-[26px] font-bold leading-[1.15] tracking-tight mt-4"
         style={{ fontFamily: "var(--font-display)" }}
       >
         {p.title}
       </h4>
-      <p className="mt-3 text-[13.5px] leading-[1.55] text-paper/60 group-hover:text-ink/70 line-clamp-2">
+      <p className="mt-3 text-[14px] leading-[1.55] text-paper/80 group-hover:text-ink/80 line-clamp-2">
         {p.description}
       </p>
-      <p className="mt-5 text-[10px] tracking-[0.24em] uppercase text-paper/50 group-hover:text-ink/70" style={mono}>
+      <p className="mt-5 text-[11px] tracking-[0.24em] uppercase text-blue group-hover:text-ink" style={mono}>
         {p.comingSoon ? "Coming Soon" : "Read →"}
       </p>
     </Wrap>
