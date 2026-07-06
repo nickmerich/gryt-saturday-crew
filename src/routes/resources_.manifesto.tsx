@@ -52,7 +52,7 @@ const HUMAN_LAYER_PHOTOS: {
 
 const SITE = "https://grytrunclub.com";
 const URL = `${SITE}/resources/manifesto`;
-const TITLE = "The Human Layer Comes First · GRYT Manifesto";
+const TITLE = "July 2026 Audit: The Human Layer Comes First · GRYT Manifesto";
 const DESCRIPTION =
   "A GRYT Club audit manifesto from Nick Merich on what we learned, what we missed, and what we are building next.";
 const PUBLISHED = "2026-07-01T00:00:00Z";
@@ -82,7 +82,7 @@ export const Route = createFileRoute("/resources_/manifesto")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Article",
-          headline: "The Human Layer Comes First",
+          headline: "July 2026 Audit: The Human Layer Comes First",
           description: DESCRIPTION,
           author: {
             "@type": "Person",
@@ -366,7 +366,7 @@ function ManifestoPage() {
             className="uppercase text-[clamp(48px,9vw,140px)] leading-[0.88] tracking-tight"
             style={{ fontFamily: "var(--font-condensed)" }}
           >
-            The Human Layer<br />Comes First
+            July 2026 Audit:<br />The Human Layer<br />Comes First
           </h1>
           <p className="mt-8 text-paper/85 text-[18px] md:text-[22px] leading-[1.5] max-w-[720px]">
             A GRYT Club audit manifesto on what we learned, what we missed,
