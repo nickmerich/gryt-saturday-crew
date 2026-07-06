@@ -54,6 +54,7 @@ function ResourcesPage() {
           <Masthead />
           <Playbooks />
           <Conversations />
+          <ManifestoCallout />
           <ShareYourStory />
           <ArtifactsAndTools />
           <Merch />
@@ -367,6 +368,53 @@ function Conversations() {
           ))}
         </div>
       </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────  MANIFESTO CALLOUT  ───────────── */
+
+function ManifestoCallout() {
+  return (
+    <section className="mb-24 md:mb-32">
+      <Link
+        to="/resources/manifesto"
+        className={`group block border border-paper/25 bg-vintage p-8 md:p-14 hover:border-blue transition-colors ${focusRing}`}
+      >
+        <div className="grid md:grid-cols-12 gap-8 md:gap-12 items-end">
+          <div className="md:col-span-8">
+            <span className="text-blue text-[12px] tracking-[0.22em] uppercase mb-4 block" style={mono}>
+              § 02.5 · Self-reflection · Audit manifesto · From Nick
+            </span>
+            <h2
+              className="uppercase text-[clamp(36px,5.6vw,80px)] leading-[0.9] tracking-tight group-hover:text-blue transition-colors"
+              style={{ fontFamily: "var(--font-condensed)" }}
+            >
+              The Human Layer<br />Comes First
+            </h2>
+            <p className="mt-6 text-paper/85 text-[16px] md:text-[17px] leading-[1.65] max-w-[560px]">
+              What the GRYT audit revealed: we built the tech stack before the
+              ritual. Here is what we missed, and what we are building next.
+            </p>
+          </div>
+          <div className="md:col-span-4 flex md:justify-end">
+            <span
+              className="inline-flex items-center gap-3 text-[12px] tracking-[0.22em] uppercase text-blue group-hover:text-paper transition-colors"
+              style={mono}
+            >
+              Read the manifesto
+              <span
+                className="w-11 h-11 border border-blue flex items-center justify-center group-hover:bg-blue group-hover:text-ink transition-colors"
+                aria-hidden="true"
+              >
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </span>
+            </span>
+          </div>
+        </div>
+      </Link>
     </section>
   );
 }
