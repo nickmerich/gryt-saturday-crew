@@ -786,6 +786,42 @@ function PhotoControls({
         format={(v) => `${Math.round(v * 100)}%`}
         onChange={(v) => onChange({ offsetY: v })}
       />
+      <div>
+        <RangeControl
+          label="Rotation"
+          value={transform.rotation}
+          min={-180}
+          max={180}
+          step={1}
+          format={(v) => `${v > 0 ? "+" : ""}${Math.round(v)}°`}
+          onChange={(v) => onChange({ rotation: v })}
+        />
+        <div className="mt-2 flex flex-wrap gap-1.5">
+          {[
+            { label: "−90°", delta: -90 },
+            { label: "−1°", delta: -1 },
+            { label: "0°", set: 0 },
+            { label: "+1°", delta: 1 },
+            { label: "+90°", delta: 90 },
+          ].map((b) => (
+            <button
+              key={b.label}
+              type="button"
+              onClick={() => {
+                if ("set" in b) {
+                  onChange({ rotation: b.set });
+                } else {
+                  const next = ((transform.rotation + b.delta + 180) % 360) - 180;
+                  onChange({ rotation: next });
+                }
+              }}
+              className="px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] border border-paper/25 text-paper/80 hover:border-blue hover:text-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ink transition-colors"
+            >
+              {b.label}
+            </button>
+          ))}
+        </div>
+      </div>
       <p className="text-[11px] text-paper/55 leading-[1.5]">
         Tip: drag the preview to nudge the photo into place.
       </p>
