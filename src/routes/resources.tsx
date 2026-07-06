@@ -423,14 +423,14 @@ function ArtifactsAndTools() {
 
   return (
     <section className="mb-24 md:mb-32">
-      <div className="bg-vintage p-8 md:p-14 border border-paper/10">
+      <div className="bg-vintage p-8 md:p-14 border border-paper/25">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-12 md:mb-16">
           <div>
-            <span className="text-blue text-[11px] tracking-[0.22em] uppercase mb-4 block" style={mono}>
+            <span className="text-blue text-[12px] tracking-[0.22em] uppercase mb-4 block" style={mono}>
               § 03 · Free to use & share
             </span>
             <h2
-              className="uppercase leading-[0.9] tracking-tight text-[clamp(40px,6vw,80px)]"
+              className="uppercase leading-[0.95] tracking-tight text-[clamp(38px,6vw,80px)]"
               style={{ fontFamily: "var(--font-condensed)" }}
             >
               Artifacts<br />&amp; Tools
@@ -438,10 +438,10 @@ function ArtifactsAndTools() {
           </div>
           <Link
             to={interactive.href!}
-            className="inline-flex items-center gap-3 px-5 py-3 border border-blue text-blue text-[11px] tracking-[0.22em] uppercase hover:bg-blue hover:text-ink transition-colors self-start"
+            className={`inline-flex items-center gap-3 px-5 py-3 border border-blue text-blue text-[12px] tracking-[0.22em] uppercase hover:bg-blue hover:text-ink transition-colors self-start ${focusRing}`}
             style={mono}
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-blue" />
+            <span className="w-1.5 h-1.5 rounded-full bg-blue" aria-hidden="true" />
             {interactive.name} · Open →
           </Link>
         </div>
@@ -454,9 +454,14 @@ function ArtifactsAndTools() {
               <Wrap
                 key={g.name}
                 {...props}
-                className={`block group ${g.comingSoon ? "opacity-55 cursor-default" : "cursor-pointer"}`}
+                className={`block group ${
+                  g.comingSoon
+                    ? "opacity-70 cursor-default"
+                    : `cursor-pointer ${focusRing}`
+                }`}
+                {...(g.comingSoon ? { "aria-disabled": true } : {})}
               >
-                <div className="relative aspect-[4/5] bg-ink border border-paper/10 group-hover:border-blue transition-colors overflow-hidden">
+                <div className="relative aspect-[4/5] bg-ink border border-paper/25 group-hover:border-blue transition-colors overflow-hidden">
                   <div
                     className="absolute inset-0 opacity-[0.07]"
                     style={{
@@ -469,7 +474,7 @@ function ArtifactsAndTools() {
                     <MonogramG className="h-20 w-20" />
                   </div>
                   <span
-                    className="absolute top-3 left-3 text-[10px] tracking-[0.22em] uppercase text-paper/60"
+                    className="absolute top-3 left-3 text-[11px] tracking-[0.22em] uppercase text-paper/85"
                     style={mono}
                   >
                     {g.format}
@@ -477,15 +482,15 @@ function ArtifactsAndTools() {
                 </div>
                 <div className="pt-4">
                   <h4
-                    className="font-bold text-[15px] leading-[1.2] tracking-tight"
+                    className="font-bold text-[16px] leading-[1.25] tracking-tight"
                     style={{ fontFamily: "var(--font-display)" }}
                   >
                     {g.name}
                   </h4>
-                  <p className="mt-1.5 text-[12.5px] text-paper/55 leading-[1.5]">
+                  <p className="mt-1.5 text-[13.5px] text-paper/80 leading-[1.55]">
                     {g.description}
                   </p>
-                  <p className="mt-3 text-[10px] tracking-[0.22em] uppercase text-blue group-hover:text-paper transition-colors" style={mono}>
+                  <p className="mt-3 text-[11px] tracking-[0.22em] uppercase text-blue group-hover:text-paper transition-colors" style={mono}>
                     {g.comingSoon ? "Soon" : "Download →"}
                   </p>
                 </div>
