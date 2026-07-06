@@ -351,6 +351,7 @@ function Hero() {
   return (
     <section
       id="top"
+      data-hero-variant={variant ?? "a"}
       className="relative overflow-hidden text-paper bg-ink py-16 md:py-24 lg:py-28 px-6 sm:px-12 lg:px-24"
     >
       <div
