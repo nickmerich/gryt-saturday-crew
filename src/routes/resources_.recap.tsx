@@ -106,8 +106,8 @@ const PRESETS: Array<{ label: string; hint: string; values: FormState }> = [
 const CANVAS_W = 1080;
 const CANVAS_H = 1350; // 4:5 portrait, IG-friendly
 
-type PhotoTransform = { scale: number; offsetX: number; offsetY: number };
-const DEFAULT_TRANSFORM: PhotoTransform = { scale: 1, offsetX: 0, offsetY: 0 };
+type PhotoTransform = { scale: number; offsetX: number; offsetY: number; rotation: number };
+const DEFAULT_TRANSFORM: PhotoTransform = { scale: 1, offsetX: 0, offsetY: 0, rotation: 0 };
 
 function RecapGeneratorPage() {
   const [form, setForm] = useState<FormState>(DEFAULTS);
@@ -700,9 +700,16 @@ function drawCover(
   transform: PhotoTransform = DEFAULT_TRANSFORM,
 ) {
   const scale = Math.max(0.1, transform.scale);
+  const rot = (transform.rotation * Math.PI) / 180;
+  const cos = Math.abs(Math.cos(rot));
+  const sin = Math.abs(Math.sin(rot));
+  // Enlarged dest rect that fully covers w×h at this rotation angle
+  const dw = w * cos + h * sin;
+  const dh = w * sin + h * cos;
+
   const ir = img.width / img.height;
-  const tr = w / h;
-  // Base "cover" source rect, then shrink by scale to zoom in
+  const tr = dw / dh;
+  // Base "cover" source rect (against rotated dest aspect), shrunk by zoom
   let sw: number, sh: number;
   if (ir > tr) {
     sh = img.height / scale;
@@ -711,12 +718,20 @@ function drawCover(
     sw = img.width / scale;
     sh = (img.width / tr) / scale;
   }
-  // Center then apply user offsets (normalized -1..1 across the overflow)
   const maxOffX = (img.width - sw) / 2;
   const maxOffY = (img.height - sh) / 2;
   const sx = clamp((img.width - sw) / 2 + transform.offsetX * maxOffX, 0, img.width - sw);
   const sy = clamp((img.height - sh) / 2 + transform.offsetY * maxOffY, 0, img.height - sh);
-  ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h);
+
+  ctx.save();
+  // Clip so rotated overflow stays inside the photo band
+  ctx.beginPath();
+  ctx.rect(x, y, w, h);
+  ctx.clip();
+  ctx.translate(x + w / 2, y + h / 2);
+  ctx.rotate(rot);
+  ctx.drawImage(img, sx, sy, sw, sh, -dw / 2, -dh / 2, dw, dh);
+  ctx.restore();
 }
 
 function clamp(v: number, min: number, max: number) {
@@ -771,6 +786,42 @@ function PhotoControls({
         format={(v) => `${Math.round(v * 100)}%`}
         onChange={(v) => onChange({ offsetY: v })}
       />
+      <div>
+        <RangeControl
+          label="Rotation"
+          value={transform.rotation}
+          min={-180}
+          max={180}
+          step={1}
+          format={(v) => `${v > 0 ? "+" : ""}${Math.round(v)}°`}
+          onChange={(v) => onChange({ rotation: v })}
+        />
+        <div className="mt-2 flex flex-wrap gap-1.5">
+          {[
+            { label: "−90°", delta: -90 },
+            { label: "−1°", delta: -1 },
+            { label: "0°", set: 0 },
+            { label: "+1°", delta: 1 },
+            { label: "+90°", delta: 90 },
+          ].map((b) => (
+            <button
+              key={b.label}
+              type="button"
+              onClick={() => {
+                if ("set" in b) {
+                  onChange({ rotation: b.set });
+                } else {
+                  const next = ((transform.rotation + b.delta + 180) % 360) - 180;
+                  onChange({ rotation: next });
+                }
+              }}
+              className="px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] border border-paper/25 text-paper/80 hover:border-blue hover:text-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ink transition-colors"
+            >
+              {b.label}
+            </button>
+          ))}
+        </div>
+      </div>
       <p className="text-[11px] text-paper/55 leading-[1.5]">
         Tip: drag the preview to nudge the photo into place.
       </p>
