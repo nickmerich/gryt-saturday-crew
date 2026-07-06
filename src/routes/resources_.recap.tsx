@@ -376,15 +376,28 @@ function RecapGeneratorPage() {
 
           {/* Preview */}
           <div className="order-1 lg:order-2 lg:sticky lg:top-24">
-            <p className="eyebrow text-blue mb-4">LIVE PREVIEW</p>
+            <div className="flex items-center justify-between mb-4 gap-3">
+              <p className="eyebrow text-blue">LIVE PREVIEW</p>
+              <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-paper/70">
+                <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-blue animate-pulse" />
+                Updates as you type
+              </span>
+            </div>
             <div className="relative bg-black border border-paper/15 overflow-hidden">
               <canvas
                 ref={canvasRef}
                 width={CANVAS_W}
                 height={CANVAS_H}
                 className="block w-full h-auto"
+                aria-label="Live preview of your recap graphic. This is exactly what will download."
               />
+              <div className="absolute top-3 left-3 bg-ink/85 backdrop-blur-sm border border-paper/20 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-paper">
+                1080 × 1350 · PNG
+              </div>
             </div>
+            <p className="mt-3 text-xs text-paper/70 leading-[1.5]">
+              What you see is what downloads — no processing step, no surprises.
+            </p>
           </div>
         </div>
       </section>
