@@ -669,11 +669,33 @@ function RSVP() {
         source: source || "unspecified",
       });
       // Also emit a Saturday-only conversion so GA4 goals can key off it.
+      let saturdayFired = false;
       if (selected.includes("sat")) {
         track("rsvp_saturday_success", {
           hero_variant: heroVariant ?? "unknown",
         });
+        saturdayFired = true;
       }
+      // Client-side validation: if the selected day label contains "Saturday"
+      // but the conversion event did not fire, warn loudly so the GA4 goal
+      // wiring can be fixed. Runs on a microtask so any thrown track() error
+      // settles first.
+      queueMicrotask(() => {
+        const hasSaturday = selected.some((d) =>
+          (DAY_LABEL[d] ?? "").toLowerCase().includes("saturday"),
+        );
+        if (hasSaturday && !saturdayFired) {
+          // eslint-disable-next-line no-console
+          console.warn(
+            "[analytics] rsvp_saturday_success was NOT fired despite a Saturday selection.",
+            { selected, hero_variant: heroVariant ?? "unknown" },
+          );
+          track("rsvp_saturday_missing", {
+            hero_variant: heroVariant ?? "unknown",
+            days: selected.join(","),
+          });
+        }
+      });
       // Save a tiny prefill so the waiver page can auto-populate.
       try {
         const contactStr = contact.trim();
