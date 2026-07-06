@@ -624,63 +624,73 @@ function NextIssue() {
 
   return (
     <div className="bg-ink p-10 md:p-14">
-      <span className="text-blue text-[11px] tracking-[0.22em] uppercase mb-4 block" style={mono}>
+      <span className="text-blue text-[12px] tracking-[0.22em] uppercase mb-4 block" style={mono}>
         § 05 · Next Issue
       </span>
       <h2
-        className="uppercase text-[clamp(28px,3.6vw,44px)] leading-[0.95] tracking-tight mb-6"
+        className="uppercase text-[clamp(28px,3.6vw,44px)] leading-[1.02] tracking-tight mb-6"
         style={{ fontFamily: "var(--font-condensed)" }}
       >
         Want the next playbook?
       </h2>
-      <p className="text-[15px] leading-[1.65] text-paper/70 mb-8 max-w-[380px]">
+      <p className="text-[15px] leading-[1.65] text-paper/85 mb-8 max-w-[380px]">
         We send new GRYT resources when they're ready. No spam. No noise.
       </p>
 
       {done ? (
-        <div className="border border-blue p-5">
-          <p className="text-blue text-[11px] tracking-[0.22em] uppercase mb-2" style={mono}>
+        <div role="status" aria-live="polite" className="border border-blue p-5">
+          <p className="text-blue text-[12px] tracking-[0.22em] uppercase mb-2" style={mono}>
             You're on the list
           </p>
-          <p className="text-paper/80 text-[14px] leading-[1.55]">
+          <p className="text-paper/90 text-[14px] leading-[1.55]">
             We'll email <span className="text-paper">{email}</span> when the next one drops.
           </p>
         </div>
       ) : (
-        <form onSubmit={onSubmit} className="flex flex-col gap-4">
+        <form onSubmit={onSubmit} className="flex flex-col gap-4" noValidate>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <input
-              type="text"
-              maxLength={80}
-              required
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              placeholder="FIRST NAME"
-              className="bg-transparent border-b border-paper/25 pb-2 text-[14px] tracking-[0.14em] uppercase placeholder:text-paper/30 focus:outline-none focus:border-blue transition-colors"
-              style={mono}
-            />
-            <input
-              type="email"
-              maxLength={255}
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="EMAIL"
-              className="bg-transparent border-b border-paper/25 pb-2 text-[14px] tracking-[0.14em] uppercase placeholder:text-paper/30 focus:outline-none focus:border-blue transition-colors"
-              style={mono}
-            />
+            <div>
+              <label htmlFor="ni-first" className="sr-only">First name</label>
+              <input
+                id="ni-first"
+                type="text"
+                maxLength={80}
+                required
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                placeholder="FIRST NAME"
+                autoComplete="given-name"
+                className={`w-full bg-transparent border-b border-paper/50 pb-2 text-[14px] tracking-[0.14em] uppercase placeholder:text-paper/60 focus:outline-none focus:border-blue focus-visible:border-blue transition-colors ${focusRing}`}
+                style={mono}
+              />
+            </div>
+            <div>
+              <label htmlFor="ni-email" className="sr-only">Email</label>
+              <input
+                id="ni-email"
+                type="email"
+                maxLength={255}
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="EMAIL"
+                autoComplete="email"
+                className={`w-full bg-transparent border-b border-paper/50 pb-2 text-[14px] tracking-[0.14em] uppercase placeholder:text-paper/60 focus:outline-none focus:border-blue focus-visible:border-blue transition-colors ${focusRing}`}
+                style={mono}
+              />
+            </div>
           </div>
           <button
             type="submit"
             disabled={submitting}
-            className="mt-2 self-start px-6 py-3 border border-paper text-[11px] tracking-[0.22em] uppercase hover:bg-paper hover:text-ink transition-colors disabled:opacity-40"
+            className={`mt-2 self-start px-6 py-3 min-h-[44px] border border-paper text-[12px] tracking-[0.22em] uppercase hover:bg-paper hover:text-ink transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${focusRing}`}
             style={{ fontFamily: "var(--font-condensed)" }}
           >
             {submitting ? "Sending…" : "Notify Me →"}
           </button>
         </form>
       )}
-      {error && <p className="mt-4 text-[13px] text-red-400">{error}</p>}
+      {error && <p role="alert" className="mt-4 text-[14px] text-red-300">{error}</p>}
     </div>
   );
 }
