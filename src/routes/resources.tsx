@@ -390,7 +390,7 @@ function ManifestoCallout() {
               className="uppercase text-[clamp(36px,5.6vw,80px)] leading-[0.9] tracking-tight group-hover:text-blue transition-colors"
               style={{ fontFamily: "var(--font-condensed)" }}
             >
-              The Human Layer<br />Comes First
+              July 2026 Audit:<br />The Human Layer<br />Comes First
             </h2>
             <p className="mt-6 text-paper/85 text-[16px] md:text-[17px] leading-[1.65] max-w-[560px]">
               What the GRYT audit revealed: we built the tech stack before the
