@@ -315,7 +315,7 @@ function Conversations() {
       <div className="flex flex-col md:flex-row gap-12 md:gap-20">
         <aside className="md:w-1/4 shrink-0">
           <div className="md:sticky md:top-24">
-            <span className="text-blue text-[11px] tracking-[0.22em] uppercase mb-4 block" style={mono}>
+            <span className="text-blue text-[12px] tracking-[0.22em] uppercase mb-4 block" style={mono}>
               § 02
             </span>
             <h2
@@ -324,13 +324,13 @@ function Conversations() {
             >
               Conversations
             </h2>
-            <p className="mt-5 text-paper/60 text-[14px] leading-[1.6] max-w-[280px]">
+            <p className="mt-5 text-paper/80 text-[15px] leading-[1.65] max-w-[280px]">
               Unfiltered dialogue with the founders and the crew — on
               community, consistency, and doing hard things together.
             </p>
             <Link
               to="/resources/conversations"
-              className="mt-6 inline-block text-[11px] tracking-[0.22em] uppercase text-blue hover:text-paper transition-colors"
+              className={`mt-6 inline-block text-[12px] tracking-[0.22em] uppercase text-blue underline underline-offset-4 decoration-blue/40 hover:decoration-blue hover:text-paper transition-colors ${focusRing}`}
               style={mono}
             >
               Read all →
@@ -343,21 +343,21 @@ function Conversations() {
             <article
               key={c.n}
               className={`group ${
-                i < CONVERSATIONS.length - 1 ? "border-b border-paper/10 pb-16 md:pb-20" : ""
-              } ${c.comingSoon ? "opacity-70" : ""}`}
+                i < CONVERSATIONS.length - 1 ? "border-b border-paper/20 pb-16 md:pb-20" : ""
+              } ${c.comingSoon ? "opacity-80" : ""}`}
             >
               <div className="flex items-center gap-4 mb-6">
-                <span className="text-blue text-[11px] tracking-[0.24em] uppercase" style={mono}>
+                <span className="text-blue text-[12px] tracking-[0.24em] uppercase" style={mono}>
                   Transcript {c.n}
                 </span>
                 {c.comingSoon && (
-                  <span className="text-[10px] tracking-[0.22em] uppercase text-paper/40 border border-paper/25 px-2 py-1" style={mono}>
+                  <span className="text-[11px] tracking-[0.22em] uppercase text-paper/80 border border-paper/40 px-2 py-1" style={mono}>
                     Coming Soon
                   </span>
                 )}
               </div>
               <blockquote
-                className="text-[clamp(24px,3.4vw,44px)] font-light leading-[1.15] tracking-tight max-w-[22ch] group-hover:text-blue transition-colors"
+                className="text-[clamp(22px,3.4vw,44px)] font-light leading-[1.25] tracking-tight max-w-[22ch] group-hover:text-blue transition-colors"
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 &ldquo;{c.quote}&rdquo;
@@ -367,7 +367,7 @@ function Conversations() {
                 style={{ fontFamily: "var(--font-condensed)" }}
               >
                 — {c.guest}
-                <span className="text-paper/50"> · {c.role}</span>
+                <span className="text-paper/75"> · {c.role}</span>
               </cite>
             </article>
           ))}
