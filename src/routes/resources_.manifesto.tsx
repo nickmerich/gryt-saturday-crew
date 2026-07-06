@@ -48,14 +48,6 @@ const HUMAN_LAYER_PHOTOS: {
     span: "md:col-span-7",
     ratio: "aspect-[16/10]",
   },
-  {
-    src: halftonePortrait.url,
-    alt: "Halftone portrait of a runner",
-    caption: "One person, seen. That is where community begins.",
-    eyebrow: "The one",
-    span: "md:col-span-12",
-    ratio: "aspect-[21/9]",
-  },
 ];
 
 const SITE = "https://grytrunclub.com";
