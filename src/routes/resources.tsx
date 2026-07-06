@@ -839,11 +839,11 @@ function PartnerForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+    <form onSubmit={onSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-5" noValidate>
       <div>
         <label htmlFor="p-name" className={swissLabel} style={mono}>Name</label>
         <input
-          id="p-name" type="text" maxLength={120} required
+          id="p-name" type="text" maxLength={120} required autoComplete="name"
           value={name} onChange={(e) => setName(e.target.value)}
           className={swissInput} placeholder="Your name"
         />
@@ -851,7 +851,7 @@ function PartnerForm() {
       <div>
         <label htmlFor="p-email" className={swissLabel} style={mono}>Email</label>
         <input
-          id="p-email" type="email" maxLength={255} required
+          id="p-email" type="email" maxLength={255} required autoComplete="email"
           value={email} onChange={(e) => setEmail(e.target.value)}
           className={swissInput} placeholder="you@company.com"
         />
@@ -859,7 +859,7 @@ function PartnerForm() {
       <div>
         <label htmlFor="p-org" className={swissLabel} style={mono}>Organization</label>
         <input
-          id="p-org" type="text" maxLength={160}
+          id="p-org" type="text" maxLength={160} autoComplete="organization"
           value={organization} onChange={(e) => setOrganization(e.target.value)}
           className={swissInput} placeholder="Company, brand, or yourself"
         />
@@ -889,7 +889,7 @@ function PartnerForm() {
       </div>
       <div className="sm:col-span-2">
         <label htmlFor="p-msg" className={swissLabel} style={mono}>
-          Message <span className="text-paper/35 normal-case tracking-normal">(optional)</span>
+          Message <span className="text-paper/70 normal-case tracking-normal">(optional)</span>
         </label>
         <textarea
           id="p-msg" rows={5} maxLength={1500}
@@ -898,15 +898,15 @@ function PartnerForm() {
           placeholder="Tell us what you have in mind."
         />
       </div>
-      {error && <p className="sm:col-span-2 text-[13px] text-red-400">{error}</p>}
+      {error && <p role="alert" className="sm:col-span-2 text-[14px] text-red-300">{error}</p>}
       <div className="sm:col-span-2 flex items-center justify-between gap-4 pt-2">
-        <p className="text-[11px] tracking-[0.2em] uppercase text-paper/40" style={mono}>
+        <p className="text-[12px] tracking-[0.2em] uppercase text-paper/75" style={mono}>
           Nick reads every note.
         </p>
         <button
           type="submit"
           disabled={submitting}
-          className="px-7 py-4 border border-paper text-[11px] tracking-[0.22em] uppercase hover:bg-blue hover:border-blue hover:text-ink transition-colors disabled:opacity-40"
+          className={`px-7 py-4 min-h-[44px] border border-paper text-[12px] tracking-[0.22em] uppercase hover:bg-blue hover:border-blue hover:text-ink transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${focusRing}`}
           style={{ fontFamily: "var(--font-condensed)" }}
         >
           {submitting ? "Sending…" : "Submit Inquiry →"}
