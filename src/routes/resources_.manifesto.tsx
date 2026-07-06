@@ -82,7 +82,7 @@ export const Route = createFileRoute("/resources_/manifesto")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Article",
-          headline: "The Human Layer Comes First",
+          headline: "July 2026 Audit: The Human Layer Comes First",
           description: DESCRIPTION,
           author: {
             "@type": "Person",
