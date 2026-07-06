@@ -748,22 +748,22 @@ function GetInvolved() {
           >
             We're building something real in Pittsburgh.
           </h3>
-          <p className="mt-6 text-paper/70 text-[15px] leading-[1.65]">
+          <p className="mt-6 text-paper/85 text-[15px] leading-[1.65]">
             Local business, brand, coach, or creator who believes in
             community-driven fitness? There's a place for you here. Simple,
             genuine partnerships that add value to the crew.
           </p>
-          <div className="flex flex-wrap gap-2 mt-8">
+          <ul className="flex flex-wrap gap-2 mt-8 list-none p-0" aria-label="Partnership types">
             {PARTNER_PILLS.map((label) => (
-              <span
+              <li
                 key={label}
-                className="inline-flex items-center px-3 py-1.5 border border-paper/25 text-[10px] tracking-[0.2em] uppercase text-paper/75"
+                className="inline-flex items-center px-3 py-1.5 border border-paper/45 text-[11px] tracking-[0.2em] uppercase text-paper/90"
                 style={mono}
               >
                 {label}
-              </span>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
 
         <div className="md:col-span-2">
