@@ -820,8 +820,8 @@ function PartnerForm() {
 
   if (done) {
     return (
-      <div className="p-8 border border-blue bg-vintage">
-        <p className="text-blue text-[11px] tracking-[0.22em] uppercase mb-3" style={mono}>
+      <div role="status" aria-live="polite" className="p-8 border border-blue bg-vintage">
+        <p className="text-blue text-[12px] tracking-[0.22em] uppercase mb-3" style={mono}>
           Message received
         </p>
         <h3
@@ -830,7 +830,7 @@ function PartnerForm() {
         >
           We'll be in touch.
         </h3>
-        <p className="text-paper/75 text-[14px] leading-[1.6]">
+        <p className="text-paper/90 text-[15px] leading-[1.65]">
           Nick reads every partner inquiry personally. Expect a reply within a
           few days.
         </p>
