@@ -2691,6 +2691,10 @@ function NewsletterBar() {
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [msg, setMsg] = useState<string | null>(null);
 
+  useEffect(() => {
+    captureAttribution();
+  }, []);
+
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     const value = email.trim();
@@ -2698,10 +2702,15 @@ function NewsletterBar() {
     setStatus("loading");
     setMsg(null);
     try {
+      const attribution = getSignupAttribution("homepage_bar");
       const res = await fetch("/api/newsletter/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: value, source: "homepage_bar" }),
+        body: JSON.stringify({
+          email: value,
+          source: "homepage_bar",
+          ...attribution,
+        }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok || !data.ok) throw new Error(data.error || "Sign-up failed");
@@ -2712,6 +2721,7 @@ function NewsletterBar() {
       setMsg(err?.message || "Something went wrong.");
     }
   }
+
 
   return (
     <div className="sticky top-[68px] z-40 bg-blue text-ink border-b border-ink/15">
