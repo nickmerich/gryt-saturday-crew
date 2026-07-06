@@ -192,24 +192,27 @@ function Playbooks() {
         {/* Featured */}
         <Link
           to="/resources/playbooks"
-          className="md:col-span-8 bg-ink p-8 md:p-12 flex flex-col justify-between group cursor-pointer min-h-[420px] hover:bg-vintage transition-colors"
+          className={`md:col-span-8 bg-ink p-8 md:p-12 flex flex-col justify-between group cursor-pointer min-h-[420px] hover:bg-vintage transition-colors ${focusRing}`}
         >
           <div>
-            <span className="text-blue text-[11px] tracking-[0.22em] uppercase mb-6 block" style={mono}>
+            <span className="text-blue text-[12px] tracking-[0.22em] uppercase mb-6 block" style={mono}>
               {featured.n} / {featured.category} · Featured
             </span>
             <h3
-              className="text-[clamp(36px,5vw,68px)] font-bold leading-[0.95] tracking-tight max-w-[16ch]"
+              className="text-[clamp(32px,5vw,68px)] font-bold leading-[1.02] tracking-tight max-w-[16ch]"
               style={{ fontFamily: "var(--font-display)" }}
             >
               {featured.title}
             </h3>
           </div>
           <div className="flex items-end justify-between gap-8 mt-10">
-            <p className="max-w-md text-[15px] leading-[1.65] text-paper/70">
+            <p className="max-w-md text-[15px] leading-[1.65] text-paper/85">
               {featured.description}
             </p>
-            <span className="w-14 h-14 border border-paper flex items-center justify-center shrink-0 group-hover:bg-blue group-hover:border-blue group-hover:text-ink transition-colors">
+            <span
+              className="w-14 h-14 border border-paper flex items-center justify-center shrink-0 group-hover:bg-blue group-hover:border-blue group-hover:text-ink transition-colors"
+              aria-hidden="true"
+            >
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
