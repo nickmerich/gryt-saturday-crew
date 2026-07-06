@@ -106,8 +106,8 @@ const PRESETS: Array<{ label: string; hint: string; values: FormState }> = [
 const CANVAS_W = 1080;
 const CANVAS_H = 1350; // 4:5 portrait, IG-friendly
 
-type PhotoTransform = { scale: number; offsetX: number; offsetY: number };
-const DEFAULT_TRANSFORM: PhotoTransform = { scale: 1, offsetX: 0, offsetY: 0 };
+type PhotoTransform = { scale: number; offsetX: number; offsetY: number; rotation: number };
+const DEFAULT_TRANSFORM: PhotoTransform = { scale: 1, offsetX: 0, offsetY: 0, rotation: 0 };
 
 function RecapGeneratorPage() {
   const [form, setForm] = useState<FormState>(DEFAULTS);
