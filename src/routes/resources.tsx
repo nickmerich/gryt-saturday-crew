@@ -777,9 +777,9 @@ function GetInvolved() {
 /* ─────────────────────  PARTNER FORM  ────────────────────── */
 
 const swissInput =
-  "w-full bg-vintage border border-paper/10 px-4 py-3.5 text-[14px] text-paper placeholder:text-paper/35 focus:outline-none focus:border-blue transition-colors";
+  `w-full bg-vintage border border-paper/40 px-4 py-3.5 text-[15px] text-paper placeholder:text-paper/55 focus:outline-none focus:border-blue transition-colors ${focusRing}`;
 const swissLabel =
-  "block text-[10px] tracking-[0.22em] uppercase text-paper/55 mb-2";
+  "block text-[11px] tracking-[0.22em] uppercase text-paper/85 mb-2";
 
 function PartnerForm() {
   const submit = useServerFn(submitPartnerInquiry);
