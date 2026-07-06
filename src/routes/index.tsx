@@ -58,20 +58,29 @@ const EVENT_DATES = nextSaturdayISOs(12);
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Pittsburgh Running Group · South Hills Run Club · Saturdays 7 AM · gryt" },
+      { title: "Do Hard Things Together · Pittsburgh Running Group · South Hills Run Club · gryt" },
       {
         name: "description",
         content:
-          "GRYT is a free Pittsburgh running group and South Hills run club meeting Saturdays at 7 AM on the Montour / Peters Trail in McMurray. Walk, jog, or run — no pace requirement, no one gets dropped.",
+          "Do hard things together. GRYT is a free Pittsburgh running group and South Hills run club meeting Saturdays at 7 AM on the Montour / Peters Trail in McMurray. No pace requirement, no one gets dropped.",
       },
-      { property: "og:title", content: "Pittsburgh Running Group · South Hills Run Club · Saturdays 7 AM" },
+      { property: "og:title", content: "Do Hard Things Together · Pittsburgh Running Group · South Hills Run Club" },
       {
         property: "og:description",
         content:
-          "Free Pittsburgh run club in the South Hills. Saturdays 7 AM on the Montour / Peters Trail. Do hard things together.",
+          "Do hard things together. Free Pittsburgh run club in the South Hills — Saturdays 7 AM on the Montour / Peters Trail in McMurray.",
       },
+      { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "GRYT Run Club" },
       { property: "og:url", content: SITE_URL },
       { property: "og:image", content: ABS_HERO_IMG },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Do Hard Things Together · Pittsburgh Running Group · South Hills Run Club" },
+      {
+        name: "twitter:description",
+        content:
+          "Free Pittsburgh run club in the South Hills. Saturdays 7 AM on the Montour / Peters Trail. Do hard things together.",
+      },
       { name: "twitter:image", content: ABS_HERO_IMG },
     ],
     links: [{ rel: "canonical", href: SITE_URL }],
