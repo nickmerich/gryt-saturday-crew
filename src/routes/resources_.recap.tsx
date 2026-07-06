@@ -117,6 +117,7 @@ function RecapGeneratorPage() {
   const [activePreset, setActivePreset] = useState<string | null>(null);
   const [status, setStatus] = useState<"idle" | "saving" | "saved">("idle");
   const [savedFile, setSavedFile] = useState<string | null>(null);
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const dragState = useRef<{ x: number; y: number; ox: number; oy: number } | null>(null);
 
