@@ -31,6 +31,7 @@ import { Route as ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRout
 import { Route as ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026RouteImport } from './routes/resources_.playbooks_.best-free-running-clubs-pittsburgh-2026'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as ApiPublicRsvpRouteImport } from './routes/api/public/rsvp'
+import { Route as ApiNewsletterSubscribeRouteImport } from './routes/api/newsletter/subscribe'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
@@ -153,6 +154,11 @@ const ApiPublicRsvpRoute = ApiPublicRsvpRouteImport.update({
   path: '/api/public/rsvp',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiNewsletterSubscribeRoute = ApiNewsletterSubscribeRouteImport.update({
+  id: '/api/newsletter/subscribe',
+  path: '/api/newsletter/subscribe',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const Char91DotmcpChar93InvokeToolToolRoute =
   Char91DotmcpChar93InvokeToolToolRouteImport.update({
     id: '/.mcp/invoke-tool/$tool',
@@ -207,6 +213,7 @@ export interface FileRoutesByFullPath {
   '/resources/playbooks': typeof ResourcesPlaybooksRoute
   '/resources/recap': typeof ResourcesRecapRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/api/newsletter/subscribe': typeof ApiNewsletterSubscribeRoute
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/resources/playbooks/best-free-running-clubs-pittsburgh-2026': typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route
@@ -237,6 +244,7 @@ export interface FileRoutesByTo {
   '/resources/playbooks': typeof ResourcesPlaybooksRoute
   '/resources/recap': typeof ResourcesRecapRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/api/newsletter/subscribe': typeof ApiNewsletterSubscribeRoute
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/resources/playbooks/best-free-running-clubs-pittsburgh-2026': typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route
@@ -268,6 +276,7 @@ export interface FileRoutesById {
   '/resources_/playbooks': typeof ResourcesPlaybooksRoute
   '/resources_/recap': typeof ResourcesRecapRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/api/newsletter/subscribe': typeof ApiNewsletterSubscribeRoute
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/resources_/playbooks_/best-free-running-clubs-pittsburgh-2026': typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route
@@ -300,6 +309,7 @@ export interface FileRouteTypes {
     | '/resources/playbooks'
     | '/resources/recap'
     | '/.mcp/invoke-tool/$tool'
+    | '/api/newsletter/subscribe'
     | '/api/public/rsvp'
     | '/lovable/email/suppression'
     | '/resources/playbooks/best-free-running-clubs-pittsburgh-2026'
@@ -330,6 +340,7 @@ export interface FileRouteTypes {
     | '/resources/playbooks'
     | '/resources/recap'
     | '/.mcp/invoke-tool/$tool'
+    | '/api/newsletter/subscribe'
     | '/api/public/rsvp'
     | '/lovable/email/suppression'
     | '/resources/playbooks/best-free-running-clubs-pittsburgh-2026'
@@ -360,6 +371,7 @@ export interface FileRouteTypes {
     | '/resources_/playbooks'
     | '/resources_/recap'
     | '/.mcp/invoke-tool/$tool'
+    | '/api/newsletter/subscribe'
     | '/api/public/rsvp'
     | '/lovable/email/suppression'
     | '/resources_/playbooks_/best-free-running-clubs-pittsburgh-2026'
@@ -390,6 +402,7 @@ export interface RootRouteChildren {
   ResourcesPlaybooksRoute: typeof ResourcesPlaybooksRoute
   ResourcesRecapRoute: typeof ResourcesRecapRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
+  ApiNewsletterSubscribeRoute: typeof ApiNewsletterSubscribeRoute
   ApiPublicRsvpRoute: typeof ApiPublicRsvpRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
   ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route: typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route
@@ -558,6 +571,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicRsvpRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/newsletter/subscribe': {
+      id: '/api/newsletter/subscribe'
+      path: '/api/newsletter/subscribe'
+      fullPath: '/api/newsletter/subscribe'
+      preLoaderRoute: typeof ApiNewsletterSubscribeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/.mcp/invoke-tool/$tool': {
       id: '/.mcp/invoke-tool/$tool'
       path: '/.mcp/invoke-tool/$tool'
@@ -633,6 +653,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResourcesPlaybooksRoute: ResourcesPlaybooksRoute,
   ResourcesRecapRoute: ResourcesRecapRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
+  ApiNewsletterSubscribeRoute: ApiNewsletterSubscribeRoute,
   ApiPublicRsvpRoute: ApiPublicRsvpRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
   ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route:
