@@ -94,26 +94,24 @@ function Masthead() {
       >
         Volume 01 · Issue 03 · From the founders
       </p>
-      <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-10">
-        <h1
-          className="uppercase leading-[0.82] tracking-tight text-[clamp(96px,15vw,240px)]"
-          style={{ fontFamily: "var(--font-condensed)" }}
+      <h1
+        className="uppercase leading-[0.82] tracking-tight text-[clamp(84px,13vw,200px)]"
+        style={{ fontFamily: "var(--font-condensed)" }}
+      >
+        Resources
+      </h1>
+      <div className="mt-8 md:mt-10 flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+        <p
+          className="text-[22px] md:text-[28px] font-light leading-[1.25] max-w-[720px]"
+          style={{ fontFamily: "var(--font-display)" }}
         >
-          Resources
-        </h1>
-        <div className="max-w-md md:pb-3">
-          <p
-            className="text-[22px] md:text-[26px] font-light leading-[1.25]"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            Everything we've learned from showing up every Saturday —{" "}
-            <span className="text-blue">shared freely.</span> Playbooks,
-            interviews, free graphics, and partner opportunities.
-          </p>
-          <p className="mt-6 text-[11px] tracking-[0.24em] uppercase text-paper/45" style={mono}>
-            An open field manual · Pittsburgh, PA
-          </p>
-        </div>
+          Everything we've learned from showing up every Saturday —{" "}
+          <span className="text-blue">shared freely.</span> Playbooks,
+          interviews, free graphics, and partner opportunities.
+        </p>
+        <p className="text-[11px] tracking-[0.24em] uppercase text-paper/45 shrink-0" style={mono}>
+          An open field manual<br className="hidden md:block" /> · Pittsburgh, PA
+        </p>
       </div>
     </header>
   );
