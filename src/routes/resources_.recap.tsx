@@ -110,10 +110,20 @@ function RecapGeneratorPage() {
   const [form, setForm] = useState<FormState>(DEFAULTS);
   const [photoUrl, setPhotoUrl] = useState<string | null>(null);
   const [photoImg, setPhotoImg] = useState<HTMLImageElement | null>(null);
+  const [activePreset, setActivePreset] = useState<string | null>(null);
+  const [status, setStatus] = useState<"idle" | "saving" | "saved">("idle");
+  const [savedFile, setSavedFile] = useState<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((f) => ({ ...f, [key]: value }));
+    setActivePreset(null);
+  }
+
+  function applyPreset(p: (typeof PRESETS)[number]) {
+    setForm(p.values);
+    setActivePreset(p.label);
+    setStatus("idle");
   }
 
   function onPhoto(e: ChangeEvent<HTMLInputElement>) {
@@ -148,13 +158,31 @@ function RecapGeneratorPage() {
     drawRecap(canvas, form, photoImg);
   }, [form, photoImg]);
 
-  function download() {
+  // Auto-clear the "saved" confirmation
+  useEffect(() => {
+    if (status !== "saved") return;
+    const t = setTimeout(() => setStatus("idle"), 5000);
+    return () => clearTimeout(t);
+  }, [status]);
+
+  async function download() {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const link = document.createElement("a");
-    link.download = `gryt-recap-${Date.now()}.png`;
-    link.href = canvas.toDataURL("image/png");
-    link.click();
+    setStatus("saving");
+    // Let the button state paint before we encode the PNG.
+    await new Promise((r) => setTimeout(r, 350));
+    try {
+      const filename = `gryt-recap-${Date.now()}.png`;
+      const link = document.createElement("a");
+      link.download = filename;
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+      setSavedFile(filename);
+      setStatus("saved");
+    } catch {
+      setStatus("idle");
+      alert("Something went wrong saving your recap. Please try again.");
+    }
   }
 
   return (
