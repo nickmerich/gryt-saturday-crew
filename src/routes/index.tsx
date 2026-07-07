@@ -3321,8 +3321,35 @@ function NewsletterBar() {
             </button>
           </form>
         )}
+        {status !== "done" && !errorMessage && (
+          <p className="basis-full text-[11px] leading-[1.45] text-ink/70 flex flex-wrap items-center gap-x-1.5">
+            <svg
+              aria-hidden
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="h-3 w-3 shrink-0"
+            >
+              <rect x="4" y="10" width="16" height="10" rx="1" />
+              <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+            </svg>
+            <span>
+              One email a week. No spam, no sharing. Unsubscribe any time.{" "}
+              <Link
+                to="/privacy"
+                className="underline underline-offset-2 decoration-ink/40 hover:decoration-ink font-medium"
+              >
+                Privacy
+              </Link>
+              .
+            </span>
+          </p>
+        )}
         <span id="nl-email-hint" className="sr-only">
-          Enter your email to receive the weekly Saturday brief.
+          Enter your email to receive the weekly Saturday brief. We only use it to send the newsletter and you can unsubscribe any time.
         </span>
         <p
           id="nl-status"
