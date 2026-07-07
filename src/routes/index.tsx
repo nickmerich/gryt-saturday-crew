@@ -3365,6 +3365,14 @@ function NewsletterBar() {
               </span>
               <span className="text-[11px] sm:text-[12px] text-ink/70 mt-1 flex flex-wrap items-center gap-x-1.5 gap-y-0.5">
                 {resendStatus === "sent" ? (
+                  <span
+                    ref={successResendRegionRef}
+                    tabIndex={-1}
+                    className="text-ink font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/40 focus-visible:ring-offset-1"
+                  >
+                    {resendMsg}
+                  </span>
+                ) : resendStatus === "sent" ? (
                   <span className="text-ink font-medium">
                     {resendMsg}
                   </span>
