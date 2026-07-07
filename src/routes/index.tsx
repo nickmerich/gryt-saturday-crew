@@ -3337,10 +3337,49 @@ function NewsletterBar() {
           id="nl-email-error"
           role="alert"
           aria-live="assertive"
-          className={`text-xs font-medium text-ink basis-full ${errorMessage ? "" : "sr-only"}`}
+          className={`text-xs font-medium text-ink basis-full flex items-center gap-1.5 ${errorMessage ? "" : "sr-only"}`}
         >
-          {errorMessage ?? ""}
+          {errorMessage ? (
+            <>
+              <svg
+                aria-hidden
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                className="h-3.5 w-3.5 shrink-0"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
+              <span>{errorMessage}</span>
+            </>
+          ) : (
+            ""
+          )}
         </p>
+        {suggestion && !errorMessage && (
+          <p
+            id="nl-email-suggestion"
+            className="text-xs font-medium text-ink basis-full flex items-center gap-1.5"
+          >
+            <span className="opacity-75">Did you mean</span>
+            <button
+              type="button"
+              onClick={() => {
+                setEmail(suggestion);
+                setTouched(false);
+                requestAnimationFrame(() => emailRef.current?.focus());
+              }}
+              className="underline underline-offset-2 decoration-2 hover:text-ink/70 font-bold"
+            >
+              {suggestion}
+            </button>
+            <span className="opacity-75">?</span>
+          </p>
+        )}
       </div>
     </div>
   );
