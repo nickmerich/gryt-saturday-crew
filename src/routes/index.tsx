@@ -3138,6 +3138,28 @@ function NewsletterBar() {
   const [resendMsg, setResendMsg] = useState<string | null>(null);
   const [resendCooldown, setResendCooldown] = useState(0);
   const emailRef = useRef<HTMLInputElement | null>(null);
+  const successResendRegionRef = useRef<HTMLSpanElement | null>(null);
+  const errorResendRegionRef = useRef<HTMLSpanElement | null>(null);
+
+  const resendAnnouncement =
+    resendStatus === "sending"
+      ? "Resending confirmation email."
+      : resendStatus === "sent"
+      ? resendMsg ?? "Confirmation email sent again. Check your inbox and spam folder."
+      : resendStatus === "error"
+      ? resendMsg ?? "Couldn't resend confirmation. Try again in a minute."
+      : "";
+
+  // When resend resolves (sent or error) the active button is either removed
+  // or switches to a disabled cooldown label — move focus to the status
+  // region so keyboard users don't get stranded on a hidden/disabled control.
+  useEffect(() => {
+    if (resendStatus !== "sent" && resendStatus !== "error") return;
+    const target = successResendRegionRef.current ?? errorResendRegionRef.current;
+    if (target) {
+      requestAnimationFrame(() => target.focus());
+    }
+  }, [resendStatus]);
 
   useEffect(() => {
     captureAttribution();
