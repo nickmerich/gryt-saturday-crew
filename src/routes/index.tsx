@@ -2073,7 +2073,23 @@ function Community() {
             alt="Big crew huddled up in Mt. Lebanon after a Tuesday night run"
             className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15"
           />
+          <img
+            src={photo1.url}
+            alt="Crew posted up at the trailhead before the Saturday run"
+            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15"
+          />
+          <img
+            src={photo4.url}
+            alt="Runners rolling out on the Montour Trail at first light"
+            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15"
+          />
+          <img
+            src={photo6.url}
+            alt="Post-run coffee and hangs in the lot"
+            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15"
+          />
         </div>
+
 
 
 
