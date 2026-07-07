@@ -3138,6 +3138,28 @@ function NewsletterBar() {
   const [resendMsg, setResendMsg] = useState<string | null>(null);
   const [resendCooldown, setResendCooldown] = useState(0);
   const emailRef = useRef<HTMLInputElement | null>(null);
+  const successResendRegionRef = useRef<HTMLSpanElement | null>(null);
+  const errorResendRegionRef = useRef<HTMLSpanElement | null>(null);
+
+  const resendAnnouncement =
+    resendStatus === "sending"
+      ? "Resending confirmation email."
+      : resendStatus === "sent"
+      ? resendMsg ?? "Confirmation email sent again. Check your inbox and spam folder."
+      : resendStatus === "error"
+      ? resendMsg ?? "Couldn't resend confirmation. Try again in a minute."
+      : "";
+
+  // When resend resolves (sent or error) the active button is either removed
+  // or switches to a disabled cooldown label — move focus to the status
+  // region so keyboard users don't get stranded on a hidden/disabled control.
+  useEffect(() => {
+    if (resendStatus !== "sent" && resendStatus !== "error") return;
+    const target = successResendRegionRef.current ?? errorResendRegionRef.current;
+    if (target) {
+      requestAnimationFrame(() => target.focus());
+    }
+  }, [resendStatus]);
 
   useEffect(() => {
     captureAttribution();
@@ -3249,6 +3271,10 @@ function NewsletterBar() {
 
   return (
     <div className="sticky top-[68px] z-40 bg-blue text-ink border-y-2 border-ink shadow-[0_6px_0_-2px_rgba(0,0,0,0.15),0_18px_40px_-20px_rgba(0,0,0,0.55)]">
+      {/* Screen-reader announcement for resend state transitions */}
+      <div role="status" aria-live="polite" aria-atomic="true" className="sr-only">
+        {resendAnnouncement}
+      </div>
       {/* Diagonal stripe accent on the far edges — hidden on mobile so they don't crowd the form */}
       <div
         aria-hidden
@@ -3343,12 +3369,22 @@ function NewsletterBar() {
               </span>
               <span className="text-[11px] sm:text-[12px] text-ink/70 mt-1 flex flex-wrap items-center gap-x-1.5 gap-y-0.5">
                 {resendStatus === "sent" ? (
-                  <span className="text-ink font-medium">
+                  <span
+                    ref={successResendRegionRef}
+                    tabIndex={-1}
+                    className="text-ink font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/40 focus-visible:ring-offset-1"
+                  >
                     {resendMsg}
                   </span>
                 ) : resendStatus === "error" ? (
                   <>
-                    <span className="text-red-800 font-medium">{resendMsg}</span>
+                    <span
+                      ref={errorResendRegionRef}
+                      tabIndex={-1}
+                      className="text-red-800 font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-red-800/40 focus-visible:ring-offset-1"
+                    >
+                      {resendMsg}
+                    </span>
                     <button
                       type="button"
                       onClick={handleResend}
@@ -3508,7 +3544,13 @@ function NewsletterBar() {
                 <>
                   <span aria-hidden className="opacity-40">·</span>
                   {resendStatus === "sent" ? (
-                    <span className="text-ink">{resendMsg}</span>
+                    <span
+                      ref={successResendRegionRef}
+                      tabIndex={-1}
+                      className="text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/40 focus-visible:ring-offset-1"
+                    >
+                      {resendMsg}
+                    </span>
                   ) : (
                     <button
                       type="button"
