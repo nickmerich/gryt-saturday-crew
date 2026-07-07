@@ -1,0 +1,32 @@
+name: mcp-allowlist
+
+# Fails the build if a new MCP tool is added under src/lib/mcp/tools/
+# without an entry in PUBLIC_TOOL_ALLOWLIST, a mention in
+# src/lib/mcp/PUBLIC_ACCESS.md, a call to guardToolAccess(), or
+# registration in src/lib/mcp/index.ts. Guards the
+# app_mcp_public_unauthenticated protections from silent regression.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  check-mcp-allowlist:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      - name: Verify MCP allowlist + docs coverage
+        run: node scripts/check-mcp-allowlist.mjs
+      - name: Run MCP allowlist unit tests
+        run: bun test tests/mcp-public-allowlist.test.ts
