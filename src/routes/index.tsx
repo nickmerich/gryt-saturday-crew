@@ -2046,47 +2046,47 @@ function Community() {
           <img
             src={photo2.url}
             alt="Sunny morning crew before heading out"
-            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15"
+            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15 photo-hover"
           />
           <img
             src={photo3.url}
             alt="Cooling down on the trail after a Saturday run"
-            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15"
+            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15 photo-hover"
           />
           <img
             src={photoBridge.url}
             alt="The crew running over the bridge on the Montour Trail"
-            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15"
+            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15 photo-hover"
           />
           <img
             src={photo5.url}
             alt="Three runners heading down the trail at sunrise"
-            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15"
+            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15 photo-hover"
           />
           <img
             src={photo7.url}
             alt="Tuesday Night Shift crew in the lot before the run"
-            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15"
+            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15 photo-hover"
           />
           <img
             src={photo8.url}
             alt="Big crew huddled up in Mt. Lebanon after a Tuesday night run"
-            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15"
+            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15 photo-hover"
           />
           <img
             src={photo1.url}
             alt="Crew posted up at the trailhead before the Saturday run"
-            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15"
+            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15 photo-hover"
           />
           <img
             src={photo4.url}
             alt="Runners rolling out on the Montour Trail at first light"
-            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15"
+            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15 photo-hover"
           />
           <img
             src={photo6.url}
             alt="Post-run coffee and hangs in the lot"
-            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15"
+            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15 photo-hover"
           />
         </div>
 
