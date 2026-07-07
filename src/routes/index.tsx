@@ -3125,6 +3125,8 @@ function validateEmail(raw: string): EmailValidation {
 }
 
 const NEWSLETTER_DISMISS_KEY = "gryt.newsletter.dismissed";
+const NEWSLETTER_RESEND_UNTIL_KEY = "gryt.newsletter.resendUntil";
+const NEWSLETTER_RESEND_EMAIL_KEY = "gryt.newsletter.resendEmail";
 
 function NewsletterBar() {
   const [email, setEmail] = useState("");
@@ -3167,6 +3169,17 @@ function NewsletterBar() {
       if (localStorage.getItem(NEWSLETTER_DISMISS_KEY) === "1") {
         setDismissed(true);
       }
+      const untilRaw = localStorage.getItem(NEWSLETTER_RESEND_UNTIL_KEY);
+      const savedEmail = localStorage.getItem(NEWSLETTER_RESEND_EMAIL_KEY);
+      const until = untilRaw ? parseInt(untilRaw, 10) : 0;
+      const remainingMs = until - Date.now();
+      if (remainingMs > 0) {
+        setResendCooldown(Math.ceil(remainingMs / 1000));
+        if (savedEmail) setSubmittedEmail(savedEmail);
+      } else if (untilRaw) {
+        localStorage.removeItem(NEWSLETTER_RESEND_UNTIL_KEY);
+        localStorage.removeItem(NEWSLETTER_RESEND_EMAIL_KEY);
+      }
     } catch {
       /* ignore storage errors */
     }
@@ -3175,7 +3188,15 @@ function NewsletterBar() {
 
   // Countdown timer for resend cooldown (throttles repeat clicks).
   useEffect(() => {
-    if (resendCooldown <= 0) return;
+    if (resendCooldown <= 0) {
+      try {
+        localStorage.removeItem(NEWSLETTER_RESEND_UNTIL_KEY);
+        localStorage.removeItem(NEWSLETTER_RESEND_EMAIL_KEY);
+      } catch {
+        /* ignore */
+      }
+      return;
+    }
     const id = setTimeout(() => setResendCooldown((c) => Math.max(0, c - 1)), 1000);
     return () => clearTimeout(id);
   }, [resendCooldown]);
@@ -3257,6 +3278,15 @@ function NewsletterBar() {
       setResendStatus("sent");
       setResendMsg("Sent again — check your inbox and spam.");
       setResendCooldown(30);
+      try {
+        localStorage.setItem(
+          NEWSLETTER_RESEND_UNTIL_KEY,
+          String(Date.now() + 30 * 1000),
+        );
+        localStorage.setItem(NEWSLETTER_RESEND_EMAIL_KEY, submittedEmail);
+      } catch {
+        /* ignore */
+      }
     } catch (err: any) {
       setResendStatus("error");
       setResendMsg(err?.message || "Couldn't resend. Try again in a minute.");
