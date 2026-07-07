@@ -1997,20 +1997,31 @@ function AffiliationList({ name, items }: { name: string; items: string[] }) {
     <div>
       <div className="display-condensed text-ink text-[18px] mb-3">{name}</div>
       <ul className="flex flex-wrap gap-1.5">
-        {visible.map((b) => (
-          <li
-            key={b}
-            className="border border-ink/25 px-2 py-1 text-[10px] sm:text-[11px] leading-tight uppercase tracking-[0.08em] text-ink/80 break-words"
-            style={{ fontFamily: "var(--font-body)" }}
-          >
-            {b}
-          </li>
-        ))}
+        {visible.map((b, i) => {
+          const isExtra = i >= COLLAPSED;
+          return (
+            <li
+              key={b}
+              className={`border border-ink/25 px-2 py-1 text-[10px] sm:text-[11px] leading-tight uppercase tracking-[0.08em] text-ink/80 break-words ${
+                isExtra
+                  ? "animate-in fade-in slide-in-from-top-1 duration-300 ease-out fill-mode-both"
+                  : ""
+              }`}
+              style={{
+                fontFamily: "var(--font-body)",
+                animationDelay: isExtra ? `${(i - COLLAPSED) * 60}ms` : undefined,
+              }}
+            >
+              {b}
+            </li>
+          );
+        })}
         {showToggle && (
           <li>
             <button
               type="button"
               onClick={() => setExpanded((v) => !v)}
+              aria-expanded={expanded}
               className="border border-ink/40 px-2 py-1 text-[10px] sm:text-[11px] leading-tight uppercase tracking-[0.08em] text-ink hover:bg-ink hover:text-paper transition-colors"
               style={{ fontFamily: "var(--font-body)" }}
             >
