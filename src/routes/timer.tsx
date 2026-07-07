@@ -36,9 +36,12 @@ function uid() {
 
 // ---------- Page ----------
 function TimerPage() {
+  // Event metadata
+  const [eventTitle, setEventTitle] = useState("Saturday Run");
   // Event clock
   const [startAt, setStartAt] = useState<number | null>(null);
   const [now, setNow] = useState<number>(Date.now());
+  const [shareStatus, setShareStatus] = useState<"idle" | "copied">("idle");
   const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
