@@ -34,13 +34,26 @@ for (const file of toolFiles) {
   const path = resolve(TOOLS_DIR, file);
   const src = read(path);
 
-  // Extract tool name from `name: "..."` inside defineTool({...}).
-  const nameMatch = src.match(/name:\s*["'`]([a-z0-9_\-]+)["'`]/i);
-  if (!nameMatch) {
-    errors.push(`${file}: could not find a \`name: "..."\` field`);
+  // Extract tool name: either `name: "literal"` or `name: IDENT` where
+  // IDENT is a `const IDENT = "literal"` in the same file.
+  let toolName = null;
+  const literal = src.match(/name:\s*["'`]([a-z0-9_\-]+)["'`]/i);
+  if (literal) {
+    toolName = literal[1];
+  } else {
+    const ident = src.match(/name:\s*([A-Za-z_][A-Za-z0-9_]*)\s*,/);
+    if (ident) {
+      const decl = new RegExp(
+        `\\b(?:const|let|var)\\s+${ident[1]}\\s*(?::[^=]+)?=\\s*["'\`]([a-z0-9_\\-]+)["'\`]`,
+        "i",
+      ).exec(src);
+      if (decl) toolName = decl[1];
+    }
+  }
+  if (!toolName) {
+    errors.push(`${file}: could not resolve tool name from \`name:\` field`);
     continue;
   }
-  const toolName = nameMatch[1];
 
   if (!/guardToolAccess\s*\(/.test(src)) {
     errors.push(`${file} (${toolName}): handler does not call guardToolAccess()`);
