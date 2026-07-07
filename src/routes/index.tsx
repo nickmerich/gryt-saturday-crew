@@ -2873,77 +2873,28 @@ function WeeklyRhythm() {
               ☀️
             </div>
 
-            <div className="relative">
-              <div
-                className="eyebrow mb-3"
-                style={{ color: "#7a3a0e" }}
-              >
-                Saturday · GRYT Run
-              </div>
-              <h3 className="display-condensed text-ink text-[clamp(34px,4.6vw,56px)] leading-[0.95]">
-                The weekend
-                <br />
-                anchor.
-              </h3>
-              <p className="mt-5 text-ink/80 text-[16px] leading-[1.6] max-w-[460px]">
-                7 AM sharp. One hour. The big effort. The crew. Home before the day gets away from
-                you.
-              </p>
+            <div className="relative flex flex-col gap-8">
+              <header className="flex flex-col gap-4">
+                <div className="eyebrow" style={{ color: "#7a3a0e" }}>
+                  Saturday · GRYT Run
+                </div>
+                <h3 className="display-condensed text-ink text-[clamp(34px,4.6vw,56px)] leading-[0.95]">
+                  The weekend
+                  <br />
+                  anchor.
+                </h3>
+                <p className="text-ink/80 text-[16px] leading-[1.6] max-w-[460px]">
+                  7 AM sharp. One hour. The big effort. The crew. Home before the day gets away
+                  from you.
+                </p>
+              </header>
 
-              <dl className="mt-7 border-t border-ink/20">
-                {[
-                  ["When", "Saturdays · 7:00 AM"],
-                  ["Meet", "212 Valley Brook Rd, McMurray"],
-                  ["Distance", "~4 miles out & back"],
-                  ["Pace", "All paces · all parents welcome"],
-                  ["Hosts", "Nick & Laura Merich"],
-                  ["After", "Coffee in the lot"],
-                ].map(([k, v]) => (
-                  <div
-                    key={k}
-                    className="flex justify-between gap-4 py-3 border-b border-ink/15"
-                  >
-                    <dt className="text-[11px] font-bold tracking-[0.16em] uppercase text-ink/55 shrink-0 basis-[88px]">
-                      {k}
-                    </dt>
-                    <dd className="text-[15px] text-right text-ink/90 font-medium">{v}</dd>
-                  </div>
-                ))}
-              </dl>
-
-              <div className="mt-7 inline-flex items-center gap-2 px-3.5 py-2 border border-ink/40 text-ink text-[11px] font-bold tracking-[0.14em] uppercase">
-                The other half · close the loop
-              </div>
-
-
-              <div className="mt-7 flex flex-wrap gap-3">
-                <a
-                  href="#join-sat"
-                  className="inline-flex items-center px-5 py-3 text-[12px] font-bold uppercase tracking-[0.12em] bg-ink text-paper hover:bg-[#3a7ca5] transition-colors"
-                >
-                  RSVP Saturday
-                </a>
-                <a
-                  href={satCal}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center px-5 py-3 text-[12px] font-bold uppercase tracking-[0.12em] border border-ink/50 text-ink hover:bg-ink hover:text-paper transition-colors"
-                >
-                  Add to Calendar
-                </a>
-                <a
-                  href={STRAVA_EVENT_URL.sat}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center px-5 py-3 text-[12px] font-bold uppercase tracking-[0.12em] border border-ink/50 text-ink hover:bg-ink hover:text-paper transition-colors"
-                >
-                  Strava event →
-                </a>
-              </div>
-
-              <div className="mt-8">
+              <div>
                 <div className="flex items-center gap-3 mb-3">
-                  <span className="inline-block h-[3px] w-8 bg-ink" style={{ transform: "skewX(-20deg)" }} />
+                  <span
+                    className="inline-block h-[3px] w-8 bg-blue"
+                    style={{ transform: "skewX(-20deg)" }}
+                  />
                   <span className="text-[11px] font-bold tracking-[0.18em] uppercase text-ink/70">
                     Meetup pin
                   </span>
@@ -2958,7 +2909,7 @@ function WeeklyRhythm() {
                       referrerPolicy="no-referrer-when-downgrade"
                       className="absolute inset-0 h-full w-full grayscale contrast-110"
                     />
-                    <div className="pointer-events-none absolute left-0 right-0 bottom-0 flex items-center justify-between gap-2 px-3 py-2 bg-gradient-to-t from-black/85 to-transparent">
+                    <div className="pointer-events-none absolute left-0 right-0 bottom-0 flex items-center justify-between gap-3 px-3 py-2 bg-gradient-to-t from-black/85 to-transparent">
                       <span className="display-condensed text-paper text-[15px] leading-none">
                         Montour / Peters Trailhead
                       </span>
@@ -2972,10 +2923,56 @@ function WeeklyRhythm() {
                   href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Rd%2C%20McMurray%2C%20PA%2015317"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-5 inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.14em] text-ink hover:text-[#3a7ca5] transition-colors"
+                  className="mt-4 inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.14em] text-ink hover:text-[#3a7ca5] transition-colors"
                 >
                   <span>Get directions</span>
                   <span aria-hidden>→</span>
+                </a>
+              </div>
+
+              <dl className="border-t border-ink/20">
+                {[
+                  ["When", "Saturdays · 7:00 AM"],
+                  ["Meet", "212 Valley Brook Rd, McMurray"],
+                  ["Distance", "~4 miles out & back"],
+                  ["Pace", "All paces · all parents welcome"],
+                  ["Hosts", "Nick & Laura Merich"],
+                  ["After", "Coffee in the lot"],
+                ].map(([k, v]) => (
+                  <div
+                    key={k}
+                    className="grid grid-cols-[96px_1fr] gap-4 py-3 border-b border-ink/15 items-baseline"
+                  >
+                    <dt className="text-[11px] font-bold tracking-[0.16em] uppercase text-ink/55">
+                      {k}
+                    </dt>
+                    <dd className="text-[15px] leading-[1.45] text-ink/90 font-medium">{v}</dd>
+                  </div>
+                ))}
+              </dl>
+
+              <div className="grid gap-3 sm:grid-cols-[auto_auto_auto] sm:justify-start">
+                <a
+                  href="#join-sat"
+                  className="inline-flex items-center justify-center h-11 px-5 text-[12px] font-bold uppercase tracking-[0.12em] bg-ink text-paper hover:bg-[#3a7ca5] transition-colors"
+                >
+                  RSVP Saturday
+                </a>
+                <a
+                  href={satCal}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center h-11 px-5 text-[12px] font-bold uppercase tracking-[0.12em] border border-ink/50 text-ink hover:bg-ink hover:text-paper transition-colors"
+                >
+                  Add to Calendar
+                </a>
+                <a
+                  href={STRAVA_EVENT_URL.sat}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center h-11 px-5 text-[12px] font-bold uppercase tracking-[0.12em] border border-ink/50 text-ink hover:bg-ink hover:text-paper transition-colors"
+                >
+                  Strava event →
                 </a>
               </div>
             </div>
