@@ -3504,6 +3504,35 @@ function NewsletterBar() {
                 <line x1="12" y1="16" x2="12.01" y2="16" />
               </svg>
               <span>{errorMessage}</span>
+              {showRequestError && submittedEmail && (
+                <>
+                  <span aria-hidden className="opacity-40">·</span>
+                  {resendStatus === "sent" ? (
+                    <span className="text-ink">{resendMsg}</span>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={handleResend}
+                      disabled={resendStatus === "sending" || resendCooldown > 0}
+                      className="underline underline-offset-2 decoration-2 font-bold hover:text-ink/70 disabled:opacity-50 disabled:no-underline disabled:cursor-not-allowed inline-flex items-center gap-1"
+                    >
+                      {resendStatus === "sending" ? (
+                        <>
+                          <span
+                            aria-hidden
+                            className="inline-block h-2.5 w-2.5 rounded-full border-2 border-ink border-t-transparent animate-spin"
+                          />
+                          Retrying
+                        </>
+                      ) : resendCooldown > 0 ? (
+                        `Retry in ${resendCooldown}s`
+                      ) : (
+                        "Resend confirmation"
+                      )}
+                    </button>
+                  )}
+                </>
+              )}
             </>
           ) : (
             ""
