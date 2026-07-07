@@ -3210,12 +3210,16 @@ function NewsletterBar() {
 
   const disableSubmit = status === "loading" || !validation.ok;
 
+  // Avoid hydration mismatch: render the bar on the server, then hide it
+  // client-side if the visitor has previously dismissed it.
+  if (hydrated && dismissed) return null;
+
   return (
     <div className="sticky top-[68px] z-40 bg-blue text-ink border-y-2 border-ink shadow-[0_6px_0_-2px_rgba(0,0,0,0.15),0_18px_40px_-20px_rgba(0,0,0,0.55)]">
-      {/* Diagonal stripe accent on the far edges */}
+      {/* Diagonal stripe accent on the far edges — hidden on mobile so they don't crowd the form */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-y-0 left-0 w-8 sm:w-12 opacity-70"
+        className="pointer-events-none absolute inset-y-0 left-0 w-12 opacity-70 hidden sm:block"
         style={{
           backgroundImage:
             "repeating-linear-gradient(-20deg, rgba(0,0,0,0.85) 0 6px, transparent 6px 14px)",
@@ -3225,7 +3229,7 @@ function NewsletterBar() {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-y-0 right-0 w-8 sm:w-12 opacity-70"
+        className="pointer-events-none absolute inset-y-0 right-0 w-12 opacity-70 hidden sm:block"
         style={{
           backgroundImage:
             "repeating-linear-gradient(-20deg, rgba(0,0,0,0.85) 0 6px, transparent 6px 14px)",
@@ -3234,8 +3238,8 @@ function NewsletterBar() {
         }}
       />
 
-      <div className="relative max-w-[1180px] mx-auto flex items-center gap-4 sm:gap-6 px-5 sm:px-8 md:px-12 py-3 sm:py-3.5 flex-wrap">
-        <div className="flex items-center gap-3 shrink-0">
+      <div className="relative max-w-[1180px] mx-auto flex items-center gap-3 sm:gap-6 px-3 sm:px-8 md:px-12 pr-10 sm:pr-16 py-3 sm:py-3.5 flex-wrap">
+        <div className="flex items-center gap-3 shrink-0 basis-full sm:basis-auto">
           <span
             aria-hidden
             className="hidden sm:inline-block h-[3px] w-8 bg-ink"
@@ -3243,7 +3247,7 @@ function NewsletterBar() {
           />
           <div className="flex flex-col leading-tight">
             <span
-              className="display-condensed text-ink text-[15px] sm:text-[17px] tracking-[0.02em]"
+              className="display-condensed text-ink text-[14px] sm:text-[17px] tracking-[0.02em]"
             >
               Saturday Brief
             </span>
@@ -3252,6 +3256,28 @@ function NewsletterBar() {
             </span>
           </div>
         </div>
+
+        {/* Dismiss — absolute so it never eats form width */}
+        <button
+          type="button"
+          onClick={handleDismiss}
+          aria-label="Dismiss newsletter bar"
+          className="absolute top-2 right-2 sm:top-1/2 sm:right-4 sm:-translate-y-1/2 inline-flex h-8 w-8 items-center justify-center text-ink/70 hover:text-ink hover:bg-ink/10 transition-colors"
+        >
+          <svg
+            aria-hidden
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            className="h-4 w-4"
+          >
+            <line x1="6" y1="6" x2="18" y2="18" />
+            <line x1="18" y1="6" x2="6" y2="18" />
+          </svg>
+        </button>
+
 
         {status === "done" ? (
           <div
