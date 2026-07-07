@@ -3143,8 +3143,12 @@ function NewsletterBar() {
     : showRequestError
     ? msg
     : null;
+  const suggestion =
+    validation.ok && validation.suggestion && touched ? validation.suggestion : null;
   const describedBy = errorMessage
     ? "nl-email-error"
+    : suggestion
+    ? "nl-email-suggestion"
     : "nl-email-hint";
 
   async function onSubmit(e: React.FormEvent) {
