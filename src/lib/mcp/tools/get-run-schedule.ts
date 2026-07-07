@@ -1,13 +1,16 @@
-import { defineTool } from "@lovable.dev/mcp-js";
+import { defineTool, type ToolContext } from "@lovable.dev/mcp-js";
+import { guardToolAccess } from "../public-allowlist";
+
+const TOOL_NAME = "get_run_schedule";
 
 export default defineTool({
-  name: "get_run_schedule",
+  name: TOOL_NAME,
   title: "Get run schedule",
   description:
     "Return GRYT Run Club's weekly meet-up schedule, including day, time, and meeting location.",
   inputSchema: {},
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
-  handler: () => {
+  handler: (_args: unknown, ctx: ToolContext) => {
     const runs = [
       {
         day: "Saturday",
@@ -25,9 +28,10 @@ export default defineTool({
         notes: "Check the Strava group for weekly details.",
       },
     ];
+    const payload = guardToolAccess(TOOL_NAME, ctx.isAuthenticated(), { runs });
     return {
-      content: [{ type: "text", text: JSON.stringify(runs, null, 2) }],
-      structuredContent: { runs },
+      content: [{ type: "text", text: JSON.stringify(payload.runs ?? [], null, 2) }],
+      structuredContent: payload,
     };
   },
 });
