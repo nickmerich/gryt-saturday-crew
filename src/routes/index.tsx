@@ -3128,6 +3128,43 @@ const NEWSLETTER_DISMISS_KEY = "gryt.newsletter.dismissed";
 const NEWSLETTER_RESEND_UNTIL_KEY = "gryt.newsletter.resendUntil";
 const NEWSLETTER_RESEND_EMAIL_KEY = "gryt.newsletter.resendEmail";
 
+// Safe storage wrapper: falls back to an in-memory Map when localStorage
+// is unavailable (SSR, private mode, blocked by CSP/quota, disabled cookies).
+// Guarantees no throws so UI flows keep working even without persistence.
+const memoryStore = new Map<string, string>();
+const safeStorage = {
+  get(key: string): string | null {
+    try {
+      if (typeof window !== "undefined" && window.localStorage) {
+        return window.localStorage.getItem(key);
+      }
+    } catch {
+      /* fall through to memory */
+    }
+    return memoryStore.has(key) ? (memoryStore.get(key) ?? null) : null;
+  },
+  set(key: string, value: string): void {
+    memoryStore.set(key, value);
+    try {
+      if (typeof window !== "undefined" && window.localStorage) {
+        window.localStorage.setItem(key, value);
+      }
+    } catch {
+      /* memory copy already saved */
+    }
+  },
+  remove(key: string): void {
+    memoryStore.delete(key);
+    try {
+      if (typeof window !== "undefined" && window.localStorage) {
+        window.localStorage.removeItem(key);
+      }
+    } catch {
+      /* ignore */
+    }
+  },
+};
+
 function NewsletterBar() {
   const [email, setEmail] = useState("");
   const [touched, setTouched] = useState(false);
@@ -3165,23 +3202,19 @@ function NewsletterBar() {
 
   useEffect(() => {
     captureAttribution();
-    try {
-      if (localStorage.getItem(NEWSLETTER_DISMISS_KEY) === "1") {
-        setDismissed(true);
-      }
-      const untilRaw = localStorage.getItem(NEWSLETTER_RESEND_UNTIL_KEY);
-      const savedEmail = localStorage.getItem(NEWSLETTER_RESEND_EMAIL_KEY);
-      const until = untilRaw ? parseInt(untilRaw, 10) : 0;
-      const remainingMs = until - Date.now();
-      if (remainingMs > 0) {
-        setResendCooldown(Math.ceil(remainingMs / 1000));
-        if (savedEmail) setSubmittedEmail(savedEmail);
-      } else if (untilRaw) {
-        localStorage.removeItem(NEWSLETTER_RESEND_UNTIL_KEY);
-        localStorage.removeItem(NEWSLETTER_RESEND_EMAIL_KEY);
-      }
-    } catch {
-      /* ignore storage errors */
+    if (safeStorage.get(NEWSLETTER_DISMISS_KEY) === "1") {
+      setDismissed(true);
+    }
+    const untilRaw = safeStorage.get(NEWSLETTER_RESEND_UNTIL_KEY);
+    const savedEmail = safeStorage.get(NEWSLETTER_RESEND_EMAIL_KEY);
+    const until = untilRaw ? parseInt(untilRaw, 10) : 0;
+    const remainingMs = until - Date.now();
+    if (remainingMs > 0) {
+      setResendCooldown(Math.ceil(remainingMs / 1000));
+      if (savedEmail) setSubmittedEmail(savedEmail);
+    } else if (untilRaw) {
+      safeStorage.remove(NEWSLETTER_RESEND_UNTIL_KEY);
+      safeStorage.remove(NEWSLETTER_RESEND_EMAIL_KEY);
     }
     setHydrated(true);
   }, []);
@@ -3189,12 +3222,8 @@ function NewsletterBar() {
   // Countdown timer for resend cooldown (throttles repeat clicks).
   useEffect(() => {
     if (resendCooldown <= 0) {
-      try {
-        localStorage.removeItem(NEWSLETTER_RESEND_UNTIL_KEY);
-        localStorage.removeItem(NEWSLETTER_RESEND_EMAIL_KEY);
-      } catch {
-        /* ignore */
-      }
+      safeStorage.remove(NEWSLETTER_RESEND_UNTIL_KEY);
+      safeStorage.remove(NEWSLETTER_RESEND_EMAIL_KEY);
       return;
     }
     const id = setTimeout(() => setResendCooldown((c) => Math.max(0, c - 1)), 1000);
@@ -3203,11 +3232,7 @@ function NewsletterBar() {
 
   function handleDismiss() {
     setDismissed(true);
-    try {
-      localStorage.setItem(NEWSLETTER_DISMISS_KEY, "1");
-    } catch {
-      /* ignore */
-    }
+    safeStorage.set(NEWSLETTER_DISMISS_KEY, "1");
   }
 
   const validation = useMemo(() => validateEmail(email), [email]);
@@ -3278,15 +3303,11 @@ function NewsletterBar() {
       setResendStatus("sent");
       setResendMsg("Sent again — check your inbox and spam.");
       setResendCooldown(30);
-      try {
-        localStorage.setItem(
-          NEWSLETTER_RESEND_UNTIL_KEY,
-          String(Date.now() + 30 * 1000),
-        );
-        localStorage.setItem(NEWSLETTER_RESEND_EMAIL_KEY, submittedEmail);
-      } catch {
-        /* ignore */
-      }
+      safeStorage.set(
+        NEWSLETTER_RESEND_UNTIL_KEY,
+        String(Date.now() + 30 * 1000),
+      );
+      safeStorage.set(NEWSLETTER_RESEND_EMAIL_KEY, submittedEmail);
     } catch (err: any) {
       setResendStatus("error");
       setResendMsg(err?.message || "Couldn't resend. Try again in a minute.");
