@@ -3202,23 +3202,19 @@ function NewsletterBar() {
 
   useEffect(() => {
     captureAttribution();
-    try {
-      if (localStorage.getItem(NEWSLETTER_DISMISS_KEY) === "1") {
-        setDismissed(true);
-      }
-      const untilRaw = localStorage.getItem(NEWSLETTER_RESEND_UNTIL_KEY);
-      const savedEmail = localStorage.getItem(NEWSLETTER_RESEND_EMAIL_KEY);
-      const until = untilRaw ? parseInt(untilRaw, 10) : 0;
-      const remainingMs = until - Date.now();
-      if (remainingMs > 0) {
-        setResendCooldown(Math.ceil(remainingMs / 1000));
-        if (savedEmail) setSubmittedEmail(savedEmail);
-      } else if (untilRaw) {
-        localStorage.removeItem(NEWSLETTER_RESEND_UNTIL_KEY);
-        localStorage.removeItem(NEWSLETTER_RESEND_EMAIL_KEY);
-      }
-    } catch {
-      /* ignore storage errors */
+    if (safeStorage.get(NEWSLETTER_DISMISS_KEY) === "1") {
+      setDismissed(true);
+    }
+    const untilRaw = safeStorage.get(NEWSLETTER_RESEND_UNTIL_KEY);
+    const savedEmail = safeStorage.get(NEWSLETTER_RESEND_EMAIL_KEY);
+    const until = untilRaw ? parseInt(untilRaw, 10) : 0;
+    const remainingMs = until - Date.now();
+    if (remainingMs > 0) {
+      setResendCooldown(Math.ceil(remainingMs / 1000));
+      if (savedEmail) setSubmittedEmail(savedEmail);
+    } else if (untilRaw) {
+      safeStorage.remove(NEWSLETTER_RESEND_UNTIL_KEY);
+      safeStorage.remove(NEWSLETTER_RESEND_EMAIL_KEY);
     }
     setHydrated(true);
   }, []);
@@ -3226,12 +3222,8 @@ function NewsletterBar() {
   // Countdown timer for resend cooldown (throttles repeat clicks).
   useEffect(() => {
     if (resendCooldown <= 0) {
-      try {
-        localStorage.removeItem(NEWSLETTER_RESEND_UNTIL_KEY);
-        localStorage.removeItem(NEWSLETTER_RESEND_EMAIL_KEY);
-      } catch {
-        /* ignore */
-      }
+      safeStorage.remove(NEWSLETTER_RESEND_UNTIL_KEY);
+      safeStorage.remove(NEWSLETTER_RESEND_EMAIL_KEY);
       return;
     }
     const id = setTimeout(() => setResendCooldown((c) => Math.max(0, c - 1)), 1000);
@@ -3240,11 +3232,7 @@ function NewsletterBar() {
 
   function handleDismiss() {
     setDismissed(true);
-    try {
-      localStorage.setItem(NEWSLETTER_DISMISS_KEY, "1");
-    } catch {
-      /* ignore */
-    }
+    safeStorage.set(NEWSLETTER_DISMISS_KEY, "1");
   }
 
   const validation = useMemo(() => validateEmail(email), [email]);
