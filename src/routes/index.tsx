@@ -3372,13 +3372,15 @@ function NewsletterBar() {
                   >
                     {resendMsg}
                   </span>
-                ) : resendStatus === "sent" ? (
-                  <span className="text-ink font-medium">
-                    {resendMsg}
-                  </span>
                 ) : resendStatus === "error" ? (
                   <>
-                    <span className="text-red-800 font-medium">{resendMsg}</span>
+                    <span
+                      ref={errorResendRegionRef}
+                      tabIndex={-1}
+                      className="text-red-800 font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-red-800/40 focus-visible:ring-offset-1"
+                    >
+                      {resendMsg}
+                    </span>
                     <button
                       type="button"
                       onClick={handleResend}
