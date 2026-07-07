@@ -149,6 +149,32 @@ function TimerPage() {
     URL.revokeObjectURL(url);
   };
 
+  const buildShareUrl = () => {
+    const payload = encodePayload({
+      v: 1,
+      title: eventTitle.trim() || "Saturday Run",
+      startedAt: startAt,
+      finishers: results.map((p) => ({
+        n: p.name,
+        b: p.bib,
+        t: p.finishMs,
+      })),
+    });
+    return `${window.location.origin}/timer/results#${payload}`;
+  };
+
+  const shareResults = async () => {
+    if (results.length === 0) return;
+    const url = buildShareUrl();
+    try {
+      await navigator.clipboard.writeText(url);
+      setShareStatus("copied");
+      setTimeout(() => setShareStatus("idle"), 2000);
+    } catch {
+      window.prompt("Copy this link:", url);
+    }
+  };
+
   return (
     <main className="min-h-screen bg-ink text-paper font-body">
       {/* Header */}
