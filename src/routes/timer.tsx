@@ -183,12 +183,14 @@ function TimerPage() {
           <div className="text-[11px] tracking-[0.22em] uppercase text-white/50">
             GRYT · Event Timer
           </div>
-          <h1
-            className="font-condensed uppercase text-3xl sm:text-4xl mt-1"
+          <input
+            value={eventTitle}
+            onChange={(e) => setEventTitle(e.target.value)}
+            aria-label="Event title"
+            className="font-condensed uppercase text-3xl sm:text-4xl mt-1 bg-transparent border-b border-transparent hover:border-white/20 focus:border-blue focus:outline-none w-full max-w-md"
             style={{ letterSpacing: "0.01em" }}
-          >
-            Saturday Run — Live Timer
-          </h1>
+          />
+
         </div>
         <a
           href="/"
@@ -323,18 +325,31 @@ function TimerPage() {
         {/* Results */}
         <section>
           <div className="flex items-end justify-between">
+          <div className="flex items-end justify-between gap-4">
             <SectionHeader
               eyebrow="02 · Results"
               title={`Finishers (${results.length})`}
             />
-            <button
-              onClick={exportCsv}
-              disabled={results.length === 0}
-              className="text-[11px] tracking-[0.22em] uppercase text-white/60 hover:text-blue disabled:opacity-30 disabled:cursor-not-allowed"
-            >
-              Export CSV
-            </button>
+            <div className="flex flex-col items-end gap-1">
+              <div className="flex gap-4">
+                <button
+                  onClick={shareResults}
+                  disabled={results.length === 0}
+                  className="text-[11px] tracking-[0.22em] uppercase text-white/60 hover:text-blue disabled:opacity-30 disabled:cursor-not-allowed"
+                >
+                  {shareStatus === "copied" ? "Link Copied ✓" : "Share Link"}
+                </button>
+                <button
+                  onClick={exportCsv}
+                  disabled={results.length === 0}
+                  className="text-[11px] tracking-[0.22em] uppercase text-white/60 hover:text-blue disabled:opacity-30 disabled:cursor-not-allowed"
+                >
+                  Export CSV
+                </button>
+              </div>
+            </div>
           </div>
+
 
           <div className="mt-6 border border-white/10">
             <div className="grid grid-cols-[48px_64px_1fr_120px] gap-2 px-4 py-2 bg-vintage text-[10px] tracking-[0.22em] uppercase text-white/50">
