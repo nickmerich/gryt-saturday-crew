@@ -3084,21 +3084,62 @@ function NewsletterBar() {
   const disableSubmit = status === "loading" || !validation.ok;
 
   return (
-    <div className="sticky top-[68px] z-40 bg-blue text-ink border-b border-ink/15">
-      <div className="max-w-[1180px] mx-auto flex items-center gap-4 px-5 sm:px-8 md:px-12 py-2.5 flex-wrap">
-        <span className="eyebrow text-ink/80 shrink-0">
-          Saturday brief · every Friday
-        </span>
+    <div className="sticky top-[68px] z-40 bg-blue text-ink border-y-2 border-ink shadow-[0_6px_0_-2px_rgba(0,0,0,0.15),0_18px_40px_-20px_rgba(0,0,0,0.55)]">
+      {/* Diagonal stripe accent on the far edges */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-y-0 left-0 w-8 sm:w-12 opacity-70"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(-20deg, rgba(0,0,0,0.85) 0 6px, transparent 6px 14px)",
+          maskImage: "linear-gradient(to right, black, transparent)",
+          WebkitMaskImage: "linear-gradient(to right, black, transparent)",
+        }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-y-0 right-0 w-8 sm:w-12 opacity-70"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(-20deg, rgba(0,0,0,0.85) 0 6px, transparent 6px 14px)",
+          maskImage: "linear-gradient(to left, black, transparent)",
+          WebkitMaskImage: "linear-gradient(to left, black, transparent)",
+        }}
+      />
+
+      <div className="relative max-w-[1180px] mx-auto flex items-center gap-4 sm:gap-6 px-5 sm:px-8 md:px-12 py-3 sm:py-3.5 flex-wrap">
+        <div className="flex items-center gap-3 shrink-0">
+          <span
+            aria-hidden
+            className="hidden sm:inline-block h-[3px] w-8 bg-ink"
+            style={{ transform: "skewX(-20deg)" }}
+          />
+          <div className="flex flex-col leading-tight">
+            <span
+              className="display-condensed text-ink text-[15px] sm:text-[17px] tracking-[0.02em]"
+            >
+              Saturday Brief
+            </span>
+            <span className="eyebrow text-ink/70 text-[10px] sm:text-[11px] tracking-[0.16em]">
+              Drops every Friday
+            </span>
+          </div>
+        </div>
+
         {status === "done" ? (
-          <p role="status" aria-live="polite" className="text-sm font-medium">
-            You're in. Watch your inbox.
+          <p
+            role="status"
+            aria-live="polite"
+            className="display-condensed text-ink text-[16px] sm:text-[18px] tracking-[0.02em] flex-1 min-w-[220px]"
+          >
+            You're in. Watch your inbox. →
           </p>
         ) : (
           <form
             onSubmit={onSubmit}
             noValidate
             aria-label="Subscribe to the GRYT Saturday brief"
-            className="flex flex-1 min-w-[240px] items-center gap-2"
+            className="flex flex-1 min-w-[240px] items-stretch gap-0 bg-paper border-2 border-ink shadow-[3px_3px_0_var(--ink)]"
           >
             <label htmlFor="nl-email" className="sr-only">Email address</label>
             <input
@@ -3118,9 +3159,10 @@ function NewsletterBar() {
               aria-invalid={errorMessage ? true : undefined}
               aria-describedby={describedBy}
               aria-errormessage={errorMessage ? "nl-email-error" : undefined}
-              className={`flex-1 min-w-0 bg-transparent border-0 border-b text-ink placeholder:text-ink/50 py-1.5 text-sm focus:outline-none ${
-                errorMessage ? "border-red-800 focus:border-red-800" : "border-ink/40 focus:border-ink"
+              className={`flex-1 min-w-0 bg-transparent border-0 text-ink placeholder:text-ink/40 px-3 sm:px-4 py-2.5 text-sm sm:text-[15px] focus:outline-none focus:bg-blue/10 transition-colors ${
+                errorMessage ? "text-red-800" : ""
               }`}
+              style={{ fontFamily: "var(--font-body)" }}
             />
             <button
               type="submit"
@@ -3128,8 +3170,8 @@ function NewsletterBar() {
               aria-disabled={disableSubmit}
               aria-busy={status === "loading"}
               aria-describedby="nl-status"
-              className="bg-ink text-blue px-4 py-2 text-xs font-bold uppercase tracking-[0.1em] hover:bg-paper hover:text-ink transition-colors disabled:opacity-40 disabled:cursor-not-allowed inline-flex items-center gap-2"
-              style={{ fontFamily: "var(--font-body)" }}
+              className="bg-ink text-blue px-4 sm:px-5 text-xs sm:text-[13px] font-bold uppercase tracking-[0.14em] hover:bg-blue hover:text-ink hover:shadow-[inset_0_0_0_2px_var(--ink)] transition-all disabled:opacity-40 disabled:cursor-not-allowed inline-flex items-center gap-2 shrink-0"
+              style={{ fontFamily: "var(--font-condensed)" }}
             >
               {status === "loading" && (
                 <span
@@ -3137,7 +3179,7 @@ function NewsletterBar() {
                   className="inline-block h-3 w-3 rounded-full border-2 border-blue border-t-transparent animate-spin"
                 />
               )}
-              <span>{status === "loading" ? "Sending" : "Subscribe"}</span>
+              <span>{status === "loading" ? "Sending" : "Subscribe →"}</span>
             </button>
           </form>
         )}
@@ -3157,11 +3199,10 @@ function NewsletterBar() {
           id="nl-email-error"
           role="alert"
           aria-live="assertive"
-          className={`text-xs text-ink/80 basis-full ${errorMessage ? "" : "sr-only"}`}
+          className={`text-xs font-medium text-ink basis-full ${errorMessage ? "" : "sr-only"}`}
         >
           {errorMessage ?? ""}
         </p>
-
       </div>
     </div>
   );
