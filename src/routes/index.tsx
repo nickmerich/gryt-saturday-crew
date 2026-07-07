@@ -3303,15 +3303,11 @@ function NewsletterBar() {
       setResendStatus("sent");
       setResendMsg("Sent again — check your inbox and spam.");
       setResendCooldown(30);
-      try {
-        localStorage.setItem(
-          NEWSLETTER_RESEND_UNTIL_KEY,
-          String(Date.now() + 30 * 1000),
-        );
-        localStorage.setItem(NEWSLETTER_RESEND_EMAIL_KEY, submittedEmail);
-      } catch {
-        /* ignore */
-      }
+      safeStorage.set(
+        NEWSLETTER_RESEND_UNTIL_KEY,
+        String(Date.now() + 30 * 1000),
+      );
+      safeStorage.set(NEWSLETTER_RESEND_EMAIL_KEY, submittedEmail);
     } catch (err: any) {
       setResendStatus("error");
       setResendMsg(err?.message || "Couldn't resend. Try again in a minute.");
