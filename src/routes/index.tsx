@@ -2042,6 +2042,8 @@ function Community() {
           </div>
         </div>
 
+        <PhotoColorToggle />
+
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-12">
           <img
             src={photo2.url}
