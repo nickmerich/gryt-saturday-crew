@@ -1411,8 +1411,7 @@ function FirstTimer() {
             </div>
           ))}
         </div>
-        <div className="mt-[2px] border-2 border-t-0 border-ink bg-ink text-paper p-7 md:p-9 grid gap-6 md:grid-cols-[auto_1fr_auto] md:items-center">
-          <div className="display-condensed text-blue text-6xl leading-[0.85]">1.1</div>
+        <div className="mt-[2px] border-2 border-t-0 border-ink bg-ink text-paper p-7 md:p-9 grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
           <div>
             <h3 className="display-condensed text-paper text-[24px] mb-2.5 uppercase">Sign the waiver before you come.</h3>
             <p className="text-[15px] leading-[1.6] text-paper/75">
