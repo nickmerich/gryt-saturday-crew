@@ -3334,12 +3334,54 @@ function NewsletterBar() {
                 <polyline points="4 12 10 18 20 6" />
               </svg>
             </span>
-            <div className="flex min-w-0 flex-col justify-center leading-tight">
+            <div className="flex min-w-0 flex-1 flex-col justify-center leading-tight gap-0.5">
               <span className="display-condensed text-ink text-[15px] sm:text-[17px] tracking-[0.02em]">
                 You're on the list.
               </span>
               <span className="text-[12px] sm:text-[13px] text-ink/75 font-medium">
                 Friday, 6 AM ET — check your inbox (and spam) for the first brief.
+              </span>
+              <span className="text-[11px] sm:text-[12px] text-ink/70 mt-1 flex flex-wrap items-center gap-x-1.5 gap-y-0.5">
+                {resendStatus === "sent" ? (
+                  <span className="text-ink font-medium">
+                    {resendMsg}
+                  </span>
+                ) : resendStatus === "error" ? (
+                  <>
+                    <span className="text-red-800 font-medium">{resendMsg}</span>
+                    <button
+                      type="button"
+                      onClick={handleResend}
+                      className="underline underline-offset-2 decoration-2 font-bold hover:text-ink"
+                    >
+                      Try again
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <span>Not there in a few minutes?</span>
+                    <button
+                      type="button"
+                      onClick={handleResend}
+                      disabled={resendStatus === "sending" || resendCooldown > 0}
+                      className="underline underline-offset-2 decoration-2 font-bold hover:text-ink disabled:opacity-50 disabled:no-underline disabled:cursor-not-allowed inline-flex items-center gap-1"
+                    >
+                      {resendStatus === "sending" ? (
+                        <>
+                          <span
+                            aria-hidden
+                            className="inline-block h-2.5 w-2.5 rounded-full border-2 border-ink border-t-transparent animate-spin"
+                          />
+                          Resending
+                        </>
+                      ) : resendCooldown > 0 ? (
+                        `Resend in ${resendCooldown}s`
+                      ) : (
+                        "Resend confirmation"
+                      )}
+                    </button>
+                  </>
+                )}
               </span>
             </div>
             <a
