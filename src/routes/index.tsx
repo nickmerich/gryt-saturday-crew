@@ -3125,6 +3125,8 @@ function validateEmail(raw: string): EmailValidation {
 }
 
 const NEWSLETTER_DISMISS_KEY = "gryt.newsletter.dismissed";
+const NEWSLETTER_RESEND_UNTIL_KEY = "gryt.newsletter.resendUntil";
+const NEWSLETTER_RESEND_EMAIL_KEY = "gryt.newsletter.resendEmail";
 
 function NewsletterBar() {
   const [email, setEmail] = useState("");
