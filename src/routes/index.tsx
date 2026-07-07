@@ -3133,6 +3133,10 @@ function NewsletterBar() {
   const [msg, setMsg] = useState<string | null>(null);
   const [dismissed, setDismissed] = useState(false);
   const [hydrated, setHydrated] = useState(false);
+  const [submittedEmail, setSubmittedEmail] = useState<string | null>(null);
+  const [resendStatus, setResendStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [resendMsg, setResendMsg] = useState<string | null>(null);
+  const [resendCooldown, setResendCooldown] = useState(0);
   const emailRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
@@ -3146,6 +3150,13 @@ function NewsletterBar() {
     }
     setHydrated(true);
   }, []);
+
+  // Countdown timer for resend cooldown (throttles repeat clicks).
+  useEffect(() => {
+    if (resendCooldown <= 0) return;
+    const id = setTimeout(() => setResendCooldown((c) => Math.max(0, c - 1)), 1000);
+    return () => clearTimeout(id);
+  }, [resendCooldown]);
 
   function handleDismiss() {
     setDismissed(true);
@@ -3172,13 +3183,27 @@ function NewsletterBar() {
     ? "nl-email-suggestion"
     : "nl-email-hint";
 
+  async function subscribe(value: string) {
+    const attribution = getSignupAttribution("homepage_bar");
+    const res = await fetch("/api/newsletter/subscribe", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: value,
+        source: "homepage_bar",
+        ...attribution,
+      }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || !data.ok) throw new Error(data.error || "Sign-up failed");
+  }
+
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setTouched(true);
     if (!validation.ok) {
       setStatus("error");
       setMsg(validation.error || "Enter a valid email.");
-      // Move focus back to the invalid field so screen readers announce the error.
       requestAnimationFrame(() => emailRef.current?.focus());
       return;
     }
@@ -3186,25 +3211,33 @@ function NewsletterBar() {
     setStatus("loading");
     setMsg(null);
     try {
-      const attribution = getSignupAttribution("homepage_bar");
-      const res = await fetch("/api/newsletter/subscribe", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: value,
-          source: "homepage_bar",
-          ...attribution,
-        }),
-      });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok || !data.ok) throw new Error(data.error || "Sign-up failed");
+      await subscribe(value);
       setStatus("done");
+      setSubmittedEmail(value);
       setEmail("");
       setTouched(false);
+      setResendStatus("idle");
+      setResendMsg(null);
     } catch (err: any) {
       setStatus("error");
+      setSubmittedEmail(value);
       setMsg(err?.message || "Something went wrong.");
       requestAnimationFrame(() => emailRef.current?.focus());
+    }
+  }
+
+  async function handleResend() {
+    if (!submittedEmail || resendCooldown > 0 || resendStatus === "sending") return;
+    setResendStatus("sending");
+    setResendMsg(null);
+    try {
+      await subscribe(submittedEmail);
+      setResendStatus("sent");
+      setResendMsg("Sent again — check your inbox and spam.");
+      setResendCooldown(30);
+    } catch (err: any) {
+      setResendStatus("error");
+      setResendMsg(err?.message || "Couldn't resend. Try again in a minute.");
     }
   }
 
