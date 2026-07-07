@@ -13,6 +13,8 @@ import photo4 from "@/assets/photos/run-club-4.jpg.asset.json";
 import photo5 from "@/assets/photos/run-club-5.jpg.asset.json";
 import photo6 from "@/assets/photos/run-club-6.jpg.asset.json";
 import photoBridge from "@/assets/photos/run-club-bridge.jpg.asset.json";
+import photo7 from "@/assets/photos/run-club-7.jpg.asset.json";
+import photo8 from "@/assets/photos/run-club-8.jpg.asset.json";
 import nickLauraAsset from "@/assets/photos/nick-laura.jpg.asset.json";
 import grytBearAsset from "@/assets/gryt-bear.png.asset.json";
 
