@@ -279,8 +279,8 @@ function MissionStamp({
 function Nav() {
   const [open, setOpen] = useState(false);
   const links: Array<[string, string]> = [
-    ["#details", "Saturday"],
-    ["#first", "First Time"],
+    ["#details", "Let's Run"],
+    ["#first", "Start Here"],
     ["#community", "Community"],
     ["/resources", "Resources"],
   ];
