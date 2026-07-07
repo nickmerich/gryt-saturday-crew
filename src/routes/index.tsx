@@ -2749,6 +2749,29 @@ function WeeklyRhythm() {
                   See meetup spot on Strava →
                 </a>
               </div>
+
+              <div className="mt-8">
+                <div className="text-[11px] font-bold tracking-[0.16em] uppercase text-paper/45 mb-3">
+                  Meetup pin
+                </div>
+                <div className="relative overflow-hidden border border-paper/15 aspect-[16/10] bg-ink/60">
+                  <iframe
+                    src="https://maps.google.com/maps?q=Mt.+Lebanon+Public+Library,+16+Castle+Shannon+Blvd,+Pittsburgh,+PA+15228&z=16&ie=UTF8&iwloc=&output=embed"
+                    title="Tuesday Night Shift meetup — Mt. Lebanon Public Library"
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="absolute inset-0 h-full w-full grayscale contrast-125"
+                  />
+                </div>
+                <a
+                  href="https://www.google.com/maps/dir/?api=1&destination=Mt.%20Lebanon%20Public%20Library%2C%2016%20Castle%20Shannon%20Blvd%2C%20Pittsburgh%2C%20PA%2015228"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 inline-flex items-center text-[12px] font-bold uppercase tracking-[0.12em] text-blue hover:text-paper transition-colors"
+                >
+                  Get directions →
+                </a>
+              </div>
             </div>
           </article>
 
