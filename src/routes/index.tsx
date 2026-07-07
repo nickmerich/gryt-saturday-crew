@@ -1988,6 +1988,42 @@ function TheRun() {
   );
 }
 
+function AffiliationList({ name, items }: { name: string; items: string[] }) {
+  const [expanded, setExpanded] = useState(false);
+  const COLLAPSED = 2;
+  const showToggle = items.length > COLLAPSED;
+  const visible = expanded || !showToggle ? items : items.slice(0, COLLAPSED);
+  return (
+    <div>
+      <div className="display-condensed text-ink text-[18px] mb-3">{name}</div>
+      <ul className="flex flex-wrap gap-1.5">
+        {visible.map((b) => (
+          <li
+            key={b}
+            className="border border-ink/25 px-2 py-1 text-[10px] sm:text-[11px] leading-tight uppercase tracking-[0.08em] text-ink/80 break-words"
+            style={{ fontFamily: "var(--font-body)" }}
+          >
+            {b}
+          </li>
+        ))}
+        {showToggle && (
+          <li>
+            <button
+              type="button"
+              onClick={() => setExpanded((v) => !v)}
+              className="border border-ink/40 px-2 py-1 text-[10px] sm:text-[11px] leading-tight uppercase tracking-[0.08em] text-ink hover:bg-ink hover:text-paper transition-colors"
+              style={{ fontFamily: "var(--font-body)" }}
+            >
+              {expanded ? "Show less" : `+${items.length - COLLAPSED} more`}
+            </button>
+          </li>
+        )}
+      </ul>
+    </div>
+  );
+}
+
+
 function Founders() {
   const stats: Array<[string, string]> = [
     ["27", "marathons — Nick & Laura, combined"],
@@ -2027,44 +2063,25 @@ function Founders() {
               Where they've shown up
             </div>
             <div className="grid gap-6 sm:grid-cols-2 max-w-[520px]">
-              <div>
-                <div className="display-condensed text-ink text-[18px] mb-3">Laura</div>
-                <ul className="flex flex-wrap gap-1.5">
-                  {[
-                    "LULULEMON RUN CLUB AMBASSADOR",
-                    "NUUN ATHLETE",
-                    "DUQUESNE UNIVERSITY SOCCER PLAYER",
-                  ].map((b) => (
-                    <li
-                      key={b}
-                      className="border border-ink/25 px-2 py-1 text-[10px] sm:text-[11px] leading-tight uppercase tracking-[0.08em] text-ink/80 break-words"
-                      style={{ fontFamily: "var(--font-body)" }}
-                    >
-                      {b}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <div className="display-condensed text-ink text-[18px] mb-3">Nick</div>
-                <ul className="flex flex-wrap gap-1.5">
-                  {[
-                    "FREAK ATHLETE",
-                    "DAD DAY RUN CLUB LEADER",
-                    "POPSITE ATHLETE",
-                    "POINT PARK UNIVERSITY BASEBALL PLAYER",
-                  ].map((b) => (
-                    <li
-                      key={b}
-                      className="border border-ink/25 px-2 py-1 text-[10px] sm:text-[11px] leading-tight uppercase tracking-[0.08em] text-ink/80 break-words"
-                      style={{ fontFamily: "var(--font-body)" }}
-                    >
-                      {b}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <AffiliationList
+                name="Laura"
+                items={[
+                  "LULULEMON RUN CLUB AMBASSADOR",
+                  "NUUN ATHLETE",
+                  "DUQUESNE UNIVERSITY SOCCER PLAYER",
+                ]}
+              />
+              <AffiliationList
+                name="Nick"
+                items={[
+                  "FREAK ATHLETE",
+                  "DAD DAY RUN CLUB LEADER",
+                  "POPSITE ATHLETE",
+                  "POINT PARK UNIVERSITY BASEBALL PLAYER",
+                ]}
+              />
             </div>
+
 
           </div>
         </div>
