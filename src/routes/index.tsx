@@ -1993,43 +1993,66 @@ function AffiliationList({ name, items }: { name: string; items: string[] }) {
   const COLLAPSED = 2;
   const showToggle = items.length > COLLAPSED;
   const visible = expanded || !showToggle ? items : items.slice(0, COLLAPSED);
+
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const innerRef = useRef<HTMLUListElement>(null);
+  const [height, setHeight] = useState<number | "auto">("auto");
+
+  useEffect(() => {
+    if (!innerRef.current) return;
+    const next = innerRef.current.scrollHeight;
+    setHeight(next);
+    const t = setTimeout(() => setHeight("auto"), 320);
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [expanded, items.length]);
+
   return (
     <div>
       <div className="display-condensed text-ink text-[18px] mb-3">{name}</div>
-      <ul className="flex flex-wrap gap-1.5">
-        {visible.map((b, i) => {
-          const isExtra = i >= COLLAPSED;
-          return (
-            <li
-              key={b}
-              className={`border border-ink/25 px-2 py-1 text-[10px] sm:text-[11px] leading-tight uppercase tracking-[0.08em] text-ink/80 break-words ${
-                isExtra
-                  ? "animate-in fade-in slide-in-from-top-1 duration-300 ease-out fill-mode-both"
-                  : ""
-              }`}
-              style={{
-                fontFamily: "var(--font-body)",
-                animationDelay: isExtra ? `${(i - COLLAPSED) * 60}ms` : undefined,
-              }}
-            >
-              {b}
+      <div
+        ref={wrapRef}
+        style={{
+          height: height === "auto" ? "auto" : `${height}px`,
+          transition: "height 300ms cubic-bezier(0.22, 1, 0.36, 1)",
+          overflow: "hidden",
+        }}
+      >
+        <ul ref={innerRef} className="flex flex-wrap gap-1.5">
+          {visible.map((b, i) => {
+            const isExtra = i >= COLLAPSED;
+            return (
+              <li
+                key={b}
+                className={`border border-ink/25 px-2 py-1 text-[10px] sm:text-[11px] leading-tight uppercase tracking-[0.08em] text-ink/80 break-words ${
+                  isExtra
+                    ? "animate-in fade-in slide-in-from-top-1 duration-300 ease-out fill-mode-both"
+                    : ""
+                }`}
+                style={{
+                  fontFamily: "var(--font-body)",
+                  animationDelay: isExtra ? `${(i - COLLAPSED) * 60}ms` : undefined,
+                }}
+              >
+                {b}
+              </li>
+            );
+          })}
+          {showToggle && (
+            <li>
+              <button
+                type="button"
+                onClick={() => setExpanded((v) => !v)}
+                aria-expanded={expanded}
+                className="border border-ink/40 px-2 py-1 text-[10px] sm:text-[11px] leading-tight uppercase tracking-[0.08em] text-ink hover:bg-ink hover:text-paper transition-colors"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                {expanded ? "Show less" : `+${items.length - COLLAPSED} more`}
+              </button>
             </li>
-          );
-        })}
-        {showToggle && (
-          <li>
-            <button
-              type="button"
-              onClick={() => setExpanded((v) => !v)}
-              aria-expanded={expanded}
-              className="border border-ink/40 px-2 py-1 text-[10px] sm:text-[11px] leading-tight uppercase tracking-[0.08em] text-ink hover:bg-ink hover:text-paper transition-colors"
-              style={{ fontFamily: "var(--font-body)" }}
-            >
-              {expanded ? "Show less" : `+${items.length - COLLAPSED} more`}
-            </button>
-          </li>
-        )}
-      </ul>
+          )}
+        </ul>
+      </div>
     </div>
   );
 }
