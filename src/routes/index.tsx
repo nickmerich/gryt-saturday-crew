@@ -2743,9 +2743,10 @@ function WeeklyRhythm() {
                   href={STRAVA_EVENT_URL.tue}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center px-5 py-3 text-[12px] font-bold uppercase tracking-[0.12em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors"
+                  className="inline-flex items-center px-5 py-3 text-[12px] font-bold uppercase tracking-[0.12em] bg-blue text-ink hover:bg-paper transition-colors"
+                  title="Opens the Tuesday event on Strava with the exact meetup pin"
                 >
-                  Strava event →
+                  See meetup spot on Strava →
                 </a>
               </div>
             </div>
