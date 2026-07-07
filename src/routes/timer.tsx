@@ -324,7 +324,6 @@ function TimerPage() {
 
         {/* Results */}
         <section>
-          <div className="flex items-end justify-between">
           <div className="flex items-end justify-between gap-4">
             <SectionHeader
               eyebrow="02 · Results"
