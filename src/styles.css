@@ -64,7 +64,8 @@
     -webkit-font-smoothing: antialiased;
   }
   ::selection { background: var(--blue); color: var(--ink); }
-  img.object-cover, img.object-contain { filter: grayscale(100%); }
+  body:not(.photos-color) img.object-cover,
+  body:not(.photos-color) img.object-contain { filter: grayscale(100%); }
 }
 
 @utility photo-hover {
@@ -74,6 +75,12 @@
     filter: grayscale(100%) contrast(1.15) brightness(1.03);
     transform: scale(1.03);
   }
+}
+
+body.photos-color .photo-hover:hover {
+  filter: contrast(1.15) brightness(1.03) !important;
+}
+
 
 @layer components {
   .eyebrow {

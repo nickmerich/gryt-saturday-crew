@@ -23,6 +23,35 @@ const heroImg = photo4.url;
 const circleImg = photo6.url;
 const foundersImg = nickLauraAsset.url;
 
+function PhotoColorToggle() {
+  const [color, setColor] = useState(false);
+  useEffect(() => {
+    document.body.classList.toggle("photos-color", color);
+    return () => { document.body.classList.remove("photos-color"); };
+  }, [color]);
+  return (
+    <div className="flex items-center gap-3 mb-5">
+      <span className="eyebrow">Photos</span>
+      <div className="inline-flex border border-paper/20">
+        <button
+          type="button"
+          onClick={() => setColor(false)}
+          className={`px-3 py-1.5 text-[11px] font-bold tracking-[0.16em] uppercase transition-colors ${!color ? "bg-blue text-ink" : "text-paper/70 hover:text-paper"}`}
+        >
+          B&W
+        </button>
+        <button
+          type="button"
+          onClick={() => setColor(true)}
+          className={`px-3 py-1.5 text-[11px] font-bold tracking-[0.16em] uppercase transition-colors ${color ? "bg-blue text-ink" : "text-paper/70 hover:text-paper"}`}
+        >
+          Color
+        </button>
+      </div>
+    </div>
+  );
+}
+
 const FAQ_ITEMS: { q: string; a: string }[] = [
   { q: "Where do I park?", a: "Park near 212 Valley Brook Road in the South Hills and follow the group toward the Montour Peters Trail." },
   { q: "Are there bathrooms?", a: "Check the meeting-point details before you come, since restroom access can depend on what is open at that hour." },
@@ -2041,6 +2070,8 @@ function Community() {
             </span>
           </div>
         </div>
+
+        <PhotoColorToggle />
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-12">
           <img
