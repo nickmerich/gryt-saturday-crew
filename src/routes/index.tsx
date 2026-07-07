@@ -380,7 +380,7 @@ function Hero() {
     ["7–15", "regulars each Saturday"],
     ["33", "runners on Strava"],
     ["27", "marathons — Laura & Nick combined"],
-    ["0", "runners dropped, ever"],
+    
   ];
 
   // Sticky 50/50 A/B on the hero headline + subcopy. Variant A is the current
