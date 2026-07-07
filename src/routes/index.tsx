@@ -2940,6 +2940,44 @@ function WeeklyRhythm() {
                   Strava event →
                 </a>
               </div>
+
+              <div className="mt-8">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="inline-block h-[3px] w-8 bg-ink" style={{ transform: "skewX(-20deg)" }} />
+                  <span className="text-[11px] font-bold tracking-[0.18em] uppercase text-ink/70">
+                    Meetup pin
+                  </span>
+                </div>
+                <div className="relative">
+                  <div aria-hidden className="absolute left-2 top-2 -right-2 -bottom-2 bg-blue" />
+                  <div className="relative overflow-hidden border border-ink/30 aspect-[16/10] bg-ink/5">
+                    <iframe
+                      src="https://maps.google.com/maps?q=212+Valley+Brook+Rd,+McMurray,+PA+15317&z=15&ie=UTF8&iwloc=&output=embed"
+                      title="Saturday GRYT Run meetup — 212 Valley Brook Rd, McMurray"
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      className="absolute inset-0 h-full w-full grayscale contrast-110"
+                    />
+                    <div className="pointer-events-none absolute left-0 right-0 bottom-0 flex items-center justify-between gap-2 px-3 py-2 bg-gradient-to-t from-black/85 to-transparent">
+                      <span className="display-condensed text-paper text-[15px] leading-none">
+                        Montour / Peters Trailhead
+                      </span>
+                      <span className="text-[10px] font-bold tracking-[0.16em] uppercase text-ink bg-blue px-2 py-1 whitespace-nowrap">
+                        Sat · 7 AM
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <a
+                  href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Rd%2C%20McMurray%2C%20PA%2015317"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-5 inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.14em] text-ink hover:text-[#3a7ca5] transition-colors"
+                >
+                  <span>Get directions</span>
+                  <span aria-hidden>→</span>
+                </a>
+              </div>
             </div>
           </article>
         </div>
