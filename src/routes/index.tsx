@@ -3004,21 +3004,123 @@ const DISPOSABLE_DOMAINS = new Set([
   "throwawaymail.com",
 ]);
 
-function validateEmail(raw: string): { ok: boolean; error?: string } {
+// Popular domains we can auto-suggest a fix for when the user has an obvious typo.
+const COMMON_DOMAINS = [
+  "gmail.com",
+  "yahoo.com",
+  "hotmail.com",
+  "outlook.com",
+  "icloud.com",
+  "aol.com",
+  "live.com",
+  "me.com",
+  "proton.me",
+  "protonmail.com",
+  "comcast.net",
+  "verizon.net",
+  "att.net",
+];
+
+// Hard-coded fixes for the most common misspellings — cheaper and more reliable
+// than fuzzy-matching for these.
+const DOMAIN_TYPO_FIXES: Record<string, string> = {
+  "gmial.com": "gmail.com",
+  "gmai.com": "gmail.com",
+  "gmil.com": "gmail.com",
+  "gnail.com": "gmail.com",
+  "gmali.com": "gmail.com",
+  "gmail.co": "gmail.com",
+  "gmail.cm": "gmail.com",
+  "gmail.con": "gmail.com",
+  "gmail.comm": "gmail.com",
+  "yaho.com": "yahoo.com",
+  "yahooo.com": "yahoo.com",
+  "yahho.com": "yahoo.com",
+  "yaoo.com": "yahoo.com",
+  "hotnail.com": "hotmail.com",
+  "hotmial.com": "hotmail.com",
+  "hotmai.com": "hotmail.com",
+  "hormail.com": "hotmail.com",
+  "outlok.com": "outlook.com",
+  "outloo.com": "outlook.com",
+  "iclould.com": "icloud.com",
+  "icloud.co": "icloud.com",
+  "icould.com": "icloud.com",
+};
+
+// Damerau-Levenshtein distance, capped for speed. Used to catch typos we
+// didn't hard-code above (e.g. "gmail.cim" → "gmail.com").
+function editDistance(a: string, b: string, max = 2): number {
+  if (a === b) return 0;
+  if (Math.abs(a.length - b.length) > max) return max + 1;
+  const m = a.length;
+  const n = b.length;
+  const dp: number[] = Array(n + 1).fill(0);
+  for (let j = 0; j <= n; j++) dp[j] = j;
+  for (let i = 1; i <= m; i++) {
+    let prev = dp[0];
+    dp[0] = i;
+    let rowMin = dp[0];
+    for (let j = 1; j <= n; j++) {
+      const temp = dp[j];
+      dp[j] =
+        a[i - 1] === b[j - 1]
+          ? prev
+          : 1 + Math.min(prev, dp[j], dp[j - 1]);
+      prev = temp;
+      if (dp[j] < rowMin) rowMin = dp[j];
+    }
+    if (rowMin > max) return max + 1;
+  }
+  return dp[n];
+}
+
+function suggestDomain(domain: string): string | null {
+  if (!domain) return null;
+  const fixed = DOMAIN_TYPO_FIXES[domain];
+  if (fixed) return fixed;
+  if (COMMON_DOMAINS.includes(domain)) return null;
+  let best: { d: string; dist: number } | null = null;
+  for (const candidate of COMMON_DOMAINS) {
+    const dist = editDistance(domain, candidate, 2);
+    if (dist === 0) return null;
+    if (dist <= 2 && (!best || dist < best.dist)) best = { d: candidate, dist };
+  }
+  return best?.d ?? null;
+}
+
+type EmailValidation = { ok: boolean; error?: string; suggestion?: string };
+
+function validateEmail(raw: string): EmailValidation {
   const value = raw.trim();
   if (!value) return { ok: false };
-  if (value.length > 255) return { ok: false, error: "Email is too long." };
-  if (/\s/.test(value)) return { ok: false, error: "No spaces allowed." };
-  if ((value.match(/@/g) || []).length !== 1) return { ok: false, error: "Enter a valid email." };
-  if (!EMAIL_RE.test(value)) return { ok: false, error: "Enter a valid email." };
+  if (value.length > 255) return { ok: false, error: "Email is too long — try shortening it." };
+  if (/\s/.test(value)) return { ok: false, error: "Emails can't contain spaces." };
+  const atCount = (value.match(/@/g) || []).length;
+  if (atCount === 0) return { ok: false, error: "Missing an @ — try you@email.com." };
+  if (atCount > 1) return { ok: false, error: "Only one @ allowed." };
+  if (!EMAIL_RE.test(value)) {
+    if (!value.includes(".", value.indexOf("@")))
+      return { ok: false, error: "Add a domain like gmail.com after the @." };
+    return { ok: false, error: "That doesn't look like a valid email." };
+  }
   const [local, domain] = value.toLowerCase().split("@");
-  if (local.length > 64) return { ok: false, error: "Email is too long." };
+  if (local.length > 64) return { ok: false, error: "The part before @ is too long." };
   if (local.startsWith(".") || local.endsWith(".") || local.includes(".."))
-    return { ok: false, error: "Enter a valid email." };
+    return { ok: false, error: "Remove the stray dots before the @." };
   if (!domain.includes(".") || domain.startsWith("-") || domain.endsWith("-"))
-    return { ok: false, error: "Enter a valid email." };
+    return { ok: false, error: "That domain doesn't look right." };
+  const tld = domain.split(".").pop() || "";
+  if (tld.length < 2) return { ok: false, error: "The domain ending looks off." };
   if (DISPOSABLE_DOMAINS.has(domain))
-    return { ok: false, error: "Use a permanent email address." };
+    return { ok: false, error: "Please use a permanent email address." };
+  const suggestion = suggestDomain(domain);
+  if (suggestion) {
+    return {
+      ok: true,
+      suggestion: `${local}@${suggestion}`,
+    };
+  }
   return { ok: true };
 }
 
