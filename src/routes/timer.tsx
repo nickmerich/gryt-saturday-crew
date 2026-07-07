@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { encodePayload, formatDuration } from "@/lib/timer-share";
+
 
 export const Route = createFileRoute("/timer")({
   head: () => ({
@@ -25,18 +27,8 @@ type Participant = {
 };
 
 // ---------- Helpers ----------
-const pad = (n: number, w = 2) => n.toString().padStart(w, "0");
 
-function formatDuration(ms: number): string {
-  if (ms < 0) ms = 0;
-  const totalCs = Math.floor(ms / 10); // centiseconds
-  const cs = totalCs % 100;
-  const totalSec = Math.floor(totalCs / 100);
-  const s = totalSec % 60;
-  const m = Math.floor(totalSec / 60) % 60;
-  const h = Math.floor(totalSec / 3600);
-  return `${pad(h)}:${pad(m)}:${pad(s)}.${pad(cs)}`;
-}
+
 
 function uid() {
   return Math.random().toString(36).slice(2, 10);
