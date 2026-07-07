@@ -3540,7 +3540,13 @@ function NewsletterBar() {
                 <>
                   <span aria-hidden className="opacity-40">·</span>
                   {resendStatus === "sent" ? (
-                    <span className="text-ink">{resendMsg}</span>
+                    <span
+                      ref={successResendRegionRef}
+                      tabIndex={-1}
+                      className="text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/40 focus-visible:ring-offset-1"
+                    >
+                      {resendMsg}
+                    </span>
                   ) : (
                     <button
                       type="button"
