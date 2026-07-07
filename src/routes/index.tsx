@@ -2042,7 +2042,7 @@ function Community() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-12">
           <img
             src={photo2.url}
             alt="Sunny morning crew before heading out"
@@ -2063,7 +2063,18 @@ function Community() {
             alt="Three runners heading down the trail at sunrise"
             className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15"
           />
+          <img
+            src={photo7.url}
+            alt="Tuesday Night Shift crew in the lot before the run"
+            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15"
+          />
+          <img
+            src={photo8.url}
+            alt="Big crew huddled up in Mt. Lebanon after a Tuesday night run"
+            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15"
+          />
         </div>
+
 
 
 
