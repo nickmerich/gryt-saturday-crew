@@ -377,8 +377,8 @@ function Nav() {
 
 function Hero() {
   const stats: Array<[string, string]> = [
-    ["7–15", "regulars each Saturday"],
-    ["33", "runners on Strava"],
+    ["9–15", "regulars each Saturday"],
+    ["38", "runners on Strava"],
     ["27", "marathons — Laura & Nick combined"],
     
   ];
@@ -2062,8 +2062,8 @@ function Founders() {
   const stats: Array<[string, string]> = [
     ["27", "marathons — Nick & Laura, combined"],
     ["2014", "running together since"],
-    ["7–15", "regulars each Saturday"],
-    ["33", "total Strava members"],
+    ["9–15", "regulars each Saturday"],
+    ["38", "total Strava members"],
   ];
 
   return (
