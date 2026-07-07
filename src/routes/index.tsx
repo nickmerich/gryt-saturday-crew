@@ -2028,16 +2028,16 @@ function Founders() {
             </div>
             <div className="grid gap-6 sm:grid-cols-2 max-w-[520px]">
               <div>
-                <div className="display-condensed text-ink text-[18px] mb-2">Laura</div>
-                <ul className="flex flex-wrap gap-2">
+                <div className="display-condensed text-ink text-[18px] mb-3">Laura</div>
+                <ul className="flex flex-wrap gap-1.5">
                   {[
                     "LULULEMON RUN CLUB AMBASSADOR",
-                    "NUUN ATHLETE\u00a0",
+                    "NUUN ATHLETE",
                     "DUQUESNE UNIVERSITY SOCCER PLAYER",
                   ].map((b) => (
                     <li
                       key={b}
-                      className="border border-ink/25 px-2.5 py-1 text-[11px] uppercase tracking-[0.1em] text-ink/80"
+                      className="border border-ink/25 px-2 py-1 text-[10px] sm:text-[11px] leading-tight uppercase tracking-[0.08em] text-ink/80 break-words"
                       style={{ fontFamily: "var(--font-body)" }}
                     >
                       {b}
@@ -2046,8 +2046,8 @@ function Founders() {
                 </ul>
               </div>
               <div>
-                <div className="display-condensed text-ink text-[18px] mb-2">Nick</div>
-                <ul className="flex flex-wrap gap-2">
+                <div className="display-condensed text-ink text-[18px] mb-3">Nick</div>
+                <ul className="flex flex-wrap gap-1.5">
                   {[
                     "FREAK ATHLETE",
                     "DAD DAY RUN CLUB LEADER",
@@ -2056,7 +2056,7 @@ function Founders() {
                   ].map((b) => (
                     <li
                       key={b}
-                      className="border border-ink/25 px-2.5 py-1 text-[11px] uppercase tracking-[0.1em] text-ink/80"
+                      className="border border-ink/25 px-2 py-1 text-[10px] sm:text-[11px] leading-tight uppercase tracking-[0.08em] text-ink/80 break-words"
                       style={{ fontFamily: "var(--font-body)" }}
                     >
                       {b}
@@ -2065,6 +2065,7 @@ function Founders() {
                 </ul>
               </div>
             </div>
+
           </div>
         </div>
         <div className="flex-[0_1_320px] min-w-[240px] bg-ink text-paper flex flex-col">
