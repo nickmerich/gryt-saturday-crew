@@ -2027,44 +2027,25 @@ function Founders() {
               Where they've shown up
             </div>
             <div className="grid gap-6 sm:grid-cols-2 max-w-[520px]">
-              <div>
-                <div className="display-condensed text-ink text-[18px] mb-3">Laura</div>
-                <ul className="flex flex-wrap gap-1.5">
-                  {[
-                    "LULULEMON RUN CLUB AMBASSADOR",
-                    "NUUN ATHLETE",
-                    "DUQUESNE UNIVERSITY SOCCER PLAYER",
-                  ].map((b) => (
-                    <li
-                      key={b}
-                      className="border border-ink/25 px-2 py-1 text-[10px] sm:text-[11px] leading-tight uppercase tracking-[0.08em] text-ink/80 break-words"
-                      style={{ fontFamily: "var(--font-body)" }}
-                    >
-                      {b}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <div className="display-condensed text-ink text-[18px] mb-3">Nick</div>
-                <ul className="flex flex-wrap gap-1.5">
-                  {[
-                    "FREAK ATHLETE",
-                    "DAD DAY RUN CLUB LEADER",
-                    "POPSITE ATHLETE",
-                    "POINT PARK UNIVERSITY BASEBALL PLAYER",
-                  ].map((b) => (
-                    <li
-                      key={b}
-                      className="border border-ink/25 px-2 py-1 text-[10px] sm:text-[11px] leading-tight uppercase tracking-[0.08em] text-ink/80 break-words"
-                      style={{ fontFamily: "var(--font-body)" }}
-                    >
-                      {b}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <AffiliationList
+                name="Laura"
+                items={[
+                  "LULULEMON RUN CLUB AMBASSADOR",
+                  "NUUN ATHLETE",
+                  "DUQUESNE UNIVERSITY SOCCER PLAYER",
+                ]}
+              />
+              <AffiliationList
+                name="Nick"
+                items={[
+                  "FREAK ATHLETE",
+                  "DAD DAY RUN CLUB LEADER",
+                  "POPSITE ATHLETE",
+                  "POINT PARK UNIVERSITY BASEBALL PLAYER",
+                ]}
+              />
             </div>
+
 
           </div>
         </div>
