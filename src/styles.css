@@ -64,6 +64,7 @@
     -webkit-font-smoothing: antialiased;
   }
   ::selection { background: var(--blue); color: var(--ink); }
+  img.object-cover, img.object-contain { filter: grayscale(100%); }
 }
 
 @layer components {
