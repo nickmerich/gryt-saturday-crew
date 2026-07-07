@@ -3124,16 +3124,37 @@ function validateEmail(raw: string): EmailValidation {
   return { ok: true };
 }
 
+const NEWSLETTER_DISMISS_KEY = "gryt.newsletter.dismissed";
+
 function NewsletterBar() {
   const [email, setEmail] = useState("");
   const [touched, setTouched] = useState(false);
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [msg, setMsg] = useState<string | null>(null);
+  const [dismissed, setDismissed] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
   const emailRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     captureAttribution();
+    try {
+      if (localStorage.getItem(NEWSLETTER_DISMISS_KEY) === "1") {
+        setDismissed(true);
+      }
+    } catch {
+      /* ignore storage errors */
+    }
+    setHydrated(true);
   }, []);
+
+  function handleDismiss() {
+    setDismissed(true);
+    try {
+      localStorage.setItem(NEWSLETTER_DISMISS_KEY, "1");
+    } catch {
+      /* ignore */
+    }
+  }
 
   const validation = useMemo(() => validateEmail(email), [email]);
   const showFieldError = touched && !validation.ok && email.trim().length > 0;
