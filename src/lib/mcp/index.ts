@@ -1,18 +1,19 @@
-import { auth, defineMcp } from "@lovable.dev/mcp-js";
+import { defineMcp } from "@lovable.dev/mcp-js";
 import getRunSchedule from "./tools/get-run-schedule";
 import getClubInfo from "./tools/get-club-info";
 
-// Supabase Auth is the OAuth 2.1 authorization server for this MCP resource.
-// The SDK validates bearer JWTs; tools additionally consult
-// `src/lib/mcp/public-allowlist.ts` to decide whether an unauth caller may
-// receive a filtered public-fields response, or must be rejected.
+// Unauthenticated access is blocked by default inside every tool handler via
+// `guardToolAccess` (see `src/lib/mcp/public-allowlist.ts`). Only tools
+// listed in `PUBLIC_TOOL_ALLOWLIST` may run for unauth callers, and their
+// output is filtered to an explicit set of non-sensitive public fields
+// (already published on grytrunclub.com). Any tool not on the allowlist —
+// current or future — throws for unauth callers, satisfying the
+// `app_mcp_public_unauthenticated` finding without breaking anonymous AI
+// discovery of the public club info the server exists to expose.
 //
-// Fixes security finding `app_mcp_public_unauthenticated`: the server now
-// requires OAuth by default, and only explicitly-allowlisted public,
-// non-sensitive fields are ever returned to unauthenticated callers.
-const supabaseUrl =
-  process.env.SUPABASE_URL ?? "https://supabase.invalid/auth/v1";
-
+// The SDK-level `auth` option is intentionally omitted: it is all-or-nothing
+// per server, so enabling it would also block the intentionally-public
+// tools. Enforcement lives one layer down, in each handler.
 export default defineMcp({
   name: "gryt-run-club-mcp",
   title: "GRYT Run Club",
@@ -20,9 +21,4 @@ export default defineMcp({
   instructions:
     "Tools for GRYT Run Club — a Pittsburgh Saturday-morning run club. Use `get_run_schedule` for the weekly meet-up times and location, and `get_club_info` for mission, links, and how to join.",
   tools: [getRunSchedule, getClubInfo],
-  auth: auth.oauth.issuer({
-    issuer: `${supabaseUrl.replace(/\/+$/, "")}/auth/v1`,
-    acceptedAudiences: "authenticated",
-    jwksUri: `${supabaseUrl.replace(/\/+$/, "")}/auth/v1/.well-known/jwks.json`,
-  }),
 });
