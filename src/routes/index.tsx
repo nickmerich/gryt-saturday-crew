@@ -2811,25 +2811,40 @@ function WeeklyRhythm() {
               </div>
 
               <div className="mt-8">
-                <div className="text-[11px] font-bold tracking-[0.16em] uppercase text-paper/45 mb-3">
-                  Meetup pin
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="inline-block h-[3px] w-8 bg-blue" style={{ transform: "skewX(-20deg)" }} />
+                  <span className="text-[11px] font-bold tracking-[0.18em] uppercase text-blue">
+                    Meetup pin
+                  </span>
                 </div>
-                <div className="relative overflow-hidden border border-paper/15 aspect-[16/10] bg-ink/60">
-                  <iframe
-                    src="https://maps.google.com/maps?q=Mt.+Lebanon+Public+Library,+16+Castle+Shannon+Blvd,+Pittsburgh,+PA+15228&z=16&ie=UTF8&iwloc=&output=embed"
-                    title="Tuesday Night Shift meetup — Mt. Lebanon Public Library"
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    className="absolute inset-0 h-full w-full grayscale contrast-125"
-                  />
+                <div className="relative">
+                  <div aria-hidden className="absolute left-2 top-2 -right-2 -bottom-2 bg-blue" />
+                  <div className="relative overflow-hidden border border-paper/20 aspect-[16/10] bg-ink/60">
+                    <iframe
+                      src="https://maps.google.com/maps?q=Mt.+Lebanon+Public+Library,+16+Castle+Shannon+Blvd,+Pittsburgh,+PA+15228&z=16&ie=UTF8&iwloc=&output=embed"
+                      title="Tuesday Night Shift meetup — Mt. Lebanon Public Library"
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      className="absolute inset-0 h-full w-full grayscale contrast-125"
+                    />
+                    <div className="pointer-events-none absolute left-0 right-0 bottom-0 flex items-center justify-between gap-2 px-3 py-2 bg-gradient-to-t from-black/85 to-transparent">
+                      <span className="display-condensed text-paper text-[15px] leading-none">
+                        Mt. Lebanon Public Library
+                      </span>
+                      <span className="text-[10px] font-bold tracking-[0.16em] uppercase text-ink bg-blue px-2 py-1 whitespace-nowrap">
+                        Tue · 9 PM
+                      </span>
+                    </div>
+                  </div>
                 </div>
                 <a
                   href="https://www.google.com/maps/dir/?api=1&destination=Mt.%20Lebanon%20Public%20Library%2C%2016%20Castle%20Shannon%20Blvd%2C%20Pittsburgh%2C%20PA%2015228"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-3 inline-flex items-center text-[12px] font-bold uppercase tracking-[0.12em] text-blue hover:text-paper transition-colors"
+                  className="mt-5 inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.14em] text-blue hover:text-paper transition-colors"
                 >
-                  Get directions →
+                  <span>Get directions</span>
+                  <span aria-hidden>→</span>
                 </a>
               </div>
             </div>
@@ -2923,6 +2938,44 @@ function WeeklyRhythm() {
                   className="inline-flex items-center px-5 py-3 text-[12px] font-bold uppercase tracking-[0.12em] border border-ink/50 text-ink hover:bg-ink hover:text-paper transition-colors"
                 >
                   Strava event →
+                </a>
+              </div>
+
+              <div className="mt-8">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="inline-block h-[3px] w-8 bg-ink" style={{ transform: "skewX(-20deg)" }} />
+                  <span className="text-[11px] font-bold tracking-[0.18em] uppercase text-ink/70">
+                    Meetup pin
+                  </span>
+                </div>
+                <div className="relative">
+                  <div aria-hidden className="absolute left-2 top-2 -right-2 -bottom-2 bg-blue" />
+                  <div className="relative overflow-hidden border border-ink/30 aspect-[16/10] bg-ink/5">
+                    <iframe
+                      src="https://maps.google.com/maps?q=212+Valley+Brook+Rd,+McMurray,+PA+15317&z=15&ie=UTF8&iwloc=&output=embed"
+                      title="Saturday GRYT Run meetup — 212 Valley Brook Rd, McMurray"
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      className="absolute inset-0 h-full w-full grayscale contrast-110"
+                    />
+                    <div className="pointer-events-none absolute left-0 right-0 bottom-0 flex items-center justify-between gap-2 px-3 py-2 bg-gradient-to-t from-black/85 to-transparent">
+                      <span className="display-condensed text-paper text-[15px] leading-none">
+                        Montour / Peters Trailhead
+                      </span>
+                      <span className="text-[10px] font-bold tracking-[0.16em] uppercase text-ink bg-blue px-2 py-1 whitespace-nowrap">
+                        Sat · 7 AM
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <a
+                  href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Rd%2C%20McMurray%2C%20PA%2015317"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-5 inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.14em] text-ink hover:text-[#3a7ca5] transition-colors"
+                >
+                  <span>Get directions</span>
+                  <span aria-hidden>→</span>
                 </a>
               </div>
             </div>
