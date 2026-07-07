@@ -1,0 +1,31 @@
+name: og-tags
+
+# Re-scrapes the published manifesto URL and asserts og:*, twitter:*,
+# and canonical tags match. Runs on push/PR to main and daily so a
+# silent CDN regression surfaces even without a code change.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "0 12 * * *"
+  workflow_dispatch:
+    inputs:
+      target_url:
+        description: "Override URL to check"
+        required: false
+
+jobs:
+  check-og-tags:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Verify link-preview meta tags
+        env:
+          TARGET_URL: ${{ github.event.inputs.target_url }}
+        run: node scripts/check-og-tags.mjs
