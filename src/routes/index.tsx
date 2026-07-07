@@ -2021,6 +2021,47 @@ function Founders() {
               themselves.
             </p>
           </div>
+
+          <div className="mt-10">
+            <div className="eyebrow mb-4" style={{ color: "#3a7ca5" }}>
+              Where they've shown up
+            </div>
+            <div className="grid gap-6 sm:grid-cols-2 max-w-[520px]">
+              <div>
+                <div className="display-condensed text-ink text-[18px] mb-2">Laura</div>
+                <ul className="flex flex-wrap gap-2">
+                  {["Lululemon Ambassador", "Nooma", "Pittsburgh Marathon"].map((b) => (
+                    <li
+                      key={b}
+                      className="border border-ink/25 px-2.5 py-1 text-[11px] uppercase tracking-[0.1em] text-ink/80"
+                      style={{ fontFamily: "var(--font-body)" }}
+                    >
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <div className="display-condensed text-ink text-[18px] mb-2">Nick</div>
+                <ul className="flex flex-wrap gap-2">
+                  {[
+                    "Free Athlete",
+                    "Dad Day",
+                    "Carnegie Mellon",
+                    "Queens Park Baseball",
+                  ].map((b) => (
+                    <li
+                      key={b}
+                      className="border border-ink/25 px-2.5 py-1 text-[11px] uppercase tracking-[0.1em] text-ink/80"
+                      style={{ fontFamily: "var(--font-body)" }}
+                    >
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="flex-[0_1_320px] min-w-[240px] bg-ink text-paper flex flex-col">
           <div className="relative">
