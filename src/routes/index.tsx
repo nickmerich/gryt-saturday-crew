@@ -2873,17 +2873,17 @@ function WeeklyRhythm() {
               ☀️
             </div>
 
-            <div className="relative flex flex-col gap-8">
-              <header className="flex flex-col gap-4">
+            <div className="relative flex flex-col gap-6 sm:gap-8">
+              <header className="flex flex-col gap-3 sm:gap-4 pr-14 sm:pr-0">
                 <div className="eyebrow" style={{ color: "#7a3a0e" }}>
                   Saturday · GRYT Run
                 </div>
-                <h3 className="display-condensed text-ink text-[clamp(34px,4.6vw,56px)] leading-[0.95]">
+                <h3 className="display-condensed text-ink text-[clamp(30px,9vw,56px)] leading-[0.95]">
                   The weekend
                   <br />
                   anchor.
                 </h3>
-                <p className="text-ink/80 text-[16px] leading-[1.6] max-w-[460px]">
+                <p className="text-ink/80 text-[15px] sm:text-[16px] leading-[1.55] sm:leading-[1.6] max-w-[460px]">
                   7 AM sharp. One hour. The big effort. The crew. Home before the day gets away
                   from you.
                 </p>
@@ -2901,7 +2901,7 @@ function WeeklyRhythm() {
                 </div>
                 <div className="relative">
                   <div aria-hidden className="absolute left-2 top-2 -right-2 -bottom-2 bg-blue" />
-                  <div className="relative overflow-hidden border border-ink/30 aspect-[16/10] bg-ink/5">
+                  <div className="relative overflow-hidden border border-ink/30 aspect-[4/3] sm:aspect-[16/10] bg-ink/5">
                     <iframe
                       src="https://maps.google.com/maps?q=212+Valley+Brook+Rd,+McMurray,+PA+15317&z=15&ie=UTF8&iwloc=&output=embed"
                       title="Saturday GRYT Run meetup — 212 Valley Brook Rd, McMurray"
@@ -2909,8 +2909,8 @@ function WeeklyRhythm() {
                       referrerPolicy="no-referrer-when-downgrade"
                       className="absolute inset-0 h-full w-full grayscale contrast-110"
                     />
-                    <div className="pointer-events-none absolute left-0 right-0 bottom-0 flex items-center justify-between gap-3 px-3 py-2 bg-gradient-to-t from-black/85 to-transparent">
-                      <span className="display-condensed text-paper text-[15px] leading-none">
+                    <div className="pointer-events-none absolute left-0 right-0 bottom-0 flex flex-wrap items-center justify-between gap-2 px-3 py-2 bg-gradient-to-t from-black/85 to-transparent">
+                      <span className="display-condensed text-paper text-[13px] sm:text-[15px] leading-none">
                         Montour / Peters Trailhead
                       </span>
                       <span className="text-[10px] font-bold tracking-[0.16em] uppercase text-ink bg-blue px-2 py-1 whitespace-nowrap">
@@ -2940,18 +2940,18 @@ function WeeklyRhythm() {
                   ["After", "Coffee in the lot"],
                 ].map(([k, v]) => (
                   <div
-                    key={k}
-                    className="grid grid-cols-[96px_1fr] gap-4 py-3 border-b border-ink/15 items-baseline"
+                    key={k as string}
+                    className="grid grid-cols-[72px_1fr] sm:grid-cols-[96px_1fr] gap-3 sm:gap-4 py-2.5 sm:py-3 border-b border-ink/15 items-baseline"
                   >
-                    <dt className="text-[11px] font-bold tracking-[0.16em] uppercase text-ink/55">
+                    <dt className="text-[10px] sm:text-[11px] font-bold tracking-[0.14em] sm:tracking-[0.16em] uppercase text-ink/55">
                       {k}
                     </dt>
-                    <dd className="text-[15px] leading-[1.45] text-ink/90 font-medium">{v}</dd>
+                    <dd className="text-[14px] sm:text-[15px] leading-[1.4] sm:leading-[1.45] text-ink/90 font-medium">{v}</dd>
                   </div>
                 ))}
               </dl>
 
-              <div className="grid gap-3 sm:grid-cols-[auto_auto_auto] sm:justify-start">
+              <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-[auto_auto_auto] sm:gap-3 sm:justify-start">
                 <a
                   href="#join-sat"
                   className="inline-flex items-center justify-center h-11 px-5 text-[12px] font-bold uppercase tracking-[0.12em] bg-ink text-paper hover:bg-[#3a7ca5] transition-colors"
