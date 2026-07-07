@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { encodePayload, formatDuration } from "@/lib/timer-share";
+
 
 export const Route = createFileRoute("/timer")({
   head: () => ({
@@ -25,18 +27,8 @@ type Participant = {
 };
 
 // ---------- Helpers ----------
-const pad = (n: number, w = 2) => n.toString().padStart(w, "0");
 
-function formatDuration(ms: number): string {
-  if (ms < 0) ms = 0;
-  const totalCs = Math.floor(ms / 10); // centiseconds
-  const cs = totalCs % 100;
-  const totalSec = Math.floor(totalCs / 100);
-  const s = totalSec % 60;
-  const m = Math.floor(totalSec / 60) % 60;
-  const h = Math.floor(totalSec / 3600);
-  return `${pad(h)}:${pad(m)}:${pad(s)}.${pad(cs)}`;
-}
+
 
 function uid() {
   return Math.random().toString(36).slice(2, 10);
@@ -44,9 +36,12 @@ function uid() {
 
 // ---------- Page ----------
 function TimerPage() {
+  // Event metadata
+  const [eventTitle, setEventTitle] = useState("Saturday Run");
   // Event clock
   const [startAt, setStartAt] = useState<number | null>(null);
   const [now, setNow] = useState<number>(Date.now());
+  const [shareStatus, setShareStatus] = useState<"idle" | "copied">("idle");
   const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
@@ -154,6 +149,32 @@ function TimerPage() {
     URL.revokeObjectURL(url);
   };
 
+  const buildShareUrl = () => {
+    const payload = encodePayload({
+      v: 1,
+      title: eventTitle.trim() || "Saturday Run",
+      startedAt: startAt,
+      finishers: results.map((p) => ({
+        n: p.name,
+        b: p.bib,
+        t: p.finishMs,
+      })),
+    });
+    return `${window.location.origin}/timer/results#${payload}`;
+  };
+
+  const shareResults = async () => {
+    if (results.length === 0) return;
+    const url = buildShareUrl();
+    try {
+      await navigator.clipboard.writeText(url);
+      setShareStatus("copied");
+      setTimeout(() => setShareStatus("idle"), 2000);
+    } catch {
+      window.prompt("Copy this link:", url);
+    }
+  };
+
   return (
     <main className="min-h-screen bg-ink text-paper font-body">
       {/* Header */}
@@ -162,12 +183,14 @@ function TimerPage() {
           <div className="text-[11px] tracking-[0.22em] uppercase text-white/50">
             GRYT · Event Timer
           </div>
-          <h1
-            className="font-condensed uppercase text-3xl sm:text-4xl mt-1"
+          <input
+            value={eventTitle}
+            onChange={(e) => setEventTitle(e.target.value)}
+            aria-label="Event title"
+            className="font-condensed uppercase text-3xl sm:text-4xl mt-1 bg-transparent border-b border-transparent hover:border-white/20 focus:border-blue focus:outline-none w-full max-w-md"
             style={{ letterSpacing: "0.01em" }}
-          >
-            Saturday Run — Live Timer
-          </h1>
+          />
+
         </div>
         <a
           href="/"
@@ -301,19 +324,31 @@ function TimerPage() {
 
         {/* Results */}
         <section>
-          <div className="flex items-end justify-between">
+          <div className="flex items-end justify-between gap-4">
             <SectionHeader
               eyebrow="02 · Results"
               title={`Finishers (${results.length})`}
             />
-            <button
-              onClick={exportCsv}
-              disabled={results.length === 0}
-              className="text-[11px] tracking-[0.22em] uppercase text-white/60 hover:text-blue disabled:opacity-30 disabled:cursor-not-allowed"
-            >
-              Export CSV
-            </button>
+            <div className="flex flex-col items-end gap-1">
+              <div className="flex gap-4">
+                <button
+                  onClick={shareResults}
+                  disabled={results.length === 0}
+                  className="text-[11px] tracking-[0.22em] uppercase text-white/60 hover:text-blue disabled:opacity-30 disabled:cursor-not-allowed"
+                >
+                  {shareStatus === "copied" ? "Link Copied ✓" : "Share Link"}
+                </button>
+                <button
+                  onClick={exportCsv}
+                  disabled={results.length === 0}
+                  className="text-[11px] tracking-[0.22em] uppercase text-white/60 hover:text-blue disabled:opacity-30 disabled:cursor-not-allowed"
+                >
+                  Export CSV
+                </button>
+              </div>
+            </div>
           </div>
+
 
           <div className="mt-6 border border-white/10">
             <div className="grid grid-cols-[48px_64px_1fr_120px] gap-2 px-4 py-2 bg-vintage text-[10px] tracking-[0.22em] uppercase text-white/50">

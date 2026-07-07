@@ -19,6 +19,7 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as MembersRouteImport } from './routes/members'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TimerResultsRouteImport } from './routes/timer_.results'
 import { Route as ResourcesRecapRouteImport } from './routes/resources_.recap'
 import { Route as ResourcesPlaybooksRouteImport } from './routes/resources_.playbooks'
 import { Route as ResourcesManifestoRouteImport } from './routes/resources_.manifesto'
@@ -90,6 +91,11 @@ const McpRoute = McpRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TimerResultsRoute = TimerResultsRouteImport.update({
+  id: '/timer_/results',
+  path: '/timer/results',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResourcesRecapRoute = ResourcesRecapRouteImport.update({
@@ -233,6 +239,7 @@ export interface FileRoutesByFullPath {
   '/resources/manifesto': typeof ResourcesManifestoRoute
   '/resources/playbooks': typeof ResourcesPlaybooksRoute
   '/resources/recap': typeof ResourcesRecapRoute
+  '/timer/results': typeof TimerResultsRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/newsletter/subscribe': typeof ApiNewsletterSubscribeRoute
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
@@ -267,6 +274,7 @@ export interface FileRoutesByTo {
   '/resources/manifesto': typeof ResourcesManifestoRoute
   '/resources/playbooks': typeof ResourcesPlaybooksRoute
   '/resources/recap': typeof ResourcesRecapRoute
+  '/timer/results': typeof TimerResultsRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/newsletter/subscribe': typeof ApiNewsletterSubscribeRoute
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
@@ -302,6 +310,7 @@ export interface FileRoutesById {
   '/resources_/manifesto': typeof ResourcesManifestoRoute
   '/resources_/playbooks': typeof ResourcesPlaybooksRoute
   '/resources_/recap': typeof ResourcesRecapRoute
+  '/timer_/results': typeof TimerResultsRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/newsletter/subscribe': typeof ApiNewsletterSubscribeRoute
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
@@ -338,6 +347,7 @@ export interface FileRouteTypes {
     | '/resources/manifesto'
     | '/resources/playbooks'
     | '/resources/recap'
+    | '/timer/results'
     | '/.mcp/invoke-tool/$tool'
     | '/api/newsletter/subscribe'
     | '/api/public/rsvp'
@@ -372,6 +382,7 @@ export interface FileRouteTypes {
     | '/resources/manifesto'
     | '/resources/playbooks'
     | '/resources/recap'
+    | '/timer/results'
     | '/.mcp/invoke-tool/$tool'
     | '/api/newsletter/subscribe'
     | '/api/public/rsvp'
@@ -406,6 +417,7 @@ export interface FileRouteTypes {
     | '/resources_/manifesto'
     | '/resources_/playbooks'
     | '/resources_/recap'
+    | '/timer_/results'
     | '/.mcp/invoke-tool/$tool'
     | '/api/newsletter/subscribe'
     | '/api/public/rsvp'
@@ -440,6 +452,7 @@ export interface RootRouteChildren {
   ResourcesManifestoRoute: typeof ResourcesManifestoRoute
   ResourcesPlaybooksRoute: typeof ResourcesPlaybooksRoute
   ResourcesRecapRoute: typeof ResourcesRecapRoute
+  TimerResultsRoute: typeof TimerResultsRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
   ApiNewsletterSubscribeRoute: typeof ApiNewsletterSubscribeRoute
   ApiPublicRsvpRoute: typeof ApiPublicRsvpRoute
@@ -524,6 +537,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/timer_/results': {
+      id: '/timer_/results'
+      path: '/timer/results'
+      fullPath: '/timer/results'
+      preLoaderRoute: typeof TimerResultsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/resources_/recap': {
@@ -715,6 +735,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResourcesManifestoRoute: ResourcesManifestoRoute,
   ResourcesPlaybooksRoute: ResourcesPlaybooksRoute,
   ResourcesRecapRoute: ResourcesRecapRoute,
+  TimerResultsRoute: TimerResultsRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
   ApiNewsletterSubscribeRoute: ApiNewsletterSubscribeRoute,
   ApiPublicRsvpRoute: ApiPublicRsvpRoute,
