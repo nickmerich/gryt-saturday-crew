@@ -2030,7 +2030,11 @@ function Founders() {
               <div>
                 <div className="display-condensed text-ink text-[18px] mb-2">Laura</div>
                 <ul className="flex flex-wrap gap-2">
-                  {["Lululemon Ambassador", "Nooma", "Pittsburgh Marathon"].map((b) => (
+                  {[
+                    "LULULEMON RUN CLUB AMBASSADOR",
+                    "NUUN ATHLETE\u00a0",
+                    "DUQUESNE UNIVERSITY SOCCER PLAYER",
+                  ].map((b) => (
                     <li
                       key={b}
                       className="border border-ink/25 px-2.5 py-1 text-[11px] uppercase tracking-[0.1em] text-ink/80"
@@ -2045,10 +2049,10 @@ function Founders() {
                 <div className="display-condensed text-ink text-[18px] mb-2">Nick</div>
                 <ul className="flex flex-wrap gap-2">
                   {[
-                    "Free Athlete",
-                    "Dad Day",
-                    "Carnegie Mellon",
-                    "Queens Park Baseball",
+                    "FREAK ATHLETE",
+                    "DAD DAY RUN CLUB LEADER",
+                    "POPSITE ATHLETE",
+                    "POINT PARK UNIVERSITY BASEBALL PLAYER",
                   ].map((b) => (
                     <li
                       key={b}
