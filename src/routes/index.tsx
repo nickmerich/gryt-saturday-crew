@@ -3271,6 +3271,10 @@ function NewsletterBar() {
 
   return (
     <div className="sticky top-[68px] z-40 bg-blue text-ink border-y-2 border-ink shadow-[0_6px_0_-2px_rgba(0,0,0,0.15),0_18px_40px_-20px_rgba(0,0,0,0.55)]">
+      {/* Screen-reader announcement for resend state transitions */}
+      <div role="status" aria-live="polite" aria-atomic="true" className="sr-only">
+        {resendAnnouncement}
+      </div>
       {/* Diagonal stripe accent on the far edges — hidden on mobile so they don't crowd the form */}
       <div
         aria-hidden
