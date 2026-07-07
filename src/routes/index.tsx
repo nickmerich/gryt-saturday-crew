@@ -3127,13 +3127,45 @@ function NewsletterBar() {
         </div>
 
         {status === "done" ? (
-          <p
+          <div
             role="status"
             aria-live="polite"
-            className="display-condensed text-ink text-[16px] sm:text-[18px] tracking-[0.02em] flex-1 min-w-[220px]"
+            className="flex flex-1 min-w-[240px] items-stretch gap-3 bg-paper border-2 border-ink shadow-[3px_3px_0_var(--ink)] px-3 sm:px-4 py-2.5 animate-fade-in"
           >
-            You're in. Watch your inbox. →
-          </p>
+            <span
+              aria-hidden
+              className="flex h-9 w-9 shrink-0 items-center justify-center bg-ink text-blue"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3"
+                strokeLinecap="square"
+                strokeLinejoin="miter"
+                className="h-5 w-5"
+              >
+                <polyline points="4 12 10 18 20 6" />
+              </svg>
+            </span>
+            <div className="flex min-w-0 flex-col justify-center leading-tight">
+              <span className="display-condensed text-ink text-[15px] sm:text-[17px] tracking-[0.02em]">
+                You're on the list.
+              </span>
+              <span className="text-[12px] sm:text-[13px] text-ink/75 font-medium">
+                Friday, 6 AM ET — check your inbox (and spam) for the first brief.
+              </span>
+            </div>
+            <a
+              href="https://www.strava.com/clubs/1708552"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:inline-flex shrink-0 items-center justify-center bg-ink text-blue px-4 text-[12px] font-bold uppercase tracking-[0.14em] hover:bg-blue hover:text-ink hover:shadow-[inset_0_0_0_2px_var(--ink)] transition-all"
+              style={{ fontFamily: "var(--font-condensed)" }}
+            >
+              Join Strava →
+            </a>
+          </div>
         ) : (
           <form
             onSubmit={onSubmit}
