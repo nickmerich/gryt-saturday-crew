@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WaiverRouteImport } from './routes/waiver'
+import { Route as TimerRouteImport } from './routes/timer'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ResourcesRouteImport } from './routes/resources'
@@ -44,6 +45,11 @@ import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/em
 const WaiverRoute = WaiverRouteImport.update({
   id: '/waiver',
   path: '/waiver',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TimerRoute = TimerRouteImport.update({
+  id: '/timer',
+  path: '/timer',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TermsRoute = TermsRouteImport.update({
@@ -215,6 +221,7 @@ export interface FileRoutesByFullPath {
   '/resources': typeof ResourcesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/timer': typeof TimerRoute
   '/waiver': typeof WaiverRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -248,6 +255,7 @@ export interface FileRoutesByTo {
   '/resources': typeof ResourcesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/timer': typeof TimerRoute
   '/waiver': typeof WaiverRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -282,6 +290,7 @@ export interface FileRoutesById {
   '/resources': typeof ResourcesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/timer': typeof TimerRoute
   '/waiver': typeof WaiverRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -317,6 +326,7 @@ export interface FileRouteTypes {
     | '/resources'
     | '/sitemap.xml'
     | '/terms'
+    | '/timer'
     | '/waiver'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -350,6 +360,7 @@ export interface FileRouteTypes {
     | '/resources'
     | '/sitemap.xml'
     | '/terms'
+    | '/timer'
     | '/waiver'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -383,6 +394,7 @@ export interface FileRouteTypes {
     | '/resources'
     | '/sitemap.xml'
     | '/terms'
+    | '/timer'
     | '/waiver'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -417,6 +429,7 @@ export interface RootRouteChildren {
   ResourcesRoute: typeof ResourcesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
+  TimerRoute: typeof TimerRoute
   WaiverRoute: typeof WaiverRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -448,6 +461,13 @@ declare module '@tanstack/react-router' {
       path: '/waiver'
       fullPath: '/waiver'
       preLoaderRoute: typeof WaiverRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/timer': {
+      id: '/timer'
+      path: '/timer'
+      fullPath: '/timer'
+      preLoaderRoute: typeof TimerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/terms': {
@@ -683,6 +703,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResourcesRoute: ResourcesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
+  TimerRoute: TimerRoute,
   WaiverRoute: WaiverRoute,
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
