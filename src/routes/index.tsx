@@ -3128,6 +3128,43 @@ const NEWSLETTER_DISMISS_KEY = "gryt.newsletter.dismissed";
 const NEWSLETTER_RESEND_UNTIL_KEY = "gryt.newsletter.resendUntil";
 const NEWSLETTER_RESEND_EMAIL_KEY = "gryt.newsletter.resendEmail";
 
+// Safe storage wrapper: falls back to an in-memory Map when localStorage
+// is unavailable (SSR, private mode, blocked by CSP/quota, disabled cookies).
+// Guarantees no throws so UI flows keep working even without persistence.
+const memoryStore = new Map<string, string>();
+const safeStorage = {
+  get(key: string): string | null {
+    try {
+      if (typeof window !== "undefined" && window.localStorage) {
+        return window.localStorage.getItem(key);
+      }
+    } catch {
+      /* fall through to memory */
+    }
+    return memoryStore.has(key) ? (memoryStore.get(key) ?? null) : null;
+  },
+  set(key: string, value: string): void {
+    memoryStore.set(key, value);
+    try {
+      if (typeof window !== "undefined" && window.localStorage) {
+        window.localStorage.setItem(key, value);
+      }
+    } catch {
+      /* memory copy already saved */
+    }
+  },
+  remove(key: string): void {
+    memoryStore.delete(key);
+    try {
+      if (typeof window !== "undefined" && window.localStorage) {
+        window.localStorage.removeItem(key);
+      }
+    } catch {
+      /* ignore */
+    }
+  },
+};
+
 function NewsletterBar() {
   const [email, setEmail] = useState("");
   const [touched, setTouched] = useState(false);
