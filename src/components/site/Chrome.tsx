@@ -263,6 +263,16 @@ export function SiteFooter() {
             </p>
           </div>
         </div>
+        <div className="border-t border-paper/15 pt-10 pb-2">
+          <Link
+            to="/resources/recap"
+            className="inline-flex items-center gap-3 px-5 py-3 border border-blue text-blue text-[12px] tracking-[0.22em] uppercase hover:bg-blue hover:text-ink transition-colors"
+            style={{ fontFamily: "var(--font-mono, ui-monospace, monospace)" }}
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-blue" aria-hidden="true" />
+            Recap Run Generator · Open →
+          </Link>
+        </div>
         <RecommendationsBar />
         <div className="flex justify-between gap-4 pt-8 flex-wrap eyebrow text-paper/40">
           <span>© 2026 GRYT Run Club. All rights reserved.</span>
