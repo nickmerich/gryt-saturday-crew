@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { useServerFn } from "@tanstack/react-start";
-import { signWaiver, checkWaiverStatus } from "@/lib/waiver.functions";
+import { signWaiver } from "@/lib/waiver.functions";
 import { submitRecommendation } from "@/lib/recommendations.functions";
 import { captureAttribution, getSignupAttribution } from "@/lib/attribution";
 import { useHeroVariant } from "@/lib/ab-hero";
