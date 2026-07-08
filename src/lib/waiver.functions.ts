@@ -2,9 +2,6 @@ import { createServerFn } from "@tanstack/react-start";
 import { createHash } from "crypto";
 import { z } from "zod";
 
-const EmailInput = z.object({
-  email: z.string().trim().email().max(200),
-});
 
 
 const WaiverInput = z.object({
