@@ -460,32 +460,21 @@ const GRAPHICS: Array<{
 ];
 
 function ArtifactsAndTools() {
-  const interactive = GRAPHICS.find((g) => g.interactive)!;
   const rest = GRAPHICS.filter((g) => !g.interactive);
 
   return (
     <section className="mb-24 md:mb-32">
       <div className="bg-vintage p-8 md:p-14 border border-paper/25">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-12 md:mb-16">
-          <div>
-            <span className="text-blue text-[12px] tracking-[0.22em] uppercase mb-4 block" style={mono}>
-              § 03 · Free to use & share
-            </span>
-            <h2
-              className="uppercase leading-[0.95] tracking-tight text-[clamp(38px,6vw,80px)]"
-              style={{ fontFamily: "var(--font-condensed)" }}
-            >
-              Artifacts<br />&amp; Tools
-            </h2>
-          </div>
-          <Link
-            to={interactive.href!}
-            className={`inline-flex items-center gap-3 px-5 py-3 border border-blue text-blue text-[12px] tracking-[0.22em] uppercase hover:bg-blue hover:text-ink transition-colors self-start ${focusRing}`}
-            style={mono}
+        <div className="mb-12 md:mb-16">
+          <span className="text-blue text-[12px] tracking-[0.22em] uppercase mb-4 block" style={mono}>
+            § 03 · Free to use & share
+          </span>
+          <h2
+            className="uppercase leading-[0.95] tracking-tight text-[clamp(38px,6vw,80px)]"
+            style={{ fontFamily: "var(--font-condensed)" }}
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-blue" aria-hidden="true" />
-            {interactive.name} · Open →
-          </Link>
+            Artifacts<br />&amp; Tools
+          </h2>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
