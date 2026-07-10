@@ -31,21 +31,48 @@ export const exchangeStravaCode = createServerFn({ method: "POST" })
     if (!res.ok) {
       const body = await res.text();
       console.error(`Strava token exchange failed [${res.status}]: ${body}`);
-      let parsed: { message?: string; errors?: Array<{ field?: string; code?: string }> } | null = null;
+      let parsed: { message?: string; errors?: Array<{ resource?: string; field?: string; code?: string }> } | null = null;
       try { parsed = JSON.parse(body); } catch { /* not JSON */ }
-      const codes = (parsed?.errors ?? []).map((e) => `${e.field ?? ""}:${e.code ?? ""}`).join(",");
-      if (res.status === 400 && /redirect_uri/i.test(body)) {
+      const errs = parsed?.errors ?? [];
+      const codes = errs.map((e) => `${e.resource ?? ""}.${e.field ?a ""}:${e.code ?? ""}`).filter((s) => s !== "..:").join(", ");
+      const tag = `[strava ${res.status}${codes ? ` · ${codes}` : ""}]`;
+
+      // invalid_grant / expired / already-used authorization code
+      const hasField = (field: string, code?: string) =>
+        errs.some((e) => e.field === field && (!code || e.code === code));
+      if (hasField("code", "invalid") || /invalid_grant/i.test(body)) {
         throw new Error(
-          "Strava rejected the redirect URL. In your Strava API app settings, set the Authorization Callback Domain to this site's domain (no https://, no path).",
+          `${tag} Authorization code was rejected (invalid_grant). Strava codes expire within seconds and can only be used once — this usually means the page was refreshed after redirect, the code was re-exchanged, or too much time passed. Tap Connect Strava to start a fresh authorization.`,
         );
       }
-      if (res.status === 401 || /invalid|unauthor/i.test(body)) {
+      if (hasField("code", "expired") || /expired/i.test(body)) {
         throw new Error(
-          "Strava rejected the authorization code. This usually means the client ID/secret don't match, or the code was already used. Try Connect Strava again.",
+          `${tag} Authorization code expired before it reached Strava. Tap Connect Strava again and complete the authorization within ~30 seconds.`,
+        );
+      }
+      if (hasField("client_id") || hasField("client_secret") || /client.?(id|secret)/i.test(body)) {
+        throw new Error(
+          `${tag} Strava rejected the client credentials. The STRAVA_CLIENT_ID or STRAVA_CLIENT_SECRET on the server doesn't match your Strava API application. Site owner: verify both secrets in the Strava API settings.`,
+        );
+      }
+      if (res.status === 400 && /redirect_uri/i.test(body)) {
+        throw new Error(
+          `${tag} Strava rejected the redirect URL. In your Strava API app settings, set the Authorization Callback Domain to this site's domain (no https://, no path).`,
+        );
+      }
+      if (res.status === 429) {
+        throw new Error(`${tag} Strava rate limit hit. Wait 15 minutes and try again.`);
+      }
+      if (res.status >= 500) {
+        throw new Error(`${tag} Strava is having trouble on their end. Try again in a minute.`);
+      }
+      if (res.status === 401 || /unauthor/i.test(body)) {
+        throw new Error(
+          `${tag} Strava rejected the request as unauthorized. The client ID/secret likely don't match, or the code was already used. Tap Connect Strava again.`,
         );
       }
       throw new Error(
-        `Couldn't connect to Strava (${res.status}${codes ? ` · ${codes}` : ""}). Please try again.`,
+        `${tag} Couldn't complete Strava token exchange. ${parsed?.message ?? "Please try again."}`,
       );
     }
 
