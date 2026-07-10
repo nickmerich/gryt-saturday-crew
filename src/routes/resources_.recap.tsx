@@ -684,7 +684,7 @@ function drawRecap(
 
     ctx.fillStyle = "#FFFFFF";
     ctx.font = "700 78px 'Oswald', 'Arial Narrow', Impact, sans-serif";
-    drawFittedText(ctx, s.value, cx - colW / 2 + 20, statTop + 90, colW - 40, 78, "center");
+    drawFittedText(ctx, s.value, cx, statTop + 90, colW - 40, 78, "center");
 
     // Divider
     if (i < stats.length - 1) {
