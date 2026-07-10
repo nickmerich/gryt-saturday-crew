@@ -1,7 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useRef, useState, type ChangeEvent } from "react";
+import { useCallback, useEffect, useRef, useState, type ChangeEvent } from "react";
+import { useServerFn } from "@tanstack/react-start";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 import { toast } from "sonner";
+import {
+  exchangeStravaCode,
+  getStravaActivities,
+  getStravaConfig,
+  type StravaActivity,
+} from "@/lib/strava.functions";
+
 
 export const Route = createFileRoute("/resources_/recap")({
   head: () => ({
