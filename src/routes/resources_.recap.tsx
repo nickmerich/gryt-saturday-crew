@@ -222,11 +222,17 @@ function RecapGeneratorPage() {
       link.click();
       setSavedFile(filename);
       setStatus("saved");
+      toast.success("Recap saved", {
+        description: `${filename} · ${canvas.width}×${canvas.height} PNG`,
+      });
     } catch {
       setStatus("idle");
-      alert("Something went wrong saving your recap. Please try again.");
+      toast.error("Couldn't save your recap", {
+        description: "Please try again.",
+      });
     }
   }
+
 
   return (
     <main className="bg-ink text-paper">
