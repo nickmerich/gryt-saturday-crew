@@ -1080,3 +1080,155 @@ function drawGrytMark(ctx: CanvasRenderingContext2D, x: number, y: number) {
   ctx.fillStyle = "#FFFFFF";
   ctx.fillText(text, x, y);
 }
+
+/* ─────────────────────────  STRAVA HELPERS  ─────────────────────── */
+
+function pad2(n: number) {
+  return n.toString().padStart(2, "0");
+}
+function formatDuration(totalSec: number): string {
+  const s = Math.max(0, Math.round(totalSec));
+  const h = Math.floor(s / 3600);
+  const m = Math.floor((s % 3600) / 60);
+  const sec = s % 60;
+  return h > 0 ? `${h}:${pad2(m)}:${pad2(sec)}` : `${m}:${pad2(sec)}`;
+}
+function formatPace(secPerMi: number): string {
+  const s = Math.max(0, Math.round(secPerMi));
+  const m = Math.floor(s / 60);
+  const sec = s % 60;
+  return `${m}:${pad2(sec)}`;
+}
+const MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+function formatDate(d: Date): string {
+  if (Number.isNaN(d.getTime())) return "";
+  return `${MONTHS[d.getMonth()]} ${pad2(d.getDate())} · ${d.getFullYear()}`;
+}
+
+function StravaPanel({
+  state,
+  error,
+  athlete,
+  activities,
+  selectedId,
+  onConnect,
+  onDisconnect,
+  onRefresh,
+  onPick,
+}: {
+  state: "idle" | "connecting" | "loading" | "ready" | "error";
+  error: string | null;
+  athlete: { firstName: string | null; username: string | null } | null;
+  activities: StravaActivity[] | null;
+  selectedId: number | null;
+  onConnect: () => void;
+  onDisconnect: () => void;
+  onRefresh: () => void;
+  onPick: (a: StravaActivity) => void;
+}) {
+  const connected = state === "ready" || state === "loading";
+  return (
+    <div className="border border-paper/15 bg-paper/[0.03] p-4 sm:p-5">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <p className="eyebrow text-blue mb-1">Sync from Strava</p>
+          <p className="text-xs text-paper/70 leading-[1.5]">
+            {connected && athlete
+              ? `Connected${athlete.firstName ? ` as ${athlete.firstName}` : ""}. Pick a run to auto-fill.`
+              : "One-tap import your latest runs. No account required."}
+          </p>
+        </div>
+        {connected ? (
+          <button
+            type="button"
+            onClick={onDisconnect}
+            className="text-[11px] font-bold uppercase tracking-[0.12em] text-paper/60 hover:text-paper underline underline-offset-2 shrink-0"
+          >
+            Disconnect
+          </button>
+        ) : null}
+      </div>
+
+      {!connected && (
+        <button
+          type="button"
+          onClick={onConnect}
+          disabled={state === "connecting"}
+          className="mt-3 inline-flex items-center gap-2 px-4 py-2.5 bg-[#FC4C02] text-white text-sm font-bold uppercase tracking-[0.12em] hover:brightness-110 transition disabled:opacity-70 disabled:cursor-not-allowed"
+        >
+          {state === "connecting" ? (
+            <>
+              <span className="inline-block h-3.5 w-3.5 rounded-full border-2 border-current border-r-transparent animate-spin" />
+              Connecting…
+            </>
+          ) : (
+            <>Connect Strava</>
+          )}
+        </button>
+      )}
+
+      {state === "error" && error && (
+        <p className="mt-3 text-xs text-red-300">{error}</p>
+      )}
+
+      {state === "loading" && (
+        <p className="mt-3 text-xs text-paper/60">Loading your recent runs…</p>
+      )}
+
+      {state === "ready" && activities && activities.length > 0 && (
+        <>
+          <div className="mt-4 flex items-center justify-between">
+            <span className="eyebrow text-paper/55">Recent runs</span>
+            <button
+              type="button"
+              onClick={onRefresh}
+              className="text-[11px] font-bold uppercase tracking-[0.12em] text-paper/60 hover:text-blue"
+            >
+              Refresh
+            </button>
+          </div>
+          <ul className="mt-2 max-h-72 overflow-y-auto divide-y divide-paper/10 border border-paper/10">
+            {activities.map((a) => {
+              const miles = a.distance / 1609.344;
+              const paceSec = miles > 0 ? a.moving_time / miles : 0;
+              const active = selectedId === a.id;
+              const d = new Date(a.start_date_local);
+              return (
+                <li key={a.id}>
+                  <button
+                    type="button"
+                    onClick={() => onPick(a)}
+                    aria-pressed={active}
+                    className={`w-full text-left px-3 py-2.5 flex items-center justify-between gap-3 transition-colors ${
+                      active ? "bg-blue/15" : "hover:bg-paper/[0.04]"
+                    }`}
+                  >
+                    <div className="min-w-0">
+                      <p className="text-sm text-paper truncate">{a.name}</p>
+                      <p className="text-[11px] uppercase tracking-[0.1em] text-paper/55 mt-0.5">
+                        {formatDate(d)} · {miles.toFixed(miles >= 10 ? 1 : 2)} mi
+                      </p>
+                    </div>
+                    <div className="text-right shrink-0">
+                      <p className="text-sm text-paper tabular-nums">{formatDuration(a.moving_time)}</p>
+                      <p className="text-[11px] uppercase tracking-[0.1em] text-paper/55 mt-0.5 tabular-nums">
+                        {paceSec > 0 ? `${formatPace(paceSec)}/mi` : "—"}
+                      </p>
+                    </div>
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </>
+      )}
+
+      {state === "ready" && activities && activities.length === 0 && (
+        <p className="mt-3 text-xs text-paper/60">
+          No runs found on your Strava. Log a run and refresh.
+        </p>
+      )}
+    </div>
+  );
+}
+
