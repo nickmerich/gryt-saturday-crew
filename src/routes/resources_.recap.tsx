@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ChangeEvent } from "react";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/resources_/recap")({
   head: () => ({
@@ -222,11 +223,17 @@ function RecapGeneratorPage() {
       link.click();
       setSavedFile(filename);
       setStatus("saved");
+      toast.success("Recap saved", {
+        description: `${filename} · ${canvas.width}×${canvas.height} PNG`,
+      });
     } catch {
       setStatus("idle");
-      alert("Something went wrong saving your recap. Please try again.");
+      toast.error("Couldn't save your recap", {
+        description: "Please try again.",
+      });
     }
   }
+
 
   return (
     <main className="bg-ink text-paper">
