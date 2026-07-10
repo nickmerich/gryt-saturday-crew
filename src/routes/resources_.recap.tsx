@@ -599,12 +599,30 @@ function RecapGeneratorPage() {
               </button>
               <button
                 type="button"
+                onClick={generateShareLink}
+                disabled={!acceptedTerms || shareState === "generating"}
+                aria-busy={shareState === "generating"}
+                className="px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-blue text-blue hover:bg-blue hover:text-ink transition-colors disabled:opacity-70 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ink inline-flex items-center gap-2"
+                title={!acceptedTerms ? "Accept the terms to generate a share link" : undefined}
+              >
+                {shareState === "generating" && (
+                  <span
+                    aria-hidden="true"
+                    className="inline-block h-3.5 w-3.5 rounded-full border-2 border-current border-r-transparent animate-spin"
+                  />
+                )}
+                {shareState === "generating" ? "GENERATING…" : "GET SHARE LINK ↗"}
+              </button>
+              <button
+                type="button"
                 onClick={() => {
                   setForm(DEFAULTS);
                   setPhotoUrl(null);
                   setTransform(DEFAULT_TRANSFORM);
                   setActivePreset(null);
                   setStatus("idle");
+                  setShareUrl(null);
+                  setShareState("idle");
                 }}
                 className="px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-paper/30 text-paper/85 hover:border-blue hover:text-blue transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
               >
@@ -612,7 +630,7 @@ function RecapGeneratorPage() {
               </button>
             </div>
 
-            <div className="min-h-[64px]" aria-live="polite">
+            <div className="min-h-[64px] space-y-3" aria-live="polite">
               {status === "saved" && (
                 <div className="flex items-start gap-3 border border-blue/60 bg-blue/10 px-4 py-3">
                   <span
@@ -629,13 +647,48 @@ function RecapGeneratorPage() {
                   </div>
                 </div>
               )}
+
+              {shareState === "ready" && shareUrl && (
+                <div className="border border-blue/60 bg-blue/10 px-4 py-3">
+                  <p className="eyebrow text-blue mb-2">Shareable link</p>
+                  <div className="flex flex-col sm:flex-row gap-2 sm:items-center">
+                    <input
+                      readOnly
+                      value={shareUrl}
+                      onFocus={(e) => e.currentTarget.select()}
+                      className="flex-1 min-w-0 bg-ink/60 border border-paper/20 text-paper text-xs px-2.5 py-2 font-mono truncate focus:outline-none focus:border-blue"
+                    />
+                    <div className="flex gap-2">
+                      <button
+                        type="button"
+                        onClick={copyShareLink}
+                        className="px-3 py-2 text-xs font-bold uppercase tracking-[0.12em] bg-blue text-ink hover:brightness-110"
+                      >
+                        Copy
+                      </button>
+                      <a
+                        href={shareUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-3 py-2 text-xs font-bold uppercase tracking-[0.12em] border border-paper/30 text-paper/85 hover:border-blue hover:text-blue"
+                      >
+                        Open
+                      </a>
+                    </div>
+                  </div>
+                  <p className="text-paper/60 text-[11px] mt-2 leading-[1.5]">
+                    Paste this link anywhere — Instagram DMs, Strava posts, group chats.
+                  </p>
+                </div>
+              )}
             </div>
 
             <p className="text-paper/70 text-xs leading-[1.5]">
-              Everything runs in your browser. Photos never upload anywhere.
-              1080 × 1350px (Instagram-ready).
+              Downloads render entirely in your browser. Share links upload the finished
+              PNG so anyone with the link can view it. 1080 × 1350px (Instagram-ready).
             </p>
           </div>
+
 
           {/* Preview */}
           <div className="order-1 lg:order-2 lg:sticky lg:top-24">
