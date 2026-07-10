@@ -1324,8 +1324,44 @@ function StravaPanel({
       )}
 
       {state === "error" && error && (
-        <p className="mt-3 text-xs text-red-300">{error}</p>
+        <div
+          role="alert"
+          className="mt-3 border border-red-400/40 bg-red-500/[0.06] p-3 text-xs text-paper/85"
+        >
+          <p className="text-red-300 font-medium">{error}</p>
+          <details className="mt-3 group" open>
+            <summary className="cursor-pointer eyebrow text-paper/70 hover:text-paper">
+              Troubleshoot in 4 steps
+            </summary>
+            <ol className="mt-2 space-y-1.5 list-decimal list-inside text-paper/75 leading-[1.55]">
+              <li>Make sure you're signed into the correct Strava account in this browser.</li>
+              <li>
+                Tap <span className="font-bold uppercase tracking-wider text-paper">Connect Strava</span> again — on the Strava page, keep <em>“View data about your activities”</em> checked and press <em>Authorize</em>.
+              </li>
+              <li>If Strava says the redirect URL is invalid, the site owner needs to set the <em>Authorization Callback Domain</em> to <code className="text-blue">{typeof window !== "undefined" ? window.location.host : "grytrunclub.com"}</code>.</li>
+              <li>Still stuck? Try a private window, or use the manual form / photo upload below.</li>
+            </ol>
+          </details>
+          <div className="mt-3 flex gap-2">
+            <button
+              type="button"
+              onClick={onConnect}
+              className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#FC4C02] text-white text-[11px] font-bold uppercase tracking-[0.12em] hover:brightness-110"
+            >
+              Try again
+            </button>
+            <a
+              href="https://www.strava.com/settings/apps"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1 px-3 py-1.5 border border-paper/20 text-[11px] font-bold uppercase tracking-[0.12em] text-paper/80 hover:text-paper hover:border-paper/40"
+            >
+              Strava app settings ↗
+            </a>
+          </div>
+        </div>
       )}
+
 
       {state === "loading" && (
         <p className="mt-3 text-xs text-paper/60">Loading your recent runs…</p>
