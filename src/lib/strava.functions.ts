@@ -34,7 +34,7 @@ export const exchangeStravaCode = createServerFn({ method: "POST" })
       let parsed: { message?: string; errors?: Array<{ resource?: string; field?: string; code?: string }> } | null = null;
       try { parsed = JSON.parse(body); } catch { /* not JSON */ }
       const errs = parsed?.errors ?? [];
-      const codes = errs.map((e) => `${e.resource ?? ""}.${e.field ?a ""}:${e.code ?? ""}`).filter((s) => s !== "..:").join(", ");
+      const codes = errs.map((e) => `${e.resource ?? ""}.${e.field ?? ""}:${e.code ?? ""}`).filter((s) => s !== "..:").join(", ");
       const tag = `[strava ${res.status}${codes ? ` · ${codes}` : ""}]`;
 
       // invalid_grant / expired / already-used authorization code
