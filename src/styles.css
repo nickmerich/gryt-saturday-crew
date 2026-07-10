@@ -222,6 +222,11 @@ body.photos-color .photo-hover:hover {
     width: max-content;
     animation: grytmarq-slow 45s linear infinite;
   }
+
+  @keyframes recap-progress {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(300%); }
+  }
 }
 
 /* Baby-blue surfaces get the dotted-grid texture overlay */
