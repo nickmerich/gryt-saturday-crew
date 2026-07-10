@@ -141,6 +141,120 @@ function RecapGeneratorPage() {
     setStatus("idle");
   }
 
+  // ── Strava sync ────────────────────────────────────────────────
+  const [stravaToken, setStravaToken] = useState<string | null>(null);
+  const [stravaAthlete, setStravaAthlete] = useState<{ firstName: string | null; username: string | null } | null>(null);
+  const [stravaActivities, setStravaActivities] = useState<StravaActivity[] | null>(null);
+  const [stravaState, setStravaState] = useState<"idle" | "connecting" | "loading" | "ready" | "error">("idle");
+  const [stravaError, setStravaError] = useState<string | null>(null);
+  const [selectedActivityId, setSelectedActivityId] = useState<number | null>(null);
+  const exchangeCode = useServerFn(exchangeStravaCode);
+  const fetchActivities = useServerFn(getStravaActivities);
+  const fetchStravaConfig = useServerFn(getStravaConfig);
+
+  const loadActivities = useCallback(
+    async (token: string) => {
+      setStravaState("loading");
+      try {
+        const { activities } = await fetchActivities({ data: { accessToken: token } });
+        setStravaActivities(activities);
+        setStravaState("ready");
+        if (activities.length === 0) {
+          toast.message("No recent runs found on Strava.");
+        }
+      } catch (err) {
+        const msg = err instanceof Error ? err.message : "Couldn't load runs.";
+        setStravaError(msg);
+        setStravaState("error");
+        toast.error(msg);
+      }
+    },
+    [fetchActivities],
+  );
+
+  // Handle Strava OAuth redirect (?code=...&scope=...)
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const code = url.searchParams.get("code");
+    const err = url.searchParams.get("error");
+    if (err) {
+      url.searchParams.delete("error");
+      url.searchParams.delete("state");
+      window.history.replaceState({}, "", url.pathname + url.search + url.hash);
+      toast.error("Strava connection cancelled.");
+      return;
+    }
+    if (!code) return;
+    // Strip params from URL immediately so a refresh doesn't re-exchange.
+    url.searchParams.delete("code");
+    url.searchParams.delete("scope");
+    url.searchParams.delete("state");
+    window.history.replaceState({}, "", url.pathname + url.search + url.hash);
+    setStravaState("connecting");
+    (async () => {
+      try {
+        const result = await exchangeCode({ data: { code } });
+        setStravaToken(result.accessToken);
+        setStravaAthlete(result.athlete);
+        await loadActivities(result.accessToken);
+      } catch (e) {
+        const msg = e instanceof Error ? e.message : "Couldn't connect to Strava.";
+        setStravaError(msg);
+        setStravaState("error");
+        toast.error(msg);
+      }
+    })();
+  }, [exchangeCode, loadActivities]);
+
+  async function connectStrava() {
+    try {
+      const { clientId } = await fetchStravaConfig();
+      const redirectUri = `${window.location.origin}/resources/recap`;
+      const authUrl = new URL("https://www.strava.com/oauth/authorize");
+      authUrl.searchParams.set("client_id", clientId);
+      authUrl.searchParams.set("redirect_uri", redirectUri);
+      authUrl.searchParams.set("response_type", "code");
+      authUrl.searchParams.set("approval_prompt", "auto");
+      authUrl.searchParams.set("scope", "read,activity:read");
+      window.location.href = authUrl.toString();
+    } catch {
+      toast.error("Strava isn't configured yet.");
+    }
+  }
+
+  function disconnectStrava() {
+    setStravaToken(null);
+    setStravaAthlete(null);
+    setStravaActivities(null);
+    setSelectedActivityId(null);
+    setStravaState("idle");
+    setStravaError(null);
+  }
+
+  function applyStravaActivity(a: StravaActivity) {
+    const miles = a.distance / 1609.344;
+    const distance = miles.toFixed(miles >= 10 ? 1 : 2);
+    const time = formatDuration(a.moving_time);
+    const paceSecPerMi = miles > 0 ? a.moving_time / miles : 0;
+    const pace = paceSecPerMi > 0 ? formatPace(paceSecPerMi) : "";
+    const d = new Date(a.start_date_local);
+    const date = formatDate(d);
+    const loc = [a.location_city, a.location_state].filter(Boolean).join(", ").toUpperCase();
+    setForm((f) => ({
+      ...f,
+      title: (a.name || "STRAVA RUN").toUpperCase().slice(0, 32),
+      date,
+      location: loc || f.location,
+      distance,
+      time,
+      pace,
+    }));
+    setSelectedActivityId(a.id);
+    setActivePreset(null);
+    setStatus("idle");
+    toast.success("Run loaded from Strava.");
+  }
+
   function onPhoto(e: ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -152,6 +266,7 @@ function RecapGeneratorPage() {
     setPhotoUrl(url);
     setTransform(DEFAULT_TRANSFORM);
   }
+
 
   function updateTransform(patch: Partial<PhotoTransform>) {
     setTransform((t) => ({ ...t, ...patch }));
