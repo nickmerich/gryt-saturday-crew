@@ -620,10 +620,10 @@ function drawRecap(
 
   // Diagonal blue slash motif over photo
   ctx.save();
-  ctx.translate(W * 0.78, photoArea.h * 0.18);
+  ctx.translate(W * 0.72, photoArea.h * 0.17);
   ctx.rotate((-12 * Math.PI) / 180);
   ctx.fillStyle = "#89CFF0";
-  ctx.fillRect(-260, -8, 520, 16);
+  ctx.fillRect(-220, -8, 440, 16);
   ctx.restore();
 
   // Top eyebrow row
