@@ -209,16 +209,23 @@ function RecapGeneratorPage() {
     [fetchActivities],
   );
 
-  // Handle Strava OAuth redirect (?code=...&scope=...)
+  // Handle Strava OAuth redirect (?code=...&scope=...&error=...)
   useEffect(() => {
     const url = new URL(window.location.href);
     const code = url.searchParams.get("code");
     const err = url.searchParams.get("error");
+    const scope = url.searchParams.get("scope");
     if (err) {
       url.searchParams.delete("error");
       url.searchParams.delete("state");
       window.history.replaceState({}, "", url.pathname + url.search + url.hash);
-      toast.error("Strava connection cancelled.");
+      const msg =
+        err === "access_denied"
+          ? "You cancelled the Strava authorization. Tap Connect Strava to try again."
+          : `Strava returned an error: ${err}. See the troubleshooting steps below.`;
+      setStravaError(msg);
+      setStravaState("error");
+      toast.error(msg);
       return;
     }
     if (!code) return;
@@ -227,6 +234,14 @@ function RecapGeneratorPage() {
     url.searchParams.delete("scope");
     url.searchParams.delete("state");
     window.history.replaceState({}, "", url.pathname + url.search + url.hash);
+    // If the user didn't grant activity:read, the token won't fetch runs.
+    if (scope && !/activity:read/.test(scope)) {
+      const msg = "You didn't grant activity access. On the Strava page, keep the 'View your activities' box checked, then Authorize.";
+      setStravaError(msg);
+      setStravaState("error");
+      toast.error(msg);
+      return;
+    }
     setStravaState("connecting");
     (async () => {
       try {
@@ -243,7 +258,9 @@ function RecapGeneratorPage() {
     })();
   }, [exchangeCode, loadActivities]);
 
+
   async function connectStrava() {
+    setStravaError(null);
     try {
       const { clientId } = await fetchStravaConfig();
       const redirectUri = `${window.location.origin}/resources/recap`;
@@ -255,9 +272,13 @@ function RecapGeneratorPage() {
       authUrl.searchParams.set("scope", "read,activity:read");
       window.location.href = authUrl.toString();
     } catch {
-      toast.error("Strava isn't configured yet.");
+      const msg = "Strava isn't configured yet. The site owner needs to add Strava API credentials.";
+      setStravaError(msg);
+      setStravaState("error");
+      toast.error(msg);
     }
   }
+
 
   function disconnectStrava() {
     setStravaToken(null);
@@ -1303,8 +1324,44 @@ function StravaPanel({
       )}
 
       {state === "error" && error && (
-        <p className="mt-3 text-xs text-red-300">{error}</p>
+        <div
+          role="alert"
+          className="mt-3 border border-red-400/40 bg-red-500/[0.06] p-3 text-xs text-paper/85"
+        >
+          <p className="text-red-300 font-medium">{error}</p>
+          <details className="mt-3 group" open>
+            <summary className="cursor-pointer eyebrow text-paper/70 hover:text-paper">
+              Troubleshoot in 4 steps
+            </summary>
+            <ol className="mt-2 space-y-1.5 list-decimal list-inside text-paper/75 leading-[1.55]">
+              <li>Make sure you're signed into the correct Strava account in this browser.</li>
+              <li>
+                Tap <span className="font-bold uppercase tracking-wider text-paper">Connect Strava</span> again — on the Strava page, keep <em>“View data about your activities”</em> checked and press <em>Authorize</em>.
+              </li>
+              <li>If Strava says the redirect URL is invalid, the site owner needs to set the <em>Authorization Callback Domain</em> to <code className="text-blue">{typeof window !== "undefined" ? window.location.host : "grytrunclub.com"}</code>.</li>
+              <li>Still stuck? Try a private window, or use the manual form / photo upload below.</li>
+            </ol>
+          </details>
+          <div className="mt-3 flex gap-2">
+            <button
+              type="button"
+              onClick={onConnect}
+              className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#FC4C02] text-white text-[11px] font-bold uppercase tracking-[0.12em] hover:brightness-110"
+            >
+              Try again
+            </button>
+            <a
+              href="https://www.strava.com/settings/apps"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1 px-3 py-1.5 border border-paper/20 text-[11px] font-bold uppercase tracking-[0.12em] text-paper/80 hover:text-paper hover:border-paper/40"
+            >
+              Strava app settings ↗
+            </a>
+          </div>
+        </div>
       )}
+
 
       {state === "loading" && (
         <p className="mt-3 text-xs text-paper/60">Loading your recent runs…</p>
