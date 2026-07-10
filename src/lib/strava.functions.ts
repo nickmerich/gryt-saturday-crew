@@ -31,8 +31,24 @@ export const exchangeStravaCode = createServerFn({ method: "POST" })
     if (!res.ok) {
       const body = await res.text();
       console.error(`Strava token exchange failed [${res.status}]: ${body}`);
-      throw new Error("Couldn't connect to Strava. Please try again.");
+      let parsed: { message?: string; errors?: Array<{ field?: string; code?: string }> } | null = null;
+      try { parsed = JSON.parse(body); } catch { /* not JSON */ }
+      const codes = (parsed?.errors ?? []).map((e) => `${e.field ?? ""}:${e.code ?? ""}`).join(",");
+      if (res.status === 400 && /redirect_uri/i.test(body)) {
+        throw new Error(
+          "Strava rejected the redirect URL. In your Strava API app settings, set the Authorization Callback Domain to this site's domain (no https://, no path).",
+        );
+      }
+      if (res.status === 401 || /invalid|unauthor/i.test(body)) {
+        throw new Error(
+          "Strava rejected the authorization code. This usually means the client ID/secret don't match, or the code was already used. Try Connect Strava again.",
+        );
+      }
+      throw new Error(
+        `Couldn't connect to Strava (${res.status}${codes ? ` · ${codes}` : ""}). Please try again.`,
+      );
     }
+
     const json = (await res.json()) as {
       access_token: string;
       expires_at: number;
