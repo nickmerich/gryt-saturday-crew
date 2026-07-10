@@ -1,7 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useRef, useState, type ChangeEvent } from "react";
+import { useCallback, useEffect, useRef, useState, type ChangeEvent } from "react";
+import { useServerFn } from "@tanstack/react-start";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 import { toast } from "sonner";
+import {
+  exchangeStravaCode,
+  getStravaActivities,
+  getStravaConfig,
+  type StravaActivity,
+} from "@/lib/strava.functions";
+
 
 export const Route = createFileRoute("/resources_/recap")({
   head: () => ({
@@ -133,6 +141,120 @@ function RecapGeneratorPage() {
     setStatus("idle");
   }
 
+  // ── Strava sync ────────────────────────────────────────────────
+  const [stravaToken, setStravaToken] = useState<string | null>(null);
+  const [stravaAthlete, setStravaAthlete] = useState<{ firstName: string | null; username: string | null } | null>(null);
+  const [stravaActivities, setStravaActivities] = useState<StravaActivity[] | null>(null);
+  const [stravaState, setStravaState] = useState<"idle" | "connecting" | "loading" | "ready" | "error">("idle");
+  const [stravaError, setStravaError] = useState<string | null>(null);
+  const [selectedActivityId, setSelectedActivityId] = useState<number | null>(null);
+  const exchangeCode = useServerFn(exchangeStravaCode);
+  const fetchActivities = useServerFn(getStravaActivities);
+  const fetchStravaConfig = useServerFn(getStravaConfig);
+
+  const loadActivities = useCallback(
+    async (token: string) => {
+      setStravaState("loading");
+      try {
+        const { activities } = await fetchActivities({ data: { accessToken: token } });
+        setStravaActivities(activities);
+        setStravaState("ready");
+        if (activities.length === 0) {
+          toast.message("No recent runs found on Strava.");
+        }
+      } catch (err) {
+        const msg = err instanceof Error ? err.message : "Couldn't load runs.";
+        setStravaError(msg);
+        setStravaState("error");
+        toast.error(msg);
+      }
+    },
+    [fetchActivities],
+  );
+
+  // Handle Strava OAuth redirect (?code=...&scope=...)
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const code = url.searchParams.get("code");
+    const err = url.searchParams.get("error");
+    if (err) {
+      url.searchParams.delete("error");
+      url.searchParams.delete("state");
+      window.history.replaceState({}, "", url.pathname + url.search + url.hash);
+      toast.error("Strava connection cancelled.");
+      return;
+    }
+    if (!code) return;
+    // Strip params from URL immediately so a refresh doesn't re-exchange.
+    url.searchParams.delete("code");
+    url.searchParams.delete("scope");
+    url.searchParams.delete("state");
+    window.history.replaceState({}, "", url.pathname + url.search + url.hash);
+    setStravaState("connecting");
+    (async () => {
+      try {
+        const result = await exchangeCode({ data: { code } });
+        setStravaToken(result.accessToken);
+        setStravaAthlete(result.athlete);
+        await loadActivities(result.accessToken);
+      } catch (e) {
+        const msg = e instanceof Error ? e.message : "Couldn't connect to Strava.";
+        setStravaError(msg);
+        setStravaState("error");
+        toast.error(msg);
+      }
+    })();
+  }, [exchangeCode, loadActivities]);
+
+  async function connectStrava() {
+    try {
+      const { clientId } = await fetchStravaConfig();
+      const redirectUri = `${window.location.origin}/resources/recap`;
+      const authUrl = new URL("https://www.strava.com/oauth/authorize");
+      authUrl.searchParams.set("client_id", clientId);
+      authUrl.searchParams.set("redirect_uri", redirectUri);
+      authUrl.searchParams.set("response_type", "code");
+      authUrl.searchParams.set("approval_prompt", "auto");
+      authUrl.searchParams.set("scope", "read,activity:read");
+      window.location.href = authUrl.toString();
+    } catch {
+      toast.error("Strava isn't configured yet.");
+    }
+  }
+
+  function disconnectStrava() {
+    setStravaToken(null);
+    setStravaAthlete(null);
+    setStravaActivities(null);
+    setSelectedActivityId(null);
+    setStravaState("idle");
+    setStravaError(null);
+  }
+
+  function applyStravaActivity(a: StravaActivity) {
+    const miles = a.distance / 1609.344;
+    const distance = miles.toFixed(miles >= 10 ? 1 : 2);
+    const time = formatDuration(a.moving_time);
+    const paceSecPerMi = miles > 0 ? a.moving_time / miles : 0;
+    const pace = paceSecPerMi > 0 ? formatPace(paceSecPerMi) : "";
+    const d = new Date(a.start_date_local);
+    const date = formatDate(d);
+    const loc = [a.location_city, a.location_state].filter(Boolean).join(", ").toUpperCase();
+    setForm((f) => ({
+      ...f,
+      title: (a.name || "STRAVA RUN").toUpperCase().slice(0, 32),
+      date,
+      location: loc || f.location,
+      distance,
+      time,
+      pace,
+    }));
+    setSelectedActivityId(a.id);
+    setActivePreset(null);
+    setStatus("idle");
+    toast.success("Run loaded from Strava.");
+  }
+
   function onPhoto(e: ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -144,6 +266,7 @@ function RecapGeneratorPage() {
     setPhotoUrl(url);
     setTransform(DEFAULT_TRANSFORM);
   }
+
 
   function updateTransform(patch: Partial<PhotoTransform>) {
     setTransform((t) => ({ ...t, ...patch }));
@@ -260,7 +383,22 @@ function RecapGeneratorPage() {
         <div className="max-w-[1180px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr,1.1fr] gap-10 lg:gap-16 items-start">
           {/* Form */}
           <div className="flex flex-col gap-6 order-2 lg:order-1">
+            <StravaPanel
+              state={stravaState}
+              error={stravaError}
+              athlete={stravaAthlete}
+              activities={stravaActivities}
+              selectedId={selectedActivityId}
+              onConnect={connectStrava}
+              onDisconnect={disconnectStrava}
+              onRefresh={() => stravaToken && loadActivities(stravaToken)}
+              onPick={applyStravaActivity}
+            />
+
+            <div className="h-px bg-paper/15" aria-hidden="true" />
+
             <div>
+
               <p className="eyebrow text-blue mb-3">Start from an example</p>
               <div className="flex flex-wrap gap-2" role="group" aria-label="Example runs">
                 {PRESETS.map((p) => {
@@ -942,3 +1080,155 @@ function drawGrytMark(ctx: CanvasRenderingContext2D, x: number, y: number) {
   ctx.fillStyle = "#FFFFFF";
   ctx.fillText(text, x, y);
 }
+
+/* ─────────────────────────  STRAVA HELPERS  ─────────────────────── */
+
+function pad2(n: number) {
+  return n.toString().padStart(2, "0");
+}
+function formatDuration(totalSec: number): string {
+  const s = Math.max(0, Math.round(totalSec));
+  const h = Math.floor(s / 3600);
+  const m = Math.floor((s % 3600) / 60);
+  const sec = s % 60;
+  return h > 0 ? `${h}:${pad2(m)}:${pad2(sec)}` : `${m}:${pad2(sec)}`;
+}
+function formatPace(secPerMi: number): string {
+  const s = Math.max(0, Math.round(secPerMi));
+  const m = Math.floor(s / 60);
+  const sec = s % 60;
+  return `${m}:${pad2(sec)}`;
+}
+const MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+function formatDate(d: Date): string {
+  if (Number.isNaN(d.getTime())) return "";
+  return `${MONTHS[d.getMonth()]} ${pad2(d.getDate())} · ${d.getFullYear()}`;
+}
+
+function StravaPanel({
+  state,
+  error,
+  athlete,
+  activities,
+  selectedId,
+  onConnect,
+  onDisconnect,
+  onRefresh,
+  onPick,
+}: {
+  state: "idle" | "connecting" | "loading" | "ready" | "error";
+  error: string | null;
+  athlete: { firstName: string | null; username: string | null } | null;
+  activities: StravaActivity[] | null;
+  selectedId: number | null;
+  onConnect: () => void;
+  onDisconnect: () => void;
+  onRefresh: () => void;
+  onPick: (a: StravaActivity) => void;
+}) {
+  const connected = state === "ready" || state === "loading";
+  return (
+    <div className="border border-paper/15 bg-paper/[0.03] p-4 sm:p-5">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <p className="eyebrow text-blue mb-1">Sync from Strava</p>
+          <p className="text-xs text-paper/70 leading-[1.5]">
+            {connected && athlete
+              ? `Connected${athlete.firstName ? ` as ${athlete.firstName}` : ""}. Pick a run to auto-fill.`
+              : "One-tap import your latest runs. No account required."}
+          </p>
+        </div>
+        {connected ? (
+          <button
+            type="button"
+            onClick={onDisconnect}
+            className="text-[11px] font-bold uppercase tracking-[0.12em] text-paper/60 hover:text-paper underline underline-offset-2 shrink-0"
+          >
+            Disconnect
+          </button>
+        ) : null}
+      </div>
+
+      {!connected && (
+        <button
+          type="button"
+          onClick={onConnect}
+          disabled={state === "connecting"}
+          className="mt-3 inline-flex items-center gap-2 px-4 py-2.5 bg-[#FC4C02] text-white text-sm font-bold uppercase tracking-[0.12em] hover:brightness-110 transition disabled:opacity-70 disabled:cursor-not-allowed"
+        >
+          {state === "connecting" ? (
+            <>
+              <span className="inline-block h-3.5 w-3.5 rounded-full border-2 border-current border-r-transparent animate-spin" />
+              Connecting…
+            </>
+          ) : (
+            <>Connect Strava</>
+          )}
+        </button>
+      )}
+
+      {state === "error" && error && (
+        <p className="mt-3 text-xs text-red-300">{error}</p>
+      )}
+
+      {state === "loading" && (
+        <p className="mt-3 text-xs text-paper/60">Loading your recent runs…</p>
+      )}
+
+      {state === "ready" && activities && activities.length > 0 && (
+        <>
+          <div className="mt-4 flex items-center justify-between">
+            <span className="eyebrow text-paper/55">Recent runs</span>
+            <button
+              type="button"
+              onClick={onRefresh}
+              className="text-[11px] font-bold uppercase tracking-[0.12em] text-paper/60 hover:text-blue"
+            >
+              Refresh
+            </button>
+          </div>
+          <ul className="mt-2 max-h-72 overflow-y-auto divide-y divide-paper/10 border border-paper/10">
+            {activities.map((a) => {
+              const miles = a.distance / 1609.344;
+              const paceSec = miles > 0 ? a.moving_time / miles : 0;
+              const active = selectedId === a.id;
+              const d = new Date(a.start_date_local);
+              return (
+                <li key={a.id}>
+                  <button
+                    type="button"
+                    onClick={() => onPick(a)}
+                    aria-pressed={active}
+                    className={`w-full text-left px-3 py-2.5 flex items-center justify-between gap-3 transition-colors ${
+                      active ? "bg-blue/15" : "hover:bg-paper/[0.04]"
+                    }`}
+                  >
+                    <div className="min-w-0">
+                      <p className="text-sm text-paper truncate">{a.name}</p>
+                      <p className="text-[11px] uppercase tracking-[0.1em] text-paper/55 mt-0.5">
+                        {formatDate(d)} · {miles.toFixed(miles >= 10 ? 1 : 2)} mi
+                      </p>
+                    </div>
+                    <div className="text-right shrink-0">
+                      <p className="text-sm text-paper tabular-nums">{formatDuration(a.moving_time)}</p>
+                      <p className="text-[11px] uppercase tracking-[0.1em] text-paper/55 mt-0.5 tabular-nums">
+                        {paceSec > 0 ? `${formatPace(paceSec)}/mi` : "—"}
+                      </p>
+                    </div>
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </>
+      )}
+
+      {state === "ready" && activities && activities.length === 0 && (
+        <p className="mt-3 text-xs text-paper/60">
+          No runs found on your Strava. Log a run and refresh.
+        </p>
+      )}
+    </div>
+  );
+}
+
