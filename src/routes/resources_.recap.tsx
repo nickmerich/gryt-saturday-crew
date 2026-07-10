@@ -9,6 +9,8 @@ import {
   getStravaConfig,
   type StravaActivity,
 } from "@/lib/strava.functions";
+import { uploadRecap } from "@/lib/recap-share.functions";
+
 
 
 export const Route = createFileRoute("/resources_/recap")({
