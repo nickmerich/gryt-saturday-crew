@@ -289,8 +289,14 @@ function RecapGeneratorPage() {
     setSelectedActivityId(a.id);
     setActivePreset(null);
     setStatus("idle");
-    toast.success("Run loaded from Strava.");
+    setShareUrl(null);
+    toast.success("Run loaded from Strava. Generating share link…");
+    // Wait one frame so the redraw effect uses the new form state, then upload.
+    setTimeout(() => {
+      void generateShareLink();
+    }, 60);
   }
+
 
   function onPhoto(e: ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
