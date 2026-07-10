@@ -260,6 +260,7 @@ function RecapGeneratorPage() {
 
 
   async function connectStrava() {
+    setStravaError(null);
     try {
       const { clientId } = await fetchStravaConfig();
       const redirectUri = `${window.location.origin}/resources/recap`;
@@ -271,9 +272,13 @@ function RecapGeneratorPage() {
       authUrl.searchParams.set("scope", "read,activity:read");
       window.location.href = authUrl.toString();
     } catch {
-      toast.error("Strava isn't configured yet.");
+      const msg = "Strava isn't configured yet. The site owner needs to add Strava API credentials.";
+      setStravaError(msg);
+      setStravaState("error");
+      toast.error(msg);
     }
   }
+
 
   function disconnectStrava() {
     setStravaToken(null);
