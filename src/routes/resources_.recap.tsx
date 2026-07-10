@@ -648,6 +648,45 @@ function RecapGeneratorPage() {
                 </div>
               )}
 
+              {shareState === "generating" && (
+                <div
+                  role="status"
+                  className="flex items-center gap-3 border border-blue/60 bg-blue/10 px-4 py-3"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="inline-block h-4 w-4 shrink-0 rounded-full border-2 border-blue border-r-transparent animate-spin"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-bold text-paper">Generating share link…</p>
+                    <p className="text-paper/70 text-[11px] mt-0.5">
+                      Uploading your 1080 × 1350 PNG. Usually under 5 seconds.
+                    </p>
+                    <div
+                      className="mt-2 h-1 w-full overflow-hidden bg-paper/15"
+                      aria-hidden="true"
+                    >
+                      <div className="h-full w-1/3 bg-blue animate-[recap-progress_1.2s_ease-in-out_infinite]" />
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {shareState === "error" && (
+                <div className="border border-red-500/60 bg-red-500/10 px-4 py-3 text-sm text-paper">
+                  Couldn't create share link.{" "}
+                  <button
+                    type="button"
+                    onClick={generateShareLink}
+                    className="underline underline-offset-2 hover:text-blue"
+                  >
+                    Try again
+                  </button>
+                  .
+                </div>
+              )}
+
+
               {shareState === "ready" && shareUrl && (
                 <div className="border border-blue/60 bg-blue/10 px-4 py-3">
                   <p className="eyebrow text-blue mb-2">Shareable link</p>
