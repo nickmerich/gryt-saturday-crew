@@ -153,6 +153,41 @@ function RecapGeneratorPage() {
   const exchangeCode = useServerFn(exchangeStravaCode);
   const fetchActivities = useServerFn(getStravaActivities);
   const fetchStravaConfig = useServerFn(getStravaConfig);
+  const uploadRecapFn = useServerFn(uploadRecap);
+
+  // ── Share link ────────────────────────────────────────────────
+  const [shareUrl, setShareUrl] = useState<string | null>(null);
+  const [shareState, setShareState] = useState<"idle" | "generating" | "ready" | "error">("idle");
+
+  const generateShareLink = useCallback(async () => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    setShareState("generating");
+    setShareUrl(null);
+    try {
+      // Yield so the latest form/photo has painted into the canvas.
+      await new Promise((r) => requestAnimationFrame(() => r(null)));
+      const dataUrl = canvas.toDataURL("image/png");
+      const { url } = await uploadRecapFn({ data: { dataUrl } });
+      setShareUrl(url);
+      setShareState("ready");
+      toast.success("Share link ready");
+    } catch (e) {
+      setShareState("error");
+      toast.error(e instanceof Error ? e.message : "Couldn't create share link.");
+    }
+  }, [uploadRecapFn]);
+
+  async function copyShareLink() {
+    if (!shareUrl) return;
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      toast.success("Link copied to clipboard");
+    } catch {
+      toast.error("Couldn't copy — long-press the link instead.");
+    }
+  }
+
 
   const loadActivities = useCallback(
     async (token: string) => {
