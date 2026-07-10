@@ -209,16 +209,23 @@ function RecapGeneratorPage() {
     [fetchActivities],
   );
 
-  // Handle Strava OAuth redirect (?code=...&scope=...)
+  // Handle Strava OAuth redirect (?code=...&scope=...&error=...)
   useEffect(() => {
     const url = new URL(window.location.href);
     const code = url.searchParams.get("code");
     const err = url.searchParams.get("error");
+    const scope = url.searchParams.get("scope");
     if (err) {
       url.searchParams.delete("error");
       url.searchParams.delete("state");
       window.history.replaceState({}, "", url.pathname + url.search + url.hash);
-      toast.error("Strava connection cancelled.");
+      const msg =
+        err === "access_denied"
+          ? "You cancelled the Strava authorization. Tap Connect Strava to try again."
+          : `Strava returned an error: ${err}. See the troubleshooting steps below.`;
+      setStravaError(msg);
+      setStravaState("error");
+      toast.error(msg);
       return;
     }
     if (!code) return;
@@ -227,6 +234,14 @@ function RecapGeneratorPage() {
     url.searchParams.delete("scope");
     url.searchParams.delete("state");
     window.history.replaceState({}, "", url.pathname + url.search + url.hash);
+    // If the user didn't grant activity:read, the token won't fetch runs.
+    if (scope && !/activity:read/.test(scope)) {
+      const msg = "You didn't grant activity access. On the Strava page, keep the 'View your activities' box checked, then Authorize.";
+      setStravaError(msg);
+      setStravaState("error");
+      toast.error(msg);
+      return;
+    }
     setStravaState("connecting");
     (async () => {
       try {
@@ -242,6 +257,7 @@ function RecapGeneratorPage() {
       }
     })();
   }, [exchangeCode, loadActivities]);
+
 
   async function connectStrava() {
     try {
