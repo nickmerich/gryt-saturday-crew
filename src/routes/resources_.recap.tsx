@@ -620,10 +620,10 @@ function drawRecap(
 
   // Diagonal blue slash motif over photo
   ctx.save();
-  ctx.translate(W * 0.78, photoArea.h * 0.18);
+  ctx.translate(W * 0.72, photoArea.h * 0.17);
   ctx.rotate((-12 * Math.PI) / 180);
   ctx.fillStyle = "#89CFF0";
-  ctx.fillRect(-260, -8, 520, 16);
+  ctx.fillRect(-220, -8, 440, 16);
   ctx.restore();
 
   // Top eyebrow row
@@ -684,7 +684,7 @@ function drawRecap(
 
     ctx.fillStyle = "#FFFFFF";
     ctx.font = "700 78px 'Oswald', 'Arial Narrow', Impact, sans-serif";
-    drawFittedText(ctx, s.value, cx - colW / 2 + 20, statTop + 90, colW - 40, 78, "center");
+    drawFittedText(ctx, s.value, cx, statTop + 90, colW - 40, 78, "center");
 
     // Divider
     if (i < stats.length - 1) {
