@@ -4,9 +4,9 @@ import ogImage from "@/assets/og-conversations.jpg";
 
 const SITE = "https://gryt-saturday-crew.lovable.app";
 const URL = `${SITE}/resources/conversations`;
-const TITLE = "Conversations · gryt run club";
+const TITLE = "Gryt Run Club Interviews & Conversations | gryt run club";
 const DESCRIPTION =
-  "Interviews and Q&As with the founders, members, and partners of gryt run club — the people behind the miles.";
+  "Explore gryt run club interviews with our founders, members, and partners. Real stories from the people behind the miles — in their own words.";
 
 export const Route = createFileRoute("/resources_/conversations")({
   head: () => ({
@@ -26,6 +26,25 @@ export const Route = createFileRoute("/resources_/conversations")({
       { name: "twitter:image", content: `${SITE}${ogImage}` },
     ],
     links: [{ rel: "canonical", href: URL }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: [
+            {
+              "@type": "Question",
+              name: "Who is featured in gryt run club interviews?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Gryt run club interviews feature founders, members, and community partners sharing their running journeys and stories.",
+              },
+            },
+          ],
+        }),
+      },
+    ],
   }),
   component: ConversationsPage,
 });
@@ -109,11 +128,12 @@ function ConversationsPage() {
           </Link>
           <p className="eyebrow text-blue mt-8 mb-5">INTERVIEWS & FEATURES</p>
           <h1 className="display-condensed uppercase text-[clamp(48px,9vw,128px)] leading-[0.9]">
-            Conversations
+            Gryt Run Club Interviews & Conversations
           </h1>
           <p className="mt-7 text-paper/75 text-lg md:text-xl max-w-[640px] leading-[1.55]">
-            The people behind the miles. Founders, members, and partners on
-            what it actually takes to keep showing up.
+            Explore gryt run club interviews with founders, members, and
+            partners — the people behind the miles sharing what it actually
+            takes to keep showing up.
           </p>
         </div>
       </section>
