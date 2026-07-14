@@ -1,26 +1,30 @@
-## Problem
+## Plan: End-to-end RLS test for recap uploads (user vs service_role)
 
-The `/waiver` form submission calls `signWaiver`, which inserts into `public.waiver_signatures` using the publishable (anon) key. The table has an RLS INSERT policy ("Anyone can submit a valid 2026 waiver" for anon/authenticated), **but no table-level GRANTs exist**. Supabase's Data API requires explicit GRANTs in addition to RLS — without them, every insert returns a permission error and the user sees "We couldn't save your signature."
+Extend `e2e/recaps-bucket-rls.spec.ts` with two additional cases that go beyond the existing anon-denial checks:
 
-Verified via `information_schema.role_table_grants` — zero grants on `public.waiver_signatures`.
+### New test cases
 
-## Fix
+1. **Authenticated (non-admin) user cannot upload to `recaps`**
+   - Create a temporary auth user via `supabaseAdmin.auth.admin.createUser` (email-confirmed, random email/password).
+   - Sign that user in with a fresh publishable-key client to obtain a session (acts as `authenticated` role).
+   - Attempt `storage.from("recaps").upload(...)` — assert an error is returned (RLS blocks `authenticated`).
+   - Also assert `list`, `download`, and `createSignedUrl` are blocked for the signed-in user.
+   - Cleanup: `supabaseAdmin.auth.admin.deleteUser(userId)` in `test.afterAll`.
 
-One migration that adds the missing grants (matching the existing policy surface):
+2. **`service_role` (admin) can upload, sign, and delete in `recaps`**
+   - Build a `service_role` client from `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` (mirrors what `uploadRecap` does via `supabaseAdmin`).
+   - Upload a 1x1 PNG to a unique path — assert no error.
+   - `createSignedUrl` for that path — assert a URL is returned; `fetch` it and assert 200.
+   - `remove([path])` — assert no error. Skip the whole admin block via `test.skip` if `SUPABASE_SERVICE_ROLE_KEY` isn't in the env (local runs may not have it).
 
-```sql
-GRANT INSERT ON public.waiver_signatures TO anon, authenticated;
-GRANT ALL    ON public.waiver_signatures TO service_role;
-```
+### Technical details
 
-No SELECT for anon/authenticated — reads are done through `supabaseAdmin` in `checkWaiverStatus`, so service_role coverage is enough.
+- File: `e2e/recaps-bucket-rls.spec.ts` (extend, don't replace existing anon cases).
+- Env vars used: `VITE_SUPABASE_URL`/`SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY`/`SUPABASE_PUBLISHABLE_KEY`, and (new) `SUPABASE_SERVICE_ROLE_KEY` — gate admin/user-creation blocks on its presence with `test.skip`.
+- Use `test.describe.serial` for the admin block so upload → sign → delete run in order and clean up.
+- Keep the pattern consistent with the existing file: `createClient` with `persistSession: false`, unique timestamped paths, minimal PNG buffer already defined.
+- No app-code changes; this is test-only.
 
-## Verify
+### Verification
 
-1. After the migration runs, invoke `signWaiver` end-to-end via Playwright against `/waiver` with a valid test payload and confirm:
-   - Success view renders ("Waiver signed — you're covered through Dec 31, 2026.")
-   - A row exists in `waiver_signatures` (confirm via `supabase--read_query`)
-2. Invoke `checkWaiverStatus` for that email and confirm `signed: true`.
-3. Re-test the homepage `RSVPWaiverBlock` to confirm the badge swap still works once a signature exists.
-
-No application-code changes are required — the bug is purely a missing DB grant.
+Run `bunx playwright test e2e/recaps-bucket-rls.spec.ts` and confirm all cases (existing + new) pass, with the admin block skipped cleanly if the service role key isn't present.
