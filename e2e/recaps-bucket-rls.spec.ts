@@ -195,3 +195,100 @@ test.describe.serial("recaps bucket — service_role (admin) happy path", () => 
     expect(error).toBeNull();
   });
 });
+
+/**
+ * Recap route metadata: the app exposes only `uploadRecap`. Normal users
+ * must not be able to enumerate stored recaps or read their metadata
+ * (list entries, object info) through the storage API — only the
+ * service_role path used by uploadRecap can.
+ */
+test.describe.serial("recap metadata visibility", () => {
+  test.skip(
+    !SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY || !SUPABASE_SERVICE_ROLE_KEY,
+    "Requires SUPABASE_SERVICE_ROLE_KEY to seed a recap object",
+  );
+
+  const admin = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
+    auth: { persistSession: false, autoRefreshToken: false },
+  });
+  const anon = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+    auth: { persistSession: false, autoRefreshToken: false },
+  });
+  const userClient = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+    auth: { persistSession: false, autoRefreshToken: false },
+  });
+
+  const seededPath = `e2e-meta-${Date.now()}.png`;
+  const email = `e2e-meta-${Date.now()}@example.test`;
+  const password = `Pw!${crypto.randomUUID()}`;
+  let userId = "";
+
+  test.beforeAll(async () => {
+    const { error: upErr } = await admin.storage
+      .from("recaps")
+      .upload(seededPath, PNG_BYTES, { contentType: "image/png", upsert: false });
+    if (upErr) throw upErr;
+
+    const { data, error } = await admin.auth.admin.createUser({
+      email,
+      password,
+      email_confirm: true,
+    });
+    if (error || !data.user) throw error ?? new Error("createUser failed");
+    userId = data.user.id;
+
+    const signIn = await userClient.auth.signInWithPassword({ email, password });
+    if (signIn.error) throw signIn.error;
+  });
+
+  test.afterAll(async () => {
+    await userClient.auth.signOut().catch(() => {});
+    if (userId) await admin.auth.admin.deleteUser(userId).catch(() => {});
+    await admin.storage.from("recaps").remove([seededPath]).catch(() => {});
+  });
+
+  test("anon cannot list recap metadata (seeded object hidden)", async () => {
+    const { data, error } = await anon.storage.from("recaps").list();
+    if (!error) {
+      const names = (data ?? []).map((entry) => entry.name);
+      expect(names).not.toContain(seededPath);
+    }
+  });
+
+  test("anon cannot read info for a known recap path", async () => {
+    const { data, error } = await anon.storage.from("recaps").info(seededPath);
+    expect(data).toBeNull();
+    expect(error).not.toBeNull();
+  });
+
+  test("authenticated user cannot list recap metadata (seeded object hidden)", async () => {
+    const { data, error } = await userClient.storage.from("recaps").list();
+    if (!error) {
+      const names = (data ?? []).map((entry) => entry.name);
+      expect(names).not.toContain(seededPath);
+    }
+  });
+
+  test("authenticated user cannot read info for a known recap path", async () => {
+    const { data, error } = await userClient.storage
+      .from("recaps")
+      .info(seededPath);
+    expect(data).toBeNull();
+    expect(error).not.toBeNull();
+  });
+
+  test("service_role can list recap metadata and see the seeded object", async () => {
+    const { data, error } = await admin.storage.from("recaps").list();
+    expect(error).toBeNull();
+    const names = (data ?? []).map((entry) => entry.name);
+    expect(names).toContain(seededPath);
+  });
+
+  test("service_role can read info for a known recap path", async () => {
+    const { data, error } = await admin.storage
+      .from("recaps")
+      .info(seededPath);
+    expect(error).toBeNull();
+    expect(data).not.toBeNull();
+  });
+});
