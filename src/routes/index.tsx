@@ -2293,12 +2293,12 @@ function Community() {
           />
           <img
             src={photo7.url}
-            alt="Tuesday Night Shift crew in the lot before the run"
+            alt="Crew in the lot before a Saturday run"
             className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15 photo-hover"
           />
           <img
             src={photo8.url}
-            alt="Big crew huddled up in Mt. Lebanon after a Tuesday night run"
+            alt="Big crew huddled up after a Saturday run"
             className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15 photo-hover"
           />
           <img
