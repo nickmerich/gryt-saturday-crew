@@ -820,7 +820,7 @@ function RSVP() {
           </p>
           <div className="border-t border-paper/20 pt-5 flex flex-col gap-3 max-w-[440px]">
             {([
-              ["WHEN", "GRYT Run #12 · Sat, July 4th · 7:00 AM"],
+              ["WHEN", nextSaturdayLabelLong()],
               ["WHERE", <>212 Valley Brook Road, McMurray · trail parking · <a href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Road%2C%20McMurray%2C%20PA" target="_blank" rel="noopener noreferrer" className="text-blue hover:underline">Get directions</a></>],
               ["FIRST?", "Most people come alone. Show up 10 min early."],
             ] as [string, ReactNode][]).map(([k, v]) => (
