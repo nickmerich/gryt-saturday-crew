@@ -2278,7 +2278,7 @@ function Community() {
                 Next up
               </span>
               <span className="text-sm font-semibold text-paper">
-                GRYT Run #11 · Sat, Jun 27 · 7 AM
+                {nextSaturdayLabel()}
               </span>
             </div>
             <a
