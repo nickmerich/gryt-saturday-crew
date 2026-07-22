@@ -997,11 +997,7 @@ function RSVP() {
                   ✓
                 </span>
                 <span className="display-condensed text-ink text-[24px]">
-                  {submittedDays.length === 2
-                    ? "You're in for Tue + Sat."
-                    : submittedDays[0] === "tue"
-                      ? "You're in for Tuesday."
-                      : "You're in for Saturday."}
+                  You're in for Saturday.
                 </span>
               </div>
               <div className="border-y border-[#d8d4cb] py-4 mb-5 flex flex-col gap-3">
@@ -1019,7 +1015,7 @@ function RSVP() {
                     >
                       <span>Add {DAY_LABEL[d]}</span>
                       <span className="text-xs tracking-[0.1em] uppercase opacity-70">
-                        {d === "sat" ? "7:00 AM" : "9:00 PM"}
+                        7:00 AM
                       </span>
                     </a>
                   ))}
@@ -1033,12 +1029,12 @@ function RSVP() {
                       rel="noopener"
                       className="text-[11px] font-bold uppercase tracking-[0.14em] text-ink/70 hover:text-ink underline underline-offset-4"
                     >
-                      Open {d === "sat" ? "Saturday" : "Tuesday"} on Strava →
+                      Open Saturday on Strava →
                     </a>
                   ))}
                 </div>
                 <div className="text-xs text-ink/55">
-                  Recurring weekly event — shows up every {submittedDays.length === 2 ? "Tuesday and Saturday" : submittedDays[0] === "tue" ? "Tuesday" : "Saturday"}.
+                  Recurring weekly event — shows up every Saturday.
                 </div>
               </div>
               <RSVPWaiverBlock />
