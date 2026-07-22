@@ -634,7 +634,7 @@ function Marquee() {
     "Do hard things together",
     "Real people",
     "Real miles",
-    "7–15 regulars",
+    "10+ regulars",
     "All paces welcome",
     "Do hard things together",
     "Free forever",
