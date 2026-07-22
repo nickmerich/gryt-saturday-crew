@@ -723,7 +723,7 @@ function RSVP() {
   const [name, setName] = useState("");
   const [contact, setContact] = useState("");
   const [source, setSource] = useState("");
-  const [days, setDays] = useState<Record<RsvpDay, boolean>>({ tue: false, sat: true });
+  const [days, setDays] = useState<Record<RsvpDay, boolean>>({ sat: true });
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -731,18 +731,13 @@ function RSVP() {
 
   const toggleDay = (d: RsvpDay) => setDays((p) => ({ ...p, [d]: !p[d] }));
 
-  // Allow "RSVP Saturday" / "RSVP Tuesday" buttons elsewhere on the page to
-  // deep-link into this form with the right day preselected.
+  // Allow "RSVP Saturday" buttons elsewhere on the page to deep-link into this form.
   useEffect(() => {
     if (typeof window === "undefined") return;
     const applyHash = () => {
       const h = window.location.hash.replace("#", "").toLowerCase();
-      let matched = true;
-      if (h === "join-sat") setDays({ tue: false, sat: true });
-      else if (h === "join-tue") setDays({ tue: true, sat: false });
-      else if (h === "join-both") setDays({ tue: true, sat: true });
-      else matched = false;
-      if (matched) {
+      if (h === "join-sat" || h === "join-tue" || h === "join-both") {
+        setDays({ sat: true });
         document.getElementById("join")?.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     };
@@ -762,7 +757,7 @@ function RSVP() {
     }
     const selected = (Object.keys(days) as RsvpDay[]).filter((d) => days[d]);
     if (selected.length === 0) {
-      setError("Pick at least one run — Tuesday, Saturday, or both.");
+      setError("Confirm Saturday to lock it in.");
       track("rsvp_submit_blocked", {
         reason: "no_day_selected",
         hero_variant: heroVariant ?? "unknown",
