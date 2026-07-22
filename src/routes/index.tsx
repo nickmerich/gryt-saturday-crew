@@ -2684,7 +2684,20 @@ function Footer() {
           <span>© 2026 GRYT Run Club. All rights reserved.</span>
           <span>Built by Laura & Nick Merich.</span>
         </div>
+        <div className="pt-3 eyebrow text-paper/35">
+          Designed, written, and shipped by{" "}
+          <a
+            href="https://nick.pop.site"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-paper/60 hover:text-blue underline underline-offset-2 decoration-paper/20 hover:decoration-blue transition-colors"
+          >
+            Nick Merich
+          </a>
+          .
+        </div>
       </div>
+
     </footer>
   );
 }
