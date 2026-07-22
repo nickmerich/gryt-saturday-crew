@@ -273,7 +273,96 @@ function nextSaturdayLabelLong(from: Date = new Date()): string {
   return `GRYT Run #${nextRunNumber(from)} · Sat, ${md} · 7:00 AM`;
 }
 
+// Milliseconds until the next Saturday 7:00 AM in America/New_York.
+// Uses toLocaleString to translate "now" into NY wall time so DST is handled
+// implicitly. Returns 0 during the live window (Sat 7:00–7:59 AM ET).
+function msUntilNextSaturday7amET(from: Date = new Date()): number {
+  const nyNow = new Date(from.toLocaleString("en-US", { timeZone: "America/New_York" }));
+  const target = new Date(nyNow);
+  target.setHours(7, 0, 0, 0);
+  const day = nyNow.getDay(); // 0=Sun..6=Sat
+  let add = (6 - day + 7) % 7;
+  if (day === 6) {
+    // Saturday: live window is 7:00 → 7:59 AM ET
+    if (nyNow.getHours() === 7) return 0;
+    if (nyNow.getTime() >= target.getTime()) add = 7;
+  }
+  target.setDate(target.getDate() + add);
+  return Math.max(0, target.getTime() - nyNow.getTime());
+}
+
+function RunCountdown({ className = "" }: { className?: string }) {
+  const [ms, setMs] = React.useState<number | null>(null);
+  React.useEffect(() => {
+    const tick = () => setMs(msUntilNextSaturday7amET());
+    tick();
+    const id = window.setInterval(tick, 1000);
+    return () => window.clearInterval(id);
+  }, []);
+
+  // Reserve height on SSR/first paint to avoid layout shift.
+  if (ms === null) {
+    return (
+      <div className={className} aria-hidden="true" style={{ minHeight: 92 }} />
+    );
+  }
+
+  const live = ms === 0;
+  const totalSec = Math.floor(ms / 1000);
+  const days = Math.floor(totalSec / 86400);
+  const hours = Math.floor((totalSec % 86400) / 3600);
+  const minutes = Math.floor((totalSec % 3600) / 60);
+  const seconds = totalSec % 60;
+  const pad = (n: number) => n.toString().padStart(2, "0");
+
+  const label = live
+    ? "We're running right now"
+    : `Until ${nextSaturdayLabel()}`;
+
+  return (
+    <div
+      className={`border border-paper/15 bg-paper/[0.03] px-5 py-4 ${className}`}
+      role="timer"
+      aria-live="off"
+      aria-label={
+        live
+          ? "The Saturday run is happening now"
+          : `Countdown to next Saturday 7 AM: ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`
+      }
+    >
+      <div className="eyebrow eyebrow-blue mb-2">{label}</div>
+      {live ? (
+        <div className="display-condensed text-paper text-[clamp(28px,5vw,44px)] leading-none tracking-[0.01em]">
+          Live now · trailhead
+        </div>
+      ) : (
+        <div
+          className="flex items-end gap-4 sm:gap-6 tabular-nums text-paper"
+          style={{ fontFamily: "var(--font-mono, ui-monospace, monospace)" }}
+        >
+          {[
+            [days, "DAYS"],
+            [hours, "HRS"],
+            [minutes, "MIN"],
+            [seconds, "SEC"],
+          ].map(([n, u]) => (
+            <div key={u as string} className="flex flex-col items-start">
+              <span className="text-[clamp(28px,5vw,44px)] leading-none font-bold">
+                {pad(n as number)}
+              </span>
+              <span className="text-[10px] tracking-[0.18em] text-paper/50 mt-1">
+                {u}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 type RsvpDay = "tue" | "sat";
+
 const DAY_LABEL: Record<RsvpDay, string> = { tue: "Tuesday · Night Shift", sat: "Saturday · GRYT Run" };
 const DAY_CAL: Record<RsvpDay, string> = { tue: TUE_CAL_URL, sat: SAT_CAL_URL };
 const DAY_EVENT_LABEL: Record<RsvpDay, string> = {
