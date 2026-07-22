@@ -547,11 +547,11 @@ function Hero() {
               </>
             ) : (
               <>
-                You used to have a team.
+                RUNNING IS EASIER
                 <br />
-                Now you have{" "}
+                WITH LIKE MINDED{" "}
                 <span className="relative inline-block">
-                  Saturday.
+                  COMPANY.
                   <span
                     className="absolute left-[-2px] right-[-2px] bottom-[0.06em] h-[0.11em] bg-blue"
                     style={{ transform: "skewX(-8deg)" }}
