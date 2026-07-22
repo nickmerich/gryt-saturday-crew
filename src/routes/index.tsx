@@ -2912,165 +2912,23 @@ function Testimonial() {
 function WeeklyRhythm() {
   const stravaUrl = STRAVA_CLUB;
   const satCal = SAT_CAL_URL;
-  const tueCal = TUE_CAL_URL;
 
   return (
     <section id="rhythm" className="bg-ink text-paper py-20 md:py-28 px-6 sm:px-12 lg:px-24 border-t border-paper/10">
       <div className="max-w-[1180px] mx-auto">
-        <div className="eyebrow eyebrow-blue mb-4">Two runs · one crew · one cadence</div>
+        <div className="eyebrow eyebrow-blue mb-4">One run · one crew · one cadence</div>
         <h2 className="display-condensed text-paper text-[clamp(40px,6vw,80px)] leading-[0.95] max-w-[900px]">
           Do hard things. <span className="text-blue">Together.</span>
           <br />
-          Twice a week.
+          Every Saturday.
         </h2>
 
         <p className="mt-6 max-w-[760px] text-paper/80 text-lg md:text-xl leading-relaxed">
-          One crew. One rhythm. Tuesday and Saturday aren't two events — they're the same standing appointment, twice a week. Same people. Same promise. Show up once and you're halfway. Show up for both and you're in.
+          One crew. One rhythm. Same standing appointment, every week. Same people. Same promise. Show up once and you're halfway. Show up every week and you're in.
         </p>
 
+        <div className="mt-14 grid grid-cols-1 gap-6 lg:gap-7">
 
-
-
-
-
-        <div className="mt-14 grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-7">
-          {/* TUESDAY — NIGHT SHIFT */}
-          <article
-            className="relative overflow-hidden border border-paper/15 p-7 md:p-10 flex flex-col"
-            style={{
-              background:
-                "linear-gradient(160deg, #07080d 0%, #0d1220 55%, #111a2e 100%)",
-            }}
-          >
-            <div
-              aria-hidden
-              className="absolute inset-0 pointer-events-none opacity-60"
-              style={{
-                backgroundImage:
-                  "radial-gradient(rgba(137,207,240,0.18) 1px, transparent 1.5px), radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1.4px)",
-                backgroundSize: "22px 22px, 9px 9px",
-                backgroundPosition: "0 0, 4px 7px",
-                maskImage:
-                  "radial-gradient(ellipse at 85% 10%, #000 0%, transparent 70%)",
-                WebkitMaskImage:
-                  "radial-gradient(ellipse at 85% 10%, #000 0%, transparent 70%)",
-              }}
-            />
-            <div
-              aria-hidden
-              className="absolute top-6 right-6 text-[44px] leading-none select-none"
-              style={{ filter: "drop-shadow(0 0 14px rgba(137,207,240,0.45))" }}
-            >
-              🌙
-            </div>
-
-            <div className="relative">
-              <div className="eyebrow text-blue mb-3">Tuesday · Night Shift</div>
-              <h3 className="display-condensed text-paper text-[clamp(34px,4.6vw,56px)] leading-[0.95]">
-                Midweek pulse.
-                <br />
-                After dark.
-              </h3>
-              <p className="mt-5 text-paper/75 text-[16px] leading-[1.6] max-w-[460px]">
-                The run that keeps the week from getting away from you. Lights on. Reflective gear.
-                Same crew, different shift.
-              </p>
-
-              <dl className="mt-7 border-t border-paper/15">
-                {[
-                  ["When", "Tuesdays · 9:00 PM"],
-                  ["Meet", "Mt. Lebanon Public Library"],
-                  ["Distance", "4 miles · Beadling Loop"],
-                  ["Pace", "All paces · no one left behind"],
-                  ["Bring", "Light + reflective gear + a friend"],
-                  ["After", "TBD — post-run spot"],
-                ].map(([k, v]) => (
-                  <div
-                    key={k}
-                    className="flex justify-between gap-4 py-3 border-b border-paper/12"
-                  >
-                    <dt className="text-[11px] font-bold tracking-[0.16em] uppercase text-paper/45 shrink-0 basis-[88px]">
-                      {k}
-                    </dt>
-                    <dd className="text-[15px] text-right text-paper/90">{v}</dd>
-                  </div>
-                ))}
-              </dl>
-
-              <div
-                className="mt-7 inline-flex items-center gap-2 px-3.5 py-2 border border-blue/40 text-blue text-[11px] font-bold tracking-[0.14em] uppercase"
-              >
-                Half the cadence · bring a friend
-              </div>
-
-
-              <div className="mt-7 flex flex-wrap gap-3">
-                <a
-                  href="#join-tue"
-                  className="inline-flex items-center px-5 py-3 text-[12px] font-bold uppercase tracking-[0.12em] bg-blue text-ink hover:bg-paper transition-colors"
-                >
-                  RSVP Tuesday
-                </a>
-                <a
-                  href={tueCal}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center px-5 py-3 text-[12px] font-bold uppercase tracking-[0.12em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors"
-                >
-                  Add to Calendar
-                </a>
-                <a
-                  href={STRAVA_EVENT_URL.tue}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center px-5 py-3 text-[12px] font-bold uppercase tracking-[0.12em] bg-blue text-ink hover:bg-paper transition-colors"
-                  title="Opens the Tuesday event on Strava with the exact meetup pin"
-                >
-                  See meetup spot on Strava →
-                </a>
-              </div>
-
-              <div className="mt-8">
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="inline-block h-[3px] w-8 bg-blue" style={{ transform: "skewX(-20deg)" }} />
-                  <span className="text-[11px] font-bold tracking-[0.18em] uppercase text-blue">
-                    Meetup pin
-                  </span>
-                </div>
-                <div className="relative">
-                  <div aria-hidden className="absolute left-2 top-2 -right-2 -bottom-2 bg-blue" />
-                  <div className="relative overflow-hidden border border-paper/20 aspect-[16/10] bg-ink/60">
-                    <iframe
-                      src="https://maps.google.com/maps?q=Mt.+Lebanon+Public+Library,+16+Castle+Shannon+Blvd,+Pittsburgh,+PA+15228&z=16&ie=UTF8&iwloc=&output=embed"
-                      title="Tuesday Night Shift meetup — Mt. Lebanon Public Library"
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                      className="absolute inset-0 h-full w-full grayscale contrast-125"
-                    />
-                    <div className="pointer-events-none absolute left-0 right-0 bottom-0 flex items-center justify-between gap-2 px-3 py-2 bg-gradient-to-t from-black/85 to-transparent">
-                      <span className="display-condensed text-paper text-[15px] leading-none">
-                        Mt. Lebanon Public Library
-                      </span>
-                      <span className="text-[10px] font-bold tracking-[0.16em] uppercase text-ink bg-blue px-2 py-1 whitespace-nowrap">
-                        Tue · 9 PM
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <a
-                  href="https://www.google.com/maps/dir/?api=1&destination=Mt.%20Lebanon%20Public%20Library%2C%2016%20Castle%20Shannon%20Blvd%2C%20Pittsburgh%2C%20PA%2015228"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-5 inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.14em] text-blue hover:text-paper transition-colors"
-                >
-                  <span>Get directions</span>
-                  <span aria-hidden>→</span>
-                </a>
-              </div>
-            </div>
-          </article>
-
-          {/* SATURDAY — GRYT RUN */}
           <article
             className="relative overflow-hidden border border-ink/10 p-7 md:p-10 flex flex-col text-ink"
             style={{
