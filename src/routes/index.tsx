@@ -485,10 +485,9 @@ function Nav() {
 
 function Hero() {
   const stats: Array<[string, string]> = [
-    ["9–15", "regulars each Saturday"],
-    ["38", "runners on Strava"],
+    ["10+", "regulars each Saturday"],
+    ["42", "runners on Strava"],
     ["27", "marathons — Laura & Nick combined"],
-    
   ];
 
   // Sticky 50/50 A/B on the hero headline + subcopy. Variant A is the current
@@ -548,11 +547,11 @@ function Hero() {
               </>
             ) : (
               <>
-                You used to have a team.
+                RUNNING IS EASIER
                 <br />
-                Now you have{" "}
+                WITH LIKE MINDED{" "}
                 <span className="relative inline-block">
-                  Saturday.
+                  COMPANY.
                   <span
                     className="absolute left-[-2px] right-[-2px] bottom-[0.06em] h-[0.11em] bg-blue"
                     style={{ transform: "skewX(-8deg)" }}
@@ -635,7 +634,7 @@ function Marquee() {
     "Do hard things together",
     "Real people",
     "Real miles",
-    "7–15 regulars",
+    "10+ regulars",
     "All paces welcome",
     "Do hard things together",
     "Free forever",
