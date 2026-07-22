@@ -353,22 +353,18 @@ function RunCountdown({ className = "" }: { className?: string }) {
   );
 }
 
-type RsvpDay = "tue" | "sat";
+type RsvpDay = "sat";
 
-const DAY_LABEL: Record<RsvpDay, string> = { tue: "Tuesday · Night Shift", sat: "Saturday · GRYT Run" };
-const DAY_CAL: Record<RsvpDay, string> = { tue: TUE_CAL_URL, sat: SAT_CAL_URL };
+const DAY_LABEL: Record<RsvpDay, string> = { sat: "Saturday · GRYT Run" };
+const DAY_CAL: Record<RsvpDay, string> = { sat: SAT_CAL_URL };
 const DAY_EVENT_LABEL: Record<RsvpDay, string> = {
-  tue: "GRYT Night Shift · Tuesday · 9 PM",
   sat: nextSaturdayLabel(),
 };
 
 const STRAVA_EVENT =
   "https://www.strava.com/clubs/1708552/group_events/3480014931408029926";
-// Per-day Strava destination. Saturday points at the recurring group event;
-// Tuesday falls back to the club's group_events list until a recurring Tue event ID is set.
 const STRAVA_EVENT_URL: Record<RsvpDay, string> = {
   sat: STRAVA_EVENT,
-  tue: "https://www.strava.com/clubs/1708552/group_events",
 };
 
 function MonogramG({ className = "" }: { className?: string }) {
