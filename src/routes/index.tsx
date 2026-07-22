@@ -907,6 +907,7 @@ function RSVP() {
             Tell us you're coming and we'll send one nudge Friday and a wave Saturday morning.
             That's it. No spam, no funnel — just a standing invite to the trailhead.
           </p>
+          <RunCountdown className="mb-6 max-w-[440px]" />
           <div className="border-t border-paper/20 pt-5 flex flex-col gap-3 max-w-[440px]">
             {([
               ["WHEN", nextSaturdayLabelLong()],
