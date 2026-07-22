@@ -107,6 +107,23 @@ describe("MCP tool handlers", () => {
     }
   });
 
+  test("get_run_schedule only returns Saturday runs (no Tuesday/Night Shift)", async () => {
+    for (const ctx of [anon, authed]) {
+      const res = await invoke(getRunSchedule as ToolLike, ctx);
+      const runs =
+        (res.structuredContent as { runs?: Array<Record<string, unknown>> })
+          ?.runs ?? [];
+      expect(runs.length).toBeGreaterThan(0);
+      for (const r of runs) {
+        expect(r.day).toBe("Saturday");
+      }
+      const blob = JSON.stringify(res).toLowerCase();
+      expect(blob).not.toContain("tuesday");
+      expect(blob).not.toContain("night shift");
+      expect(blob).not.toContain("nightshift");
+    }
+  });
+
   test("get_club_info anon response only exposes allowlisted fields", async () => {
     const res = await invoke(getClubInfo as ToolLike, anon);
     const allowed = new Set(PUBLIC_TOOL_ALLOWLIST.get_club_info.fields);
