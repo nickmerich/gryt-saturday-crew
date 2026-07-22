@@ -234,14 +234,6 @@ export const SAT_CAL_URL =
   "&location=" + encodeURIComponent("212 Valley Brook Rd, McMurray, PA 15317") +
   "&details=" + encodeURIComponent("All paces. All parents. 7 AM sharp. Coffee in the lot after. Strava: " + STRAVA_CLUB);
 
-export const TUE_CAL_URL =
-  "https://www.google.com/calendar/render?action=TEMPLATE" +
-  "&text=" + encodeURIComponent("GRYT Night Shift — Tuesday Run") +
-  "&dates=20251230T210000/20251230T220000" +
-  "&recur=" + encodeURIComponent("RRULE:FREQ=WEEKLY;BYDAY=TU") +
-  "&ctz=America/New_York" +
-  "&location=" + encodeURIComponent("Mt. Lebanon Public Library, 16 Castle Shannon Blvd, Pittsburgh, PA 15228") +
-  "&details=" + encodeURIComponent("After dark. Bring a light and a friend. All paces. No one left behind. Strava: " + STRAVA_CLUB);
 
 // Dynamic label for the next Saturday run. Anchored so run # stays correct.
 // Anchor: Run #11 == 2026-06-27 (Sat). Weekly cadence.
@@ -361,22 +353,18 @@ function RunCountdown({ className = "" }: { className?: string }) {
   );
 }
 
-type RsvpDay = "tue" | "sat";
+type RsvpDay = "sat";
 
-const DAY_LABEL: Record<RsvpDay, string> = { tue: "Tuesday · Night Shift", sat: "Saturday · GRYT Run" };
-const DAY_CAL: Record<RsvpDay, string> = { tue: TUE_CAL_URL, sat: SAT_CAL_URL };
+const DAY_LABEL: Record<RsvpDay, string> = { sat: "Saturday · GRYT Run" };
+const DAY_CAL: Record<RsvpDay, string> = { sat: SAT_CAL_URL };
 const DAY_EVENT_LABEL: Record<RsvpDay, string> = {
-  tue: "GRYT Night Shift · Tuesday · 9 PM",
   sat: nextSaturdayLabel(),
 };
 
 const STRAVA_EVENT =
   "https://www.strava.com/clubs/1708552/group_events/3480014931408029926";
-// Per-day Strava destination. Saturday points at the recurring group event;
-// Tuesday falls back to the club's group_events list until a recurring Tue event ID is set.
 const STRAVA_EVENT_URL: Record<RsvpDay, string> = {
   sat: STRAVA_EVENT,
-  tue: "https://www.strava.com/clubs/1708552/group_events",
 };
 
 function MonogramG({ className = "" }: { className?: string }) {
@@ -735,7 +723,7 @@ function RSVP() {
   const [name, setName] = useState("");
   const [contact, setContact] = useState("");
   const [source, setSource] = useState("");
-  const [days, setDays] = useState<Record<RsvpDay, boolean>>({ tue: false, sat: true });
+  const [days, setDays] = useState<Record<RsvpDay, boolean>>({ sat: true });
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -743,18 +731,13 @@ function RSVP() {
 
   const toggleDay = (d: RsvpDay) => setDays((p) => ({ ...p, [d]: !p[d] }));
 
-  // Allow "RSVP Saturday" / "RSVP Tuesday" buttons elsewhere on the page to
-  // deep-link into this form with the right day preselected.
+  // Allow "RSVP Saturday" buttons elsewhere on the page to deep-link into this form.
   useEffect(() => {
     if (typeof window === "undefined") return;
     const applyHash = () => {
       const h = window.location.hash.replace("#", "").toLowerCase();
-      let matched = true;
-      if (h === "join-sat") setDays({ tue: false, sat: true });
-      else if (h === "join-tue") setDays({ tue: true, sat: false });
-      else if (h === "join-both") setDays({ tue: true, sat: true });
-      else matched = false;
-      if (matched) {
+      if (h === "join-sat" || h === "join-tue" || h === "join-both") {
+        setDays({ sat: true });
         document.getElementById("join")?.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     };
@@ -774,7 +757,7 @@ function RSVP() {
     }
     const selected = (Object.keys(days) as RsvpDay[]).filter((d) => days[d]);
     if (selected.length === 0) {
-      setError("Pick at least one run — Tuesday, Saturday, or both.");
+      setError("Confirm Saturday to lock it in.");
       track("rsvp_submit_blocked", {
         reason: "no_day_selected",
         hero_variant: heroVariant ?? "unknown",
@@ -931,28 +914,14 @@ function RSVP() {
                 I'm in this week
               </div>
               <label className="block text-[11px] font-bold tracking-[0.14em] uppercase text-ink/55 mb-2">
-                Which run(s)?
+                This week's run
               </label>
               <div className="flex flex-col gap-2 mb-4">
-                {(["sat", "tue"] as RsvpDay[]).map((d) => (
-                  <label
-                    key={d}
-                    className={`flex items-center gap-3 border-[1.5px] px-3.5 py-3 cursor-pointer transition-colors ${
-                      days[d] ? "border-ink bg-white" : "border-[#cfcabe] bg-white/60 hover:border-ink/60"
-                    }`}
-                  >
-                    <input
-                      type="checkbox"
-                      checked={days[d]}
-                      onChange={() => toggleDay(d)}
-                      className="w-4 h-4 accent-[#3a7ca5]"
-                    />
-                    <span className="text-sm font-semibold text-ink">{DAY_LABEL[d]}</span>
-                    <span className="text-xs text-ink/55 ml-auto">
-                      {d === "sat" ? "7:00 AM" : "9:00 PM"}
-                    </span>
-                  </label>
-                ))}
+                <div className="flex items-center gap-3 border-[1.5px] border-ink bg-white px-3.5 py-3">
+                  <span className="w-4 h-4 flex items-center justify-center bg-ink text-paper text-[10px]">✓</span>
+                  <span className="text-sm font-semibold text-ink">Saturday · GRYT Run</span>
+                  <span className="text-xs text-ink/55 ml-auto">7:00 AM</span>
+                </div>
               </div>
               {[
                 {
@@ -1028,11 +997,7 @@ function RSVP() {
                   ✓
                 </span>
                 <span className="display-condensed text-ink text-[24px]">
-                  {submittedDays.length === 2
-                    ? "You're in for Tue + Sat."
-                    : submittedDays[0] === "tue"
-                      ? "You're in for Tuesday."
-                      : "You're in for Saturday."}
+                  You're in for Saturday.
                 </span>
               </div>
               <div className="border-y border-[#d8d4cb] py-4 mb-5 flex flex-col gap-3">
@@ -1050,7 +1015,7 @@ function RSVP() {
                     >
                       <span>Add {DAY_LABEL[d]}</span>
                       <span className="text-xs tracking-[0.1em] uppercase opacity-70">
-                        {d === "sat" ? "7:00 AM" : "9:00 PM"}
+                        7:00 AM
                       </span>
                     </a>
                   ))}
@@ -1064,12 +1029,12 @@ function RSVP() {
                       rel="noopener"
                       className="text-[11px] font-bold uppercase tracking-[0.14em] text-ink/70 hover:text-ink underline underline-offset-4"
                     >
-                      Open {d === "sat" ? "Saturday" : "Tuesday"} on Strava →
+                      Open Saturday on Strava →
                     </a>
                   ))}
                 </div>
                 <div className="text-xs text-ink/55">
-                  Recurring weekly event — shows up every {submittedDays.length === 2 ? "Tuesday and Saturday" : submittedDays[0] === "tue" ? "Tuesday" : "Saturday"}.
+                  Recurring weekly event — shows up every Saturday.
                 </div>
               </div>
               <RSVPWaiverBlock />
@@ -2328,12 +2293,12 @@ function Community() {
           />
           <img
             src={photo7.url}
-            alt="Tuesday Night Shift crew in the lot before the run"
+            alt="Crew in the lot before a Saturday run"
             className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15 photo-hover"
           />
           <img
             src={photo8.url}
-            alt="Big crew huddled up in Mt. Lebanon after a Tuesday night run"
+            alt="Big crew huddled up after a Saturday run"
             className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15 photo-hover"
           />
           <img
@@ -2947,165 +2912,23 @@ function Testimonial() {
 function WeeklyRhythm() {
   const stravaUrl = STRAVA_CLUB;
   const satCal = SAT_CAL_URL;
-  const tueCal = TUE_CAL_URL;
 
   return (
     <section id="rhythm" className="bg-ink text-paper py-20 md:py-28 px-6 sm:px-12 lg:px-24 border-t border-paper/10">
       <div className="max-w-[1180px] mx-auto">
-        <div className="eyebrow eyebrow-blue mb-4">Two runs · one crew · one cadence</div>
+        <div className="eyebrow eyebrow-blue mb-4">One run · one crew · one cadence</div>
         <h2 className="display-condensed text-paper text-[clamp(40px,6vw,80px)] leading-[0.95] max-w-[900px]">
           Do hard things. <span className="text-blue">Together.</span>
           <br />
-          Twice a week.
+          Every Saturday.
         </h2>
 
         <p className="mt-6 max-w-[760px] text-paper/80 text-lg md:text-xl leading-relaxed">
-          One crew. One rhythm. Tuesday and Saturday aren't two events — they're the same standing appointment, twice a week. Same people. Same promise. Show up once and you're halfway. Show up for both and you're in.
+          One crew. One rhythm. Same standing appointment, every week. Same people. Same promise. Show up once and you're halfway. Show up every week and you're in.
         </p>
 
+        <div className="mt-14 grid grid-cols-1 gap-6 lg:gap-7">
 
-
-
-
-
-        <div className="mt-14 grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-7">
-          {/* TUESDAY — NIGHT SHIFT */}
-          <article
-            className="relative overflow-hidden border border-paper/15 p-7 md:p-10 flex flex-col"
-            style={{
-              background:
-                "linear-gradient(160deg, #07080d 0%, #0d1220 55%, #111a2e 100%)",
-            }}
-          >
-            <div
-              aria-hidden
-              className="absolute inset-0 pointer-events-none opacity-60"
-              style={{
-                backgroundImage:
-                  "radial-gradient(rgba(137,207,240,0.18) 1px, transparent 1.5px), radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1.4px)",
-                backgroundSize: "22px 22px, 9px 9px",
-                backgroundPosition: "0 0, 4px 7px",
-                maskImage:
-                  "radial-gradient(ellipse at 85% 10%, #000 0%, transparent 70%)",
-                WebkitMaskImage:
-                  "radial-gradient(ellipse at 85% 10%, #000 0%, transparent 70%)",
-              }}
-            />
-            <div
-              aria-hidden
-              className="absolute top-6 right-6 text-[44px] leading-none select-none"
-              style={{ filter: "drop-shadow(0 0 14px rgba(137,207,240,0.45))" }}
-            >
-              🌙
-            </div>
-
-            <div className="relative">
-              <div className="eyebrow text-blue mb-3">Tuesday · Night Shift</div>
-              <h3 className="display-condensed text-paper text-[clamp(34px,4.6vw,56px)] leading-[0.95]">
-                Midweek pulse.
-                <br />
-                After dark.
-              </h3>
-              <p className="mt-5 text-paper/75 text-[16px] leading-[1.6] max-w-[460px]">
-                The run that keeps the week from getting away from you. Lights on. Reflective gear.
-                Same crew, different shift.
-              </p>
-
-              <dl className="mt-7 border-t border-paper/15">
-                {[
-                  ["When", "Tuesdays · 9:00 PM"],
-                  ["Meet", "Mt. Lebanon Public Library"],
-                  ["Distance", "4 miles · Beadling Loop"],
-                  ["Pace", "All paces · no one left behind"],
-                  ["Bring", "Light + reflective gear + a friend"],
-                  ["After", "TBD — post-run spot"],
-                ].map(([k, v]) => (
-                  <div
-                    key={k}
-                    className="flex justify-between gap-4 py-3 border-b border-paper/12"
-                  >
-                    <dt className="text-[11px] font-bold tracking-[0.16em] uppercase text-paper/45 shrink-0 basis-[88px]">
-                      {k}
-                    </dt>
-                    <dd className="text-[15px] text-right text-paper/90">{v}</dd>
-                  </div>
-                ))}
-              </dl>
-
-              <div
-                className="mt-7 inline-flex items-center gap-2 px-3.5 py-2 border border-blue/40 text-blue text-[11px] font-bold tracking-[0.14em] uppercase"
-              >
-                Half the cadence · bring a friend
-              </div>
-
-
-              <div className="mt-7 flex flex-wrap gap-3">
-                <a
-                  href="#join-tue"
-                  className="inline-flex items-center px-5 py-3 text-[12px] font-bold uppercase tracking-[0.12em] bg-blue text-ink hover:bg-paper transition-colors"
-                >
-                  RSVP Tuesday
-                </a>
-                <a
-                  href={tueCal}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center px-5 py-3 text-[12px] font-bold uppercase tracking-[0.12em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors"
-                >
-                  Add to Calendar
-                </a>
-                <a
-                  href={STRAVA_EVENT_URL.tue}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center px-5 py-3 text-[12px] font-bold uppercase tracking-[0.12em] bg-blue text-ink hover:bg-paper transition-colors"
-                  title="Opens the Tuesday event on Strava with the exact meetup pin"
-                >
-                  See meetup spot on Strava →
-                </a>
-              </div>
-
-              <div className="mt-8">
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="inline-block h-[3px] w-8 bg-blue" style={{ transform: "skewX(-20deg)" }} />
-                  <span className="text-[11px] font-bold tracking-[0.18em] uppercase text-blue">
-                    Meetup pin
-                  </span>
-                </div>
-                <div className="relative">
-                  <div aria-hidden className="absolute left-2 top-2 -right-2 -bottom-2 bg-blue" />
-                  <div className="relative overflow-hidden border border-paper/20 aspect-[16/10] bg-ink/60">
-                    <iframe
-                      src="https://maps.google.com/maps?q=Mt.+Lebanon+Public+Library,+16+Castle+Shannon+Blvd,+Pittsburgh,+PA+15228&z=16&ie=UTF8&iwloc=&output=embed"
-                      title="Tuesday Night Shift meetup — Mt. Lebanon Public Library"
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                      className="absolute inset-0 h-full w-full grayscale contrast-125"
-                    />
-                    <div className="pointer-events-none absolute left-0 right-0 bottom-0 flex items-center justify-between gap-2 px-3 py-2 bg-gradient-to-t from-black/85 to-transparent">
-                      <span className="display-condensed text-paper text-[15px] leading-none">
-                        Mt. Lebanon Public Library
-                      </span>
-                      <span className="text-[10px] font-bold tracking-[0.16em] uppercase text-ink bg-blue px-2 py-1 whitespace-nowrap">
-                        Tue · 9 PM
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <a
-                  href="https://www.google.com/maps/dir/?api=1&destination=Mt.%20Lebanon%20Public%20Library%2C%2016%20Castle%20Shannon%20Blvd%2C%20Pittsburgh%2C%20PA%2015228"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-5 inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.14em] text-blue hover:text-paper transition-colors"
-                >
-                  <span>Get directions</span>
-                  <span aria-hidden>→</span>
-                </a>
-              </div>
-            </div>
-          </article>
-
-          {/* SATURDAY — GRYT RUN */}
           <article
             className="relative overflow-hidden border border-ink/10 p-7 md:p-10 flex flex-col text-ink"
             style={{
