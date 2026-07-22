@@ -292,8 +292,8 @@ function msUntilNextSaturday7amET(from: Date = new Date()): number {
 }
 
 function RunCountdown({ className = "" }: { className?: string }) {
-  const [ms, setMs] = React.useState<number | null>(null);
-  React.useEffect(() => {
+  const [ms, setMs] = useState<number | null>(null);
+  useEffect(() => {
     const tick = () => setMs(msUntilNextSaturday7amET());
     tick();
     const id = window.setInterval(tick, 1000);
