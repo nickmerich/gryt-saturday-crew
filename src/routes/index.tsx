@@ -914,28 +914,14 @@ function RSVP() {
                 I'm in this week
               </div>
               <label className="block text-[11px] font-bold tracking-[0.14em] uppercase text-ink/55 mb-2">
-                Which run(s)?
+                This week's run
               </label>
               <div className="flex flex-col gap-2 mb-4">
-                {(["sat", "tue"] as RsvpDay[]).map((d) => (
-                  <label
-                    key={d}
-                    className={`flex items-center gap-3 border-[1.5px] px-3.5 py-3 cursor-pointer transition-colors ${
-                      days[d] ? "border-ink bg-white" : "border-[#cfcabe] bg-white/60 hover:border-ink/60"
-                    }`}
-                  >
-                    <input
-                      type="checkbox"
-                      checked={days[d]}
-                      onChange={() => toggleDay(d)}
-                      className="w-4 h-4 accent-[#3a7ca5]"
-                    />
-                    <span className="text-sm font-semibold text-ink">{DAY_LABEL[d]}</span>
-                    <span className="text-xs text-ink/55 ml-auto">
-                      {d === "sat" ? "7:00 AM" : "9:00 PM"}
-                    </span>
-                  </label>
-                ))}
+                <div className="flex items-center gap-3 border-[1.5px] border-ink bg-white px-3.5 py-3">
+                  <span className="w-4 h-4 flex items-center justify-center bg-ink text-paper text-[10px]">✓</span>
+                  <span className="text-sm font-semibold text-ink">Saturday · GRYT Run</span>
+                  <span className="text-xs text-ink/55 ml-auto">7:00 AM</span>
+                </div>
               </div>
               {[
                 {
