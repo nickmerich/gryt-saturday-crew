@@ -243,13 +243,44 @@ export const TUE_CAL_URL =
   "&location=" + encodeURIComponent("Mt. Lebanon Public Library, 16 Castle Shannon Blvd, Pittsburgh, PA 15228") +
   "&details=" + encodeURIComponent("After dark. Bring a light and a friend. All paces. No one left behind. Strava: " + STRAVA_CLUB);
 
+// Dynamic label for the next Saturday run. Anchored so run # stays correct.
+// Anchor: Run #11 == 2026-06-27 (Sat). Weekly cadence.
+const RUN_ANCHOR_MS = Date.UTC(2026, 5, 27); // Jun 27, 2026 UTC
+const RUN_ANCHOR_NUMBER = 11;
+function nextSaturday(from: Date = new Date()): Date {
+  const d = new Date(from);
+  d.setHours(0, 0, 0, 0);
+  const day = d.getDay(); // 0=Sun..6=Sat
+  // If today is Saturday, keep today; otherwise advance to upcoming Saturday.
+  const add = day === 6 ? 0 : (6 - day + 7) % 7;
+  d.setDate(d.getDate() + add);
+  return d;
+}
+function nextRunNumber(from: Date = new Date()): number {
+  const sat = nextSaturday(from);
+  const satUTC = Date.UTC(sat.getFullYear(), sat.getMonth(), sat.getDate());
+  const weeks = Math.round((satUTC - RUN_ANCHOR_MS) / (7 * 24 * 60 * 60 * 1000));
+  return RUN_ANCHOR_NUMBER + weeks;
+}
+function nextSaturdayLabel(from: Date = new Date()): string {
+  const sat = nextSaturday(from);
+  const md = sat.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+  return `GRYT Run #${nextRunNumber(from)} · Sat, ${md} · 7 AM`;
+}
+function nextSaturdayLabelLong(from: Date = new Date()): string {
+  const sat = nextSaturday(from);
+  const md = sat.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+  return `GRYT Run #${nextRunNumber(from)} · Sat, ${md} · 7:00 AM`;
+}
+
 type RsvpDay = "tue" | "sat";
 const DAY_LABEL: Record<RsvpDay, string> = { tue: "Tuesday · Night Shift", sat: "Saturday · GRYT Run" };
 const DAY_CAL: Record<RsvpDay, string> = { tue: TUE_CAL_URL, sat: SAT_CAL_URL };
 const DAY_EVENT_LABEL: Record<RsvpDay, string> = {
   tue: "GRYT Night Shift · Tuesday · 9 PM",
-  sat: "GRYT Run #12 · Sat, July 4th · 7 AM",
+  sat: nextSaturdayLabel(),
 };
+
 const STRAVA_EVENT =
   "https://www.strava.com/clubs/1708552/group_events/3480014931408029926";
 // Per-day Strava destination. Saturday points at the recurring group event;
@@ -789,7 +820,7 @@ function RSVP() {
           </p>
           <div className="border-t border-paper/20 pt-5 flex flex-col gap-3 max-w-[440px]">
             {([
-              ["WHEN", "GRYT Run #12 · Sat, July 4th · 7:00 AM"],
+              ["WHEN", nextSaturdayLabelLong()],
               ["WHERE", <>212 Valley Brook Road, McMurray · trail parking · <a href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Road%2C%20McMurray%2C%20PA" target="_blank" rel="noopener noreferrer" className="text-blue hover:underline">Get directions</a></>],
               ["FIRST?", "Most people come alone. Show up 10 min early."],
             ] as [string, ReactNode][]).map(([k, v]) => (
@@ -2247,7 +2278,7 @@ function Community() {
                 Next up
               </span>
               <span className="text-sm font-semibold text-paper">
-                GRYT Run #11 · Sat, Jun 27 · 7 AM
+                {nextSaturdayLabel()}
               </span>
             </div>
             <a
@@ -2653,7 +2684,20 @@ function Footer() {
           <span>© 2026 GRYT Run Club. All rights reserved.</span>
           <span>Built by Laura & Nick Merich.</span>
         </div>
+        <div className="pt-3 eyebrow text-paper/35">
+          Designed, written, and shipped by{" "}
+          <a
+            href="https://nick.pop.site"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-paper/60 hover:text-blue underline underline-offset-2 decoration-paper/20 hover:decoration-blue transition-colors"
+          >
+            Nick Merich
+          </a>
+          .
+        </div>
       </div>
+
     </footer>
   );
 }
