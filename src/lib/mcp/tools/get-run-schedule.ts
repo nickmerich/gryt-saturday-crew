@@ -20,13 +20,6 @@ export default defineTool({
         pace: "Easy, conversational. All paces welcome.",
         notes: "Coffee after. No signup required — just show up.",
       },
-      {
-        day: "Tuesday",
-        time: "9:00 PM",
-        location: "Coordinated via Strava club",
-        pace: "Shorter, faster post-work reset",
-        notes: "Check the Strava group for weekly details.",
-      },
     ];
     const payload = guardToolAccess(TOOL_NAME, ctx.isAuthenticated(), { runs });
     return {
