@@ -485,10 +485,9 @@ function Nav() {
 
 function Hero() {
   const stats: Array<[string, string]> = [
-    ["9–15", "regulars each Saturday"],
-    ["38", "runners on Strava"],
+    ["10+", "regulars each Saturday"],
+    ["42", "runners on Strava"],
     ["27", "marathons — Laura & Nick combined"],
-    
   ];
 
   // Sticky 50/50 A/B on the hero headline + subcopy. Variant A is the current
