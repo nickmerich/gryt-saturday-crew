@@ -545,7 +545,7 @@ function Hero() {
   const stats: Array<[string, string]> = [
     ["10+", "regulars each Saturday"],
     ["42", "runners on Strava"],
-    ["27", "marathons — Laura & Nick combined"],
+    ["0-27", "\n\nFROM BEGINNER TO MARATHON RUNNERS: THE FOUNDERS LAURA & NICK COMBINED"],
   ];
 
   // Sticky 50/50 A/B on the hero headline + subcopy. Variant A is the current
@@ -588,7 +588,7 @@ function Hero() {
         <div className="flex-1 min-w-[300px] basis-[480px]">
           <div className="eyebrow-blue eyebrow mb-6 flex items-center gap-2.5 flex-wrap">
             <span className="w-2 h-2 bg-blue rounded-full" />
-            Pittsburgh Running Group · South Hills Run Club · Saturdays 7 AM · McMurray, PA
+            THE GO-TO SOUTH HILLS PITTSBURGH PARENTS RUN CLUB&nbsp;{"\n\n\n\n\n\n"}
           </div>
           <h1 className="display-condensed text-paper text-[clamp(44px,7.2vw,108px)] leading-[0.9] [word-spacing:-0.02em] break-words">
             {isB ? (
@@ -623,10 +623,10 @@ function Hero() {
             <p className="text-lg leading-[1.55] text-paper/85">
               {isB
                 ? "GRYT is a free Pittsburgh running group and South Hills run club — 7 AM sharp Saturdays on the Montour / Peters Trail in McMurray. Former athletes. Busy parents. Comeback runners. Same trail, same time, every week."
-                : "GRYT is a free Pittsburgh running group and South Hills run club for former athletes, busy parents, and comeback runners who miss having a team. We meet every Saturday at 7 AM on the Montour / Peters Trail in McMurray — walk, jog, or run — and do the hard thing together."}
+                : "GRYT is a free Pittsburgh running group and South Hills run club for former athletes, busy parents, and comeback runners who miss having a team. We meet every Saturday at 7 AM on the Montour / Peters Trail in McMurray.\n\n\nCome walk, jog, or run and do the hard thing together."}
             </p>
             <p className="text-base md:text-[17px] font-semibold leading-[1.5] text-paper">
-              Show up. Do the work. No pace requirement. No one gets dropped.
+              Show up. Do the work. Earn your day.
             </p>
           </div>
 
@@ -656,11 +656,11 @@ function Hero() {
               rel="noopener"
               className="btn-ghost"
             >
-              Join the Strava chat
+              JOIN THE STRAVA
             </a>
           </div>
           <p className="mt-5 text-[13px] leading-[1.5] text-paper/60">
-            Do hard things together — starts at the trailhead, Saturday 7 AM.
+            {"\n"}
           </p>
         </div>
 
