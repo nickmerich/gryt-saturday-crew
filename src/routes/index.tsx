@@ -959,7 +959,24 @@ function RSVP() {
                   {k}
                 </span>
                 <span className="text-[15px] text-paper/90">{v}</span>
-              </div>
+          </div>
+          <div className="mt-5 flex flex-wrap gap-3 max-w-[440px]">
+            <a
+              href={nextSaturdayIcsDataUrl()}
+              download={nextSaturdayIcsFilename()}
+              className="inline-flex items-center gap-2 border border-paper/30 hover:border-blue hover:text-blue text-paper text-[12px] font-bold tracking-[0.14em] uppercase px-4 py-2.5 transition-colors"
+            >
+              ↓ Add to calendar (.ics)
+            </a>
+            <a
+              href={SAT_CAL_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 border border-paper/15 hover:border-paper/40 text-paper/70 hover:text-paper text-[12px] font-bold tracking-[0.14em] uppercase px-4 py-2.5 transition-colors"
+            >
+              Google Calendar →
+            </a>
+          </div>
             ))}
           </div>
         </div>
