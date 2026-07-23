@@ -3028,9 +3028,9 @@ function WeeklyRhythm() {
                   Saturday · GRYT Run
                 </div>
                 <h3 className="display-condensed text-ink text-[clamp(30px,9vw,56px)] leading-[0.95]">
-                  The weekend
+                  TIME TO
                   <br />
-                  anchor.
+                  LOCK IN!
                 </h3>
                 <p className="text-ink/80 text-[15px] sm:text-[16px] leading-[1.55] sm:leading-[1.6] max-w-[460px]">
                   7 AM sharp. One hour. The big effort. The crew. Home before the day gets away
