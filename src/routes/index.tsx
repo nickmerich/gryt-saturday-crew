@@ -622,8 +622,8 @@ function Hero() {
           <div className="mt-7 max-w-[540px] flex flex-col gap-3.5">
             <p className="text-lg leading-[1.55] text-paper/85">
               {isB
-                ? "Hard is easier with company. GRYT is a free Pittsburgh running group and South Hills run club — 7 AM sharp Saturdays on the Montour / Peters Trail in McMurray. Former athletes. Busy parents. Comeback runners. Same trail, same time, every week."
-                : "Hard is easier with company. GRYT is a free Pittsburgh running group and South Hills run club for former athletes, busy parents, and comeback runners who miss having a team. We meet every Saturday at 7 AM on the Montour / Peters Trail in McMurray — walk, jog, or run — and do the hard thing together."}
+                ? "GRYT is a free Pittsburgh running group and South Hills run club — 7 AM sharp Saturdays on the Montour / Peters Trail in McMurray. Former athletes. Busy parents. Comeback runners. Same trail, same time, every week."
+                : "GRYT is a free Pittsburgh running group and South Hills run club for former athletes, busy parents, and comeback runners who miss having a team. We meet every Saturday at 7 AM on the Montour / Peters Trail in McMurray — walk, jog, or run — and do the hard thing together."}
             </p>
             <p className="text-base md:text-[17px] font-semibold leading-[1.5] text-paper">
               Show up. Do the work. No pace requirement. No one gets dropped.
