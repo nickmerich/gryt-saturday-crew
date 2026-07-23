@@ -2116,7 +2116,7 @@ function TheRun() {
         <div className="flex-1 min-w-[280px] basis-[380px]">
           <div className="eyebrow eyebrow-blue mb-4">The run</div>
           <h2 className="display-condensed text-paper text-[clamp(34px,4.4vw,62px)] mb-6">
-            The route is easy. Showing up is the hard part.
+            THE ROUTE IS EASY. WAKING UP AND THEN SHOWING UP IS THE HARD PART.
           </h2>
           <div className="flex flex-col gap-4 max-w-[480px]">
             <p className="text-[17px] leading-[1.6] text-paper/80">
