@@ -959,6 +959,8 @@ function RSVP() {
                   {k}
                 </span>
                 <span className="text-[15px] text-paper/90">{v}</span>
+              </div>
+            ))}
           </div>
           <div className="mt-5 flex flex-wrap gap-3 max-w-[440px]">
             <a
@@ -976,8 +978,6 @@ function RSVP() {
             >
               Google Calendar →
             </a>
-          </div>
-            ))}
           </div>
         </div>
 
