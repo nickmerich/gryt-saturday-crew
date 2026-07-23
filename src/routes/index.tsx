@@ -2621,10 +2621,13 @@ function FinalCTA() {
       />
       <div className="relative max-w-[920px] mx-auto text-center">
         <h2 className="display-condensed text-paper text-[clamp(44px,7vw,104px)] leading-[0.9] mb-6">
-          Stop waiting to feel ready.
+          STOP WAITING TO FEEL READY. START NOW.
         </h2>
         <p className="text-lg leading-[1.6] text-paper/80 max-w-[580px] mx-auto mb-3.5">
-          You do not need to get in better shape first. You do not need to know someone. You do not need the perfect Saturday. You just need to show up once.
+          You do not need to get in better shape first.&nbsp;<br />
+          You do not need to know someone.&nbsp;<br />
+          You do not need the perfect Saturday.&nbsp;<br />
+          You just need to show up.
         </p>
         <p className="display-condensed text-blue text-[clamp(26px,3.6vw,44px)] mb-9">
           Saturday. 7 AM. McMurray.
