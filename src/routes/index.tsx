@@ -2811,7 +2811,7 @@ function Footer() {
         <RecommendationsBar />
         <div className="flex justify-between gap-4 pt-8 flex-wrap eyebrow text-paper/40">
           <span>© 2026 GRYT Run Club. All rights reserved.</span>
-          <span>Built by Laura & Nick Merich.</span>
+          <span>{"\n"}</span>
         </div>
         <div className="pt-3 eyebrow text-paper/35">
           Designed, written, and shipped by{" "}
@@ -2821,7 +2821,7 @@ function Footer() {
             rel="noopener noreferrer"
             className="text-paper/60 hover:text-blue underline underline-offset-2 decoration-paper/20 hover:decoration-blue transition-colors"
           >
-            Nick Merich
+            NICK & LAURA MERICH
           </a>
           .
         </div>
