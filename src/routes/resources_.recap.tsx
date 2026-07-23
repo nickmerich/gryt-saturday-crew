@@ -833,19 +833,31 @@ function PhotoPicker({
   hasPhoto: boolean;
   onClear: () => void;
 }) {
+  const inputRef = useRef<HTMLInputElement>(null);
   return (
     <div>
       <span className="eyebrow text-paper/55 block mb-2">Photo</span>
       <div className="flex flex-wrap items-center gap-3">
-        <label className="inline-flex items-center px-4 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-paper/30 text-paper/85 hover:border-blue hover:text-blue cursor-pointer transition-colors">
+        <button
+          type="button"
+          onClick={() => inputRef.current?.click()}
+          className="inline-flex items-center px-4 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-paper/30 text-paper/85 hover:border-blue hover:text-blue cursor-pointer transition-colors bg-transparent"
+        >
           {hasPhoto ? "Replace photo" : "Upload photo"}
-          <input
-            type="file"
-            accept="image/*"
-            onChange={onChange}
-            className="sr-only"
-          />
-        </label>
+        </button>
+        <input
+          ref={inputRef}
+          type="file"
+          accept="image/*"
+          onChange={(e) => {
+            onChange(e);
+            // Allow re-selecting the same file after clearing.
+            if (inputRef.current) inputRef.current.value = "";
+          }}
+          className="sr-only"
+          aria-hidden="true"
+          tabIndex={-1}
+        />
         {hasPhoto && (
           <button
             type="button"
