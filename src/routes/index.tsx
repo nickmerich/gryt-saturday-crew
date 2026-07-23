@@ -265,6 +265,64 @@ function nextSaturdayLabelLong(from: Date = new Date()): string {
   return `GRYT Run #${nextRunNumber(from)} · Sat, ${md} · 7:00 AM`;
 }
 
+// Build a downloadable .ics for the next Saturday 7:00 AM run (America/New_York).
+function nextSaturdayIcsDataUrl(from: Date = new Date()): string {
+  const sat = nextSaturday(from);
+  const y = sat.getFullYear();
+  const m = String(sat.getMonth() + 1).padStart(2, "0");
+  const d = String(sat.getDate()).padStart(2, "0");
+  const runNum = nextRunNumber(from);
+  const dtStart = `${y}${m}${d}T070000`;
+  const dtEnd = `${y}${m}${d}T080000`;
+  const dtStamp = new Date().toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+  const uid = `gryt-run-${y}${m}${d}@grytrunclub.com`;
+  const esc = (s: string) => s.replace(/[\\,;]/g, (c) => "\\" + c).replace(/\n/g, "\\n");
+  const lines = [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//GRYT Run Club//EN",
+    "CALSCALE:GREGORIAN",
+    "METHOD:PUBLISH",
+    "BEGIN:VTIMEZONE",
+    "TZID:America/New_York",
+    "BEGIN:STANDARD",
+    "DTSTART:20071104T020000",
+    "RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU",
+    "TZOFFSETFROM:-0400",
+    "TZOFFSETTO:-0500",
+    "TZNAME:EST",
+    "END:STANDARD",
+    "BEGIN:DAYLIGHT",
+    "DTSTART:20070311T020000",
+    "RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU",
+    "TZOFFSETFROM:-0500",
+    "TZOFFSETTO:-0400",
+    "TZNAME:EDT",
+    "END:DAYLIGHT",
+    "END:VTIMEZONE",
+    "BEGIN:VEVENT",
+    `UID:${uid}`,
+    `DTSTAMP:${dtStamp}`,
+    `DTSTART;TZID=America/New_York:${dtStart}`,
+    `DTEND;TZID=America/New_York:${dtEnd}`,
+    `SUMMARY:${esc(`GRYT Run #${runNum} — Saturday Morning`)}`,
+    `LOCATION:${esc("212 Valley Brook Rd, McMurray, PA 15317")}`,
+    `DESCRIPTION:${esc("All paces. All parents. 7 AM sharp. Coffee in the lot after. https://grytrunclub.com")}`,
+    "URL:https://grytrunclub.com",
+    "END:VEVENT",
+    "END:VCALENDAR",
+  ];
+  return "data:text/calendar;charset=utf-8," + encodeURIComponent(lines.join("\r\n"));
+}
+
+function nextSaturdayIcsFilename(from: Date = new Date()): string {
+  const sat = nextSaturday(from);
+  const y = sat.getFullYear();
+  const m = String(sat.getMonth() + 1).padStart(2, "0");
+  const d = String(sat.getDate()).padStart(2, "0");
+  return `gryt-run-${y}-${m}-${d}.ics`;
+}
+
 // Milliseconds until the next Saturday 7:00 AM in America/New_York.
 // Uses toLocaleString to translate "now" into NY wall time so DST is handled
 // implicitly. Returns 0 during the live window (Sat 7:00–7:59 AM ET).
@@ -903,6 +961,23 @@ function RSVP() {
                 <span className="text-[15px] text-paper/90">{v}</span>
               </div>
             ))}
+          </div>
+          <div className="mt-5 flex flex-wrap gap-3 max-w-[440px]">
+            <a
+              href={nextSaturdayIcsDataUrl()}
+              download={nextSaturdayIcsFilename()}
+              className="inline-flex items-center gap-2 border border-paper/30 hover:border-blue hover:text-blue text-paper text-[12px] font-bold tracking-[0.14em] uppercase px-4 py-2.5 transition-colors"
+            >
+              ↓ Add to calendar (.ics)
+            </a>
+            <a
+              href={SAT_CAL_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 border border-paper/15 hover:border-paper/40 text-paper/70 hover:text-paper text-[12px] font-bold tracking-[0.14em] uppercase px-4 py-2.5 transition-colors"
+            >
+              Google Calendar →
+            </a>
           </div>
         </div>
 
