@@ -319,6 +319,32 @@ function RecapGeneratorPage() {
     }, 60);
   }
 
+  function applyParsedActivity(a: ParsedActivity) {
+    const miles = a.distanceMeters / 1609.344;
+    const distance = miles > 0 ? miles.toFixed(miles >= 10 ? 1 : 2) : "";
+    const time = a.movingTimeSeconds > 0 ? formatDuration(a.movingTimeSeconds) : "";
+    const paceSecPerMi = miles > 0 ? a.movingTimeSeconds / miles : 0;
+    const pace = paceSecPerMi > 0 ? formatPace(paceSecPerMi) : "";
+    const d = new Date(a.startDateLocal);
+    setForm((f) => ({
+      ...f,
+      title: (a.name || "GARMIN RUN").toUpperCase().slice(0, 32),
+      date: formatDate(d),
+      distance,
+      time,
+      pace,
+    }));
+    setSelectedActivityId(null);
+    setActivePreset(null);
+    setStatus("idle");
+    setShareUrl(null);
+    toast.success(`Loaded from Garmin (.${a.source}). Generating share link…`);
+    setTimeout(() => {
+      void generateShareLink();
+    }, 60);
+  }
+
+
 
   function onPhoto(e: ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
