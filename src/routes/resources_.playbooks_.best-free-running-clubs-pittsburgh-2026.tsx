@@ -9,7 +9,7 @@ const URL = `${SITE}/resources/playbooks/best-free-running-clubs-pittsburgh-2026
 const TITLE =
   "Best Free Running Clubs in Pittsburgh (2026) · gryt run club";
 const DESCRIPTION =
-  "A no-BS guide to Pittsburgh's free running clubs in 2026 — Yinz, Fleet Feet, Steel City, Kool, Pharaoh Hounds, and GRYT. Who they're for, when they meet, and what makes each one worth your Saturday.";
+  "Pittsburgh's free running clubs in 2026 — Yinz, Fleet Feet, Steel City, Kool, Pharaoh Hounds, and GRYT. Who they're for and when they meet.";
 const PUBLISHED = "2026-01-20";
 
 const FAQS: Array<{ q: string; a: string }> = [
