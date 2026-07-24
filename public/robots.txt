@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /auth
+Disallow: /checkout
+Disallow: /lovable/
+Disallow: /api/
 
 Sitemap: https://grytrunclub.com/sitemap.xml
