@@ -114,7 +114,8 @@ export const Route = createFileRoute("/faq")({
 
 function FaqPage() {
   return (
-    <Chrome>
+    <>
+      <SiteNav />
       <section className="bg-paper text-ink">
         <div className="mx-auto max-w-3xl px-6 py-16 sm:py-24">
           <div className="mb-10 sm:mb-14">
@@ -191,6 +192,8 @@ function FaqPage() {
           </div>
         </div>
       </section>
-    </Chrome>
+      <SiteFooter />
+    </>
+
   );
 }
