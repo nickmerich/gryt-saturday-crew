@@ -20,6 +20,7 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as MembersRouteImport } from './routes/members'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as FaqRouteImport } from './routes/faq'
+import { Route as EmailStatusRouteImport } from './routes/email-status'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TimerResultsRouteImport } from './routes/timer_.results'
@@ -103,6 +104,11 @@ const McpRoute = McpRouteImport.update({
 const FaqRoute = FaqRouteImport.update({
   id: '/faq',
   path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmailStatusRoute = EmailStatusRouteImport.update({
+  id: '/email-status',
+  path: '/email-status',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -264,6 +270,7 @@ const ApiPublicPaymentsWebhookRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/email-status': typeof EmailStatusRoute
   '/faq': typeof FaqRoute
   '/mcp': typeof McpRoute
   '/members': typeof MembersRouteWithChildren
@@ -306,6 +313,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/email-status': typeof EmailStatusRoute
   '/faq': typeof FaqRoute
   '/mcp': typeof McpRoute
   '/members': typeof MembersRouteWithChildren
@@ -349,6 +357,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/email-status': typeof EmailStatusRoute
   '/faq': typeof FaqRoute
   '/mcp': typeof McpRoute
   '/members': typeof MembersRouteWithChildren
@@ -393,6 +402,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/email-status'
     | '/faq'
     | '/mcp'
     | '/members'
@@ -435,6 +445,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/email-status'
     | '/faq'
     | '/mcp'
     | '/members'
@@ -477,6 +488,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/auth'
+    | '/email-status'
     | '/faq'
     | '/mcp'
     | '/members'
@@ -520,6 +532,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRoute
+  EmailStatusRoute: typeof EmailStatusRoute
   FaqRoute: typeof FaqRoute
   McpRoute: typeof McpRoute
   MembersRoute: typeof MembersRouteWithChildren
@@ -636,6 +649,13 @@ declare module '@tanstack/react-router' {
       path: '/faq'
       fullPath: '/faq'
       preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/email-status': {
+      id: '/email-status'
+      path: '/email-status'
+      fullPath: '/email-status'
+      preLoaderRoute: typeof EmailStatusRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -858,6 +878,7 @@ const MembersRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
+  EmailStatusRoute: EmailStatusRoute,
   FaqRoute: FaqRoute,
   McpRoute: McpRoute,
   MembersRoute: MembersRouteWithChildren,
