@@ -9,7 +9,18 @@ export const Route = createFileRoute("/privacy")({
         name: "description",
         content: "How GRYT Run Club collects, uses, and protects your information.",
       },
+      { property: "og:title", content: "Privacy Policy · gryt run club" },
+      {
+        property: "og:description",
+        content: "How GRYT Run Club collects, uses, and protects your information.",
+      },
+      { property: "og:url", content: "https://grytrunclub.com/privacy" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Privacy Policy · gryt run club" },
+      { name: "twitter:description", content: "How GRYT Run Club collects, uses, and protects your information." },
     ],
+    links: [{ rel: "canonical", href: "https://grytrunclub.com/privacy" }],
   }),
   component: PrivacyPage,
 });

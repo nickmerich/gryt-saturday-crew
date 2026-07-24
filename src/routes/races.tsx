@@ -5,7 +5,7 @@ const SITE = "https://grytrunclub.com";
 const URL = `${SITE}/races`;
 const TITLE = "Pittsburgh Races 2026 · Upcoming Races & Training Guide · gryt run club";
 const DESCRIPTION =
-  "A curated calendar of upcoming Pittsburgh races in 2026 — from the Pittsburgh Marathon to Peters Township 5Ks and South Hills trail runs. Pick your next goal and train with GRYT.";
+  "Upcoming Pittsburgh races in 2026 — Pittsburgh Marathon, Peters Township 5Ks, South Hills trail runs. Pick your goal and train with GRYT.";
 
 type Race = {
   name: string;

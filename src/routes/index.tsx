@@ -95,7 +95,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Do hard things together. GRYT is a free Pittsburgh running group and South Hills run club meeting Saturdays at 7 AM on the Montour / Peters Trail in McMurray. No pace requirement, no one gets dropped.",
+          "Free Pittsburgh run club on the Montour / Peters Trail in McMurray. Saturdays 7 AM, all paces welcome — no one gets dropped.",
       },
       { property: "og:title", content: "Do Hard Things Together · Pittsburgh Running Group · South Hills Run Club" },
       {

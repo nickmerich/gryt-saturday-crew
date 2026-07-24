@@ -104,9 +104,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/d9453e83-accf-45b7-aa22-28bb004995ee" },
       { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/d9453e83-accf-45b7-aa22-28bb004995ee" },
-      { name: "description", content: "Free Saturday morning run club on the Montour Trail in McMurray, PA. All paces welcome. No signup, no fee — just show up at 7 AM Saturday." },
-      { property: "og:description", content: "Free Saturday morning run club on the Montour Trail in McMurray, PA. All paces welcome. No signup, no fee — just show up at 7 AM Saturday." },
-      { name: "twitter:description", content: "Free Saturday morning run club on the Montour Trail in McMurray, PA. All paces welcome. No signup, no fee — just show up at 7 AM Saturday." },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
