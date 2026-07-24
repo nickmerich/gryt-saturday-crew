@@ -91,7 +91,7 @@ export function SiteNav() {
             Resources
           </a>
           <a
-            href="/#faq"
+            href="/faq"
             className="eyebrow text-paper/80 hover:text-blue transition-colors"
           >
             FAQ
