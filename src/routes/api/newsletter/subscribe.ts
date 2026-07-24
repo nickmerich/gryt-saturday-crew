@@ -63,7 +63,9 @@ export const Route = createFileRoute("/api/newsletter/subscribe")({
             body: JSON.stringify({
               email,
               reactivate_existing: true,
-              send_welcome_email: true,
+              send_welcome_email: false,
+              double_opt_in: true,
+              double_opt_override: "on",
               utm_source: utm_source ?? source ?? "grytrunclub.com",
               utm_medium: utm_medium ?? "website",
               utm_campaign: utm_campaign ?? "homepage_optin",
