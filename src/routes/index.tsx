@@ -3567,10 +3567,10 @@ function NewsletterBar() {
             </span>
             <div className="flex min-w-0 flex-1 flex-col justify-center leading-tight gap-0.5">
               <span className="display-condensed text-ink text-[15px] sm:text-[17px] tracking-[0.02em]">
-                You're on the list.
+                Confirm your email.
               </span>
               <span className="text-[12px] sm:text-[13px] text-ink/75 font-medium">
-                Friday, 6 AM ET — check your inbox (and spam) for the first brief.
+                We just sent a confirmation link — click it to lock in Friday drops.
               </span>
               <span className="text-[11px] sm:text-[12px] text-ink/70 mt-1 flex flex-wrap items-center gap-x-1.5 gap-y-0.5">
                 {resendStatus === "sent" ? (
