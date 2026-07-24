@@ -10,6 +10,7 @@ import {
   type StravaActivity,
 } from "@/lib/strava.functions";
 import { uploadRecap } from "@/lib/recap-share.functions";
+import { parseGarminFile, type ParsedActivity } from "@/lib/garmin-parse";
 
 
 
@@ -318,6 +319,32 @@ function RecapGeneratorPage() {
     }, 60);
   }
 
+  function applyParsedActivity(a: ParsedActivity) {
+    const miles = a.distanceMeters / 1609.344;
+    const distance = miles > 0 ? miles.toFixed(miles >= 10 ? 1 : 2) : "";
+    const time = a.movingTimeSeconds > 0 ? formatDuration(a.movingTimeSeconds) : "";
+    const paceSecPerMi = miles > 0 ? a.movingTimeSeconds / miles : 0;
+    const pace = paceSecPerMi > 0 ? formatPace(paceSecPerMi) : "";
+    const d = new Date(a.startDateLocal);
+    setForm((f) => ({
+      ...f,
+      title: (a.name || "GARMIN RUN").toUpperCase().slice(0, 32),
+      date: formatDate(d),
+      distance,
+      time,
+      pace,
+    }));
+    setSelectedActivityId(null);
+    setActivePreset(null);
+    setStatus("idle");
+    setShareUrl(null);
+    toast.success(`Loaded from Garmin (.${a.source}). Generating share link…`);
+    setTimeout(() => {
+      void generateShareLink();
+    }, 60);
+  }
+
+
 
   function onPhoto(e: ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -447,17 +474,20 @@ function RecapGeneratorPage() {
         <div className="max-w-[1180px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr,1.1fr] gap-10 lg:gap-16 items-start">
           {/* Form */}
           <div className="flex flex-col gap-6 order-2 lg:order-1">
-            <StravaPanel
-              state={stravaState}
-              error={stravaError}
-              athlete={stravaAthlete}
-              activities={stravaActivities}
-              selectedId={selectedActivityId}
-              onConnect={connectStrava}
-              onDisconnect={disconnectStrava}
-              onRefresh={() => stravaToken && loadActivities(stravaToken)}
-              onPick={applyStravaActivity}
-            />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <StravaPanel
+                state={stravaState}
+                error={stravaError}
+                athlete={stravaAthlete}
+                activities={stravaActivities}
+                selectedId={selectedActivityId}
+                onConnect={connectStrava}
+                onDisconnect={disconnectStrava}
+                onRefresh={() => stravaToken && loadActivities(stravaToken)}
+                onPick={applyStravaActivity}
+              />
+              <GarminPanel onParsed={applyParsedActivity} />
+            </div>
 
             <div className="h-px bg-paper/15" aria-hidden="true" />
 
@@ -1435,4 +1465,82 @@ function StravaPanel({
     </div>
   );
 }
+
+function GarminPanel({ onParsed }: { onParsed: (a: ParsedActivity) => void }) {
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const [state, setState] = useState<"idle" | "parsing" | "error" | "done">("idle");
+  const [error, setError] = useState<string | null>(null);
+  const [fileName, setFileName] = useState<string | null>(null);
+
+  async function handleFile(f: File | null) {
+    if (!f) return;
+    setError(null);
+    setFileName(f.name);
+    setState("parsing");
+    try {
+      if (f.size > 20 * 1024 * 1024) throw new Error("File is over 20MB.");
+      const parsed = await parseGarminFile(f);
+      if (parsed.distanceMeters <= 0 && parsed.movingTimeSeconds <= 0) {
+        throw new Error("Couldn't read distance or time from this file.");
+      }
+      setState("done");
+      onParsed(parsed);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Couldn't parse that file.");
+      setState("error");
+    }
+  }
+
+  return (
+    <div className="border border-paper/15 bg-paper/[0.03] p-4 sm:p-5">
+      <div>
+        <p className="eyebrow text-blue mb-1">Upload from Garmin</p>
+        <p className="text-xs text-paper/70 leading-[1.5]">
+          Drop a <code className="text-paper/90">.fit</code>, <code className="text-paper/90">.tcx</code>, or <code className="text-paper/90">.gpx</code> file from Garmin Connect.
+        </p>
+      </div>
+
+      <input
+        ref={inputRef}
+        type="file"
+        accept=".fit,.tcx,.gpx,application/gpx+xml,application/vnd.garmin.tcx+xml,application/octet-stream"
+        onChange={(e) => handleFile(e.target.files?.[0] ?? null)}
+        className="sr-only"
+      />
+      <button
+        type="button"
+        onClick={() => inputRef.current?.click()}
+        disabled={state === "parsing"}
+        className="mt-3 inline-flex items-center gap-2 px-4 py-2.5 bg-[#000A2C] text-white text-sm font-bold uppercase tracking-[0.12em] hover:brightness-125 transition disabled:opacity-70 disabled:cursor-not-allowed border border-paper/20"
+      >
+        {state === "parsing" ? (
+          <>
+            <span className="inline-block h-3.5 w-3.5 rounded-full border-2 border-current border-r-transparent animate-spin" />
+            Reading…
+          </>
+        ) : (
+          <>Choose Garmin file</>
+        )}
+      </button>
+
+      {fileName && state !== "error" && (
+        <p className="mt-2 text-[11px] uppercase tracking-[0.1em] text-paper/55 truncate">{fileName}</p>
+      )}
+
+      {state === "error" && error && (
+        <div role="alert" className="mt-3 border border-red-400/40 bg-red-500/[0.06] p-3 text-xs text-paper/85">
+          <p className="text-red-300 font-medium">{error}</p>
+          <p className="mt-2 text-paper/70">
+            In Garmin Connect, open the activity → menu (…) → <em>Export Original</em> (.fit) or <em>Export to GPX/TCX</em>.
+          </p>
+        </div>
+      )}
+
+      {state === "done" && (
+        <p className="mt-3 text-xs text-paper/60">Loaded. Splits filled below — tweak anything, then share.</p>
+      )}
+    </div>
+  );
+}
+
 
