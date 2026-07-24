@@ -3513,10 +3513,10 @@ function NewsletterBar() {
             <span
               className="display-condensed text-ink text-[14px] sm:text-[17px] tracking-[0.02em]"
             >
-              Saturday Brief
+              DO HARD THINGS TOGETHER
             </span>
             <span className="eyebrow text-ink/70 text-[10px] sm:text-[11px] tracking-[0.16em]">
-              Drops every Friday
+              EMAIL DROPS EVERY FRIDAY
             </span>
           </div>
         </div>
