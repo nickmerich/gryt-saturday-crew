@@ -28,6 +28,7 @@ import { Route as ResourcesGraphicsRouteImport } from './routes/resources_.graph
 import { Route as ResourcesConversationsRouteImport } from './routes/resources_.conversations'
 import { Route as MembersKeyRouteImport } from './routes/members.$key'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
+import { Route as CheckoutReturnRouteImport } from './routes/checkout.return'
 import { Route as AdminMembersRouteImport } from './routes/admin.members'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
@@ -44,6 +45,7 @@ import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/l
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
+import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
 
 const WaiverRoute = WaiverRouteImport.update({
   id: '/waiver',
@@ -140,6 +142,11 @@ const EmailUnsubscribeRoute = EmailUnsubscribeRouteImport.update({
   path: '/email/unsubscribe',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CheckoutReturnRoute = CheckoutReturnRouteImport.update({
+  id: '/checkout/return',
+  path: '/checkout/return',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminMembersRoute = AdminMembersRouteImport.update({
   id: '/admin/members',
   path: '/admin/members',
@@ -229,6 +236,12 @@ const LovableEmailAuthPreviewRoute = LovableEmailAuthPreviewRouteImport.update({
   path: '/lovable/email/auth/preview',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicPaymentsWebhookRoute =
+  ApiPublicPaymentsWebhookRouteImport.update({
+    id: '/api/public/payments/webhook',
+    path: '/api/public/payments/webhook',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -245,6 +258,7 @@ export interface FileRoutesByFullPath {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/members': typeof AdminMembersRoute
+  '/checkout/return': typeof CheckoutReturnRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/members/$key': typeof MembersKeyRoute
   '/resources/conversations': typeof ResourcesConversationsRoute
@@ -261,6 +275,7 @@ export interface FileRoutesByFullPath {
   '/resources/playbooks/best-free-running-clubs-pittsburgh-2026': typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route
   '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs': typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute
   '/resources/playbooks/gryt-vs-yinz-run-club': typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
+  '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -282,6 +297,7 @@ export interface FileRoutesByTo {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/members': typeof AdminMembersRoute
+  '/checkout/return': typeof CheckoutReturnRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/members/$key': typeof MembersKeyRoute
   '/resources/conversations': typeof ResourcesConversationsRoute
@@ -298,6 +314,7 @@ export interface FileRoutesByTo {
   '/resources/playbooks/best-free-running-clubs-pittsburgh-2026': typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route
   '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs': typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute
   '/resources/playbooks/gryt-vs-yinz-run-club': typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
+  '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -320,6 +337,7 @@ export interface FileRoutesById {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/members': typeof AdminMembersRoute
+  '/checkout/return': typeof CheckoutReturnRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/members/$key': typeof MembersKeyRoute
   '/resources_/conversations': typeof ResourcesConversationsRoute
@@ -336,6 +354,7 @@ export interface FileRoutesById {
   '/resources_/playbooks_/best-free-running-clubs-pittsburgh-2026': typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route
   '/resources_/playbooks_/fleet-feet-pittsburgh-vs-independent-run-clubs': typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute
   '/resources_/playbooks_/gryt-vs-yinz-run-club': typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
+  '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -359,6 +378,7 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/members'
+    | '/checkout/return'
     | '/email/unsubscribe'
     | '/members/$key'
     | '/resources/conversations'
@@ -375,6 +395,7 @@ export interface FileRouteTypes {
     | '/resources/playbooks/best-free-running-clubs-pittsburgh-2026'
     | '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs'
     | '/resources/playbooks/gryt-vs-yinz-run-club'
+    | '/api/public/payments/webhook'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
@@ -396,6 +417,7 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/members'
+    | '/checkout/return'
     | '/email/unsubscribe'
     | '/members/$key'
     | '/resources/conversations'
@@ -412,6 +434,7 @@ export interface FileRouteTypes {
     | '/resources/playbooks/best-free-running-clubs-pittsburgh-2026'
     | '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs'
     | '/resources/playbooks/gryt-vs-yinz-run-club'
+    | '/api/public/payments/webhook'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
@@ -433,6 +456,7 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/members'
+    | '/checkout/return'
     | '/email/unsubscribe'
     | '/members/$key'
     | '/resources_/conversations'
@@ -449,6 +473,7 @@ export interface FileRouteTypes {
     | '/resources_/playbooks_/best-free-running-clubs-pittsburgh-2026'
     | '/resources_/playbooks_/fleet-feet-pittsburgh-vs-independent-run-clubs'
     | '/resources_/playbooks_/gryt-vs-yinz-run-club'
+    | '/api/public/payments/webhook'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
@@ -471,6 +496,7 @@ export interface RootRouteChildren {
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   AdminMembersRoute: typeof AdminMembersRoute
+  CheckoutReturnRoute: typeof CheckoutReturnRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   ResourcesConversationsRoute: typeof ResourcesConversationsRoute
   ResourcesGraphicsRoute: typeof ResourcesGraphicsRoute
@@ -486,6 +512,7 @@ export interface RootRouteChildren {
   ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route: typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route
   ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute: typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute
   ResourcesPlaybooksGrytVsYinzRunClubRoute: typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
+  ApiPublicPaymentsWebhookRoute: typeof ApiPublicPaymentsWebhookRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
@@ -628,6 +655,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EmailUnsubscribeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/checkout/return': {
+      id: '/checkout/return'
+      path: '/checkout/return'
+      fullPath: '/checkout/return'
+      preLoaderRoute: typeof CheckoutReturnRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/members': {
       id: '/admin/members'
       path: '/admin/members'
@@ -740,6 +774,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LovableEmailAuthPreviewRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/payments/webhook': {
+      id: '/api/public/payments/webhook'
+      path: '/api/public/payments/webhook'
+      fullPath: '/api/public/payments/webhook'
+      preLoaderRoute: typeof ApiPublicPaymentsWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -770,6 +811,7 @@ const rootRouteChildren: RootRouteChildren = {
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
   AdminMembersRoute: AdminMembersRoute,
+  CheckoutReturnRoute: CheckoutReturnRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   ResourcesConversationsRoute: ResourcesConversationsRoute,
   ResourcesGraphicsRoute: ResourcesGraphicsRoute,
@@ -788,6 +830,7 @@ const rootRouteChildren: RootRouteChildren = {
     ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute,
   ResourcesPlaybooksGrytVsYinzRunClubRoute:
     ResourcesPlaybooksGrytVsYinzRunClubRoute,
+  ApiPublicPaymentsWebhookRoute: ApiPublicPaymentsWebhookRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
