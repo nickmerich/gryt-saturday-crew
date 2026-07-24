@@ -448,17 +448,20 @@ function RecapGeneratorPage() {
         <div className="max-w-[1180px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr,1.1fr] gap-10 lg:gap-16 items-start">
           {/* Form */}
           <div className="flex flex-col gap-6 order-2 lg:order-1">
-            <StravaPanel
-              state={stravaState}
-              error={stravaError}
-              athlete={stravaAthlete}
-              activities={stravaActivities}
-              selectedId={selectedActivityId}
-              onConnect={connectStrava}
-              onDisconnect={disconnectStrava}
-              onRefresh={() => stravaToken && loadActivities(stravaToken)}
-              onPick={applyStravaActivity}
-            />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <StravaPanel
+                state={stravaState}
+                error={stravaError}
+                athlete={stravaAthlete}
+                activities={stravaActivities}
+                selectedId={selectedActivityId}
+                onConnect={connectStrava}
+                onDisconnect={disconnectStrava}
+                onRefresh={() => stravaToken && loadActivities(stravaToken)}
+                onPick={applyStravaActivity}
+              />
+              <GarminPanel onParsed={applyParsedActivity} />
+            </div>
 
             <div className="h-px bg-paper/15" aria-hidden="true" />
 
