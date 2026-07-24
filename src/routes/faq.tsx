@@ -5,7 +5,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import Chrome from "@/components/site/Chrome";
+import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 
 type FAQ = { q: string; a: string };
 
