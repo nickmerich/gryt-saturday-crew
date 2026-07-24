@@ -10,6 +10,7 @@ import {
   type StravaActivity,
 } from "@/lib/strava.functions";
 import { uploadRecap } from "@/lib/recap-share.functions";
+import { parseGarminFile, type ParsedActivity } from "@/lib/garmin-parse";
 
 
 
