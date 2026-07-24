@@ -1,30 +1,41 @@
-## Plan: End-to-end RLS test for recap uploads (user vs service_role)
 
-Extend `e2e/recaps-bucket-rls.spec.ts` with two additional cases that go beyond the existing anon-denial checks:
+# Enable Stripe Payments
 
-### New test cases
+Set up Lovable's built-in Stripe integration (no API keys or Stripe account required to start) so GRYT can accept **donations** and **membership dues**. A test sandbox activates immediately; going live later requires claiming/verifying the Stripe account.
 
-1. **Authenticated (non-admin) user cannot upload to `recaps`**
-   - Create a temporary auth user via `supabaseAdmin.auth.admin.createUser` (email-confirmed, random email/password).
-   - Sign that user in with a fresh publishable-key client to obtain a session (acts as `authenticated` role).
-   - Attempt `storage.from("recaps").upload(...)` — assert an error is returned (RLS blocks `authenticated`).
-   - Also assert `list`, `download`, and `createSignedUrl` are blocked for the signed-in user.
-   - Cleanup: `supabaseAdmin.auth.admin.deleteUser(userId)` in `test.afterAll`.
+## Scope for this step
 
-2. **`service_role` (admin) can upload, sign, and delete in `recaps`**
-   - Build a `service_role` client from `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` (mirrors what `uploadRecap` does via `supabaseAdmin`).
-   - Upload a 1x1 PNG to a unique path — assert no error.
-   - `createSignedUrl` for that path — assert a URL is returned; `fetch` it and assert 200.
-   - `remove([path])` — assert no error. Skip the whole admin block via `test.skip` if `SUPABASE_SERVICE_ROLE_KEY` isn't in the env (local runs may not have it).
+Just enable Stripe. Product creation, checkout UI, and webhook handling come in follow-up steps once the integration is live and the relevant knowledge files are surfaced.
 
-### Technical details
+## Steps
 
-- File: `e2e/recaps-bucket-rls.spec.ts` (extend, don't replace existing anon cases).
-- Env vars used: `VITE_SUPABASE_URL`/`SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY`/`SUPABASE_PUBLISHABLE_KEY`, and (new) `SUPABASE_SERVICE_ROLE_KEY` — gate admin/user-creation blocks on its presence with `test.skip`.
-- Use `test.describe.serial` for the admin block so upload → sign → delete run in order and clean up.
-- Keep the pattern consistent with the existing file: `createClient` with `persistSession: false`, unique timestamped paths, minimal PNG buffer already defined.
-- No app-code changes; this is test-only.
+1. Call `enable_stripe_payments` to provision the seamless Stripe integration in test mode.
+2. After it completes, set the default tax handling path:
+   - **Donations**: no tax automation (donations aren't taxable).
+   - **Membership dues**: tax calculation + collection only (`automatic_tax`, +0.5%) — dues to a US run club aren't clearly eligible for full compliance handling, and you handle any registration/filing.
+3. Create the two products via `batch_create_product`:
+   - **GRYT Support / Donation** — one-time, customer-chosen amount.
+   - **GRYT Membership Dues** — recurring (monthly or yearly — you'll pick).
+4. Implement checkout: a `createServerFn` that creates a Stripe Checkout Session and a client button on the homepage (donations) plus a dedicated membership section.
+5. Add a webhook route at `src/routes/api/public/stripe-webhook.ts` to record successful payments and membership status.
 
-### Verification
+## Technical notes
 
-Run `bunx playwright test e2e/recaps-bucket-rls.spec.ts` and confirm all cases (existing + new) pass, with the admin block skipped cleanly if the service role key isn't present.
+- Seamless Stripe is Lovable-managed — no `STRIPE_SECRET_KEY` to paste. Do not confuse with the legacy BYOK `enable_stripe` tool.
+- Checkout session creation goes in a server function under `src/lib/` (e.g. `src/lib/stripe.functions.ts`), never in a loader.
+- Webhook route lives under `/api/public/*` (bypasses auth) and must verify the Stripe signature before touching the DB.
+- Persisting donations/members needs a new table (e.g. `payments`, `memberships`) with RLS + GRANTs — I'll draft the migration in the follow-up step.
+- Success/cancel URLs will be same-origin routes on grytrunclub.com.
+
+## Questions I'll ask before building checkout (not now)
+
+- Membership cadence: monthly, yearly, or both?
+- Suggested donation amounts (e.g. $5 / $15 / $50 / custom)?
+- Where should the "Donate" and "Become a member" CTAs live on the site?
+
+## What you'll need to do later
+
+- Claim the Stripe account and complete verification to accept real payments.
+- No action needed now — the sandbox works immediately after enable.
+
+Approve this plan and I'll enable Stripe.
