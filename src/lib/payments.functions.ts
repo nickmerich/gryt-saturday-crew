@@ -44,3 +44,51 @@ export const createDonationCheckout = createServerFn({ method: 'POST' })
       return { error: getStripeErrorMessage(error) };
     }
   });
+
+export const createEventEntryCheckout = createServerFn({ method: 'POST' })
+  .inputValidator((data: {
+    eventId: string;
+    eventName: string;
+    amountInCents: number;
+    quantity: number;
+    customerEmail?: string;
+    returnUrl: string;
+    environment: StripeEnv;
+  }) => {
+    if (!/^[a-zA-Z0-9_-]+$/.test(data.eventId)) throw new Error('Invalid eventId');
+    if (!data.eventName || data.eventName.length > 120) throw new Error('Invalid event name');
+    if (!data.amountInCents || data.amountInCents < 100) throw new Error('Amount must be at least $1');
+    if (data.amountInCents > 1_000_000) throw new Error('Amount too large');
+    if (!Number.isInteger(data.quantity) || data.quantity < 1 || data.quantity > 10) {
+      throw new Error('Quantity must be between 1 and 10');
+    }
+    if (data.environment !== 'sandbox' && data.environment !== 'live') {
+      throw new Error('Invalid environment');
+    }
+    return data;
+  })
+  .handler(async ({ data }): Promise<CheckoutSessionResult> => {
+    try {
+      const stripe = createStripeClient(data.environment);
+      const session = await stripe.checkout.sessions.create({
+        line_items: [{
+          price_data: {
+            currency: 'usd',
+            product_data: { name: `Event Entry — ${data.eventName}` },
+            unit_amount: data.amountInCents,
+          },
+          quantity: data.quantity,
+        }],
+        mode: 'payment',
+        ui_mode: 'embedded_page',
+        return_url: data.returnUrl,
+        payment_intent_data: { description: `Event Entry — ${data.eventName}` },
+        metadata: { eventId: data.eventId, eventName: data.eventName, type: 'event_entry' },
+        ...(data.customerEmail && { customer_email: data.customerEmail }),
+      });
+      return { clientSecret: session.client_secret ?? '' };
+    } catch (error) {
+      return { error: getStripeErrorMessage(error) };
+    }
+  });
+
