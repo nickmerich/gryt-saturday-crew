@@ -607,11 +607,11 @@ function Hero() {
               </>
             ) : (
               <>
-                RUNNING IS EASIER
+                A RUN CLUB FOR BUSY,
                 <br />
-                WITH LIKE MINDED{" "}
+                ATHLETIC PARENTS IN{" "}
                 <span className="relative inline-block">
-                  COMPANY.
+                  SOUTH HILLS, PITTSBURGH.
                   <span
                     className="absolute left-[-2px] right-[-2px] bottom-[0.06em] h-[0.11em] bg-blue"
                     style={{ transform: "skewX(-8deg)" }}
