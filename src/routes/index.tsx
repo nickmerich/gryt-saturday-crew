@@ -609,14 +609,14 @@ function Hero() {
               <>
                 A RUN CLUB FOR BUSY,
                 <br />
-                ATHLETIC PARENTS IN{" "}
                 <span className="relative inline-block">
-                  SOUTH HILLS, PITTSBURGH.
+                  ATHLETIC PARENTS.
                   <span
                     className="absolute left-[-2px] right-[-2px] bottom-[0.06em] h-[0.11em] bg-blue"
                     style={{ transform: "skewX(-8deg)" }}
                   />
                 </span>
+
               </>
             )}
           </h1>
