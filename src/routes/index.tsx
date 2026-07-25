@@ -245,8 +245,8 @@ function nextSaturday(from: Date = new Date()): Date {
   const d = new Date(from);
   d.setHours(0, 0, 0, 0);
   const day = d.getDay(); // 0=Sun..6=Sat
-  // If today is Saturday, keep today; otherwise advance to upcoming Saturday.
-  const add = day === 6 ? 0 : (6 - day + 7) % 7;
+  // Always advance to the upcoming Saturday. If today is Saturday, roll to next week.
+  const add = day === 6 ? 7 : (6 - day + 7) % 7;
   d.setDate(d.getDate() + add);
   return d;
 }
