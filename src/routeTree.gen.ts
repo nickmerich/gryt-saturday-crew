@@ -26,6 +26,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as TimerResultsRouteImport } from './routes/timer_.results'
 import { Route as ResourcesRecapRouteImport } from './routes/resources_.recap'
 import { Route as ResourcesPlaybooksRouteImport } from './routes/resources_.playbooks'
+import { Route as ResourcesMoreThanMilesRouteImport } from './routes/resources_.more-than-miles'
 import { Route as ResourcesManifestoRouteImport } from './routes/resources_.manifesto'
 import { Route as ResourcesGraphicsRouteImport } from './routes/resources_.graphics'
 import { Route as ResourcesConversationsRouteImport } from './routes/resources_.conversations'
@@ -134,6 +135,11 @@ const ResourcesRecapRoute = ResourcesRecapRouteImport.update({
 const ResourcesPlaybooksRoute = ResourcesPlaybooksRouteImport.update({
   id: '/resources_/playbooks',
   path: '/resources/playbooks',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResourcesMoreThanMilesRoute = ResourcesMoreThanMilesRouteImport.update({
+  id: '/resources_/more-than-miles',
+  path: '/resources/more-than-miles',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResourcesManifestoRoute = ResourcesManifestoRouteImport.update({
@@ -291,6 +297,7 @@ export interface FileRoutesByFullPath {
   '/resources/conversations': typeof ResourcesConversationsRoute
   '/resources/graphics': typeof ResourcesGraphicsRoute
   '/resources/manifesto': typeof ResourcesManifestoRoute
+  '/resources/more-than-miles': typeof ResourcesMoreThanMilesRoute
   '/resources/playbooks': typeof ResourcesPlaybooksRoute
   '/resources/recap': typeof ResourcesRecapRoute
   '/timer/results': typeof TimerResultsRoute
@@ -334,6 +341,7 @@ export interface FileRoutesByTo {
   '/resources/conversations': typeof ResourcesConversationsRoute
   '/resources/graphics': typeof ResourcesGraphicsRoute
   '/resources/manifesto': typeof ResourcesManifestoRoute
+  '/resources/more-than-miles': typeof ResourcesMoreThanMilesRoute
   '/resources/playbooks': typeof ResourcesPlaybooksRoute
   '/resources/recap': typeof ResourcesRecapRoute
   '/timer/results': typeof TimerResultsRoute
@@ -378,6 +386,7 @@ export interface FileRoutesById {
   '/resources_/conversations': typeof ResourcesConversationsRoute
   '/resources_/graphics': typeof ResourcesGraphicsRoute
   '/resources_/manifesto': typeof ResourcesManifestoRoute
+  '/resources_/more-than-miles': typeof ResourcesMoreThanMilesRoute
   '/resources_/playbooks': typeof ResourcesPlaybooksRoute
   '/resources_/recap': typeof ResourcesRecapRoute
   '/timer_/results': typeof TimerResultsRoute
@@ -423,6 +432,7 @@ export interface FileRouteTypes {
     | '/resources/conversations'
     | '/resources/graphics'
     | '/resources/manifesto'
+    | '/resources/more-than-miles'
     | '/resources/playbooks'
     | '/resources/recap'
     | '/timer/results'
@@ -466,6 +476,7 @@ export interface FileRouteTypes {
     | '/resources/conversations'
     | '/resources/graphics'
     | '/resources/manifesto'
+    | '/resources/more-than-miles'
     | '/resources/playbooks'
     | '/resources/recap'
     | '/timer/results'
@@ -509,6 +520,7 @@ export interface FileRouteTypes {
     | '/resources_/conversations'
     | '/resources_/graphics'
     | '/resources_/manifesto'
+    | '/resources_/more-than-miles'
     | '/resources_/playbooks'
     | '/resources_/recap'
     | '/timer_/results'
@@ -552,6 +564,7 @@ export interface RootRouteChildren {
   ResourcesConversationsRoute: typeof ResourcesConversationsRoute
   ResourcesGraphicsRoute: typeof ResourcesGraphicsRoute
   ResourcesManifestoRoute: typeof ResourcesManifestoRoute
+  ResourcesMoreThanMilesRoute: typeof ResourcesMoreThanMilesRoute
   ResourcesPlaybooksRoute: typeof ResourcesPlaybooksRoute
   ResourcesRecapRoute: typeof ResourcesRecapRoute
   TimerResultsRoute: typeof TimerResultsRoute
@@ -691,6 +704,13 @@ declare module '@tanstack/react-router' {
       path: '/resources/playbooks'
       fullPath: '/resources/playbooks'
       preLoaderRoute: typeof ResourcesPlaybooksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resources_/more-than-miles': {
+      id: '/resources_/more-than-miles'
+      path: '/resources/more-than-miles'
+      fullPath: '/resources/more-than-miles'
+      preLoaderRoute: typeof ResourcesMoreThanMilesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/resources_/manifesto': {
@@ -899,6 +919,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResourcesConversationsRoute: ResourcesConversationsRoute,
   ResourcesGraphicsRoute: ResourcesGraphicsRoute,
   ResourcesManifestoRoute: ResourcesManifestoRoute,
+  ResourcesMoreThanMilesRoute: ResourcesMoreThanMilesRoute,
   ResourcesPlaybooksRoute: ResourcesPlaybooksRoute,
   ResourcesRecapRoute: ResourcesRecapRoute,
   TimerResultsRoute: TimerResultsRoute,

@@ -52,6 +52,7 @@ function ResourcesPage() {
         <SiteNav />
         <div className="mx-auto max-w-[1240px] px-6 lg:px-10 pt-16 md:pt-24 pb-24">
           <Masthead />
+          <FeaturedStory />
           <Playbooks />
           <Conversations />
           <ManifestoCallout />
@@ -64,6 +65,34 @@ function ResourcesPage() {
         <SiteFooter />
       </main>
     </>
+  );
+}
+
+function FeaturedStory() {
+  return (
+    <section className="mb-24 md:mb-32">
+      <Link
+        to="/resources/more-than-miles"
+        className={`group block border border-blue bg-blue/[0.06] p-8 md:p-12 hover:bg-blue hover:text-ink transition-colors ${focusRing}`}
+      >
+        <span className="text-blue text-[12px] tracking-[0.22em] uppercase mb-6 block group-hover:text-ink" style={mono}>
+          § 00 / Community · New Story
+        </span>
+        <h3
+          className="text-[clamp(28px,4.4vw,60px)] font-bold leading-[1.04] tracking-tight max-w-[20ch]"
+          style={{ fontFamily: "var(--font-display)" }}
+        >
+          More Than Miles: 5 Things You Wouldn't Guess From the Parking Lot
+        </h3>
+        <p className="mt-6 max-w-xl text-[15px] leading-[1.65] text-paper/85 group-hover:text-ink/80">
+          A Boston-standard marathoner waiting for the last runner, a 64-minute
+          PR in 23 weeks, and route maps drawn by a real cartographer.
+        </p>
+        <span className="mt-8 inline-block text-[12px] tracking-[0.22em] uppercase" style={mono}>
+          Read the story →
+        </span>
+      </Link>
+    </section>
   );
 }
 
