@@ -26,7 +26,7 @@ export const Route = createFileRoute("/api/newsletter/status")({
       GET: async ({ request }) => {
         const apiKey = process.env.BEEHIIV_API_KEY;
         const publicationId = process.env.BEEHIIV_PUBLICATION_ID;
-        if (!apiKey || !publicationId) {
+        if (!apiKey || !publicationId || !/^pub_[0-9a-fA-F-]+$/.test(publicationId)) {
           return Response.json(
             { ok: false, error: "Newsletter is not configured" },
             { status: 500, headers: CORS },
