@@ -52,6 +52,7 @@ function ResourcesPage() {
         <SiteNav />
         <div className="mx-auto max-w-[1240px] px-6 lg:px-10 pt-16 md:pt-24 pb-24">
           <Masthead />
+          <FeaturedStory />
           <Playbooks />
           <Conversations />
           <ManifestoCallout />
