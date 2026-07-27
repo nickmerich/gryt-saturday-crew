@@ -23,8 +23,8 @@ export const Route = createFileRoute("/api/newsletter/subscribe")({
       POST: async ({ request }) => {
         const apiKey = process.env.BEEHIIV_API_KEY;
         const publicationId = process.env.BEEHIIV_PUBLICATION_ID;
-        if (!apiKey || !publicationId) {
-          console.error("Beehiiv credentials missing");
+        if (!apiKey || !publicationId || !/^pub_[0-9a-fA-F-]+$/.test(publicationId)) {
+          console.error("Beehiiv credentials missing or publication id malformed");
           return Response.json(
             { ok: false, error: "Newsletter is not configured" },
             { status: 500, headers: CORS },
