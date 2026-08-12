@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { submitRecommendation } from "@/lib/recommendations.functions";
 import grytBearAsset from "@/assets/gryt-bear.png.asset.json";
+import insuranceAsset from "@/assets/certificate-of-insurance.pdf.asset.json";
 
 const STRAVA_CLUB = "https://www.strava.com/clubs/1708552";
 
