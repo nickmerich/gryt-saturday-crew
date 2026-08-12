@@ -1,36 +1,32 @@
+# Remove the redundant "Saturday is already planned" block, keep the details, extend its look
 
-# Enable Stripe Payments — Donations Only
+## What changes
 
-Set up Lovable's built-in Stripe integration so GRYT can accept **one-time donations** with suggested amounts (no membership subscription). A test sandbox is live now; going live requires claiming/verifying the Stripe account later in the Payments tab.
+1. **Delete the standalone details section** ("THE PLAN IS SIMPLE / Saturday is already planned." with the WHEN–AFTER table and the "I'm coming this Saturday" button). It repeats the RSVP block and the Saturday article.
 
-## Scope
+2. **Nothing is lost.** The RSVP block's fact list grows from three rows (WHEN, WHERE, FIRST?) to the full set:
+   - When · Saturday · 7:00 AM (next-Saturday date, as today)
+   - Where · 212 Valley Brook Road, McMurray + Get directions
+   - Route · Montour / Peters Trail · Peters Township & Upper St. Clair
+   - Distance · About 4 miles · out and back
+   - Pace · Walk, jog, run · all welcome
+   - Cost · Free, always
+   - After · Coffee, water, sometimes fruit in the lot
+   - First? · Most people come alone. Show up 10 min early.
 
-- One-time donations only. Suggested amounts: **$5 / $15 / $50 / custom**.
-- No membership dues, no recurring billing, no subscription plumbing.
-- CTA lives in a new **"Support GRYT"** block on the homepage (above the footer) — no separate `/support` route for now.
+   Rows use the same hairline-rule treatment as the deleted block (uppercase label left, value right, thin divider between rows), tuned for the dark RSVP panel.
 
-## Steps
+3. **Carry the bone/cream panel forward.** The `#f4f2ed` bone surface with hard corners, 2px ink top rule, and hairline dividers becomes a repeating homepage rhythm instead of a one-off:
+   - Alternate homepage sections between ink-black and bone so the page reads as stacked panels rather than one long black scroll.
+   - Any section that currently sits on plain black and lists facts or steps (the "first time" steps, the FAQ preview, the details inside the Saturday article) gets the bone panel + ink type + hairline-rule pattern.
+   - Section eyebrows on bone use the muted steel-blue (`#3a7ca5`) already used in the deleted block; headlines stay condensed uppercase; baby blue stays the accent for links and the mission slash.
+   - Photo grids, hero, marquee, and footer stay black — the contrast is what makes the bone panels land.
 
-1. Create a single Stripe product **"GRYT Donation"** (used only for dashboard labeling). Actual amounts are dynamic via Stripe's `price_data` — donors pick preset or custom.
-2. Add shared server utility `src/lib/stripe.server.ts` (`createStripeClient`, `getStripeErrorMessage`, `verifyWebhook`) and client helper `src/lib/stripe.ts` (`getStripe`, `getStripeEnvironment`).
-3. Add `createDonationCheckout` server function in `src/lib/payments.functions.ts` that builds an embedded Checkout Session with `price_data` (dynamic amount, min 50¢), no tax automation (donations aren't taxable), no subscription mode.
-4. Add `PaymentTestModeBanner`, `StripeEmbeddedCheckout`, and `useStripeCheckout` components.
-5. Add a `SupportBlock` on the homepage (`src/routes/index.tsx`) — GRYT-styled paper card with preset amount pills, custom input, and "Chip in" button that opens the embedded checkout inline.
-6. Add return route `src/routes/checkout.return.tsx` with a thank-you state that matches the house style.
-7. Add webhook route at `src/routes/api/public/payments/webhook.ts` — required path, verifies Stripe signature, logs `checkout.session.completed` events. No DB table needed since there's no membership state to persist; the Payments tab already tracks transactions.
-8. Install pinned `stripe@22.0.2`, `@stripe/stripe-js@9.2.0`, `@stripe/react-stripe-js@6.2.0`.
+4. **Anchor safety.** The removed section owns `id="details"`, which the nav "The Run" link and other in-page links point to. That id moves onto the section that keeps the run facts so no link breaks.
 
 ## Technical notes
 
-- Seamless Stripe is Lovable-managed — no API keys to paste.
-- Dynamic amounts use `price_data` (no `create_price` needed, no `lookup_key` resolution).
-- No `automatic_tax` and no `managed_payments` — donations to a run club aren't taxable.
-- Webhook path `/api/public/payments/webhook` is required by Lovable; bypasses auth by design, secured by Stripe signature verification.
-- No new DB table this pass — Stripe dashboard + Payments tab are the source of truth. If you later want member-facing donation history or leaderboards, we add a `donations` table then.
-- Client cap: input rejects amounts under $1 and over $10,000 with a friendly message.
-
-## What you'll need to do later
-
-- Claim the Stripe account and finish verification in the Payments tab to accept real (not test) payments. Test cards work in preview immediately (`4242 4242 4242 4242`).
-
-Approve and I'll build it.
+- `QuickDetails()` in `src/routes/index.tsx` is deleted along with its render call; its `id="details"` moves to the RSVP section (currently `id="join"`, which keeps an anchor alias).
+- The row list inside the RSVP block is extended and restyled to the label/value/hairline pattern; no data fetching or server code changes.
+- Bone panel styling is applied via existing Tailwind classes and, where it repeats more than twice, a small `@utility bone-panel` in `src/styles.css` so the treatment stays consistent.
+- Frontend/presentation only — no changes to RSVP submission, email, or backend logic.
