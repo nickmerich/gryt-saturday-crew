@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { submitRecommendation } from "@/lib/recommendations.functions";
 import grytBearAsset from "@/assets/gryt-bear.png.asset.json";
+import insuranceAsset from "@/assets/certificate-of-insurance.pdf.asset.json";
 
 const STRAVA_CLUB = "https://www.strava.com/clubs/1708552";
 
@@ -260,6 +261,18 @@ export function SiteFooter() {
             </div>
             <p className="text-sm leading-[1.6] text-paper/70 max-w-[340px]">
               Pittsburgh, PA · Saturdays · 7 AM · Montour / Peters Trail.
+            </p>
+            <p className="text-sm leading-[1.6] text-paper/60 max-w-[340px] mt-3">
+              GRYT Run Club carries general liability insurance.{" "}
+              <a
+                href={insuranceAsset.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue underline underline-offset-2 hover:text-paper transition-colors"
+              >
+                View proof of insurance (PDF)
+              </a>
+              .
             </p>
           </div>
         </div>
