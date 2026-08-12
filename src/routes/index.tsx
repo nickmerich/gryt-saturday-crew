@@ -239,8 +239,8 @@ export const SAT_CAL_URL =
 
 // Dynamic label for the next Saturday run. Anchored so run # stays correct.
 // Anchor: Run #11 == 2026-06-27 (Sat). Weekly cadence.
-const RUN_ANCHOR_MS = Date.UTC(2026, 5, 27); // Jun 27, 2026 UTC
-const RUN_ANCHOR_NUMBER = 10;
+const RUN_ANCHOR_MS = Date.UTC(2026, 7, 15); // Aug 15, 2026 UTC
+const RUN_ANCHOR_NUMBER = 16;
 function nextSaturday(from: Date = new Date()): Date {
   const d = new Date(from);
   d.setHours(0, 0, 0, 0);
