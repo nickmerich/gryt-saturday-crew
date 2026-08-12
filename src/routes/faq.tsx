@@ -168,6 +168,19 @@ function FaqPage() {
                   style={{ fontFamily: "var(--font-body)" }}
                 >
                   {f.a}
+                  {f.href ? (
+                    <>
+                      {" "}
+                      <a
+                        href={f.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline underline-offset-4 hover:text-ink"
+                      >
+                        {f.hrefLabel ?? "Learn more"}
+                      </a>
+                    </>
+                  ) : null}
                 </AccordionContent>
               </AccordionItem>
             ))}
