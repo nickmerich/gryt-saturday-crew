@@ -947,17 +947,29 @@ function RSVP() {
             That's it. No spam, no funnel — just a standing invite to the trailhead.
           </p>
           <RunCountdown className="mb-6 max-w-[440px]" />
-          <div className="border-t border-paper/20 pt-5 flex flex-col gap-3 max-w-[440px]">
+          <div id="details" className="scroll-mt-24 border-t-2 border-paper/70 max-w-[440px]">
             {([
-              ["WHEN", nextSaturdayLabelLong()],
-              ["WHERE", <>212 Valley Brook Road, McMurray · trail parking · <a href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Road%2C%20McMurray%2C%20PA" target="_blank" rel="noopener noreferrer" className="text-blue hover:underline">Get directions</a></>],
-              ["FIRST?", "Most people come alone. Show up 10 min early."],
-            ] as [string, ReactNode][]).map(([k, v]) => (
-              <div key={k} className="flex gap-3 items-baseline">
-                <span className="display-condensed text-blue text-[15px] tracking-[0.06em] basis-[86px] shrink-0">
+              ["When", nextSaturdayLabelLong()],
+              ["Where", <>212 Valley Brook Road, McMurray · <a href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Road%2C%20McMurray%2C%20PA" target="_blank" rel="noopener noreferrer" className="text-blue hover:underline">Get directions</a></>],
+              ["Route", "Montour / Peters Trail · Peters Township & Upper St. Clair"],
+              ["Distance", "About 4 miles · out and back"],
+              ["Pace", "Walk, jog, run · all welcome"],
+              ["Cost", "Free, always"],
+              ["After", "Coffee, water, sometimes fruit in the lot"],
+              ["First?", "Most people come alone. Show up 10 min early."],
+            ] as [string, ReactNode][]).map(([k, v], i, arr) => (
+              <div
+                key={k}
+                className={`flex justify-between gap-5 py-3.5 ${
+                  i !== arr.length - 1 ? "border-b border-paper/15" : ""
+                }`}
+              >
+                <span className="text-[11px] font-bold tracking-[0.16em] uppercase text-blue/80 shrink-0 basis-[78px] pt-1">
                   {k}
                 </span>
-                <span className="text-[15px] text-paper/90">{v}</span>
+                <span className="text-[15px] md:text-[16px] font-semibold text-right text-paper/90">
+                  {v}
+                </span>
               </div>
             ))}
           </div>
@@ -1139,57 +1151,6 @@ function RSVP() {
   );
 }
 
-function QuickDetails() {
-  const rows: Array<[string, React.ReactNode]> = [
-    ["When", "Saturday · 7:00 AM"],
-    ["Where", <>212 Valley Brook Road · McMurray, PA · <a href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Road%2C%20McMurray%2C%20PA" target="_blank" rel="noopener noreferrer" className="underline hover:text-ink/70">Get directions</a></>],
-    ["Route", "Montour / Peters Trail · Peters Township & Upper St. Clair"],
-    ["Distance", "About 4 miles · out and back"],
-    ["Pace", "Walk, jog, run · all welcome"],
-    ["Cost", "Free, always"],
-    ["After", "Coffee, water, sometimes fruit in the lot"],
-  ];
-  return (
-    <section id="details" className="bg-[#f4f2ed] text-ink py-20 md:py-28 px-6 sm:px-12 lg:px-24">
-      <div className="max-w-[1100px] mx-auto flex flex-wrap gap-12 lg:gap-20 items-start">
-        <div className="flex-1 min-w-[280px] basis-[320px]">
-          <div className="eyebrow mb-4" style={{ color: "#3a7ca5" }}>
-            The plan is simple
-          </div>
-          <h2 className="display-condensed text-ink text-[clamp(40px,5vw,68px)] mb-5">
-            Saturday is already planned.
-          </h2>
-          <p className="text-[17px] leading-[1.6] text-ink/75 max-w-[440px] mb-7">
-            You do not need a training plan, a perfect week, or a fast pace. You just need shoes and
-            the decision to show up.
-          </p>
-          <a
-            href="#join"
-            className="inline-block text-sm font-bold tracking-[0.1em] uppercase px-7 py-4 bg-ink text-paper hover:bg-[#3a7ca5] transition-colors"
-            style={{ fontFamily: "var(--font-body)" }}
-          >
-            I'm coming this Saturday
-          </a>
-        </div>
-        <div className="flex-1 min-w-[300px] basis-[420px] border-t-2 border-ink">
-          {rows.map(([k, v], i) => (
-            <div
-              key={k}
-              className={`flex justify-between gap-5 py-4 ${
-                i !== rows.length - 1 ? "border-b border-[#d8d4cb]" : ""
-              }`}
-            >
-              <span className="text-[11px] font-bold tracking-[0.16em] uppercase text-ink/45 shrink-0 basis-[78px]">
-                {k}
-              </span>
-              <span className="text-[17px] font-semibold text-right">{v}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
 function CorePromise() {
   const cards = [
@@ -1454,7 +1415,7 @@ function WhoItsFor() {
   ];
 
   return (
-    <section id="who" className="bg-white text-ink py-20 md:py-28 px-6 sm:px-12 lg:px-24">
+    <section id="who" className="bone-panel py-20 md:py-28 px-6 sm:px-12 lg:px-24">
       <div className="max-w-[1180px] mx-auto">
         <div className="eyebrow mb-4" style={{ color: "#3a7ca5" }}>
           Who it's for
@@ -2226,7 +2187,7 @@ function Founders() {
   ];
 
   return (
-    <section id="founders" className="bg-[#f4f2ed] text-ink py-20 md:py-28 px-6 sm:px-12 lg:px-24">
+    <section id="founders" className="bone-panel py-20 md:py-28 px-6 sm:px-12 lg:px-24">
       <div className="max-w-[1100px] mx-auto flex flex-wrap gap-8 lg:gap-16 items-start">
         <div className="flex-1 min-w-[300px] basis-[420px]">
           <div className="eyebrow mb-4" style={{ color: "#3a7ca5" }}>
@@ -2476,7 +2437,7 @@ function Beliefs() {
   ];
 
   return (
-    <section id="why" className="bg-white text-ink py-20 md:py-28 px-6 sm:px-12 lg:px-24">
+    <section id="why" className="bone-panel py-20 md:py-28 px-6 sm:px-12 lg:px-24">
       <div className="max-w-[1080px] mx-auto">
         <div className="eyebrow mb-4" style={{ color: "#3a7ca5" }}>
           What we believe
@@ -2555,7 +2516,7 @@ function FAQ() {
   const [open, setOpen] = useState(0);
 
   return (
-    <section id="faq" className="bg-[#f4f2ed] text-ink py-20 md:py-28 px-6 sm:px-12 lg:px-24">
+    <section id="faq" className="bone-panel py-20 md:py-28 px-6 sm:px-12 lg:px-24">
       <div className="max-w-[920px] mx-auto">
         <div className="flex justify-between items-end border-b-[3px] border-ink pb-3.5 mb-2 flex-wrap gap-3">
           <h2 className="display-condensed text-ink text-[clamp(36px,5vw,66px)] leading-[0.92] m-0">
@@ -3820,7 +3781,6 @@ function Landing() {
       <Hero />
       <Marquee />
       <RSVP />
-      <QuickDetails />
       <CorePromise />
       <WeeklyRhythm />
       <WhoItsFor />

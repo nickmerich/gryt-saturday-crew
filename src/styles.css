@@ -68,6 +68,12 @@
   body:not(.photos-color) img.object-contain { filter: grayscale(100%); }
 }
 
+@utility bone-panel {
+  background-color: #f4f2ed;
+  color: var(--ink);
+  border-top: 2px solid rgba(0, 0, 0, 0.9);
+}
+
 @utility photo-hover {
   transition: filter 300ms ease-out, transform 400ms ease-out;
   will-change: transform, filter;
