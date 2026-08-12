@@ -36,6 +36,12 @@ const FAQS: FAQ[] = [
     a: "Yes. Sign it once on the Waiver page and you're good for every run after that. It takes under a minute.",
   },
   {
+    q: "Is the run club insured?",
+    a: "Yes. GRYT Run Club carries general liability insurance. You can view the certificate of insurance any time.",
+    href: insuranceAsset.url,
+    hrefLabel: "View proof of insurance (PDF)",
+  },
+  {
     q: "What should I wear and bring?",
     a: "Whatever you'd normally run in. Layers if it's cold. Bring water for anything longer than 45 minutes. In winter, a headlamp helps for the first mile or two before the sun's up.",
   },
