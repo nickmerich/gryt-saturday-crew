@@ -2267,7 +2267,7 @@ function Founders() {
               <AffiliationList
                 name="Nick"
                 items={[
-                  "FREAK ATHLETE",
+                  "FREAK ATHLETE PARTNER",
                   "DAD DAY RUN CLUB LEADER",
                   "POPSITE ATHLETE",
                   "POINT PARK UNIVERSITY BASEBALL PLAYER",
