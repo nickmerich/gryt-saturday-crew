@@ -262,6 +262,18 @@ export function SiteFooter() {
             <p className="text-sm leading-[1.6] text-paper/70 max-w-[340px]">
               Pittsburgh, PA · Saturdays · 7 AM · Montour / Peters Trail.
             </p>
+            <p className="text-sm leading-[1.6] text-paper/60 max-w-[340px] mt-3">
+              GRYT Run Club carries general liability insurance.{" "}
+              <a
+                href={insuranceAsset.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue underline underline-offset-2 hover:text-paper transition-colors"
+              >
+                View proof of insurance (PDF)
+              </a>
+              .
+            </p>
           </div>
         </div>
         <div className="border-t border-paper/15 pt-10 pb-2">
