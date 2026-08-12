@@ -6,8 +6,9 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
+import insuranceAsset from "@/assets/certificate-of-insurance.pdf.asset.json";
 
-type FAQ = { q: string; a: string };
+type FAQ = { q: string; a: string; href?: string; hrefLabel?: string };
 
 const FAQS: FAQ[] = [
   {
@@ -33,6 +34,12 @@ const FAQS: FAQ[] = [
   {
     q: "Is there a waiver?",
     a: "Yes. Sign it once on the Waiver page and you're good for every run after that. It takes under a minute.",
+  },
+  {
+    q: "Is the run club insured?",
+    a: "Yes. GRYT Run Club carries general liability insurance. You can view the certificate of insurance any time.",
+    href: insuranceAsset.url,
+    hrefLabel: "View proof of insurance (PDF)",
   },
   {
     q: "What should I wear and bring?",
@@ -161,6 +168,19 @@ function FaqPage() {
                   style={{ fontFamily: "var(--font-body)" }}
                 >
                   {f.a}
+                  {f.href ? (
+                    <>
+                      {" "}
+                      <a
+                        href={f.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline underline-offset-4 hover:text-ink"
+                      >
+                        {f.hrefLabel ?? "Learn more"}
+                      </a>
+                    </>
+                  ) : null}
                 </AccordionContent>
               </AccordionItem>
             ))}
