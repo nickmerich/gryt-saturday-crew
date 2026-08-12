@@ -1415,7 +1415,7 @@ function WhoItsFor() {
   ];
 
   return (
-    <section id="who" className="bg-white text-ink py-20 md:py-28 px-6 sm:px-12 lg:px-24">
+    <section id="who" className="bone-panel py-20 md:py-28 px-6 sm:px-12 lg:px-24">
       <div className="max-w-[1180px] mx-auto">
         <div className="eyebrow mb-4" style={{ color: "#3a7ca5" }}>
           Who it's for
@@ -2187,7 +2187,7 @@ function Founders() {
   ];
 
   return (
-    <section id="founders" className="bg-[#f4f2ed] text-ink py-20 md:py-28 px-6 sm:px-12 lg:px-24">
+    <section id="founders" className="bone-panel py-20 md:py-28 px-6 sm:px-12 lg:px-24">
       <div className="max-w-[1100px] mx-auto flex flex-wrap gap-8 lg:gap-16 items-start">
         <div className="flex-1 min-w-[300px] basis-[420px]">
           <div className="eyebrow mb-4" style={{ color: "#3a7ca5" }}>
@@ -2437,7 +2437,7 @@ function Beliefs() {
   ];
 
   return (
-    <section id="why" className="bg-white text-ink py-20 md:py-28 px-6 sm:px-12 lg:px-24">
+    <section id="why" className="bone-panel py-20 md:py-28 px-6 sm:px-12 lg:px-24">
       <div className="max-w-[1080px] mx-auto">
         <div className="eyebrow mb-4" style={{ color: "#3a7ca5" }}>
           What we believe
@@ -2516,7 +2516,7 @@ function FAQ() {
   const [open, setOpen] = useState(0);
 
   return (
-    <section id="faq" className="bg-[#f4f2ed] text-ink py-20 md:py-28 px-6 sm:px-12 lg:px-24">
+    <section id="faq" className="bone-panel py-20 md:py-28 px-6 sm:px-12 lg:px-24">
       <div className="max-w-[920px] mx-auto">
         <div className="flex justify-between items-end border-b-[3px] border-ink pb-3.5 mb-2 flex-wrap gap-3">
           <h2 className="display-condensed text-ink text-[clamp(36px,5vw,66px)] leading-[0.92] m-0">
