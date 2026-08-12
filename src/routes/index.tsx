@@ -947,17 +947,29 @@ function RSVP() {
             That's it. No spam, no funnel — just a standing invite to the trailhead.
           </p>
           <RunCountdown className="mb-6 max-w-[440px]" />
-          <div className="border-t border-paper/20 pt-5 flex flex-col gap-3 max-w-[440px]">
+          <div id="details" className="scroll-mt-24 border-t-2 border-paper/70 max-w-[440px]">
             {([
-              ["WHEN", nextSaturdayLabelLong()],
-              ["WHERE", <>212 Valley Brook Road, McMurray · trail parking · <a href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Road%2C%20McMurray%2C%20PA" target="_blank" rel="noopener noreferrer" className="text-blue hover:underline">Get directions</a></>],
-              ["FIRST?", "Most people come alone. Show up 10 min early."],
-            ] as [string, ReactNode][]).map(([k, v]) => (
-              <div key={k} className="flex gap-3 items-baseline">
-                <span className="display-condensed text-blue text-[15px] tracking-[0.06em] basis-[86px] shrink-0">
+              ["When", nextSaturdayLabelLong()],
+              ["Where", <>212 Valley Brook Road, McMurray · <a href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Road%2C%20McMurray%2C%20PA" target="_blank" rel="noopener noreferrer" className="text-blue hover:underline">Get directions</a></>],
+              ["Route", "Montour / Peters Trail · Peters Township & Upper St. Clair"],
+              ["Distance", "About 4 miles · out and back"],
+              ["Pace", "Walk, jog, run · all welcome"],
+              ["Cost", "Free, always"],
+              ["After", "Coffee, water, sometimes fruit in the lot"],
+              ["First?", "Most people come alone. Show up 10 min early."],
+            ] as [string, ReactNode][]).map(([k, v], i, arr) => (
+              <div
+                key={k}
+                className={`flex justify-between gap-5 py-3.5 ${
+                  i !== arr.length - 1 ? "border-b border-paper/15" : ""
+                }`}
+              >
+                <span className="text-[11px] font-bold tracking-[0.16em] uppercase text-blue/80 shrink-0 basis-[78px] pt-1">
                   {k}
                 </span>
-                <span className="text-[15px] text-paper/90">{v}</span>
+                <span className="text-[15px] md:text-[16px] font-semibold text-right text-paper/90">
+                  {v}
+                </span>
               </div>
             ))}
           </div>
