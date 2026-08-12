@@ -6,8 +6,9 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
+import insuranceAsset from "@/assets/certificate-of-insurance.pdf.asset.json";
 
-type FAQ = { q: string; a: string };
+type FAQ = { q: string; a: string; href?: string; hrefLabel?: string };
 
 const FAQS: FAQ[] = [
   {
