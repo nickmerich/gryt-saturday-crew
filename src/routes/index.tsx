@@ -1139,57 +1139,6 @@ function RSVP() {
   );
 }
 
-function QuickDetails() {
-  const rows: Array<[string, React.ReactNode]> = [
-    ["When", "Saturday · 7:00 AM"],
-    ["Where", <>212 Valley Brook Road · McMurray, PA · <a href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Road%2C%20McMurray%2C%20PA" target="_blank" rel="noopener noreferrer" className="underline hover:text-ink/70">Get directions</a></>],
-    ["Route", "Montour / Peters Trail · Peters Township & Upper St. Clair"],
-    ["Distance", "About 4 miles · out and back"],
-    ["Pace", "Walk, jog, run · all welcome"],
-    ["Cost", "Free, always"],
-    ["After", "Coffee, water, sometimes fruit in the lot"],
-  ];
-  return (
-    <section id="details" className="bg-[#f4f2ed] text-ink py-20 md:py-28 px-6 sm:px-12 lg:px-24">
-      <div className="max-w-[1100px] mx-auto flex flex-wrap gap-12 lg:gap-20 items-start">
-        <div className="flex-1 min-w-[280px] basis-[320px]">
-          <div className="eyebrow mb-4" style={{ color: "#3a7ca5" }}>
-            The plan is simple
-          </div>
-          <h2 className="display-condensed text-ink text-[clamp(40px,5vw,68px)] mb-5">
-            Saturday is already planned.
-          </h2>
-          <p className="text-[17px] leading-[1.6] text-ink/75 max-w-[440px] mb-7">
-            You do not need a training plan, a perfect week, or a fast pace. You just need shoes and
-            the decision to show up.
-          </p>
-          <a
-            href="#join"
-            className="inline-block text-sm font-bold tracking-[0.1em] uppercase px-7 py-4 bg-ink text-paper hover:bg-[#3a7ca5] transition-colors"
-            style={{ fontFamily: "var(--font-body)" }}
-          >
-            I'm coming this Saturday
-          </a>
-        </div>
-        <div className="flex-1 min-w-[300px] basis-[420px] border-t-2 border-ink">
-          {rows.map(([k, v], i) => (
-            <div
-              key={k}
-              className={`flex justify-between gap-5 py-4 ${
-                i !== rows.length - 1 ? "border-b border-[#d8d4cb]" : ""
-              }`}
-            >
-              <span className="text-[11px] font-bold tracking-[0.16em] uppercase text-ink/45 shrink-0 basis-[78px]">
-                {k}
-              </span>
-              <span className="text-[17px] font-semibold text-right">{v}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
 function CorePromise() {
   const cards = [
