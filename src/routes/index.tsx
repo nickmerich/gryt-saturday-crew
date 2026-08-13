@@ -3725,10 +3725,17 @@ function ResourcesBlock() {
   return (
     <section
       id="resources"
-      className="relative overflow-hidden bg-ink text-paper py-20 md:py-28 px-6 sm:px-12 lg:px-24 border-t border-paper/15"
+      className="grit-panel relative overflow-hidden text-paper py-20 md:py-28 px-6 sm:px-12 lg:px-24"
     >
-      <div className="max-w-[1180px] mx-auto">
+      <span
+        aria-hidden="true"
+        className="display-condensed pointer-events-none select-none absolute -right-[6%] top-1/2 -translate-y-1/2 text-paper/[0.045] leading-none text-[clamp(180px,34vw,460px)] tracking-[-0.04em]"
+      >
+        gryt
+      </span>
+      <div className="relative max-w-[1180px] mx-auto">
         <div className="eyebrow eyebrow-blue mb-4">Runner resources</div>
+
         <h2 className="display-condensed uppercase text-[clamp(34px,6vw,76px)] leading-[0.94] max-w-[16ch]">
           Make your run look
           <br />
@@ -3763,7 +3770,7 @@ function ResourcesBlock() {
 
           <Link
             to="/resources"
-            className="group relative block border border-paper/25 p-6 sm:p-7 hover:border-blue transition-colors"
+            className="group relative block border border-paper/25 bg-ink/60 backdrop-blur-[2px] p-6 sm:p-7 hover:border-blue transition-colors"
           >
             <div
               className="text-[11px] tracking-[0.22em] uppercase mb-3 text-blue"
