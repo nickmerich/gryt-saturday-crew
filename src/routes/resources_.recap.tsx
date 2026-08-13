@@ -421,7 +421,7 @@ function RecapGeneratorPage() {
       </section>
 
       <section className="px-5 sm:px-10 lg:px-20 py-10 md:py-14">
-        <div className="max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-[minmax(0,1fr),minmax(0,460px)] gap-10 lg:gap-14 items-start">
+        <div className="max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,460px)] gap-10 lg:gap-14 items-start">
           {/* ── Steps ── */}
           <div className="order-2 lg:order-1 flex flex-col gap-10">
             {/* Step 1 */}
