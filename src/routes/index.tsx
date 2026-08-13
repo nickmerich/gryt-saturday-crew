@@ -3770,7 +3770,7 @@ function ResourcesBlock() {
 
           <Link
             to="/resources"
-            className="group relative block border border-paper/25 p-6 sm:p-7 hover:border-blue transition-colors"
+            className="group relative block border border-paper/25 bg-ink/60 backdrop-blur-[2px] p-6 sm:p-7 hover:border-blue transition-colors"
           >
             <div
               className="text-[11px] tracking-[0.22em] uppercase mb-3 text-blue"
