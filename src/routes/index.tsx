@@ -17,6 +17,7 @@ import photo7 from "@/assets/photos/run-club-7.jpg.asset.json";
 import photo8 from "@/assets/photos/run-club-8.jpg.asset.json";
 import nickLauraAsset from "@/assets/photos/nick-laura.jpg.asset.json";
 import grytBearAsset from "@/assets/gryt-bear.png.asset.json";
+import insuranceAsset from "@/assets/certificate-of-insurance.pdf.asset.json";
 import { SupportBlock } from "@/components/SupportBlock";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 
@@ -2702,8 +2703,23 @@ function Footer() {
               >
                 Terms
               </Link>
+              <a
+                href="/faq"
+                className="eyebrow text-paper/75 hover:text-blue transition-colors"
+              >
+                FAQ
+              </a>
+              <a
+                href={insuranceAsset.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="eyebrow text-paper/75 hover:text-blue transition-colors"
+              >
+                Proof of Insurance
+              </a>
             </div>
           </div>
+
           <div className="flex-1 min-w-[260px] basis-[320px]">
             <div className="flex items-center gap-2.5 mb-4">
               <MonogramG className="h-14 w-14" />
