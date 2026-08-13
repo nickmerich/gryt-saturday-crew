@@ -250,6 +250,20 @@ export function SiteFooter() {
               >
                 Terms
               </Link>
+              <a
+                href="/faq"
+                className="eyebrow text-paper/75 hover:text-blue transition-colors"
+              >
+                FAQ
+              </a>
+              <a
+                href={insuranceAsset.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="eyebrow text-paper/75 hover:text-blue transition-colors"
+              >
+                Proof of Insurance
+              </a>
             </div>
           </div>
           <div className="flex-1 min-w-[260px] basis-[320px]">
