@@ -17,6 +17,7 @@ import photo7 from "@/assets/photos/run-club-7.jpg.asset.json";
 import photo8 from "@/assets/photos/run-club-8.jpg.asset.json";
 import nickLauraAsset from "@/assets/photos/nick-laura.jpg.asset.json";
 import grytBearAsset from "@/assets/gryt-bear.png.asset.json";
+import insuranceAsset from "@/assets/certificate-of-insurance.pdf.asset.json";
 import { SupportBlock } from "@/components/SupportBlock";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 
