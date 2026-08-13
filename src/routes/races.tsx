@@ -3,7 +3,7 @@ import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 
 const SITE = "https://grytrunclub.com";
 const URL = `${SITE}/races`;
-const TITLE = "Pittsburgh Races 2026 · Upcoming Races & Training Guide · gryt run club";
+const TITLE = "Pittsburgh Races 2026 · Training Guide · gryt run club";
 const DESCRIPTION =
   "Upcoming Pittsburgh races in 2026 — Pittsburgh Marathon, Peters Township 5Ks, South Hills trail runs. Pick your goal and train with GRYT.";
 
