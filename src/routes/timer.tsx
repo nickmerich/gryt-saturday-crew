@@ -180,9 +180,9 @@ function TimerPage() {
       {/* Header */}
       <header className="border-b border-white/10 px-6 sm:px-10 py-6 flex items-center justify-between">
         <div>
-          <div className="text-[11px] tracking-[0.22em] uppercase text-white/50">
+          <h1 className="text-[11px] tracking-[0.22em] uppercase text-white/50 font-body font-normal">
             GRYT · Event Timer
-          </div>
+          </h1>
           <input
             value={eventTitle}
             onChange={(e) => setEventTitle(e.target.value)}
