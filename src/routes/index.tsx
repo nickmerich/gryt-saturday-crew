@@ -2719,16 +2719,8 @@ function Footer() {
             </p>
           </div>
         </div>
-        <div className="border-t border-paper/15 pt-10 pb-2">
-          <Link
-            to="/resources/recap"
-            className="inline-flex items-center gap-3 px-5 py-3 border border-blue text-blue text-[12px] tracking-[0.22em] uppercase hover:bg-blue hover:text-ink transition-colors"
-            style={{ fontFamily: "var(--font-mono, ui-monospace, monospace)" }}
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-blue" aria-hidden="true" />
-            Recap Run Generator · Open →
-          </Link>
-        </div>
+        <div className="border-t border-paper/15 pt-10 pb-2" />
+
         <RecommendationsBar />
         <div className="flex justify-between gap-4 pt-8 flex-wrap eyebrow text-paper/40">
           <span>© 2026 GRYT Run Club. All rights reserved.</span>
@@ -3729,6 +3721,74 @@ function NewsletterBar() {
   );
 }
 
+function ResourcesBlock() {
+  return (
+    <section
+      id="resources"
+      className="relative overflow-hidden bg-ink text-paper py-20 md:py-28 px-6 sm:px-12 lg:px-24 border-t border-paper/15"
+    >
+      <div className="max-w-[1180px] mx-auto">
+        <div className="eyebrow eyebrow-blue mb-4">Runner resources</div>
+        <h2 className="display-condensed uppercase text-[clamp(34px,6vw,76px)] leading-[0.94] max-w-[16ch]">
+          Make your run look
+          <br />
+          as good as it felt.
+        </h2>
+        <p className="mt-6 max-w-[54ch] text-[15px] sm:text-[17px] leading-[1.65] text-paper/75">
+          Free tools for the crew. Turn any run into a branded recap graphic in
+          under a minute, then post it and pull someone else off the couch.
+        </p>
+
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 max-w-[860px]">
+          <Link
+            to="/resources/recap"
+            className="group relative block border-2 border-blue bg-blue text-ink p-6 sm:p-7 hover:bg-paper hover:border-paper transition-colors"
+          >
+            <div
+              className="text-[11px] tracking-[0.22em] uppercase mb-3"
+              style={{ fontFamily: "var(--font-mono, ui-monospace, monospace)" }}
+            >
+              Featured tool
+            </div>
+            <div className="display-condensed uppercase text-[clamp(26px,3.6vw,40px)] leading-[0.98]">
+              Recap run generator
+            </div>
+            <div className="mt-3 text-[14px] leading-[1.6] text-ink/75">
+              Connect Strava or Garmin, pick a style, share it.
+            </div>
+            <div className="mt-6 text-[12px] tracking-[0.22em] uppercase font-bold">
+              Open →
+            </div>
+          </Link>
+
+          <Link
+            to="/resources"
+            className="group relative block border border-paper/25 p-6 sm:p-7 hover:border-blue transition-colors"
+          >
+            <div
+              className="text-[11px] tracking-[0.22em] uppercase mb-3 text-blue"
+              style={{ fontFamily: "var(--font-mono, ui-monospace, monospace)" }}
+            >
+              More
+            </div>
+            <div className="display-condensed uppercase text-[clamp(26px,3.6vw,40px)] leading-[0.98]">
+              All resources
+            </div>
+            <div className="mt-3 text-[14px] leading-[1.6] text-paper/70">
+              Route notes, first-timer guides, and crew stories.
+            </div>
+            <div className="mt-6 text-[12px] tracking-[0.22em] uppercase font-bold text-blue">
+              Browse →
+            </div>
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+
 
 
 function Landing() {
@@ -3739,6 +3799,8 @@ function Landing() {
       <Hero />
       <Marquee />
       <RSVP />
+      <ResourcesBlock />
+
       <CorePromise />
       <WeeklyRhythm />
       <WhoItsFor />
