@@ -74,6 +74,41 @@
   border-top: 2px solid rgba(0, 0, 0, 0.9);
 }
 
+@utility grit-panel {
+  position: relative;
+  background-color: var(--vintage);
+  border-top: 2px solid var(--blue);
+  border-bottom: 2px solid var(--blue);
+  background-image:
+    repeating-linear-gradient(
+      82deg,
+      transparent 0px,
+      transparent 118px,
+      color-mix(in oklab, var(--blue) 14%, transparent) 118px,
+      color-mix(in oklab, var(--blue) 14%, transparent) 132px,
+      transparent 132px,
+      transparent 190px,
+      color-mix(in oklab, var(--blue) 7%, transparent) 190px,
+      color-mix(in oklab, var(--blue) 7%, transparent) 226px,
+      transparent 226px,
+      transparent 420px
+    ),
+    radial-gradient(
+      120% 90% at 12% 0%,
+      color-mix(in oklab, var(--blue) 12%, transparent) 0%,
+      transparent 60%
+    );
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='180' height='180' filter='url(%23n)' opacity='0.55'/></svg>");
+  }
+}
+
 @utility photo-hover {
   transition: filter 300ms ease-out, transform 400ms ease-out;
   will-change: transform, filter;
