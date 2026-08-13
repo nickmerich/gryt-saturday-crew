@@ -3799,6 +3799,8 @@ function Landing() {
       <Hero />
       <Marquee />
       <RSVP />
+      <ResourcesBlock />
+
       <CorePromise />
       <WeeklyRhythm />
       <WhoItsFor />
