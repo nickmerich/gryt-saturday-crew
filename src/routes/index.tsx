@@ -91,7 +91,7 @@ const EVENT_DATES = nextSaturdayISOs(12);
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Do Hard Things Together · Pittsburgh Running Group · South Hills Run Club · gryt" },
+      { title: "Pittsburgh Running Group · South Hills Run Club · gryt" },
       {
         name: "description",
         content:
