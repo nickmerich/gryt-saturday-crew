@@ -49,7 +49,7 @@ export const Route = createFileRoute("/resources_/recap")({
 
 const DEFAULTS: RecapForm = {
   title: "SATURDAY RUN",
-  date: "JUN 21 · 2026",
+  date: formatDate(new Date()),
   location: "PITTSBURGH, PA",
   distance: "6.2",
   time: "52:18",
