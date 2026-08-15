@@ -49,7 +49,7 @@ export const Route = createFileRoute("/resources_/recap")({
 
 const DEFAULTS: RecapForm = {
   title: "SATURDAY RUN",
-  date: "JUN 21 · 2026",
+  date: formatDate(new Date()),
   location: "PITTSBURGH, PA",
   distance: "6.2",
   time: "52:18",
@@ -617,7 +617,6 @@ function RecapGeneratorPage() {
                 <SecondaryBtn onClick={challengeFriend} disabled={!acceptedTerms}>
                   Challenge a friend
                 </SecondaryBtn>
-                <GhostBtn onClick={startOver}>Make another</GhostBtn>
                 <GhostBtn onClick={startOver}>Start over</GhostBtn>
               </div>
 
