@@ -617,7 +617,6 @@ function RecapGeneratorPage() {
                 <SecondaryBtn onClick={challengeFriend} disabled={!acceptedTerms}>
                   Challenge a friend
                 </SecondaryBtn>
-                <GhostBtn onClick={startOver}>Make another</GhostBtn>
                 <GhostBtn onClick={startOver}>Start over</GhostBtn>
               </div>
 
