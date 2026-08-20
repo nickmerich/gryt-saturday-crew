@@ -3402,7 +3402,7 @@ function NewsletterBar() {
   if (hydrated && dismissed) return null;
 
   return (
-    <div className="sticky top-[68px] z-40 bg-blue text-ink border-y-2 border-ink shadow-[0_6px_0_-2px_rgba(0,0,0,0.15),0_18px_40px_-20px_rgba(0,0,0,0.55)]">
+    <div className="relative sticky top-[68px] z-40 bg-blue text-ink border-y-2 border-ink shadow-[0_6px_0_-2px_rgba(0,0,0,0.15),0_18px_40px_-20px_rgba(0,0,0,0.55)]">
       {/* Screen-reader announcement for resend state transitions */}
       <div role="status" aria-live="polite" aria-atomic="true" className="sr-only">
         {resendAnnouncement}
@@ -3442,8 +3442,11 @@ function NewsletterBar() {
             >
               DO HARD THINGS TOGETHER
             </span>
-            <span className="eyebrow text-ink/70 text-[10px] sm:text-[11px] tracking-[0.16em]">
-              EMAIL DROPS EVERY FRIDAY
+            <span className="eyebrow text-ink/70 text-[10px] sm:text-[11px] tracking-[0.16em] leading-[1.35]">
+              <span className="sm:hidden">BIWEEKLY · RUNS, EVENTS, MERCH</span>
+              <span className="hidden sm:inline">
+                BIWEEKLY · RUNS, EVENTS, MERCH, PARTNERS, RESOURCES
+              </span>
             </span>
           </div>
         </div>
@@ -3497,7 +3500,7 @@ function NewsletterBar() {
                 Confirm your email.
               </span>
               <span className="text-[12px] sm:text-[13px] text-ink/75 font-medium">
-                We just sent a confirmation link — click it to lock in Friday drops.
+                We just sent a confirmation link — click it to lock in the biweekly drop.
               </span>
               <span className="text-[11px] sm:text-[12px] text-ink/70 mt-1 flex flex-wrap items-center gap-x-1.5 gap-y-0.5">
                 {resendStatus === "sent" ? (
@@ -3566,7 +3569,7 @@ function NewsletterBar() {
           <form
             onSubmit={onSubmit}
             noValidate
-            aria-label="Subscribe to the GRYT Saturday brief"
+            aria-label="Subscribe to the biweekly GRYT email"
             className="flex flex-1 min-w-[240px] items-stretch gap-0 bg-paper border-2 border-ink shadow-[3px_3px_0_var(--ink)]"
           >
             <label htmlFor="nl-email" className="sr-only">Email address</label>
@@ -3627,7 +3630,7 @@ function NewsletterBar() {
               <path d="M8 10V7a4 4 0 0 1 8 0v3" />
             </svg>
             <span>
-              One email a week. No spam, no sharing. Unsubscribe any time.{" "}
+              Biweekly. No spam, no sharing. Unsubscribe any time.{" "}
               <Link
                 to="/privacy"
                 className="underline underline-offset-2 decoration-ink/40 hover:decoration-ink font-medium"
@@ -3639,7 +3642,7 @@ function NewsletterBar() {
           </p>
         )}
         <span id="nl-email-hint" className="sr-only">
-          Enter your email to receive the weekly Saturday brief. We only use it to send the newsletter and you can unsubscribe any time.
+          Enter your email to receive the biweekly GRYT email. We only use it to send the newsletter and you can unsubscribe any time.
         </span>
         <p
           id="nl-status"
