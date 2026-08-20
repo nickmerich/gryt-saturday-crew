@@ -3442,8 +3442,11 @@ function NewsletterBar() {
             >
               DO HARD THINGS TOGETHER
             </span>
-            <span className="eyebrow text-ink/70 text-[10px] sm:text-[11px] tracking-[0.16em]">
-              EMAIL DROPS EVERY FRIDAY
+            <span className="eyebrow text-ink/70 text-[10px] sm:text-[11px] tracking-[0.16em] leading-[1.35]">
+              <span className="sm:hidden">BIWEEKLY · RUNS, EVENTS, MERCH</span>
+              <span className="hidden sm:inline">
+                BIWEEKLY · RUNS, EVENTS, MERCH, PARTNERS, RESOURCES
+              </span>
             </span>
           </div>
         </div>
