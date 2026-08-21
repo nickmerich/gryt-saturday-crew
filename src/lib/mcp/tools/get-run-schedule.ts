@@ -1,5 +1,6 @@
 import { defineTool, type ToolContext } from "@lovable.dev/mcp-js";
 import { guardToolAccess } from "../public-allowlist";
+import { nextRunNumber, nextSaturdayISODate, nextSaturdayLabel } from "@/lib/run-schedule";
 
 const TOOL_NAME = "get_run_schedule";
 
@@ -19,6 +20,9 @@ export default defineTool({
         meetingPoint: "212 Valley Brook Road, McMurray, PA",
         pace: "Easy, conversational. All paces welcome.",
         notes: "Coffee after. No signup required — just show up.",
+        nextRunNumber: nextRunNumber(),
+        nextRunDate: nextSaturdayISODate(),
+        nextRunLabel: nextSaturdayLabel(),
       },
     ];
     const payload = guardToolAccess(TOOL_NAME, ctx.isAuthenticated(), { runs });
