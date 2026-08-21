@@ -7,8 +7,6 @@ import { captureAttribution, getSignupAttribution } from "@/lib/attribution";
 import { useHeroVariant } from "@/lib/ab-hero";
 import { track } from "@/lib/analytics";
 import {
-  nextSaturday,
-  nextRunNumber,
   nextSaturdayLabel,
   nextSaturdayLabelLong,
   nextSaturdayISOs,

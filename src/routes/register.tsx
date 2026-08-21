@@ -2,12 +2,13 @@ import { createFileRoute, Link } from '@tanstack/react-router';
 import { useState } from 'react';
 import { StripeEventEntryCheckout } from '@/components/StripeEmbeddedCheckout';
 import { PaymentTestModeBanner } from '@/components/PaymentTestModeBanner';
+import { nextRunNumber, nextSaturdayLabelLong } from '@/lib/run-schedule';
 
 const EVENT = {
   id: 'gryt_saturday_long_run',
-  name: 'GRYT Saturday Long Run',
+  name: `GRYT Saturday Long Run — Run #${nextRunNumber()}`,
   amountInCents: 2500,
-  date: 'Saturday · 7:00 AM',
+  date: nextSaturdayLabelLong(),
   location: 'Montour / Peters Trail · McMurray, PA',
   description:
     'Timed group run with bib, aid support, post-run coffee, and a finisher photo. Walk, jog, or race — everyone finishes.',
