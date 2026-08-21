@@ -84,7 +84,7 @@ export const template = {
     name: 'Jamie Doe',
     contact: 'jamie@example.com',
     source: 'Instagram',
-    eventLabel: 'GRYT Run #11 · Sat, Jun 27 · 7 AM',
+    eventLabel: 'GRYT Saturday Run · 7 AM',
     submittedAt: new Date().toISOString(),
   },
 } satisfies TemplateEntry

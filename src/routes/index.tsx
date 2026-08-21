@@ -6,6 +6,13 @@ import { submitRecommendation } from "@/lib/recommendations.functions";
 import { captureAttribution, getSignupAttribution } from "@/lib/attribution";
 import { useHeroVariant } from "@/lib/ab-hero";
 import { track } from "@/lib/analytics";
+import {
+  nextSaturdayLabel,
+  nextSaturdayLabelLong,
+  nextSaturdayISOs,
+  nextSaturdayIcsDataUrl,
+  nextSaturdayIcsFilename,
+} from "@/lib/run-schedule";
 import photo1 from "@/assets/photos/run-club-1.jpg.asset.json";
 import photo2 from "@/assets/photos/run-club-2.jpg.asset.json";
 import photo3 from "@/assets/photos/run-club-3.jpg.asset.json";
@@ -73,20 +80,6 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
 const SITE_URL = "https://grytrunclub.com";
 const ABS_HERO_IMG = heroImg.startsWith("http") ? heroImg : `${SITE_URL}${heroImg}`;
 
-// Next 12 Saturday 7am occurrences for the recurring event schema.
-function nextSaturdayISOs(count: number): string[] {
-  const out: string[] = [];
-  const d = new Date();
-  d.setUTCHours(11, 0, 0, 0); // 7:00 AM America/New_York ~= 11:00 UTC (EST). Best-effort.
-  const day = d.getUTCDay();
-  const add = (6 - day + 7) % 7 || 7;
-  d.setUTCDate(d.getUTCDate() + add);
-  for (let i = 0; i < count; i++) {
-    out.push(d.toISOString());
-    d.setUTCDate(d.getUTCDate() + 7);
-  }
-  return out;
-}
 const EVENT_DATES = nextSaturdayISOs(12);
 
 export const Route = createFileRoute("/")({
@@ -237,94 +230,6 @@ export const SAT_CAL_URL =
   "&location=" + encodeURIComponent("212 Valley Brook Rd, McMurray, PA 15317") +
   "&details=" + encodeURIComponent("All paces. All parents. 7 AM sharp. Coffee in the lot after. Strava: " + STRAVA_CLUB);
 
-
-// Dynamic label for the next Saturday run. Anchored so run # stays correct.
-// Anchor: Run #11 == 2026-06-27 (Sat). Weekly cadence.
-const RUN_ANCHOR_MS = Date.UTC(2026, 7, 15); // Aug 15, 2026 UTC
-const RUN_ANCHOR_NUMBER = 16;
-function nextSaturday(from: Date = new Date()): Date {
-  const d = new Date(from);
-  d.setHours(0, 0, 0, 0);
-  const day = d.getDay(); // 0=Sun..6=Sat
-  // Always advance to the upcoming Saturday. If today is Saturday, roll to next week.
-  const add = day === 6 ? 7 : (6 - day + 7) % 7;
-  d.setDate(d.getDate() + add);
-  return d;
-}
-function nextRunNumber(from: Date = new Date()): number {
-  const sat = nextSaturday(from);
-  const satUTC = Date.UTC(sat.getFullYear(), sat.getMonth(), sat.getDate());
-  const weeks = Math.round((satUTC - RUN_ANCHOR_MS) / (7 * 24 * 60 * 60 * 1000));
-  return RUN_ANCHOR_NUMBER + weeks;
-}
-function nextSaturdayLabel(from: Date = new Date()): string {
-  const sat = nextSaturday(from);
-  const md = sat.toLocaleDateString("en-US", { month: "short", day: "numeric" });
-  return `GRYT Run #${nextRunNumber(from)} · Sat, ${md} · 7 AM`;
-}
-function nextSaturdayLabelLong(from: Date = new Date()): string {
-  const sat = nextSaturday(from);
-  const md = sat.toLocaleDateString("en-US", { month: "short", day: "numeric" });
-  return `GRYT Run #${nextRunNumber(from)} · Sat, ${md} · 7:00 AM`;
-}
-
-// Build a downloadable .ics for the next Saturday 7:00 AM run (America/New_York).
-function nextSaturdayIcsDataUrl(from: Date = new Date()): string {
-  const sat = nextSaturday(from);
-  const y = sat.getFullYear();
-  const m = String(sat.getMonth() + 1).padStart(2, "0");
-  const d = String(sat.getDate()).padStart(2, "0");
-  const runNum = nextRunNumber(from);
-  const dtStart = `${y}${m}${d}T070000`;
-  const dtEnd = `${y}${m}${d}T080000`;
-  const dtStamp = new Date().toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
-  const uid = `gryt-run-${y}${m}${d}@grytrunclub.com`;
-  const esc = (s: string) => s.replace(/[\\,;]/g, (c) => "\\" + c).replace(/\n/g, "\\n");
-  const lines = [
-    "BEGIN:VCALENDAR",
-    "VERSION:2.0",
-    "PRODID:-//GRYT Run Club//EN",
-    "CALSCALE:GREGORIAN",
-    "METHOD:PUBLISH",
-    "BEGIN:VTIMEZONE",
-    "TZID:America/New_York",
-    "BEGIN:STANDARD",
-    "DTSTART:20071104T020000",
-    "RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU",
-    "TZOFFSETFROM:-0400",
-    "TZOFFSETTO:-0500",
-    "TZNAME:EST",
-    "END:STANDARD",
-    "BEGIN:DAYLIGHT",
-    "DTSTART:20070311T020000",
-    "RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU",
-    "TZOFFSETFROM:-0500",
-    "TZOFFSETTO:-0400",
-    "TZNAME:EDT",
-    "END:DAYLIGHT",
-    "END:VTIMEZONE",
-    "BEGIN:VEVENT",
-    `UID:${uid}`,
-    `DTSTAMP:${dtStamp}`,
-    `DTSTART;TZID=America/New_York:${dtStart}`,
-    `DTEND;TZID=America/New_York:${dtEnd}`,
-    `SUMMARY:${esc(`GRYT Run #${runNum} — Saturday Morning`)}`,
-    `LOCATION:${esc("212 Valley Brook Rd, McMurray, PA 15317")}`,
-    `DESCRIPTION:${esc("All paces. All parents. 7 AM sharp. Coffee in the lot after. https://grytrunclub.com")}`,
-    "URL:https://grytrunclub.com",
-    "END:VEVENT",
-    "END:VCALENDAR",
-  ];
-  return "data:text/calendar;charset=utf-8," + encodeURIComponent(lines.join("\r\n"));
-}
-
-function nextSaturdayIcsFilename(from: Date = new Date()): string {
-  const sat = nextSaturday(from);
-  const y = sat.getFullYear();
-  const m = String(sat.getMonth() + 1).padStart(2, "0");
-  const d = String(sat.getDate()).padStart(2, "0");
-  return `gryt-run-${y}-${m}-${d}.ics`;
-}
 
 // Milliseconds until the next Saturday 7:00 AM in America/New_York.
 // Uses toLocaleString to translate "now" into NY wall time so DST is handled

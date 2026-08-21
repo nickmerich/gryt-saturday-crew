@@ -22,7 +22,7 @@ interface Props {
 
 const Email = ({
   name,
-  eventLabel = 'GRYT Run #11 · Sat, Jun 27 · 7:00 AM',
+  eventLabel = 'GRYT Saturday Run · 7:00 AM',
   calendarUrl,
   stravaUrl = 'https://www.strava.com/clubs/1708552',
 }: Props) => {
@@ -90,7 +90,7 @@ export const template = {
   displayName: 'RSVP confirmation (runner)',
   previewData: {
     name: 'Jamie',
-    eventLabel: 'GRYT Run #11 · Sat, Jun 27 · 7:00 AM',
+    eventLabel: 'GRYT Saturday Run · 7:00 AM',
     calendarUrl: 'https://calendar.google.com/calendar/render',
     stravaUrl: 'https://www.strava.com/clubs/1708552',
   },

@@ -4,6 +4,7 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import { createFileRoute } from '@tanstack/react-router'
 import { z } from 'zod'
 import { TEMPLATES } from '@/lib/email-templates/registry'
+import { nextRunNumber, nextSaturdayISODate, nextSaturdayLabel } from '@/lib/run-schedule'
 
 const SITE_NAME = 'gryt-saturday-crew'
 const SENDER_DOMAIN = 'notify.gryt.club'
@@ -191,7 +192,7 @@ export const Route = createFileRoute('/api/public/rsvp')({
 
         const rsvpId = inserted.id as string
         const resolvedEventLabel =
-          eventLabel?.trim() || 'GRYT Run #11 · Sat, Jun 27 · 7 AM'
+          eventLabel?.trim() || nextSaturdayLabel()
 
         // 2. Owner notification (always)
         try {
@@ -216,11 +217,12 @@ export const Route = createFileRoute('/api/public/rsvp')({
         const contactIsEmail = isEmail(contact.trim())
         if (contactIsEmail) {
           try {
+            const calDay = nextSaturdayISODate().replace(/-/g, '')
             const calHref =
               'https://calendar.google.com/calendar/render?action=TEMPLATE' +
               '&text=' +
-              encodeURIComponent('GRYT Run #11') +
-              '&dates=20260627T110000Z/20260627T120000Z' +
+              encodeURIComponent(`GRYT Run #${nextRunNumber()}`) +
+              `&dates=${calDay}T110000Z/${calDay}T120000Z` +
               '&details=' +
               encodeURIComponent(
                 'GRYT Run Club — Saturday 7 AM. Walk, jog, or run the Montour/Peters Trail. No one gets dropped. https://www.strava.com/clubs/1708552',
