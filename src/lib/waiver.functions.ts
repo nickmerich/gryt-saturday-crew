@@ -143,6 +143,45 @@ export const signWaiver = createServerFn({ method: "POST" })
       durationMs: Date.now() - startedAt,
     });
 
+    // Fire-and-forget Notion roster sync — never block the response.
+    // Closes the funnel leak: waiver emails/phones now reach the Members DB.
+    try {
+      const { syncWaiverToNotion } = await import("@/lib/notion/waiver-sync.server");
+      void syncWaiverToNotion({
+        full_name: data.full_name.trim(),
+        email: data.email.trim().toLowerCase(),
+        phone: data.phone?.trim() || null,
+        signed_on: row.signed_on as string,
+      })
+        .then(async (res) => {
+          logWaiver("notion_synced", { emailHash, id: row.id, action: res.action });
+          await supabase
+            .from("waiver_signatures")
+            .update({
+              notion_synced: true,
+              notion_member_page_id: res.memberPageId,
+              notion_synced_at: new Date().toISOString(),
+              notion_last_error: null,
+            })
+            .eq("id", row.id);
+        })
+        .catch(async (err) => {
+          const msg = err instanceof Error ? err.message : String(err);
+          logWaiver("notion_sync_failed", { emailHash, id: row.id, message: msg });
+          await supabase
+            .from("waiver_signatures")
+            .update({ notion_last_error: msg.slice(0, 1000) })
+            .eq("id", row.id)
+            .then(() => {});
+        });
+    } catch (err) {
+      logWaiver("notion_sync_failed", {
+        emailHash,
+        id: row.id,
+        message: err instanceof Error ? err.message : String(err),
+      });
+    }
+
     // Fire-and-forget confirmation email — never block the response.
     try {
       const { sendInternalTransactionalEmail } = await import(

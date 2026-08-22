@@ -17,7 +17,7 @@ function headers() {
   }
 }
 
-async function notionFetch(path: string, init: RequestInit = {}) {
+export async function notionFetch(path: string, init: RequestInit = {}) {
   const res = await fetch(`${GATEWAY}${path}`, {
     ...init,
     headers: { ...headers(), ...(init.headers || {}) },

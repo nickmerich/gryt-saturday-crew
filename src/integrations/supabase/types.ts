@@ -288,6 +288,10 @@ export type Database = {
           signed_on: string
           user_agent: string | null
           waiver_version: string
+          notion_synced: boolean
+          notion_member_page_id: string | null
+          notion_synced_at: string | null
+          notion_last_error: string | null
         }
         Insert: {
           created_at?: string
@@ -304,6 +308,10 @@ export type Database = {
           signed_on?: string
           user_agent?: string | null
           waiver_version?: string
+          notion_synced?: boolean
+          notion_member_page_id?: string | null
+          notion_synced_at?: string | null
+          notion_last_error?: string | null
         }
         Update: {
           created_at?: string
@@ -320,6 +328,10 @@ export type Database = {
           signed_on?: string
           user_agent?: string | null
           waiver_version?: string
+          notion_synced?: boolean
+          notion_member_page_id?: string | null
+          notion_synced_at?: string | null
+          notion_last_error?: string | null
         }
         Relationships: []
       }
