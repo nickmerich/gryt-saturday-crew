@@ -77,6 +77,12 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
   { q: "What is the after like?", a: "We hang in the parking lot after the run with coffee, water, and sometimes fruit. Stay for 10 minutes or stay for an hour. Either way, you are invited." },
 ];
 
+import {
+  REGULARS_LABEL,
+  STRAVA_MEMBERS_LABEL,
+  FOUNDER_MARATHONS,
+} from "@/lib/club-stats";
+
 const SITE_URL = "https://grytrunclub.com";
 const ABS_HERO_IMG = heroImg.startsWith("http") ? heroImg : `${SITE_URL}${heroImg}`;
 
@@ -372,7 +378,7 @@ function MissionStamp({
       <span className="relative inline-block">
         together.
         <span
-          className="absolute left-[-2px] right-[-2px] bottom-[0.1em] h-[0.12em] bg-blue"
+          className="absolute left-[-2px] right-[-2px] -bottom-[0.08em] h-[0.1em] bg-blue"
           style={{ transform: "skewX(-8deg)" }}
           aria-hidden
         />
@@ -451,9 +457,9 @@ function Nav() {
 
 function Hero() {
   const stats: Array<[string, string]> = [
-    ["15+", "regulars each Saturday"],
-    ["53", "runners on Strava"],
-    ["27", "From beginner to marathon runners — the founders Laura & Nick combined"],
+    [REGULARS_LABEL, "regulars each Saturday"],
+    [STRAVA_MEMBERS_LABEL, "runners on Strava"],
+    [String(FOUNDER_MARATHONS), "marathons between the founders"],
   ];
 
   // Sticky 50/50 A/B on the hero headline + subcopy. Variant A is the current
@@ -467,7 +473,7 @@ function Hero() {
     <section
       id="top"
       data-hero-variant={variant ?? "a"}
-      className="relative overflow-hidden text-paper bg-ink py-16 md:py-24 lg:py-28 px-6 sm:px-12 lg:px-24"
+      className="relative overflow-hidden text-paper bg-ink py-10 md:py-24 lg:py-28 px-6 sm:px-12 lg:px-24"
     >
       <div
         className="absolute inset-0"
@@ -492,13 +498,13 @@ function Hero() {
         }}
       />
 
-      <div className="relative max-w-[1240px] mx-auto flex flex-wrap items-center gap-10 lg:gap-16">
+      <div className="relative max-w-[1240px] mx-auto flex flex-wrap items-center gap-8 lg:gap-16">
         <div className="flex-1 min-w-[300px] basis-[480px]">
-          <div className="eyebrow-blue eyebrow mb-6 flex items-center gap-2.5 flex-wrap">
+          <div className="eyebrow-blue eyebrow mb-4 md:mb-6 flex items-center gap-2.5 flex-wrap">
             <span className="w-2 h-2 bg-blue rounded-full" />
             THE GO-TO SOUTH HILLS PITTSBURGH PARENTS RUN CLUB
           </div>
-          <h1 className="display-condensed text-paper text-[clamp(44px,7.2vw,108px)] leading-[0.9] [word-spacing:-0.02em] break-words">
+          <h1 className="display-condensed text-paper text-[clamp(38px,7.2vw,108px)] leading-[0.9] [word-spacing:-0.02em] break-words">
             {isB ? (
               <>
                 Do hard things
@@ -506,7 +512,7 @@ function Hero() {
                 <span className="relative inline-block">
                   together.
                   <span
-                    className="absolute left-[-2px] right-[-2px] bottom-[0.06em] h-[0.11em] bg-blue"
+                    className="absolute left-[-2px] right-[-2px] -bottom-[0.1em] h-[0.09em] bg-blue"
                     style={{ transform: "skewX(-8deg)" }}
                   />
                 </span>
@@ -518,7 +524,7 @@ function Hero() {
                 <span className="relative inline-block">
                   ATHLETIC PARENTS.
                   <span
-                    className="absolute left-[-2px] right-[-2px] bottom-[0.06em] h-[0.11em] bg-blue"
+                    className="absolute left-[-2px] right-[-2px] -bottom-[0.1em] h-[0.09em] bg-blue"
                     style={{ transform: "skewX(-8deg)" }}
                   />
                 </span>
@@ -527,8 +533,8 @@ function Hero() {
             )}
           </h1>
 
-          <div className="mt-7 max-w-[540px] flex flex-col gap-3.5">
-            <p className="text-lg leading-[1.55] text-paper/85">
+          <div className="mt-4 md:mt-7 max-w-[540px] flex flex-col gap-3">
+            <p className="text-[15px] md:text-lg leading-[1.5] md:leading-[1.55] text-paper/85">
               {isB
                 ? "GRYT is a free Pittsburgh running group and South Hills run club — 7 AM sharp Saturdays on the Montour / Peters Trail in McMurray. Former athletes. Busy parents. Comeback runners. Same trail, same time, every week."
                 : "GRYT is a free Pittsburgh running group and South Hills run club for former athletes, busy parents, and comeback runners who miss having a team. We meet every Saturday at 7 AM on the Montour / Peters Trail in McMurray. Come walk, jog, or run and do the hard thing together."}
@@ -538,15 +544,15 @@ function Hero() {
             </p>
           </div>
 
-          <div className="mt-7 flex flex-wrap border border-paper/20 max-w-[560px]">
+          <div className="mt-5 md:mt-7 flex flex-wrap border border-paper/20 max-w-[560px]">
             {stats.map(([n, l], i) => (
               <div
                 key={l}
-                className={`flex-1 basis-[130px] px-4 py-4 ${
+                className={`flex-1 basis-[104px] px-3 py-3 md:px-4 md:py-4 ${
                   i !== stats.length - 1 ? "border-r border-paper/15" : ""
                 }`}
               >
-                <div className="display-condensed text-blue text-[34px] leading-[0.85]">{n}</div>
+                <div className="display-condensed text-blue text-[26px] md:text-[34px] leading-[0.85]">{n}</div>
                 <div className="text-[11px] font-semibold tracking-[0.06em] text-paper/70 mt-1.5 uppercase">
                   {l}
                 </div>
@@ -554,7 +560,7 @@ function Hero() {
             ))}
           </div>
 
-          <div className="mt-7 flex flex-wrap gap-3.5">
+          <div className="mt-5 md:mt-7 flex flex-wrap gap-3">
             <a href="#join" className="btn-primary">
               RSVP for Saturday →
             </a>
@@ -575,7 +581,7 @@ function Hero() {
             <img
               src={heroImgAsset.url}
               alt="GRYT runner at night — motion, grit, and forward momentum"
-              className="block w-full h-[520px] object-cover"
+              className="block w-full h-[300px] md:h-[520px] object-cover"
             />
             <div className="absolute left-0 right-0 bottom-0 flex items-end justify-between gap-3 px-4 pt-5 pb-4 bg-gradient-to-t from-black/85 to-transparent">
               <span className="display-condensed text-paper text-[22px] leading-none">
@@ -597,7 +603,7 @@ function Marquee() {
     "Do hard things together",
     "Real people",
     "Real miles",
-    "10+ regulars",
+    `${REGULARS_LABEL} regulars`,
     "All paces welcome",
     "Do hard things together",
     "Free forever",
@@ -2044,10 +2050,10 @@ function AffiliationList({ name, items }: { name: string; items: string[] }) {
 
 function Founders() {
   const stats: Array<[string, string]> = [
-    ["27", "marathons — Nick & Laura, combined"],
+    [String(FOUNDER_MARATHONS), "marathons — Nick & Laura, combined"],
     ["2014", "running together since"],
-    ["9–15", "regulars each Saturday"],
-    ["38", "total Strava members"],
+    [REGULARS_LABEL, "regulars each Saturday"],
+    [STRAVA_MEMBERS_LABEL, "total Strava members"],
   ];
 
   return (
