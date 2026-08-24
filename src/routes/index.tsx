@@ -1157,8 +1157,6 @@ function CorePromise() {
   );
 }
 
-}
-
 
 function WhoItsFor() {
   const cards = [
