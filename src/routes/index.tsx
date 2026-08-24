@@ -3661,9 +3661,7 @@ function ResourcesBlock() {
         <div className="eyebrow eyebrow-blue mb-4">Runner resources</div>
 
         <h2 className="display-condensed uppercase text-[clamp(34px,6vw,76px)] leading-[0.94] max-w-[16ch]">
-          Make your run look
-          <br />
-          as good as it felt.
+          MAKE RUNNING FUN.
         </h2>
         <p className="mt-6 max-w-[54ch] text-[15px] sm:text-[17px] leading-[1.65] text-paper/75">
           Free tools for the crew. Turn any run into a branded recap graphic in
