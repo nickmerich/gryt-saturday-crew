@@ -3152,7 +3152,6 @@ function NewsletterBar() {
   const [touched, setTouched] = useState(false);
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [msg, setMsg] = useState<string | null>(null);
-  const [hydrated, setHydrated] = useState(false);
   const [submittedEmail, setSubmittedEmail] = useState<string | null>(null);
   const [resendStatus, setResendStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [resendMsg, setResendMsg] = useState<string | null>(null);
@@ -3194,7 +3193,6 @@ function NewsletterBar() {
       safeStorage.remove(NEWSLETTER_RESEND_UNTIL_KEY);
       safeStorage.remove(NEWSLETTER_RESEND_EMAIL_KEY);
     }
-    setHydrated(true);
   }, []);
 
   // Countdown timer for resend cooldown (throttles repeat clicks).
