@@ -2843,31 +2843,22 @@ function WeeklyRhythm() {
 
         <div className="mt-14 grid grid-cols-1 gap-6 lg:gap-7">
 
-          <article
-            className="relative overflow-hidden border border-ink/10 p-7 md:p-10 flex flex-col text-ink"
-            style={{
-              background:
-                "linear-gradient(160deg, #ffe8b8 0%, #ffd28a 35%, #f8b15a 70%, #e88f4a 100%)",
-            }}
-          >
+          <article className="relative overflow-hidden bone-panel border-2 border-ink p-7 md:p-10 flex flex-col text-ink">
             <div
               aria-hidden
-              className="absolute -top-24 -right-24 w-[280px] h-[280px] rounded-full"
+              className="pointer-events-none absolute inset-y-0 right-0 w-24 opacity-60"
               style={{
-                background:
-                  "radial-gradient(circle, rgba(255,255,255,0.85) 0%, rgba(255,210,138,0) 65%)",
+                backgroundImage:
+                  "repeating-linear-gradient(-20deg, var(--blue) 0 10px, transparent 10px 22px)",
+                maskImage: "linear-gradient(to left, black, transparent)",
+                WebkitMaskImage: "linear-gradient(to left, black, transparent)",
               }}
             />
-            <div
-              aria-hidden
-              className="absolute top-6 right-7 text-[44px] leading-none select-none"
-            >
-              ☀️
-            </div>
+            <div aria-hidden className="absolute left-0 top-0 h-1.5 w-full bg-blue" />
 
             <div className="relative flex flex-col gap-6 sm:gap-8">
-              <header className="flex flex-col gap-3 sm:gap-4 pr-14 sm:pr-0">
-                <div className="eyebrow" style={{ color: "#7a3a0e" }}>
+              <header className="flex flex-col gap-3 sm:gap-4">
+                <div className="eyebrow" style={{ color: "#3a7ca5" }}>
                   Saturday · GRYT Run
                 </div>
                 <h3 className="display-condensed text-ink text-[clamp(30px,9vw,56px)] leading-[0.95]">
@@ -3308,12 +3299,12 @@ function NewsletterBar() {
 
   const disableSubmit = status === "loading" || !validation.ok;
 
-  // Avoid hydration mismatch: render the bar on the server, then hide it
-  // client-side if the visitor has previously dismissed it.
-  if (hydrated && dismissed) return null;
-
   return (
-    <div className="relative sticky top-[68px] z-40 bg-blue text-ink border-y-2 border-ink shadow-[0_6px_0_-2px_rgba(0,0,0,0.15),0_18px_40px_-20px_rgba(0,0,0,0.55)]">
+    <section
+      id="newsletter"
+      aria-labelledby="newsletter-heading"
+      className="relative bg-blue text-ink border-y-2 border-ink"
+    >
       {/* Screen-reader announcement for resend state transitions */}
       <div role="status" aria-live="polite" aria-atomic="true" className="sr-only">
         {resendAnnouncement}
@@ -3340,7 +3331,7 @@ function NewsletterBar() {
         }}
       />
 
-      <div className="relative max-w-[1180px] mx-auto flex items-center gap-3 sm:gap-6 px-3 sm:px-8 md:px-12 pr-10 sm:pr-16 py-3 sm:py-3.5 flex-wrap">
+      <div className="relative max-w-[1180px] mx-auto flex items-center gap-3 sm:gap-6 px-6 sm:px-12 lg:px-24 py-8 sm:py-10 flex-wrap">
         <div className="flex items-center gap-3 shrink-0 basis-full sm:basis-auto">
           <span
             aria-hidden
@@ -3349,7 +3340,8 @@ function NewsletterBar() {
           />
           <div className="flex flex-col leading-tight">
             <span
-              className="display-condensed text-ink text-[14px] sm:text-[17px] tracking-[0.02em]"
+              id="newsletter-heading"
+              className="display-condensed text-ink text-[18px] sm:text-[22px] tracking-[0.02em]"
             >
               DO HARD THINGS TOGETHER
             </span>
@@ -3361,28 +3353,6 @@ function NewsletterBar() {
             </span>
           </div>
         </div>
-
-        {/* Dismiss — absolute so it never eats form width */}
-        <button
-          type="button"
-          onClick={handleDismiss}
-          aria-label="Dismiss newsletter bar"
-          className="absolute top-2 right-2 sm:top-1/2 sm:right-4 sm:-translate-y-1/2 inline-flex h-8 w-8 items-center justify-center text-ink/70 hover:text-ink hover:bg-ink/10 transition-colors"
-        >
-          <svg
-            aria-hidden
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            className="h-4 w-4"
-          >
-            <line x1="6" y1="6" x2="18" y2="18" />
-            <line x1="18" y1="6" x2="6" y2="18" />
-          </svg>
-        </button>
-
 
         {status === "done" ? (
           <div
