@@ -1065,11 +1065,10 @@ function RSVP() {
 
 
 function CorePromise() {
-  const cards = [
+  const stats = [
     {
       stat: "1 IN 5",
       headline: "Feel lonely or isolated most or all of the time.",
-      body: "This is not rare, and it is not just a bad week. A meaningful share of Americans say loneliness is part of normal life now.",
       source: "Pew Research Center, 2025",
       sourceUrl:
         "https://www.pewresearch.org/short-reads/2025/03/06/how-many-americans-say-they-are-lonely/",
@@ -1077,19 +1076,8 @@ function CorePromise() {
         "Pew Research Center survey on how often U.S. adults report feeling lonely or isolated (2025).",
     },
     {
-      stat: "UNDER 50\nGETS HIT HARDER",
-      headline: "Adults in the busy years feel it most.",
-      body: "Pew found 22% of adults under 50 feel lonely or isolated all or most of the time, versus 9% of adults 50 and older. That is the exact life stage where routines break and community gets thin.",
-      source: "Pew Research Center, 2025",
-      sourceUrl:
-        "https://www.pewresearch.org/short-reads/2025/03/06/how-many-americans-say-they-are-lonely/",
-      sourceDetail:
-        "Age breakdown of loneliness rates from Pew Research Center's 2025 survey of U.S. adults.",
-    },
-    {
       stat: "73%",
       headline: "Say technology contributes to loneliness.",
-      body: "We are more connected digitally and less connected in real life. More notifications did not give people a crew, a ritual, or someone to notice when they stopped showing up.",
       source: "Harvard Making Caring Common, 2024",
       sourceUrl: "https://mcc.gse.harvard.edu/reports/on-edge",
       sourceDetail:
@@ -1098,97 +1086,15 @@ function CorePromise() {
     {
       stat: "75%",
       headline: "Say more community events would help.",
-      body: "People are not asking for more content. They are asking for more places to go, more reasons to gather, and more ways to see the same people every week.",
       source: "Harvard Making Caring Common, 2024",
       sourceUrl: "https://mcc.gse.harvard.edu/reports/on-edge",
       sourceDetail:
         "Harvard Making Caring Common survey on what Americans say would reduce loneliness (2024).",
     },
-    {
-      stat: "CONNECTION\nIS HEALTH",
-      headline: "Social connection is not extra. It is foundational.",
-      body: "CDC says social connection supports mental and physical health, and the Surgeon General warns that loneliness and isolation raise the risk of serious health harms. A run club is not just fitness. It is protective structure.",
-      source: "CDC + U.S. Surgeon General",
-      sourceUrl:
-        "https://www.hhs.gov/surgeongeneral/priorities/connection/index.html",
-      sourceDetail:
-        "U.S. Surgeon General's Advisory on the Healing Effects of Social Connection and Community, plus CDC guidance on social connection and health.",
-    },
   ];
 
-
-  const scrollerRef = useRef<HTMLDivElement | null>(null);
-  const cardRefs = useRef<Array<HTMLElement | null>>([]);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const focusCard = (index: number) => {
-    const clamped = Math.max(0, Math.min(cards.length - 1, index));
-    const el = cardRefs.current[clamped];
-    if (!el) return;
-    el.focus();
-    el.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
-    setActiveIndex(clamped);
-  };
-
-  const scrollBy = (dir: 1 | -1) => {
-    focusCard(activeIndex + dir);
-  };
-
-  // Track active card as user scrolls (touch / trackpad)
-  useEffect(() => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    let raf = 0;
-    const onScroll = () => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        const scrollerRect = el.getBoundingClientRect();
-        let best = 0;
-        let bestDist = Infinity;
-        cardRefs.current.forEach((card, i) => {
-          if (!card) return;
-          const r = card.getBoundingClientRect();
-          const d = Math.abs(r.left - scrollerRect.left);
-          if (d < bestDist) {
-            bestDist = d;
-            best = i;
-          }
-        });
-        setActiveIndex(best);
-      });
-    };
-    el.addEventListener("scroll", onScroll, { passive: true });
-    return () => {
-      el.removeEventListener("scroll", onScroll);
-      cancelAnimationFrame(raf);
-    };
-  }, []);
-
-  const onCardKeyDown = (e: React.KeyboardEvent<HTMLElement>, index: number) => {
-    switch (e.key) {
-      case "ArrowRight":
-        e.preventDefault();
-        focusCard(index + 1);
-        break;
-      case "ArrowLeft":
-        e.preventDefault();
-        focusCard(index - 1);
-        break;
-      case "Home":
-        e.preventDefault();
-        focusCard(0);
-        break;
-      case "End":
-        e.preventDefault();
-        focusCard(cards.length - 1);
-        break;
-    }
-  };
-
-  const active = cards[activeIndex];
-
   return (
-    <section className="relative overflow-hidden bg-ink text-paper py-24 md:py-32">
+    <section className="relative overflow-hidden bg-ink text-paper py-20 md:py-28">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -1198,80 +1104,36 @@ function CorePromise() {
           WebkitMaskImage: "radial-gradient(ellipse at 90% 0%, #000, transparent 65%)",
         }}
       />
-      <div className="relative">
-        <div className="max-w-[1180px] mx-auto px-6 sm:px-12 lg:px-24">
-          <div className="eyebrow eyebrow-blue mb-6">The data behind the feeling</div>
-          <h2 className="display-condensed text-paper text-[clamp(36px,5.4vw,78px)] leading-[0.95] max-w-[980px] mb-8">
-            Loneliness is not a you problem. It is what adult life looks like when everything gets{" "}
-            <span className="text-blue">fragmented.</span>
-          </h2>
-          <p className="text-[18px] leading-[1.6] text-paper/75 max-w-[720px]">
-            Work. Kids. Screens. Commutes. Group chats that are not real community. Most adults are
-            not failing at connection — they are living in a system that makes real connection
-            harder to keep. That is why IRL clubs like GRYT matter.
-          </p>
+      <div className="relative max-w-[1180px] mx-auto px-6 sm:px-12 lg:px-24">
+        <div className="eyebrow eyebrow-blue mb-6">The data behind the feeling</div>
+        <h2 className="display-condensed text-paper text-[clamp(34px,5.4vw,78px)] leading-[0.95] max-w-[980px] mb-6">
+          Loneliness is not a you problem. It is what adult life looks like when everything gets{" "}
+          <span className="text-blue">fragmented.</span>
+        </h2>
+        <p className="text-[17px] leading-[1.6] text-paper/75 max-w-[720px]">
+          Most adults are not failing at connection — they are living in a system that makes real
+          connection harder to keep. That is why IRL clubs like GRYT matter.
+        </p>
 
-          <div className="hidden md:flex items-center gap-3 justify-end mt-10 mb-4">
-            <button
-              type="button"
-              onClick={() => scrollBy(-1)}
-              aria-label="Previous stat"
-              aria-controls="stats-carousel"
-              className="h-11 w-11 border-2 border-paper/30 text-paper hover:border-blue hover:text-blue transition-colors inline-flex items-center justify-center"
-            >
-              ←
-            </button>
-            <button
-              type="button"
-              onClick={() => scrollBy(1)}
-              aria-label="Next stat"
-              aria-controls="stats-carousel"
-              className="h-11 w-11 border-2 border-paper/30 text-paper hover:border-blue hover:text-blue transition-colors inline-flex items-center justify-center"
-            >
-              →
-            </button>
-          </div>
-        </div>
-
-        <div
-          id="stats-carousel"
-          ref={scrollerRef}
-          role="region"
-          aria-roledescription="carousel"
-          aria-label="Data on loneliness and connection"
-          className="mt-4 flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth px-6 sm:px-12 lg:px-24 pb-6"
-          style={{ scrollbarWidth: "none" }}
-        >
-          {cards.map((c, i) => (
+        <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 border-t-2 border-l-2 border-paper/20">
+          {stats.map((c) => (
             <article
-              key={i}
-              data-stat-card
-              ref={(el) => {
-                cardRefs.current[i] = el;
-              }}
-              tabIndex={i === activeIndex ? 0 : -1}
-              role="group"
-              aria-roledescription="slide"
-              aria-label={`${i + 1} of ${cards.length}: ${c.headline}`}
-              aria-current={i === activeIndex ? "true" : undefined}
-              onKeyDown={(e) => onCardKeyDown(e, i)}
-              onFocus={() => setActiveIndex(i)}
-              className="snap-start shrink-0 w-[85vw] sm:w-[440px] md:w-[460px] border-2 border-paper/20 bg-black/40 p-8 md:p-10 flex flex-col focus:outline-none focus-visible:border-blue focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+              key={c.stat}
+              className="border-r-2 border-b-2 border-paper/20 p-6 md:p-8 flex flex-col"
             >
-              <div className="display-condensed text-blue text-[clamp(44px,5.6vw,72px)] leading-[0.92] whitespace-pre-line mb-6">
+              <div className="display-condensed text-blue text-[clamp(40px,5vw,64px)] leading-[0.92] mb-4">
                 {c.stat}
               </div>
-              <h3 className="display-condensed text-paper text-[22px] md:text-[26px] leading-[1.1] mb-4 uppercase">
+              <h3 className="display-condensed text-paper text-[18px] md:text-[21px] leading-[1.15] uppercase mb-5">
                 {c.headline}
               </h3>
-              <p className="text-[15px] leading-[1.6] text-paper/75 mb-6">{c.body}</p>
               <a
                 href={c.sourceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 title={c.sourceDetail}
                 aria-label={`Source: ${c.source}. ${c.sourceDetail} Opens in a new tab.`}
-                className="mt-auto inline-flex items-center gap-1.5 self-start eyebrow text-paper/50 border-b border-paper/20 pb-0.5 hover:text-blue hover:border-blue focus-visible:text-blue focus-visible:border-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ink transition-colors"
+                className="mt-auto inline-flex items-center gap-1.5 self-start eyebrow text-paper/50 border-b border-paper/20 pb-0.5 hover:text-blue hover:border-blue transition-colors"
               >
                 <span>Source · {c.source}</span>
                 <span aria-hidden="true">↗</span>
@@ -1280,14 +1142,8 @@ function CorePromise() {
           ))}
         </div>
 
-        {/* Screen-reader-only live region announcing the active card */}
-        <div className="sr-only" aria-live="polite" aria-atomic="true">
-          {`Card ${activeIndex + 1} of ${cards.length}: ${active.stat.replace(/\n/g, " ")}. ${active.headline}`}
-        </div>
-
-
-        <div className="max-w-[1180px] mx-auto px-6 sm:px-12 lg:px-24 mt-14 md:mt-20">
-          <p className="display-condensed text-paper text-[clamp(28px,3.8vw,52px)] leading-[1.02] max-w-[900px]">
+        <div className="mt-12 md:mt-16">
+          <p className="display-condensed text-paper text-[clamp(26px,3.8vw,52px)] leading-[1.02] max-w-[900px]">
             You do not need another app.
             <br />
             <span className="text-blue">You need a place to be expected.</span>
@@ -1299,6 +1155,8 @@ function CorePromise() {
       </div>
     </section>
   );
+}
+
 }
 
 
