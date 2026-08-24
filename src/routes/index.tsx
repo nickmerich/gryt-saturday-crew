@@ -275,7 +275,7 @@ function RunCountdown({ className = "" }: { className?: string }) {
 
   const label = live
     ? "We're running right now"
-    : `Until ${nextSaturdayLabel()}`;
+    : `UNTIL ${nextSaturdayLabel().toUpperCase()}`;
 
   return (
     <div
