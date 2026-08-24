@@ -77,6 +77,12 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
   { q: "What is the after like?", a: "We hang in the parking lot after the run with coffee, water, and sometimes fruit. Stay for 10 minutes or stay for an hour. Either way, you are invited." },
 ];
 
+import {
+  REGULARS_LABEL,
+  STRAVA_MEMBERS_LABEL,
+  FOUNDER_MARATHONS,
+} from "@/lib/club-stats";
+
 const SITE_URL = "https://grytrunclub.com";
 const ABS_HERO_IMG = heroImg.startsWith("http") ? heroImg : `${SITE_URL}${heroImg}`;
 
@@ -372,7 +378,7 @@ function MissionStamp({
       <span className="relative inline-block">
         together.
         <span
-          className="absolute left-[-2px] right-[-2px] bottom-[0.1em] h-[0.12em] bg-blue"
+          className="absolute left-[-2px] right-[-2px] -bottom-[0.08em] h-[0.1em] bg-blue"
           style={{ transform: "skewX(-8deg)" }}
           aria-hidden
         />
@@ -451,9 +457,9 @@ function Nav() {
 
 function Hero() {
   const stats: Array<[string, string]> = [
-    ["15+", "regulars each Saturday"],
-    ["53", "runners on Strava"],
-    ["27", "From beginner to marathon runners — the founders Laura & Nick combined"],
+    [REGULARS_LABEL, "regulars each Saturday"],
+    [STRAVA_MEMBERS_LABEL, "runners on Strava"],
+    [String(FOUNDER_MARATHONS), "marathons between the founders"],
   ];
 
   // Sticky 50/50 A/B on the hero headline + subcopy. Variant A is the current
@@ -467,7 +473,7 @@ function Hero() {
     <section
       id="top"
       data-hero-variant={variant ?? "a"}
-      className="relative overflow-hidden text-paper bg-ink py-16 md:py-24 lg:py-28 px-6 sm:px-12 lg:px-24"
+      className="relative overflow-hidden text-paper bg-ink py-10 md:py-24 lg:py-28 px-6 sm:px-12 lg:px-24"
     >
       <div
         className="absolute inset-0"
@@ -492,13 +498,13 @@ function Hero() {
         }}
       />
 
-      <div className="relative max-w-[1240px] mx-auto flex flex-wrap items-center gap-10 lg:gap-16">
+      <div className="relative max-w-[1240px] mx-auto flex flex-wrap items-center gap-8 lg:gap-16">
         <div className="flex-1 min-w-[300px] basis-[480px]">
-          <div className="eyebrow-blue eyebrow mb-6 flex items-center gap-2.5 flex-wrap">
+          <div className="eyebrow-blue eyebrow mb-4 md:mb-6 flex items-center gap-2.5 flex-wrap">
             <span className="w-2 h-2 bg-blue rounded-full" />
             THE GO-TO SOUTH HILLS PITTSBURGH PARENTS RUN CLUB
           </div>
-          <h1 className="display-condensed text-paper text-[clamp(44px,7.2vw,108px)] leading-[0.9] [word-spacing:-0.02em] break-words">
+          <h1 className="display-condensed text-paper text-[clamp(38px,7.2vw,108px)] leading-[0.9] [word-spacing:-0.02em] break-words">
             {isB ? (
               <>
                 Do hard things
@@ -506,7 +512,7 @@ function Hero() {
                 <span className="relative inline-block">
                   together.
                   <span
-                    className="absolute left-[-2px] right-[-2px] bottom-[0.06em] h-[0.11em] bg-blue"
+                    className="absolute left-[-2px] right-[-2px] -bottom-[0.1em] h-[0.09em] bg-blue"
                     style={{ transform: "skewX(-8deg)" }}
                   />
                 </span>
@@ -518,7 +524,7 @@ function Hero() {
                 <span className="relative inline-block">
                   ATHLETIC PARENTS.
                   <span
-                    className="absolute left-[-2px] right-[-2px] bottom-[0.06em] h-[0.11em] bg-blue"
+                    className="absolute left-[-2px] right-[-2px] -bottom-[0.1em] h-[0.09em] bg-blue"
                     style={{ transform: "skewX(-8deg)" }}
                   />
                 </span>
@@ -527,8 +533,8 @@ function Hero() {
             )}
           </h1>
 
-          <div className="mt-7 max-w-[540px] flex flex-col gap-3.5">
-            <p className="text-lg leading-[1.55] text-paper/85">
+          <div className="mt-4 md:mt-7 max-w-[540px] flex flex-col gap-3">
+            <p className="text-[15px] md:text-lg leading-[1.5] md:leading-[1.55] text-paper/85">
               {isB
                 ? "GRYT is a free Pittsburgh running group and South Hills run club — 7 AM sharp Saturdays on the Montour / Peters Trail in McMurray. Former athletes. Busy parents. Comeback runners. Same trail, same time, every week."
                 : "GRYT is a free Pittsburgh running group and South Hills run club for former athletes, busy parents, and comeback runners who miss having a team. We meet every Saturday at 7 AM on the Montour / Peters Trail in McMurray. Come walk, jog, or run and do the hard thing together."}
@@ -538,15 +544,15 @@ function Hero() {
             </p>
           </div>
 
-          <div className="mt-7 flex flex-wrap border border-paper/20 max-w-[560px]">
+          <div className="mt-5 md:mt-7 flex flex-wrap border border-paper/20 max-w-[560px]">
             {stats.map(([n, l], i) => (
               <div
                 key={l}
-                className={`flex-1 basis-[130px] px-4 py-4 ${
+                className={`flex-1 basis-[104px] px-3 py-3 md:px-4 md:py-4 ${
                   i !== stats.length - 1 ? "border-r border-paper/15" : ""
                 }`}
               >
-                <div className="display-condensed text-blue text-[34px] leading-[0.85]">{n}</div>
+                <div className="display-condensed text-blue text-[26px] md:text-[34px] leading-[0.85]">{n}</div>
                 <div className="text-[11px] font-semibold tracking-[0.06em] text-paper/70 mt-1.5 uppercase">
                   {l}
                 </div>
@@ -554,7 +560,7 @@ function Hero() {
             ))}
           </div>
 
-          <div className="mt-7 flex flex-wrap gap-3.5">
+          <div className="mt-5 md:mt-7 flex flex-wrap gap-3">
             <a href="#join" className="btn-primary">
               RSVP for Saturday →
             </a>
@@ -575,7 +581,7 @@ function Hero() {
             <img
               src={heroImgAsset.url}
               alt="GRYT runner at night — motion, grit, and forward momentum"
-              className="block w-full h-[520px] object-cover"
+              className="block w-full h-[300px] md:h-[520px] object-cover"
             />
             <div className="absolute left-0 right-0 bottom-0 flex items-end justify-between gap-3 px-4 pt-5 pb-4 bg-gradient-to-t from-black/85 to-transparent">
               <span className="display-condensed text-paper text-[22px] leading-none">
@@ -597,7 +603,7 @@ function Marquee() {
     "Do hard things together",
     "Real people",
     "Real miles",
-    "10+ regulars",
+    `${REGULARS_LABEL} regulars`,
     "All paces welcome",
     "Do hard things together",
     "Free forever",
@@ -1059,11 +1065,10 @@ function RSVP() {
 
 
 function CorePromise() {
-  const cards = [
+  const stats = [
     {
       stat: "1 IN 5",
       headline: "Feel lonely or isolated most or all of the time.",
-      body: "This is not rare, and it is not just a bad week. A meaningful share of Americans say loneliness is part of normal life now.",
       source: "Pew Research Center, 2025",
       sourceUrl:
         "https://www.pewresearch.org/short-reads/2025/03/06/how-many-americans-say-they-are-lonely/",
@@ -1071,19 +1076,8 @@ function CorePromise() {
         "Pew Research Center survey on how often U.S. adults report feeling lonely or isolated (2025).",
     },
     {
-      stat: "UNDER 50\nGETS HIT HARDER",
-      headline: "Adults in the busy years feel it most.",
-      body: "Pew found 22% of adults under 50 feel lonely or isolated all or most of the time, versus 9% of adults 50 and older. That is the exact life stage where routines break and community gets thin.",
-      source: "Pew Research Center, 2025",
-      sourceUrl:
-        "https://www.pewresearch.org/short-reads/2025/03/06/how-many-americans-say-they-are-lonely/",
-      sourceDetail:
-        "Age breakdown of loneliness rates from Pew Research Center's 2025 survey of U.S. adults.",
-    },
-    {
       stat: "73%",
       headline: "Say technology contributes to loneliness.",
-      body: "We are more connected digitally and less connected in real life. More notifications did not give people a crew, a ritual, or someone to notice when they stopped showing up.",
       source: "Harvard Making Caring Common, 2024",
       sourceUrl: "https://mcc.gse.harvard.edu/reports/on-edge",
       sourceDetail:
@@ -1092,97 +1086,15 @@ function CorePromise() {
     {
       stat: "75%",
       headline: "Say more community events would help.",
-      body: "People are not asking for more content. They are asking for more places to go, more reasons to gather, and more ways to see the same people every week.",
       source: "Harvard Making Caring Common, 2024",
       sourceUrl: "https://mcc.gse.harvard.edu/reports/on-edge",
       sourceDetail:
         "Harvard Making Caring Common survey on what Americans say would reduce loneliness (2024).",
     },
-    {
-      stat: "CONNECTION\nIS HEALTH",
-      headline: "Social connection is not extra. It is foundational.",
-      body: "CDC says social connection supports mental and physical health, and the Surgeon General warns that loneliness and isolation raise the risk of serious health harms. A run club is not just fitness. It is protective structure.",
-      source: "CDC + U.S. Surgeon General",
-      sourceUrl:
-        "https://www.hhs.gov/surgeongeneral/priorities/connection/index.html",
-      sourceDetail:
-        "U.S. Surgeon General's Advisory on the Healing Effects of Social Connection and Community, plus CDC guidance on social connection and health.",
-    },
   ];
 
-
-  const scrollerRef = useRef<HTMLDivElement | null>(null);
-  const cardRefs = useRef<Array<HTMLElement | null>>([]);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const focusCard = (index: number) => {
-    const clamped = Math.max(0, Math.min(cards.length - 1, index));
-    const el = cardRefs.current[clamped];
-    if (!el) return;
-    el.focus();
-    el.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
-    setActiveIndex(clamped);
-  };
-
-  const scrollBy = (dir: 1 | -1) => {
-    focusCard(activeIndex + dir);
-  };
-
-  // Track active card as user scrolls (touch / trackpad)
-  useEffect(() => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    let raf = 0;
-    const onScroll = () => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        const scrollerRect = el.getBoundingClientRect();
-        let best = 0;
-        let bestDist = Infinity;
-        cardRefs.current.forEach((card, i) => {
-          if (!card) return;
-          const r = card.getBoundingClientRect();
-          const d = Math.abs(r.left - scrollerRect.left);
-          if (d < bestDist) {
-            bestDist = d;
-            best = i;
-          }
-        });
-        setActiveIndex(best);
-      });
-    };
-    el.addEventListener("scroll", onScroll, { passive: true });
-    return () => {
-      el.removeEventListener("scroll", onScroll);
-      cancelAnimationFrame(raf);
-    };
-  }, []);
-
-  const onCardKeyDown = (e: React.KeyboardEvent<HTMLElement>, index: number) => {
-    switch (e.key) {
-      case "ArrowRight":
-        e.preventDefault();
-        focusCard(index + 1);
-        break;
-      case "ArrowLeft":
-        e.preventDefault();
-        focusCard(index - 1);
-        break;
-      case "Home":
-        e.preventDefault();
-        focusCard(0);
-        break;
-      case "End":
-        e.preventDefault();
-        focusCard(cards.length - 1);
-        break;
-    }
-  };
-
-  const active = cards[activeIndex];
-
   return (
-    <section className="relative overflow-hidden bg-ink text-paper py-24 md:py-32">
+    <section className="relative overflow-hidden bg-ink text-paper py-20 md:py-28">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -1192,80 +1104,36 @@ function CorePromise() {
           WebkitMaskImage: "radial-gradient(ellipse at 90% 0%, #000, transparent 65%)",
         }}
       />
-      <div className="relative">
-        <div className="max-w-[1180px] mx-auto px-6 sm:px-12 lg:px-24">
-          <div className="eyebrow eyebrow-blue mb-6">The data behind the feeling</div>
-          <h2 className="display-condensed text-paper text-[clamp(36px,5.4vw,78px)] leading-[0.95] max-w-[980px] mb-8">
-            Loneliness is not a you problem. It is what adult life looks like when everything gets{" "}
-            <span className="text-blue">fragmented.</span>
-          </h2>
-          <p className="text-[18px] leading-[1.6] text-paper/75 max-w-[720px]">
-            Work. Kids. Screens. Commutes. Group chats that are not real community. Most adults are
-            not failing at connection — they are living in a system that makes real connection
-            harder to keep. That is why IRL clubs like GRYT matter.
-          </p>
+      <div className="relative max-w-[1180px] mx-auto px-6 sm:px-12 lg:px-24">
+        <div className="eyebrow eyebrow-blue mb-6">The data behind the feeling</div>
+        <h2 className="display-condensed text-paper text-[clamp(34px,5.4vw,78px)] leading-[0.95] max-w-[980px] mb-6">
+          Loneliness is not a you problem. It is what adult life looks like when everything gets{" "}
+          <span className="text-blue">fragmented.</span>
+        </h2>
+        <p className="text-[17px] leading-[1.6] text-paper/75 max-w-[720px]">
+          Most adults are not failing at connection — they are living in a system that makes real
+          connection harder to keep. That is why IRL clubs like GRYT matter.
+        </p>
 
-          <div className="hidden md:flex items-center gap-3 justify-end mt-10 mb-4">
-            <button
-              type="button"
-              onClick={() => scrollBy(-1)}
-              aria-label="Previous stat"
-              aria-controls="stats-carousel"
-              className="h-11 w-11 border-2 border-paper/30 text-paper hover:border-blue hover:text-blue transition-colors inline-flex items-center justify-center"
-            >
-              ←
-            </button>
-            <button
-              type="button"
-              onClick={() => scrollBy(1)}
-              aria-label="Next stat"
-              aria-controls="stats-carousel"
-              className="h-11 w-11 border-2 border-paper/30 text-paper hover:border-blue hover:text-blue transition-colors inline-flex items-center justify-center"
-            >
-              →
-            </button>
-          </div>
-        </div>
-
-        <div
-          id="stats-carousel"
-          ref={scrollerRef}
-          role="region"
-          aria-roledescription="carousel"
-          aria-label="Data on loneliness and connection"
-          className="mt-4 flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth px-6 sm:px-12 lg:px-24 pb-6"
-          style={{ scrollbarWidth: "none" }}
-        >
-          {cards.map((c, i) => (
+        <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 border-t-2 border-l-2 border-paper/20">
+          {stats.map((c) => (
             <article
-              key={i}
-              data-stat-card
-              ref={(el) => {
-                cardRefs.current[i] = el;
-              }}
-              tabIndex={i === activeIndex ? 0 : -1}
-              role="group"
-              aria-roledescription="slide"
-              aria-label={`${i + 1} of ${cards.length}: ${c.headline}`}
-              aria-current={i === activeIndex ? "true" : undefined}
-              onKeyDown={(e) => onCardKeyDown(e, i)}
-              onFocus={() => setActiveIndex(i)}
-              className="snap-start shrink-0 w-[85vw] sm:w-[440px] md:w-[460px] border-2 border-paper/20 bg-black/40 p-8 md:p-10 flex flex-col focus:outline-none focus-visible:border-blue focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+              key={c.stat}
+              className="border-r-2 border-b-2 border-paper/20 p-6 md:p-8 flex flex-col"
             >
-              <div className="display-condensed text-blue text-[clamp(44px,5.6vw,72px)] leading-[0.92] whitespace-pre-line mb-6">
+              <div className="display-condensed text-blue text-[clamp(40px,5vw,64px)] leading-[0.92] mb-4">
                 {c.stat}
               </div>
-              <h3 className="display-condensed text-paper text-[22px] md:text-[26px] leading-[1.1] mb-4 uppercase">
+              <h3 className="display-condensed text-paper text-[18px] md:text-[21px] leading-[1.15] uppercase mb-5">
                 {c.headline}
               </h3>
-              <p className="text-[15px] leading-[1.6] text-paper/75 mb-6">{c.body}</p>
               <a
                 href={c.sourceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 title={c.sourceDetail}
                 aria-label={`Source: ${c.source}. ${c.sourceDetail} Opens in a new tab.`}
-                className="mt-auto inline-flex items-center gap-1.5 self-start eyebrow text-paper/50 border-b border-paper/20 pb-0.5 hover:text-blue hover:border-blue focus-visible:text-blue focus-visible:border-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ink transition-colors"
+                className="mt-auto inline-flex items-center gap-1.5 self-start eyebrow text-paper/50 border-b border-paper/20 pb-0.5 hover:text-blue hover:border-blue transition-colors"
               >
                 <span>Source · {c.source}</span>
                 <span aria-hidden="true">↗</span>
@@ -1274,14 +1142,8 @@ function CorePromise() {
           ))}
         </div>
 
-        {/* Screen-reader-only live region announcing the active card */}
-        <div className="sr-only" aria-live="polite" aria-atomic="true">
-          {`Card ${activeIndex + 1} of ${cards.length}: ${active.stat.replace(/\n/g, " ")}. ${active.headline}`}
-        </div>
-
-
-        <div className="max-w-[1180px] mx-auto px-6 sm:px-12 lg:px-24 mt-14 md:mt-20">
-          <p className="display-condensed text-paper text-[clamp(28px,3.8vw,52px)] leading-[1.02] max-w-[900px]">
+        <div className="mt-12 md:mt-16">
+          <p className="display-condensed text-paper text-[clamp(26px,3.8vw,52px)] leading-[1.02] max-w-[900px]">
             You do not need another app.
             <br />
             <span className="text-blue">You need a place to be expected.</span>
@@ -2044,10 +1906,10 @@ function AffiliationList({ name, items }: { name: string; items: string[] }) {
 
 function Founders() {
   const stats: Array<[string, string]> = [
-    ["27", "marathons — Nick & Laura, combined"],
+    [String(FOUNDER_MARATHONS), "marathons — Nick & Laura, combined"],
     ["2014", "running together since"],
-    ["9–15", "regulars each Saturday"],
-    ["38", "total Strava members"],
+    [REGULARS_LABEL, "regulars each Saturday"],
+    [STRAVA_MEMBERS_LABEL, "total Strava members"],
   ];
 
   return (
@@ -2837,31 +2699,22 @@ function WeeklyRhythm() {
 
         <div className="mt-14 grid grid-cols-1 gap-6 lg:gap-7">
 
-          <article
-            className="relative overflow-hidden border border-ink/10 p-7 md:p-10 flex flex-col text-ink"
-            style={{
-              background:
-                "linear-gradient(160deg, #ffe8b8 0%, #ffd28a 35%, #f8b15a 70%, #e88f4a 100%)",
-            }}
-          >
+          <article className="relative overflow-hidden bone-panel border-2 border-ink p-7 md:p-10 flex flex-col text-ink">
             <div
               aria-hidden
-              className="absolute -top-24 -right-24 w-[280px] h-[280px] rounded-full"
+              className="pointer-events-none absolute inset-y-0 right-0 w-24 opacity-60"
               style={{
-                background:
-                  "radial-gradient(circle, rgba(255,255,255,0.85) 0%, rgba(255,210,138,0) 65%)",
+                backgroundImage:
+                  "repeating-linear-gradient(-20deg, var(--blue) 0 10px, transparent 10px 22px)",
+                maskImage: "linear-gradient(to left, black, transparent)",
+                WebkitMaskImage: "linear-gradient(to left, black, transparent)",
               }}
             />
-            <div
-              aria-hidden
-              className="absolute top-6 right-7 text-[44px] leading-none select-none"
-            >
-              ☀️
-            </div>
+            <div aria-hidden className="absolute left-0 top-0 h-1.5 w-full bg-blue" />
 
             <div className="relative flex flex-col gap-6 sm:gap-8">
-              <header className="flex flex-col gap-3 sm:gap-4 pr-14 sm:pr-0">
-                <div className="eyebrow" style={{ color: "#7a3a0e" }}>
+              <header className="flex flex-col gap-3 sm:gap-4">
+                <div className="eyebrow" style={{ color: "#3a7ca5" }}>
                   Saturday · GRYT Run
                 </div>
                 <h3 className="display-condensed text-ink text-[clamp(30px,9vw,56px)] leading-[0.95]">
@@ -3110,7 +2963,6 @@ function validateEmail(raw: string): EmailValidation {
   return { ok: true };
 }
 
-const NEWSLETTER_DISMISS_KEY = "gryt.newsletter.dismissed";
 const NEWSLETTER_RESEND_UNTIL_KEY = "gryt.newsletter.resendUntil";
 const NEWSLETTER_RESEND_EMAIL_KEY = "gryt.newsletter.resendEmail";
 
@@ -3156,8 +3008,6 @@ function NewsletterBar() {
   const [touched, setTouched] = useState(false);
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [msg, setMsg] = useState<string | null>(null);
-  const [dismissed, setDismissed] = useState(false);
-  const [hydrated, setHydrated] = useState(false);
   const [submittedEmail, setSubmittedEmail] = useState<string | null>(null);
   const [resendStatus, setResendStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [resendMsg, setResendMsg] = useState<string | null>(null);
@@ -3188,9 +3038,6 @@ function NewsletterBar() {
 
   useEffect(() => {
     captureAttribution();
-    if (safeStorage.get(NEWSLETTER_DISMISS_KEY) === "1") {
-      setDismissed(true);
-    }
     const untilRaw = safeStorage.get(NEWSLETTER_RESEND_UNTIL_KEY);
     const savedEmail = safeStorage.get(NEWSLETTER_RESEND_EMAIL_KEY);
     const until = untilRaw ? parseInt(untilRaw, 10) : 0;
@@ -3202,7 +3049,6 @@ function NewsletterBar() {
       safeStorage.remove(NEWSLETTER_RESEND_UNTIL_KEY);
       safeStorage.remove(NEWSLETTER_RESEND_EMAIL_KEY);
     }
-    setHydrated(true);
   }, []);
 
   // Countdown timer for resend cooldown (throttles repeat clicks).
@@ -3215,11 +3061,6 @@ function NewsletterBar() {
     const id = setTimeout(() => setResendCooldown((c) => Math.max(0, c - 1)), 1000);
     return () => clearTimeout(id);
   }, [resendCooldown]);
-
-  function handleDismiss() {
-    setDismissed(true);
-    safeStorage.set(NEWSLETTER_DISMISS_KEY, "1");
-  }
 
   const validation = useMemo(() => validateEmail(email), [email]);
   const showFieldError = touched && !validation.ok && email.trim().length > 0;
@@ -3302,12 +3143,12 @@ function NewsletterBar() {
 
   const disableSubmit = status === "loading" || !validation.ok;
 
-  // Avoid hydration mismatch: render the bar on the server, then hide it
-  // client-side if the visitor has previously dismissed it.
-  if (hydrated && dismissed) return null;
-
   return (
-    <div className="relative sticky top-[68px] z-40 bg-blue text-ink border-y-2 border-ink shadow-[0_6px_0_-2px_rgba(0,0,0,0.15),0_18px_40px_-20px_rgba(0,0,0,0.55)]">
+    <section
+      id="newsletter"
+      aria-labelledby="newsletter-heading"
+      className="relative bg-blue text-ink border-y-2 border-ink"
+    >
       {/* Screen-reader announcement for resend state transitions */}
       <div role="status" aria-live="polite" aria-atomic="true" className="sr-only">
         {resendAnnouncement}
@@ -3334,7 +3175,7 @@ function NewsletterBar() {
         }}
       />
 
-      <div className="relative max-w-[1180px] mx-auto flex items-center gap-3 sm:gap-6 px-3 sm:px-8 md:px-12 pr-10 sm:pr-16 py-3 sm:py-3.5 flex-wrap">
+      <div className="relative max-w-[1180px] mx-auto flex items-center gap-3 sm:gap-6 px-6 sm:px-12 lg:px-24 py-8 sm:py-10 flex-wrap">
         <div className="flex items-center gap-3 shrink-0 basis-full sm:basis-auto">
           <span
             aria-hidden
@@ -3343,7 +3184,8 @@ function NewsletterBar() {
           />
           <div className="flex flex-col leading-tight">
             <span
-              className="display-condensed text-ink text-[14px] sm:text-[17px] tracking-[0.02em]"
+              id="newsletter-heading"
+              className="display-condensed text-ink text-[18px] sm:text-[22px] tracking-[0.02em]"
             >
               DO HARD THINGS TOGETHER
             </span>
@@ -3355,28 +3197,6 @@ function NewsletterBar() {
             </span>
           </div>
         </div>
-
-        {/* Dismiss — absolute so it never eats form width */}
-        <button
-          type="button"
-          onClick={handleDismiss}
-          aria-label="Dismiss newsletter bar"
-          className="absolute top-2 right-2 sm:top-1/2 sm:right-4 sm:-translate-y-1/2 inline-flex h-8 w-8 items-center justify-center text-ink/70 hover:text-ink hover:bg-ink/10 transition-colors"
-        >
-          <svg
-            aria-hidden
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            className="h-4 w-4"
-          >
-            <line x1="6" y1="6" x2="18" y2="18" />
-            <line x1="18" y1="6" x2="6" y2="18" />
-          </svg>
-        </button>
-
 
         {status === "done" ? (
           <div
@@ -3641,7 +3461,7 @@ function NewsletterBar() {
           </p>
         )}
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -3724,7 +3544,6 @@ function Landing() {
   return (
     <main className="bg-ink text-paper">
       <Nav />
-      <NewsletterBar />
       <Hero />
       <Marquee />
       <RSVP />
@@ -3744,6 +3563,7 @@ function Landing() {
       <FinalCTA />
       <SupportBlock />
       <PaymentTestModeBanner />
+      <NewsletterBar />
       <Footer />
     </main>
   );
