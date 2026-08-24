@@ -3107,7 +3107,6 @@ function validateEmail(raw: string): EmailValidation {
   return { ok: true };
 }
 
-const NEWSLETTER_DISMISS_KEY = "gryt.newsletter.dismissed";
 const NEWSLETTER_RESEND_UNTIL_KEY = "gryt.newsletter.resendUntil";
 const NEWSLETTER_RESEND_EMAIL_KEY = "gryt.newsletter.resendEmail";
 
@@ -3153,7 +3152,6 @@ function NewsletterBar() {
   const [touched, setTouched] = useState(false);
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [msg, setMsg] = useState<string | null>(null);
-  const [dismissed, setDismissed] = useState(false);
   const [hydrated, setHydrated] = useState(false);
   const [submittedEmail, setSubmittedEmail] = useState<string | null>(null);
   const [resendStatus, setResendStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
@@ -3185,9 +3183,6 @@ function NewsletterBar() {
 
   useEffect(() => {
     captureAttribution();
-    if (safeStorage.get(NEWSLETTER_DISMISS_KEY) === "1") {
-      setDismissed(true);
-    }
     const untilRaw = safeStorage.get(NEWSLETTER_RESEND_UNTIL_KEY);
     const savedEmail = safeStorage.get(NEWSLETTER_RESEND_EMAIL_KEY);
     const until = untilRaw ? parseInt(untilRaw, 10) : 0;
@@ -3212,11 +3207,6 @@ function NewsletterBar() {
     const id = setTimeout(() => setResendCooldown((c) => Math.max(0, c - 1)), 1000);
     return () => clearTimeout(id);
   }, [resendCooldown]);
-
-  function handleDismiss() {
-    setDismissed(true);
-    safeStorage.set(NEWSLETTER_DISMISS_KEY, "1");
-  }
 
   const validation = useMemo(() => validateEmail(email), [email]);
   const showFieldError = touched && !validation.ok && email.trim().length > 0;
@@ -3617,7 +3607,7 @@ function NewsletterBar() {
           </p>
         )}
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -3700,7 +3690,6 @@ function Landing() {
   return (
     <main className="bg-ink text-paper">
       <Nav />
-      <NewsletterBar />
       <Hero />
       <Marquee />
       <RSVP />
@@ -3720,6 +3709,7 @@ function Landing() {
       <FinalCTA />
       <SupportBlock />
       <PaymentTestModeBanner />
+      <NewsletterBar />
       <Footer />
     </main>
   );
