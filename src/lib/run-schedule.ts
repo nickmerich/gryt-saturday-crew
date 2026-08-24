@@ -1,7 +1,7 @@
 // Single source of truth for GRYT's Saturday run schedule and run numbering.
-// Anchor: Run #16 == Sat, Aug 15, 2026. Weekly cadence, 7:00 AM America/New_York.
-export const RUN_ANCHOR_MS = Date.UTC(2026, 7, 15);
-export const RUN_ANCHOR_NUMBER = 16;
+// Anchor: Run #18 == Sat, Sep 5, 2026. Weekly cadence, 7:00 AM America/New_York.
+export const RUN_ANCHOR_MS = Date.UTC(2026, 8, 5);
+export const RUN_ANCHOR_NUMBER = 18;
 
 export function nextSaturday(from: Date = new Date()): Date {
   const d = new Date(from);
