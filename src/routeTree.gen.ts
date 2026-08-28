@@ -41,6 +41,7 @@ import { Route as ResourcesPlaybooksGrytVsYinzRunClubRouteImport } from './route
 import { Route as ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRouteImport } from './routes/resources_.playbooks_.fleet-feet-pittsburgh-vs-independent-run-clubs'
 import { Route as ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026RouteImport } from './routes/resources_.playbooks_.best-free-running-clubs-pittsburgh-2026'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
+import { Route as LovableEmailEventsRouteImport } from './routes/lovable/email/events'
 import { Route as ApiPublicRsvpRouteImport } from './routes/api/public/rsvp'
 import { Route as ApiNewsletterSubscribeRouteImport } from './routes/api/newsletter/subscribe'
 import { Route as ApiNewsletterStatusRouteImport } from './routes/api/newsletter/status'
@@ -219,6 +220,11 @@ const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
   path: '/lovable/email/suppression',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LovableEmailEventsRoute = LovableEmailEventsRouteImport.update({
+  id: '/lovable/email/events',
+  path: '/lovable/email/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicRsvpRoute = ApiPublicRsvpRouteImport.update({
   id: '/api/public/rsvp',
   path: '/api/public/rsvp',
@@ -314,6 +320,7 @@ export interface FileRoutesByFullPath {
   '/api/newsletter/status': typeof ApiNewsletterStatusRoute
   '/api/newsletter/subscribe': typeof ApiNewsletterSubscribeRoute
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
+  '/lovable/email/events': typeof LovableEmailEventsRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/resources/playbooks/best-free-running-clubs-pittsburgh-2026': typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route
   '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs': typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute
@@ -359,6 +366,7 @@ export interface FileRoutesByTo {
   '/api/newsletter/status': typeof ApiNewsletterStatusRoute
   '/api/newsletter/subscribe': typeof ApiNewsletterSubscribeRoute
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
+  '/lovable/email/events': typeof LovableEmailEventsRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/resources/playbooks/best-free-running-clubs-pittsburgh-2026': typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route
   '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs': typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute
@@ -405,6 +413,7 @@ export interface FileRoutesById {
   '/api/newsletter/status': typeof ApiNewsletterStatusRoute
   '/api/newsletter/subscribe': typeof ApiNewsletterSubscribeRoute
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
+  '/lovable/email/events': typeof LovableEmailEventsRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/resources_/playbooks_/best-free-running-clubs-pittsburgh-2026': typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route
   '/resources_/playbooks_/fleet-feet-pittsburgh-vs-independent-run-clubs': typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute
@@ -452,6 +461,7 @@ export interface FileRouteTypes {
     | '/api/newsletter/status'
     | '/api/newsletter/subscribe'
     | '/api/public/rsvp'
+    | '/lovable/email/events'
     | '/lovable/email/suppression'
     | '/resources/playbooks/best-free-running-clubs-pittsburgh-2026'
     | '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs'
@@ -497,6 +507,7 @@ export interface FileRouteTypes {
     | '/api/newsletter/status'
     | '/api/newsletter/subscribe'
     | '/api/public/rsvp'
+    | '/lovable/email/events'
     | '/lovable/email/suppression'
     | '/resources/playbooks/best-free-running-clubs-pittsburgh-2026'
     | '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs'
@@ -542,6 +553,7 @@ export interface FileRouteTypes {
     | '/api/newsletter/status'
     | '/api/newsletter/subscribe'
     | '/api/public/rsvp'
+    | '/lovable/email/events'
     | '/lovable/email/suppression'
     | '/resources_/playbooks_/best-free-running-clubs-pittsburgh-2026'
     | '/resources_/playbooks_/fleet-feet-pittsburgh-vs-independent-run-clubs'
@@ -587,6 +599,7 @@ export interface RootRouteChildren {
   ApiNewsletterStatusRoute: typeof ApiNewsletterStatusRoute
   ApiNewsletterSubscribeRoute: typeof ApiNewsletterSubscribeRoute
   ApiPublicRsvpRoute: typeof ApiPublicRsvpRoute
+  LovableEmailEventsRoute: typeof LovableEmailEventsRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
   ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route: typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route
   ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute: typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute
@@ -825,6 +838,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LovableEmailSuppressionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lovable/email/events': {
+      id: '/lovable/email/events'
+      path: '/lovable/email/events'
+      fullPath: '/lovable/email/events'
+      preLoaderRoute: typeof LovableEmailEventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/rsvp': {
       id: '/api/public/rsvp'
       path: '/api/public/rsvp'
@@ -950,6 +970,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiNewsletterStatusRoute: ApiNewsletterStatusRoute,
   ApiNewsletterSubscribeRoute: ApiNewsletterSubscribeRoute,
   ApiPublicRsvpRoute: ApiPublicRsvpRoute,
+  LovableEmailEventsRoute: LovableEmailEventsRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
   ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route:
     ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route,
