@@ -1,14 +1,8 @@
-import * as React from 'react'
-import { render as renderAsync } from '@react-email/components'
 import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import { createFileRoute } from '@tanstack/react-router'
 import { z } from 'zod'
-import { TEMPLATES } from '@/lib/email-templates/registry'
+import { sendInternalTransactionalEmail } from '@/lib/email/send-internal.server'
 import { nextRunNumber, nextSaturdayISODate, nextSaturdayLabel } from '@/lib/run-schedule'
-
-const SITE_NAME = 'gryt-saturday-crew'
-const SENDER_DOMAIN = 'notify.gryt.club'
-const FROM_DOMAIN = 'notify.gryt.club'
 
 const isEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)
 
@@ -20,14 +14,6 @@ const RsvpSchema = z.object({
   heroVariant: z.enum(['a', 'b']).optional().nullable(),
 })
 
-function generateToken(): string {
-  const bytes = new Uint8Array(32)
-  crypto.getRandomValues(bytes)
-  return Array.from(bytes)
-    .map((b) => b.toString(16).padStart(2, '0'))
-    .join('')
-}
-
 function redactEmail(email: string | null | undefined): string {
   if (!email) return '***'
   const [localPart, domain] = email.split('@')
@@ -35,110 +21,18 @@ function redactEmail(email: string | null | undefined): string {
   return `${localPart[0]}***@${domain}`
 }
 
-async function enqueueTemplate(
-  supabase: SupabaseClient<any, 'public', any>,
+async function sendTemplate(
   templateName: string,
   recipientEmail: string,
   templateData: Record<string, any>,
   idempotencyKey: string,
 ) {
-  const entry = TEMPLATES[templateName]
-  if (!entry) throw new Error(`Template not found: ${templateName}`)
-
-  const effectiveRecipient = entry.to || recipientEmail
-  if (!effectiveRecipient) throw new Error('No recipient resolved')
-
-  const messageId = crypto.randomUUID()
-  const normalizedEmail = effectiveRecipient.toLowerCase()
-
-  // suppression check
-  const { data: suppressed } = await supabase
-    .from('suppressed_emails')
-    .select('id')
-    .eq('email', normalizedEmail)
-    .maybeSingle()
-
-  if (suppressed) {
-    await supabase.from('email_send_log').insert({
-      message_id: messageId,
-      template_name: templateName,
-      recipient_email: effectiveRecipient,
-      status: 'suppressed',
-    })
-    return { skipped: true, reason: 'suppressed' as const }
-  }
-
-  // unsubscribe token (one per address)
-  let unsubscribeToken: string
-  const { data: existingToken } = await supabase
-    .from('email_unsubscribe_tokens')
-    .select('token, used_at')
-    .eq('email', normalizedEmail)
-    .maybeSingle()
-
-  if (existingToken && !existingToken.used_at) {
-    unsubscribeToken = existingToken.token as string
-  } else if (!existingToken) {
-    unsubscribeToken = generateToken()
-    await supabase
-      .from('email_unsubscribe_tokens')
-      .upsert(
-        { token: unsubscribeToken, email: normalizedEmail },
-        { onConflict: 'email', ignoreDuplicates: true },
-      )
-    const { data: storedToken } = await supabase
-      .from('email_unsubscribe_tokens')
-      .select('token')
-      .eq('email', normalizedEmail)
-      .maybeSingle()
-    if (storedToken?.token) unsubscribeToken = storedToken.token as string
-  } else {
-    return { skipped: true, reason: 'suppressed' as const }
-  }
-
-  const element = React.createElement(entry.component, templateData)
-  const html = await renderAsync(element)
-  const text = await renderAsync(element, { plainText: true })
-  const subject =
-    typeof entry.subject === 'function' ? entry.subject(templateData) : entry.subject
-
-  await supabase.from('email_send_log').insert({
-    message_id: messageId,
-    template_name: templateName,
-    recipient_email: effectiveRecipient,
-    status: 'pending',
+  return sendInternalTransactionalEmail({
+    templateName,
+    recipientEmail,
+    templateData,
+    idempotencyKey,
   })
-
-  const { error: enqueueError } = await supabase.rpc('enqueue_email', {
-    queue_name: 'transactional_emails',
-    payload: {
-      message_id: messageId,
-      to: effectiveRecipient,
-      from: `${SITE_NAME} <noreply@${FROM_DOMAIN}>`,
-      sender_domain: SENDER_DOMAIN,
-      subject,
-      html,
-      text,
-      purpose: 'transactional',
-      label: templateName,
-      idempotency_key: idempotencyKey,
-      unsubscribe_token: unsubscribeToken,
-      queued_at: new Date().toISOString(),
-    },
-  })
-
-  if (enqueueError) {
-    await supabase.from('email_send_log').insert({
-      message_id: messageId,
-      template_name: templateName,
-      recipient_email: effectiveRecipient,
-      status: 'failed',
-      error_message: 'Failed to enqueue email',
-    })
-    throw enqueueError
-  }
-
-  return { skipped: false }
 }
 
 export const Route = createFileRoute('/api/public/rsvp')({
@@ -196,8 +90,7 @@ export const Route = createFileRoute('/api/public/rsvp')({
 
         // 2. Owner notification (always)
         try {
-          await enqueueTemplate(
-            supabase,
+          await sendTemplate(
             'rsvp-notification',
             '', // fixed `to:` in template
             {
@@ -230,8 +123,7 @@ export const Route = createFileRoute('/api/public/rsvp')({
               '&location=' +
               encodeURIComponent('212 Valley Brook Road, McMurray, PA')
 
-            await enqueueTemplate(
-              supabase,
+            await sendTemplate(
               'rsvp-confirmation',
               contact.trim(),
               {

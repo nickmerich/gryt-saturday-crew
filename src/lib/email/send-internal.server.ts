@@ -1,25 +1,35 @@
-import * as React from 'react'
-import { render } from '@react-email/components'
 import { createClient } from '@supabase/supabase-js'
+import { EmailAPIError } from '@lovable.dev/email-js'
+import { sendTemplateEmail } from '@/lib/email-templates/send-email'
 import { TEMPLATES } from '@/lib/email-templates/registry'
 
-const SITE_NAME = 'gryt-saturday-crew'
-const SENDER_DOMAIN = 'notify.gryt.club'
-const FROM_DOMAIN = 'notify.gryt.club'
-
-function generateToken(): string {
-  const bytes = new Uint8Array(32)
-  crypto.getRandomValues(bytes)
-  return Array.from(bytes)
-    .map((b) => b.toString(16).padStart(2, '0'))
-    .join('')
+/** Append-only audit row. Never decides the send result. */
+async function logSend(entry: {
+  templateName: string
+  recipientEmail: string
+  status: 'sent' | 'suppressed' | 'failed'
+  errorMessage?: string
+}): Promise<void> {
+  const supabaseUrl = process.env.SUPABASE_URL
+  const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+  if (!supabaseUrl || !supabaseServiceKey) return
+  const supabase = createClient(supabaseUrl, supabaseServiceKey)
+  const { error } = await supabase.from('email_send_log').insert({
+    message_id: null,
+    template_name: entry.templateName,
+    recipient_email: entry.recipientEmail,
+    status: entry.status,
+    error_message: entry.errorMessage ?? null,
+  })
+  if (error) {
+    console.error('email_send_log insert failed', { code: error.code, message: error.message })
+  }
 }
 
 /**
- * Server-only: render a registered template and enqueue it for the email queue.
- * Use this from public/unauthenticated server functions where there's no user JWT
- * (contact forms, recommendations, etc.). Authenticated flows should POST to
- * /lovable/email/transactional/send instead.
+ * Server-only: render a registered template and send it through Lovable's
+ * managed email API. Use this from public/unauthenticated server functions
+ * (contact forms, recommendations, RSVP, etc.).
  */
 export async function sendInternalTransactionalEmail(opts: {
   templateName: string
@@ -27,101 +37,53 @@ export async function sendInternalTransactionalEmail(opts: {
   templateData?: Record<string, any>
   idempotencyKey?: string
 }): Promise<{ ok: boolean; reason?: string }> {
-  const supabaseUrl = process.env.SUPABASE_URL
-  const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
-  if (!supabaseUrl || !supabaseServiceKey) {
-    console.error('sendInternalTransactionalEmail: missing env')
-    return { ok: false, reason: 'config' }
-  }
-
   const template = TEMPLATES[opts.templateName]
   if (!template) {
     console.error('sendInternalTransactionalEmail: template not found', opts.templateName)
     return { ok: false, reason: 'template_not_found' }
   }
 
-  const supabase = createClient(supabaseUrl, supabaseServiceKey)
-  const recipient = (template.to || opts.recipientEmail).toLowerCase()
-  const messageId = crypto.randomUUID()
-  const idempotencyKey = opts.idempotencyKey || messageId
+  const recipient = (template.to || opts.recipientEmail || '').toLowerCase()
+  if (!recipient) {
+    console.error('sendInternalTransactionalEmail: no recipient resolved')
+    return { ok: false, reason: 'no_recipient' }
+  }
 
-  // Suppression
-  const { data: suppressed } = await supabase
-    .from('suppressed_emails')
-    .select('id')
-    .eq('email', recipient)
-    .maybeSingle()
-  if (suppressed) {
-    await supabase.from('email_send_log').insert({
-      message_id: messageId,
-      template_name: opts.templateName,
-      recipient_email: recipient,
-      status: 'suppressed',
+  try {
+    const result = await sendTemplateEmail(opts.templateName, recipient, {
+      templateData: opts.templateData ?? {},
+      ...(opts.idempotencyKey ? { idempotencyKey: opts.idempotencyKey } : {}),
     })
-    return { ok: false, reason: 'suppressed' }
+
+    if (!result.sent) {
+      await logSend({
+        templateName: opts.templateName,
+        recipientEmail: recipient,
+        status: 'suppressed',
+      })
+      return { ok: false, reason: 'suppressed' }
+    }
+
+    await logSend({
+      templateName: opts.templateName,
+      recipientEmail: recipient,
+      status: 'sent',
+    })
+    return { ok: true }
+  } catch (error) {
+    const message =
+      error instanceof EmailAPIError
+        ? `${error.code}: ${error.message}`
+        : error instanceof Error
+          ? error.message
+          : String(error)
+    console.error('sendInternalTransactionalEmail send failed', { message })
+    await logSend({
+      templateName: opts.templateName,
+      recipientEmail: recipient,
+      status: 'failed',
+      errorMessage: message.slice(0, 500),
+    })
+    return { ok: false, reason: 'send_failed' }
   }
-
-  // Unsubscribe token (reuse or create)
-  let unsubscribeToken: string
-  const { data: existing } = await supabase
-    .from('email_unsubscribe_tokens')
-    .select('token, used_at')
-    .eq('email', recipient)
-    .maybeSingle()
-  if (existing && !existing.used_at) {
-    unsubscribeToken = existing.token
-  } else {
-    unsubscribeToken = generateToken()
-    await supabase
-      .from('email_unsubscribe_tokens')
-      .upsert(
-        { token: unsubscribeToken, email: recipient },
-        { onConflict: 'email', ignoreDuplicates: true },
-      )
-    const { data: stored } = await supabase
-      .from('email_unsubscribe_tokens')
-      .select('token')
-      .eq('email', recipient)
-      .maybeSingle()
-    if (stored?.token) unsubscribeToken = stored.token
-  }
-
-  const element = React.createElement(template.component, opts.templateData ?? {})
-  const html = await render(element)
-  const plainText = await render(element, { plainText: true })
-  const subject =
-    typeof template.subject === 'function'
-      ? template.subject(opts.templateData ?? {})
-      : template.subject
-
-  await supabase.from('email_send_log').insert({
-    message_id: messageId,
-    template_name: opts.templateName,
-    recipient_email: recipient,
-    status: 'pending',
-  })
-
-  const { error: enqueueError } = await supabase.rpc('enqueue_email', {
-    queue_name: 'transactional_emails',
-    payload: {
-      message_id: messageId,
-      to: recipient,
-      from: `${SITE_NAME} <noreply@${FROM_DOMAIN}>`,
-      sender_domain: SENDER_DOMAIN,
-      subject,
-      html,
-      text: plainText,
-      purpose: 'transactional',
-      label: opts.templateName,
-      idempotency_key: idempotencyKey,
-      unsubscribe_token: unsubscribeToken,
-      queued_at: new Date().toISOString(),
-    },
-  })
-
-  if (enqueueError) {
-    console.error('sendInternalTransactionalEmail enqueue failed', enqueueError)
-    return { ok: false, reason: 'enqueue_failed' }
-  }
-  return { ok: true }
 }
