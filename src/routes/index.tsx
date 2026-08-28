@@ -242,18 +242,17 @@ export const SAT_CAL_URL =
 // implicitly. Returns 0 during the live window (Sat 7:00–7:59 AM ET).
 function msUntilNextSaturday7amET(from: Date = new Date()): number {
   const nyNow = new Date(from.toLocaleString("en-US", { timeZone: "America/New_York" }));
-  const target = new Date(nyNow);
-  target.setHours(7, 0, 0, 0);
-  const day = nyNow.getDay(); // 0=Sun..6=Sat
-  let add = (6 - day + 7) % 7;
-  if (day === 6) {
-    // Saturday: live window is 7:00 → 7:59 AM ET
-    if (nyNow.getHours() === 7) return 0;
-    if (nyNow.getTime() >= target.getTime()) add = 7;
+  // Live window only counts on a Saturday the club is actually running.
+  const todayKey = `${nyNow.getFullYear()}-${String(nyNow.getMonth() + 1).padStart(2, "0")}-${String(nyNow.getDate()).padStart(2, "0")}`;
+  if (nyNow.getDay() === 6 && nyNow.getHours() === 7 && !SKIPPED_RUN_DATES.includes(todayKey)) {
+    return 0;
   }
-  target.setDate(target.getDate() + add);
+  const sat = nextSaturday(nyNow);
+  const target = new Date(sat);
+  target.setHours(7, 0, 0, 0);
   return Math.max(0, target.getTime() - nyNow.getTime());
 }
+
 
 function RunCountdown({ className = "" }: { className?: string }) {
   const [ms, setMs] = useState<number | null>(null);
