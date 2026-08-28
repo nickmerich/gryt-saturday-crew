@@ -53,8 +53,9 @@ export function nextSaturdayISOs(count: number, from: Date = new Date()): string
   const day = d.getUTCDay();
   const add = (6 - day + 7) % 7 || 7;
   d.setUTCDate(d.getUTCDate() + add);
-  for (let i = 0; i < count; i++) {
-    out.push(d.toISOString());
+  while (out.length < count) {
+    const ymdKey = d.toISOString().slice(0, 10);
+    if (!SKIPPED_RUN_DATES.includes(ymdKey)) out.push(d.toISOString());
     d.setUTCDate(d.getUTCDate() + 7);
   }
   return out;
