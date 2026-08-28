@@ -3616,6 +3616,7 @@ function Landing() {
       <Nav />
       <Hero />
       <Marquee />
+      <FiveKNotice />
       <RSVP />
       <ResourcesBlock />
 
