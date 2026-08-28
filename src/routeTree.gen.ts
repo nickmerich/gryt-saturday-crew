@@ -30,6 +30,7 @@ import { Route as ResourcesPlaybooksRouteImport } from './routes/resources_.play
 import { Route as ResourcesMoreThanMilesRouteImport } from './routes/resources_.more-than-miles'
 import { Route as ResourcesManifestoRouteImport } from './routes/resources_.manifesto'
 import { Route as ResourcesGraphicsRouteImport } from './routes/resources_.graphics'
+import { Route as ResourcesEqtPittsburgh10Miler2026RouteImport } from './routes/resources_.eqt-pittsburgh-10-miler-2026'
 import { Route as ResourcesConversationsRouteImport } from './routes/resources_.conversations'
 import { Route as MembersKeyRouteImport } from './routes/members.$key'
 import { Route as CheckoutReturnRouteImport } from './routes/checkout.return'
@@ -156,6 +157,12 @@ const ResourcesGraphicsRoute = ResourcesGraphicsRouteImport.update({
   path: '/resources/graphics',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResourcesEqtPittsburgh10Miler2026Route =
+  ResourcesEqtPittsburgh10Miler2026RouteImport.update({
+    id: '/resources_/eqt-pittsburgh-10-miler-2026',
+    path: '/resources/eqt-pittsburgh-10-miler-2026',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ResourcesConversationsRoute = ResourcesConversationsRouteImport.update({
   id: '/resources_/conversations',
   path: '/resources/conversations',
@@ -281,6 +288,7 @@ export interface FileRoutesByFullPath {
   '/checkout/return': typeof CheckoutReturnRoute
   '/members/$key': typeof MembersKeyRoute
   '/resources/conversations': typeof ResourcesConversationsRoute
+  '/resources/eqt-pittsburgh-10-miler-2026': typeof ResourcesEqtPittsburgh10Miler2026Route
   '/resources/graphics': typeof ResourcesGraphicsRoute
   '/resources/manifesto': typeof ResourcesManifestoRoute
   '/resources/more-than-miles': typeof ResourcesMoreThanMilesRoute
@@ -323,6 +331,7 @@ export interface FileRoutesByTo {
   '/checkout/return': typeof CheckoutReturnRoute
   '/members/$key': typeof MembersKeyRoute
   '/resources/conversations': typeof ResourcesConversationsRoute
+  '/resources/eqt-pittsburgh-10-miler-2026': typeof ResourcesEqtPittsburgh10Miler2026Route
   '/resources/graphics': typeof ResourcesGraphicsRoute
   '/resources/manifesto': typeof ResourcesManifestoRoute
   '/resources/more-than-miles': typeof ResourcesMoreThanMilesRoute
@@ -366,6 +375,7 @@ export interface FileRoutesById {
   '/checkout/return': typeof CheckoutReturnRoute
   '/members/$key': typeof MembersKeyRoute
   '/resources_/conversations': typeof ResourcesConversationsRoute
+  '/resources_/eqt-pittsburgh-10-miler-2026': typeof ResourcesEqtPittsburgh10Miler2026Route
   '/resources_/graphics': typeof ResourcesGraphicsRoute
   '/resources_/manifesto': typeof ResourcesManifestoRoute
   '/resources_/more-than-miles': typeof ResourcesMoreThanMilesRoute
@@ -410,6 +420,7 @@ export interface FileRouteTypes {
     | '/checkout/return'
     | '/members/$key'
     | '/resources/conversations'
+    | '/resources/eqt-pittsburgh-10-miler-2026'
     | '/resources/graphics'
     | '/resources/manifesto'
     | '/resources/more-than-miles'
@@ -452,6 +463,7 @@ export interface FileRouteTypes {
     | '/checkout/return'
     | '/members/$key'
     | '/resources/conversations'
+    | '/resources/eqt-pittsburgh-10-miler-2026'
     | '/resources/graphics'
     | '/resources/manifesto'
     | '/resources/more-than-miles'
@@ -494,6 +506,7 @@ export interface FileRouteTypes {
     | '/checkout/return'
     | '/members/$key'
     | '/resources_/conversations'
+    | '/resources_/eqt-pittsburgh-10-miler-2026'
     | '/resources_/graphics'
     | '/resources_/manifesto'
     | '/resources_/more-than-miles'
@@ -536,6 +549,7 @@ export interface RootRouteChildren {
   AdminMembersRoute: typeof AdminMembersRoute
   CheckoutReturnRoute: typeof CheckoutReturnRoute
   ResourcesConversationsRoute: typeof ResourcesConversationsRoute
+  ResourcesEqtPittsburgh10Miler2026Route: typeof ResourcesEqtPittsburgh10Miler2026Route
   ResourcesGraphicsRoute: typeof ResourcesGraphicsRoute
   ResourcesManifestoRoute: typeof ResourcesManifestoRoute
   ResourcesMoreThanMilesRoute: typeof ResourcesMoreThanMilesRoute
@@ -707,6 +721,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResourcesGraphicsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/resources_/eqt-pittsburgh-10-miler-2026': {
+      id: '/resources_/eqt-pittsburgh-10-miler-2026'
+      path: '/resources/eqt-pittsburgh-10-miler-2026'
+      fullPath: '/resources/eqt-pittsburgh-10-miler-2026'
+      preLoaderRoute: typeof ResourcesEqtPittsburgh10Miler2026RouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/resources_/conversations': {
       id: '/resources_/conversations'
       path: '/resources/conversations'
@@ -875,6 +896,8 @@ const rootRouteChildren: RootRouteChildren = {
   AdminMembersRoute: AdminMembersRoute,
   CheckoutReturnRoute: CheckoutReturnRoute,
   ResourcesConversationsRoute: ResourcesConversationsRoute,
+  ResourcesEqtPittsburgh10Miler2026Route:
+    ResourcesEqtPittsburgh10Miler2026Route,
   ResourcesGraphicsRoute: ResourcesGraphicsRoute,
   ResourcesManifestoRoute: ResourcesManifestoRoute,
   ResourcesMoreThanMilesRoute: ResourcesMoreThanMilesRoute,
