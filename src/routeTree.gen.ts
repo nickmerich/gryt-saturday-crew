@@ -24,6 +24,7 @@ import { Route as EmailStatusRouteImport } from './routes/email-status'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TimerResultsRouteImport } from './routes/timer_.results'
+import { Route as ResourcesRunningWithAGroupRouteImport } from './routes/resources_.running-with-a-group'
 import { Route as ResourcesRecapRouteImport } from './routes/resources_.recap'
 import { Route as ResourcesPlaybooksRouteImport } from './routes/resources_.playbooks'
 import { Route as ResourcesMoreThanMilesRouteImport } from './routes/resources_.more-than-miles'
@@ -127,6 +128,12 @@ const TimerResultsRoute = TimerResultsRouteImport.update({
   path: '/timer/results',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResourcesRunningWithAGroupRoute =
+  ResourcesRunningWithAGroupRouteImport.update({
+    id: '/resources_/running-with-a-group',
+    path: '/resources/running-with-a-group',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ResourcesRecapRoute = ResourcesRecapRouteImport.update({
   id: '/resources_/recap',
   path: '/resources/recap',
@@ -300,6 +307,7 @@ export interface FileRoutesByFullPath {
   '/resources/more-than-miles': typeof ResourcesMoreThanMilesRoute
   '/resources/playbooks': typeof ResourcesPlaybooksRoute
   '/resources/recap': typeof ResourcesRecapRoute
+  '/resources/running-with-a-group': typeof ResourcesRunningWithAGroupRoute
   '/timer/results': typeof TimerResultsRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -344,6 +352,7 @@ export interface FileRoutesByTo {
   '/resources/more-than-miles': typeof ResourcesMoreThanMilesRoute
   '/resources/playbooks': typeof ResourcesPlaybooksRoute
   '/resources/recap': typeof ResourcesRecapRoute
+  '/resources/running-with-a-group': typeof ResourcesRunningWithAGroupRoute
   '/timer/results': typeof TimerResultsRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -389,6 +398,7 @@ export interface FileRoutesById {
   '/resources_/more-than-miles': typeof ResourcesMoreThanMilesRoute
   '/resources_/playbooks': typeof ResourcesPlaybooksRoute
   '/resources_/recap': typeof ResourcesRecapRoute
+  '/resources_/running-with-a-group': typeof ResourcesRunningWithAGroupRoute
   '/timer_/results': typeof TimerResultsRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -435,6 +445,7 @@ export interface FileRouteTypes {
     | '/resources/more-than-miles'
     | '/resources/playbooks'
     | '/resources/recap'
+    | '/resources/running-with-a-group'
     | '/timer/results'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
@@ -479,6 +490,7 @@ export interface FileRouteTypes {
     | '/resources/more-than-miles'
     | '/resources/playbooks'
     | '/resources/recap'
+    | '/resources/running-with-a-group'
     | '/timer/results'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
@@ -523,6 +535,7 @@ export interface FileRouteTypes {
     | '/resources_/more-than-miles'
     | '/resources_/playbooks'
     | '/resources_/recap'
+    | '/resources_/running-with-a-group'
     | '/timer_/results'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
@@ -567,6 +580,7 @@ export interface RootRouteChildren {
   ResourcesMoreThanMilesRoute: typeof ResourcesMoreThanMilesRoute
   ResourcesPlaybooksRoute: typeof ResourcesPlaybooksRoute
   ResourcesRecapRoute: typeof ResourcesRecapRoute
+  ResourcesRunningWithAGroupRoute: typeof ResourcesRunningWithAGroupRoute
   TimerResultsRoute: typeof TimerResultsRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -690,6 +704,13 @@ declare module '@tanstack/react-router' {
       path: '/timer/results'
       fullPath: '/timer/results'
       preLoaderRoute: typeof TimerResultsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resources_/running-with-a-group': {
+      id: '/resources_/running-with-a-group'
+      path: '/resources/running-with-a-group'
+      fullPath: '/resources/running-with-a-group'
+      preLoaderRoute: typeof ResourcesRunningWithAGroupRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/resources_/recap': {
@@ -922,6 +943,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResourcesMoreThanMilesRoute: ResourcesMoreThanMilesRoute,
   ResourcesPlaybooksRoute: ResourcesPlaybooksRoute,
   ResourcesRecapRoute: ResourcesRecapRoute,
+  ResourcesRunningWithAGroupRoute: ResourcesRunningWithAGroupRoute,
   TimerResultsRoute: TimerResultsRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
