@@ -3567,6 +3567,7 @@ function FiveKNotice() {
               src={fiveKFlyer.url}
               alt="Back To School 5K and Wellness Social — August 29, 9 AM, Obama Academy, Pittsburgh"
               loading="lazy"
+              style={{ filter: "none" }}
               className="w-full h-full object-cover max-h-[420px] md:max-h-none border-b-2 md:border-b-0 md:border-r-2 border-ink"
             />
             <div className="p-7 md:p-10 flex flex-col gap-5">
