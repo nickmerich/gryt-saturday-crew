@@ -114,6 +114,28 @@ function FeaturedStory() {
           Read the blog →
         </span>
       </Link>
+
+      <Link
+        to="/resources/eqt-pittsburgh-10-miler-2026"
+        className={`group block border border-paper/20 bg-vintage p-8 md:p-10 mt-px hover:bg-blue hover:text-ink transition-colors ${focusRing}`}
+      >
+        <span className="text-blue text-[12px] tracking-[0.22em] uppercase mb-5 block group-hover:text-ink" style={mono}>
+          § 00.2 / Racing · Guide
+        </span>
+        <h3
+          className="text-[clamp(24px,3.4vw,44px)] font-bold leading-[1.06] tracking-tight max-w-[24ch]"
+          style={{ fontFamily: "var(--font-display)" }}
+        >
+          EQT Pittsburgh 10 Miler 2026: Race Guide, Course Details, and Training Tips
+        </h3>
+        <p className="mt-5 max-w-xl text-[15px] leading-[1.65] text-paper/85 group-hover:text-ink/80">
+          Course terrain, hill work, pacing targets, and race-day logistics —
+          plus how to train for it with a free no-drop crew.
+        </p>
+        <span className="mt-7 inline-block text-[12px] tracking-[0.22em] uppercase" style={mono}>
+          Read the guide →
+        </span>
+      </Link>
     </section>
   );
 }
