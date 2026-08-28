@@ -7,12 +7,15 @@ import { captureAttribution, getSignupAttribution } from "@/lib/attribution";
 import { useHeroVariant } from "@/lib/ab-hero";
 import { track } from "@/lib/analytics";
 import {
+  nextSaturday,
   nextSaturdayLabel,
   nextSaturdayLabelLong,
   nextSaturdayISOs,
   nextSaturdayIcsDataUrl,
   nextSaturdayIcsFilename,
+  SKIPPED_RUN_DATES,
 } from "@/lib/run-schedule";
+import fiveKFlyer from "@/assets/gryt-pps-5k.jpg.asset.json";
 import photo1 from "@/assets/photos/run-club-1.jpg.asset.json";
 import photo2 from "@/assets/photos/run-club-2.jpg.asset.json";
 import photo3 from "@/assets/photos/run-club-3.jpg.asset.json";
@@ -242,18 +245,17 @@ export const SAT_CAL_URL =
 // implicitly. Returns 0 during the live window (Sat 7:00–7:59 AM ET).
 function msUntilNextSaturday7amET(from: Date = new Date()): number {
   const nyNow = new Date(from.toLocaleString("en-US", { timeZone: "America/New_York" }));
-  const target = new Date(nyNow);
-  target.setHours(7, 0, 0, 0);
-  const day = nyNow.getDay(); // 0=Sun..6=Sat
-  let add = (6 - day + 7) % 7;
-  if (day === 6) {
-    // Saturday: live window is 7:00 → 7:59 AM ET
-    if (nyNow.getHours() === 7) return 0;
-    if (nyNow.getTime() >= target.getTime()) add = 7;
+  // Live window only counts on a Saturday the club is actually running.
+  const todayKey = `${nyNow.getFullYear()}-${String(nyNow.getMonth() + 1).padStart(2, "0")}-${String(nyNow.getDate()).padStart(2, "0")}`;
+  if (nyNow.getDay() === 6 && nyNow.getHours() === 7 && !SKIPPED_RUN_DATES.includes(todayKey)) {
+    return 0;
   }
-  target.setDate(target.getDate() + add);
+  const sat = nextSaturday(nyNow);
+  const target = new Date(sat);
+  target.setHours(7, 0, 0, 0);
   return Math.max(0, target.getTime() - nyNow.getTime());
 }
+
 
 function RunCountdown({ className = "" }: { className?: string }) {
   const [ms, setMs] = useState<number | null>(null);
@@ -3540,12 +3542,82 @@ function ResourcesBlock() {
 
 
 
+const FIVEK_REGISTER =
+  "https://runsignup.com/Race/PA/Pittsburgh/BackToSchool5KandWellnessSocial";
+
+function FiveKNotice() {
+  // Auto-expires after Aug 29, 2026 (America/New_York).
+  const [visible, setVisible] = useState(true);
+  useEffect(() => {
+    const ny = new Date(new Date().toLocaleString("en-US", { timeZone: "America/New_York" }));
+    setVisible(ny.getTime() <= new Date(2026, 7, 29, 23, 59, 59).getTime());
+  }, []);
+  if (!visible) return null;
+
+  return (
+    <section
+      id="back-to-school-5k"
+      className="bg-ink text-paper px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-t border-paper/10"
+    >
+      <div className="max-w-[1180px] mx-auto">
+        <div className="relative overflow-hidden bone-panel border-2 border-ink text-ink">
+          <div aria-hidden className="absolute left-0 top-0 h-1.5 w-full bg-blue" />
+          <div className="grid grid-cols-1 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] gap-0">
+            <img
+              src={fiveKFlyer.url}
+              alt="Back To School 5K and Wellness Social — August 29, 9 AM, Obama Academy, Pittsburgh"
+              loading="lazy"
+              style={{ filter: "none" }}
+              className="w-full h-full object-cover max-h-[420px] md:max-h-none border-b-2 md:border-b-0 md:border-r-2 border-ink"
+            />
+            <div className="p-7 md:p-10 flex flex-col gap-5">
+              <div className="eyebrow" style={{ color: "#3a7ca5" }}>
+                This Saturday · No 7 AM club run
+              </div>
+              <h2 className="display-condensed text-ink text-[clamp(30px,6vw,58px)] leading-[0.95]">
+                BACK TO SCHOOL 5K
+                <br />+ WELLNESS SOCIAL
+              </h2>
+              <div className="text-[15px] sm:text-base leading-[1.6] text-ink/80">
+                <div className="font-bold text-ink">Sat, Aug 29 · 9:00 AM</div>
+                <div>Obama Academy of International Studies</div>
+                <div>515 N Highland Ave, Pittsburgh, PA 15206</div>
+              </div>
+              <p className="text-[15px] sm:text-base leading-[1.6] text-ink/80 max-w-[460px]">
+                Join Team GRYT when you register — fastest club takes the trophy.
+              </p>
+              <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+                <a
+                  href={FIVEK_REGISTER}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center h-14 px-8 bg-ink text-paper border-2 border-ink text-[12px] tracking-[0.2em] uppercase font-bold hover:bg-blue hover:text-ink transition"
+                >
+                  Register for the 5K
+                </a>
+                <span className="text-[12px] tracking-[0.14em] uppercase text-ink/70">
+                  Use code <span className="font-bold text-ink">GRYT</span> for 15% off
+                </span>
+              </div>
+              <p className="border-t border-ink/15 pt-4 text-[12px] tracking-[0.14em] uppercase text-ink/70">
+                Regular GRYT runs pick back up Sat, Sep 5 · 7 AM · usual spot
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Landing() {
+
   return (
     <main className="bg-ink text-paper">
       <Nav />
       <Hero />
       <Marquee />
+      <FiveKNotice />
       <RSVP />
       <ResourcesBlock />
 

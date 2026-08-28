@@ -3,6 +3,13 @@
 export const RUN_ANCHOR_MS = Date.UTC(2026, 8, 5);
 export const RUN_ANCHOR_NUMBER = 18;
 
+/** Saturdays with no GRYT club run (YYYY-MM-DD). Numbering is unaffected. */
+export const SKIPPED_RUN_DATES = ["2026-08-29"];
+
+function toYMD(d: Date): string {
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+
 export function nextSaturday(from: Date = new Date()): Date {
   const d = new Date(from);
   d.setHours(0, 0, 0, 0);
@@ -10,8 +17,14 @@ export function nextSaturday(from: Date = new Date()): Date {
   // Always advance to the upcoming Saturday. If today is Saturday, roll to next week.
   const add = day === 6 ? 7 : (6 - day + 7) % 7;
   d.setDate(d.getDate() + add);
+  // Skip any Saturdays where the club isn't running.
+  let guard = 0;
+  while (SKIPPED_RUN_DATES.includes(toYMD(d)) && guard++ < 52) {
+    d.setDate(d.getDate() + 7);
+  }
   return d;
 }
+
 
 export function nextRunNumber(from: Date = new Date()): number {
   const sat = nextSaturday(from);
@@ -40,8 +53,9 @@ export function nextSaturdayISOs(count: number, from: Date = new Date()): string
   const day = d.getUTCDay();
   const add = (6 - day + 7) % 7 || 7;
   d.setUTCDate(d.getUTCDate() + add);
-  for (let i = 0; i < count; i++) {
-    out.push(d.toISOString());
+  while (out.length < count) {
+    const ymdKey = d.toISOString().slice(0, 10);
+    if (!SKIPPED_RUN_DATES.includes(ymdKey)) out.push(d.toISOString());
     d.setUTCDate(d.getUTCDate() + 7);
   }
   return out;
