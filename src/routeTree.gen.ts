@@ -34,6 +34,7 @@ import { Route as ResourcesMoreThanMilesRouteImport } from './routes/resources_.
 import { Route as ResourcesManifestoRouteImport } from './routes/resources_.manifesto'
 import { Route as ResourcesGraphicsRouteImport } from './routes/resources_.graphics'
 import { Route as ResourcesEqtPittsburgh10Miler2026RouteImport } from './routes/resources_.eqt-pittsburgh-10-miler-2026'
+import { Route as ResourcesCrossTrainingForRunnersRouteImport } from './routes/resources_.cross-training-for-runners'
 import { Route as ResourcesConversationsRouteImport } from './routes/resources_.conversations'
 import { Route as ResourcesBuildARunningBaseRouteImport } from './routes/resources_.build-a-running-base'
 import { Route as MembersKeyRouteImport } from './routes/members.$key'
@@ -184,6 +185,12 @@ const ResourcesEqtPittsburgh10Miler2026Route =
     path: '/resources/eqt-pittsburgh-10-miler-2026',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ResourcesCrossTrainingForRunnersRoute =
+  ResourcesCrossTrainingForRunnersRouteImport.update({
+    id: '/resources_/cross-training-for-runners',
+    path: '/resources/cross-training-for-runners',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ResourcesConversationsRoute = ResourcesConversationsRouteImport.update({
   id: '/resources_/conversations',
   path: '/resources/conversations',
@@ -316,6 +323,7 @@ export interface FileRoutesByFullPath {
   '/members/$key': typeof MembersKeyRoute
   '/resources/build-a-running-base': typeof ResourcesBuildARunningBaseRoute
   '/resources/conversations': typeof ResourcesConversationsRoute
+  '/resources/cross-training-for-runners': typeof ResourcesCrossTrainingForRunnersRoute
   '/resources/eqt-pittsburgh-10-miler-2026': typeof ResourcesEqtPittsburgh10Miler2026Route
   '/resources/graphics': typeof ResourcesGraphicsRoute
   '/resources/manifesto': typeof ResourcesManifestoRoute
@@ -363,6 +371,7 @@ export interface FileRoutesByTo {
   '/members/$key': typeof MembersKeyRoute
   '/resources/build-a-running-base': typeof ResourcesBuildARunningBaseRoute
   '/resources/conversations': typeof ResourcesConversationsRoute
+  '/resources/cross-training-for-runners': typeof ResourcesCrossTrainingForRunnersRoute
   '/resources/eqt-pittsburgh-10-miler-2026': typeof ResourcesEqtPittsburgh10Miler2026Route
   '/resources/graphics': typeof ResourcesGraphicsRoute
   '/resources/manifesto': typeof ResourcesManifestoRoute
@@ -411,6 +420,7 @@ export interface FileRoutesById {
   '/members/$key': typeof MembersKeyRoute
   '/resources_/build-a-running-base': typeof ResourcesBuildARunningBaseRoute
   '/resources_/conversations': typeof ResourcesConversationsRoute
+  '/resources_/cross-training-for-runners': typeof ResourcesCrossTrainingForRunnersRoute
   '/resources_/eqt-pittsburgh-10-miler-2026': typeof ResourcesEqtPittsburgh10Miler2026Route
   '/resources_/graphics': typeof ResourcesGraphicsRoute
   '/resources_/manifesto': typeof ResourcesManifestoRoute
@@ -460,6 +470,7 @@ export interface FileRouteTypes {
     | '/members/$key'
     | '/resources/build-a-running-base'
     | '/resources/conversations'
+    | '/resources/cross-training-for-runners'
     | '/resources/eqt-pittsburgh-10-miler-2026'
     | '/resources/graphics'
     | '/resources/manifesto'
@@ -507,6 +518,7 @@ export interface FileRouteTypes {
     | '/members/$key'
     | '/resources/build-a-running-base'
     | '/resources/conversations'
+    | '/resources/cross-training-for-runners'
     | '/resources/eqt-pittsburgh-10-miler-2026'
     | '/resources/graphics'
     | '/resources/manifesto'
@@ -554,6 +566,7 @@ export interface FileRouteTypes {
     | '/members/$key'
     | '/resources_/build-a-running-base'
     | '/resources_/conversations'
+    | '/resources_/cross-training-for-runners'
     | '/resources_/eqt-pittsburgh-10-miler-2026'
     | '/resources_/graphics'
     | '/resources_/manifesto'
@@ -601,6 +614,7 @@ export interface RootRouteChildren {
   CheckoutReturnRoute: typeof CheckoutReturnRoute
   ResourcesBuildARunningBaseRoute: typeof ResourcesBuildARunningBaseRoute
   ResourcesConversationsRoute: typeof ResourcesConversationsRoute
+  ResourcesCrossTrainingForRunnersRoute: typeof ResourcesCrossTrainingForRunnersRoute
   ResourcesEqtPittsburgh10Miler2026Route: typeof ResourcesEqtPittsburgh10Miler2026Route
   ResourcesGraphicsRoute: typeof ResourcesGraphicsRoute
   ResourcesManifestoRoute: typeof ResourcesManifestoRoute
@@ -804,6 +818,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResourcesEqtPittsburgh10Miler2026RouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/resources_/cross-training-for-runners': {
+      id: '/resources_/cross-training-for-runners'
+      path: '/resources/cross-training-for-runners'
+      fullPath: '/resources/cross-training-for-runners'
+      preLoaderRoute: typeof ResourcesCrossTrainingForRunnersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/resources_/conversations': {
       id: '/resources_/conversations'
       path: '/resources/conversations'
@@ -980,6 +1001,7 @@ const rootRouteChildren: RootRouteChildren = {
   CheckoutReturnRoute: CheckoutReturnRoute,
   ResourcesBuildARunningBaseRoute: ResourcesBuildARunningBaseRoute,
   ResourcesConversationsRoute: ResourcesConversationsRoute,
+  ResourcesCrossTrainingForRunnersRoute: ResourcesCrossTrainingForRunnersRoute,
   ResourcesEqtPittsburgh10Miler2026Route:
     ResourcesEqtPittsburgh10Miler2026Route,
   ResourcesGraphicsRoute: ResourcesGraphicsRoute,

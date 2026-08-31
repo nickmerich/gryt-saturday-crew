@@ -26,6 +26,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/resources/what-to-eat-before-a-run", changefreq: "monthly", priority: "0.7" },
           { path: "/resources/should-you-join-a-running-club", changefreq: "monthly", priority: "0.7" },
           { path: "/resources/build-a-running-base", changefreq: "monthly", priority: "0.7" },
+          { path: "/resources/cross-training-for-runners", changefreq: "monthly", priority: "0.7" },
           { path: "/resources/graphics", changefreq: "monthly", priority: "0.7" },
           { path: "/resources/manifesto", changefreq: "monthly", priority: "0.7" },
           { path: "/resources/recap", changefreq: "monthly", priority: "0.7" },
