@@ -185,6 +185,28 @@ function FeaturedStory() {
           Read the blog →
         </span>
       </Link>
+
+      <Link
+        to="/resources/build-a-running-base"
+        className={`group block border border-paper/20 bg-vintage p-8 md:p-10 mt-px hover:bg-blue hover:text-ink transition-colors ${focusRing}`}
+      >
+        <span className="text-blue text-[12px] tracking-[0.22em] uppercase mb-5 block group-hover:text-ink" style={mono}>
+          § 00.5 / Training · Guide
+        </span>
+        <h3
+          className="text-[clamp(24px,3.4vw,44px)] font-bold leading-[1.06] tracking-tight max-w-[24ch]"
+          style={{ fontFamily: "var(--font-display)" }}
+        >
+          How to Build a Running Base Before Your First Race
+        </h3>
+        <p className="mt-5 max-w-xl text-[15px] leading-[1.65] text-paper/85 group-hover:text-ink/80">
+          How long the base phase takes, how many days a week, what easy
+          actually feels like, and when you're ready for a plan.
+        </p>
+        <span className="mt-7 inline-block text-[12px] tracking-[0.22em] uppercase" style={mono}>
+          Read the guide →
+        </span>
+      </Link>
     </section>
   );
 }
