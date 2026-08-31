@@ -246,7 +246,7 @@ function msUntilNextSaturday7amET(from: Date = new Date()): number {
   if (nyNow.getDay() === 6 && nyNow.getHours() === 7 && !SKIPPED_RUN_DATES.includes(todayKey)) {
     return 0;
   }
-  const sat = nextSaturday(nyNow);
+  const sat = upcomingRunSaturday(nyNow);
   const target = new Date(sat);
   target.setHours(7, 0, 0, 0);
   return Math.max(0, target.getTime() - nyNow.getTime());
