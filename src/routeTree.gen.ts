@@ -35,6 +35,7 @@ import { Route as ResourcesManifestoRouteImport } from './routes/resources_.mani
 import { Route as ResourcesGraphicsRouteImport } from './routes/resources_.graphics'
 import { Route as ResourcesEqtPittsburgh10Miler2026RouteImport } from './routes/resources_.eqt-pittsburgh-10-miler-2026'
 import { Route as ResourcesConversationsRouteImport } from './routes/resources_.conversations'
+import { Route as ResourcesBuildARunningBaseRouteImport } from './routes/resources_.build-a-running-base'
 import { Route as MembersKeyRouteImport } from './routes/members.$key'
 import { Route as CheckoutReturnRouteImport } from './routes/checkout.return'
 import { Route as AdminMembersRouteImport } from './routes/admin.members'
@@ -188,6 +189,12 @@ const ResourcesConversationsRoute = ResourcesConversationsRouteImport.update({
   path: '/resources/conversations',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResourcesBuildARunningBaseRoute =
+  ResourcesBuildARunningBaseRouteImport.update({
+    id: '/resources_/build-a-running-base',
+    path: '/resources/build-a-running-base',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const MembersKeyRoute = MembersKeyRouteImport.update({
   id: '/$key',
   path: '/$key',
@@ -307,6 +314,7 @@ export interface FileRoutesByFullPath {
   '/admin/members': typeof AdminMembersRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/members/$key': typeof MembersKeyRoute
+  '/resources/build-a-running-base': typeof ResourcesBuildARunningBaseRoute
   '/resources/conversations': typeof ResourcesConversationsRoute
   '/resources/eqt-pittsburgh-10-miler-2026': typeof ResourcesEqtPittsburgh10Miler2026Route
   '/resources/graphics': typeof ResourcesGraphicsRoute
@@ -353,6 +361,7 @@ export interface FileRoutesByTo {
   '/admin/members': typeof AdminMembersRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/members/$key': typeof MembersKeyRoute
+  '/resources/build-a-running-base': typeof ResourcesBuildARunningBaseRoute
   '/resources/conversations': typeof ResourcesConversationsRoute
   '/resources/eqt-pittsburgh-10-miler-2026': typeof ResourcesEqtPittsburgh10Miler2026Route
   '/resources/graphics': typeof ResourcesGraphicsRoute
@@ -400,6 +409,7 @@ export interface FileRoutesById {
   '/admin/members': typeof AdminMembersRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/members/$key': typeof MembersKeyRoute
+  '/resources_/build-a-running-base': typeof ResourcesBuildARunningBaseRoute
   '/resources_/conversations': typeof ResourcesConversationsRoute
   '/resources_/eqt-pittsburgh-10-miler-2026': typeof ResourcesEqtPittsburgh10Miler2026Route
   '/resources_/graphics': typeof ResourcesGraphicsRoute
@@ -448,6 +458,7 @@ export interface FileRouteTypes {
     | '/admin/members'
     | '/checkout/return'
     | '/members/$key'
+    | '/resources/build-a-running-base'
     | '/resources/conversations'
     | '/resources/eqt-pittsburgh-10-miler-2026'
     | '/resources/graphics'
@@ -494,6 +505,7 @@ export interface FileRouteTypes {
     | '/admin/members'
     | '/checkout/return'
     | '/members/$key'
+    | '/resources/build-a-running-base'
     | '/resources/conversations'
     | '/resources/eqt-pittsburgh-10-miler-2026'
     | '/resources/graphics'
@@ -540,6 +552,7 @@ export interface FileRouteTypes {
     | '/admin/members'
     | '/checkout/return'
     | '/members/$key'
+    | '/resources_/build-a-running-base'
     | '/resources_/conversations'
     | '/resources_/eqt-pittsburgh-10-miler-2026'
     | '/resources_/graphics'
@@ -586,6 +599,7 @@ export interface RootRouteChildren {
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   AdminMembersRoute: typeof AdminMembersRoute
   CheckoutReturnRoute: typeof CheckoutReturnRoute
+  ResourcesBuildARunningBaseRoute: typeof ResourcesBuildARunningBaseRoute
   ResourcesConversationsRoute: typeof ResourcesConversationsRoute
   ResourcesEqtPittsburgh10Miler2026Route: typeof ResourcesEqtPittsburgh10Miler2026Route
   ResourcesGraphicsRoute: typeof ResourcesGraphicsRoute
@@ -797,6 +811,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResourcesConversationsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/resources_/build-a-running-base': {
+      id: '/resources_/build-a-running-base'
+      path: '/resources/build-a-running-base'
+      fullPath: '/resources/build-a-running-base'
+      preLoaderRoute: typeof ResourcesBuildARunningBaseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/members/$key': {
       id: '/members/$key'
       path: '/$key'
@@ -957,6 +978,7 @@ const rootRouteChildren: RootRouteChildren = {
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
   AdminMembersRoute: AdminMembersRoute,
   CheckoutReturnRoute: CheckoutReturnRoute,
+  ResourcesBuildARunningBaseRoute: ResourcesBuildARunningBaseRoute,
   ResourcesConversationsRoute: ResourcesConversationsRoute,
   ResourcesEqtPittsburgh10Miler2026Route:
     ResourcesEqtPittsburgh10Miler2026Route,
