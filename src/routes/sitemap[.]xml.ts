@@ -33,12 +33,8 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs", changefreq: "monthly", priority: "0.6" },
           { path: "/resources/playbooks/gryt-vs-yinz-run-club", changefreq: "monthly", priority: "0.6" },
           { path: "/register", changefreq: "monthly", priority: "0.6" },
-          { path: "/members", changefreq: "monthly", priority: "0.5" },
-          { path: "/auth", changefreq: "yearly", priority: "0.3" },
-          { path: "/mcp", changefreq: "yearly", priority: "0.3" },
           { path: "/privacy", changefreq: "yearly", priority: "0.3" },
           { path: "/terms", changefreq: "yearly", priority: "0.3" },
-          { path: "/waiver", changefreq: "yearly", priority: "0.3" },
         ];
 
         const urls = entries.map((e) =>
