@@ -3,6 +3,10 @@ import { useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } 
 import { useServerFn } from "@tanstack/react-start";
 import { signWaiver } from "@/lib/waiver.functions";
 import { submitRecommendation } from "@/lib/recommendations.functions";
+import {
+  getGoogleReviews,
+  type GoogleReviewsPayload,
+} from "@/lib/google-reviews.functions";
 import { captureAttribution, getSignupAttribution } from "@/lib/attribution";
 import { useHeroVariant } from "@/lib/ab-hero";
 import { track } from "@/lib/analytics";
