@@ -1279,6 +1279,33 @@ function FirstTimer() {
             <span className="font-semibold">First time? Come 10 minutes early.</span> Nick, Laura, or one of the regulars will introduce you to someone before we start.
           </p>
         </div>
+
+        <div className="mt-10 border-2 border-ink">
+          <div className="border-b-2 border-ink bg-ink px-6 py-3 md:px-8">
+            <span className="eyebrow text-paper/80">First-timer questions</span>
+          </div>
+          <dl className="m-0 grid grid-cols-1 gap-[2px] bg-ink md:grid-cols-3">
+            {[
+              {
+                q: "Where do I park?",
+                a: "212 Valley Brook Road in McMurray. Free lot at the trailhead, always room at 7 AM. Look for the group near the trail sign.",
+              },
+              {
+                q: "What happens at mile two?",
+                a: "The pack has spread into small groups and you are talking to somebody. Mile two is where it stops feeling like a workout and starts feeling like a Saturday.",
+              },
+              {
+                q: "Is there a required pace?",
+                a: "No. Walkers, joggers, and runners all start together and nobody gets dropped. Turn around whenever you want — the route is an out-and-back.",
+              },
+            ].map((f) => (
+              <div key={f.q} className="bg-blue p-6 md:p-7">
+                <dt className="display-condensed text-ink text-[20px] mb-2">{f.q}</dt>
+                <dd className="m-0 text-[15px] leading-[1.6] text-[#13313f]">{f.a}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
         <div className="mt-10 flex flex-col sm:flex-row flex-wrap gap-3">
           <a
             href="#join"
