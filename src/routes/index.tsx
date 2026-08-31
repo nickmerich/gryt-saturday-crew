@@ -3739,7 +3739,7 @@ function RegionBand() {
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/25 to-transparent" />
         <figcaption className="absolute inset-x-0 bottom-0 p-5 sm:p-8">
           <div className="mx-auto flex max-w-6xl flex-col gap-2">
-            <span className="text-[11px] uppercase tracking-[0.28em] text-brand">
+            <span className="text-[11px] uppercase tracking-[0.28em] text-blue">
               South Hills · Pittsburgh, PA
             </span>
             <p className="max-w-xl font-condensed text-2xl uppercase leading-[0.95] text-paper sm:text-4xl">
