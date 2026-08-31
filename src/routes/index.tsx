@@ -20,6 +20,7 @@ import {
   SKIPPED_RUN_DATES,
 } from "@/lib/run-schedule";
 import fiveKFlyer from "@/assets/gryt-pps-5k.jpg.asset.json";
+import pittsburghBridge from "@/assets/pittsburgh-bridge.webp.asset.json";
 import photo1 from "@/assets/photos/run-club-1.jpg.asset.json";
 import photo2 from "@/assets/photos/run-club-2.jpg.asset.json";
 import photo3 from "@/assets/photos/run-club-3.jpg.asset.json";
