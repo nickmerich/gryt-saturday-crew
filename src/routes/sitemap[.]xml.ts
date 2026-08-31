@@ -24,6 +24,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/resources/running-with-a-group", changefreq: "monthly", priority: "0.7" },
           { path: "/resources/eqt-pittsburgh-10-miler-2026", changefreq: "monthly", priority: "0.7" },
           { path: "/resources/what-to-eat-before-a-run", changefreq: "monthly", priority: "0.7" },
+          { path: "/resources/should-you-join-a-running-club", changefreq: "monthly", priority: "0.7" },
           { path: "/resources/graphics", changefreq: "monthly", priority: "0.7" },
           { path: "/resources/manifesto", changefreq: "monthly", priority: "0.7" },
           { path: "/resources/recap", changefreq: "monthly", priority: "0.7" },

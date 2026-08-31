@@ -163,6 +163,28 @@ function FeaturedStory() {
           Read the guide →
         </span>
       </Link>
+
+      <Link
+        to="/resources/should-you-join-a-running-club"
+        className={`group block border border-paper/20 bg-vintage p-8 md:p-10 mt-px hover:bg-blue hover:text-ink transition-colors ${focusRing}`}
+      >
+        <span className="text-blue text-[12px] tracking-[0.22em] uppercase mb-5 block group-hover:text-ink" style={mono}>
+          § 00.4 / Community · Blog
+        </span>
+        <h3
+          className="text-[clamp(24px,3.4vw,44px)] font-bold leading-[1.06] tracking-tight max-w-[24ch]"
+          style={{ fontFamily: "var(--font-display)" }}
+        >
+          Should You Join a Running Club? An Honest Answer
+        </h3>
+        <p className="mt-5 max-w-xl text-[15px] leading-[1.65] text-paper/85 group-hover:text-ink/80">
+          Am I too slow, what does it cost, do I have to talk — straight answers
+          from Nick Merich before you get out of the car.
+        </p>
+        <span className="mt-7 inline-block text-[12px] tracking-[0.22em] uppercase" style={mono}>
+          Read the blog →
+        </span>
+      </Link>
     </section>
   );
 }
