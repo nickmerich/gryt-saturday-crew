@@ -2,6 +2,7 @@ import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Link as LinkIcon, Check, Facebook, Linkedin } from "lucide-react";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
+import { ShareButtons } from "@/components/site/ShareButtons";
 import ogImage from "@/assets/og-playbooks.jpg";
 
 const SITE = "https://grytrunclub.com";
@@ -261,6 +262,7 @@ function ArticlePage() {
             </Link>
           </div>
         </div>
+        <ShareButtons url={URL} title={TITLE} />
       </article>
       <SiteFooter />
     </main>

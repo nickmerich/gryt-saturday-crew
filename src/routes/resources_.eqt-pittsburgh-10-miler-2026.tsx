@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
+import { ShareButtons } from "@/components/site/ShareButtons";
 import heroAsset from "@/assets/pittsburgh-10-miler.png.asset.json";
 
 const SITE = "https://grytrunclub.com";
@@ -419,6 +420,7 @@ function TenMilerPage() {
             </Link>
           </div>
         </div>
+        <ShareButtons url={URL} title={TITLE} />
       </article>
       <SiteFooter />
     </main>

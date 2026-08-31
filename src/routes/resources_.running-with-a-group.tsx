@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
+import { ShareButtons } from "@/components/site/ShareButtons";
 import ogImage from "@/assets/og-conversations.jpg";
 
 const SITE = "https://grytrunclub.com";
@@ -400,6 +401,7 @@ function GroupRunningPage() {
             </Link>
           </div>
         </div>
+        <ShareButtons url={URL} title={TITLE} />
       </article>
       <SiteFooter />
     </main>
