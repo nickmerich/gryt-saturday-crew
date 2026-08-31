@@ -3732,6 +3732,7 @@ function Landing() {
       <Nav />
       <Hero />
       <Marquee />
+      <GoogleReviewsBlock />
       <FiveKNotice />
       <RSVP />
       <ResourcesBlock />
