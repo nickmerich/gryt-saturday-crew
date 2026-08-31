@@ -1149,17 +1149,6 @@ function CorePromise() {
             </article>
           ))}
         </div>
-
-        <div className="mt-12 md:mt-16">
-          <p className="display-condensed text-paper text-[clamp(26px,3.8vw,52px)] leading-[1.02] max-w-[900px]">
-            You do not need another app.
-            <br />
-            <span className="text-blue">You need a place to be expected.</span>
-          </p>
-          <p className="text-[17px] leading-[1.6] text-paper/70 mt-5 max-w-[680px]">
-            Same trail. Same time. Same people. That is how strangers become regulars.
-          </p>
-        </div>
       </div>
     </section>
   );
