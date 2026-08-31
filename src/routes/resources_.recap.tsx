@@ -879,10 +879,14 @@ function PhotoPicker({
         <input
           ref={inputRef}
           type="file"
-          accept="image/*"
+          accept="image/*,.heic,.heif,.jpg,.jpeg,.png,.webp"
           onChange={(e) => {
             onChange(e);
-            if (inputRef.current) inputRef.current.value = "";
+            // Clear on the next tick so the File stays readable while the
+            // reader picks it up (iOS Safari drops it on a sync reset).
+            setTimeout(() => {
+              if (inputRef.current) inputRef.current.value = "";
+            }, 0);
           }}
           className="sr-only"
           tabIndex={-1}
