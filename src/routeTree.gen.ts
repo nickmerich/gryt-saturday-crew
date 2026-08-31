@@ -25,6 +25,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TimerResultsRouteImport } from './routes/timer_.results'
 import { Route as ResourcesWhatToEatBeforeARunRouteImport } from './routes/resources_.what-to-eat-before-a-run'
+import { Route as ResourcesRunsRouteImport } from './routes/resources_.runs'
 import { Route as ResourcesRunningWithAGroupRouteImport } from './routes/resources_.running-with-a-group'
 import { Route as ResourcesRecapRouteImport } from './routes/resources_.recap'
 import { Route as ResourcesPlaybooksRouteImport } from './routes/resources_.playbooks'
@@ -133,6 +134,11 @@ const ResourcesWhatToEatBeforeARunRoute =
     path: '/resources/what-to-eat-before-a-run',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ResourcesRunsRoute = ResourcesRunsRouteImport.update({
+  id: '/resources_/runs',
+  path: '/resources/runs',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ResourcesRunningWithAGroupRoute =
   ResourcesRunningWithAGroupRouteImport.update({
     id: '/resources_/running-with-a-group',
@@ -302,6 +308,7 @@ export interface FileRoutesByFullPath {
   '/resources/playbooks': typeof ResourcesPlaybooksRoute
   '/resources/recap': typeof ResourcesRecapRoute
   '/resources/running-with-a-group': typeof ResourcesRunningWithAGroupRoute
+  '/resources/runs': typeof ResourcesRunsRoute
   '/resources/what-to-eat-before-a-run': typeof ResourcesWhatToEatBeforeARunRoute
   '/timer/results': typeof TimerResultsRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
@@ -346,6 +353,7 @@ export interface FileRoutesByTo {
   '/resources/playbooks': typeof ResourcesPlaybooksRoute
   '/resources/recap': typeof ResourcesRecapRoute
   '/resources/running-with-a-group': typeof ResourcesRunningWithAGroupRoute
+  '/resources/runs': typeof ResourcesRunsRoute
   '/resources/what-to-eat-before-a-run': typeof ResourcesWhatToEatBeforeARunRoute
   '/timer/results': typeof TimerResultsRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
@@ -391,6 +399,7 @@ export interface FileRoutesById {
   '/resources_/playbooks': typeof ResourcesPlaybooksRoute
   '/resources_/recap': typeof ResourcesRecapRoute
   '/resources_/running-with-a-group': typeof ResourcesRunningWithAGroupRoute
+  '/resources_/runs': typeof ResourcesRunsRoute
   '/resources_/what-to-eat-before-a-run': typeof ResourcesWhatToEatBeforeARunRoute
   '/timer_/results': typeof TimerResultsRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
@@ -437,6 +446,7 @@ export interface FileRouteTypes {
     | '/resources/playbooks'
     | '/resources/recap'
     | '/resources/running-with-a-group'
+    | '/resources/runs'
     | '/resources/what-to-eat-before-a-run'
     | '/timer/results'
     | '/.lovable/oauth/consent'
@@ -481,6 +491,7 @@ export interface FileRouteTypes {
     | '/resources/playbooks'
     | '/resources/recap'
     | '/resources/running-with-a-group'
+    | '/resources/runs'
     | '/resources/what-to-eat-before-a-run'
     | '/timer/results'
     | '/.lovable/oauth/consent'
@@ -525,6 +536,7 @@ export interface FileRouteTypes {
     | '/resources_/playbooks'
     | '/resources_/recap'
     | '/resources_/running-with-a-group'
+    | '/resources_/runs'
     | '/resources_/what-to-eat-before-a-run'
     | '/timer_/results'
     | '/.lovable/oauth/consent'
@@ -569,6 +581,7 @@ export interface RootRouteChildren {
   ResourcesPlaybooksRoute: typeof ResourcesPlaybooksRoute
   ResourcesRecapRoute: typeof ResourcesRecapRoute
   ResourcesRunningWithAGroupRoute: typeof ResourcesRunningWithAGroupRoute
+  ResourcesRunsRoute: typeof ResourcesRunsRoute
   ResourcesWhatToEatBeforeARunRoute: typeof ResourcesWhatToEatBeforeARunRoute
   TimerResultsRoute: typeof TimerResultsRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
@@ -698,6 +711,13 @@ declare module '@tanstack/react-router' {
       path: '/resources/what-to-eat-before-a-run'
       fullPath: '/resources/what-to-eat-before-a-run'
       preLoaderRoute: typeof ResourcesWhatToEatBeforeARunRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resources_/runs': {
+      id: '/resources_/runs'
+      path: '/resources/runs'
+      fullPath: '/resources/runs'
+      preLoaderRoute: typeof ResourcesRunsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/resources_/running-with-a-group': {
@@ -925,6 +945,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResourcesPlaybooksRoute: ResourcesPlaybooksRoute,
   ResourcesRecapRoute: ResourcesRecapRoute,
   ResourcesRunningWithAGroupRoute: ResourcesRunningWithAGroupRoute,
+  ResourcesRunsRoute: ResourcesRunsRoute,
   ResourcesWhatToEatBeforeARunRoute: ResourcesWhatToEatBeforeARunRoute,
   TimerResultsRoute: TimerResultsRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
