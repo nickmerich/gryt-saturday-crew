@@ -41,8 +41,10 @@ export const Route = createFileRoute("/resources_/recap")({
         content: "Turn today's run into a graphic worth sharing. Free from gryt run club.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://grytrunclub.com/resources/recap" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://grytrunclub.com/resources/recap" }],
   }),
   component: RecapGeneratorPage,
 });
