@@ -239,10 +239,17 @@ function RecapGeneratorPage() {
     setStravaError(null);
     try {
       const { clientId } = await fetchStravaConfig();
-      const redirectUri = `${window.location.origin}/resources/recap`;
+      // Strava only accepts redirects on the app's Authorization Callback Domain
+      // (grytrunclub.com). Preview/lovable.app origins are rejected with
+      // "redirect_uri: invalid", so send those through the production domain.
+      const host = window.location.hostname;
+      const allowed = host === "grytrunclub.com" || host === "www.grytrunclub.com";
+      const origin = allowed ? window.location.origin : "https://grytrunclub.com";
+      const redirectUri = `${origin}/resources/recap`;
       const authUrl = new URL("https://www.strava.com/oauth/authorize");
       authUrl.searchParams.set("client_id", clientId);
       authUrl.searchParams.set("redirect_uri", redirectUri);
+
       authUrl.searchParams.set("response_type", "code");
       authUrl.searchParams.set("approval_prompt", "auto");
       authUrl.searchParams.set("scope", "read,activity:read");
