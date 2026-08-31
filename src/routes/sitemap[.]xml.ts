@@ -27,6 +27,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/resources/graphics", changefreq: "monthly", priority: "0.7" },
           { path: "/resources/manifesto", changefreq: "monthly", priority: "0.7" },
           { path: "/resources/recap", changefreq: "monthly", priority: "0.7" },
+          { path: "/resources/runs", changefreq: "monthly", priority: "0.6" },
           { path: "/resources/playbooks/best-free-running-clubs-pittsburgh-2026", changefreq: "monthly", priority: "0.6" },
           { path: "/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs", changefreq: "monthly", priority: "0.6" },
           { path: "/resources/playbooks/gryt-vs-yinz-run-club", changefreq: "monthly", priority: "0.6" },

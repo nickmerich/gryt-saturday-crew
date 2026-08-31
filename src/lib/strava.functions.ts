@@ -100,6 +100,7 @@ export type StravaActivity = {
   sport_type: string;
   distance: number; // meters
   moving_time: number; // seconds
+  total_elevation_gain: number | null; // meters
   start_date_local: string; // ISO
   location_city: string | null;
   location_state: string | null;
@@ -128,4 +129,62 @@ export const getStravaActivities = createServerFn({ method: "POST" })
       (a) => a.sport_type === "Run" || a.sport_type === "TrailRun" || a.type === "Run",
     );
     return { activities: runs.slice(0, 20) };
+  });
+
+export type StravaSplit = {
+  split: number;
+  distance: number; // meters
+  moving_time: number; // seconds
+  elevation_difference: number | null; // meters
+  average_speed: number; // m/s
+};
+
+export const getStravaActivityDetail = createServerFn({ method: "POST" })
+  .inputValidator((input: { accessToken: string; activityId: number }) => {
+    if (!input || typeof input.accessToken !== "string" || input.accessToken.length < 8) {
+      throw new Error("Missing access token");
+    }
+    if (!Number.isFinite(input.activityId)) throw new Error("Invalid activity");
+    return { accessToken: input.accessToken, activityId: Math.trunc(input.activityId) };
+  })
+  .handler(async ({ data }) => {
+    const res = await fetch(
+      `https://www.strava.com/api/v3/activities/${data.activityId}?include_all_efforts=false`,
+      { headers: { Authorization: `Bearer ${data.accessToken}` } },
+    );
+    if (!res.ok) {
+      const body = await res.text();
+      console.error(`Strava activity detail failed [${res.status}]: ${body}`);
+      if (res.status === 401) throw new Error("Your Strava session expired. Reconnect to continue.");
+      if (res.status === 404) throw new Error("That run is no longer available on Strava.");
+      throw new Error("Couldn't load the run details. Please try again.");
+    }
+    const json = (await res.json()) as {
+      id: number;
+      name: string;
+      distance: number;
+      moving_time: number;
+      elapsed_time: number;
+      total_elevation_gain: number | null;
+      average_heartrate?: number | null;
+      start_date_local: string;
+      splits_standard?: StravaSplit[];
+      splits_metric?: StravaSplit[];
+    };
+    return {
+      id: json.id,
+      name: json.name,
+      distance: json.distance,
+      movingTime: json.moving_time,
+      elapsedTime: json.elapsed_time,
+      elevationGain: json.total_elevation_gain ?? null,
+      averageHeartrate: json.average_heartrate ?? null,
+      startDateLocal: json.start_date_local,
+      splits: (json.splits_standard ?? []).map((s) => ({
+        split: s.split,
+        distance: s.distance,
+        movingTime: s.moving_time,
+        elevationDifference: s.elevation_difference ?? null,
+      })),
+    };
   });

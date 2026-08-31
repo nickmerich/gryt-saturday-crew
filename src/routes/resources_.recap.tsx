@@ -424,6 +424,11 @@ function RecapGeneratorPage() {
           <p className="mt-3 text-paper/70 text-base sm:text-lg max-w-[560px] leading-[1.5]">
             Turn today's run into a graphic worth sharing.
           </p>
+          <p className="mt-3 text-sm">
+            <Link to="/resources/runs" className="text-blue underline underline-offset-4 hover:text-paper">
+              Or browse your Strava runs with pace, elevation, and splits →
+            </Link>
+          </p>
         </div>
       </section>
 
