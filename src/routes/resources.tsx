@@ -21,7 +21,11 @@ export const Route = createFileRoute("/resources")({
         content:
           "Everything we've learned from showing up every Saturday — shared freely.",
       },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://grytrunclub.com/resources" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://grytrunclub.com/resources" }],
   }),
   component: ResourcesPage,
 });
