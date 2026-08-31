@@ -3,6 +3,10 @@ import { useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } 
 import { useServerFn } from "@tanstack/react-start";
 import { signWaiver } from "@/lib/waiver.functions";
 import { submitRecommendation } from "@/lib/recommendations.functions";
+import {
+  getGoogleReviews,
+  type GoogleReviewsPayload,
+} from "@/lib/google-reviews.functions";
 import { captureAttribution, getSignupAttribution } from "@/lib/attribution";
 import { useHeroVariant } from "@/lib/ab-hero";
 import { track } from "@/lib/analytics";
@@ -3637,6 +3641,90 @@ function FiveKNotice() {
   );
 }
 
+function Stars({ rating }: { rating: number }) {
+  const rounded = Math.round(rating);
+  return (
+    <span aria-label={`${rating.toFixed(1)} out of 5`} className="text-blue tracking-[0.14em]">
+      {"★★★★★".slice(0, rounded)}
+      <span className="text-paper/25">{"★★★★★".slice(rounded)}</span>
+    </span>
+  );
+}
+
+function GoogleReviewsBlock() {
+  const fetchReviews = useServerFn(getGoogleReviews);
+  const [data, setData] = useState<GoogleReviewsPayload | null>(null);
+
+  useEffect(() => {
+    let active = true;
+    fetchReviews()
+      .then((res) => {
+        if (active) setData(res);
+      })
+      .catch(() => {
+        if (active) setData(null);
+      });
+    return () => {
+      active = false;
+    };
+  }, [fetchReviews]);
+
+  if (!data || !data.configured || data.reviews.length === 0) return null;
+
+  return (
+    <section className="bg-ink text-paper border-t border-paper/10">
+      <div className="mx-auto max-w-6xl px-5 sm:px-8 py-16 md:py-24">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+          <div>
+            <div className="eyebrow text-blue">Run reviews · Google</div>
+            <h2 className="display-condensed text-[clamp(32px,7vw,64px)] leading-[0.95] mt-2">
+              WHAT RUNNERS SAY
+            </h2>
+          </div>
+          {data.rating !== null && (
+            <div className="flex items-center gap-3 text-[13px] tracking-[0.14em] uppercase text-paper/70">
+              <Stars rating={data.rating} />
+              <span className="font-bold text-paper">{data.rating.toFixed(1)}</span>
+              <span>· {data.total} reviews</span>
+            </div>
+          )}
+        </div>
+
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {data.reviews.slice(0, 6).map((review, i) => (
+            <figure
+              key={`${review.author}-${i}`}
+              className="border border-paper/15 bg-paper/[0.03] p-6 flex flex-col gap-4"
+            >
+              <Stars rating={review.rating} />
+              <blockquote className="text-[15px] leading-[1.65] text-paper/85">
+                “{review.text}”
+              </blockquote>
+              <figcaption className="mt-auto pt-3 border-t border-paper/10 text-[12px] tracking-[0.14em] uppercase text-paper/60">
+                {review.author}
+                {review.relativeTime ? ` · ${review.relativeTime}` : ""}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+
+        {data.mapsUrl && (
+          <div className="mt-8">
+            <a
+              href={data.mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center h-13 px-7 py-4 border-2 border-blue text-blue text-[12px] tracking-[0.2em] uppercase font-bold hover:bg-blue hover:text-ink transition"
+            >
+              Read / leave a review on Google
+            </a>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
 function Landing() {
 
   return (
@@ -3644,6 +3732,7 @@ function Landing() {
       <Nav />
       <Hero />
       <Marquee />
+      <GoogleReviewsBlock />
       <FiveKNotice />
       <RSVP />
       <ResourcesBlock />
