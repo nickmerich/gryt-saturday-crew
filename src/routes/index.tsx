@@ -279,7 +279,7 @@ function RunCountdown({ className = "" }: { className?: string }) {
 
   const label = live
     ? "We're running right now"
-    : `UNTIL ${nextSaturdayLabel().toUpperCase()}`;
+    : `UNTIL ${upcomingRunLabel(new Date(new Date().toLocaleString("en-US", { timeZone: "America/New_York" }))).toUpperCase()}`;
 
   return (
     <div
