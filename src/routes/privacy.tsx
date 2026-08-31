@@ -20,7 +20,14 @@ export const Route = createFileRoute("/privacy")({
       { name: "twitter:title", content: "Privacy Policy · gryt run club" },
       { name: "twitter:description", content: "How GRYT Run Club collects, uses, and protects your information." },
     ],
-    links: [{ rel: "canonical", href: "https://grytrunclub.com/privacy" }],
+    links: [
+      { rel: "canonical", href: "https://grytrunclub.com/privacy" },
+      {
+        rel: "preload",
+        as: "image",
+        href: grytBearAsset.url,
+      },
+    ],
   }),
   component: PrivacyPage,
 });
@@ -37,7 +44,7 @@ function PrivacyPage() {
               className="h-11 w-11"
               width={44}
               height={44}
-              loading="lazy"
+              fetchpriority="high"
             />
             <span className="wordmark uppercase text-[20px] leading-none [text-shadow:2px_2px_0_var(--blue)]">
               Run Club
