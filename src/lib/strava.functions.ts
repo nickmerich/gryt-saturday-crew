@@ -100,6 +100,7 @@ export type StravaActivity = {
   sport_type: string;
   distance: number; // meters
   moving_time: number; // seconds
+  total_elevation_gain: number | null; // meters
   start_date_local: string; // ISO
   location_city: string | null;
   location_state: string | null;
