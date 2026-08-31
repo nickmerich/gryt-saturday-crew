@@ -187,6 +187,28 @@ function FeaturedStory() {
       </Link>
 
       <Link
+        to="/resources/cross-training-for-runners"
+        className={`group block border border-paper/20 bg-vintage p-8 md:p-10 mt-px hover:bg-blue hover:text-ink transition-colors ${focusRing}`}
+      >
+        <span className="text-blue text-[12px] tracking-[0.22em] uppercase mb-5 block group-hover:text-ink" style={mono}>
+          § 00.6 / Training · Guide
+        </span>
+        <h3
+          className="text-[clamp(24px,3.4vw,44px)] font-bold leading-[1.06] tracking-tight max-w-[24ch]"
+          style={{ fontFamily: "var(--font-display)" }}
+        >
+          Cross-Training for Runners: The Best Low-Impact Options
+        </h3>
+        <p className="mt-5 max-w-xl text-[15px] leading-[1.65] text-paper/85 group-hover:text-ink/80">
+          Cycling, swimming, elliptical, strength, yoga, hiking, rowing — what
+          to do between run days, and how to fit it into a real week.
+        </p>
+        <span className="mt-7 inline-block text-[12px] tracking-[0.22em] uppercase" style={mono}>
+          Read the guide →
+        </span>
+      </Link>
+
+      <Link
         to="/resources/build-a-running-base"
         className={`group block border border-paper/20 bg-vintage p-8 md:p-10 mt-px hover:bg-blue hover:text-ink transition-colors ${focusRing}`}
       >
