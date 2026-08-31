@@ -3726,7 +3726,34 @@ function GoogleReviewsBlock() {
   );
 }
 
+function RegionBand() {
+  return (
+    <section className="relative border-y border-paper/15 bg-ink">
+      <figure className="relative m-0">
+        <img
+          src={pittsburghBridge.url}
+          alt="Halftone illustration of a Pittsburgh bridge over the river at sunrise with the downtown skyline"
+          loading="lazy"
+          className="h-[38vw] max-h-[420px] min-h-[220px] w-full object-cover"
+        />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/25 to-transparent" />
+        <figcaption className="absolute inset-x-0 bottom-0 p-5 sm:p-8">
+          <div className="mx-auto flex max-w-6xl flex-col gap-2">
+            <span className="text-[11px] uppercase tracking-[0.28em] text-brand">
+              South Hills · Pittsburgh, PA
+            </span>
+            <p className="max-w-xl font-condensed text-2xl uppercase leading-[0.95] text-paper sm:text-4xl">
+              Built on Pittsburgh roads, hills, and bridges.
+            </p>
+          </div>
+        </figcaption>
+      </figure>
+    </section>
+  );
+}
+
 function Landing() {
+
 
   return (
     <main className="bg-ink text-paper">
