@@ -28,8 +28,10 @@ export const Route = createFileRoute("/resources_/runs")({
           "Your Strava runs, broken down by pace, elevation, and mile splits. Free from gryt run club.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://grytrunclub.com/resources/runs" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://grytrunclub.com/resources/runs" }],
   }),
   component: RunsPage,
 });
