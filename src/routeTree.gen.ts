@@ -25,6 +25,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TimerResultsRouteImport } from './routes/timer_.results'
 import { Route as ResourcesWhatToEatBeforeARunRouteImport } from './routes/resources_.what-to-eat-before-a-run'
+import { Route as ResourcesShouldYouJoinARunningClubRouteImport } from './routes/resources_.should-you-join-a-running-club'
 import { Route as ResourcesRunsRouteImport } from './routes/resources_.runs'
 import { Route as ResourcesRunningWithAGroupRouteImport } from './routes/resources_.running-with-a-group'
 import { Route as ResourcesRecapRouteImport } from './routes/resources_.recap'
@@ -132,6 +133,12 @@ const ResourcesWhatToEatBeforeARunRoute =
   ResourcesWhatToEatBeforeARunRouteImport.update({
     id: '/resources_/what-to-eat-before-a-run',
     path: '/resources/what-to-eat-before-a-run',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ResourcesShouldYouJoinARunningClubRoute =
+  ResourcesShouldYouJoinARunningClubRouteImport.update({
+    id: '/resources_/should-you-join-a-running-club',
+    path: '/resources/should-you-join-a-running-club',
     getParentRoute: () => rootRouteImport,
   } as any)
 const ResourcesRunsRoute = ResourcesRunsRouteImport.update({
@@ -309,6 +316,7 @@ export interface FileRoutesByFullPath {
   '/resources/recap': typeof ResourcesRecapRoute
   '/resources/running-with-a-group': typeof ResourcesRunningWithAGroupRoute
   '/resources/runs': typeof ResourcesRunsRoute
+  '/resources/should-you-join-a-running-club': typeof ResourcesShouldYouJoinARunningClubRoute
   '/resources/what-to-eat-before-a-run': typeof ResourcesWhatToEatBeforeARunRoute
   '/timer/results': typeof TimerResultsRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
@@ -354,6 +362,7 @@ export interface FileRoutesByTo {
   '/resources/recap': typeof ResourcesRecapRoute
   '/resources/running-with-a-group': typeof ResourcesRunningWithAGroupRoute
   '/resources/runs': typeof ResourcesRunsRoute
+  '/resources/should-you-join-a-running-club': typeof ResourcesShouldYouJoinARunningClubRoute
   '/resources/what-to-eat-before-a-run': typeof ResourcesWhatToEatBeforeARunRoute
   '/timer/results': typeof TimerResultsRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
@@ -400,6 +409,7 @@ export interface FileRoutesById {
   '/resources_/recap': typeof ResourcesRecapRoute
   '/resources_/running-with-a-group': typeof ResourcesRunningWithAGroupRoute
   '/resources_/runs': typeof ResourcesRunsRoute
+  '/resources_/should-you-join-a-running-club': typeof ResourcesShouldYouJoinARunningClubRoute
   '/resources_/what-to-eat-before-a-run': typeof ResourcesWhatToEatBeforeARunRoute
   '/timer_/results': typeof TimerResultsRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
@@ -447,6 +457,7 @@ export interface FileRouteTypes {
     | '/resources/recap'
     | '/resources/running-with-a-group'
     | '/resources/runs'
+    | '/resources/should-you-join-a-running-club'
     | '/resources/what-to-eat-before-a-run'
     | '/timer/results'
     | '/.lovable/oauth/consent'
@@ -492,6 +503,7 @@ export interface FileRouteTypes {
     | '/resources/recap'
     | '/resources/running-with-a-group'
     | '/resources/runs'
+    | '/resources/should-you-join-a-running-club'
     | '/resources/what-to-eat-before-a-run'
     | '/timer/results'
     | '/.lovable/oauth/consent'
@@ -537,6 +549,7 @@ export interface FileRouteTypes {
     | '/resources_/recap'
     | '/resources_/running-with-a-group'
     | '/resources_/runs'
+    | '/resources_/should-you-join-a-running-club'
     | '/resources_/what-to-eat-before-a-run'
     | '/timer_/results'
     | '/.lovable/oauth/consent'
@@ -582,6 +595,7 @@ export interface RootRouteChildren {
   ResourcesRecapRoute: typeof ResourcesRecapRoute
   ResourcesRunningWithAGroupRoute: typeof ResourcesRunningWithAGroupRoute
   ResourcesRunsRoute: typeof ResourcesRunsRoute
+  ResourcesShouldYouJoinARunningClubRoute: typeof ResourcesShouldYouJoinARunningClubRoute
   ResourcesWhatToEatBeforeARunRoute: typeof ResourcesWhatToEatBeforeARunRoute
   TimerResultsRoute: typeof TimerResultsRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
@@ -711,6 +725,13 @@ declare module '@tanstack/react-router' {
       path: '/resources/what-to-eat-before-a-run'
       fullPath: '/resources/what-to-eat-before-a-run'
       preLoaderRoute: typeof ResourcesWhatToEatBeforeARunRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resources_/should-you-join-a-running-club': {
+      id: '/resources_/should-you-join-a-running-club'
+      path: '/resources/should-you-join-a-running-club'
+      fullPath: '/resources/should-you-join-a-running-club'
+      preLoaderRoute: typeof ResourcesShouldYouJoinARunningClubRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/resources_/runs': {
@@ -946,6 +967,8 @@ const rootRouteChildren: RootRouteChildren = {
   ResourcesRecapRoute: ResourcesRecapRoute,
   ResourcesRunningWithAGroupRoute: ResourcesRunningWithAGroupRoute,
   ResourcesRunsRoute: ResourcesRunsRoute,
+  ResourcesShouldYouJoinARunningClubRoute:
+    ResourcesShouldYouJoinARunningClubRoute,
   ResourcesWhatToEatBeforeARunRoute: ResourcesWhatToEatBeforeARunRoute,
   TimerResultsRoute: TimerResultsRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
