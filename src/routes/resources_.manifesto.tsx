@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
+import { ShareButtons } from "@/components/site/ShareButtons";
 import { track } from "@/lib/analytics";
 import crewTrail from "@/assets/photos/manifesto/crew-trail.jpg.asset.json";
 import marathonStreet from "@/assets/photos/manifesto/marathon-street.jpg.asset.json";
@@ -509,6 +510,7 @@ function ManifestoPage() {
                   )
                 )}
               </div>
+              <ShareButtons url={URL} title={TITLE} />
             </article>
           ))}
         </div>

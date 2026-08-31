@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
+import { ShareButtons } from "@/components/site/ShareButtons";
 import heroAsset from "@/assets/running-base-pittsburgh.png.asset.json";
 
 const SITE = "https://grytrunclub.com";
@@ -454,6 +455,7 @@ function RunningBasePage() {
             </Link>
           </div>
         </div>
+        <ShareButtons url={URL} title={TITLE} />
       </article>
       <SiteFooter />
     </main>

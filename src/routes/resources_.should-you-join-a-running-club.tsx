@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
+import { ShareButtons } from "@/components/site/ShareButtons";
 
 const SITE = "https://grytrunclub.com";
 const URL = `${SITE}/resources/should-you-join-a-running-club`;
@@ -338,6 +339,7 @@ function ShouldYouJoinPage() {
             </Link>
           </div>
         </div>
+        <ShareButtons url={URL} title={TITLE} />
       </article>
       <SiteFooter />
     </main>

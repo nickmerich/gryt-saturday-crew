@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
+import { ShareButtons } from "@/components/site/ShareButtons";
 import heroAsset from "@/assets/pre-run-nutrition.png.asset.json";
 
 const SITE = "https://grytrunclub.com";
@@ -419,6 +420,7 @@ function PreRunNutritionPage() {
             </Link>
           </div>
         </div>
+        <ShareButtons url={URL} title={TITLE} />
       </article>
       <SiteFooter />
     </main>

@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
+import { ShareButtons } from "@/components/site/ShareButtons";
 import ogImage from "@/assets/og-conversations.jpg";
 
 const SITE = "https://gryt-saturday-crew.lovable.app";
@@ -155,6 +156,7 @@ function ConversationsPage() {
               {c.comingSoon && (
                 <p className="mt-6 eyebrow text-paper/40">Coming Soon</p>
               )}
+              <ShareButtons url={URL} title={TITLE} />
             </article>
           ))}
         </div>
