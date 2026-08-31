@@ -25,6 +25,30 @@ export function nextSaturday(from: Date = new Date()): Date {
   return d;
 }
 
+/**
+ * The run that's still ahead of you right now: today's Saturday run if it's
+ * Saturday before 7 AM (and the club is running), otherwise the next Saturday.
+ * `from` must already be expressed in America/New_York wall-clock time.
+ */
+export function upcomingRunSaturday(from: Date = new Date()): Date {
+  if (from.getDay() === 6 && from.getHours() < 7) {
+    const today = new Date(from);
+    today.setHours(0, 0, 0, 0);
+    if (!SKIPPED_RUN_DATES.includes(toYMD(today))) return today;
+  }
+  return nextSaturday(from);
+}
+
+export function upcomingRunLabel(from: Date = new Date()): string {
+  const sat = upcomingRunSaturday(from);
+  const satUTC = Date.UTC(sat.getFullYear(), sat.getMonth(), sat.getDate());
+  const weeks = Math.round((satUTC - RUN_ANCHOR_MS) / (7 * 24 * 60 * 60 * 1000));
+  const date = sat.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+  return `GRYT Run #${RUN_ANCHOR_NUMBER + weeks} · Sat, ${date} · 7 AM`;
+}
+
+
+
 
 export function nextRunNumber(from: Date = new Date()): number {
   const sat = nextSaturday(from);

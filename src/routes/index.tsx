@@ -12,13 +12,15 @@ import { captureAttribution, getSignupAttribution } from "@/lib/attribution";
 import { useHeroVariant } from "@/lib/ab-hero";
 import { track } from "@/lib/analytics";
 import {
-  nextSaturday,
+  
   nextSaturdayLabel,
   nextSaturdayLabelLong,
   nextSaturdayISOs,
   nextSaturdayIcsDataUrl,
   nextSaturdayIcsFilename,
   SKIPPED_RUN_DATES,
+  upcomingRunSaturday,
+  upcomingRunLabel,
 } from "@/lib/run-schedule";
 import pittsburghBridge from "@/assets/pittsburgh-bridge.webp.asset.json";
 import photo1 from "@/assets/photos/run-club-1.jpg.asset.json";
@@ -244,7 +246,7 @@ function msUntilNextSaturday7amET(from: Date = new Date()): number {
   if (nyNow.getDay() === 6 && nyNow.getHours() === 7 && !SKIPPED_RUN_DATES.includes(todayKey)) {
     return 0;
   }
-  const sat = nextSaturday(nyNow);
+  const sat = upcomingRunSaturday(nyNow);
   const target = new Date(sat);
   target.setHours(7, 0, 0, 0);
   return Math.max(0, target.getTime() - nyNow.getTime());
@@ -277,7 +279,7 @@ function RunCountdown({ className = "" }: { className?: string }) {
 
   const label = live
     ? "We're running right now"
-    : `UNTIL ${nextSaturdayLabel().toUpperCase()}`;
+    : `UNTIL ${upcomingRunLabel(new Date(new Date().toLocaleString("en-US", { timeZone: "America/New_York" }))).toUpperCase()}`;
 
   return (
     <div
