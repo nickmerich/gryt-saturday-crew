@@ -24,6 +24,7 @@ import { Route as EmailStatusRouteImport } from './routes/email-status'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TimerResultsRouteImport } from './routes/timer_.results'
+import { Route as ResourcesWhatToEatBeforeARunRouteImport } from './routes/resources_.what-to-eat-before-a-run'
 import { Route as ResourcesRunningWithAGroupRouteImport } from './routes/resources_.running-with-a-group'
 import { Route as ResourcesRecapRouteImport } from './routes/resources_.recap'
 import { Route as ResourcesPlaybooksRouteImport } from './routes/resources_.playbooks'
@@ -126,6 +127,12 @@ const TimerResultsRoute = TimerResultsRouteImport.update({
   path: '/timer/results',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResourcesWhatToEatBeforeARunRoute =
+  ResourcesWhatToEatBeforeARunRouteImport.update({
+    id: '/resources_/what-to-eat-before-a-run',
+    path: '/resources/what-to-eat-before-a-run',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ResourcesRunningWithAGroupRoute =
   ResourcesRunningWithAGroupRouteImport.update({
     id: '/resources_/running-with-a-group',
@@ -295,6 +302,7 @@ export interface FileRoutesByFullPath {
   '/resources/playbooks': typeof ResourcesPlaybooksRoute
   '/resources/recap': typeof ResourcesRecapRoute
   '/resources/running-with-a-group': typeof ResourcesRunningWithAGroupRoute
+  '/resources/what-to-eat-before-a-run': typeof ResourcesWhatToEatBeforeARunRoute
   '/timer/results': typeof TimerResultsRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -338,6 +346,7 @@ export interface FileRoutesByTo {
   '/resources/playbooks': typeof ResourcesPlaybooksRoute
   '/resources/recap': typeof ResourcesRecapRoute
   '/resources/running-with-a-group': typeof ResourcesRunningWithAGroupRoute
+  '/resources/what-to-eat-before-a-run': typeof ResourcesWhatToEatBeforeARunRoute
   '/timer/results': typeof TimerResultsRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -382,6 +391,7 @@ export interface FileRoutesById {
   '/resources_/playbooks': typeof ResourcesPlaybooksRoute
   '/resources_/recap': typeof ResourcesRecapRoute
   '/resources_/running-with-a-group': typeof ResourcesRunningWithAGroupRoute
+  '/resources_/what-to-eat-before-a-run': typeof ResourcesWhatToEatBeforeARunRoute
   '/timer_/results': typeof TimerResultsRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -427,6 +437,7 @@ export interface FileRouteTypes {
     | '/resources/playbooks'
     | '/resources/recap'
     | '/resources/running-with-a-group'
+    | '/resources/what-to-eat-before-a-run'
     | '/timer/results'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
@@ -470,6 +481,7 @@ export interface FileRouteTypes {
     | '/resources/playbooks'
     | '/resources/recap'
     | '/resources/running-with-a-group'
+    | '/resources/what-to-eat-before-a-run'
     | '/timer/results'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
@@ -513,6 +525,7 @@ export interface FileRouteTypes {
     | '/resources_/playbooks'
     | '/resources_/recap'
     | '/resources_/running-with-a-group'
+    | '/resources_/what-to-eat-before-a-run'
     | '/timer_/results'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
@@ -556,6 +569,7 @@ export interface RootRouteChildren {
   ResourcesPlaybooksRoute: typeof ResourcesPlaybooksRoute
   ResourcesRecapRoute: typeof ResourcesRecapRoute
   ResourcesRunningWithAGroupRoute: typeof ResourcesRunningWithAGroupRoute
+  ResourcesWhatToEatBeforeARunRoute: typeof ResourcesWhatToEatBeforeARunRoute
   TimerResultsRoute: typeof TimerResultsRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -677,6 +691,13 @@ declare module '@tanstack/react-router' {
       path: '/timer/results'
       fullPath: '/timer/results'
       preLoaderRoute: typeof TimerResultsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resources_/what-to-eat-before-a-run': {
+      id: '/resources_/what-to-eat-before-a-run'
+      path: '/resources/what-to-eat-before-a-run'
+      fullPath: '/resources/what-to-eat-before-a-run'
+      preLoaderRoute: typeof ResourcesWhatToEatBeforeARunRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/resources_/running-with-a-group': {
@@ -904,6 +925,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResourcesPlaybooksRoute: ResourcesPlaybooksRoute,
   ResourcesRecapRoute: ResourcesRecapRoute,
   ResourcesRunningWithAGroupRoute: ResourcesRunningWithAGroupRoute,
+  ResourcesWhatToEatBeforeARunRoute: ResourcesWhatToEatBeforeARunRoute,
   TimerResultsRoute: TimerResultsRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
