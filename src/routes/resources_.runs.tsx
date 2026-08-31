@@ -52,7 +52,7 @@ function shortDate(iso: string) {
   return `${d.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })}`;
 }
 
-const GUIDES: Array<{ to: string; kicker: string; title: string; blurb: string }> = [
+const GUIDES = [
   {
     to: "/resources/what-to-eat-before-a-run",
     kicker: "FUEL",
@@ -77,7 +77,7 @@ const GUIDES: Array<{ to: string; kicker: string; title: string; blurb: string }
     title: "More than miles",
     blurb: "Five things you wouldn't guess from the parking lot.",
   },
-];
+] as const;
 
 function RunsPage() {
   const [token, setToken] = useState<string | null>(null);
