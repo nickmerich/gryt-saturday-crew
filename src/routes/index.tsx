@@ -19,6 +19,8 @@ import {
   nextSaturdayIcsDataUrl,
   nextSaturdayIcsFilename,
   SKIPPED_RUN_DATES,
+  upcomingRunSaturday,
+  upcomingRunLabel,
 } from "@/lib/run-schedule";
 import pittsburghBridge from "@/assets/pittsburgh-bridge.webp.asset.json";
 import photo1 from "@/assets/photos/run-club-1.jpg.asset.json";
