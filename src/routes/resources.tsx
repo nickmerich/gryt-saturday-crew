@@ -9,18 +9,19 @@ import lookbookAsset from "@/assets/lookbook-merch.png.asset.json";
 export const Route = createFileRoute("/resources")({
   head: () => ({
     meta: [
-      { title: "Resources · gryt run club" },
+      { title: "Running Resources · South Hills Pittsburgh | GRYT Run Club" },
       {
         name: "description",
         content:
-          "Playbooks, interviews, free graphics, merch, and partner opportunities from the founders of gryt run club.",
+          "Playbooks, interviews, free graphics, merch, and partner opportunities from the founders of GRYT — a free South Hills run club in Pittsburgh, PA.",
       },
-      { property: "og:title", content: "Resources · gryt run club" },
+      { property: "og:title", content: "Running Resources · South Hills Pittsburgh | GRYT Run Club" },
       {
         property: "og:description",
         content:
-          "Everything we've learned from showing up every Saturday — shared freely.",
+          "Everything we've learned running the South Hills every Saturday — playbooks, guides, and free tools, shared openly.",
       },
+
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://grytrunclub.com/resources" },
       { name: "twitter:card", content: "summary_large_image" },

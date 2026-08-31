@@ -92,18 +92,19 @@ const FAQ_JSON_LD = {
 export const Route = createFileRoute("/faq")({
   head: () => ({
     meta: [
-      { title: "FAQ — GRYT Run Club Pittsburgh" },
+      { title: "South Hills Run Club FAQ · McMurray, PA | GRYT" },
       {
         name: "description",
         content:
-          "Answers to the most common questions about joining GRYT — pace, cost, safety, gear, weather, waiver, and how Saturday mornings actually work.",
+          "Pace, cost, parking, gear, weather, and waiver questions for GRYT — the free South Hills run club meeting Saturdays 7 AM in McMurray, PA.",
       },
-      { property: "og:title", content: "FAQ — GRYT Run Club Pittsburgh" },
+      { property: "og:title", content: "South Hills Run Club FAQ · McMurray, PA | GRYT" },
       {
         property: "og:description",
         content:
-          "Am I too slow? Do I need to RSVP? What if it rains? Everything a first-timer asks before showing up on Saturday.",
+          "Am I too slow? Where do I park in McMurray? What if it rains? Everything a first-timer asks before a South Hills Saturday run.",
       },
+
       { property: "og:type", content: "article" },
       { property: "og:url", content: "https://grytrunclub.com/faq" },
       { name: "twitter:card", content: "summary_large_image" },
