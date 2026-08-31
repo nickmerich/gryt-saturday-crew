@@ -3774,6 +3774,7 @@ function Landing() {
       <Founders />
       <Testimonial />
       <Community />
+      <RegionBand />
       <Beliefs />
       <FAQ />
       <FinalCTA />
