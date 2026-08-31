@@ -37,7 +37,7 @@ function PrivacyPage() {
               className="h-11 w-11"
               width={44}
               height={44}
-              loading="lazy"
+              loading="eager"
             />
             <span className="wordmark uppercase text-[20px] leading-none [text-shadow:2px_2px_0_var(--blue)]">
               Run Club
