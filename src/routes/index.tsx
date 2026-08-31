@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { SITE_TITLE, SITE_DESCRIPTION } from "./__root";
 import { useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { signWaiver } from "@/lib/waiver.functions";
@@ -99,29 +100,17 @@ const EVENT_DATES = nextSaturdayISOs(12);
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "South Hills Run Club · Pittsburgh Running Group | GRYT" },
-      {
-        name: "description",
-        content:
-          "Free run club in the South Hills of Pittsburgh. Saturdays 7 AM on the Montour / Peters Trail in McMurray. All paces — no one gets dropped.",
-      },
-      { property: "og:title", content: "South Hills Run Club · Pittsburgh Running Group | GRYT" },
-      {
-        property: "og:description",
-        content:
-          "Free run club in the South Hills of Pittsburgh. Saturdays 7 AM on the Montour / Peters Trail in McMurray. All paces — no one gets dropped.",
-      },
+      { title: SITE_TITLE },
+      { name: "description", content: SITE_DESCRIPTION },
+      { property: "og:title", content: SITE_TITLE },
+      { property: "og:description", content: SITE_DESCRIPTION },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "GRYT Run Club" },
       { property: "og:url", content: SITE_URL },
       { property: "og:image", content: ABS_HERO_IMG },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "South Hills Run Club · Pittsburgh Running Group | GRYT" },
-      {
-        name: "twitter:description",
-        content:
-          "Free South Hills run club in Pittsburgh. Saturdays 7 AM on the Montour / Peters Trail in McMurray. Every pace welcome.",
-      },
+      { name: "twitter:title", content: SITE_TITLE },
+      { name: "twitter:description", content: SITE_DESCRIPTION },
 
       { name: "twitter:image", content: ABS_HERO_IMG },
     ],

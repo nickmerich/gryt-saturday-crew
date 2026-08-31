@@ -11,6 +11,12 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
+export const SITE_TITLE =
+  "Do Hard Things Together · Pittsburgh Running Group · South Hills Run Club · gryt";
+export const SITE_DESCRIPTION =
+  "Free Pittsburgh run club on the Montour / Peters Trail in McMurray. Saturdays 7 AM, all paces welcome — no one gets dropped.";
+
+
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -77,18 +83,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "google-site-verification", content: "Ht_bpR8RX3N2WTSUYLjZmObrxjQ--ZyvEZGLNEgBots" },
-      { title: "GRYT Run Club · Saturdays 7 AM · McMurray, PA" },
-      {
-        name: "description",
-        content:
-          "Pittsburgh Saturday 7 AM run club on the Montour / Peters Trail for former athletes, busy parents, and comeback runners. No pace requirement.",
-      },
+      { title: SITE_TITLE },
+      { name: "description", content: SITE_DESCRIPTION },
       { name: "author", content: "GRYT Run Club" },
-      { property: "og:title", content: "GRYT Run Club · Saturdays 7 AM · McMurray, PA" },
-      {
-        property: "og:description",
-        content: "Do hard things together. Saturday mornings on the Montour / Peters Trail.",
-      },
+      { property: "og:title", content: SITE_TITLE },
+      { property: "og:description", content: SITE_DESCRIPTION },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "gryt run club" },
       { property: "og:url", content: "https://grytrunclub.com" },
@@ -97,11 +96,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "apple-mobile-web-app-capable", content: "yes" },
       { name: "apple-mobile-web-app-status-bar-style", content: "black" },
       { name: "apple-mobile-web-app-title", content: "gryt" },
-      { name: "twitter:title", content: "GRYT Run Club · Saturdays 7 AM · McMurray, PA" },
-      {
-        name: "twitter:description",
-        content: "Do hard things together. Saturday mornings on the Montour / Peters Trail.",
-      },
+      { name: "twitter:title", content: SITE_TITLE },
+      { name: "twitter:description", content: SITE_DESCRIPTION },
       { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/d9453e83-accf-45b7-aa22-28bb004995ee" },
       { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/d9453e83-accf-45b7-aa22-28bb004995ee" },
     ],
