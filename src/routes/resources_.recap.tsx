@@ -319,9 +319,22 @@ function RecapGeneratorPage() {
       toast.error("That image is too large. Try one under 8MB.");
       return;
     }
-    setPhotoUrl(URL.createObjectURL(file));
-    setTransform(DEFAULT_TRANSFORM);
-    setShowCrop(true);
+    // Some cameras hand back files with an empty or non-image MIME type
+    // (HEIC on iOS, files picked from cloud drives). Read those as a data URL
+    // so the browser can still decode whatever it supports.
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = typeof reader.result === "string" ? reader.result : null;
+      if (!result) {
+        toast.error("Couldn't read that photo. Try a different one.");
+        return;
+      }
+      setPhotoUrl(result);
+      setTransform(DEFAULT_TRANSFORM);
+      setShowCrop(true);
+    };
+    reader.onerror = () => toast.error("Couldn't read that photo. Try a different one.");
+    reader.readAsDataURL(file);
   }
 
   function updateTransform(patch: Partial<PhotoTransform>) {
@@ -333,11 +346,25 @@ function RecapGeneratorPage() {
       setPhotoImg(null);
       return;
     }
+    let cancelled = false;
     const img = new Image();
-    img.onload = () => setPhotoImg(img);
+    img.onload = () => {
+      if (!cancelled) setPhotoImg(img);
+    };
+    img.onerror = () => {
+      if (cancelled) return;
+      setPhotoImg(null);
+      setPhotoUrl(null);
+      setShowCrop(false);
+      toast.error("That image format isn't supported here.", {
+        description: "HEIC photos from iPhone often fail — save it as JPEG and try again.",
+      });
+    };
     img.src = photoUrl;
     return () => {
+      cancelled = true;
       img.onload = null;
+      img.onerror = null;
     };
   }, [photoUrl]);
 
@@ -852,10 +879,14 @@ function PhotoPicker({
         <input
           ref={inputRef}
           type="file"
-          accept="image/*"
+          accept="image/*,.heic,.heif,.jpg,.jpeg,.png,.webp"
           onChange={(e) => {
             onChange(e);
-            if (inputRef.current) inputRef.current.value = "";
+            // Clear on the next tick so the File stays readable while the
+            // reader picks it up (iOS Safari drops it on a sync reset).
+            setTimeout(() => {
+              if (inputRef.current) inputRef.current.value = "";
+            }, 0);
           }}
           className="sr-only"
           tabIndex={-1}
