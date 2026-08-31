@@ -99,29 +99,30 @@ const EVENT_DATES = nextSaturdayISOs(12);
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Pittsburgh Running Group · South Hills Run Club · gryt" },
+      { title: "South Hills Run Club · Pittsburgh Running Group | GRYT" },
       {
         name: "description",
         content:
-          "Free Pittsburgh run club on the Montour / Peters Trail in McMurray. Saturdays 7 AM, all paces welcome — no one gets dropped.",
+          "Free run club in the South Hills of Pittsburgh. Saturdays 7 AM on the Montour / Peters Trail in McMurray. All paces — no one gets dropped.",
       },
-      { property: "og:title", content: "Do Hard Things Together · Pittsburgh Running Group · South Hills Run Club" },
+      { property: "og:title", content: "South Hills Run Club · Pittsburgh Running Group | GRYT" },
       {
         property: "og:description",
         content:
-          "Do hard things together. Free Pittsburgh run club in the South Hills — Saturdays 7 AM on the Montour / Peters Trail in McMurray.",
+          "Free run club in the South Hills of Pittsburgh. Saturdays 7 AM on the Montour / Peters Trail in McMurray. All paces — no one gets dropped.",
       },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "GRYT Run Club" },
       { property: "og:url", content: SITE_URL },
       { property: "og:image", content: ABS_HERO_IMG },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Do Hard Things Together · Pittsburgh Running Group · South Hills Run Club" },
+      { name: "twitter:title", content: "South Hills Run Club · Pittsburgh Running Group | GRYT" },
       {
         name: "twitter:description",
         content:
-          "Free Pittsburgh run club in the South Hills. Saturdays 7 AM on the Montour / Peters Trail. Do hard things together.",
+          "Free South Hills run club in Pittsburgh. Saturdays 7 AM on the Montour / Peters Trail in McMurray. Every pace welcome.",
       },
+
       { name: "twitter:image", content: ABS_HERO_IMG },
     ],
     links: [{ rel: "canonical", href: SITE_URL }],
