@@ -3,13 +3,14 @@ import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 
 const SITE = "https://grytrunclub.com";
 const URL = `${SITE}/races`;
-const TITLE = "Pittsburgh Races 2026 · Training Guide · gryt run club";
+const TITLE = "Pittsburgh Races 2026–27 · Training Guide · gryt run club";
 const DESCRIPTION =
-  "Upcoming Pittsburgh races in 2026 — Pittsburgh Marathon, Peters Township 5Ks, South Hills trail runs. Pick your goal and train with GRYT.";
+  "Upcoming Pittsburgh races — Great Race, EQT 10 Miler, the 2027 Pittsburgh Marathon, Peters Township 5Ks, and South Hills trail runs. Pick your goal and train with GRYT.";
 
 type Race = {
   name: string;
   date: string;
+  iso?: string;
   distance: string;
   location: string;
   url?: string;
@@ -19,13 +20,14 @@ type Race = {
 
 const RACES: Race[] = [
   {
-    name: "Pittsburgh Marathon (DICK'S Sporting Goods)",
-    date: "May 3, 2026",
-    distance: "Marathon · Half · Relay · 5K",
-    location: "Downtown Pittsburgh",
-    url: "https://www.thepittsburghmarathon.com/",
+    name: "Great Race",
+    date: "September 27, 2026",
+    iso: "2026-09-27",
+    distance: "10K · 5K",
+    location: "Squirrel Hill → Point State Park",
+    url: "https://www.rungreatrace.com/",
     blurb:
-      "The city's flagship race weekend. Fast half, brutal-but-loved full through every neighborhood. If you pick one Pittsburgh race per year, this is it.",
+      "One of the largest 10Ks in the country. Net-downhill, fast course, big crowds. A rite of passage for Pittsburgh runners. Four weeks out — the Saturday long run is the whole plan now.",
     tier: "signature",
   },
   {
@@ -35,22 +37,22 @@ const RACES: Race[] = [
     location: "North Shore → South Side",
     url: "https://www.pittsburghtenmiler.com/",
     blurb:
-      "A late-season classic. Great fall goal race if the marathon isn't your thing but you still want something long and honest.",
+      "A late-season classic. Great fall goal race if the marathon isn't your thing but you still want something long and honest. Ten weeks out — start the build now.",
     tier: "signature",
   },
   {
-    name: "Great Race",
-    date: "September 27, 2026",
-    distance: "10K · 5K",
-    location: "Squirrel Hill → Point State Park",
-    url: "https://www.rungreatrace.com/",
+    name: "Pittsburgh Marathon (DICK'S Sporting Goods)",
+    date: "May 2027",
+    distance: "Marathon · Half · Relay · 5K",
+    location: "Downtown Pittsburgh",
+    url: "https://www.thepittsburghmarathon.com/",
     blurb:
-      "One of the largest 10Ks in the country. Net-downhill, fast course, big crowds. A rite of passage for Pittsburgh runners.",
+      "The city's flagship race weekend. Fast half, brutal-but-loved full through every neighborhood. If you pick one Pittsburgh race per year, this is it. Builds start in January.",
     tier: "signature",
   },
   {
     name: "Peters Township Community Day 5K",
-    date: "June 2026",
+    date: "June 2027",
     distance: "5K",
     location: "Peters Township Community Park",
     blurb:
@@ -59,7 +61,7 @@ const RACES: Race[] = [
   },
   {
     name: "Just a Short Run",
-    date: "March 2026",
+    date: "March 2027",
     distance: "Half · 15K · 5K · 1M",
     location: "North Park",
     url: "https://elitrunners.com/",
@@ -78,7 +80,7 @@ const RACES: Race[] = [
   },
   {
     name: "North Park Trail Runs (Steel City Road Runners)",
-    date: "Series · Spring–Fall 2026",
+    date: "Series · Spring–Fall",
     distance: "5K–15K",
     location: "North Park",
     blurb:
@@ -87,7 +89,7 @@ const RACES: Race[] = [
   },
   {
     name: "Rachel Carson Trail Challenge",
-    date: "June 2026",
+    date: "June 2027",
     distance: "34 Miles (point-to-point)",
     location: "Harrison Hills → North Park",
     url: "https://rachelcarsontrails.org/",
