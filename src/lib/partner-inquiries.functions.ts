@@ -65,16 +65,16 @@ export const submitPartnerInquiry = createServerFn({ method: "POST" })
 
     if (error) {
       console.error("partner inquiry insert failed", error);
-      throw new Error("We couldn't send your message. Please try again.");
     }
 
+    let emailed = false;
     try {
       const { sendInternalTransactionalEmail } = await import(
         "./email/send-internal.server"
       );
       const baseKey = inserted?.id ?? crypto.randomUUID();
       const submittedAt = inserted?.created_at ?? new Date().toISOString();
-      await sendInternalTransactionalEmail({
+      const result = await sendInternalTransactionalEmail({
         templateName: "partner-inquiry-notification",
         recipientEmail: "merichnick@gmail.com",
         idempotencyKey: `partner-inquiry-${baseKey}`,
@@ -85,11 +85,19 @@ export const submitPartnerInquiry = createServerFn({ method: "POST" })
           involvement: data.involvement,
           message: message ?? "—",
           submittedAt,
+          ...(error ? { note: "Database save failed — email only." } : {}),
         },
       });
+      emailed = result.ok;
     } catch (e) {
       console.error("partner inquiry notification email failed", e);
     }
 
+    // The lead is only lost if BOTH the save and the notification failed.
+    if (error && !emailed) {
+      throw new Error("We couldn't send your message. Please try again.");
+    }
+
     return { ok: true };
   });
+
