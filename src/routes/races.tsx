@@ -144,14 +144,14 @@ export const Route = createFileRoute("/races")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "ItemList",
-          name: "Upcoming Pittsburgh Races 2026",
+          name: "Upcoming Pittsburgh Races 2026–27",
           itemListElement: RACES.map((r, i) => ({
             "@type": "ListItem",
             position: i + 1,
             item: {
               "@type": "Event",
               name: r.name,
-              startDate: r.date,
+              ...(r.iso ? { startDate: r.iso } : {}),
               eventStatus: "https://schema.org/EventScheduled",
               eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
               location: {
@@ -195,9 +195,9 @@ function RacesPage() {
 
       <section className="px-6 sm:px-12 lg:px-24 py-20 md:py-28 border-b border-paper/15">
         <div className="max-w-[1080px] mx-auto">
-          <p className="eyebrow text-blue mb-5">RACES · PITTSBURGH · 2026</p>
+          <p className="eyebrow text-blue mb-5">RACES · PITTSBURGH · 2026–27</p>
           <h1 className="display-condensed uppercase text-[clamp(44px,8vw,112px)] leading-[0.92]">
-            Upcoming Pittsburgh<br />Races 2026
+            Upcoming Pittsburgh<br />Races 2026–27
           </h1>
           <p className="mt-7 max-w-[720px] text-paper/75 text-lg md:text-xl leading-[1.55]">
             {DESCRIPTION}
