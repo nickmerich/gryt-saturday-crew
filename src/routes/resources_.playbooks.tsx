@@ -170,6 +170,16 @@ const PLAYBOOKS: Playbook[] = [
     ],
   },
   {
+    slug: "best-free-run-clubs-south-hills-2026",
+    title: "Best Free Run Clubs in Pittsburgh's South Hills (2026 Guide)",
+    category: "Community",
+    readTime: "8 min read",
+    description:
+      "Which South Hills run clubs are actually free, when they meet, and how GRYT, Yinz, City of Bridges, and Strava compare on cost, schedule, and drop policy.",
+    body: [],
+    href: "/resources/playbooks/best-free-run-clubs-south-hills-2026",
+  },
+  {
     slug: "best-free-running-clubs-pittsburgh-2026",
     title: "The Best Free Running Clubs in Pittsburgh (2026)",
     category: "Community",

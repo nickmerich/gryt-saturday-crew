@@ -45,6 +45,7 @@ import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]
 import { Route as ResourcesPlaybooksGrytVsYinzRunClubRouteImport } from './routes/resources_.playbooks_.gryt-vs-yinz-run-club'
 import { Route as ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRouteImport } from './routes/resources_.playbooks_.fleet-feet-pittsburgh-vs-independent-run-clubs'
 import { Route as ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026RouteImport } from './routes/resources_.playbooks_.best-free-running-clubs-pittsburgh-2026'
+import { Route as ResourcesPlaybooksBestFreeRunClubsSouthHills2026RouteImport } from './routes/resources_.playbooks_.best-free-run-clubs-south-hills-2026'
 import { Route as LovableEmailEventsRouteImport } from './routes/lovable/email/events'
 import { Route as ApiPublicRsvpRouteImport } from './routes/api/public/rsvp'
 import { Route as ApiNewsletterSubscribeRouteImport } from './routes/api/newsletter/subscribe'
@@ -247,6 +248,12 @@ const ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route =
     path: '/resources/playbooks/best-free-running-clubs-pittsburgh-2026',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ResourcesPlaybooksBestFreeRunClubsSouthHills2026Route =
+  ResourcesPlaybooksBestFreeRunClubsSouthHills2026RouteImport.update({
+    id: '/resources_/playbooks_/best-free-run-clubs-south-hills-2026',
+    path: '/resources/playbooks/best-free-run-clubs-south-hills-2026',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const LovableEmailEventsRoute = LovableEmailEventsRouteImport.update({
   id: '/lovable/email/events',
   path: '/lovable/email/events',
@@ -341,6 +348,7 @@ export interface FileRoutesByFullPath {
   '/api/newsletter/subscribe': typeof ApiNewsletterSubscribeRoute
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
   '/lovable/email/events': typeof LovableEmailEventsRoute
+  '/resources/playbooks/best-free-run-clubs-south-hills-2026': typeof ResourcesPlaybooksBestFreeRunClubsSouthHills2026Route
   '/resources/playbooks/best-free-running-clubs-pittsburgh-2026': typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route
   '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs': typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute
   '/resources/playbooks/gryt-vs-yinz-run-club': typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
@@ -389,6 +397,7 @@ export interface FileRoutesByTo {
   '/api/newsletter/subscribe': typeof ApiNewsletterSubscribeRoute
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
   '/lovable/email/events': typeof LovableEmailEventsRoute
+  '/resources/playbooks/best-free-run-clubs-south-hills-2026': typeof ResourcesPlaybooksBestFreeRunClubsSouthHills2026Route
   '/resources/playbooks/best-free-running-clubs-pittsburgh-2026': typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route
   '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs': typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute
   '/resources/playbooks/gryt-vs-yinz-run-club': typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
@@ -438,6 +447,7 @@ export interface FileRoutesById {
   '/api/newsletter/subscribe': typeof ApiNewsletterSubscribeRoute
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
   '/lovable/email/events': typeof LovableEmailEventsRoute
+  '/resources_/playbooks_/best-free-run-clubs-south-hills-2026': typeof ResourcesPlaybooksBestFreeRunClubsSouthHills2026Route
   '/resources_/playbooks_/best-free-running-clubs-pittsburgh-2026': typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route
   '/resources_/playbooks_/fleet-feet-pittsburgh-vs-independent-run-clubs': typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute
   '/resources_/playbooks_/gryt-vs-yinz-run-club': typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
@@ -488,6 +498,7 @@ export interface FileRouteTypes {
     | '/api/newsletter/subscribe'
     | '/api/public/rsvp'
     | '/lovable/email/events'
+    | '/resources/playbooks/best-free-run-clubs-south-hills-2026'
     | '/resources/playbooks/best-free-running-clubs-pittsburgh-2026'
     | '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs'
     | '/resources/playbooks/gryt-vs-yinz-run-club'
@@ -536,6 +547,7 @@ export interface FileRouteTypes {
     | '/api/newsletter/subscribe'
     | '/api/public/rsvp'
     | '/lovable/email/events'
+    | '/resources/playbooks/best-free-run-clubs-south-hills-2026'
     | '/resources/playbooks/best-free-running-clubs-pittsburgh-2026'
     | '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs'
     | '/resources/playbooks/gryt-vs-yinz-run-club'
@@ -584,6 +596,7 @@ export interface FileRouteTypes {
     | '/api/newsletter/subscribe'
     | '/api/public/rsvp'
     | '/lovable/email/events'
+    | '/resources_/playbooks_/best-free-run-clubs-south-hills-2026'
     | '/resources_/playbooks_/best-free-running-clubs-pittsburgh-2026'
     | '/resources_/playbooks_/fleet-feet-pittsburgh-vs-independent-run-clubs'
     | '/resources_/playbooks_/gryt-vs-yinz-run-club'
@@ -632,6 +645,7 @@ export interface RootRouteChildren {
   ApiNewsletterSubscribeRoute: typeof ApiNewsletterSubscribeRoute
   ApiPublicRsvpRoute: typeof ApiPublicRsvpRoute
   LovableEmailEventsRoute: typeof LovableEmailEventsRoute
+  ResourcesPlaybooksBestFreeRunClubsSouthHills2026Route: typeof ResourcesPlaybooksBestFreeRunClubsSouthHills2026Route
   ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route: typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route
   ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute: typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute
   ResourcesPlaybooksGrytVsYinzRunClubRoute: typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
@@ -895,6 +909,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026RouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/resources_/playbooks_/best-free-run-clubs-south-hills-2026': {
+      id: '/resources_/playbooks_/best-free-run-clubs-south-hills-2026'
+      path: '/resources/playbooks/best-free-run-clubs-south-hills-2026'
+      fullPath: '/resources/playbooks/best-free-run-clubs-south-hills-2026'
+      preLoaderRoute: typeof ResourcesPlaybooksBestFreeRunClubsSouthHills2026RouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lovable/email/events': {
       id: '/lovable/email/events'
       path: '/lovable/email/events'
@@ -1021,6 +1042,8 @@ const rootRouteChildren: RootRouteChildren = {
   ApiNewsletterSubscribeRoute: ApiNewsletterSubscribeRoute,
   ApiPublicRsvpRoute: ApiPublicRsvpRoute,
   LovableEmailEventsRoute: LovableEmailEventsRoute,
+  ResourcesPlaybooksBestFreeRunClubsSouthHills2026Route:
+    ResourcesPlaybooksBestFreeRunClubsSouthHills2026Route,
   ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route:
     ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route,
   ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute:
