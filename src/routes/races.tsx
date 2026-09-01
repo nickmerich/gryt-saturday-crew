@@ -101,8 +101,8 @@ const RACES: Race[] = [
 
 const FAQS = [
   {
-    q: "When is the 2026 Pittsburgh Marathon?",
-    a: "The DICK'S Sporting Goods Pittsburgh Marathon is scheduled for Sunday, May 3, 2026. Race weekend also includes a half marathon, marathon relay, and a 5K on the Saturday.",
+    q: "What's the next big Pittsburgh race?",
+    a: "The Great Race (10K and 5K) runs September 27, 2026, then the EQT Pittsburgh 10 Miler in November. The next DICK'S Sporting Goods Pittsburgh Marathon weekend lands in early May 2027 — confirm the exact date on the official race site.",
   },
   {
     q: "What's a good first race in Pittsburgh?",
