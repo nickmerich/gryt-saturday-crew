@@ -152,7 +152,7 @@ export function nextSaturdayIcsDataUrl(from: Date = nyNow()): string {
   return "data:text/calendar;charset=utf-8," + encodeURIComponent(lines.join("\r\n"));
 }
 
-export function nextSaturdayIcsFilename(from: Date = new Date()): string {
-  const { y, m, d } = ymd(nextSaturday(from));
+export function nextSaturdayIcsFilename(from: Date = nyNow()): string {
+  const { y, m, d } = ymd(upcomingRunSaturday(from));
   return `gryt-run-${y}-${m}-${d}.ics`;
 }
