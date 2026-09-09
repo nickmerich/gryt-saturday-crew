@@ -99,14 +99,14 @@ function ymd(d: Date) {
 }
 
 /** ISO date (YYYY-MM-DD) of the next Saturday run. */
-export function nextSaturdayISODate(from: Date = new Date()): string {
-  const { y, m, d } = ymd(nextSaturday(from));
+export function nextSaturdayISODate(from: Date = nyNow()): string {
+  const { y, m, d } = ymd(upcomingRunSaturday(from));
   return `${y}-${m}-${d}`;
 }
 
 /** Downloadable .ics for the next Saturday 7:00 AM run (America/New_York). */
-export function nextSaturdayIcsDataUrl(from: Date = new Date()): string {
-  const sat = nextSaturday(from);
+export function nextSaturdayIcsDataUrl(from: Date = nyNow()): string {
+  const sat = upcomingRunSaturday(from);
   const { y, m, d } = ymd(sat);
   const runNum = nextRunNumber(from);
   const dtStart = `${y}${m}${d}T070000`;
