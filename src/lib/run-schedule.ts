@@ -66,11 +66,11 @@ export function nextSaturdayShortDate(from: Date = nyNow()): string {
   return upcomingRunSaturday(from).toLocaleDateString("en-US", { month: "short", day: "numeric" });
 }
 
-export function nextSaturdayLabel(from: Date = new Date()): string {
+export function nextSaturdayLabel(from: Date = nyNow()): string {
   return `GRYT Run #${nextRunNumber(from)} · Sat, ${nextSaturdayShortDate(from)} · 7 AM`;
 }
 
-export function nextSaturdayLabelLong(from: Date = new Date()): string {
+export function nextSaturdayLabelLong(from: Date = nyNow()): string {
   return `GRYT Run #${nextRunNumber(from)} · Sat, ${nextSaturdayShortDate(from)} · 7:00 AM`;
 }
 
