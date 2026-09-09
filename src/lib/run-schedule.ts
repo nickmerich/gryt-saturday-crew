@@ -50,22 +50,27 @@ export function upcomingRunLabel(from: Date = new Date()): string {
 
 
 
-export function nextRunNumber(from: Date = new Date()): number {
-  const sat = nextSaturday(from);
+/** "Now" expressed in America/New_York wall-clock time. */
+export function nyNow(from: Date = new Date()): Date {
+  return new Date(from.toLocaleString("en-US", { timeZone: "America/New_York" }));
+}
+
+export function nextRunNumber(from: Date = nyNow()): number {
+  const sat = upcomingRunSaturday(from);
   const satUTC = Date.UTC(sat.getFullYear(), sat.getMonth(), sat.getDate());
   const weeks = Math.round((satUTC - RUN_ANCHOR_MS) / (7 * 24 * 60 * 60 * 1000));
   return RUN_ANCHOR_NUMBER + weeks;
 }
 
-export function nextSaturdayShortDate(from: Date = new Date()): string {
-  return nextSaturday(from).toLocaleDateString("en-US", { month: "short", day: "numeric" });
+export function nextSaturdayShortDate(from: Date = nyNow()): string {
+  return upcomingRunSaturday(from).toLocaleDateString("en-US", { month: "short", day: "numeric" });
 }
 
-export function nextSaturdayLabel(from: Date = new Date()): string {
+export function nextSaturdayLabel(from: Date = nyNow()): string {
   return `GRYT Run #${nextRunNumber(from)} · Sat, ${nextSaturdayShortDate(from)} · 7 AM`;
 }
 
-export function nextSaturdayLabelLong(from: Date = new Date()): string {
+export function nextSaturdayLabelLong(from: Date = nyNow()): string {
   return `GRYT Run #${nextRunNumber(from)} · Sat, ${nextSaturdayShortDate(from)} · 7:00 AM`;
 }
 
@@ -94,14 +99,14 @@ function ymd(d: Date) {
 }
 
 /** ISO date (YYYY-MM-DD) of the next Saturday run. */
-export function nextSaturdayISODate(from: Date = new Date()): string {
-  const { y, m, d } = ymd(nextSaturday(from));
+export function nextSaturdayISODate(from: Date = nyNow()): string {
+  const { y, m, d } = ymd(upcomingRunSaturday(from));
   return `${y}-${m}-${d}`;
 }
 
 /** Downloadable .ics for the next Saturday 7:00 AM run (America/New_York). */
-export function nextSaturdayIcsDataUrl(from: Date = new Date()): string {
-  const sat = nextSaturday(from);
+export function nextSaturdayIcsDataUrl(from: Date = nyNow()): string {
+  const sat = upcomingRunSaturday(from);
   const { y, m, d } = ymd(sat);
   const runNum = nextRunNumber(from);
   const dtStart = `${y}${m}${d}T070000`;
@@ -147,7 +152,7 @@ export function nextSaturdayIcsDataUrl(from: Date = new Date()): string {
   return "data:text/calendar;charset=utf-8," + encodeURIComponent(lines.join("\r\n"));
 }
 
-export function nextSaturdayIcsFilename(from: Date = new Date()): string {
-  const { y, m, d } = ymd(nextSaturday(from));
+export function nextSaturdayIcsFilename(from: Date = nyNow()): string {
+  const { y, m, d } = ymd(upcomingRunSaturday(from));
   return `gryt-run-${y}-${m}-${d}.ics`;
 }
