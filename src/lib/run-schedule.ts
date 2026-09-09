@@ -50,15 +50,20 @@ export function upcomingRunLabel(from: Date = new Date()): string {
 
 
 
-export function nextRunNumber(from: Date = new Date()): number {
-  const sat = nextSaturday(from);
+/** "Now" expressed in America/New_York wall-clock time. */
+export function nyNow(from: Date = new Date()): Date {
+  return new Date(from.toLocaleString("en-US", { timeZone: "America/New_York" }));
+}
+
+export function nextRunNumber(from: Date = nyNow()): number {
+  const sat = upcomingRunSaturday(from);
   const satUTC = Date.UTC(sat.getFullYear(), sat.getMonth(), sat.getDate());
   const weeks = Math.round((satUTC - RUN_ANCHOR_MS) / (7 * 24 * 60 * 60 * 1000));
   return RUN_ANCHOR_NUMBER + weeks;
 }
 
-export function nextSaturdayShortDate(from: Date = new Date()): string {
-  return nextSaturday(from).toLocaleDateString("en-US", { month: "short", day: "numeric" });
+export function nextSaturdayShortDate(from: Date = nyNow()): string {
+  return upcomingRunSaturday(from).toLocaleDateString("en-US", { month: "short", day: "numeric" });
 }
 
 export function nextSaturdayLabel(from: Date = new Date()): string {
