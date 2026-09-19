@@ -30,20 +30,25 @@ export function readSignupToken(cookieHeader: string | null | undefined): string
   return null;
 }
 
+// Secure is required everywhere the app is actually served (https). Local dev
+// runs over plain http, where a Secure cookie would be dropped by the browser.
+const SECURE = process.env["NODE_ENV"] === "production" ? "Secure; " : "";
+
 export function signupCookie(token: string): string {
   return [
     `${SIGNUP_COOKIE}=${encodeURIComponent(token)}`,
     "Path=/",
     "HttpOnly",
-    "Secure",
+    ...(SECURE ? ["Secure"] : []),
     "SameSite=Lax",
     `Max-Age=${MAX_AGE_SECONDS}`,
   ].join("; ");
 }
 
 export function clearedSignupCookie(): string {
-  return `${SIGNUP_COOKIE}=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0`;
+  return `${SIGNUP_COOKIE}=; Path=/; HttpOnly; ${SECURE}SameSite=Lax; Max-Age=0`;
 }
+
 
 export type SignupSessionRow = {
   id: string;
