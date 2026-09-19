@@ -1468,7 +1468,13 @@ function RSVPWaiverBlock({
       <p className="text-[13px] leading-[1.55] text-ink/70 mb-3">
         We carried your name and contact over — one signature covers you through Dec 31, 2026.
       </p>
-      <InlineWaiver prefill={prefill} autoOpen compact />
+      <InlineWaiver
+        prefill={prefill}
+        autoOpen
+        compact
+        onSigned={() => onStatusChange?.(true)}
+      />
+
     </div>
   );
 }
