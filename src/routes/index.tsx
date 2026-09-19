@@ -2101,7 +2101,7 @@ function AffiliationList({ name, items }: { name: string; items: string[] }) {
 
 function Founders() {
   const stats: Array<[string, string]> = [
-    [String(FOUNDER_MARATHONS), "marathons — Nick & Laura, combined"],
+    [INSTAGRAM_LABEL, "followers on Instagram"],
     ["2014", "running together since"],
     [REGULARS_LABEL, "regulars each Saturday"],
     [STRAVA_MEMBERS_LABEL, "total Strava members"],
