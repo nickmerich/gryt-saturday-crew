@@ -1430,13 +1430,23 @@ type WaiverForm = {
 type WaiverPrefill = { name?: string; email?: string; phone?: string };
 
 
-function RSVPWaiverBlock({ prefill }: { prefill?: WaiverPrefill }) {
+function RSVPWaiverBlock({
+  prefill,
+  onStatusChange,
+}: {
+  prefill?: WaiverPrefill;
+  onStatusChange?: (signed: boolean) => void;
+}) {
   const [waiver, setWaiver] = useState<{ id: string; signed_on: string; name: string } | null>(null);
 
   useEffect(() => {
     const stored = readStoredWaiver();
-    if (stored) setWaiver(stored);
+    if (stored) {
+      setWaiver(stored);
+      onStatusChange?.(true);
+    }
   }, []);
+
 
   if (waiver) {
     return (
