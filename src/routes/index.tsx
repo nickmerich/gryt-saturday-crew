@@ -1323,7 +1323,7 @@ type WaiverForm = {
   agree_adult: boolean;
 };
 
-function RSVPWaiverBlock() {
+function RSVPWaiverBlock({ prefill }: { prefill?: WaiverPrefill }) {
   const [waiver, setWaiver] = useState<{ id: string; signed_on: string; name: string } | null>(null);
 
   useEffect(() => {
@@ -1344,16 +1344,14 @@ function RSVPWaiverBlock() {
   }
 
   return (
-    <div className="flex flex-col gap-2.5">
-      <Link
-        to="/waiver"
-        className="text-[13px] font-bold tracking-[0.1em] uppercase py-4 bg-ink text-paper text-center hover:bg-[#3a7ca5] transition-colors block"
-      >
-        Sign the waiver
-      </Link>
-      <p className="text-[12px] text-ink/60 text-center -mt-1">
-        One signature covers you through Dec 31, 2026. Takes about a minute.
+    <div>
+      <div className="text-[11px] font-bold tracking-[0.14em] uppercase text-ink/55 mb-2">
+        Last step · Sign the 2026 waiver
+      </div>
+      <p className="text-[13px] leading-[1.55] text-ink/70 mb-3">
+        We carried your name and contact over — one signature covers you through Dec 31, 2026.
       </p>
+      <InlineWaiver prefill={prefill} autoOpen compact />
     </div>
   );
 }
