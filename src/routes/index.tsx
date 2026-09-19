@@ -92,7 +92,7 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
 import {
   REGULARS_LABEL,
   STRAVA_MEMBERS_LABEL,
-  FOUNDER_MARATHONS,
+  INSTAGRAM_LABEL,
 } from "@/lib/club-stats";
 
 const SITE_URL = "https://grytrunclub.com";
