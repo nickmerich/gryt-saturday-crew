@@ -42,7 +42,6 @@ const SYSTEM = [
 export const createRunPlan = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => PlanInput.parse(input))
   .handler(async ({ data }) => {
-    console.log("[plan] handler start", data.goal);
     const key = process.env["LOVABLE_API_KEY"];
     if (!key) throw new Error("AI is not configured yet.");
 
