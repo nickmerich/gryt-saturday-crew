@@ -143,6 +143,33 @@ export const signWaiver = createServerFn({ method: "POST" })
       durationMs: Date.now() - startedAt,
     });
 
+    // Attach the signed waiver to the server-side signup session (opaque
+    // httpOnly cookie token — no personal data in the URL).
+    try {
+      const { getRequestHeader, setResponseHeader } = await import(
+        "@tanstack/react-start/server"
+      );
+      const { readSignupToken, recordSignupSession, signupCookie } = await import(
+        "@/lib/signup-session.server"
+      );
+      const token = await recordSignupSession(
+        readSignupToken(getRequestHeader("cookie")),
+        {
+          waiver_id: row.id as string,
+          waiver_signed_on: row.signed_on as string,
+          name: data.full_name.trim(),
+          contact: data.email.trim().toLowerCase(),
+        },
+      );
+      if (token) setResponseHeader("set-cookie", signupCookie(token));
+    } catch (err) {
+      logWaiver("session_store_failed", {
+        emailHash,
+        message: err instanceof Error ? err.message : String(err),
+      });
+    }
+
+
     // Fire-and-forget confirmation email — never block the response.
     try {
       const { sendInternalTransactionalEmail } = await import(

@@ -3,6 +3,8 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "./__root";
 import { useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { signWaiver } from "@/lib/waiver.functions";
+import { clearSignupSession, loadSignupSession } from "@/lib/signup-session.functions";
+
 import { submitRecommendation } from "@/lib/recommendations.functions";
 import {
   getGoogleReviews,
@@ -694,6 +696,8 @@ function RSVP() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submittedDays, setSubmittedDays] = useState<RsvpDay[]>([]);
+  const [waiverOnFile, setWaiverOnFile] = useState(false);
+
 
   // Hand the RSVP details to the waiver in memory — no URL parameters.
   const waiverPrefill = useMemo(() => {
@@ -722,6 +726,28 @@ function RSVP() {
     window.addEventListener("hashchange", applyHash);
     return () => window.removeEventListener("hashchange", applyHash);
   }, []);
+
+  // Restore a completed submission from secure server-side storage. The
+  // browser only carries an opaque httpOnly cookie — nothing in the URL.
+  useEffect(() => {
+    let cancelled = false;
+    loadSignupSession()
+      .then((session) => {
+        if (cancelled || !session || !session.rsvpAt) return;
+        setName(session.name ?? "");
+        setContact(session.contact ?? "");
+        setSubmittedDays(["sat"]);
+        setWaiverOnFile(Boolean(session.waiver));
+        setSubmitted(true);
+      })
+      .catch(() => {
+        // no stored submission — show the form
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
 
   const submit = async () => {
     if (!name.trim() || !contact.trim()) {
@@ -1002,12 +1028,16 @@ function RSVP() {
               contact={contact}
               days={submittedDays}
               prefill={waiverPrefill}
+              waiverOnFile={waiverOnFile}
               onReset={() => {
+                void clearSignupSession().catch(() => {});
+                setWaiverOnFile(false);
                 setSubmitted(false);
                 setSubmittedDays([]);
                 setName("");
                 setContact("");
                 setSource("");
+
               }}
             />
           )}
@@ -1036,15 +1066,18 @@ function RSVPConfirmation({
   contact,
   days,
   prefill,
+  waiverOnFile = false,
   onReset,
 }: {
   name: string;
   contact: string;
   days: RsvpDay[];
   prefill?: WaiverPrefill;
+  waiverOnFile?: boolean;
   onReset: () => void;
 }) {
-  const [waiverSigned, setWaiverSigned] = useState(false);
+  const [waiverSigned, setWaiverSigned] = useState(waiverOnFile);
+
   const firstName = name.trim().split(/\s+/)[0] || "Runner";
   const masked = maskContact(contact);
 
