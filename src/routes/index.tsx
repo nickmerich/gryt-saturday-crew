@@ -1032,7 +1032,7 @@ function RSVP() {
                   Recurring weekly event — shows up every Saturday.
                 </div>
               </div>
-              <RSVPWaiverBlock />
+              <RSVPWaiverBlock prefill={waiverPrefill} />
               <a
                 href={STRAVA_CLUB}
                 target="_blank"
