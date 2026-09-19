@@ -695,6 +695,17 @@ function RSVP() {
   const [submitted, setSubmitted] = useState(false);
   const [submittedDays, setSubmittedDays] = useState<RsvpDay[]>([]);
 
+  // Hand the RSVP details to the waiver in memory — no URL parameters.
+  const waiverPrefill = useMemo(() => {
+    const c = contact.trim();
+    const isEmail = /@/.test(c);
+    return {
+      name: name.trim(),
+      email: isEmail ? c.toLowerCase() : "",
+      phone: isEmail ? "" : c,
+    };
+  }, [name, contact]);
+
   const toggleDay = (d: RsvpDay) => setDays((p) => ({ ...p, [d]: !p[d] }));
 
   // Allow "RSVP Saturday" buttons elsewhere on the page to deep-link into this form.
@@ -1032,7 +1043,7 @@ function RSVP() {
                   Recurring weekly event — shows up every Saturday.
                 </div>
               </div>
-              <RSVPWaiverBlock />
+              <RSVPWaiverBlock prefill={waiverPrefill} />
               <a
                 href={STRAVA_CLUB}
                 target="_blank"
@@ -1323,7 +1334,11 @@ type WaiverForm = {
   agree_adult: boolean;
 };
 
-function RSVPWaiverBlock() {
+/** RSVP details handed to the waiver in memory only — never via the URL. */
+type WaiverPrefill = { name?: string; email?: string; phone?: string };
+
+
+function RSVPWaiverBlock({ prefill }: { prefill?: WaiverPrefill }) {
   const [waiver, setWaiver] = useState<{ id: string; signed_on: string; name: string } | null>(null);
 
   useEffect(() => {
@@ -1344,16 +1359,14 @@ function RSVPWaiverBlock() {
   }
 
   return (
-    <div className="flex flex-col gap-2.5">
-      <Link
-        to="/waiver"
-        className="text-[13px] font-bold tracking-[0.1em] uppercase py-4 bg-ink text-paper text-center hover:bg-[#3a7ca5] transition-colors block"
-      >
-        Sign the waiver
-      </Link>
-      <p className="text-[12px] text-ink/60 text-center -mt-1">
-        One signature covers you through Dec 31, 2026. Takes about a minute.
+    <div>
+      <div className="text-[11px] font-bold tracking-[0.14em] uppercase text-ink/55 mb-2">
+        Last step · Sign the 2026 waiver
+      </div>
+      <p className="text-[13px] leading-[1.55] text-ink/70 mb-3">
+        We carried your name and contact over — one signature covers you through Dec 31, 2026.
       </p>
+      <InlineWaiver prefill={prefill} autoOpen compact />
     </div>
   );
 }
@@ -1393,9 +1406,17 @@ function saveStoredWaiver(v: { id: string; signed_on: string; name: string }) {
   }
 }
 
-function InlineWaiver() {
+function InlineWaiver({
+  prefill,
+  autoOpen = false,
+  compact = false,
+}: {
+  prefill?: WaiverPrefill;
+  autoOpen?: boolean;
+  compact?: boolean;
+}) {
   const sign = useServerFn(signWaiver);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(autoOpen);
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [form, setForm] = useState<WaiverForm>(EMPTY_FORM);
   const [submitting, setSubmitting] = useState(false);
@@ -1406,6 +1427,17 @@ function InlineWaiver() {
     const stored = readStoredWaiver();
     if (stored) setDone(stored);
   }, []);
+
+  // Carry RSVP details straight across in memory — never through the URL.
+  useEffect(() => {
+    if (!prefill) return;
+    setForm((f) => ({
+      ...f,
+      full_name: f.full_name || (prefill.name ?? ""),
+      email: f.email || (prefill.email ?? ""),
+      phone: f.phone || (prefill.phone ?? ""),
+    }));
+  }, [prefill?.name, prefill?.email, prefill?.phone]);
 
   const set = <K extends keyof WaiverForm>(k: K, v: WaiverForm[K]) =>
     setForm((f) => ({ ...f, [k]: v }));
@@ -1464,7 +1496,7 @@ function InlineWaiver() {
 
   if (done) {
     return (
-      <div className="mt-6" role="status" aria-live="polite">
+      <div className={compact ? "" : "mt-6"} role="status" aria-live="polite">
         <div className="inline-flex items-center gap-2.5 bg-ink text-paper px-4 py-3 border border-paper/20">
           <span className="w-6 h-6 bg-blue flex items-center justify-center text-ink text-[13px] font-bold">✓</span>
           <span className="text-[13px] font-semibold tracking-[0.04em]">
@@ -1497,7 +1529,7 @@ function InlineWaiver() {
   }
 
   return (
-    <div className="mt-10 border-2 border-ink bg-ink text-paper">
+    <div className={`border-2 border-ink bg-ink text-paper ${compact ? "" : "mt-10"}`}>
       {/* Step header */}
       <div className="flex items-stretch border-b border-paper/15">
         {[1, 2, 3].map((n) => {
@@ -1524,7 +1556,7 @@ function InlineWaiver() {
         })}
       </div>
 
-      <div className="p-7 md:p-10">
+      <div className={compact ? "p-5" : "p-7 md:p-10"}>
         {step === 1 && (
           <div>
             <h3 className="display-condensed text-paper text-[26px] mb-2">
