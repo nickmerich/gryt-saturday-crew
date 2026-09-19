@@ -92,7 +92,7 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
 import {
   REGULARS_LABEL,
   STRAVA_MEMBERS_LABEL,
-  FOUNDER_MARATHONS,
+  INSTAGRAM_LABEL,
 } from "@/lib/club-stats";
 
 const SITE_URL = "https://grytrunclub.com";
@@ -459,7 +459,7 @@ function Hero() {
   const stats: Array<[string, string]> = [
     [REGULARS_LABEL, "regulars each Saturday"],
     [STRAVA_MEMBERS_LABEL, "runners on Strava"],
-    [String(FOUNDER_MARATHONS), "marathons between the founders"],
+    [INSTAGRAM_LABEL, "followers on Instagram"],
   ];
 
   // Sticky 50/50 A/B on the hero headline + subcopy. Variant A is the current
@@ -2101,7 +2101,7 @@ function AffiliationList({ name, items }: { name: string; items: string[] }) {
 
 function Founders() {
   const stats: Array<[string, string]> = [
-    [String(FOUNDER_MARATHONS), "marathons — Nick & Laura, combined"],
+    [INSTAGRAM_LABEL, "followers on Instagram"],
     ["2014", "running together since"],
     [REGULARS_LABEL, "regulars each Saturday"],
     [STRAVA_MEMBERS_LABEL, "total Strava members"],
