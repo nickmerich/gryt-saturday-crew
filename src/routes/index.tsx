@@ -3,6 +3,8 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "./__root";
 import { useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { signWaiver } from "@/lib/waiver.functions";
+import { clearSignupSession, loadSignupSession } from "@/lib/signup-session.functions";
+
 import { submitRecommendation } from "@/lib/recommendations.functions";
 import {
   getGoogleReviews,
