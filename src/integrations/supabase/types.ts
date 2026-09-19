@@ -209,6 +209,48 @@ export type Database = {
         }
         Relationships: []
       }
+      signup_sessions: {
+        Row: {
+          contact: string | null
+          created_at: string
+          event_label: string | null
+          expires_at: string
+          id: string
+          name: string | null
+          rsvp_id: string | null
+          token_hash: string
+          updated_at: string
+          waiver_id: string | null
+          waiver_signed_on: string | null
+        }
+        Insert: {
+          contact?: string | null
+          created_at?: string
+          event_label?: string | null
+          expires_at?: string
+          id?: string
+          name?: string | null
+          rsvp_id?: string | null
+          token_hash: string
+          updated_at?: string
+          waiver_id?: string | null
+          waiver_signed_on?: string | null
+        }
+        Update: {
+          contact?: string | null
+          created_at?: string
+          event_label?: string | null
+          expires_at?: string
+          id?: string
+          name?: string | null
+          rsvp_id?: string | null
+          token_hash?: string
+          updated_at?: string
+          waiver_id?: string | null
+          waiver_signed_on?: string | null
+        }
+        Relationships: []
+      }
       story_submissions: {
         Row: {
           consent_contact: boolean
