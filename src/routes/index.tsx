@@ -695,6 +695,17 @@ function RSVP() {
   const [submitted, setSubmitted] = useState(false);
   const [submittedDays, setSubmittedDays] = useState<RsvpDay[]>([]);
 
+  // Hand the RSVP details to the waiver in memory — no URL parameters.
+  const waiverPrefill = useMemo(() => {
+    const c = contact.trim();
+    const isEmail = /@/.test(c);
+    return {
+      name: name.trim(),
+      email: isEmail ? c.toLowerCase() : "",
+      phone: isEmail ? "" : c,
+    };
+  }, [name, contact]);
+
   const toggleDay = (d: RsvpDay) => setDays((p) => ({ ...p, [d]: !p[d] }));
 
   // Allow "RSVP Saturday" buttons elsewhere on the page to deep-link into this form.
