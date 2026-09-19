@@ -997,78 +997,170 @@ function RSVP() {
               </p>
             </div>
           ) : (
-            <div>
-              <div className="flex items-center gap-2.5 mb-3.5">
-                <span className="w-[34px] h-[34px] bg-blue flex items-center justify-center display-condensed text-ink text-xl">
-                  ✓
-                </span>
-                <span className="display-condensed text-ink text-[24px]">
-                  You're in for Saturday.
-                </span>
-              </div>
-              <div className="border-y border-[#d8d4cb] py-4 mb-5 flex flex-col gap-3">
-                <div className="text-[11px] font-bold tracking-[0.14em] uppercase text-ink/55">
-                  Add to your calendar
-                </div>
-                <div className="flex flex-col gap-2">
-                  {submittedDays.map((d) => (
-                    <a
-                      key={d}
-                      href={DAY_CAL[d]}
-                      target="_blank"
-                      rel="noopener"
-                      className="flex items-center justify-between gap-3 border-[1.5px] border-ink px-3.5 py-2.5 text-sm font-semibold text-ink hover:bg-ink hover:text-paper transition-colors"
-                    >
-                      <span>Add {DAY_LABEL[d]}</span>
-                      <span className="text-xs tracking-[0.1em] uppercase opacity-70">
-                        7:00 AM
-                      </span>
-                    </a>
-                  ))}
-                </div>
-                <div className="flex flex-wrap gap-x-4 gap-y-1">
-                  {submittedDays.map((d) => (
-                    <a
-                      key={d}
-                      href={STRAVA_EVENT_URL[d]}
-                      target="_blank"
-                      rel="noopener"
-                      className="text-[11px] font-bold uppercase tracking-[0.14em] text-ink/70 hover:text-ink underline underline-offset-4"
-                    >
-                      Open Saturday on Strava →
-                    </a>
-                  ))}
-                </div>
-                <div className="text-xs text-ink/55">
-                  Recurring weekly event — shows up every Saturday.
-                </div>
-              </div>
-              <RSVPWaiverBlock prefill={waiverPrefill} />
-              <a
-                href={STRAVA_CLUB}
-                target="_blank"
-                rel="noopener"
-                className="text-[13px] font-bold tracking-[0.1em] uppercase py-4 bg-transparent text-ink border-[1.5px] border-ink text-center hover:bg-ink hover:text-paper transition-colors block mt-4"
-              >
-                Join the Strava club
-              </a>
-              <button
-                onClick={() => {
-                  setSubmitted(false);
-                  setSubmittedDays([]);
-                  setName("");
-                  setContact("");
-                  setSource("");
-                }}
-                className="mt-4 w-full bg-transparent text-xs font-semibold text-ink/55 underline"
-              >
-                RSVP someone else
-              </button>
-            </div>
+            <RSVPConfirmation
+              name={name}
+              contact={contact}
+              days={submittedDays}
+              prefill={waiverPrefill}
+              onReset={() => {
+                setSubmitted(false);
+                setSubmittedDays([]);
+                setName("");
+                setContact("");
+                setSource("");
+              }}
+            />
           )}
+
         </div>
       </div>
     </section>
+  );
+}
+
+/** Mask the contact so the confirmation can echo it back without exposing it in full. */
+function maskContact(raw: string): string {
+  const c = raw.trim();
+  if (!c) return "";
+  if (c.includes("@")) {
+    const [user, domain] = c.split("@");
+    const head = user.slice(0, 2);
+    return `${head}${"•".repeat(Math.max(user.length - 2, 2))}@${domain}`;
+  }
+  const digits = c.replace(/\D/g, "");
+  return digits.length >= 4 ? `••• ••• ${digits.slice(-4)}` : c;
+}
+
+function RSVPConfirmation({
+  name,
+  contact,
+  days,
+  prefill,
+  onReset,
+}: {
+  name: string;
+  contact: string;
+  days: RsvpDay[];
+  prefill?: WaiverPrefill;
+  onReset: () => void;
+}) {
+  const [waiverSigned, setWaiverSigned] = useState(false);
+  const firstName = name.trim().split(/\s+/)[0] || "Runner";
+  const masked = maskContact(contact);
+
+  const rows: Array<[string, React.ReactNode]> = [
+    ["Runner", name.trim() || "—"],
+    ["Contact", masked || "—"],
+    ["RSVP", days.map((d) => DAY_LABEL[d]).join(" · ") || "Saturday · GRYT Run"],
+    ["Waiver", waiverSigned ? "Signed · covered through Dec 31, 2026" : "Not signed yet"],
+    ["When", nextSaturdayLabelLong()],
+    [
+      "Where",
+      <>
+        212 Valley Brook Road, McMurray ·{" "}
+        <a
+          href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Road%2C%20McMurray%2C%20PA"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline underline-offset-2 hover:text-ink"
+        >
+          Directions
+        </a>
+      </>,
+    ],
+  ];
+
+  return (
+    <div role="status" aria-live="polite">
+      <div className="flex items-center gap-2.5 mb-3.5">
+        <span className="w-[34px] h-[34px] bg-blue flex items-center justify-center display-condensed text-ink text-xl">
+          ✓
+        </span>
+        <span className="display-condensed text-ink text-[24px]">
+          You're in, {firstName}.
+        </span>
+      </div>
+
+      <div className="border-[1.5px] border-ink mb-5">
+        <div className="text-[11px] font-bold tracking-[0.14em] uppercase text-paper bg-ink px-3.5 py-2">
+          Your confirmation
+        </div>
+        <dl className="divide-y divide-[#d8d4cb]">
+          {rows.map(([label, value]) => (
+            <div key={label} className="flex gap-3 px-3.5 py-2.5">
+              <dt className="w-[76px] shrink-0 text-[10px] font-bold tracking-[0.14em] uppercase text-ink/55 pt-[3px]">
+                {label}
+              </dt>
+              <dd className="text-[13px] leading-[1.5] text-ink/85">{value}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+
+      <div className="border-y border-[#d8d4cb] py-4 mb-5 flex flex-col gap-3">
+        <div className="text-[11px] font-bold tracking-[0.14em] uppercase text-ink/55">
+          Add to your calendar
+        </div>
+        <div className="flex flex-col gap-2">
+          {days.map((d) => (
+            <a
+              key={d}
+              href={DAY_CAL[d]}
+              target="_blank"
+              rel="noopener"
+              className="flex items-center justify-between gap-3 border-[1.5px] border-ink px-3.5 py-2.5 text-sm font-semibold text-ink hover:bg-ink hover:text-paper transition-colors"
+            >
+              <span>Add {DAY_LABEL[d]}</span>
+              <span className="text-xs tracking-[0.1em] uppercase opacity-70">7:00 AM</span>
+            </a>
+          ))}
+          <a
+            href={nextSaturdayIcsDataUrl()}
+            download={nextSaturdayIcsFilename()}
+            className="flex items-center justify-between gap-3 border border-[#d8d4cb] px-3.5 py-2.5 text-sm font-semibold text-ink hover:border-ink transition-colors"
+          >
+            <span>Download .ics (Apple, Outlook)</span>
+            <span className="text-xs tracking-[0.1em] uppercase opacity-70">One run</span>
+          </a>
+        </div>
+        <div className="flex flex-wrap gap-x-4 gap-y-1">
+          {days.map((d) => (
+            <a
+              key={d}
+              href={STRAVA_EVENT_URL[d]}
+              target="_blank"
+              rel="noopener"
+              className="text-[11px] font-bold uppercase tracking-[0.14em] text-ink/70 hover:text-ink underline underline-offset-4"
+            >
+              Open Saturday on Strava →
+            </a>
+          ))}
+        </div>
+        <div className="text-xs text-ink/55">
+          Recurring weekly event — shows up every Saturday.
+        </div>
+      </div>
+
+      <RSVPWaiverBlock prefill={prefill} onStatusChange={setWaiverSigned} />
+
+      <a
+        href={STRAVA_CLUB}
+        target="_blank"
+        rel="noopener"
+        className="text-[13px] font-bold tracking-[0.1em] uppercase py-4 bg-transparent text-ink border-[1.5px] border-ink text-center hover:bg-ink hover:text-paper transition-colors block mt-4"
+      >
+        Join the Strava club
+      </a>
+      <button
+        onClick={onReset}
+        className="mt-4 w-full bg-transparent text-xs font-semibold text-ink/55 underline"
+      >
+        RSVP someone else
+      </button>
+      <p className="mt-3 text-[11px] leading-[1.5] text-ink/45 text-center">
+        Your details stay on this device and in our private roster — nothing personal is ever put in the web address.
+      </p>
+    </div>
   );
 }
 
@@ -1338,13 +1430,23 @@ type WaiverForm = {
 type WaiverPrefill = { name?: string; email?: string; phone?: string };
 
 
-function RSVPWaiverBlock({ prefill }: { prefill?: WaiverPrefill }) {
+function RSVPWaiverBlock({
+  prefill,
+  onStatusChange,
+}: {
+  prefill?: WaiverPrefill;
+  onStatusChange?: (signed: boolean) => void;
+}) {
   const [waiver, setWaiver] = useState<{ id: string; signed_on: string; name: string } | null>(null);
 
   useEffect(() => {
     const stored = readStoredWaiver();
-    if (stored) setWaiver(stored);
+    if (stored) {
+      setWaiver(stored);
+      onStatusChange?.(true);
+    }
   }, []);
+
 
   if (waiver) {
     return (
@@ -1366,7 +1468,13 @@ function RSVPWaiverBlock({ prefill }: { prefill?: WaiverPrefill }) {
       <p className="text-[13px] leading-[1.55] text-ink/70 mb-3">
         We carried your name and contact over — one signature covers you through Dec 31, 2026.
       </p>
-      <InlineWaiver prefill={prefill} autoOpen compact />
+      <InlineWaiver
+        prefill={prefill}
+        autoOpen
+        compact
+        onSigned={() => onStatusChange?.(true)}
+      />
+
     </div>
   );
 }
@@ -1410,10 +1518,12 @@ function InlineWaiver({
   prefill,
   autoOpen = false,
   compact = false,
+  onSigned,
 }: {
   prefill?: WaiverPrefill;
   autoOpen?: boolean;
   compact?: boolean;
+  onSigned?: () => void;
 }) {
   const sign = useServerFn(signWaiver);
   const [open, setOpen] = useState(autoOpen);
@@ -1425,8 +1535,12 @@ function InlineWaiver({
 
   useEffect(() => {
     const stored = readStoredWaiver();
-    if (stored) setDone(stored);
+    if (stored) {
+      setDone(stored);
+      onSigned?.();
+    }
   }, []);
+
 
   // Carry RSVP details straight across in memory — never through the URL.
   useEffect(() => {
@@ -1487,6 +1601,8 @@ function InlineWaiver({
       const result = { id: res.id, signed_on: res.signed_on, name: form.full_name.trim() };
       setDone(result);
       saveStoredWaiver(result);
+      onSigned?.();
+
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
     } finally {
