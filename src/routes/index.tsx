@@ -694,6 +694,8 @@ function RSVP() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submittedDays, setSubmittedDays] = useState<RsvpDay[]>([]);
+  const [waiverOnFile, setWaiverOnFile] = useState(false);
+
 
   // Hand the RSVP details to the waiver in memory — no URL parameters.
   const waiverPrefill = useMemo(() => {
