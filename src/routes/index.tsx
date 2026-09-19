@@ -1391,9 +1391,17 @@ function saveStoredWaiver(v: { id: string; signed_on: string; name: string }) {
   }
 }
 
-function InlineWaiver() {
+function InlineWaiver({
+  prefill,
+  autoOpen = false,
+  compact = false,
+}: {
+  prefill?: WaiverPrefill;
+  autoOpen?: boolean;
+  compact?: boolean;
+}) {
   const sign = useServerFn(signWaiver);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(autoOpen);
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [form, setForm] = useState<WaiverForm>(EMPTY_FORM);
   const [submitting, setSubmitting] = useState(false);
@@ -1404,6 +1412,17 @@ function InlineWaiver() {
     const stored = readStoredWaiver();
     if (stored) setDone(stored);
   }, []);
+
+  // Carry RSVP details straight across in memory — never through the URL.
+  useEffect(() => {
+    if (!prefill) return;
+    setForm((f) => ({
+      ...f,
+      full_name: f.full_name || (prefill.name ?? ""),
+      email: f.email || (prefill.email ?? ""),
+      phone: f.phone || (prefill.phone ?? ""),
+    }));
+  }, [prefill?.name, prefill?.email, prefill?.phone]);
 
   const set = <K extends keyof WaiverForm>(k: K, v: WaiverForm[K]) =>
     setForm((f) => ({ ...f, [k]: v }));
