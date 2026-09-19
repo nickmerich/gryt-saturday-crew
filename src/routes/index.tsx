@@ -997,75 +997,21 @@ function RSVP() {
               </p>
             </div>
           ) : (
-            <div>
-              <div className="flex items-center gap-2.5 mb-3.5">
-                <span className="w-[34px] h-[34px] bg-blue flex items-center justify-center display-condensed text-ink text-xl">
-                  ✓
-                </span>
-                <span className="display-condensed text-ink text-[24px]">
-                  You're in for Saturday.
-                </span>
-              </div>
-              <div className="border-y border-[#d8d4cb] py-4 mb-5 flex flex-col gap-3">
-                <div className="text-[11px] font-bold tracking-[0.14em] uppercase text-ink/55">
-                  Add to your calendar
-                </div>
-                <div className="flex flex-col gap-2">
-                  {submittedDays.map((d) => (
-                    <a
-                      key={d}
-                      href={DAY_CAL[d]}
-                      target="_blank"
-                      rel="noopener"
-                      className="flex items-center justify-between gap-3 border-[1.5px] border-ink px-3.5 py-2.5 text-sm font-semibold text-ink hover:bg-ink hover:text-paper transition-colors"
-                    >
-                      <span>Add {DAY_LABEL[d]}</span>
-                      <span className="text-xs tracking-[0.1em] uppercase opacity-70">
-                        7:00 AM
-                      </span>
-                    </a>
-                  ))}
-                </div>
-                <div className="flex flex-wrap gap-x-4 gap-y-1">
-                  {submittedDays.map((d) => (
-                    <a
-                      key={d}
-                      href={STRAVA_EVENT_URL[d]}
-                      target="_blank"
-                      rel="noopener"
-                      className="text-[11px] font-bold uppercase tracking-[0.14em] text-ink/70 hover:text-ink underline underline-offset-4"
-                    >
-                      Open Saturday on Strava →
-                    </a>
-                  ))}
-                </div>
-                <div className="text-xs text-ink/55">
-                  Recurring weekly event — shows up every Saturday.
-                </div>
-              </div>
-              <RSVPWaiverBlock prefill={waiverPrefill} />
-              <a
-                href={STRAVA_CLUB}
-                target="_blank"
-                rel="noopener"
-                className="text-[13px] font-bold tracking-[0.1em] uppercase py-4 bg-transparent text-ink border-[1.5px] border-ink text-center hover:bg-ink hover:text-paper transition-colors block mt-4"
-              >
-                Join the Strava club
-              </a>
-              <button
-                onClick={() => {
-                  setSubmitted(false);
-                  setSubmittedDays([]);
-                  setName("");
-                  setContact("");
-                  setSource("");
-                }}
-                className="mt-4 w-full bg-transparent text-xs font-semibold text-ink/55 underline"
-              >
-                RSVP someone else
-              </button>
-            </div>
+            <RSVPConfirmation
+              name={name}
+              contact={contact}
+              days={submittedDays}
+              prefill={waiverPrefill}
+              onReset={() => {
+                setSubmitted(false);
+                setSubmittedDays([]);
+                setName("");
+                setContact("");
+                setSource("");
+              }}
+            />
           )}
+
         </div>
       </div>
     </section>
