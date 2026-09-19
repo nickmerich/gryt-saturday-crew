@@ -459,7 +459,7 @@ function Hero() {
   const stats: Array<[string, string]> = [
     [REGULARS_LABEL, "regulars each Saturday"],
     [STRAVA_MEMBERS_LABEL, "runners on Strava"],
-    [String(FOUNDER_MARATHONS), "marathons between the founders"],
+    [INSTAGRAM_LABEL, "followers on Instagram"],
   ];
 
   // Sticky 50/50 A/B on the hero headline + subcopy. Variant A is the current
