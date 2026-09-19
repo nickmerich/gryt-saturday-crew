@@ -723,6 +723,28 @@ function RSVP() {
     return () => window.removeEventListener("hashchange", applyHash);
   }, []);
 
+  // Restore a completed submission from secure server-side storage. The
+  // browser only carries an opaque httpOnly cookie — nothing in the URL.
+  useEffect(() => {
+    let cancelled = false;
+    loadSignupSession()
+      .then((session) => {
+        if (cancelled || !session || !session.rsvpAt) return;
+        setName(session.name ?? "");
+        setContact(session.contact ?? "");
+        setSubmittedDays(["sat"]);
+        setWaiverOnFile(Boolean(session.waiver));
+        setSubmitted(true);
+      })
+      .catch(() => {
+        // no stored submission — show the form
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+
   const submit = async () => {
     if (!name.trim() || !contact.trim()) {
       setError("Add your name and an email or phone so we can send the reminder.");
