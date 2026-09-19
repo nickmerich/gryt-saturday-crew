@@ -1601,6 +1601,8 @@ function InlineWaiver({
       const result = { id: res.id, signed_on: res.signed_on, name: form.full_name.trim() };
       setDone(result);
       saveStoredWaiver(result);
+      onSigned?.();
+
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
     } finally {
