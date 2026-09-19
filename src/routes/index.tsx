@@ -1545,7 +1545,7 @@ function InlineWaiver({
         })}
       </div>
 
-      <div className="p-7 md:p-10">
+      <div className={compact ? "p-5" : "p-7 md:p-10"}>
         {step === 1 && (
           <div>
             <h3 className="display-condensed text-paper text-[26px] mb-2">
