@@ -736,9 +736,14 @@ function RSVP() {
         if (cancelled || !session || !session.rsvpAt) return;
         setName(session.name ?? "");
         setContact(session.contact ?? "");
-        setSubmittedDays(["sat"]);
         setWaiverOnFile(Boolean(session.waiver));
-        setSubmitted(true);
+        // Only show the confirmation when the stored RSVP is for the run that
+        // is actually coming up. Otherwise prefill the form so a returning
+        // runner can RSVP for this week.
+        if (session.eventLabel && session.eventLabel === DAY_EVENT_LABEL.sat) {
+          setSubmittedDays(["sat"]);
+          setSubmitted(true);
+        }
       })
       .catch(() => {
         // no stored submission — show the form
@@ -2127,7 +2132,7 @@ function Founders() {
               ritual for people who still want to do hard things together.
             </p>
             <p className="text-[17px] leading-[1.6] text-ink/80">
-              Laura and Nick have finished 27 marathons combined, but GRYT is not about medals. It
+              Laura and Nick have run plenty of miles together, but GRYT is not about medals. It
               is about consistency, community, and becoming the kind of person who keeps promises to
               themselves.
             </p>

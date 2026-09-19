@@ -13,6 +13,7 @@ function headers() {
   return {
     Authorization: `Bearer ${lov}`,
     'X-Connection-Api-Key': notion,
+    'Notion-Version': '2025-09-03',
     'Content-Type': 'application/json',
   }
 }
