@@ -1066,15 +1066,18 @@ function RSVPConfirmation({
   contact,
   days,
   prefill,
+  waiverOnFile = false,
   onReset,
 }: {
   name: string;
   contact: string;
   days: RsvpDay[];
   prefill?: WaiverPrefill;
+  waiverOnFile?: boolean;
   onReset: () => void;
 }) {
-  const [waiverSigned, setWaiverSigned] = useState(false);
+  const [waiverSigned, setWaiverSigned] = useState(waiverOnFile);
+
   const firstName = name.trim().split(/\s+/)[0] || "Runner";
   const masked = maskContact(contact);
 
