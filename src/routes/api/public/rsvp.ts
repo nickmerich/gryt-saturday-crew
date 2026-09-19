@@ -171,7 +171,29 @@ export const Route = createFileRoute('/api/public/rsvp')({
             .eq('id', rsvpId)
         }
 
-        return Response.json({ success: true, confirmationSent: contactIsEmail })
+        // 5. Store the completed submission server-side, keyed by an opaque
+        //    httpOnly cookie token. No personal data in the URL.
+        const headers = new Headers()
+        try {
+          const { readSignupToken, recordSignupSession, signupCookie } = await import(
+            '@/lib/signup-session.server'
+          )
+          const token = await recordSignupSession(
+            readSignupToken(request.headers.get('cookie')),
+            {
+              rsvp_id: rsvpId,
+              name,
+              contact,
+              event_label: resolvedEventLabel,
+            },
+          )
+          if (token) headers.set('set-cookie', signupCookie(token))
+        } catch (err) {
+          console.error('Signup session store failed', { rsvpId, error: err })
+        }
+
+        return Response.json({ success: true, confirmationSent: contactIsEmail }, { headers })
+
       },
     },
   },
