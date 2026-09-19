@@ -217,9 +217,11 @@ function PlanPage() {
                   {plan.title}
                 </h2>
                 <p className="mt-4 text-lg text-ink/80">{plan.summary}</p>
-                <p className="eyebrow mt-4 text-ink/60">
-                  TARGET VOLUME · {plan.weeklyMileage}
+                <p className="mt-4 text-ink/60">
+                  <span className="eyebrow">Target volume</span>{" "}
+                  <span className="text-sm">{plan.weeklyMileage}</span>
                 </p>
+
 
                 <ol className="mt-10 border-t border-ink/15">
                   {plan.week.map((d, i) => (
