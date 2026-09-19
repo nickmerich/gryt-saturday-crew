@@ -82,7 +82,10 @@ export const createRunPlan = createServerFn({ method: "POST" })
         },
       });
 
-      return await result.output;
+      console.log("[plan] stream started");
+      const out = await result.output;
+      console.log("[plan] done");
+      return out;
     } catch (error) {
       if (NoObjectGeneratedError.isInstance(error)) {
         throw new Error("The coach couldn't finish that plan. Try again.");
