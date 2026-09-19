@@ -1323,6 +1323,10 @@ type WaiverForm = {
   agree_adult: boolean;
 };
 
+/** RSVP details handed to the waiver in memory only — never via the URL. */
+type WaiverPrefill = { name?: string; email?: string; phone?: string };
+
+
 function RSVPWaiverBlock({ prefill }: { prefill?: WaiverPrefill }) {
   const [waiver, setWaiver] = useState<{ id: string; signed_on: string; name: string } | null>(null);
 
