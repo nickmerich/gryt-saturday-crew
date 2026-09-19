@@ -1518,10 +1518,12 @@ function InlineWaiver({
   prefill,
   autoOpen = false,
   compact = false,
+  onSigned,
 }: {
   prefill?: WaiverPrefill;
   autoOpen?: boolean;
   compact?: boolean;
+  onSigned?: () => void;
 }) {
   const sign = useServerFn(signWaiver);
   const [open, setOpen] = useState(autoOpen);
@@ -1533,8 +1535,12 @@ function InlineWaiver({
 
   useEffect(() => {
     const stored = readStoredWaiver();
-    if (stored) setDone(stored);
+    if (stored) {
+      setDone(stored);
+      onSigned?.();
+    }
   }, []);
+
 
   // Carry RSVP details straight across in memory — never through the URL.
   useEffect(() => {
