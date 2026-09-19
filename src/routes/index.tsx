@@ -1028,12 +1028,16 @@ function RSVP() {
               contact={contact}
               days={submittedDays}
               prefill={waiverPrefill}
+              waiverOnFile={waiverOnFile}
               onReset={() => {
+                void clearSignupSession().catch(() => {});
+                setWaiverOnFile(false);
                 setSubmitted(false);
                 setSubmittedDays([]);
                 setName("");
                 setContact("");
                 setSource("");
+
               }}
             />
           )}
