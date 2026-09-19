@@ -84,14 +84,15 @@ export const createRunPlan = createServerFn({ method: "POST" })
         },
       });
 
-      console.log("[plan] stream started");
       const out = await result.output;
-      console.log("[plan] done");
-      return out;
+      // Round-trip through JSON so the value crossing the RPC boundary is a
+      // plain, fully-serializable object.
+      return JSON.parse(JSON.stringify(out)) as RunPlan;
     } catch (error) {
       if (NoObjectGeneratedError.isInstance(error)) {
         throw new Error("The coach couldn't finish that plan. Try again.");
       }
-      throw error;
+      throw new Error("The coach couldn't finish that plan. Try again.");
     }
+
   });
