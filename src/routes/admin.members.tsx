@@ -258,6 +258,7 @@ function AdminMembersPage() {
         <div>
           <p className="eyebrow eyebrow-blue">Admin · sync status</p>
           <h1 className="display-condensed text-4xl mt-2">Member Review</h1>
+          <a href="/admin/inquiries" className="inline-block mt-3 text-sm text-blue underline">Open operator inquiry queue</a>
           <p className="mt-2 text-sm text-muted-foreground">
             {data?.length ?? '—'} members · {flagged} missing contact info
           </p>

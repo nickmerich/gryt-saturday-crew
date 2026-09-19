@@ -19,6 +19,7 @@ import { Route as RacesRouteImport } from './routes/races'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as MembersRouteImport } from './routes/members'
 import { Route as McpRouteImport } from './routes/mcp'
+import { Route as InquireRouteImport } from './routes/inquire'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as EmailStatusRouteImport } from './routes/email-status'
 import { Route as AuthRouteImport } from './routes/auth'
@@ -40,6 +41,7 @@ import { Route as ResourcesBuildARunningBaseRouteImport } from './routes/resourc
 import { Route as MembersKeyRouteImport } from './routes/members.$key'
 import { Route as CheckoutReturnRouteImport } from './routes/checkout.return'
 import { Route as AdminMembersRouteImport } from './routes/admin.members'
+import { Route as AdminInquiriesRouteImport } from './routes/admin.inquiries'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as ResourcesPlaybooksGrytVsYinzRunClubRouteImport } from './routes/resources_.playbooks_.gryt-vs-yinz-run-club'
@@ -48,8 +50,10 @@ import { Route as ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026RouteImpor
 import { Route as ResourcesPlaybooksBestFreeRunClubsSouthHills2026RouteImport } from './routes/resources_.playbooks_.best-free-run-clubs-south-hills-2026'
 import { Route as LovableEmailEventsRouteImport } from './routes/lovable/email/events'
 import { Route as ApiPublicRsvpRouteImport } from './routes/api/public/rsvp'
+import { Route as ApiPublicInquiriesRouteImport } from './routes/api/public/inquiries'
 import { Route as ApiNewsletterSubscribeRouteImport } from './routes/api/newsletter/subscribe'
 import { Route as ApiNewsletterStatusRouteImport } from './routes/api/newsletter/status'
+import { Route as ApiAdminInquiriesRouteImport } from './routes/api/admin/inquiries'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
@@ -105,6 +109,11 @@ const MembersRoute = MembersRouteImport.update({
 const McpRoute = McpRouteImport.update({
   id: '/mcp',
   path: '/mcp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InquireRoute = InquireRouteImport.update({
+  id: '/inquire',
+  path: '/inquire',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqRoute = FaqRouteImport.update({
@@ -218,6 +227,11 @@ const AdminMembersRoute = AdminMembersRouteImport.update({
   path: '/admin/members',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminInquiriesRoute = AdminInquiriesRouteImport.update({
+  id: '/admin/inquiries',
+  path: '/admin/inquiries',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const Char91DotwellKnownChar93OauthProtectedResourceRoute =
   Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
     id: '/.well-known/oauth-protected-resource',
@@ -264,6 +278,11 @@ const ApiPublicRsvpRoute = ApiPublicRsvpRouteImport.update({
   path: '/api/public/rsvp',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicInquiriesRoute = ApiPublicInquiriesRouteImport.update({
+  id: '/api/public/inquiries',
+  path: '/api/public/inquiries',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiNewsletterSubscribeRoute = ApiNewsletterSubscribeRouteImport.update({
   id: '/api/newsletter/subscribe',
   path: '/api/newsletter/subscribe',
@@ -272,6 +291,11 @@ const ApiNewsletterSubscribeRoute = ApiNewsletterSubscribeRouteImport.update({
 const ApiNewsletterStatusRoute = ApiNewsletterStatusRouteImport.update({
   id: '/api/newsletter/status',
   path: '/api/newsletter/status',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminInquiriesRoute = ApiAdminInquiriesRouteImport.update({
+  id: '/api/admin/inquiries',
+  path: '/api/admin/inquiries',
   getParentRoute: () => rootRouteImport,
 } as any)
 const Char91DotmcpChar93InvokeToolToolRoute =
@@ -313,6 +337,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/email-status': typeof EmailStatusRoute
   '/faq': typeof FaqRoute
+  '/inquire': typeof InquireRoute
   '/mcp': typeof McpRoute
   '/members': typeof MembersRouteWithChildren
   '/privacy': typeof PrivacyRoute
@@ -325,6 +350,7 @@ export interface FileRoutesByFullPath {
   '/waiver': typeof WaiverRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  '/admin/inquiries': typeof AdminInquiriesRoute
   '/admin/members': typeof AdminMembersRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/members/$key': typeof MembersKeyRoute
@@ -344,8 +370,10 @@ export interface FileRoutesByFullPath {
   '/timer/results': typeof TimerResultsRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/api/admin/inquiries': typeof ApiAdminInquiriesRoute
   '/api/newsletter/status': typeof ApiNewsletterStatusRoute
   '/api/newsletter/subscribe': typeof ApiNewsletterSubscribeRoute
+  '/api/public/inquiries': typeof ApiPublicInquiriesRoute
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
   '/lovable/email/events': typeof LovableEmailEventsRoute
   '/resources/playbooks/best-free-run-clubs-south-hills-2026': typeof ResourcesPlaybooksBestFreeRunClubsSouthHills2026Route
@@ -362,6 +390,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/email-status': typeof EmailStatusRoute
   '/faq': typeof FaqRoute
+  '/inquire': typeof InquireRoute
   '/mcp': typeof McpRoute
   '/members': typeof MembersRouteWithChildren
   '/privacy': typeof PrivacyRoute
@@ -374,6 +403,7 @@ export interface FileRoutesByTo {
   '/waiver': typeof WaiverRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  '/admin/inquiries': typeof AdminInquiriesRoute
   '/admin/members': typeof AdminMembersRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/members/$key': typeof MembersKeyRoute
@@ -393,8 +423,10 @@ export interface FileRoutesByTo {
   '/timer/results': typeof TimerResultsRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/api/admin/inquiries': typeof ApiAdminInquiriesRoute
   '/api/newsletter/status': typeof ApiNewsletterStatusRoute
   '/api/newsletter/subscribe': typeof ApiNewsletterSubscribeRoute
+  '/api/public/inquiries': typeof ApiPublicInquiriesRoute
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
   '/lovable/email/events': typeof LovableEmailEventsRoute
   '/resources/playbooks/best-free-run-clubs-south-hills-2026': typeof ResourcesPlaybooksBestFreeRunClubsSouthHills2026Route
@@ -412,6 +444,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/email-status': typeof EmailStatusRoute
   '/faq': typeof FaqRoute
+  '/inquire': typeof InquireRoute
   '/mcp': typeof McpRoute
   '/members': typeof MembersRouteWithChildren
   '/privacy': typeof PrivacyRoute
@@ -424,6 +457,7 @@ export interface FileRoutesById {
   '/waiver': typeof WaiverRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  '/admin/inquiries': typeof AdminInquiriesRoute
   '/admin/members': typeof AdminMembersRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/members/$key': typeof MembersKeyRoute
@@ -443,8 +477,10 @@ export interface FileRoutesById {
   '/timer_/results': typeof TimerResultsRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/api/admin/inquiries': typeof ApiAdminInquiriesRoute
   '/api/newsletter/status': typeof ApiNewsletterStatusRoute
   '/api/newsletter/subscribe': typeof ApiNewsletterSubscribeRoute
+  '/api/public/inquiries': typeof ApiPublicInquiriesRoute
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
   '/lovable/email/events': typeof LovableEmailEventsRoute
   '/resources_/playbooks_/best-free-run-clubs-south-hills-2026': typeof ResourcesPlaybooksBestFreeRunClubsSouthHills2026Route
@@ -463,6 +499,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/email-status'
     | '/faq'
+    | '/inquire'
     | '/mcp'
     | '/members'
     | '/privacy'
@@ -475,6 +512,7 @@ export interface FileRouteTypes {
     | '/waiver'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
+    | '/admin/inquiries'
     | '/admin/members'
     | '/checkout/return'
     | '/members/$key'
@@ -494,8 +532,10 @@ export interface FileRouteTypes {
     | '/timer/results'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
+    | '/api/admin/inquiries'
     | '/api/newsletter/status'
     | '/api/newsletter/subscribe'
+    | '/api/public/inquiries'
     | '/api/public/rsvp'
     | '/lovable/email/events'
     | '/resources/playbooks/best-free-run-clubs-south-hills-2026'
@@ -512,6 +552,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/email-status'
     | '/faq'
+    | '/inquire'
     | '/mcp'
     | '/members'
     | '/privacy'
@@ -524,6 +565,7 @@ export interface FileRouteTypes {
     | '/waiver'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
+    | '/admin/inquiries'
     | '/admin/members'
     | '/checkout/return'
     | '/members/$key'
@@ -543,8 +585,10 @@ export interface FileRouteTypes {
     | '/timer/results'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
+    | '/api/admin/inquiries'
     | '/api/newsletter/status'
     | '/api/newsletter/subscribe'
+    | '/api/public/inquiries'
     | '/api/public/rsvp'
     | '/lovable/email/events'
     | '/resources/playbooks/best-free-run-clubs-south-hills-2026'
@@ -561,6 +605,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/email-status'
     | '/faq'
+    | '/inquire'
     | '/mcp'
     | '/members'
     | '/privacy'
@@ -573,6 +618,7 @@ export interface FileRouteTypes {
     | '/waiver'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
+    | '/admin/inquiries'
     | '/admin/members'
     | '/checkout/return'
     | '/members/$key'
@@ -592,8 +638,10 @@ export interface FileRouteTypes {
     | '/timer_/results'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
+    | '/api/admin/inquiries'
     | '/api/newsletter/status'
     | '/api/newsletter/subscribe'
+    | '/api/public/inquiries'
     | '/api/public/rsvp'
     | '/lovable/email/events'
     | '/resources_/playbooks_/best-free-run-clubs-south-hills-2026'
@@ -611,6 +659,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   EmailStatusRoute: typeof EmailStatusRoute
   FaqRoute: typeof FaqRoute
+  InquireRoute: typeof InquireRoute
   McpRoute: typeof McpRoute
   MembersRoute: typeof MembersRouteWithChildren
   PrivacyRoute: typeof PrivacyRoute
@@ -623,6 +672,7 @@ export interface RootRouteChildren {
   WaiverRoute: typeof WaiverRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  AdminInquiriesRoute: typeof AdminInquiriesRoute
   AdminMembersRoute: typeof AdminMembersRoute
   CheckoutReturnRoute: typeof CheckoutReturnRoute
   ResourcesBuildARunningBaseRoute: typeof ResourcesBuildARunningBaseRoute
@@ -641,8 +691,10 @@ export interface RootRouteChildren {
   TimerResultsRoute: typeof TimerResultsRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
+  ApiAdminInquiriesRoute: typeof ApiAdminInquiriesRoute
   ApiNewsletterStatusRoute: typeof ApiNewsletterStatusRoute
   ApiNewsletterSubscribeRoute: typeof ApiNewsletterSubscribeRoute
+  ApiPublicInquiriesRoute: typeof ApiPublicInquiriesRoute
   ApiPublicRsvpRoute: typeof ApiPublicRsvpRoute
   LovableEmailEventsRoute: typeof LovableEmailEventsRoute
   ResourcesPlaybooksBestFreeRunClubsSouthHills2026Route: typeof ResourcesPlaybooksBestFreeRunClubsSouthHills2026Route
@@ -725,6 +777,13 @@ declare module '@tanstack/react-router' {
       path: '/mcp'
       fullPath: '/mcp'
       preLoaderRoute: typeof McpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inquire': {
+      id: '/inquire'
+      path: '/inquire'
+      fullPath: '/inquire'
+      preLoaderRoute: typeof InquireRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faq': {
@@ -874,6 +933,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminMembersRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/inquiries': {
+      id: '/admin/inquiries'
+      path: '/admin/inquiries'
+      fullPath: '/admin/inquiries'
+      preLoaderRoute: typeof AdminInquiriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/.well-known/oauth-protected-resource': {
       id: '/.well-known/oauth-protected-resource'
       path: '/.well-known/oauth-protected-resource'
@@ -930,6 +996,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicRsvpRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/inquiries': {
+      id: '/api/public/inquiries'
+      path: '/api/public/inquiries'
+      fullPath: '/api/public/inquiries'
+      preLoaderRoute: typeof ApiPublicInquiriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/newsletter/subscribe': {
       id: '/api/newsletter/subscribe'
       path: '/api/newsletter/subscribe'
@@ -942,6 +1015,13 @@ declare module '@tanstack/react-router' {
       path: '/api/newsletter/status'
       fullPath: '/api/newsletter/status'
       preLoaderRoute: typeof ApiNewsletterStatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/inquiries': {
+      id: '/api/admin/inquiries'
+      path: '/api/admin/inquiries'
+      fullPath: '/api/admin/inquiries'
+      preLoaderRoute: typeof ApiAdminInquiriesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/.mcp/invoke-tool/$tool': {
@@ -1005,6 +1085,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   EmailStatusRoute: EmailStatusRoute,
   FaqRoute: FaqRoute,
+  InquireRoute: InquireRoute,
   McpRoute: McpRoute,
   MembersRoute: MembersRouteWithChildren,
   PrivacyRoute: PrivacyRoute,
@@ -1018,6 +1099,7 @@ const rootRouteChildren: RootRouteChildren = {
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
+  AdminInquiriesRoute: AdminInquiriesRoute,
   AdminMembersRoute: AdminMembersRoute,
   CheckoutReturnRoute: CheckoutReturnRoute,
   ResourcesBuildARunningBaseRoute: ResourcesBuildARunningBaseRoute,
@@ -1038,8 +1120,10 @@ const rootRouteChildren: RootRouteChildren = {
   TimerResultsRoute: TimerResultsRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
+  ApiAdminInquiriesRoute: ApiAdminInquiriesRoute,
   ApiNewsletterStatusRoute: ApiNewsletterStatusRoute,
   ApiNewsletterSubscribeRoute: ApiNewsletterSubscribeRoute,
+  ApiPublicInquiriesRoute: ApiPublicInquiriesRoute,
   ApiPublicRsvpRoute: ApiPublicRsvpRoute,
   LovableEmailEventsRoute: LovableEmailEventsRoute,
   ResourcesPlaybooksBestFreeRunClubsSouthHills2026Route:
