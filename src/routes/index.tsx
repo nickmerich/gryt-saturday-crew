@@ -1485,7 +1485,7 @@ function InlineWaiver({
 
   if (done) {
     return (
-      <div className="mt-6" role="status" aria-live="polite">
+      <div className={compact ? "" : "mt-6"} role="status" aria-live="polite">
         <div className="inline-flex items-center gap-2.5 bg-ink text-paper px-4 py-3 border border-paper/20">
           <span className="w-6 h-6 bg-blue flex items-center justify-center text-ink text-[13px] font-bold">✓</span>
           <span className="text-[13px] font-semibold tracking-[0.04em]">
@@ -1518,7 +1518,7 @@ function InlineWaiver({
   }
 
   return (
-    <div className="mt-10 border-2 border-ink bg-ink text-paper">
+    <div className={`border-2 border-ink bg-ink text-paper ${compact ? "" : "mt-10"}`}>
       {/* Step header */}
       <div className="flex items-stretch border-b border-paper/15">
         {[1, 2, 3].map((n) => {
