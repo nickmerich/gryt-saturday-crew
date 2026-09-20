@@ -231,6 +231,12 @@ export function SiteFooter() {
                 Strava
               </a>
               <a
+                href="/calendar"
+                className="eyebrow text-paper/75 hover:text-blue transition-colors"
+              >
+                Calendar
+              </a>
+              <a
                 href="/resources"
                 className="eyebrow text-paper/75 hover:text-blue transition-colors"
               >
