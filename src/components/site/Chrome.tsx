@@ -86,6 +86,12 @@ export function SiteNav() {
             Who We Are
           </a>
           <a
+            href="/calendar"
+            className="eyebrow text-paper/80 hover:text-blue transition-colors"
+          >
+            Calendar
+          </a>
+          <a
             href="/resources"
             className="eyebrow text-paper/80 hover:text-blue transition-colors"
           >
@@ -223,6 +229,12 @@ export function SiteFooter() {
                 className="eyebrow text-paper/75 hover:text-blue transition-colors"
               >
                 Strava
+              </a>
+              <a
+                href="/calendar"
+                className="eyebrow text-paper/75 hover:text-blue transition-colors"
+              >
+                Calendar
               </a>
               <a
                 href="/resources"
