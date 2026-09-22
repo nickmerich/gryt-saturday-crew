@@ -26,9 +26,9 @@ export function CapDrop() {
     <section className="border border-paper/15 bg-ink text-paper">
       <div className="grid md:grid-cols-2">
         <div className="aspect-square bg-paper/5 overflow-hidden border-b md:border-b-0 md:border-r border-paper/15 flex items-center justify-center">
-          {CAP_IMAGE_READY ? (
+          {data?.state === "available" && data.imageUrl ? (
             <img
-              src={CAP_IMAGE}
+              src={data.imageUrl}
               alt="GRYT cap with embroidered crest and blue brim trim"
               className="w-full h-full object-cover"
               loading="lazy"
