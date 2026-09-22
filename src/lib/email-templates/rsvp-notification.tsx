@@ -30,6 +30,8 @@ const Email = ({
   source = 'Not provided',
   eventLabel = 'GRYT Run',
   submittedAt,
+  partySize = 1,
+  firstTimer = false,
 }: Props) => {
   const when = submittedAt
     ? new Date(submittedAt).toLocaleString('en-US', {
