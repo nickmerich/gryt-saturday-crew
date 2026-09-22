@@ -74,21 +74,20 @@ export function nextSaturdayLabelLong(from: Date = nyNow()): string {
   return `GRYT Run #${nextRunNumber(from)} · Sat, ${nextSaturdayShortDate(from)} · 7:00 AM`;
 }
 
-/** Next `count` Saturday 7am occurrences (ISO) for recurring event schema. */
+/** Next `count` Saturday 7am occurrences (ISO instants) for recurring event schema. */
 export function nextSaturdayISOs(count: number, from: Date = new Date()): string[] {
   const out: string[] = [];
-  const d = new Date(from);
-  d.setUTCHours(11, 0, 0, 0); // 7:00 AM America/New_York ~= 11:00 UTC. Best-effort.
-  const day = d.getUTCDay();
-  const add = (6 - day + 7) % 7 || 7;
-  d.setUTCDate(d.getUTCDate() + add);
-  while (out.length < count) {
-    const ymdKey = d.toISOString().slice(0, 10);
-    if (!SKIPPED_RUN_DATES.includes(ymdKey)) out.push(d.toISOString());
-    d.setUTCDate(d.getUTCDate() + 7);
+  let cursor = from;
+  let guard = 0;
+  while (out.length < count && guard++ < count + 60) {
+    const occ = getOccurrence(cursor);
+    out.push(occ.startUtc);
+    // Move just past this run to find the following one.
+    cursor = new Date(new Date(occ.endUtc).getTime() + 60_000);
   }
   return out;
 }
+
 
 function ymd(d: Date) {
   return {
