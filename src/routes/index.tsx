@@ -1112,6 +1112,9 @@ function RSVP() {
                 setName("");
                 setContact("");
                 setSource("");
+                setPartySize(1);
+                setFirstTimer(false);
+
 
               }}
             />
