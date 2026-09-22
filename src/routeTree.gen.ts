@@ -42,6 +42,7 @@ import { Route as ResourcesConversationsRouteImport } from './routes/resources_.
 import { Route as ResourcesBuildARunningBaseRouteImport } from './routes/resources_.build-a-running-base'
 import { Route as MembersKeyRouteImport } from './routes/members.$key'
 import { Route as CheckoutReturnRouteImport } from './routes/checkout.return'
+import { Route as AdminRosterRouteImport } from './routes/admin.roster'
 import { Route as AdminMembersRouteImport } from './routes/admin.members'
 import { Route as AdminInquiriesRouteImport } from './routes/admin.inquiries'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
@@ -55,6 +56,7 @@ import { Route as ApiPublicRsvpRouteImport } from './routes/api/public/rsvp'
 import { Route as ApiPublicInquiriesRouteImport } from './routes/api/public/inquiries'
 import { Route as ApiNewsletterSubscribeRouteImport } from './routes/api/newsletter/subscribe'
 import { Route as ApiNewsletterStatusRouteImport } from './routes/api/newsletter/status'
+import { Route as ApiAdminRosterRouteImport } from './routes/api/admin/roster'
 import { Route as ApiAdminInquiriesRouteImport } from './routes/api/admin/inquiries'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
@@ -234,6 +236,11 @@ const CheckoutReturnRoute = CheckoutReturnRouteImport.update({
   path: '/checkout/return',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRosterRoute = AdminRosterRouteImport.update({
+  id: '/admin/roster',
+  path: '/admin/roster',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminMembersRoute = AdminMembersRouteImport.update({
   id: '/admin/members',
   path: '/admin/members',
@@ -305,6 +312,11 @@ const ApiNewsletterStatusRoute = ApiNewsletterStatusRouteImport.update({
   path: '/api/newsletter/status',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAdminRosterRoute = ApiAdminRosterRouteImport.update({
+  id: '/api/admin/roster',
+  path: '/api/admin/roster',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAdminInquiriesRoute = ApiAdminInquiriesRouteImport.update({
   id: '/api/admin/inquiries',
   path: '/api/admin/inquiries',
@@ -366,6 +378,7 @@ export interface FileRoutesByFullPath {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/inquiries': typeof AdminInquiriesRoute
   '/admin/members': typeof AdminMembersRoute
+  '/admin/roster': typeof AdminRosterRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/members/$key': typeof MembersKeyRoute
   '/resources/build-a-running-base': typeof ResourcesBuildARunningBaseRoute
@@ -385,6 +398,7 @@ export interface FileRoutesByFullPath {
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/admin/inquiries': typeof ApiAdminInquiriesRoute
+  '/api/admin/roster': typeof ApiAdminRosterRoute
   '/api/newsletter/status': typeof ApiNewsletterStatusRoute
   '/api/newsletter/subscribe': typeof ApiNewsletterSubscribeRoute
   '/api/public/inquiries': typeof ApiPublicInquiriesRoute
@@ -421,6 +435,7 @@ export interface FileRoutesByTo {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/inquiries': typeof AdminInquiriesRoute
   '/admin/members': typeof AdminMembersRoute
+  '/admin/roster': typeof AdminRosterRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/members/$key': typeof MembersKeyRoute
   '/resources/build-a-running-base': typeof ResourcesBuildARunningBaseRoute
@@ -440,6 +455,7 @@ export interface FileRoutesByTo {
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/admin/inquiries': typeof ApiAdminInquiriesRoute
+  '/api/admin/roster': typeof ApiAdminRosterRoute
   '/api/newsletter/status': typeof ApiNewsletterStatusRoute
   '/api/newsletter/subscribe': typeof ApiNewsletterSubscribeRoute
   '/api/public/inquiries': typeof ApiPublicInquiriesRoute
@@ -477,6 +493,7 @@ export interface FileRoutesById {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/inquiries': typeof AdminInquiriesRoute
   '/admin/members': typeof AdminMembersRoute
+  '/admin/roster': typeof AdminRosterRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/members/$key': typeof MembersKeyRoute
   '/resources_/build-a-running-base': typeof ResourcesBuildARunningBaseRoute
@@ -496,6 +513,7 @@ export interface FileRoutesById {
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/admin/inquiries': typeof ApiAdminInquiriesRoute
+  '/api/admin/roster': typeof ApiAdminRosterRoute
   '/api/newsletter/status': typeof ApiNewsletterStatusRoute
   '/api/newsletter/subscribe': typeof ApiNewsletterSubscribeRoute
   '/api/public/inquiries': typeof ApiPublicInquiriesRoute
@@ -534,6 +552,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/admin/inquiries'
     | '/admin/members'
+    | '/admin/roster'
     | '/checkout/return'
     | '/members/$key'
     | '/resources/build-a-running-base'
@@ -553,6 +572,7 @@ export interface FileRouteTypes {
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/api/admin/inquiries'
+    | '/api/admin/roster'
     | '/api/newsletter/status'
     | '/api/newsletter/subscribe'
     | '/api/public/inquiries'
@@ -589,6 +609,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/admin/inquiries'
     | '/admin/members'
+    | '/admin/roster'
     | '/checkout/return'
     | '/members/$key'
     | '/resources/build-a-running-base'
@@ -608,6 +629,7 @@ export interface FileRouteTypes {
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/api/admin/inquiries'
+    | '/api/admin/roster'
     | '/api/newsletter/status'
     | '/api/newsletter/subscribe'
     | '/api/public/inquiries'
@@ -644,6 +666,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/admin/inquiries'
     | '/admin/members'
+    | '/admin/roster'
     | '/checkout/return'
     | '/members/$key'
     | '/resources_/build-a-running-base'
@@ -663,6 +686,7 @@ export interface FileRouteTypes {
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/api/admin/inquiries'
+    | '/api/admin/roster'
     | '/api/newsletter/status'
     | '/api/newsletter/subscribe'
     | '/api/public/inquiries'
@@ -700,6 +724,7 @@ export interface RootRouteChildren {
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   AdminInquiriesRoute: typeof AdminInquiriesRoute
   AdminMembersRoute: typeof AdminMembersRoute
+  AdminRosterRoute: typeof AdminRosterRoute
   CheckoutReturnRoute: typeof CheckoutReturnRoute
   ResourcesBuildARunningBaseRoute: typeof ResourcesBuildARunningBaseRoute
   ResourcesConversationsRoute: typeof ResourcesConversationsRoute
@@ -718,6 +743,7 @@ export interface RootRouteChildren {
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
   ApiAdminInquiriesRoute: typeof ApiAdminInquiriesRoute
+  ApiAdminRosterRoute: typeof ApiAdminRosterRoute
   ApiNewsletterStatusRoute: typeof ApiNewsletterStatusRoute
   ApiNewsletterSubscribeRoute: typeof ApiNewsletterSubscribeRoute
   ApiPublicInquiriesRoute: typeof ApiPublicInquiriesRoute
@@ -966,6 +992,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CheckoutReturnRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/roster': {
+      id: '/admin/roster'
+      path: '/admin/roster'
+      fullPath: '/admin/roster'
+      preLoaderRoute: typeof AdminRosterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/members': {
       id: '/admin/members'
       path: '/admin/members'
@@ -1057,6 +1090,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiNewsletterStatusRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/admin/roster': {
+      id: '/api/admin/roster'
+      path: '/api/admin/roster'
+      fullPath: '/api/admin/roster'
+      preLoaderRoute: typeof ApiAdminRosterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/admin/inquiries': {
       id: '/api/admin/inquiries'
       path: '/api/admin/inquiries'
@@ -1143,6 +1183,7 @@ const rootRouteChildren: RootRouteChildren = {
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
   AdminInquiriesRoute: AdminInquiriesRoute,
   AdminMembersRoute: AdminMembersRoute,
+  AdminRosterRoute: AdminRosterRoute,
   CheckoutReturnRoute: CheckoutReturnRoute,
   ResourcesBuildARunningBaseRoute: ResourcesBuildARunningBaseRoute,
   ResourcesConversationsRoute: ResourcesConversationsRoute,
@@ -1163,6 +1204,7 @@ const rootRouteChildren: RootRouteChildren = {
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
   ApiAdminInquiriesRoute: ApiAdminInquiriesRoute,
+  ApiAdminRosterRoute: ApiAdminRosterRoute,
   ApiNewsletterStatusRoute: ApiNewsletterStatusRoute,
   ApiNewsletterSubscribeRoute: ApiNewsletterSubscribeRoute,
   ApiPublicInquiriesRoute: ApiPublicInquiriesRoute,
