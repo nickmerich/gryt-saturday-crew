@@ -278,3 +278,24 @@ body.photos-color .photo-hover:hover {
   background-repeat: repeat;
   background-blend-mode: multiply;
 }
+
+
+/* Montour route map — dark-treated OpenStreetMap tiles */
+.gryt-tiles {
+  filter: grayscale(1) invert(1) brightness(0.86) contrast(1.15) hue-rotate(180deg);
+}
+.leaflet-container {
+  background: var(--ink);
+  font-family: var(--font-body);
+}
+.leaflet-control-attribution {
+  background: rgba(0, 0, 0, 0.65) !important;
+  color: rgba(255, 255, 255, 0.55) !important;
+  font-size: 10px !important;
+}
+.leaflet-control-attribution a { color: var(--blue) !important; }
+.leaflet-bar a {
+  background: #000 !important;
+  color: var(--blue) !important;
+  border-color: rgba(137, 207, 240, 0.45) !important;
+}
