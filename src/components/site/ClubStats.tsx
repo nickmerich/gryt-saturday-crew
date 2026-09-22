@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { getClubStats } from "@/lib/strava-club.functions";
+import { getAttendanceStats } from "@/lib/attendance.functions";
 import { SAMPLE_CLUB_STATS, STRAVA_CLUB_URL } from "@/lib/strava-club";
 import { StravaClubEmbed } from "./StravaClubEmbed";
 
@@ -26,6 +27,13 @@ export function ClubStats() {
   });
   const stats = data ?? SAMPLE_CLUB_STATS;
 
+  const fetchAttendance = useServerFn(getAttendanceStats);
+  const { data: attendance } = useQuery({
+    queryKey: ["gryt-attendance-stats"],
+    queryFn: () => fetchAttendance(),
+    staleTime: 30 * 60 * 1000,
+  });
+
   return (
     <section
       id="club-stats"
@@ -49,6 +57,18 @@ export function ClubStats() {
           <Figure value={stats.totalMiles.toLocaleString()} label="Club miles" />
           <Figure value={String(stats.runsLogged)} label="Runs logged" />
         </div>
+
+        {attendance && attendance.runsCounted > 0 ? (
+          <div className="mt-4 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            <Figure
+              value={String(attendance.longestActiveStreak)}
+              label="Longest Saturday streak"
+            />
+            <Figure value={String(attendance.lastRunAttendance)} label="At the last run" />
+            <Figure value={String(attendance.peopleCounted)} label="Checked in this season" />
+            <Figure value={String(attendance.runsCounted)} label="Saturdays counted" />
+          </div>
+        ) : null}
 
         <div className="mt-6 border border-paper/20 bg-ink/50">
           <div className="border-b border-paper/15 px-4 sm:px-5 py-3 text-[10px] tracking-[0.22em] uppercase text-blue">

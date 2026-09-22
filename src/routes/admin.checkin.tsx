@@ -283,6 +283,11 @@ function CheckinPage() {
                       Walk-in
                     </span>
                   )}
+                  {row.streakCurrent > 1 && (
+                    <span className="px-1.5 py-0.5 text-[10px] uppercase tracking-wider border border-blue/50 text-blue">
+                      {row.streakCurrent} in a row
+                    </span>
+                  )}
                   {!row.waiverSignedOn && (
                     <span className="px-1.5 py-0.5 text-[10px] uppercase tracking-wider bg-amber-500/20 text-amber-200">
                       No waiver
