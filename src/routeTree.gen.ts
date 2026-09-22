@@ -61,6 +61,7 @@ import { Route as ApiAdminStravaConnectRouteImport } from './routes/api/admin/st
 import { Route as ApiAdminRosterRouteImport } from './routes/api/admin/roster'
 import { Route as ApiAdminInquiriesRouteImport } from './routes/api/admin/inquiries'
 import { Route as ApiAdminCheckinRouteImport } from './routes/api/admin/checkin'
+import { Route as AdminStravaConnectRouteImport } from './routes/admin.strava.connect'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
@@ -340,6 +341,11 @@ const ApiAdminCheckinRoute = ApiAdminCheckinRouteImport.update({
   path: '/api/admin/checkin',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminStravaConnectRoute = AdminStravaConnectRouteImport.update({
+  id: '/admin/strava/connect',
+  path: '/admin/strava/connect',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const Char91DotmcpChar93InvokeToolToolRoute =
   Char91DotmcpChar93InvokeToolToolRouteImport.update({
     id: '/.mcp/invoke-tool/$tool',
@@ -416,6 +422,7 @@ export interface FileRoutesByFullPath {
   '/timer/results': typeof TimerResultsRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/admin/strava/connect': typeof AdminStravaConnectRoute
   '/api/admin/checkin': typeof ApiAdminCheckinRoute
   '/api/admin/inquiries': typeof ApiAdminInquiriesRoute
   '/api/admin/roster': typeof ApiAdminRosterRoute
@@ -476,6 +483,7 @@ export interface FileRoutesByTo {
   '/timer/results': typeof TimerResultsRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/admin/strava/connect': typeof AdminStravaConnectRoute
   '/api/admin/checkin': typeof ApiAdminCheckinRoute
   '/api/admin/inquiries': typeof ApiAdminInquiriesRoute
   '/api/admin/roster': typeof ApiAdminRosterRoute
@@ -537,6 +545,7 @@ export interface FileRoutesById {
   '/timer_/results': typeof TimerResultsRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/admin/strava/connect': typeof AdminStravaConnectRoute
   '/api/admin/checkin': typeof ApiAdminCheckinRoute
   '/api/admin/inquiries': typeof ApiAdminInquiriesRoute
   '/api/admin/roster': typeof ApiAdminRosterRoute
@@ -599,6 +608,7 @@ export interface FileRouteTypes {
     | '/timer/results'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
+    | '/admin/strava/connect'
     | '/api/admin/checkin'
     | '/api/admin/inquiries'
     | '/api/admin/roster'
@@ -659,6 +669,7 @@ export interface FileRouteTypes {
     | '/timer/results'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
+    | '/admin/strava/connect'
     | '/api/admin/checkin'
     | '/api/admin/inquiries'
     | '/api/admin/roster'
@@ -719,6 +730,7 @@ export interface FileRouteTypes {
     | '/timer_/results'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
+    | '/admin/strava/connect'
     | '/api/admin/checkin'
     | '/api/admin/inquiries'
     | '/api/admin/roster'
@@ -779,6 +791,7 @@ export interface RootRouteChildren {
   TimerResultsRoute: typeof TimerResultsRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
+  AdminStravaConnectRoute: typeof AdminStravaConnectRoute
   ApiAdminCheckinRoute: typeof ApiAdminCheckinRoute
   ApiAdminInquiriesRoute: typeof ApiAdminInquiriesRoute
   ApiAdminRosterRoute: typeof ApiAdminRosterRoute
@@ -1164,6 +1177,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAdminCheckinRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/strava/connect': {
+      id: '/admin/strava/connect'
+      path: '/admin/strava/connect'
+      fullPath: '/admin/strava/connect'
+      preLoaderRoute: typeof AdminStravaConnectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/.mcp/invoke-tool/$tool': {
       id: '/.mcp/invoke-tool/$tool'
       path: '/.mcp/invoke-tool/$tool'
@@ -1264,6 +1284,7 @@ const rootRouteChildren: RootRouteChildren = {
   TimerResultsRoute: TimerResultsRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
+  AdminStravaConnectRoute: AdminStravaConnectRoute,
   ApiAdminCheckinRoute: ApiAdminCheckinRoute,
   ApiAdminInquiriesRoute: ApiAdminInquiriesRoute,
   ApiAdminRosterRoute: ApiAdminRosterRoute,
