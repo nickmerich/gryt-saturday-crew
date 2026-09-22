@@ -102,6 +102,8 @@ const SITE_URL = "https://grytrunclub.com";
 const ABS_HERO_IMG = heroImg.startsWith("http") ? heroImg : `${SITE_URL}${heroImg}`;
 
 const EVENT_DATES = nextSaturdayISOs(12);
+const CANONICAL_OCCURRENCE = getOccurrence();
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -174,8 +176,9 @@ export const Route = createFileRoute("/")({
             endTime: "08:30",
             scheduleTimezone: "America/New_York",
           },
-          startDate: EVENT_DATES[0],
-          endDate: EVENT_DATES[0]?.replace("T11:00", "T12:30"),
+          startDate: CANONICAL_OCCURRENCE.startUtc,
+          endDate: CANONICAL_OCCURRENCE.endUtc,
+
           eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
           eventStatus: "https://schema.org/EventScheduled",
           url: SITE_URL,
@@ -817,6 +820,10 @@ function RSVP() {
               contact: contact.trim(),
               source: source || null,
               eventLabel: DAY_EVENT_LABEL[d],
+              ...(d === "sat"
+                ? { eventId: CANONICAL_OCCURRENCE.id, eventVersion: CANONICAL_OCCURRENCE.version }
+                : {}),
+
               heroVariant: heroVariant ?? null,
               partySize,
               firstTimer,
