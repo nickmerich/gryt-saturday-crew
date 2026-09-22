@@ -105,6 +105,13 @@ const ABS_HERO_IMG = heroImg.startsWith("http") ? heroImg : `${SITE_URL}${heroIm
 
 const EVENT_DATES = nextSaturdayISOs(12);
 const CANONICAL_OCCURRENCE = getOccurrence();
+// This calendar Saturday, when the club has called it off (organizer exception).
+const SKIPPED_THIS_WEEK = (() => {
+  const soon = upcomingOccurrences(1);
+  const first = soon[0];
+  return first && first.status === "cancelled" ? first : null;
+})();
+
 
 
 export const Route = createFileRoute("/")({
