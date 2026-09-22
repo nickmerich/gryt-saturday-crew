@@ -13,6 +13,7 @@ import { Route as WaiverRouteImport } from './routes/waiver'
 import { Route as TimerRouteImport } from './routes/timer'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ShopRouteImport } from './routes/shop'
 import { Route as ResourcesRouteImport } from './routes/resources'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as RacesRouteImport } from './routes/races'
@@ -40,6 +41,7 @@ import { Route as ResourcesEqtPittsburgh10Miler2026RouteImport } from './routes/
 import { Route as ResourcesCrossTrainingForRunnersRouteImport } from './routes/resources_.cross-training-for-runners'
 import { Route as ResourcesConversationsRouteImport } from './routes/resources_.conversations'
 import { Route as ResourcesBuildARunningBaseRouteImport } from './routes/resources_.build-a-running-base'
+import { Route as ProductHandleRouteImport } from './routes/product.$handle'
 import { Route as MembersKeyRouteImport } from './routes/members.$key'
 import { Route as CheckoutReturnRouteImport } from './routes/checkout.return'
 import { Route as AdminRosterRouteImport } from './routes/admin.roster'
@@ -87,6 +89,11 @@ const TermsRoute = TermsRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShopRoute = ShopRouteImport.update({
+  id: '/shop',
+  path: '/shop',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResourcesRoute = ResourcesRouteImport.update({
@@ -230,6 +237,11 @@ const ResourcesBuildARunningBaseRoute =
     path: '/resources/build-a-running-base',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ProductHandleRoute = ProductHandleRouteImport.update({
+  id: '/product/$handle',
+  path: '/product/$handle',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MembersKeyRoute = MembersKeyRouteImport.update({
   id: '/$key',
   path: '/$key',
@@ -394,6 +406,7 @@ export interface FileRoutesByFullPath {
   '/races': typeof RacesRoute
   '/register': typeof RegisterRoute
   '/resources': typeof ResourcesRoute
+  '/shop': typeof ShopRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/timer': typeof TimerRoute
@@ -406,6 +419,7 @@ export interface FileRoutesByFullPath {
   '/admin/roster': typeof AdminRosterRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/members/$key': typeof MembersKeyRoute
+  '/product/$handle': typeof ProductHandleRoute
   '/resources/build-a-running-base': typeof ResourcesBuildARunningBaseRoute
   '/resources/conversations': typeof ResourcesConversationsRoute
   '/resources/cross-training-for-runners': typeof ResourcesCrossTrainingForRunnersRoute
@@ -455,6 +469,7 @@ export interface FileRoutesByTo {
   '/races': typeof RacesRoute
   '/register': typeof RegisterRoute
   '/resources': typeof ResourcesRoute
+  '/shop': typeof ShopRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/timer': typeof TimerRoute
@@ -467,6 +482,7 @@ export interface FileRoutesByTo {
   '/admin/roster': typeof AdminRosterRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/members/$key': typeof MembersKeyRoute
+  '/product/$handle': typeof ProductHandleRoute
   '/resources/build-a-running-base': typeof ResourcesBuildARunningBaseRoute
   '/resources/conversations': typeof ResourcesConversationsRoute
   '/resources/cross-training-for-runners': typeof ResourcesCrossTrainingForRunnersRoute
@@ -517,6 +533,7 @@ export interface FileRoutesById {
   '/races': typeof RacesRoute
   '/register': typeof RegisterRoute
   '/resources': typeof ResourcesRoute
+  '/shop': typeof ShopRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/timer': typeof TimerRoute
@@ -529,6 +546,7 @@ export interface FileRoutesById {
   '/admin/roster': typeof AdminRosterRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/members/$key': typeof MembersKeyRoute
+  '/product/$handle': typeof ProductHandleRoute
   '/resources_/build-a-running-base': typeof ResourcesBuildARunningBaseRoute
   '/resources_/conversations': typeof ResourcesConversationsRoute
   '/resources_/cross-training-for-runners': typeof ResourcesCrossTrainingForRunnersRoute
@@ -580,6 +598,7 @@ export interface FileRouteTypes {
     | '/races'
     | '/register'
     | '/resources'
+    | '/shop'
     | '/sitemap.xml'
     | '/terms'
     | '/timer'
@@ -592,6 +611,7 @@ export interface FileRouteTypes {
     | '/admin/roster'
     | '/checkout/return'
     | '/members/$key'
+    | '/product/$handle'
     | '/resources/build-a-running-base'
     | '/resources/conversations'
     | '/resources/cross-training-for-runners'
@@ -641,6 +661,7 @@ export interface FileRouteTypes {
     | '/races'
     | '/register'
     | '/resources'
+    | '/shop'
     | '/sitemap.xml'
     | '/terms'
     | '/timer'
@@ -653,6 +674,7 @@ export interface FileRouteTypes {
     | '/admin/roster'
     | '/checkout/return'
     | '/members/$key'
+    | '/product/$handle'
     | '/resources/build-a-running-base'
     | '/resources/conversations'
     | '/resources/cross-training-for-runners'
@@ -702,6 +724,7 @@ export interface FileRouteTypes {
     | '/races'
     | '/register'
     | '/resources'
+    | '/shop'
     | '/sitemap.xml'
     | '/terms'
     | '/timer'
@@ -714,6 +737,7 @@ export interface FileRouteTypes {
     | '/admin/roster'
     | '/checkout/return'
     | '/members/$key'
+    | '/product/$handle'
     | '/resources_/build-a-running-base'
     | '/resources_/conversations'
     | '/resources_/cross-training-for-runners'
@@ -764,6 +788,7 @@ export interface RootRouteChildren {
   RacesRoute: typeof RacesRoute
   RegisterRoute: typeof RegisterRoute
   ResourcesRoute: typeof ResourcesRoute
+  ShopRoute: typeof ShopRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
   TimerRoute: typeof TimerRoute
@@ -775,6 +800,7 @@ export interface RootRouteChildren {
   AdminMembersRoute: typeof AdminMembersRoute
   AdminRosterRoute: typeof AdminRosterRoute
   CheckoutReturnRoute: typeof CheckoutReturnRoute
+  ProductHandleRoute: typeof ProductHandleRoute
   ResourcesBuildARunningBaseRoute: typeof ResourcesBuildARunningBaseRoute
   ResourcesConversationsRoute: typeof ResourcesConversationsRoute
   ResourcesCrossTrainingForRunnersRoute: typeof ResourcesCrossTrainingForRunnersRoute
@@ -839,6 +865,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shop': {
+      id: '/shop'
+      path: '/shop'
+      fullPath: '/shop'
+      preLoaderRoute: typeof ShopRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/resources': {
@@ -1028,6 +1061,13 @@ declare module '@tanstack/react-router' {
       path: '/resources/build-a-running-base'
       fullPath: '/resources/build-a-running-base'
       preLoaderRoute: typeof ResourcesBuildARunningBaseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/product/$handle': {
+      id: '/product/$handle'
+      path: '/product/$handle'
+      fullPath: '/product/$handle'
+      preLoaderRoute: typeof ProductHandleRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/members/$key': {
@@ -1254,6 +1294,7 @@ const rootRouteChildren: RootRouteChildren = {
   RacesRoute: RacesRoute,
   RegisterRoute: RegisterRoute,
   ResourcesRoute: ResourcesRoute,
+  ShopRoute: ShopRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
   TimerRoute: TimerRoute,
@@ -1266,6 +1307,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminMembersRoute: AdminMembersRoute,
   AdminRosterRoute: AdminRosterRoute,
   CheckoutReturnRoute: CheckoutReturnRoute,
+  ProductHandleRoute: ProductHandleRoute,
   ResourcesBuildARunningBaseRoute: ResourcesBuildARunningBaseRoute,
   ResourcesConversationsRoute: ResourcesConversationsRoute,
   ResourcesCrossTrainingForRunnersRoute: ResourcesCrossTrainingForRunnersRoute,
