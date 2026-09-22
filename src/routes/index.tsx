@@ -836,11 +836,15 @@ function RSVP() {
         return;
       }
       setSubmittedDays(selected);
+      setSubmittedParty(partySize);
+      setSubmittedFirstTimer(firstTimer);
       setSubmitted(true);
       track("rsvp_submit_success", {
         hero_variant: heroVariant ?? "unknown",
         days: selected.join(","),
         day_count: selected.length,
+        party_size: partySize,
+        first_timer: firstTimer,
         contact_kind: contactIsEmail ? "email" : "phone",
         source: source || "unspecified",
       });
