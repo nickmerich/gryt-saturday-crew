@@ -15,6 +15,13 @@
       "when": 1790055403553,
       "tag": "0001_rsvp_party_size_first_timer",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1790061318528,
+      "tag": "0002_create_run_checkins",
+      "breakpoints": true
     }
   ]
 }

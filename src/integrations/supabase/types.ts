@@ -215,6 +215,84 @@ export type Database = {
         }
         Relationships: []
       }
+      run_checkin_audit: {
+        Row: {
+          action: string
+          actor: string
+          checkin_id: string | null
+          created_at: string
+          detail: Json | null
+          event_id: string
+          id: string
+          person_key: string
+        }
+        Insert: {
+          action: string
+          actor: string
+          checkin_id?: string | null
+          created_at?: string
+          detail?: Json | null
+          event_id: string
+          id?: string
+          person_key: string
+        }
+        Update: {
+          action?: string
+          actor?: string
+          checkin_id?: string | null
+          created_at?: string
+          detail?: Json | null
+          event_id?: string
+          id?: string
+          person_key?: string
+        }
+        Relationships: []
+      }
+      run_checkins: {
+        Row: {
+          checked_in_at: string
+          checked_in_by: string
+          contact: string | null
+          event_date: string
+          event_id: string
+          id: string
+          name: string
+          note: string | null
+          person_key: string
+          source: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          checked_in_at?: string
+          checked_in_by: string
+          contact?: string | null
+          event_date: string
+          event_id: string
+          id?: string
+          name: string
+          note?: string | null
+          person_key: string
+          source?: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          checked_in_at?: string
+          checked_in_by?: string
+          contact?: string | null
+          event_date?: string
+          event_id?: string
+          id?: string
+          name?: string
+          note?: string | null
+          person_key?: string
+          source?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       signup_sessions: {
         Row: {
           contact: string | null
