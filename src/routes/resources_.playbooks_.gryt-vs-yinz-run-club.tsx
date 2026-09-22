@@ -251,7 +251,7 @@ function ArticlePage() {
           <ShareBar className="mt-12" label="Share this playbook" />
 
           <div className="mt-12 flex flex-wrap gap-4">
-            <Link to="/" hash="first-time" className="btn-primary">
+            <Link to="/" hash="join" className="btn-primary">
               RSVP for Saturday →
             </Link>
             <Link

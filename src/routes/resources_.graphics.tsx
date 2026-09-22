@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav, SiteFooter, MonogramG } from "@/components/site/Chrome";
 import ogImage from "@/assets/og-graphics.jpg";
+import { SITE_ORIGIN as SITE } from "@/lib/site";
 
-const SITE = "https://gryt-saturday-crew.lovable.app";
 const URL = `${SITE}/resources/graphics`;
 const TITLE = "Graphics · gryt run club";
 const DESCRIPTION =

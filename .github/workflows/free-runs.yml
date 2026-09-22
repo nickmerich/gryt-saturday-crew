@@ -1,0 +1,61 @@
+name: free-runs-regression
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      VITE_SUPABASE_URL: http://127.0.0.1:9
+      VITE_SUPABASE_PUBLISHABLE_KEY: isolated-public-test-key
+      VITE_SUPABASE_ANON_KEY: isolated-public-test-key
+      VITE_PAYMENTS_CLIENT_TOKEN: pk_test_isolated
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.4.2'
+      - name: Frozen install
+        run: bun install --frozen-lockfile --ignore-scripts
+      - name: Unit and handler regression tests
+        run: bun run test:free-runs
+      - name: Existing privacy and inquiry regression tests
+        run: bun test tests/inquiry-schema.test.ts tests/resources-email-recipients.test.ts tests/mcp-public-allowlist.test.ts
+      - name: Typecheck
+        run: bun run typecheck
+      - name: Credential-free production build
+        run: bun run build
+      - name: Install Chromium
+        run: bunx playwright install --with-deps chromium
+      - name: Local app browser and read-only HTTP checks
+        shell: bash
+        run: |
+          bun run dev --host 127.0.0.1 --port 4173 > /tmp/gryt-free-runs.log 2>&1 &
+          APP_PID=$!
+          trap 'kill "$APP_PID" || true' EXIT
+          for attempt in $(seq 1 60); do
+            if curl --silent --fail http://127.0.0.1:4173/release.json > /dev/null; then break; fi
+            sleep 1
+          done
+          curl --fail http://127.0.0.1:4173/release.json
+          EXPECTED_COMMIT="$(git rev-parse HEAD)" bun run check:free-runs:deployment
+          bun run test:free-runs:e2e
+      - name: Upload failure evidence
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: free-runs-failure-evidence
+          path: |
+            test-results/
+            /tmp/gryt-free-runs.log
+          retention-days: 7

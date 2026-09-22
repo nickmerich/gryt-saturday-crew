@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
+import { SITE_ORIGIN as BASE_URL } from "@/lib/site";
 
-const BASE_URL = "https://grytrunclub.com";
 
 interface SitemapEntry {
   path: string;
@@ -37,7 +37,6 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/resources/playbooks/best-free-running-clubs-pittsburgh-2026", changefreq: "monthly", priority: "0.6" },
           { path: "/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs", changefreq: "monthly", priority: "0.6" },
           { path: "/resources/playbooks/gryt-vs-yinz-run-club", changefreq: "monthly", priority: "0.6" },
-          { path: "/register", changefreq: "monthly", priority: "0.6" },
           { path: "/privacy", changefreq: "yearly", priority: "0.3" },
           { path: "/terms", changefreq: "yearly", priority: "0.3" },
         ];
