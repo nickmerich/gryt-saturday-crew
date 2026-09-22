@@ -1102,6 +1102,8 @@ function RSVP() {
               days={submittedDays}
               prefill={waiverPrefill}
               waiverOnFile={waiverOnFile}
+              partySize={submittedParty}
+              firstTimer={submittedFirstTimer}
               onReset={() => {
                 void clearSignupSession().catch(() => {});
                 setWaiverOnFile(false);
