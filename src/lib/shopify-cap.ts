@@ -28,7 +28,28 @@ export const CAP_PRODUCT_URL = `https://${CAP_BINDING.shopDomain}/products/${CAP
 export type CapState =
   | { state: "release-locked" }
   | { state: "unavailable"; reason: string }
-  | { state: "available"; title: string; productUrl: string };
+  | {
+      state: "available";
+      title: string;
+      productUrl: string;
+      /** Formatted from the storefront payload, e.g. "$36.00". Null when the payload has no usable price. */
+      price: string | null;
+      /** Absolute https image URL from the storefront payload, or null. */
+      imageUrl: string | null;
+    };
+
+/** Shopify product .js prices are integer cents in the shop's presentment currency. */
+function formatCents(value: unknown): string | null {
+  const cents = typeof value === "number" ? value : Number(value);
+  if (!Number.isFinite(cents) || cents <= 0) return null;
+  return `$${(cents / 100).toFixed(2)}`;
+}
+
+function absoluteImage(value: unknown): string | null {
+  if (typeof value !== "string" || !value.trim()) return null;
+  const url = value.startsWith("//") ? `https:${value}` : value;
+  return url.startsWith("https://") ? url : null;
+}
 
 type FetchLike = (input: string, init?: RequestInit) => Promise<Response>;
 
