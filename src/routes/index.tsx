@@ -1167,6 +1167,17 @@ function RSVPConfirmation({
     ["Runner", name.trim() || "—"],
     ["Contact", masked || "—"],
     ["RSVP", days.map((d) => DAY_LABEL[d]).join(" · ") || "Saturday · GRYT Run"],
+    [
+      "Heads",
+      partySize > 1
+        ? `${partySize === 5 ? "5+" : partySize} · you plus ${partySize === 5 ? "4 or more" : partySize - 1}`
+        : "Just you",
+    ],
+    ...(firstTimer
+      ? ([["First run", "We'll look for you. Come 10 min early."]] as Array<
+          [string, React.ReactNode]
+        >)
+      : []),
     ["Waiver", waiverSigned ? "Signed · covered through Dec 31, 2026" : "Not signed yet"],
     ["When", nextSaturdayLabelLong()],
     [
