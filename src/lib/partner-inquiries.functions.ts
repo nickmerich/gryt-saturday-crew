@@ -81,11 +81,11 @@ export const submitPartnerInquiry = createServerFn({ method: "POST" })
         templateData: {
           name: data.name,
           email: data.email,
-          organization: organization ?? "—",
+          organization: organization ?? "N/A",
           involvement: data.involvement,
-          message: message ?? "—",
+          message: message ?? "N/A",
           submittedAt,
-          ...(error ? { note: "Database save failed — email only." } : {}),
+          ...(error ? { note: "Database save failed, email only." } : {}),
         },
       });
       emailed = result.ok;

@@ -244,9 +244,9 @@ function drawStandard(
   ctx.fillRect(0, panelY, W, 6);
 
   const stats: Array<{ label: string; value: string }> = [
-    { label: "DISTANCE", value: form.distance ? `${form.distance} MI` : "—" },
-    { label: "TIME", value: form.time || "—" },
-    { label: "PACE", value: form.pace ? `${form.pace}/MI` : "—" },
+    { label: "DISTANCE", value: form.distance ? `${form.distance} MI` : "N/A" },
+    { label: "TIME", value: form.time || "N/A" },
+    { label: "PACE", value: form.pace ? `${form.pace}/MI` : "N/A" },
   ];
   // Theme-specific emphasis order
   if (themeId === "race") stats.unshift(stats.splice(1, 1)[0]);
@@ -387,9 +387,9 @@ function drawAura(
 
   // Stats row
   const stats = [
-    { label: "DISTANCE", value: form.distance ? `${form.distance} MI` : "—" },
-    { label: "TIME", value: form.time || "—" },
-    { label: "PACE", value: form.pace ? `${form.pace}/MI` : "—" },
+    { label: "DISTANCE", value: form.distance ? `${form.distance} MI` : "N/A" },
+    { label: "TIME", value: form.time || "N/A" },
+    { label: "PACE", value: form.pace ? `${form.pace}/MI` : "N/A" },
   ];
   const rowY = H * 0.71;
   const colW = (W - PAD * 2) / 3;

@@ -42,7 +42,7 @@ export const exchangeStravaCode = createServerFn({ method: "POST" })
         errs.some((e) => e.field === field && (!code || e.code === code));
       if (hasField("code", "invalid") || /invalid_grant/i.test(body)) {
         throw new Error(
-          `${tag} Authorization code was rejected (invalid_grant). Strava codes expire within seconds and can only be used once — this usually means the page was refreshed after redirect, the code was re-exchanged, or too much time passed. Tap Connect Strava to start a fresh authorization.`,
+          `${tag} Authorization code was rejected (invalid_grant). Strava codes expire within seconds and can only be used once, this usually means the page was refreshed after redirect, the code was re-exchanged, or too much time passed. Tap Connect Strava to start a fresh authorization.`,
         );
       }
       if (hasField("code", "expired") || /expired/i.test(body)) {

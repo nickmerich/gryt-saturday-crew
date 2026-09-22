@@ -188,7 +188,7 @@ function EmailStatusPage() {
             className="mt-6 text-lg text-ink/80"
             style={{ fontFamily: "var(--font-body)" }}
           >
-            Not sure if your subscription went through? Enter your email — we'll
+            Not sure if your subscription went through? Enter your email, we'll
             tell you if you're verified and when the next Friday drop lands.
           </p>
 

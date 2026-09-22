@@ -1,123 +1,96 @@
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { CloudRain, Wind, Thermometer, AlertTriangle } from "lucide-react";
 import { getSaturdayForecast } from "@/lib/weather.functions";
+import { useRun } from "@/lib/run-context";
+import type { ForecastReason } from "@/lib/weather";
 
-function Stat({
-  icon,
-  label,
-  value,
-  sub,
-  hot,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  value: string;
-  sub?: string;
-  hot?: boolean;
-}) {
-  return (
-    <div
-      className={`border p-4 sm:p-5 ${hot ? "border-blue bg-blue/10" : "border-paper/20 bg-ink/50"}`}
-    >
-      <div className="flex items-center gap-2 text-blue">
-        {icon}
-        <span className="text-[10px] sm:text-[11px] tracking-[0.2em] uppercase">{label}</span>
-      </div>
-      <div className="display-condensed mt-2 text-[clamp(30px,9vw,48px)] leading-[0.95]">
-        {value}
-      </div>
-      {sub ? <div className="mt-1 text-[12px] text-paper/60">{sub}</div> : null}
-    </div>
-  );
-}
-
+const MESSAGES: Record<ForecastReason, string> = {
+  configuration:
+    "The forecast point has not been verified yet. Check the current run details and organizer updates before travelling.",
+  location_changed:
+    "The meeting point changed. Weather is unavailable until the new forecast location is verified.",
+  event_status:
+    "Check the run status before travelling. A forecast is not confirmation that a run is going ahead.",
+  out_of_range: "The hourly forecast does not reach this run yet. Check again closer to the day.",
+  stale:
+    "The provider's forecast is missing a recent update. We are not showing old conditions as current.",
+  network: "Weather is temporarily unavailable. Your RSVP and run details still work.",
+};
 export function SaturdayWeather() {
+  const run = useRun();
   const fetchForecast = useServerFn(getSaturdayForecast);
-  const { data, isPending, isError } = useQuery({
-    queryKey: ["saturday-forecast"],
+  const { data, isPending, isFetching, refetch } = useQuery({
+    queryKey: ["saturday-forecast", run.id, run.version],
     queryFn: () => fetchForecast(),
-    staleTime: 15 * 60 * 1000,
+    staleTime: 60_000,
+    refetchInterval: 5 * 60_000,
+    retry: false,
   });
-
-  const rain = data?.rainChance ?? null;
-  const wind = data?.windMph ?? null;
-  const temp = data?.tempF ?? null;
-
-  const alerts: string[] = [];
-  if (rain != null && rain >= 40) alerts.push("Rain likely. Hat and a dry shirt in the car.");
-  if (wind != null && wind >= 15) alerts.push("Wind on the trail. Head out into it, ride it home.");
-  if (temp != null && temp <= 32) alerts.push("Freezing at the lot. Gloves. Layers you can shed.");
-  if (temp != null && temp >= 80) alerts.push("Hot start. Bring water, run the shade.");
-
+  const current = data?.eventId === run.id && data.eventVersion === run.version ? data : null;
   return (
-    <section
-      id="weather"
-      className="relative overflow-hidden concrete grain border-t-2 border-blue text-paper py-14 sm:py-20 px-5 sm:px-12 lg:px-24"
-    >
-      <div className="relative max-w-[1180px] mx-auto">
-        <div className="eyebrow eyebrow-blue mb-3">Saturday conditions</div>
-        <h2 className="display-condensed text-[clamp(30px,7vw,64px)] leading-[0.94]">
-          FIRST RUN · SATURDAY 7:00 AM
+    <section id="weather" className="gryt-utility-section" aria-labelledby="weather-title">
+      <div className="gryt-utility-inner">
+        <p className="eyebrow eyebrow-blue">Plan your morning</p>
+        <h2 id="weather-title" className="gryt-utility-title">
+          Weather for {run.timeLabel}
         </h2>
-        <p className="mt-3 text-[14px] sm:text-[15px] text-paper/70">
-          Valley Brook Road lot{data?.dateLabel ? ` · ${data.dateLabel}` : ""}. Forecast pulled
-          from the National Weather Service.
+        <p className="gryt-utility-intro">
+          {run.localDate} · {run.location}
         </p>
-
-        {isPending ? (
-          <div className="mt-8 h-[120px] border border-paper/15 bg-ink/40 animate-pulse" />
-        ) : isError || !data?.available ? (
-          <div className="mt-8 border border-paper/20 bg-ink/50 p-5 text-[14px] text-paper/70">
-            Forecast isn't out for that Saturday yet. Check back midweek — the run goes either
-            way.
-          </div>
-        ) : (
-          <>
-            {alerts.length > 0 ? (
-              <div className="mt-8 border-2 border-blue bg-blue text-ink p-4 sm:p-5">
-                <div className="flex items-center gap-2">
-                  <AlertTriangle size={18} strokeWidth={2.25} />
-                  <span className="display-condensed text-[18px] sm:text-[22px]">
-                    Dress for it
-                  </span>
+        <div className="gryt-utility-panel" role="status" aria-live="polite">
+          {isPending ? (
+            <p>Checking the forecast for this run...</p>
+          ) : !current?.available ? (
+            <p>{MESSAGES[current?.reason ?? "network"]}</p>
+          ) : (
+            <>
+              <dl className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <div>
+                  <dt>Temperature</dt>
+                  <dd className="gryt-weather-value">
+                    {current.tempF === null ? "Not available" : `${current.tempF}°F`}
+                  </dd>
                 </div>
-                <ul className="mt-2 space-y-1 text-[13px] sm:text-[14px] font-medium">
-                  {alerts.map((a) => (
-                    <li key={a}>{a}</li>
-                  ))}
-                </ul>
-              </div>
-            ) : null}
-
-            <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-              <Stat
-                icon={<Thermometer size={16} strokeWidth={2} />}
-                label="Temp at 7 AM"
-                value={temp != null ? `${temp}°` : "—"}
-                sub={data.shortForecast ?? undefined}
-              />
-              <Stat
-                icon={<CloudRain size={16} strokeWidth={2} />}
-                label="Rain chance"
-                value={rain != null ? `${rain}%` : "—"}
-                hot={rain != null && rain >= 40}
-                sub={rain != null && rain >= 40 ? "Wet start" : "Dry start"}
-              />
-              <Stat
-                icon={<Wind size={16} strokeWidth={2} />}
-                label="Wind"
-                value={wind != null ? `${wind}` : "—"}
-                hot={wind != null && wind >= 15}
-                sub={
-                  wind != null
-                    ? `mph${data.windDirection ? ` · ${data.windDirection}` : ""}`
-                    : undefined
-                }
-              />
-            </div>
-          </>
-        )}
+                <div>
+                  <dt>Rain chance</dt>
+                  <dd className="gryt-weather-value">
+                    {current.rainChance === null ? "Not available" : `${current.rainChance}%`}
+                  </dd>
+                </div>
+                <div>
+                  <dt>Wind</dt>
+                  <dd className="gryt-weather-value">
+                    {current.windMph === null ? "Not available" : `Up to ${current.windMph} mph`}
+                  </dd>
+                </div>
+              </dl>
+              {current.shortForecast && <p className="mt-4">{current.shortForecast}</p>}
+              <p className="mt-3 text-sm text-paper/70">
+                NWS update:{" "}
+                {new Intl.DateTimeFormat("en-US", {
+                  timeZone: run.timezone,
+                  month: "short",
+                  day: "numeric",
+                  hour: "numeric",
+                  minute: "2-digit",
+                }).format(new Date(current.updatedAt!))}{" "}
+                Eastern.
+              </p>
+            </>
+          )}
+        </div>
+        <div className="flex flex-wrap items-center gap-5 mt-5">
+          <button className="btn-ghost" disabled={isFetching} onClick={() => void refetch()}>
+            {isFetching ? "Checking..." : "Check again"}
+          </button>
+          <a href="#join" className="underline underline-offset-4">
+            View current run details
+          </a>
+        </div>
+        <p className="mt-4 text-sm text-paper/70">
+          Forecasts come from the National Weather Service when available. Conditions can change.
+          Run status is an organizer decision, not a weather prediction.
+        </p>
       </div>
     </section>
   );

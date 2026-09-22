@@ -55,7 +55,7 @@ function PlanPage() {
     e.preventDefault();
     if (form.goal.trim().length < 3) {
       setStatus("error");
-      setError("Tell us the goal first — even one line.");
+      setError("Tell us the goal first, even one line.");
       return;
     }
     setStatus("loading");
@@ -204,7 +204,7 @@ function PlanPage() {
 
             {status === "loading" && (
               <p className="text-ink/70">
-                Coach is working. Hold tight — this takes a minute.
+                Coach is working. Hold tight, this takes a minute.
               </p>
             )}
 

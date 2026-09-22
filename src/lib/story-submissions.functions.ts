@@ -79,9 +79,9 @@ export const submitStorySubmission = createServerFn({ method: "POST" })
         templateData: {
           name: data.name,
           email: data.email,
-          organization: location ?? "—",
+          organization: location ?? "N/A",
           involvement: "Story Submission",
-          message: `WHY INTERVIEW:\n${data.whyInterview}\n\nSTORY:\n${data.story}\n\nLINKS:\n${links ?? "—"}\n\nConsent to contact: ${data.consentContact ? "yes" : "no"}`,
+          message: `WHY INTERVIEW:\n${data.whyInterview}\n\nSTORY:\n${data.story}\n\nLINKS:\n${links ?? "N/A"}\n\nConsent to contact: ${data.consentContact ? "yes" : "no"}`,
           submittedAt,
         },
       });

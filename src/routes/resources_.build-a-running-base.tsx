@@ -30,7 +30,7 @@ const FAQS: Array<{ q: string; a: string }> = [
   },
   {
     q: "What pace should I run during base building?",
-    a: "Easy pace — conversational, no gasping. On a perceived effort scale of 1 to 10, aim for a 4 or 5. Most beginners run their easy days too fast, which slows recovery and increases injury risk.",
+    a: "Easy pace, conversational, no gasping. On a perceived effort scale of 1 to 10, aim for a 4 or 5. Most beginners run their easy days too fast, which slows recovery and increases injury risk.",
   },
   {
     q: "Can I build a running base while training for a race?",
@@ -46,7 +46,7 @@ const FAQS: Array<{ q: string; a: string }> = [
   },
   {
     q: "What's the 10 percent rule and should I follow it?",
-    a: "The 10 percent rule means not increasing your total weekly mileage by more than 10 percent from one week to the next. It's conservative, but it's widely used because it reduces overuse injury risk — and it's a good habit to build before race training adds more stress.",
+    a: "The 10 percent rule means not increasing your total weekly mileage by more than 10 percent from one week to the next. It's conservative, but it's widely used because it reduces overuse injury risk, and it's a good habit to build before race training adds more stress.",
   },
   {
     q: "How do I know when my base is ready for a training plan?",
@@ -210,7 +210,7 @@ function RunningBasePage() {
               Think of it as conditioning your tendons, joints, and
               cardiovascular system to handle what's coming. Muscles respond to
               training faster than connective tissue does. Jump straight into a
-              5K or 10K plan without a base, and your lungs might keep up — but
+              5K or 10K plan without a base, and your lungs might keep up, but
               your knees and shins often won't.
             </p>
 
@@ -256,7 +256,7 @@ function RunningBasePage() {
             </p>
             <p>
               <span className="text-paper font-bold">
-                Running occasionally — once or twice a week:
+                Running occasionally, once or twice a week:
               </span>{" "}
               Four to six weeks of consistent three-day weeks is usually enough
               to establish the base you need.
@@ -276,7 +276,7 @@ function RunningBasePage() {
             <p>
               Three days is the sweet spot. It's enough frequency to drive
               adaptation without overwhelming your recovery. Space the days
-              out — something like Monday, Wednesday, Saturday works well for
+              out, something like Monday, Wednesday, Saturday works well for
               most schedules.
             </p>
             <p>
@@ -316,7 +316,7 @@ function RunningBasePage() {
               As your base builds, designate one run per week as your long run.
               It should be slower than your other runs and longer by 20 to 30
               percent. This is the run that trains your body to stay on its
-              feet — which is exactly what race day demands.
+              feet, which is exactly what race day demands.
             </p>
 
             <H2 id="easy">What "easy" actually feels like</H2>
@@ -326,7 +326,7 @@ function RunningBasePage() {
               recover properly before the next run.
             </p>
             <p>
-              Easy means you could hold a full conversation — complete
+              Easy means you could hold a full conversation, complete
               sentences, no pausing to breathe. If you're running with someone
               and responding in short bursts, you're probably a little too fast.
             </p>
@@ -345,7 +345,7 @@ function RunningBasePage() {
               <li>
                 <span className="text-paper font-bold">Skipping rest days.</span>{" "}
                 Rest is when your body actually adapts. Taking two days off
-                after a long run isn't laziness — it's part of the training.
+                after a long run isn't laziness, it's part of the training.
               </li>
               <li>
                 <span className="text-paper font-bold">Jumping into a race plan too soon.</span>{" "}
@@ -399,7 +399,7 @@ function RunningBasePage() {
             </p>
             <p>
               GRYT Run Club meets Saturday mornings at 7 AM in Pittsburgh's
-              South Hills — the Montour / Peters Trail in McMurray, roughly 4
+              South Hills, the Montour / Peters Trail in McMurray, roughly 4
               miles. There's no pace requirement, no membership fee, and no one
               gets left behind. If you're in the base-building phase, that's
               exactly the right environment. Easy miles with a group go by

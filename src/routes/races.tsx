@@ -5,7 +5,7 @@ const SITE = "https://grytrunclub.com";
 const URL = `${SITE}/races`;
 const TITLE = "Pittsburgh Races 2026–27 · Training Guide · gryt run club";
 const DESCRIPTION =
-  "Upcoming Pittsburgh races — Great Race, EQT 10 Miler, the 2027 Pittsburgh Marathon, Peters Township 5Ks, and South Hills trail runs. Pick your goal and train with GRYT.";
+  "Upcoming Pittsburgh races, Great Race, EQT 10 Miler, the 2027 Pittsburgh Marathon, Peters Township 5Ks, and South Hills trail runs. Pick your goal and train with GRYT.";
 
 type Race = {
   name: string;
@@ -27,7 +27,7 @@ const RACES: Race[] = [
     location: "Squirrel Hill → Point State Park",
     url: "https://www.rungreatrace.com/",
     blurb:
-      "One of the largest 10Ks in the country. Net-downhill, fast course, big crowds. A rite of passage for Pittsburgh runners. Four weeks out — the Saturday long run is the whole plan now.",
+      "One of the largest 10Ks in the country. Net-downhill, fast course, big crowds. A rite of passage for Pittsburgh runners. Four weeks out, the Saturday long run is the whole plan now.",
     tier: "signature",
   },
   {
@@ -37,7 +37,7 @@ const RACES: Race[] = [
     location: "North Shore → South Side",
     url: "https://www.pittsburghtenmiler.com/",
     blurb:
-      "A late-season classic. Great fall goal race if the marathon isn't your thing but you still want something long and honest. Ten weeks out — start the build now.",
+      "A late-season classic. Great fall goal race if the marathon isn't your thing but you still want something long and honest. Ten weeks out, start the build now.",
     tier: "signature",
   },
   {
@@ -94,7 +94,7 @@ const RACES: Race[] = [
     location: "Harrison Hills → North Park",
     url: "https://rachelcarsontrails.org/",
     blurb:
-      "A sunrise-to-sunset gut check. Not for your first race — but if you've been running consistently for a year and want a story, this is it.",
+      "A sunrise-to-sunset gut check. Not for your first race, but if you've been running consistently for a year and want a story, this is it.",
     tier: "trail",
   },
 ];
@@ -102,7 +102,7 @@ const RACES: Race[] = [
 const FAQS = [
   {
     q: "What's the next big Pittsburgh race?",
-    a: "The Great Race (10K and 5K) runs September 27, 2026, then the EQT Pittsburgh 10 Miler in November. The next DICK'S Sporting Goods Pittsburgh Marathon weekend lands in early May 2027 — confirm the exact date on the official race site.",
+    a: "The Great Race (10K and 5K) runs September 27, 2026, then the EQT Pittsburgh 10 Miler in November. The next DICK'S Sporting Goods Pittsburgh Marathon weekend lands in early May 2027, confirm the exact date on the official race site.",
   },
   {
     q: "What's a good first race in Pittsburgh?",
@@ -114,7 +114,7 @@ const FAQS = [
   },
   {
     q: "How should I train for the Pittsburgh Marathon?",
-    a: "Most local runners start a 16–18 week build in early January for a May race. Saturday long runs with a group make the plan stick — GRYT meets every Saturday at 7 AM on the Montour Trail in McMurray, free, all paces welcome.",
+    a: "Most local runners start a 16–18 week build in early January for a May race. Saturday long runs with a group make the plan stick, GRYT meets every Saturday at 7 AM on the Montour Trail in McMurray, free, all paces welcome.",
   },
 ];
 
@@ -259,7 +259,7 @@ function RacesPage() {
           </h2>
           <div className="space-y-5 text-paper/85 text-[16px] md:text-[17px] leading-[1.7]">
             <p>
-              Most Pittsburgh race guides forget the South Hills exist. Peters Township, McMurray, Upper St. Clair, Bethel Park — these are runner-heavy neighborhoods with almost no dedicated race coverage.
+              Most Pittsburgh race guides forget the South Hills exist. Peters Township, McMurray, Upper St. Clair, Bethel Park, these are runner-heavy neighborhoods with almost no dedicated race coverage.
             </p>
             <p>
               The Montour / Peters Trail is the training backbone for anyone south of the tunnels. It's flat, crushed limestone, well-maintained, and it connects all the way from Peters Township toward Coraopolis. If you're building toward the Pittsburgh Half or Marathon in May, this is where the miles happen.
@@ -293,7 +293,7 @@ function RacesPage() {
             </Link>
           </div>
           <p className="mt-8 text-paper/50 text-sm">
-            Race dates are our best current read — always confirm on the official race site before registering.
+            Race dates are our best current read, always confirm on the official race site before registering.
           </p>
         </div>
       </section>

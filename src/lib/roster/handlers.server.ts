@@ -1,6 +1,8 @@
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { isAdminEmail } from '@/lib/admin/allowlist'
 import type { RosterEntry } from './types'
+import { rosterIdentity, waiverIdentity } from './identity'
+import { newYorkParts } from '../run-occurrence'
 
 function json(data: unknown, status = 200) {
   return Response.json(data, {
@@ -21,22 +23,12 @@ async function admin(request: Request, db: SupabaseClient) {
   return !error && data.user?.email_confirmed_at && isAdminEmail(data.user.email) ? data.user.email! : null
 }
 
-const normalizeEmail = (value: string) => value.trim().toLowerCase()
-const normalizeName = (value: string) => value.trim().toLowerCase().replace(/\s+/g, ' ')
 const digits = (value: string) => value.replace(/\D/g, '')
 
 function contactKind(contact: string): RosterEntry['contactKind'] {
   if (contact.includes('@')) return 'email'
   if (digits(contact).length >= 7) return 'phone'
   return 'other'
-}
-
-/** Stable identity for grouping RSVPs: email, else last 10 phone digits, else the name. */
-function identityKey(name: string, contact: string) {
-  const kind = contactKind(contact)
-  if (kind === 'email') return `e:${normalizeEmail(contact)}`
-  if (kind === 'phone') return `p:${digits(contact).slice(-10)}`
-  return `n:${normalizeName(name)}`
 }
 
 export async function adminRoster(request: Request) {
@@ -62,14 +54,14 @@ export async function adminRoster(request: Request) {
     return json({ error: 'The roster could not be loaded right now. Please try again.' }, 503)
   }
 
-  const waiversByEmail = new Map<string, { signedOn: string; season: number; version: string }>()
-  const waiversByName = new Map<string, { signedOn: string; season: number; version: string }>()
+  const waiversByIdentity = new Map<string, { signedOn: string; season: number; version: string }>()
   for (const row of waiverResult.data ?? []) {
     const record = { signedOn: row.signed_on as string, season: row.season as number, version: row.waiver_version as string }
-    const email = normalizeEmail((row.email as string) ?? '')
-    const name = normalizeName((row.full_name as string) ?? '')
-    if (email && !waiversByEmail.has(email)) waiversByEmail.set(email, record)
-    if (name && !waiversByName.has(name)) waiversByName.set(name, record)
+    const identity = waiverIdentity(row.full_name as string ?? '', row.email as string ?? '')
+    // Conservative: a first-name RSVP and a full-name waiver require manual review.
+    // Do not mark an old-season or unknown-version signature as current coverage.
+    if (identity && record.season === newYorkParts().year && record.version === 'gryt-run-club-2026-v1' &&
+      !waiversByIdentity.has(identity)) waiversByIdentity.set(identity, record)
   }
 
   const entries = new Map<string, RosterEntry>()
@@ -77,7 +69,7 @@ export async function adminRoster(request: Request) {
     const name = ((row.name as string) ?? '').trim()
     const contact = ((row.contact as string) ?? '').trim()
     const createdAt = row.created_at as string
-    const key = identityKey(name, contact)
+    const key = rosterIdentity(name, contact, row.id as string)
     const existing = entries.get(key)
 
     if (existing) {
@@ -90,10 +82,8 @@ export async function adminRoster(request: Request) {
     }
 
     const kind = contactKind(contact)
-    const waiver =
-      (kind === 'email' ? waiversByEmail.get(normalizeEmail(contact)) : undefined) ??
-      waiversByName.get(normalizeName(name)) ??
-      null
+    const identity = waiverIdentity(name, contact)
+    const waiver = identity ? waiversByIdentity.get(identity) ?? null : null
 
     entries.set(key, {
       key,
@@ -111,6 +101,7 @@ export async function adminRoster(request: Request) {
   const roster = Array.from(entries.values()).sort((a, b) => b.lastRsvp.localeCompare(a.lastRsvp))
   return json({
     roster,
+    coverage: { rsvpLimit: 2000, waiverLimit: 2000, possiblyTruncated: rsvpResult.data?.length === 2000 || waiverResult.data?.length === 2000 },
     totals: {
       people: roster.length,
       rsvps: rsvpResult.data?.length ?? 0,

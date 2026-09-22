@@ -3,9 +3,9 @@ import { createFileRoute, Link } from '@tanstack/react-router';
 export const Route = createFileRoute('/checkout/return')({
   head: () => ({
     meta: [
-      { title: 'Thank you — GRYT Run Club' },
+      { title: 'Thank you · GRYT Run Club' },
       { name: 'description', content: 'Thanks for supporting GRYT Run Club.' },
-      { property: 'og:title', content: 'Thank you — GRYT Run Club' },
+      { property: 'og:title', content: 'Thank you · GRYT Run Club' },
       { property: 'og:description', content: 'Thanks for supporting GRYT Run Club.' },
       { property: 'og:type', content: 'website' },
       { name: 'twitter:card', content: 'summary' },

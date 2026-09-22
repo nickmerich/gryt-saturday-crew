@@ -74,7 +74,7 @@ export const createEventEntryCheckout = createServerFn({ method: 'POST' })
         line_items: [{
           price_data: {
             currency: 'usd',
-            product_data: { name: `Event Entry — ${data.eventName}` },
+            product_data: { name: `Event Entry, ${data.eventName}` },
             unit_amount: data.amountInCents,
           },
           quantity: data.quantity,
@@ -82,7 +82,7 @@ export const createEventEntryCheckout = createServerFn({ method: 'POST' })
         mode: 'payment',
         ui_mode: 'embedded_page',
         return_url: data.returnUrl,
-        payment_intent_data: { description: `Event Entry — ${data.eventName}` },
+        payment_intent_data: { description: `Event Entry, ${data.eventName}` },
         metadata: { eventId: data.eventId, eventName: data.eventName, type: 'event_entry' },
         ...(data.customerEmail && { customer_email: data.customerEmail }),
       });

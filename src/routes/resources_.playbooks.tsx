@@ -52,7 +52,7 @@ const PLAYBOOKS: Playbook[] = [
       "The full playbook Nick used to launch GRYT: picking a location, setting a time, finding the first 10 members, and keeping them coming back.",
     body: [
       "Pick one location. Pick one time. Never move either.",
-      "Most new clubs die because the founder treats the schedule like a suggestion. The single biggest unlock for GRYT was deciding Saturday 8:00 AM at the same trailhead — rain, snow, holiday weekend, doesn't matter. People plan their week around what they trust will exist.",
+      "Most new clubs die because the founder treats the schedule like a suggestion. The single biggest unlock for GRYT was deciding Saturday 8:00 AM at the same trailhead, rain, snow, holiday weekend, doesn't matter. People plan their week around what they trust will exist.",
       "Find your first ten in person. Not on Instagram. Not in a Slack. Text ten people who already run, tell them the time and place, and show up if even one of them does. Week one we had three runners. Week six we had twelve. Week twenty we stopped counting.",
       "Make the loop simple. New runners are scared of the unknown distance more than the distance itself. Pick a flat, well-marked 3–5 mile loop everyone can finish, then layer a longer optional add-on for the faster crew. No one should ever wonder if they're going to get lost or dropped.",
       "End at a place with coffee. The run is the excuse. The community happens in the 30 minutes after.",
@@ -64,10 +64,10 @@ const PLAYBOOKS: Playbook[] = [
     category: "Training",
     readTime: "8 min read",
     description:
-      "Why showing up every Saturday at the same time changes how you see yourself — and the data behind it.",
+      "Why showing up every Saturday at the same time changes how you see yourself, and the data behind it.",
     body: [
       "The Saturday System is one rule: one long-ish run, every Saturday, no exceptions.",
-      "It works because identity beats motivation. You don't have to want to run on Saturday — you just have to be the kind of person who runs on Saturday. After 8–10 weeks, the decision stops being a decision.",
+      "It works because identity beats motivation. You don't have to want to run on Saturday, you just have to be the kind of person who runs on Saturday. After 8–10 weeks, the decision stops being a decision.",
       "Pace doesn't matter. Distance only matters loosely. The single metric that predicts a runner's 12-month progress in our club is Saturdays-attended-out-of-Saturdays-possible. Above 75% and almost everyone PRs. Below 50% and almost no one does.",
       "If you miss a Saturday, you don't 'make it up' on Sunday. You just show up the next Saturday. The streak is the system.",
     ],
@@ -98,14 +98,14 @@ const PLAYBOOKS: Playbook[] = [
       "At 7:00 AM on the Montour Trail in McMurray, the world is reduced to its most essential elements. The air carries a biting, crystalline chill that catches in your throat, and the only soundtrack is the rhythmic crunch of gravel beneath shoes and the quiet plumes of breath visible in the gray light. There is a profound silence here that is increasingly rare in our hyper-connected lives. There is no stage, no registration table, no velvet rope, and no elaborate marketing apparatus.",
       "It is a primitive architecture of community. In this quietude, we find a revelation that challenges the very foundation of modern digital strategy. While the business world is obsessed with the digital frontier, the most significant shift is happening in the physical world. As we stand in the cold, we realize that in an era of infinite synthetic noise, the only asset that remains truly un-automatable is the weight of real-life connection. The future of value is not found in a feed; it is found in the people who know your name in the physical world.",
       "The Content Trap: Why 'More' is the Wrong Strategy",
-      "Founders and strategists are currently trapped in a reactive loop. Confronted with the rising tide of Artificial Intelligence, the instinctive response has been to increase the volume — more posts, more channels, more newsletters, more 'presence.' It is an attempt to out-produce a machine that has a marginal cost of zero. By pursuing this 'more' strategy, human creators inadvertently strip away their own humanity, becoming nothing more than louder, less efficient versions of the same algorithms they seek to defeat.",
+      "Founders and strategists are currently trapped in a reactive loop. Confronted with the rising tide of Artificial Intelligence, the instinctive response has been to increase the volume, more posts, more channels, more newsletters, more 'presence.' It is an attempt to out-produce a machine that has a marginal cost of zero. By pursuing this 'more' strategy, human creators inadvertently strip away their own humanity, becoming nothing more than louder, less efficient versions of the same algorithms they seek to defeat.",
       "We are witnessing the total commoditization of the digital word. As the barrier to entry for content vanishes, the value of that content also trends toward zero. AI is making content cheaper every day, which means the most valuable thing left is the thing that cannot be automated: people who know your name in real life.",
       "The Container vs. The Product: Redefining Value",
-      "To understand the architecture of a 'human moat,' we must decouple the activity from the value. Consider the model of GRYT. It functions without the traditional markers of an organized event — there are no pace groups, no fees, and no complex funnels designed to capture lead data. On the surface, it appears to be a running group, but the run is merely the 'container.' It is the vessel, not the product itself.",
+      "To understand the architecture of a 'human moat,' we must decouple the activity from the value. Consider the model of GRYT. It functions without the traditional markers of an organized event, there are no pace groups, no fees, and no complex funnels designed to capture lead data. On the surface, it appears to be a running group, but the run is merely the 'container.' It is the vessel, not the product itself.",
       "The true product being offered is a trinity of human needs that AI can never fulfill:",
       "Accountability: The external, social pressure to honor a commitment to others.",
       "Familiarity: The compounding comfort of being recognized and known over time.",
-      "Presence: The specific, powerful reassurance of knowing that someone would notice — and care — if you simply didn't show up.",
+      "Presence: The specific, powerful reassurance of knowing that someone would notice (and care) if you simply didn't show up.",
       "The Parking Lot Metric: Identifying the Real Signal",
       "In the digital economy, we have been conditioned to worship at the altar of click-through rates and impression counts. But these are low-fidelity signals. The true metric of a human moat is found in the 'parking lot phenomenon.'",
       "On the Montour Trail, the most striking data point isn't the distance covered or the pace maintained; it is the fact that people stay in the parking lot talking long after the run has concluded. They often linger in conversation for a greater duration than the run itself. This lingering is the ultimate signal of success. It is an organic, unscripted interaction that defies growth hacks and cannot be manufactured by an automated funnel. It is the sound of a community solidifying in real-time.",
@@ -114,7 +114,7 @@ const PLAYBOOKS: Playbook[] = [
       "The machine fails the 7:52 AM test. It cannot stand beside a friend in a gravel parking lot as the sun begins to break through the trees and ask how their week actually went. It cannot offer the silence, the eye contact, or the genuine empathy of a person who has physically sacrificed their Saturday morning to be there. 'People who know your name in real life' is the ultimate competitive advantage because it is the only thing the machine cannot simulate, substitute, or scale.",
       "Choosing 'Less Scale, More Saturdays'",
       "The path forward requires a radical act of defiance against the current digital economy. It requires a strategic pivot from the pursuit of digital volume to the cultivation of human depth. We must stop trying to be louder versions of the machine and start being more intentional versions of ourselves.",
-      "The future belongs to those who understand that intimacy is the only thing that doesn't scale — and that is exactly why it is the only thing that matters.",
+      "The future belongs to those who understand that intimacy is the only thing that doesn't scale, and that is exactly why it is the only thing that matters.",
       "Less scale. More Saturdays.",
       "In a world where content is infinite, who is actually waiting for you to show up at 7 AM?",
     ],
@@ -146,13 +146,13 @@ const PLAYBOOKS: Playbook[] = [
       "Ask before you commit: Does this group run every week, or every other week? Does the location change? If the answer to either is \"it depends,\" that's useful information.",
       "Watch Out for Pace Pressure",
       "Some clubs are quietly competitive. Nothing is ever said out loud, but the faster runners are always out front, the slower ones trail off, and nobody waits.",
-      "A good run club keeps the group together. Look for language like \"all paces welcome\" or \"no one gets dropped\" — and then verify it actually happens. Read reviews, ask someone who's been, or just show up once and see how the group handles the back of the pack.",
+      "A good run club keeps the group together. Look for language like \"all paces welcome\" or \"no one gets dropped\", and then verify it actually happens. Read reviews, ask someone who's been, or just show up once and see how the group handles the back of the pack.",
       "If you've been away from running for a while, or you're coming back after kids or an injury, pace pressure is the fastest way to stop going.",
       "Free Is Better Than You Think",
       "Plenty of local running clubs are completely free. No membership fees, no gear requirements, no subscription. If a club is charging you monthly to run outside with other people, it's worth asking what exactly you're paying for.",
       "Free clubs tend to attract people who are there for the right reasons. They're not protecting an investment. They just want to run with good people.",
       "The Post-Run Matters as Much as the Miles",
-      "This sounds small, but it isn't. The 15 minutes in the parking lot after the run — coffee, water, people catching their breath and actually talking — that's where the consistency comes from. That's the part that makes you want to come back.",
+      "This sounds small, but it isn't. The 15 minutes in the parking lot after the run (coffee, water, people catching their breath and actually talking) that's where the consistency comes from. That's the part that makes you want to come back.",
       "Look for a club that has some version of this. A coffee spot nearby, a loose hang after, anything that extends the run into something social. The miles get you fit. The parking lot keeps you coming.",
       "If You're in the South Hills, There's Already a Standing Invite",
       "GRYT Run Club runs every Saturday at 7 AM on the Montour/Peters Trail in McMurray, PA. It's free, always. No pace requirement. Nobody gets dropped. The run is about 4 miles out and back on a flat, beginner-friendly trail, and there's coffee after in the lot.",
@@ -185,7 +185,7 @@ const PLAYBOOKS: Playbook[] = [
     category: "Community",
     readTime: "9 min read",
     description:
-      "A no-BS guide to Pittsburgh's free running clubs in 2026 — Yinz, Fleet Feet, Steel City, Kool, Pharaoh Hounds, and GRYT. Who they're for, when they meet, and what makes each one worth your Saturday.",
+      "A no-BS guide to Pittsburgh's free running clubs in 2026, Yinz, Fleet Feet, Steel City, Kool, Pharaoh Hounds, and GRYT. Who they're for, when they meet, and what makes each one worth your Saturday.",
     body: [],
     href: "/resources/playbooks/best-free-running-clubs-pittsburgh-2026",
   },
@@ -195,13 +195,13 @@ const PLAYBOOKS: Playbook[] = [
     category: "Community",
     readTime: "8 min read",
     description:
-      "An honest comparison of Yinz Run Club and GRYT Run Club — location, schedule, group size, and post-run culture. Figure out which Pittsburgh run club actually fits your life.",
+      "An honest comparison of Yinz Run Club and GRYT Run Club, location, schedule, group size, and post-run culture. Figure out which Pittsburgh run club actually fits your life.",
     body: [],
     href: "/resources/playbooks/gryt-vs-yinz-run-club",
   },
   {
     slug: "fleet-feet-pittsburgh-vs-independent-run-clubs",
-    title: "Fleet Feet Pittsburgh Running Group vs Independent Run Clubs — Which Should You Join?",
+    title: "Fleet Feet Pittsburgh Running Group vs Independent Run Clubs · Which Should You Join?",
     category: "Community",
     readTime: "9 min read",
     description:
@@ -231,7 +231,7 @@ function PlaybooksPage() {
           </h1>
           <p className="mt-7 text-paper/75 text-lg md:text-xl max-w-[640px] leading-[1.55]">
             Everything we've learned about building consistency, community, and
-            a sustainable running life — written down, shared freely.
+            a sustainable running life, written down, shared freely.
           </p>
         </div>
       </section>

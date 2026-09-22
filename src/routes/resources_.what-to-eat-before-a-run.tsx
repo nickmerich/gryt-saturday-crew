@@ -27,7 +27,7 @@ const SECTIONS: Array<{ id: string; label: string }> = [
 const FAQS: Array<{ q: string; a: string }> = [
   {
     q: "What should I eat before a morning run if I don't have much time?",
-    a: "A small, fast-digesting carbohydrate. Half a banana, a piece of toast, or a few dates all work. If your run is under 45 minutes, running on empty is fine too — as long as you ate well the night before.",
+    a: "A small, fast-digesting carbohydrate. Half a banana, a piece of toast, or a few dates all work. If your run is under 45 minutes, running on empty is fine too, as long as you ate well the night before.",
   },
   {
     q: "How long before a run should I eat a full meal?",
@@ -39,7 +39,7 @@ const FAQS: Array<{ q: string; a: string }> = [
   },
   {
     q: "What foods should I avoid before running?",
-    a: "High-fat foods, high-fiber foods, and anything spicy are the main ones to cut close to a run. They slow digestion or irritate the GI tract during movement. Dairy is worth testing individually — it bothers some runners and not others.",
+    a: "High-fat foods, high-fiber foods, and anything spicy are the main ones to cut close to a run. They slow digestion or irritate the GI tract during movement. Dairy is worth testing individually, it bothers some runners and not others.",
   },
   {
     q: "Is it okay to run on an empty stomach?",
@@ -201,7 +201,7 @@ function PreRunNutritionPage() {
               Get the timing off and a perfectly fine meal becomes a side stitch
               at mile two. Get the portions wrong and you're either dragging
               through the first half or making an unplanned stop before you've
-              even warmed up. This guide covers both — plus the foods that
+              even warmed up. This guide covers both, plus the foods that
               actually hold up when you're moving.
             </p>
 
@@ -212,7 +212,7 @@ function PreRunNutritionPage() {
             </p>
             <p>That's it. Everything else is a variation on that principle.</p>
             <p>
-              Two to three hours out? You can eat a full, balanced meal — carbs,
+              Two to three hours out? You can eat a full, balanced meal, carbs,
               protein, a little fat, vegetables. Your body has time to process
               it. Thirty to 45 minutes out? Keep it small and mostly
               carbohydrate-based. Less than 20 minutes? You're probably better
@@ -235,7 +235,7 @@ function PreRunNutritionPage() {
               ]}
             />
             <p>
-              Keep fat and fiber moderate. Both slow digestion — useful at
+              Keep fat and fiber moderate. Both slow digestion, useful at
               dinner, not when you're about to run. You don't need to eliminate
               them, just don't make them the centerpiece.
             </p>
@@ -268,7 +268,7 @@ function PreRunNutritionPage() {
               disagrees.
             </p>
             <p>
-              Keep the portion small — 150 to 200 calories is usually enough.
+              Keep the portion small, 150 to 200 calories is usually enough.
               You're taking the edge off hunger, not fueling a marathon.
             </p>
 
@@ -276,7 +276,7 @@ function PreRunNutritionPage() {
             <p>
               Early morning runs are their own category. If you're heading out
               within 20 to 30 minutes of waking up, you probably don't have time
-              for a real meal — and your body may not want one.
+              for a real meal, and your body may not want one.
             </p>
             <p>
               For shorter runs under 45 minutes, most people do fine on empty.
@@ -284,7 +284,7 @@ function PreRunNutritionPage() {
             </p>
             <p>
               For longer or harder efforts, a small, fast-digesting carb helps.
-              A few bites of banana, a piece of toast, a gel — something that
+              A few bites of banana, a piece of toast, a gel, something that
               takes five minutes to eat and doesn't ask much of your stomach.
             </p>
             <p>
@@ -302,7 +302,7 @@ function PreRunNutritionPage() {
                 "Bananas. Easy to digest, fast carbohydrates, a little potassium. The default pre-run food for a reason.",
                 "Toast or white bread. Low fiber, quick energy. Not glamorous, but effective.",
                 "Oatmeal. Works well at the two-to-three-hour window. Fills you up without sitting like a brick.",
-                "Rice. Same idea as oatmeal — mild, digestible, solid carbohydrate source.",
+                "Rice. Same idea as oatmeal, mild, digestible, solid carbohydrate source.",
                 "Dates. Dense carbohydrates in a small package. Two or three before a run is a legitimate strategy.",
                 "Sports drinks or diluted juice. If your stomach doesn't tolerate solids before running, liquid carbohydrates are a real option.",
               ]}
@@ -312,7 +312,7 @@ function PreRunNutritionPage() {
             <Bullets
               items={[
                 "High-fat meals. Fat slows gastric emptying. A burger two hours before a run is a gamble.",
-                "High-fiber foods. Beans, raw vegetables, bran cereals — all good for you, all bad timing before a run.",
+                "High-fiber foods. Beans, raw vegetables, bran cereals, all good for you, all bad timing before a run.",
                 "Dairy (for some people). Not universal, but a meaningful number of runners find that milk, cheese, or yogurt before a run causes GI distress. If this is you, you already know.",
                 "Spicy food. Fine in general, risky before movement.",
                 "Caffeine on an empty stomach. Coffee before a run is common and often fine, but on a completely empty stomach it can cause nausea for some people. Pair it with something small if that's you.",
@@ -328,7 +328,7 @@ function PreRunNutritionPage() {
             <p>
               The simple version: drink water consistently throughout the day
               before a run. Don't try to catch up by chugging 16 ounces right
-              before you head out — that just sloshes around.
+              before you head out, that just sloshes around.
             </p>
             <p>
               If your urine is pale yellow before you start, you're in a good
@@ -345,7 +345,7 @@ function PreRunNutritionPage() {
             </p>
             <p>
               It doesn't need to be complicated. Chocolate milk, eggs on toast,
-              a smoothie with protein, rice and chicken — all of these work. The
+              a smoothie with protein, rice and chicken, all of these work. The
               timing matters more than the specific food.
             </p>
             <p>
@@ -380,7 +380,7 @@ function PreRunNutritionPage() {
               >
                 GRYT playbooks
               </Link>{" "}
-              cover the practical side of building a consistent running habit —
+              cover the practical side of building a consistent running habit,
               including what actually matters in the early weeks versus what you
               can figure out later.
             </p>
@@ -400,7 +400,7 @@ function PreRunNutritionPage() {
             <p className="text-paper text-lg md:text-xl font-bold mt-12">
               Consistency compounds. That includes how you fuel. Get the timing
               and portions right a few times and it stops being something you
-              think about — it just becomes part of how you run.
+              think about, it just becomes part of how you run.
             </p>
             <p>
               Show up when you're ready to run with people who take the same

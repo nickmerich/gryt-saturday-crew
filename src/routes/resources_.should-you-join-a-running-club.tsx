@@ -6,7 +6,7 @@ const SITE = "https://grytrunclub.com";
 const URL = `${SITE}/resources/should-you-join-a-running-club`;
 const TITLE = "Should You Join a Running Club? An Honest Answer · gryt";
 const DESCRIPTION =
-  "Am I too slow? Do I have to talk? What does it cost? A straight answer to the questions people actually ask before showing up to a run club — from a South Hills Pittsburgh crew.";
+  "Am I too slow? Do I have to talk? What does it cost? A straight answer to the questions people actually ask before showing up to a run club, from a South Hills Pittsburgh crew.";
 const PUBLISHED = "2026-08-31";
 
 const SECTIONS: Array<{ id: string; label: string }> = [
@@ -26,7 +26,7 @@ const FAQS: Array<{ q: string; a: string }> = [
   },
   {
     q: "How much does a running club cost?",
-    a: "GRYT is free. There is no membership fee, no dues, and nothing to buy. Some clubs are store-affiliated or charge seasonal dues — ask before you go so there are no surprises.",
+    a: "GRYT is free. There is no membership fee, no dues, and nothing to buy. Some clubs are store-affiliated or charge seasonal dues, ask before you go so there are no surprises.",
   },
   {
     q: "Do I have to run the whole distance?",
@@ -229,9 +229,9 @@ function ShouldYouJoinPage() {
             </p>
             <Bullets
               items={[
-                "Free community clubs — no dues, no signup, show up when you can. GRYT is one of these.",
-                "Store-affiliated clubs — free to run, but built around a retailer and its calendar.",
-                "Coached or dues-based clubs — a few hundred dollars a season for structured training and a coach.",
+                "Free community clubs, no dues, no signup, show up when you can. GRYT is one of these.",
+                "Store-affiliated clubs, free to run, but built around a retailer and its calendar.",
+                "Coached or dues-based clubs, a few hundred dollars a season for structured training and a coach.",
               ]}
             />
             <p>
@@ -255,7 +255,7 @@ function ShouldYouJoinPage() {
 
             <H2 id="worth-it">What You Actually Get Out of It</H2>
             <p>
-              The performance research on group running is real — people run
+              The performance research on group running is real, people run
               slightly faster and considerably longer in company than alone. But
               that's not the main thing.
             </p>
@@ -265,7 +265,7 @@ function ShouldYouJoinPage() {
                 "Expectation beats motivation. Motivation is gone by week three. Six people expecting you at 7 AM is not.",
                 "You stop negotiating with yourself. The run is already scheduled and already decided.",
                 "Easy runs stay easy. Talking pace is a built-in governor on the days you'd otherwise push too hard.",
-                "You get local knowledge for free — routes, races, shoes, hills, which trail floods after rain.",
+                "You get local knowledge for free, routes, races, shoes, hills, which trail floods after rain.",
               ]}
             />
             <p>
@@ -285,7 +285,7 @@ function ShouldYouJoinPage() {
               ]}
             />
             <p>
-              Even then — one Saturday a month with a group tends to be additive,
+              Even then, one Saturday a month with a group tends to be additive,
               not disruptive.
             </p>
 
@@ -297,7 +297,7 @@ function ShouldYouJoinPage() {
             </p>
             <Bullets
               items={[
-                "Come ten minutes early. Stand near the trail sign — someone will say hey.",
+                "Come ten minutes early. Stand near the trail sign, someone will say hey.",
                 "Wear shoes you've already run in. First-run day is not new-shoe day.",
                 "Bring water and layers you can leave in the car.",
                 "Turn around whenever you want. It's an out-and-back.",
@@ -324,7 +324,7 @@ function ShouldYouJoinPage() {
               If you're still deciding, the decision is smaller than it feels.
               It's one Saturday morning.
             </p>
-            <p className="text-paper/70">— Nick Merich</p>
+            <p className="text-paper/70">Nick Merich</p>
           </div>
 
           <div className="mt-14 flex flex-wrap gap-4">

@@ -8,7 +8,7 @@ const URL = `${SITE}/resources/playbooks/best-free-run-clubs-south-hills-2026`;
 const TITLE =
   "Best Free Run Clubs in Pittsburgh's South Hills (2026) · gryt";
 const DESCRIPTION =
-  "Free run clubs in Pittsburgh's South Hills for 2026 — GRYT in McMurray, Yinz, City of Bridges, and why Strava isn't a run club. Cost, schedule, and drop policy compared.";
+  "Free run clubs in Pittsburgh's South Hills for 2026, GRYT in McMurray, Yinz, City of Bridges, and why Strava isn't a run club. Cost, schedule, and drop policy compared.";
 const PUBLISHED = "2026-09-01";
 const HERO = `${SITE}${heroAsset.url}`;
 
@@ -27,7 +27,7 @@ const FAQS: Array<{ q: string; a: string }> = [
   },
   {
     q: "What is a no-drop run club?",
-    a: "A no-drop run club means no runner gets left behind. Regardless of pace, the group waits for everyone. Faster runners loop back or slow down, and the run ends when the last person finishes — not the first.",
+    a: "A no-drop run club means no runner gets left behind. Regardless of pace, the group waits for everyone. Faster runners loop back or slow down, and the run ends when the last person finishes, not the first.",
   },
   {
     q: "Do I need to sign up before showing up to GRYT Run Club?",
@@ -62,7 +62,7 @@ const COMPARISON: Array<{
     club: "GRYT Run Club",
     proximity: "McMurray / Peters Township (home base)",
     cost: "Free",
-    schedule: "Weekly — Saturday 7 AM",
+    schedule: "Weekly, Saturday 7 AM",
     drop: "No-drop",
   },
   {
@@ -252,7 +252,7 @@ function SouthHillsPage() {
               If you've searched for free run clubs in Pittsburgh's South Hills
               and ended up on a Strava page or a generic city-wide list, you're
               not alone. The South Hills has real, weekly running groups worth
-              knowing about — and one of them meets specifically in McMurray, on
+              knowing about, and one of them meets specifically in McMurray, on
               the Montour/Peters Trail, every Saturday morning at 7 AM.
             </p>
             <p>
@@ -264,11 +264,11 @@ function SouthHillsPage() {
             <p>
               GRYT Run Club is the only free, fixed-schedule running group based
               specifically in the South Hills. Organized by Laura and Nick
-              Merich, the club runs year-round — no membership fee, no pace
+              Merich, the club runs year-round, no membership fee, no pace
               requirement, and a strict no-drop policy.
             </p>
             <p className="border-l-2 border-blue pl-5">
-              <strong className="text-paper">Saturday mornings — 7 AM.</strong>{" "}
+              <strong className="text-paper">Saturday mornings, 7 AM.</strong>{" "}
               Meet at the Valley Brook Road trailhead in McMurray for a run on
               the Montour/Peters Trail. Distance is flexible. The time is not.
               Show up at 7 AM and you'll find people.
@@ -312,7 +312,7 @@ function SouthHillsPage() {
             <p>
               City of Bridges is a paid membership club with coached runs and a
               citywide structure. They do have a South Hills group run in their
-              rotation, but it operates as a coached, fee-based program — not a
+              rotation, but it operates as a coached, fee-based program, not a
               free drop-in group. If you want structured training with a coach,
               it's worth looking into. If you want free and flexible, it's not
               the right fit.
@@ -323,7 +323,7 @@ function SouthHillsPage() {
               It comes up constantly in search results, so it's worth addressing
               directly: Strava is a GPS tracking app and social platform. It is
               not a run club. You can follow local athletes, explore routes, and
-              see what people are running in your area — all useful. But it
+              see what people are running in your area, all useful. But it
               doesn't put a real person at the trailhead waiting for you on a
               cold Saturday in October. A Strava account and a local run club
               serve different purposes. One complements the other.
@@ -378,7 +378,7 @@ function SouthHillsPage() {
             <p>
               The group will not leave you. That's the whole point of no-drop.
               If you're slower on a given day, someone will run back to meet
-              you. If you haven't run in six months, that's fine — the trail
+              you. If you haven't run in six months, that's fine, the trail
               doesn't know that, and neither does the crew.
             </p>
 

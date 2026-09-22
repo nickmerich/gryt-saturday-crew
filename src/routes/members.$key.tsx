@@ -76,11 +76,11 @@ function MemberDetailPage() {
           <div className="mt-3 flex flex-wrap gap-4 text-sm">
             <div>
               <span className="text-muted-foreground">Runs attended · </span>
-              <span className="font-medium">{member.attendance_count ?? '—'}</span>
+              <span className="font-medium">{member.attendance_count ?? 'N/A'}</span>
             </div>
             <div>
               <span className="text-muted-foreground">Connection score · </span>
-              <span className="font-medium">{member.connection_score ?? '—'}</span>
+              <span className="font-medium">{member.connection_score ?? 'N/A'}</span>
             </div>
             <div>
               <span className="text-muted-foreground">Friends brought · </span>

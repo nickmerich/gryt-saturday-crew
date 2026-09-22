@@ -7,7 +7,7 @@ const SITE = "https://gryt-saturday-crew.lovable.app";
 const URL = `${SITE}/resources/conversations`;
 const TITLE = "Conversations · gryt run club";
 const DESCRIPTION =
-  "Interviews and Q&As with the founders, members, and partners of gryt run club — the people behind the miles.";
+  "Interviews and Q&As with the founders, members, and partners of gryt run club, the people behind the miles.";
 
 export const Route = createFileRoute("/resources_/conversations")({
   head: () => ({
@@ -73,7 +73,7 @@ const CONVERSATIONS: Conversation[] = [
     qa: [
       {
         q: "How do you think about community vs. performance?",
-        a: "Performance is downstream of community for almost everyone. The people who PR with us aren't the ones training the hardest in isolation — they're the ones who keep showing up because they don't want to let the crew down.",
+        a: "Performance is downstream of community for almost everyone. The people who PR with us aren't the ones training the hardest in isolation, they're the ones who keep showing up because they don't want to let the crew down.",
       },
       {
         q: "How do you run a club with a kid at home?",

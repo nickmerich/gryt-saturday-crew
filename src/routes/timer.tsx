@@ -10,7 +10,7 @@ export const Route = createFileRoute("/timer")({
       {
         name: "description",
         content:
-          "Simple, no-nonsense event timer for GRYT Run Club Saturday runs — start the clock, capture finishes, share results.",
+          "Simple, no-nonsense event timer for GRYT Run Club Saturday runs, start the clock, capture finishes, share results.",
       },
       { name: "robots", content: "noindex, nofollow" },
     ],
@@ -295,7 +295,7 @@ function TimerPage() {
                 className="py-3 flex items-center gap-3"
               >
                 <span className="w-10 font-condensed text-white/50 tabular-nums text-sm">
-                  {p.bib ?? "—"}
+                  {p.bib ?? "N/A"}
                 </span>
                 <span className="flex-1 truncate">{p.name}</span>
                 <button
@@ -372,7 +372,7 @@ function TimerPage() {
                     {i + 1}
                   </span>
                   <span className="text-white/60 tabular-nums text-sm">
-                    {p.bib ?? "—"}
+                    {p.bib ?? "N/A"}
                   </span>
                   <span className="truncate">{p.name}</span>
                   <span className="text-right font-condensed tabular-nums text-sm flex items-center justify-end gap-2">
@@ -391,7 +391,7 @@ function TimerPage() {
           </div>
 
           <p className="mt-4 text-[11px] text-white/40 leading-relaxed">
-            Local session only — data lives in this browser tab. Export the CSV
+            Local session only, data lives in this browser tab. Export the CSV
             before closing.
           </p>
         </section>

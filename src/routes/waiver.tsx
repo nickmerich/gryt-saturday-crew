@@ -276,7 +276,7 @@ function WaiverPage() {
                   />
                   {isMinor && (
                     <Hint>
-                      Under 18. Minors must sign in person with a parent or guardian —
+                      Under 18. Minors must sign in person with a parent or guardian,
                       we can't accept this online.
                     </Hint>
                   )}
@@ -518,14 +518,14 @@ function SignedView({ record }: { record: SignedRecord }) {
             className="display-condensed text-paper text-[clamp(44px,6vw,92px)] leading-[0.92] mb-6"
             aria-live="polite"
           >
-            Waiver signed —<br />
+            Waiver signed, <br />
             <span className="text-blue">
               you're covered through Dec 31, 2026.
             </span>
           </h1>
           <p className="text-lg text-paper/80 mb-10 max-w-[560px]">
             Nice work, {record.name.split(" ")[0]}. One signature covers you
-            for the whole 2026 season. We just emailed your confirmation —
+            for the whole 2026 season. We just emailed your confirmation,
             check your inbox (and spam, just in case).
           </p>
           <div className="border border-paper/20 p-6 md:p-8 bg-ink/40 mb-10 text-[14px] font-mono text-paper/70 flex flex-col gap-1.5">

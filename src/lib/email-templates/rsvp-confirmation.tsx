@@ -18,6 +18,8 @@ interface Props {
   eventLabel?: string
   calendarUrl?: string
   stravaUrl?: string
+  location?: string
+  route?: string
 }
 
 const Email = ({
@@ -25,12 +27,14 @@ const Email = ({
   eventLabel = 'GRYT Saturday Run · 7:00 AM',
   calendarUrl,
   stravaUrl = 'https://www.strava.com/clubs/1708552',
+  location = '212 Valley Brook Road, McMurray',
+  route = 'Montour / Peters Trail',
 }: Props) => {
   const first = (name ?? '').trim().split(' ')[0]
   return (
     <Html lang="en" dir="ltr">
       <Head />
-      <Preview>You're in for Saturday — see you at the trailhead.</Preview>
+      <Preview>You're in for Saturday. See you at the trailhead.</Preview>
       <Body style={main}>
         <Container style={container}>
           <Text style={eyebrow}>GRYT RUN CLUB</Text>
@@ -38,20 +42,20 @@ const Email = ({
             {first ? `You're in, ${first}.` : "You're in."}
           </Heading>
           <Text style={lede}>
-            We've got you down for <strong>{eventLabel}</strong>. Look for the group
-            near the trail sign at 212 Valley Brook Road, McMurray.
+            We've got your RSVP for <strong>{eventLabel}</strong>.
+            Meeting point: {location}. Route: {route}.
           </Text>
 
           <Section style={card}>
             <Text style={cardEyebrow}>WHAT TO EXPECT SATURDAY</Text>
             <Text style={bullet}>
-              · Park free at the trailhead lot — come 10 min early if it's your first time
+              · Check the current meeting and parking details before travelling
             </Text>
             <Text style={bullet}>
-              · Quick circle-up at 7, then we move — walk, jog, or run your pace
+              · Walk, jog, or run your pace. Use the time in your event details
             </Text>
             <Text style={bullet}>
-              · About 4 miles out and back · nobody gets dropped
+              · Sign the required waiver before your first run
             </Text>
             <Text style={bullet}>
               · Coffee, water, and sometimes fruit in the lot after
@@ -76,7 +80,7 @@ const Email = ({
           <Hr style={hr} />
           <Text style={tagline}>DO HARD THINGS TOGETHER.</Text>
           <Text style={footer}>
-            We'll be by the trailhead. — Laura & Nick
+            We'll be by the trailhead.<br />Laura & Nick
           </Text>
         </Container>
       </Body>

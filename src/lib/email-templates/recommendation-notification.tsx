@@ -20,7 +20,7 @@ interface Props {
 
 const Email = ({
   category = 'general',
-  message = '—',
+  message = 'N/A',
   submittedAt,
 }: Props) => {
   const when = submittedAt

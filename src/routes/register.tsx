@@ -6,24 +6,24 @@ import { nextRunNumber, nextSaturdayLabelLong } from '@/lib/run-schedule';
 
 const EVENT = {
   id: 'gryt_saturday_long_run',
-  name: `GRYT Saturday Long Run — Run #${nextRunNumber()}`,
+  name: `GRYT Saturday Long Run, Run #${nextRunNumber()}`,
   amountInCents: 2500,
   date: nextSaturdayLabelLong(),
   location: 'Montour / Peters Trail · McMurray, PA',
   description:
-    'Timed group run with bib, aid support, post-run coffee, and a finisher photo. Walk, jog, or race — everyone finishes.',
+    'Timed group run with bib, aid support, post-run coffee, and a finisher photo. Walk, jog, or race, everyone finishes.',
 };
 
 export const Route = createFileRoute('/register')({
   head: () => ({
     meta: [
-      { title: 'Register — GRYT Saturday Long Run' },
+      { title: 'Register · GRYT Saturday Long Run' },
       {
         name: 'description',
         content:
           'Reserve your spot for the GRYT Saturday Long Run. Secure Stripe checkout, timed bib, aid support, and coffee at the finish.',
       },
-      { property: 'og:title', content: 'Register — GRYT Saturday Long Run' },
+      { property: 'og:title', content: 'Register · GRYT Saturday Long Run' },
       {
         property: 'og:description',
         content:

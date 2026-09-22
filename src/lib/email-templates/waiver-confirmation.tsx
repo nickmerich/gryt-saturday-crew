@@ -30,7 +30,7 @@ const Email = ({
   return (
     <Html lang="en" dir="ltr">
       <Head />
-      <Preview>Waiver signed — you're covered through Dec 31, 2026.</Preview>
+      <Preview>Waiver signed. You're covered through Dec 31, 2026.</Preview>
       <Body style={main}>
         <Container style={container}>
           <Text style={eyebrow}>GRYT RUN CLUB · 2026 SEASON</Text>
@@ -47,10 +47,10 @@ const Email = ({
           <Section style={card}>
             <Text style={cardEyebrow}>SIGNED CONFIRMATION</Text>
             <Text style={row}>
-              <span style={rowLabel}>Signer:</span> {name || '—'}
+              <span style={rowLabel}>Signer:</span> {name || 'N/A'}
             </Text>
             <Text style={row}>
-              <span style={rowLabel}>Signed on:</span> {signedOn || '—'}
+              <span style={rowLabel}>Signed on:</span> {signedOn || 'N/A'}
             </Text>
             <Text style={row}>
               <span style={rowLabel}>Coverage:</span> through Dec 31, 2026
@@ -68,7 +68,7 @@ const Email = ({
           </Section>
 
           <Text style={lede}>
-            Want a PDF copy for your records? Open the link below — your
+            Want a PDF copy for your records? Open the link below. Your
             signed badge will be waiting and you can download a printable
             confirmation in one tap.
           </Text>
@@ -84,7 +84,7 @@ const Email = ({
           <Hr style={hr} />
           <Text style={tagline}>DO HARD THINGS TOGETHER.</Text>
           <Text style={footer}>
-            See you Saturday. — Laura & Nick
+            See you Saturday.<br />Laura & Nick
           </Text>
         </Container>
       </Body>

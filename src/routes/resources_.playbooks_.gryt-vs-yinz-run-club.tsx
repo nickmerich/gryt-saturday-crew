@@ -10,7 +10,7 @@ const URL = `${SITE}/resources/playbooks/gryt-vs-yinz-run-club`;
 const TITLE =
   "GRYT vs Yinz Run Club: Which Pittsburgh Run Club Is Right for You? · gryt run club";
 const DESCRIPTION =
-  "An honest comparison of Yinz Run Club and GRYT Run Club — location, schedule, group size, and post-run culture. Figure out which Pittsburgh run club actually fits your life.";
+  "An honest comparison of Yinz Run Club and GRYT Run Club, location, schedule, group size, and post-run culture. Figure out which Pittsburgh run club actually fits your life.";
 const PUBLISHED = "2026-01-27";
 
 const SECTIONS: Array<{ id: string; label: string }> = [
@@ -30,7 +30,7 @@ const SECTIONS: Array<{ id: string; label: string }> = [
 const FAQS: Array<{ q: string; a: string }> = [
   {
     q: "Is there a Yinz Run Club in the South Hills?",
-    a: "No. Yinz Run Club is Pittsburgh's largest free run club, but their runs are city-centric with no consistent South Hills presence. Their Wednesday evening runs and biweekly Saturday runs take place in Pittsburgh neighborhoods — not in McMurray, Peters Township, Upper St. Clair, or Bethel Park.",
+    a: "No. Yinz Run Club is Pittsburgh's largest free run club, but their runs are city-centric with no consistent South Hills presence. Their Wednesday evening runs and biweekly Saturday runs take place in Pittsburgh neighborhoods, not in McMurray, Peters Township, Upper St. Clair, or Bethel Park.",
   },
   {
     q: "What are good alternatives to Yinz Run Club in Pittsburgh's South Hills?",
@@ -46,11 +46,11 @@ const FAQS: Array<{ q: string; a: string }> = [
   },
   {
     q: "Do I need to be fast to join GRYT?",
-    a: "No. Walkers, joggers, and runners all show up. No pace requirement, and no one gets dropped. If it's your first time, arrive ten minutes early — a founder or regular will introduce you before the run starts.",
+    a: "No. Walkers, joggers, and runners all show up. No pace requirement, and no one gets dropped. If it's your first time, arrive ten minutes early, a founder or regular will introduce you before the run starts.",
   },
   {
     q: "How big is GRYT compared to Yinz?",
-    a: "Yinz has over 2,500 members and is Pittsburgh's largest free run club. GRYT is smaller and newer — 33 Strava members, 7 to 15 people on a typical Saturday. The smaller size means you'll know people quickly.",
+    a: "Yinz has over 2,500 members and is Pittsburgh's largest free run club. GRYT is smaller and newer, 33 Strava members, 7 to 15 people on a typical Saturday. The smaller size means you'll know people quickly.",
   },
   {
     q: "What happens after the run at GRYT?",
@@ -185,15 +185,15 @@ function ArticlePage() {
             <p>Both clubs are free. Both are genuinely welcoming. But they serve different people, at different times, in different parts of Pittsburgh. Here's an honest look at each so you can figure out which one actually fits your life right now.</p>
 
             <h2 id="what-yinz-is" className="text-2xl md:text-3xl font-bold mt-12 mb-2 scroll-mt-24">What Yinz Run Club Is</h2>
-            <p>Yinz Run Club is Pittsburgh's largest free running community — over 2,500 members. They've built something real: a consistent Wednesday evening run at 6:30 PM with 3-mile and 1-mile options at rotating locations across the city, plus biweekly Saturday runs at 10 AM.</p>
+            <p>Yinz Run Club is Pittsburgh's largest free running community, over 2,500 members. They've built something real: a consistent Wednesday evening run at 6:30 PM with 3-mile and 1-mile options at rotating locations across the city, plus biweekly Saturday runs at 10 AM.</p>
             <p>If you live in or near Pittsburgh proper, work a standard schedule, and want a big energetic group run with a social scene attached, Yinz delivers. The size alone means you'll find someone running your pace. Rotating locations keep things fresh. The community is active and it shows.</p>
-            <p>The honest limitation is geography and timing. Yinz is a city club. Their runs happen in Pittsburgh neighborhoods. If you're coming from McMurray, Peters Township, Upper St. Clair, or Bethel Park, a Wednesday 6:30 PM run in the city means fighting traffic, arriving rushed, and getting home late. Their Saturday runs start at 10 AM — which, if you have kids, is already halfway through the morning.</p>
+            <p>The honest limitation is geography and timing. Yinz is a city club. Their runs happen in Pittsburgh neighborhoods. If you're coming from McMurray, Peters Township, Upper St. Clair, or Bethel Park, a Wednesday 6:30 PM run in the city means fighting traffic, arriving rushed, and getting home late. Their Saturday runs start at 10 AM, which, if you have kids, is already halfway through the morning.</p>
             <p>None of that is a knock on Yinz. It's just the reality of where they run and when.</p>
 
             <h2 id="what-gryt-is" className="text-2xl md:text-3xl font-bold mt-12 mb-2 scroll-mt-24">What GRYT Run Club Is</h2>
             <p>GRYT Run Club meets every Saturday at 7 AM on the Montour / Peters Trail in McMurray, PA. Four miles out and back on a flat, beginner-friendly trail. Walkers, joggers, and runners all show up. No one gets dropped. After the run, people hang out in the parking lot with coffee.</p>
             <p>Always free. No membership, no fees, no upsell.</p>
-            <p>Laura and Nick Merich founded GRYT and have 27 marathon finishes between them. On a typical Saturday, 7 to 15 people show up. The Strava club has 33 members. It's a smaller group — and that's part of what makes it work.</p>
+            <p>Laura and Nick Merich founded GRYT and have 27 marathon finishes between them. On a typical Saturday, 7 to 15 people show up. The Strava club has 33 members. It's a smaller group, and that's part of what makes it work.</p>
             <p>The 7 AM start is intentional. You're done by 8:15. The rest of Saturday is still yours.</p>
 
             <h2 id="real-differences" className="text-2xl md:text-3xl font-bold mt-12 mb-2 scroll-mt-24">The Real Differences</h2>
@@ -204,7 +204,7 @@ function ArticlePage() {
 
             <h3 id="day-and-time" className="text-xl md:text-2xl font-bold mt-8 mb-1 scroll-mt-24">Day and Time</h3>
             <p>Yinz runs Wednesday evenings at 6:30 PM and biweekly Saturdays at 10 AM. GRYT runs every Saturday at 7 AM, every week.</p>
-            <p>Wednesday evenings work well if you don't have kids or your schedule is flexible. For parents, 6:30 PM is often the hardest hour of the day — dinner, homework, bedtime. Getting out the door consistently at that time is hard to sustain.</p>
+            <p>Wednesday evenings work well if you don't have kids or your schedule is flexible. For parents, 6:30 PM is often the hardest hour of the day, dinner, homework, bedtime. Getting out the door consistently at that time is hard to sustain.</p>
             <p>Saturday at 7 AM is different. The kids aren't up yet. The day hasn't started. You can run four miles, drink coffee in a parking lot with people you actually like, and still be home before 9.</p>
 
             <h3 id="group-size" className="text-xl md:text-2xl font-bold mt-8 mb-1 scroll-mt-24">Group Size and Feel</h3>
@@ -219,7 +219,7 @@ function ArticlePage() {
             <p>You live in or near Pittsburgh proper. Wednesday evenings work for you. You want a massive community, rotating locations, and a lot of energy. You're comfortable in a big group and don't need the same faces every week. Yinz is a great club and a strong fit for that profile.</p>
 
             <h2 id="who-gryt" className="text-2xl md:text-3xl font-bold mt-12 mb-2 scroll-mt-24">Who Should Run with GRYT</h2>
-            <p>You live in the South Hills — McMurray, Peters Township, Upper St. Clair, Bethel Park. Saturday mornings work better than Wednesday evenings. You have kids, or a job that makes weeknight runs hard to stick with. You used to be an athlete and you miss having a group, but you're not chasing a PR right now. You want to know the people you run with.</p>
+            <p>You live in the South Hills, McMurray, Peters Township, Upper St. Clair, Bethel Park. Saturday mornings work better than Wednesday evenings. You have kids, or a job that makes weeknight runs hard to stick with. You used to be an athlete and you miss having a group, but you're not chasing a PR right now. You want to know the people you run with.</p>
             <p>You want coffee after, not a bar.</p>
             <p>If that sounds like you, GRYT is closer, more convenient, and built specifically for that version of you.</p>
 

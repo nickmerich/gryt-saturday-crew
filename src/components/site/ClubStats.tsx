@@ -1,98 +1,29 @@
-import { useQuery } from "@tanstack/react-query";
-import { useServerFn } from "@tanstack/react-start";
-import { getClubStats } from "@/lib/strava-club.functions";
-import { SAMPLE_CLUB_STATS, STRAVA_CLUB_URL } from "@/lib/strava-club";
-
-function Figure({ value, label }: { value: string; label: string }) {
-  return (
-    <div className="border border-paper/20 bg-ink/50 p-4 sm:p-5">
-      <div className="display-condensed text-[clamp(32px,8vw,56px)] leading-[0.92] text-blue">
-        {value}
-      </div>
-      <div className="mt-1 text-[10px] sm:text-[11px] tracking-[0.2em] uppercase text-paper/60">
-        {label}
-      </div>
-    </div>
-  );
-}
+import { STRAVA_CLUB_URL } from "@/lib/strava-club";
 
 export function ClubStats() {
-  const fetchStats = useServerFn(getClubStats);
-  const { data } = useQuery({
-    queryKey: ["strava-club-stats"],
-    queryFn: () => fetchStats(),
-    staleTime: 30 * 60 * 1000,
-  });
-  const stats = data ?? SAMPLE_CLUB_STATS;
-
   return (
-    <section
-      id="club-stats"
-      className="grit-panel relative overflow-hidden text-paper py-14 sm:py-20 px-5 sm:px-12 lg:px-24"
-    >
-      <div className="relative max-w-[1180px] mx-auto">
-        <div className="eyebrow eyebrow-blue mb-3">On Strava</div>
-        <h2 className="display-condensed text-[clamp(30px,7vw,64px)] leading-[0.94]">
-          THE CREW IN NUMBERS
+    <section id="club-stats" className="gryt-utility-section" aria-labelledby="strava-title">
+      <div className="gryt-utility-inner">
+        <p className="eyebrow eyebrow-blue">Keep in touch between Saturdays</p>
+        <h2 id="strava-title" className="gryt-utility-title">
+          Find the crew on Strava.
         </h2>
-
-        {stats.isSample ? (
-          <p className="mt-4 inline-block border border-blue/60 px-3 py-1.5 text-[11px] tracking-[0.18em] uppercase text-blue">
-            Sample data · not live yet
-          </p>
-        ) : null}
-
-        <div className="mt-6 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-          <Figure value={String(stats.members)} label="Members" />
-          <Figure value={String(stats.weeklyMiles)} label="Miles this week" />
-          <Figure value={stats.totalMiles.toLocaleString()} label="Club miles" />
-          <Figure value={`${stats.longestStreakWeeks}`} label="Longest streak (wks)" />
-        </div>
-
-        <div className="mt-6 border border-paper/20 bg-ink/50">
-          <div className="border-b border-paper/15 px-4 sm:px-5 py-3 text-[10px] tracking-[0.22em] uppercase text-blue">
-            Recent group runs
-          </div>
-          <ul>
-            {stats.recentRuns.map((run) => (
-              <li
-                key={run.id}
-                className="flex items-baseline justify-between gap-4 border-b border-paper/10 last:border-b-0 px-4 sm:px-5 py-3"
-              >
-                <div className="min-w-0">
-                  <div className="display-condensed text-[17px] sm:text-[20px] truncate">
-                    {run.name}
-                  </div>
-                  <div className="text-[12px] text-paper/55">
-                    {run.date
-                      ? new Date(`${run.date}T12:00:00`).toLocaleDateString("en-US", {
-                          month: "short",
-                          day: "numeric",
-                        })
-                      : "Recent"}
-                    {run.runners > 1 ? ` · ${run.runners} runners` : ""}
-                  </div>
-                </div>
-                <div className="display-condensed shrink-0 text-blue text-[18px] sm:text-[22px]">
-                  {run.distanceMi} mi
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {stats.note ? (
-          <p className="mt-4 text-[12px] text-paper/50">{stats.note}</p>
-        ) : null}
-
+        <p className="gryt-utility-intro">
+          Join the club, share your own runs, and stay connected. You do not need a Strava account
+          to RSVP or run with us.
+        </p>
         <a
           href={STRAVA_CLUB_URL}
           target="_blank"
-          rel="noreferrer"
-          className="btn-primary mt-7"
+          rel="noopener noreferrer"
+          className="btn-primary mt-5"
         >
-          Join the club on Strava
+          Open the Strava club
         </a>
+        <p className="mt-5 text-sm text-paper/70">
+          Weekly mileage, activity lists and attendance streaks are not published here. An activity
+          on Strava is not a Saturday check-in.
+        </p>
       </div>
     </section>
   );

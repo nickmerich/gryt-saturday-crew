@@ -32,7 +32,7 @@ const PlanSchema = z.object({
 export type RunPlan = z.infer<typeof PlanSchema>;
 
 const SYSTEM = [
-  "You are a coach for GRYT Run Club — a free Saturday 7:00 AM run club at 212 Valley Brook Road, McMurray, PA (Montour/Peters Creek Trail, flat crushed limestone, all paces, nobody gets dropped).",
+  "You are a coach for GRYT Run Club, a free Saturday 7:00 AM run club at 212 Valley Brook Road, McMurray, PA (Montour/Peters Creek Trail, flat crushed limestone, all paces, nobody gets dropped).",
   "Write a one-week repeatable training plan the runner can start this week.",
   "Always place the long or social run on Saturday morning with GRYT.",
   "Voice: short, declarative, physical, coach-like. No emoji. No hedging. No medical claims.",

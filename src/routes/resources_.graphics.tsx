@@ -6,7 +6,7 @@ const SITE = "https://gryt-saturday-crew.lovable.app";
 const URL = `${SITE}/resources/graphics`;
 const TITLE = "Graphics · gryt run club";
 const DESCRIPTION =
-  "Free downloadable graphics from gryt run club — logos, printable posters, pace cards, and social kits. Free to use, free to share.";
+  "Free downloadable graphics from gryt run club, logos, printable posters, pace cards, and social kits. Free to use, free to share.";
 
 export const Route = createFileRoute("/resources_/graphics")({
   head: () => ({
@@ -49,9 +49,9 @@ const GRAPHICS: Graphic[] = [
     fileSize: "2.4 MB",
     description: "Official logo files for partners, press, and media kits.",
     details: [
-      "Layered wordmark — white fill with baby-blue offset outline (signature)",
-      "Flat wordmark — black, white, and baby-blue variants",
-      "G monogram — for avatars, favicons, and small-format lockups",
+      "Layered wordmark, white fill with baby-blue offset outline (signature)",
+      "Flat wordmark, black, white, and baby-blue variants",
+      "G monogram, for avatars, favicons, and small-format lockups",
       "Vector SVG + high-res PNG for every variant",
     ],
   },
@@ -63,7 +63,7 @@ const GRAPHICS: Graphic[] = [
     description: "Printable poster for bulletin boards, coffee shops, and gyms.",
     details: [
       "Print-ready CMYK, 300 DPI, with 0.125\" bleed",
-      "Editable date and time block — drop in your local meetup info",
+      "Editable date and time block, drop in your local meetup info",
       "Two color treatments: signature black/blue and inverted white/blue",
     ],
   },
@@ -87,7 +87,7 @@ const GRAPHICS: Graphic[] = [
     description:
       "Instagram story templates, highlight covers, and profile graphics.",
     details: [
-      "15 story templates — event announcements, finisher posts, weather updates",
+      "15 story templates, event announcements, finisher posts, weather updates",
       "10 highlight cover icons in the signature baby-blue palette",
       "Profile picture and banner templates for IG, X, and Strava",
     ],

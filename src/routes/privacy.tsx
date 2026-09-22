@@ -80,7 +80,7 @@ function PrivacyPage() {
           <section>
             <h2 className="display-condensed text-paper text-[22px] mb-2">We do not sell your information</h2>
             <p>
-              We do not sell, rent, or trade personal information. Only the organizers — Laura and Nick — have access. We do not share RSVP or waiver data with third parties, advertisers, or sponsors.
+              We do not sell, rent, or trade personal information. Only the organizers (Laura and Nick) have access. We do not share RSVP or waiver data with third parties, advertisers, or sponsors.
             </p>
           </section>
 
