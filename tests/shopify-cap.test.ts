@@ -21,7 +21,9 @@ const validPayload = {
   title: "The Founding Member Cap",
   published_at: "2026-09-01T00:00:00Z",
   available: true,
-  variants: [{ id: CAP_BINDING.variantId, available: true }],
+  price: 3600,
+  featured_image: "//cdn.shopify.com/s/files/1/cap.jpg",
+  variants: [{ id: CAP_BINDING.variantId, available: true, price: 3600 }],
 };
 
 describe("cap release gate", () => {
@@ -48,6 +50,27 @@ describe("cap identity validation", () => {
       state: "available",
       title: "The Founding Member Cap",
       productUrl: CAP_PRODUCT_URL,
+      price: "$36.00",
+      imageUrl: "https://cdn.shopify.com/s/files/1/cap.jpg",
+    });
+  });
+
+  test("missing price and image degrade to nulls, not fake values", async () => {
+    const state = await readCapProduct(
+      jsonResponse({
+        ...validPayload,
+        price: null,
+        featured_image: null,
+        variants: [{ id: CAP_BINDING.variantId, available: true }],
+      }),
+      APPROVED,
+    );
+    expect(state).toEqual({
+      state: "available",
+      title: "The Founding Member Cap",
+      productUrl: CAP_PRODUCT_URL,
+      price: null,
+      imageUrl: null,
     });
   });
 

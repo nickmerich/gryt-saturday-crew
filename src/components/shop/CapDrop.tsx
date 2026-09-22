@@ -10,9 +10,6 @@ const REVIEW_COPY = [
   "You do not need the gear to be part of the crew.",
 ];
 
-const CAP_IMAGE = "/images/gryt-cap-detail.webp";
-/** Flip to true once the reviewed cap photo derivative is committed. */
-const CAP_IMAGE_READY = false;
 
 export function CapDrop() {
   const read = useServerFn(getCapState);
@@ -29,9 +26,9 @@ export function CapDrop() {
     <section className="border border-paper/15 bg-ink text-paper">
       <div className="grid md:grid-cols-2">
         <div className="aspect-square bg-paper/5 overflow-hidden border-b md:border-b-0 md:border-r border-paper/15 flex items-center justify-center">
-          {CAP_IMAGE_READY ? (
+          {data?.state === "available" && data.imageUrl ? (
             <img
-              src={CAP_IMAGE}
+              src={data.imageUrl}
               alt="GRYT cap with embroidered crest and blue brim trim"
               className="w-full h-full object-cover"
               loading="lazy"
@@ -54,14 +51,19 @@ export function CapDrop() {
           ))}
 
           {available && data.state === "available" ? (
-            <a
-              href={data.productUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="self-start bg-blue text-ink px-6 py-4 text-xs font-bold uppercase tracking-[0.14em] hover:bg-paper transition-colors"
-            >
-              View on Shopify
-            </a>
+            <>
+              <p className="display-condensed uppercase text-2xl tracking-[0.02em]">
+                {data.price ?? "Price on Shopify"}
+              </p>
+              <a
+                href={data.productUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="self-start bg-blue text-ink px-6 py-4 text-xs font-bold uppercase tracking-[0.14em] hover:bg-paper transition-colors"
+              >
+                View on Shopify
+              </a>
+            </>
           ) : (
             <p className="border border-paper/20 px-4 py-3 text-sm text-paper/60">
               Not for sale yet. This page is in review while the cap, price and
