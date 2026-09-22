@@ -51,6 +51,10 @@ export function CapDrop() {
           ))}
 
           {available && data.state === "available" ? (
+            <>
+              <p className="display-condensed uppercase text-2xl tracking-[0.02em]">
+                {data.price ?? "Price on Shopify"}
+              </p>
             <a
               href={data.productUrl}
               target="_blank"
