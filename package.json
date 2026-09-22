@@ -5,13 +5,17 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
-    "build": "vite build",
-    "build:dev": "vite build --mode development",
+    "build": "node scripts/write-release.mjs && vite build",
+    "build:dev": "node scripts/write-release.mjs && vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write .",
     "test:e2e": "playwright test",
-    "check:og": "node scripts/check-og-tags.mjs"
+    "check:og": "node scripts/check-og-tags.mjs",
+    "typecheck": "tsc --noEmit",
+    "test:free-runs": "bun test tests/free-runs-payment.test.ts && bun test tests/free-runs-site.test.ts",
+    "test:free-runs:e2e": "playwright test --config playwright.free-runs.config.ts",
+    "check:free-runs:deployment": "node scripts/check-free-runs-deployment.mjs"
   },
   "dependencies": {
     "@ai-sdk/openai": "^4.0.69",

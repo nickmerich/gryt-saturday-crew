@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 import ogImage from "@/assets/og-playbooks.jpg";
+import { SITE_ORIGIN as SITE } from "@/lib/site";
 
-const SITE = "https://gryt-saturday-crew.lovable.app";
 const URL = `${SITE}/resources/playbooks`;
 const TITLE = "Playbooks · gryt run club";
 const DESCRIPTION =
@@ -342,7 +342,7 @@ function CTA() {
           The playbooks only work if you run them. Come find us this Saturday.
         </p>
         <div className="mt-10 flex flex-wrap gap-4 justify-center">
-          <Link to="/" hash="first-time" className="btn-primary">
+          <Link to="/" hash="join" className="btn-primary">
             Join This Saturday →
           </Link>
           <Link
