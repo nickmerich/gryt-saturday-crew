@@ -52,20 +52,20 @@ function icsForMonth(year: number, month: number) {
 export const Route = createFileRoute("/calendar")({
   head: () => ({
     meta: [
-      { title: "Run Calendar · Saturdays 7 AM & Tuesdays 9 PM | GRYT Run Club" },
+      { title: "Run Calendar · Saturdays 7 AM | GRYT Run Club" },
       {
         name: "description",
         content:
-          "Every GRYT Run Club run, month by month. Saturday long runs at 7 AM and Tuesday Night Shift at 9 PM in McMurray, PA. Free, all paces, add it to your calendar.",
+          "Every GRYT Run Club run, month by month. Saturday long runs at 7 AM in McMurray, PA. Free, all paces, add it to your calendar.",
       },
       {
         property: "og:title",
-        content: "Run Calendar · Saturdays 7 AM & Tuesdays 9 PM | GRYT Run Club",
+        content: "Run Calendar · Saturdays 7 AM | GRYT Run Club",
       },
       {
         property: "og:description",
         content:
-          "The full monthly schedule for GRYT Run Club in the South Hills — Saturday 7 AM long runs and Tuesday 9 PM night runs.",
+          "The full monthly schedule for GRYT Run Club in the South Hills — Saturday 7 AM long runs.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://grytrunclub.com/calendar" },
