@@ -227,7 +227,7 @@ export function SiteFooter() {
         <div className="flex justify-between gap-10 flex-wrap items-start pb-12 border-b border-paper/15">
           <div>
             <MissionStamp size="md" align="left" className="text-paper" />
-            <div className="flex gap-6 mt-6">
+            <div className="flex flex-wrap gap-x-6 gap-y-3 mt-6">
               <a
                 href={STRAVA_CLUB}
                 target="_blank"
