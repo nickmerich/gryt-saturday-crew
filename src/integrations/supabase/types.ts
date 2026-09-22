@@ -163,6 +163,7 @@ export type Database = {
           contact: string
           created_at: string
           event_label: string | null
+          first_timer: boolean
           hero_variant: string | null
           id: string
           ip_hash: string | null
@@ -172,6 +173,7 @@ export type Database = {
           notion_member_page_id: string | null
           notion_synced: boolean
           notion_synced_at: string | null
+          party_size: number
           source: string | null
           user_agent: string | null
         }
@@ -179,6 +181,7 @@ export type Database = {
           contact: string
           created_at?: string
           event_label?: string | null
+          first_timer?: boolean
           hero_variant?: string | null
           id?: string
           ip_hash?: string | null
@@ -188,6 +191,7 @@ export type Database = {
           notion_member_page_id?: string | null
           notion_synced?: boolean
           notion_synced_at?: string | null
+          party_size?: number
           source?: string | null
           user_agent?: string | null
         }
@@ -195,6 +199,7 @@ export type Database = {
           contact?: string
           created_at?: string
           event_label?: string | null
+          first_timer?: boolean
           hero_variant?: string | null
           id?: string
           ip_hash?: string | null
@@ -204,6 +209,7 @@ export type Database = {
           notion_member_page_id?: string | null
           notion_synced?: boolean
           notion_synced_at?: string | null
+          party_size?: number
           source?: string | null
           user_agent?: string | null
         }

@@ -8,6 +8,13 @@
       "when": 1789802498270,
       "tag": "0000_create_signup_sessions",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1790055403553,
+      "tag": "0001_rsvp_party_size_first_timer",
+      "breakpoints": true
     }
   ]
 }
