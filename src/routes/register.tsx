@@ -60,7 +60,7 @@ function RegisterRetiredPage() {
               Next run
             </div>
             <div className="font-display text-xl">
-              GRYT Run #{nextRunNumber()} · {nextSaturdayLabelLong()} · 7:00 AM
+              {nextSaturdayLabelLong()}
             </div>
             <div className="mt-1 text-sm text-ink/70">
               212 Valley Brook Road, McMurray, PA · Montour / Peters Trail
