@@ -205,7 +205,7 @@ export interface RunOccurrence {
 /** Organizer overrides keyed by local date (YYYY-MM-DD). */
 export const RUN_EXCEPTIONS: Record<
   string,
-  { status: Extract<RunStatus, "cancelled" | "modified" | "draft">; version?: number; note?: string; localStartTime?: string }
+  { status: RunStatus; version?: number; note?: string; localStartTime?: string }
 > = {};
 
 /** Offset of America/New_York from UTC, in minutes, at a given instant. */
