@@ -45,6 +45,19 @@ export const createDonationCheckout = createServerFn({ method: 'POST' })
     }
   });
 
+/**
+ * RETIRED: GRYT runs are free. No run entry may be charged for.
+ *
+ * This endpoint stays mounted so any already-shared link fails closed with a
+ * clear message instead of 404-ing, but it never creates a checkout session
+ * for a GRYT run again. Merch and partner payments must use their own
+ * dedicated function, not this one.
+ */
+const RETIRED_RUN_ENTRY_EVENT_IDS = new Set([
+  'gryt_saturday_long_run',
+  'gryt_saturday_run',
+])
+
 export const createEventEntryCheckout = createServerFn({ method: 'POST' })
   .inputValidator((data: {
     eventId: string;
