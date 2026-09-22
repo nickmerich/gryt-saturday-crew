@@ -45,9 +45,9 @@ export function ClubStats() {
 
         <div className="mt-6 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           <Figure value={String(stats.members)} label="Members" />
-          <Figure value={String(stats.weeklyMiles)} label="Miles this week" />
+          <Figure value={stats.recentMiles.toLocaleString()} label="Recent club miles" />
           <Figure value={stats.totalMiles.toLocaleString()} label="Club miles" />
-          <Figure value={`${stats.longestStreakWeeks}`} label="Longest streak (wks)" />
+          <Figure value={String(stats.runsLogged)} label="Runs logged" />
         </div>
 
         <div className="mt-6 border border-paper/20 bg-ink/50">

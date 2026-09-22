@@ -18,10 +18,13 @@ export type ClubStats = {
   /** true when the numbers are placeholders, not live Strava data */
   isSample: boolean;
   members: number;
-  weeklyMiles: number;
+  /**
+   * Miles across the most recent club activities. Strava's club feed carries
+   * no timestamps, so this is a recent-feed total, never a weekly figure.
+   */
+  recentMiles: number;
   totalMiles: number;
   runsLogged: number;
-  longestStreakWeeks: number;
   recentRuns: ClubRun[];
   /** ISO timestamp of the read, or null for sample data */
   fetchedAt: string | null;
@@ -32,10 +35,9 @@ export type ClubStats = {
 export const SAMPLE_CLUB_STATS: ClubStats = {
   isSample: true,
   members: 82,
-  weeklyMiles: 214,
+  recentMiles: 214,
   totalMiles: 4860,
   runsLogged: 318,
-  longestStreakWeeks: 17,
   recentRuns: [
     { id: "s1", name: "Saturday Montour", date: "2026-09-19", distanceMi: 5.0, runners: 14, elevationFt: 92 },
     { id: "s2", name: "Saturday Montour", date: "2026-09-12", distanceMi: 6.2, runners: 11, elevationFt: 118 },
