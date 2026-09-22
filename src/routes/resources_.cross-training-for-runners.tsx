@@ -8,7 +8,7 @@ const URL = `${SITE}/resources/cross-training-for-runners`;
 const HERO = `${SITE}${heroAsset.url}`;
 const TITLE = "Cross-Training for Runners: Best Low-Impact Options · gryt";
 const DESCRIPTION =
-  "The best low-impact cross-training for runners — cycling, swimming, elliptical, strength, yoga, hiking, rowing — and how to fit it into a real running week.";
+  "The best low-impact cross-training for runners (cycling, swimming, elliptical, strength, yoga, hiking, rowing) and how to fit it into a real running week.";
 const PUBLISHED = "2026-08-31";
 
 const SECTIONS: Array<{ id: string; label: string }> = [
@@ -40,7 +40,7 @@ const FAQS: Array<{ q: string; a: string }> = [
   },
   {
     q: "What cross-training is best for comeback runners returning after a long break?",
-    a: "The elliptical and cycling are the best starting points. Both let you build aerobic fitness without the impact load that running places on joints and connective tissue. That matters because cardiovascular fitness returns faster than tissue tolerance — cross-training lets you bridge that gap without getting hurt.",
+    a: "The elliptical and cycling are the best starting points. Both let you build aerobic fitness without the impact load that running places on joints and connective tissue. That matters because cardiovascular fitness returns faster than tissue tolerance, cross-training lets you bridge that gap without getting hurt.",
   },
   {
     q: "How does cross-training help with race preparation?",
@@ -48,7 +48,7 @@ const FAQS: Array<{ q: string; a: string }> = [
   },
   {
     q: "Should I cross-train the day before a race?",
-    a: "A very light session — 20 minutes of easy cycling or gentle yoga — is fine the day before a race for most runners. Avoid anything that creates muscular fatigue or soreness. The goal is to stay loose and keep blood moving, not to add a training stimulus.",
+    a: "A very light session (20 minutes of easy cycling or gentle yoga) is fine the day before a race for most runners. Avoid anything that creates muscular fatigue or soreness. The goal is to stay loose and keep blood moving, not to add a training stimulus.",
   },
 ];
 
@@ -244,7 +244,7 @@ function CrossTrainingPage() {
               adds roughly 1,500 foot strikes per leg. Your hips, knees, ankles,
               and lower back absorb that load every single time. For most
               recreational runners, the limiting factor isn't cardiovascular
-              fitness. It's tissue tolerance — the ability of tendons,
+              fitness. It's tissue tolerance, the ability of tendons,
               cartilage, and connective tissue to handle cumulative stress
               without breaking down.
             </p>
@@ -267,7 +267,7 @@ function CrossTrainingPage() {
             <p>
               Cycling is the closest analog to running in terms of
               cardiovascular demand without the impact. Heart rate, breathing,
-              leg turnover — it all feels familiar. The primary muscles overlap
+              leg turnover, it all feels familiar. The primary muscles overlap
               significantly with running, particularly the quads and glutes,
               though cycling doesn't load the hip flexors or calves the same
               way.
@@ -277,7 +277,7 @@ function CrossTrainingPage() {
               main variable is intensity. An easy 45-minute ride at a
               conversational pace is genuine active recovery. A hard 60-minute
               interval session on a stationary bike is a training stimulus. Both
-              have their place — just don't confuse them.
+              have their place, just don't confuse them.
             </p>
             <p>
               For runners building toward something like the Pittsburgh Great
@@ -297,8 +297,8 @@ function CrossTrainingPage() {
               swimmer, your technique limits your effort before your lungs do,
               and the cardiovascular benefit drops. Thirty minutes of focused
               lap swimming at a moderate pace is a solid session. If technique
-              is a barrier, water running — jogging in the deep end with a
-              flotation belt — delivers similar benefits without requiring any
+              is a barrier, water running, jogging in the deep end with a
+              flotation belt, delivers similar benefits without requiring any
               swimming skill.
             </p>
 
@@ -313,7 +313,7 @@ function CrossTrainingPage() {
             </p>
             <p>
               One thing to watch: it's easy to do passively. Leaning on the
-              handles, keeping resistance low, coasting through 30 minutes —
+              handles, keeping resistance low, coasting through 30 minutes,
               that doesn't accomplish much. Keep your hands off the rails, drive
               through your hips, and use enough resistance that you're actually
               working.
@@ -349,7 +349,7 @@ function CrossTrainingPage() {
               regular running.
             </p>
             <p>
-              Hip flexors, hamstrings, thoracic spine, ankles — these are the
+              Hip flexors, hamstrings, thoracic spine, ankles, these are the
               areas most runners neglect. A 20-to-30-minute yoga session focused
               on those spots, done consistently two or three times per week,
               makes a noticeable difference in how you feel on runs. It also
@@ -367,7 +367,7 @@ function CrossTrainingPage() {
               legs in a way that builds hip and glute strength, and the
               elevation changes create cardiovascular demand without the
               repetitive impact of running. For runners who live near trails, a
-              60-to-90-minute hike on a recovery day is genuinely useful — not
+              60-to-90-minute hike on a recovery day is genuinely useful, not
               just a nice walk.
             </p>
             <p>
@@ -409,14 +409,14 @@ function CrossTrainingPage() {
             <p>
               The principle is simple: alternate impact days with non-impact
               days. Don't stack two hard sessions back-to-back. And don't skip
-              the strength work because you feel good — that's exactly when it's
+              the strength work because you feel good, that's exactly when it's
               most tempting to skip it, and exactly when it matters most.
             </p>
 
             <H2 id="comeback">Cross-training for comeback runners</H2>
             <p>
-              If you're returning to running after a gap — six months or six
-              years — cross-training isn't supplementary. It's the foundation.
+              If you're returning to running after a gap, six months or six
+              years, cross-training isn't supplementary. It's the foundation.
             </p>
             <p>
               Your cardiovascular system deconditions faster than your
@@ -434,8 +434,8 @@ function CrossTrainingPage() {
             <p>
               This is part of why the no-drop policy at GRYT matters for
               comeback runners. You're not getting dropped because you're slower
-              than you used to be. You finish with the crew. That consistency —
-              showing up every week without the pressure of keeping pace — is
+              than you used to be. You finish with the crew. That consistency,
+              showing up every week without the pressure of keeping pace, is
               what rebuilds the habit. And the habit is what makes the
               cross-training stick too.
             </p>
@@ -466,7 +466,7 @@ function CrossTrainingPage() {
               just adds another demand to a system that's already depleted.
             </p>
             <p>
-              Use cross-training to fill the gaps between runs — not to avoid
+              Use cross-training to fill the gaps between runs, not to avoid
               the rest your body is asking for.
             </p>
 
@@ -481,7 +481,7 @@ function CrossTrainingPage() {
             <p>
               Pick two or three options from this list that fit your schedule,
               your access, and your honest preferences. Do them consistently.
-              Consistency compounds — and that's as true for mobility work and
+              Consistency compounds, and that's as true for mobility work and
               mid-week bike rides as it is for the Saturday morning ritual of
               showing up at the trailhead regardless of the weather.
             </p>

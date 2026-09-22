@@ -22,7 +22,7 @@ export default defineMcp({
   title: "GRYT Run Club",
   version: "0.1.0",
   instructions:
-    "Tools for GRYT Run Club — a Pittsburgh Saturday-morning run club. Use `get_run_schedule` for the weekly meet-up times and location, and `get_club_info` for mission, links, and how to join. Additional member-only tools require sign-in.",
+    "Tools for GRYT Run Club, a Pittsburgh Saturday-morning run club. Use `get_run_schedule` for the weekly meet-up times and location, and `get_club_info` for mission, links, and how to join. Additional member-only tools require sign-in.",
   auth: auth.oauth.issuer({
     issuer: `https://${projectRef}.supabase.co/auth/v1`,
     acceptedAudiences: "authenticated",

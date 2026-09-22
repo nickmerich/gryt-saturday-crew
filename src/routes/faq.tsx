@@ -17,7 +17,7 @@ const FAQS: FAQ[] = [
   },
   {
     q: "Will I get left behind?",
-    a: "No — that's rule one. We hold pockets at every turn and the group waits at the trailhead until the last person is back in. If you're new, tell someone at the sign-in and we'll pair you up.",
+    a: "No, that's rule one. We hold pockets at every turn and the group waits at the trailhead until the last person is back in. If you're new, tell someone at the sign-in and we'll pair you up.",
   },
   {
     q: "Do I need to be able to run a 5K without stopping?",
@@ -25,11 +25,11 @@ const FAQS: FAQ[] = [
   },
   {
     q: "How much does it cost?",
-    a: "It's free. There are no dues, no membership fees, and no signup required. Donations keep the coffee and swag going — you can chip in from the Support GRYT block on the homepage, but it's optional.",
+    a: "It's free. There are no dues, no membership fees, and no signup required. Donations keep the coffee and swag going, you can chip in from the Support GRYT block on the homepage, but it's optional.",
   },
   {
     q: "Do I need to RSVP or just show up?",
-    a: "Just show up. Meet at 212 Valley Brook Road in McMurray, Peters Township at 7:00 AM Saturday. Parking is free. Look for the group near the trail sign — if you're new, come 10 minutes early and someone will say hey.",
+    a: "Just show up. Meet at 212 Valley Brook Road in McMurray, Peters Township at 7:00 AM Saturday. Parking is free. Look for the group near the trail sign, if you're new, come 10 minutes early and someone will say hey.",
   },
   {
     q: "Is there a waiver?",
@@ -47,11 +47,11 @@ const FAQS: FAQ[] = [
   },
   {
     q: "What if it rains or snows?",
-    a: "We run. Trail is mostly crushed limestone under a tree canopy, so it drains fast. We only cancel for lightning or ice that makes the trail dangerous — check the Instagram or Strava the morning of.",
+    a: "We run. Trail is mostly crushed limestone under a tree canopy, so it drains fast. We only cancel for lightning or ice that makes the trail dangerous, check the Instagram or Strava the morning of.",
   },
   {
     q: "Where do you actually run?",
-    a: "The Montour / Peters Creek Trail out of the Valley Brook trailhead in McMurray. Flat, shaded, out-and-back. You pick your distance — turn around at 1 mile, 2 miles, or go long. Directions are on the homepage.",
+    a: "The Montour / Peters Creek Trail out of the Valley Brook trailhead in McMurray. Flat, shaded, out-and-back. You pick your distance, turn around at 1 mile, 2 miles, or go long. Directions are on the homepage.",
   },
   {
     q: "How long is the run?",
@@ -63,7 +63,7 @@ const FAQS: FAQ[] = [
   },
   {
     q: "Can I bring my dog or a stroller?",
-    a: "Leashed dogs and strollers are welcome — the trail is wide and flat. Just start toward the back so nobody trips over a leash.",
+    a: "Leashed dogs and strollers are welcome, the trail is wide and flat. Just start toward the back so nobody trips over a leash.",
   },
   {
     q: "Do I have to come every week?",
@@ -96,7 +96,7 @@ export const Route = createFileRoute("/faq")({
       {
         name: "description",
         content:
-          "Pace, cost, parking, gear, weather, and waiver questions for GRYT — the free South Hills run club meeting Saturdays 7 AM in McMurray, PA.",
+          "Pace, cost, parking, gear, weather, and waiver questions for GRYT, the free South Hills run club meeting Saturdays 7 AM in McMurray, PA.",
       },
       { property: "og:title", content: "South Hills Run Club FAQ · McMurray, PA | GRYT" },
       {
@@ -146,7 +146,7 @@ function FaqPage() {
               style={{ fontFamily: "var(--font-body)" }}
             >
               The stuff first-timers actually message us about. If you don't
-              see your question here, just show up — we'll answer it in
+              see your question here, just show up, we'll answer it in
               person at 7 AM Saturday.
             </p>
           </div>

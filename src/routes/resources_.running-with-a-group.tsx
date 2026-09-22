@@ -8,7 +8,7 @@ const URL = `${SITE}/resources/running-with-a-group`;
 const TITLE =
   "Running With a Group: Why It Makes You Faster · gryt run club";
 const DESCRIPTION =
-  "Group running raises your pace without effort, turns motivation into expectation, and keeps you consistent. Why no-drop crews work — and how to find one.";
+  "Group running raises your pace without effort, turns motivation into expectation, and keeps you consistent. Why no-drop crews work, and how to find one.";
 const PUBLISHED = "2026-08-28";
 
 const SECTIONS: Array<{ id: string; label: string }> = [
@@ -45,11 +45,11 @@ const FAQS: Array<{ q: string; a: string }> = [
   },
   {
     q: "Can running with a group help me return to running after a long break?",
-    a: "Yes — and it's often the most effective way to do it. Being around experienced runners recalibrates your expectations, the social layer keeps you accountable through the early weeks when it's hardest, and a no-drop environment removes the pressure of keeping up.",
+    a: "Yes, and it's often the most effective way to do it. Being around experienced runners recalibrates your expectations, the social layer keeps you accountable through the early weeks when it's hardest, and a no-drop environment removes the pressure of keeping up.",
   },
   {
     q: "Is running with a group better than running alone?",
-    a: "For most people, most of the time, yes. Solo running has its place — long easy efforts, recovery runs, time to think. But group running builds consistency, raises your average pace, and gives you a reason to keep going that doesn't depend on how motivated you feel on a given morning.",
+    a: "For most people, most of the time, yes. Solo running has its place, long easy efforts, recovery runs, time to think. But group running builds consistency, raises your average pace, and gives you a reason to keep going that doesn't depend on how motivated you feel on a given morning.",
   },
 ];
 
@@ -170,13 +170,13 @@ function GroupRunningPage() {
 
           <div className="mt-12 space-y-5 text-paper/85 text-[16px] md:text-[17px] leading-[1.7]">
             <p>
-              Not a physical ceiling — your legs can keep going. The ceiling is
+              Not a physical ceiling, your legs can keep going. The ceiling is
               mental. It's the Saturday morning when the alarm goes off and you
               talk yourself back to sleep. It's the night the couch wins. It's
               the slow drift from "I run" to "I used to run."
             </p>
             <p>
-              Running with a group breaks that ceiling. Here's why it works —
+              Running with a group breaks that ceiling. Here's why it works,
               and why the effect is bigger than most people expect.
             </p>
 
@@ -187,7 +187,7 @@ function GroupRunningPage() {
             <p>
               You don't have to be competitive. You don't have to care about
               pace. But put another person next to you and your body responds.
-              Psychologists call it social facilitation — the presence of others
+              Psychologists call it social facilitation, the presence of others
               raises your arousal level and improves performance on familiar
               tasks. Running is a familiar task.
             </p>
@@ -211,7 +211,7 @@ function GroupRunningPage() {
             <p>
               Accountability is the mechanism. It's why group runners log more
               miles per week than solo runners, and why they stay consistent
-              through the months when motivation disappears — which it always
+              through the months when motivation disappears, which it always
               does, usually around week six.
             </p>
             <p>
@@ -268,7 +268,7 @@ function GroupRunningPage() {
               handle a bad stretch by watching someone else handle theirs.
             </p>
             <p>
-              None of this is formal instruction. It's absorbed — the same way
+              None of this is formal instruction. It's absorbed, the same way
               you pick up anything from people who are better at something than
               you are. By being around them long enough.
             </p>
@@ -292,7 +292,7 @@ function GroupRunningPage() {
               Not in a vague way. Specifically. They like the person who always
               has a terrible pun ready at mile 2. They like the one who shows up
               in weather that would make a reasonable person stay home. They
-              like the ritual — same time, same place, same faces.
+              like the ritual, same time, same place, same faces.
             </p>
             <p>
               That social layer is what turns running from a habit into an

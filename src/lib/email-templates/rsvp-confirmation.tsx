@@ -34,7 +34,7 @@ const Email = ({
   return (
     <Html lang="en" dir="ltr">
       <Head />
-      <Preview>You're in for Saturday — see you at the trailhead.</Preview>
+      <Preview>You're in for Saturday. See you at the trailhead.</Preview>
       <Body style={main}>
         <Container style={container}>
           <Text style={eyebrow}>GRYT RUN CLUB</Text>
@@ -80,7 +80,7 @@ const Email = ({
           <Hr style={hr} />
           <Text style={tagline}>DO HARD THINGS TOGETHER.</Text>
           <Text style={footer}>
-            We'll be by the trailhead. — Laura & Nick
+            We'll be by the trailhead.<br />Laura & Nick
           </Text>
         </Container>
       </Body>

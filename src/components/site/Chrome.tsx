@@ -152,7 +152,7 @@ function RecommendationsBar() {
   if (done) {
     return (
       <div className="border-t border-paper/15 pt-10 pb-2">
-        <p className="eyebrow text-blue">THANKS — WE GOT IT.</p>
+        <p className="eyebrow text-blue">THANKS, WE GOT IT.</p>
         <p className="text-sm text-paper/70 mt-2">
           Nick and Laura read every suggestion.
         </p>

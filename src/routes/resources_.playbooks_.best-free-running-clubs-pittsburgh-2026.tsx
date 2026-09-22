@@ -10,7 +10,7 @@ const URL = `${SITE}/resources/playbooks/best-free-running-clubs-pittsburgh-2026
 const TITLE =
   "Best Free Running Clubs in Pittsburgh (2026) · gryt run club";
 const DESCRIPTION =
-  "Pittsburgh's free running clubs in 2026 — Yinz, Fleet Feet, Steel City, Kool, Pharaoh Hounds, and GRYT. Who they're for and when they meet.";
+  "Pittsburgh's free running clubs in 2026, Yinz, Fleet Feet, Steel City, Kool, Pharaoh Hounds, and GRYT. Who they're for and when they meet.";
 const PUBLISHED = "2026-01-20";
 
 const FAQS: Array<{ q: string; a: string }> = [
@@ -40,7 +40,7 @@ const FAQS: Array<{ q: string; a: string }> = [
   },
   {
     q: "What happens after the run at GRYT?",
-    a: "People hang out in the parking lot with coffee. No agenda, no pitch — just a natural end to a Saturday morning run.",
+    a: "People hang out in the parking lot with coffee. No agenda, no pitch, just a natural end to a Saturday morning run.",
   },
 ];
 
@@ -154,9 +154,9 @@ function ArticlePage() {
 
 
           <div className="mt-12 space-y-5 text-paper/85 text-[16px] md:text-[17px] leading-[1.7]">
-            <p>You used to have a team. Then life got complicated — kids, commutes, a schedule that treats anything non-urgent as optional. But the part of you that needs to move, that needs people to move with, doesn't really disappear. It just waits.</p>
+            <p>You used to have a team. Then life got complicated, kids, commutes, a schedule that treats anything non-urgent as optional. But the part of you that needs to move, that needs people to move with, doesn't really disappear. It just waits.</p>
             <p>Pittsburgh has a real running community. It's spread across neighborhoods and suburbs, split between early risers and evening runners, trail people and road people. Some clubs cost money. Most are city-centric. A few are genuinely free and genuinely welcoming.</p>
-            <p>Here's what's actually out there in 2026 — who each club is for, when and where they meet, and what makes each one worth considering.</p>
+            <p>Here's what's actually out there in 2026, who each club is for, when and where they meet, and what makes each one worth considering.</p>
 
             <h2 className="text-2xl md:text-3xl font-bold mt-12 mb-2">Yinz Run Club</h2>
             <p>Yinz is Pittsburgh's largest free running community, with more than 2,500 members. If you've spent any time in the city's running scene, you've probably already heard the name.</p>
@@ -166,10 +166,10 @@ function ArticlePage() {
             <p><strong>Limitation:</strong> Every run is city-centric. If you're in the South Hills, Peters Township, or Washington County, you're adding a commute before you even lace up. The Saturday 10 AM slot also doesn't work well for parents who need to be back before the day takes over.</p>
 
             <h2 className="text-2xl md:text-3xl font-bold mt-12 mb-2">Fleet Feet Pittsburgh</h2>
-            <p>Fleet Feet runs a free weekly group run out of their East End location. The retail backing shows — solid infrastructure, mapped routes, consistent scheduling.</p>
+            <p>Fleet Feet runs a free weekly group run out of their East End location. The retail backing shows, solid infrastructure, mapped routes, consistent scheduling.</p>
             <p><strong>Best for:</strong> Runners who want a structured, beginner-friendly setup with gear and coaching resources close by.</p>
             <p><strong>Cost:</strong> Free with registration.</p>
-            <p><strong>Limitation:</strong> Anchored to the East End. If you're in Bethel Park, Upper St. Clair, or McMurray, this isn't your neighborhood option — it's a trip.</p>
+            <p><strong>Limitation:</strong> Anchored to the East End. If you're in Bethel Park, Upper St. Clair, or McMurray, this isn't your neighborhood option, it's a trip.</p>
 
             <h2 className="text-2xl md:text-3xl font-bold mt-12 mb-2">Steel City Road Runners</h2>
             <p>One of Pittsburgh's older running organizations. They host events and group runs throughout the year, with a suggested $20 annual donation rather than a hard membership fee.</p>
@@ -178,7 +178,7 @@ function ArticlePage() {
             <p><strong>Limitation:</strong> Meets only a few times per year. If you're looking for something that shows up on your calendar every single Saturday and holds you to it, this isn't that.</p>
 
             <h2 className="text-2xl md:text-3xl font-bold mt-12 mb-2">Kool Run Club</h2>
-            <p>Kool Run Club brings a different energy to Pittsburgh running — free, community-oriented, with a following built around runners who want the social side of the sport front and center.</p>
+            <p>Kool Run Club brings a different energy to Pittsburgh running, free, community-oriented, with a following built around runners who want the social side of the sport front and center.</p>
             <p><strong>Best for:</strong> Runners who want a personality-driven group with a strong social identity.</p>
             <p><strong>Cost:</strong> Free.</p>
             <p><strong>Limitation:</strong> Check their current schedule directly, as meeting times and locations can shift. Not a South Hills option.</p>
@@ -189,9 +189,9 @@ function ArticlePage() {
             <p><strong>Cost:</strong> Free.</p>
             <p><strong>Limitation:</strong> Tuesday evenings are hard for a lot of parents and people with demanding schedules. And like most Pittsburgh clubs, the Pharaoh Hounds don't have a South Hills or Washington County presence.</p>
 
-            <h2 className="text-2xl md:text-3xl font-bold mt-12 mb-2">GRYT Run Club — McMurray / South Hills</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mt-12 mb-2">GRYT Run Club, McMurray / South Hills</h2>
             <p>Here's the honest gap in Pittsburgh's running scene: almost nothing consistently serves the South Hills suburbs on a Saturday morning.</p>
-            <p>McMurray, Peters Township, Upper St. Clair, Bethel Park — these neighborhoods are full of former athletes, busy parents, and people who used to run and want to again. They don't need another Wednesday evening option that requires driving into the city first. They need something close, early, and free.</p>
+            <p>McMurray, Peters Township, Upper St. Clair, Bethel Park, these neighborhoods are full of former athletes, busy parents, and people who used to run and want to again. They don't need another Wednesday evening option that requires driving into the city first. They need something close, early, and free.</p>
             <p>That's what GRYT Run Club is.</p>
             <p>GRYT meets every Saturday at 7 AM on the Montour / Peters Trail in McMurray. The route is an out-and-back covering roughly four miles on a flat, beginner-friendly trail. Walkers, joggers, and runners all show up. No one gets dropped. No one has ever been dropped.</p>
             <p>After the run, people hang out in the parking lot with coffee. No agenda. No pitch. Just the natural end of a Saturday morning well spent.</p>
@@ -201,12 +201,12 @@ function ArticlePage() {
 
             <h3 className="text-xl md:text-2xl font-bold mt-10 mb-1">What Makes It Different</h3>
             <p>The combination is specific: zero cost, 7 AM Saturday, a flat trail in the South Hills, and coffee after. No Pittsburgh-area club currently owns that combination.</p>
-            <p>The 7 AM start matters more than it sounds. You're done by 8:15. The rest of Saturday is still yours — kids' activities, errands, whatever the day demands. You didn't sacrifice the morning. You started it.</p>
+            <p>The 7 AM start matters more than it sounds. You're done by 8:15. The rest of Saturday is still yours, kids' activities, errands, whatever the day demands. You didn't sacrifice the morning. You started it.</p>
             <p>The Montour / Peters Trail matters too. It's accessible, well-maintained, and close to home for anyone in the Peters Township and South Hills corridor. You're not driving 30 minutes to run.</p>
 
             <h3 className="text-xl md:text-2xl font-bold mt-10 mb-1">What to Expect Your First Time</h3>
             <p>Show up ten minutes early. A founder or regular will find you before the run starts. You won't be standing at the edge of a group mid-warmup wondering where to put yourself.</p>
-            <p>By mile two, the conversations are usually less about running and more about everything else — work, kids, the week you just had. That's the part people come back for.</p>
+            <p>By mile two, the conversations are usually less about running and more about everything else, work, kids, the week you just had. That's the part people come back for.</p>
             <p>The RSVP system is simple: fill out the form at grytrunclub.com, get one reminder Friday evening, and one nudge Saturday morning. That's it. No inbox flooding, no upsell.</p>
             <p>GRYT also has a Strava club (ID 1708552) where members log activity and stay connected between runs. Low-key and useful if you're already on Strava.</p>
             <p><strong>Best for:</strong> Former athletes, busy parents, and comeback runners in Pittsburgh's South Hills and Washington County who want a free, weekly, early Saturday run with real people and coffee after.</p>
@@ -214,12 +214,12 @@ function ArticlePage() {
 
             <h2 className="text-2xl md:text-3xl font-bold mt-12 mb-2">How These Clubs Compare</h2>
             <ul className="list-disc pl-6 space-y-2">
-              <li><strong>Yinz Run Club</strong> — Free · Wed evenings &amp; Sat 10 AM · City · Social post-run.</li>
-              <li><strong>Fleet Feet Pittsburgh</strong> — Free · Varies · East End · Varies.</li>
-              <li><strong>Steel City Road Runners</strong> — $20/yr donation · Occasional · City · Varies.</li>
-              <li><strong>Kool Run Club</strong> — Free · Varies · City · Social.</li>
-              <li><strong>Pittsburgh Pharaoh Hounds</strong> — Free · Tuesday evenings · City · Social.</li>
-              <li><strong>GRYT Run Club</strong> — Free · Saturday 7 AM · McMurray / South Hills · Coffee.</li>
+              <li><strong>Yinz Run Club</strong>: Free · Wed evenings &amp; Sat 10 AM · City · Social post-run.</li>
+              <li><strong>Fleet Feet Pittsburgh</strong>: Free · Varies · East End · Varies.</li>
+              <li><strong>Steel City Road Runners</strong>: $20/yr donation · Occasional · City · Varies.</li>
+              <li><strong>Kool Run Club</strong>: Free · Varies · City · Social.</li>
+              <li><strong>Pittsburgh Pharaoh Hounds</strong>: Free · Tuesday evenings · City · Social.</li>
+              <li><strong>GRYT Run Club</strong>: Free · Saturday 7 AM · McMurray / South Hills · Coffee.</li>
             </ul>
             <p>If you're in the city and free on a Wednesday evening, Yinz Run Club is a strong choice. If you're in the South Hills and Saturday mornings are your window, GRYT is the only consistent free option on the Montour / Peters Trail corridor.</p>
 
@@ -277,7 +277,7 @@ function ShareBar({
 }) {
   const [copied, setCopied] = useState(false);
   const shareUrl = URL;
-  const shareText = `${TITLE} — ${DESCRIPTION}`;
+  const shareText = `${TITLE}, ${DESCRIPTION}`;
 
   const xHref = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
     TITLE,

@@ -127,14 +127,14 @@ function RecapGeneratorPage() {
       await navigator.clipboard.writeText(url);
       toast.success("Link copied");
     } catch {
-      toast.error("Couldn't copy — long-press the link instead.");
+      toast.error("Couldn't copy, long-press the link instead.");
     }
   }
 
   async function challengeFriend() {
     const url = shareUrl ?? (await generateShareLink());
     if (!url) return;
-    const text = `I ran ${form.distance} mi with @grytrunclub. Your turn — post yours. ${url}`;
+    const text = `I ran ${form.distance} mi with @grytrunclub. Your turn, post yours. ${url}`;
     if (navigator.share) {
       try {
         await navigator.share({ text });
@@ -359,7 +359,7 @@ function RecapGeneratorPage() {
       setPhotoUrl(null);
       setShowCrop(false);
       toast.error("That image format isn't supported here.", {
-        description: "HEIC photos from iPhone often fail — save it as JPEG and try again.",
+        description: "HEIC photos from iPhone often fail, save it as JPEG and try again.",
       });
     };
     img.src = photoUrl;
@@ -1096,7 +1096,7 @@ function StravaRuns({
                     <div className="text-right shrink-0">
                       <p className="text-sm text-paper tabular-nums">{formatDuration(a.moving_time)}</p>
                       <p className="text-[11px] text-paper/55 mt-0.5 tabular-nums">
-                        {paceSec > 0 ? `${formatPace(paceSec)}/mi` : "—"}
+                        {paceSec > 0 ? `${formatPace(paceSec)}/mi` : "N/A"}
                       </p>
                     </div>
                   </button>

@@ -156,7 +156,7 @@ export const Route = createFileRoute("/")({
           "@type": "Event",
           name: "GRYT Saturday Run",
           description:
-            "Free Saturday morning group run on the Montour / Peters Trail. Walk, jog, or run — no pace requirement, no one gets dropped.",
+            "Free Saturday morning group run on the Montour / Peters Trail. Walk, jog, or run. No pace requirement, no one gets dropped.",
           startDate: currentRun().startsAt,
           endDate: currentRun().endsAt,
           eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
@@ -466,7 +466,7 @@ function Hero() {
           <div className="gryt-clean-intro">
             <p>
               {isB
-                ? "GRYT is a free Pittsburgh running group and South Hills run club — 7 AM sharp Saturdays on the Montour / Peters Trail in McMurray. Former athletes. Busy parents. Comeback runners. Same trail, same time, every week."
+                ? "GRYT is a free Pittsburgh running group and South Hills run club. We meet at 7 AM sharp Saturdays on the Montour / Peters Trail in McMurray. Former athletes. Busy parents. Comeback runners. Same trail, same time, every week."
                 : "GRYT is a free Pittsburgh running group and South Hills run club for former athletes, busy parents, and comeback runners who miss having a team. We meet every Saturday at 7 AM on the Montour / Peters Trail in McMurray. Come walk, jog, or run and do the hard thing together."}
             </p>
             <p className="font-semibold text-paper">
@@ -1022,8 +1022,8 @@ function RSVPConfirmation({
   const masked = maskContact(contact);
 
   const rows: Array<[string, React.ReactNode]> = [
-    ["Runner", name.trim() || "—"],
-    ["Contact", masked || "—"],
+    ["Runner", name.trim() || "N/A"],
+    ["Contact", masked || "N/A"],
     ["RSVP", days.map((d) => DAY_LABEL[d]).join(" · ") || "Saturday · GRYT Run"],
     ["Waiver", waiverSigned ? "Signed · covered through Dec 31, 2026" : "Not signed yet"],
     ["When", event.label],
@@ -1132,7 +1132,7 @@ function RSVPConfirmation({
         RSVP someone else
       </button>
       <p className="mt-3 text-[11px] leading-[1.5] text-ink/45 text-center">
-        Your details stay on this device and in our private roster — nothing personal is ever put in the web address.
+        Your details stay on this device and in our private roster. Nothing personal is ever put in the web address.
       </p>
     </div>
   );
@@ -1156,7 +1156,7 @@ function CorePromise() {
       source: "Harvard Making Caring Common, 2024",
       sourceUrl: "https://mcc.gse.harvard.edu/reports/on-edge",
       sourceDetail:
-        "Harvard Graduate School of Education, Making Caring Common — 'On Edge' report on loneliness and technology (2024).",
+        "Harvard Graduate School of Education, Making Caring Common, 'On Edge' report on loneliness and technology (2024).",
     },
     {
       stat: "75%",
@@ -1186,7 +1186,7 @@ function CorePromise() {
           <span className="text-blue">fragmented.</span>
         </h2>
         <p className="text-[17px] leading-[1.6] text-paper/75 max-w-[720px]">
-          Most adults are not failing at connection — they are living in a system that makes real
+          Most adults are not failing at connection. They are living in a system that makes real
           connection harder to keep. That is why IRL clubs like GRYT matter.
         </p>
 
@@ -1225,22 +1225,22 @@ function CorePromise() {
 function WhoItsFor() {
   const cards = [
     {
-      tag: "01 — The comeback",
+      tag: "01 · The comeback",
       title: "You're a former athlete.",
-      body: "You miss being around people who get it — the quiet competitiveness, the jokes before the work, and the feeling that nobody needs a speech because everyone already knows why they came. GRYT brings that back without making it complicated.",
+      body: "You miss being around people who get it: the quiet competitiveness, the jokes before the work, and the feeling that nobody needs a speech because everyone already knows why they came. GRYT brings that back without making it complicated.",
     },
     {
-      tag: "02 — The early hour",
+      tag: "02 · The early hour",
       title: "You're a parent.",
       body: "You need something that is yours, early enough that the rest of the day still works. Saturday at 7 AM gives you the workout, the headspace, and the reset before most people are fully awake.",
     },
     {
-      tag: "03 — The rhythm",
+      tag: "03 · The rhythm",
       title: "You're getting consistent again.",
       body: "Maybe you used to run. Maybe you are starting over. Maybe you just need a reason not to bail when the alarm goes off. One Saturday is a run; twelve Saturdays is a rhythm.",
     },
     {
-      tag: "04 — The crew",
+      tag: "04 · The crew",
       title: "You want a real crew.",
       body: "Not another group chat you ignore. Not a networking event disguised as fitness. Just real people who learn your name, notice when you miss, and make the miles go faster.",
     },
@@ -1335,7 +1335,7 @@ function FirstTimer() {
             Sign the 2026 waiver →
           </Link>
         </div>
-        
+
         <div className="mt-8 border-2 border-ink p-6 md:p-8 max-w-[720px]">
           <p className="text-[15px] leading-[1.6] text-[#13313f]">
             <span className="font-semibold">First time? Come 10 minutes early.</span> Nick, Laura, or one of the regulars will introduce you to someone before we start.
@@ -1358,7 +1358,7 @@ function FirstTimer() {
               },
               {
                 q: "Is there a required pace?",
-                a: "No. Walkers, joggers, and runners all start together and nobody gets dropped. Turn around whenever you want — the route is an out-and-back.",
+                a: "No. Walkers, joggers, and runners all start together and nobody gets dropped. Turn around whenever you want. The route is an out-and-back.",
               },
             ].map((f) => (
               <div key={f.q} className="bg-blue p-6 md:p-7">
@@ -1440,7 +1440,7 @@ function RSVPWaiverBlock({
         Last step · Sign the 2026 waiver
       </div>
       <p className="text-[13px] leading-[1.55] text-ink/70 mb-3">
-        We carried your name and contact over — one signature covers you through Dec 31, 2026.
+        We carried your name and contact over. One signature covers you through Dec 31, 2026.
       </p>
       <InlineWaiver
         prefill={prefill}
@@ -1590,7 +1590,7 @@ function InlineWaiver({
         <div className="inline-flex items-center gap-2.5 bg-ink text-paper px-4 py-3 border border-paper/20">
           <span className="w-6 h-6 bg-blue flex items-center justify-center text-ink text-[13px] font-bold">✓</span>
           <span className="text-[13px] font-semibold tracking-[0.04em]">
-            Waiver completed — covered through Dec 31, 2026
+            Waiver completed, covered through Dec 31, 2026
           </span>
         </div>
         <p className="mt-2 text-[12px] text-[#13313f]">
@@ -1659,8 +1659,8 @@ function InlineWaiver({
               <p>
                 In consideration of being permitted to participate in any activity organized by{" "}
                 <strong>gryt run club</strong>, I acknowledge that running and related activity
-                involve inherent risks — falls, weather, traffic, trail conditions, and the actions
-                of others — and I assume all such risks, known and unknown.
+                involve inherent risks (falls, weather, traffic, trail conditions, and the actions
+                of others) and I assume all such risks, known and unknown.
               </p>
               <p>
                 I represent that I am physically able to participate and have consulted a physician
@@ -1676,7 +1676,7 @@ function InlineWaiver({
               <p>
                 I grant the Club permission to use photos, video, or audio of me taken during
                 activities for promotional purposes, revocable in writing. Participants under 18
-                must sign in person with a parent or guardian — the online form is for adults 18+.
+                must sign in person with a parent or guardian. The online form is for adults 18+.
               </p>
               <p>
                 This agreement is effective from signing through <strong>December 31, 2026</strong>{" "}
@@ -1946,7 +1946,7 @@ function TheRun() {
           <div className="flex flex-col gap-4 max-w-[480px]">
             <p className="text-[17px] leading-[1.6] text-paper/80">
               We run the Montour / Peters Trail because it is flat, wide, simple, and friendly for
-              every pace. The usual route is about four miles out and back — but you can turn around
+              every pace. The usual route is about four miles out and back, but you can turn around
               whenever you need.
             </p>
             <p className="text-[17px] leading-[1.6] text-paper/80">
@@ -2491,7 +2491,7 @@ function RecommendationsBar() {
   if (done) {
     return (
       <div className="border-t border-paper/15 pt-10 pb-2">
-        <p className="eyebrow text-blue">THANKS — WE GOT IT.</p>
+        <p className="eyebrow text-blue">THANKS, WE GOT IT.</p>
         <p className="text-sm text-paper/70 mt-2">Nick and Laura read every suggestion.</p>
       </div>
     );
@@ -2870,7 +2870,7 @@ function WeeklyRhythm() {
                   <div className="relative overflow-hidden border border-ink/30 aspect-[4/3] sm:aspect-[16/10] bg-ink/5">
                     <iframe
                       src="https://maps.google.com/maps?q=212+Valley+Brook+Rd,+McMurray,+PA+15317&z=15&ie=UTF8&iwloc=&output=embed"
-                      title="Saturday GRYT Run meetup — 212 Valley Brook Rd, McMurray"
+                      title="Saturday GRYT Run meetup, 212 Valley Brook Rd, McMurray"
                       loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
                       className="absolute inset-0 h-full w-full grayscale contrast-110"
@@ -3060,10 +3060,10 @@ type EmailValidation = { ok: boolean; error?: string; suggestion?: string };
 function validateEmail(raw: string): EmailValidation {
   const value = raw.trim();
   if (!value) return { ok: false };
-  if (value.length > 255) return { ok: false, error: "Email is too long — try shortening it." };
+  if (value.length > 255) return { ok: false, error: "Email is too long. Try shortening it." };
   if (/\s/.test(value)) return { ok: false, error: "Emails can't contain spaces." };
   const atCount = (value.match(/@/g) || []).length;
-  if (atCount === 0) return { ok: false, error: "Missing an @ — try you@email.com." };
+  if (atCount === 0) return { ok: false, error: "Missing an @. Try you@email.com." };
   if (atCount > 1) return { ok: false, error: "Only one @ allowed." };
   if (!EMAIL_RE.test(value)) {
     if (!value.includes(".", value.indexOf("@")))
@@ -3255,7 +3255,7 @@ function NewsletterBar() {
     try {
       await subscribe(submittedEmail);
       setResendStatus("sent");
-      setResendMsg("Sent again — check your inbox and spam.");
+      setResendMsg("Sent again. Check your inbox and spam.");
       setResendCooldown(30);
       safeStorage.set(
         NEWSLETTER_RESEND_UNTIL_KEY,
@@ -3352,7 +3352,7 @@ function NewsletterBar() {
                 Confirm your email.
               </span>
               <span className="text-[12px] sm:text-[13px] text-ink/75 font-medium">
-                We just sent a confirmation link — click it to lock in the biweekly drop.
+                We just sent a confirmation link. Click it to lock in the biweekly drop.
               </span>
               <span className="text-[11px] sm:text-[12px] text-ink/70 mt-1 flex flex-wrap items-center gap-x-1.5 gap-y-0.5">
                 {resendStatus === "sent" ? (

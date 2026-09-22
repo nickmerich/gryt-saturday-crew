@@ -128,7 +128,7 @@ export function SupportBlock() {
 
           <div className="mb-5">
             <label className="block text-[11px] tracking-[0.2em] uppercase text-ink/60 mb-2">
-              Email (optional — for receipt)
+              Email (optional, for receipt)
             </label>
             <input
               type="email"

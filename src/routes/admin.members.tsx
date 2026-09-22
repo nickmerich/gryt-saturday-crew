@@ -127,7 +127,7 @@ function SignInForm({ onSent }: { onSent: () => void }) {
 }
 
 function SyncStatusPill({ status }: { status: MemberSyncStatus | undefined }) {
-  if (!status) return <span className="text-xs text-muted-foreground">—</span>
+  if (!status) return <span className="text-xs text-muted-foreground">N/A</span>
   const flags = []
   if (status.duplicate_flag) flags.push('DUP')
   if (status.review_needed) flags.push('REVIEW')
@@ -136,7 +136,7 @@ function SyncStatusPill({ status }: { status: MemberSyncStatus | undefined }) {
       <div className="text-muted-foreground">
         {status.last_strava_sync_at ? `Synced ${status.last_strava_sync_at}` : 'Never synced'}
       </div>
-      <div className="text-muted-foreground">Source: {status.sync_source ?? '—'}</div>
+      <div className="text-muted-foreground">Source: {status.sync_source ?? 'N/A'}</div>
       {flags.length > 0 && (
         <div className="text-yellow-300 font-medium">{flags.join(' · ')}</div>
       )}
@@ -165,11 +165,11 @@ function MemberRow({ m }: { m: CanonicalMember }) {
         <div className="text-[11px] font-mono text-muted-foreground">{m.canonical_member_key}</div>
       </td>
       <td className="py-3 px-3 align-top text-xs text-muted-foreground">
-        <div>{m.email ?? <span className="italic">—</span>}</div>
-        <div>{m.instagram_handle ? `@${m.instagram_handle}` : <span className="italic">—</span>}</div>
+        <div>{m.email ?? <span className="italic">N/A</span>}</div>
+        <div>{m.instagram_handle ? `@${m.instagram_handle}` : <span className="italic">N/A</span>}</div>
       </td>
       <td className="py-3 px-3 align-top text-xs">
-        <div>{m.member_status ?? '—'}</div>
+        <div>{m.member_status ?? 'N/A'}</div>
         <div className="text-muted-foreground">{m.membership_source ?? 'source unknown'}</div>
       </td>
       <td className="py-3 px-3 align-top">
@@ -263,7 +263,7 @@ function AdminMembersPage() {
             <a href="/admin/roster" className="text-sm text-blue underline">Open runner roster (RSVPs + waivers)</a>
           </div>
           <p className="mt-2 text-sm text-muted-foreground">
-            {data?.length ?? '—'} members · {flagged} missing contact info
+            {data?.length ?? 'N/A'} members · {flagged} missing contact info
           </p>
         </div>
         <button

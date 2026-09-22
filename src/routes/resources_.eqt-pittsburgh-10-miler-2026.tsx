@@ -9,7 +9,7 @@ const OG_IMAGE = `${SITE}${heroAsset.url}`;
 const TITLE =
   "EQT Pittsburgh 10 Miler 2026: Race Guide & Training · gryt run club";
 const DESCRIPTION =
-  "Course details, hill training, pacing strategy, and race-day logistics for the EQT Pittsburgh 10 Miler 2026 — plus how to train with a free no-drop group.";
+  "Course details, hill training, pacing strategy, and race-day logistics for the EQT Pittsburgh 10 Miler 2026, plus how to train with a free no-drop group.";
 const PUBLISHED = "2026-08-28";
 
 const SECTIONS: Array<{ id: string; label: string }> = [
@@ -41,7 +41,7 @@ const FAQS: Array<{ q: string; a: string }> = [
   },
   {
     q: "Do I need a training plan to run the 10 Miler?",
-    a: "A formal plan helps, but it's not required. Three consistent runs per week — one long run, one hilly effort — is enough structure for most runners to finish feeling strong.",
+    a: "A formal plan helps, but it's not required. Three consistent runs per week (one long run, one hilly effort) is enough structure for most runners to finish feeling strong.",
   },
   {
     q: "Are there running groups in Pittsburgh that train for this race?",
@@ -49,7 +49,7 @@ const FAQS: Array<{ q: string; a: string }> = [
   },
   {
     q: "What should I eat before the EQT Pittsburgh 10 Miler?",
-    a: "Stick with what you've practiced in training. A light meal two to three hours before the race — something familiar, easy to digest. Don't try anything new on race morning.",
+    a: "Stick with what you've practiced in training. A light meal two to three hours before the race, something familiar, easy to digest. Don't try anything new on race morning.",
   },
   {
     q: "Can beginners run the EQT Pittsburgh 10 Miler?",
@@ -197,7 +197,7 @@ function TenMilerPage() {
               What Is the EQT Pittsburgh 10 Miler?
             </h2>
             <p>
-              It's an annual road race through Pittsburgh — point-to-point,
+              It's an annual road race through Pittsburgh, point-to-point,
               winding through some of the city's most recognizable
               neighborhoods, with river and skyline views that remind you why
               Pittsburgh is worth running in the first place.
@@ -225,7 +225,7 @@ function TenMilerPage() {
             </p>
             <p>
               The views are the reward. Running through Pittsburgh in the spring
-              — bridges, rivers, skyline — is genuinely one of the better
+ (bridges, rivers, skyline) is genuinely one of the better
               race-day experiences in the region.
             </p>
 
@@ -262,7 +262,7 @@ function TenMilerPage() {
               elevation available. Use it.
             </p>
             <p>
-              One hilly run per week — even a short one — builds the leg
+              One hilly run per week (even a short one) builds the leg
               strength and mental tolerance that flat miles don't.
             </p>
 
@@ -316,7 +316,7 @@ function TenMilerPage() {
             <p>
               <strong className="text-paper">Nutrition:</strong> For most
               runners, 10 miles doesn't require mid-race fuel. If you're running
-              slower than 1:45, one gel around mile five won't hurt — but
+              slower than 1:45, one gel around mile five won't hurt, but
               practice it in training first.
             </p>
 
@@ -369,7 +369,7 @@ function TenMilerPage() {
               There's something specific about finishing a 10-mile race in
               Pittsburgh. The course is hard enough that you feel it. The
               distance is long enough that you had to prepare for it. And the
-              city — visible from the course in a way you never get from a car —
+              city (visible from the course in a way you never get from a car)
               makes the effort feel like it belongs somewhere.
             </p>
             <p>

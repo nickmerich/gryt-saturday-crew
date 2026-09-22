@@ -24,7 +24,7 @@ const NOTIFY_TO = 'merichnick@gmail.com'
 
 const Email = ({
   name = 'Someone',
-  contact = '—',
+  contact = 'N/A',
   source = 'Not provided',
   eventLabel = 'GRYT Run',
   submittedAt,

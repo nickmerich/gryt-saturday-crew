@@ -127,7 +127,7 @@ function StoryPage() {
           <div className="mt-12 space-y-5 text-paper/85 text-[16px] md:text-[17px] leading-[1.7]">
             <p>Every Saturday at 7 AM, a group of us meets at the Valley Brook Road trailhead in McMurray.</p>
             <p>From the parking lot, it looks simple. Neighbors. Miles. Coffee after.</p>
-            <p>That's on purpose. Most running groups are either too intimidating or too casual. We built GRYT for the people in the middle — former athletes, busy parents, comeback runners. People who want to train seriously without losing the reason it's fun.</p>
+            <p>That's on purpose. Most running groups are either too intimidating or too casual. We built GRYT for the people in the middle, former athletes, busy parents, comeback runners. People who want to train seriously without losing the reason it's fun.</p>
             <p>But look closer at who's standing in that parking lot, and the story gets interesting.</p>
             <p>Here are five things about GRYT you wouldn't guess at first glance.</p>
 
@@ -135,7 +135,7 @@ function StoryPage() {
               1. The person waiting for the last runner has a 3:25 marathon
             </h2>
             <p>Laura leads our no-drop group. Nobody gets left behind. Coffee in the parking lot after.</p>
-            <p>Her PR is 3:25:24 at Mountains 2 Beach — already inside the Boston-qualifying standard for her age group. She's run New York. She's run CIM.</p>
+            <p>Her PR is 3:25:24 at Mountains 2 Beach, already inside the Boston-qualifying standard for her age group. She's run New York. She's run CIM.</p>
             <p>She could chase splits every Saturday. Instead she runs at the pace of whoever showed up.</p>
             <p>Jenn Cicchini is the same way. She's an official Pittsburgh Marathon pace-team leader, and her whole philosophy is our unofficial north star: races are meant to be enjoyed, and running with people makes it mean something.</p>
             <p className="border-l-2 border-blue pl-5 italic text-paper/90">
@@ -148,7 +148,7 @@ function StoryPage() {
             <p>In May 2025, I finished the Pittsburgh Marathon in 5:18:15. That's a 12:08 mile, for over five hours.</p>
             <p>Twenty-three weeks later, I crossed the line at Columbus in 4:13:33. A 9:40 pace.</p>
             <p>Sixty-four minutes, gone in one season. Not because of a secret plan. Because I stopped training alone.</p>
-            <p>There's a full-circle piece to this. My first recorded race was a trail half marathon in 2014, in Venetia, PA — ten minutes from the trailhead where we meet now. A decade later, I came back to the same ground and ran over an hour faster.</p>
+            <p>There's a full-circle piece to this. My first recorded race was a trail half marathon in 2014, in Venetia, PA, ten minutes from the trailhead where we meet now. A decade later, I came back to the same ground and ran over an hour faster.</p>
             <p>Consistency compounds. Especially when people are expecting you at 7 AM.</p>
 
             <h2 id="front-of-pack" className="text-2xl md:text-3xl font-bold mt-12 mb-2 scroll-mt-24">
@@ -156,7 +156,7 @@ function StoryPage() {
             </h2>
             <p>GRYT is built for beginners. But run near the front and you'll notice something.</p>
             <p>Ian Baun raced ITU world-series triathlons, qualified for PIAA states, and has run a 4:44 mile. Around Pittsburgh, he's known from the Freddie Fu Cycling Team.</p>
-            <p>Izzy DiGnazio played lacrosse at Jefferson — her 2014 team was good enough that she went into the Jefferson Athletics Hall of Fame with the Class of 2025.</p>
+            <p>Izzy DiGnazio played lacrosse at Jefferson, her 2014 team was good enough that she went into the Jefferson Athletics Hall of Fame with the Class of 2025.</p>
             <p>Ben Brown is a career Army officer, Ranger, Airborne-qualified, and a former assistant cross-country coach at Pitt-Greensburg.</p>
             <p>None of them lead with any of that. But when you have a question about pacing or mechanics, someone in the parking lot has answered it at a level most run clubs never touch.</p>
 
@@ -164,7 +164,7 @@ function StoryPage() {
               4. Our route maps are made by an actual cartographer
             </h2>
             <p>The club runs on what people bring from their day jobs.</p>
-            <p>Jay Wysocki leads AI recruiting strategy and thinks about the club the way he thinks about systems. Jack Hareza is a Senior Finance Manager at Twitch and keeps our commerce ideas honest. And our route maps and elevation profiles are built with help from Dan Barley — a credentialed GIS professional and Senior GIS Analyst.</p>
+            <p>Jay Wysocki leads AI recruiting strategy and thinks about the club the way he thinks about systems. Jack Hareza is a Senior Finance Manager at Twitch and keeps our commerce ideas honest. And our route maps and elevation profiles are built with help from Dan Barley, a credentialed GIS professional and Senior GIS Analyst.</p>
             <p>Yes, our Saturday routes are mapped by someone who does this professionally.</p>
             <p>Nobody asked anyone to do this. That's what happens when people feel like a club is theirs.</p>
 
@@ -172,7 +172,7 @@ function StoryPage() {
               5. Families keep the whole thing running
             </h2>
             <p>The glue in this club isn't the schedule. It's the pairs.</p>
-            <p>At the 2022 Harvest Moon 10 Miler, Jay Wysocki and his son Caleb ran with back-to-back bibs — 830 and 831. Jay was 61. Caleb was 28. Jay beat him by about seven minutes.</p>
+            <p>At the 2022 Harvest Moon 10 Miler, Jay Wysocki and his son Caleb ran with back-to-back bibs, 830 and 831. Jay was 61. Caleb was 28. Jay beat him by about seven minutes.</p>
             <p>Lizeth Bayona and David Andromalos took it on the road, racing the CARA Lakefront 10 Miler in Chicago in 2026 with bibs 1254 and 1255.</p>
             <p>Motivation dips for everyone. But when your dad, your partner, or your Saturday crew is holding a bib next to yours, you show up anyway. That's the whole system.</p>
 

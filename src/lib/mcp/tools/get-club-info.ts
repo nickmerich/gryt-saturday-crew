@@ -15,7 +15,7 @@ export default defineTool({
       name: "GRYT Run Club",
       mission: "Do hard things together.",
       description:
-        "A Pittsburgh run club for former athletes, busy parents, and comeback runners. No pace requirement, no fee, no signup — just show up.",
+        "A Pittsburgh run club for former athletes, busy parents, and comeback runners. No pace requirement, no fee, no signup, just show up.",
       location: "McMurray, PA (South Hills of Pittsburgh)",
       website: "https://grytrunclub.com",
       strava: "https://www.strava.com/clubs/1708552",

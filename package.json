@@ -13,6 +13,7 @@
     "test:e2e": "playwright test",
     "test:attendance": "tsx --test tests/attendance-foundation.test.ts tests/attendance-database.test.ts",
     "typecheck": "tsc --noEmit",
+    "check:copy": "node scripts/check-copy-punctuation.mjs",
     "check:og": "node scripts/check-og-tags.mjs"
   },
   "dependencies": {

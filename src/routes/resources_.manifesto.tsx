@@ -198,11 +198,11 @@ const SECTIONS: Section[] = [
       "If the run depends on the founders, the community is one sick kid, one travel weekend, one bad night of sleep, one roofing emergency, or one overloaded week away from breaking rhythm. And rhythm is everything. People do not build habits around uncertainty. They build habits around rituals that keep showing up.",
       "The answer is not to lower the ambition. The answer is to build the crew. Not a giant volunteer bureaucracy. A small operating crew that protects the ritual:",
       [
-        "Welcome Lead — owns the first 15 seconds and makes sure no newcomer is invisible.",
-        "Pace Leads — own the front, middle, and back so every runner knows where they fit.",
-        "Tail Walker — owns the final runner and makes “no drop” real.",
-        "Photographer — owns proof of participation and same-day handoff.",
-        "Backup Captain — owns the ritual when the founders cannot.",
+        "Welcome Lead, owns the first 15 seconds and makes sure no newcomer is invisible.",
+        "Pace Leads, own the front, middle, and back so every runner knows where they fit.",
+        "Tail Walker, owns the final runner and makes “no drop” real.",
+        "Photographer, owns proof of participation and same-day handoff.",
+        "Backup Captain, owns the ritual when the founders cannot.",
       ],
       "The goal is not for Nick and Laura to carry GRYT forever. The goal is for GRYT to become strong enough that other people can carry pieces of it with pride.",
     ],
@@ -217,9 +217,9 @@ const SECTIONS: Section[] = [
       "You can bring 20 new people into a system that does not welcome them clearly, pace them safely, photograph them visibly, and follow up personally. But if only two of them return, the problem was never top-of-funnel. The problem was the container.",
       "So the order matters:",
       [
-        "01 — Plug the leak. Install the pace mechanics, welcome ritual, photo role, and 24-hour follow-up.",
-        "02 — Empower the crew. Give named humans ownership of the Saturday experience.",
-        "03 — Turn on the faucet. Push bring-a-friend, partner collabs, and larger acquisition once the experience can hold the demand.",
+        "01 · Plug the leak. Install the pace mechanics, welcome ritual, photo role, and 24-hour follow-up.",
+        "02 · Empower the crew. Give named humans ownership of the Saturday experience.",
+        "03 · Turn on the faucet. Push bring-a-friend, partner collabs, and larger acquisition once the experience can hold the demand.",
       ],
       "We should be optimistic about September. September can be a real push. But July and August need to be the build. This is where we earn the right to grow. Not by making the brand louder. By making the experience stronger.",
     ],
@@ -261,7 +261,7 @@ const SECTIONS: Section[] = [
   },
 ];
 
-const SHARE_TEXT = "The Human Layer Comes First — a GRYT Club audit manifesto from Nick Merich.";
+const SHARE_TEXT = "The Human Layer Comes First, a GRYT Club audit manifesto from Nick Merich.";
 
 function ShareBar({ variant = "dark" }: { variant?: "dark" | "vintage" }) {
   const [copied, setCopied] = useState(false);

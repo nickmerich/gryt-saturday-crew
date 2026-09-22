@@ -5,7 +5,7 @@ import { decodePayload, formatDuration, type SharedPayload } from "@/lib/timer-s
 export const Route = createFileRoute("/timer_/results")({
   head: () => ({
     meta: [
-      { title: "GRYT Timer — Results" },
+      { title: "GRYT Timer · Results" },
       { name: "description", content: "Read-only results for a GRYT Run Club timed event." },
       { name: "robots", content: "noindex, nofollow" },
     ],
@@ -62,7 +62,7 @@ function SharedResultsPage() {
         hour: "numeric",
         minute: "2-digit",
       })
-    : "—";
+    : "N/A";
 
   return (
     <main className="min-h-screen bg-ink text-paper font-body">
@@ -126,7 +126,7 @@ function SharedResultsPage() {
                   {i + 1}
                 </span>
                 <span className="text-white/60 tabular-nums text-sm">
-                  {f.b || "—"}
+                  {f.b || "N/A"}
                 </span>
                 <span className="truncate">{f.n}</span>
                 <span className="text-right font-condensed tabular-nums text-sm">

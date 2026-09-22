@@ -19,7 +19,7 @@ export const Route = createFileRoute("/resources_/runs")({
       {
         name: "description",
         content:
-          "Connect Strava and see your recent runs with pace, elevation gain, and mile-by-mile splits — plus GRYT guides to run them better.",
+          "Connect Strava and see your recent runs with pace, elevation gain, and mile-by-mile splits, plus GRYT guides to run them better.",
       },
       { property: "og:title", content: "My runs · pace, elevation, splits · gryt run club" },
       {
@@ -46,7 +46,7 @@ function miles(m: number) {
 }
 function paceOf(distanceMeters: number, seconds: number) {
   const mi = miles(distanceMeters);
-  return mi > 0 ? formatPace(seconds / mi) : "—";
+  return mi > 0 ? formatPace(seconds / mi) : "N/A";
 }
 function shortDate(iso: string) {
   const d = new Date(iso);
@@ -217,7 +217,7 @@ function RunsPage() {
           Every mile, broken down.
         </h1>
         <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/70">
-          Connect Strava to see your recent runs with pace, elevation gain, and mile-by-mile splits —
+          Connect Strava to see your recent runs with pace, elevation gain, and mile-by-mile splits,
           then turn any of them into a shareable recap graphic.
         </p>
 
@@ -302,7 +302,7 @@ function RunsPage() {
                         value={
                           a.total_elevation_gain != null
                             ? `${Math.round(a.total_elevation_gain * FT)}′`
-                            : "—"
+                            : "N/A"
                         }
                       />
                     </div>
@@ -387,9 +387,9 @@ function SplitTable({ splits }: { splits: Detail["splits"] }) {
           return (
             <tr key={s.split} className="border-t border-white/8">
               <td className="py-2 text-white/70">{pad2(s.split)}</td>
-              <td className="py-2 text-white">{pace > 0 ? formatPace(pace) : "—"}</td>
+              <td className="py-2 text-white">{pace > 0 ? formatPace(pace) : "N/A"}</td>
               <td className="py-2 text-white/70">
-                {elev == null ? "—" : `${elev > 0 ? "+" : ""}${elev}′`}
+                {elev == null ? "N/A" : `${elev > 0 ? "+" : ""}${elev}′`}
               </td>
               <td className="py-2">
                 <span className="ml-auto block h-2 w-full max-w-[160px] bg-white/10">

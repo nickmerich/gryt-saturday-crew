@@ -13,13 +13,13 @@ export const Route = createFileRoute("/resources")({
       {
         name: "description",
         content:
-          "Playbooks, interviews, free graphics, merch, and partner opportunities from the founders of GRYT — a free South Hills run club in Pittsburgh, PA.",
+          "Playbooks, interviews, free graphics, merch, and partner opportunities from the founders of GRYT, a free South Hills run club in Pittsburgh, PA.",
       },
       { property: "og:title", content: "Running Resources · South Hills Pittsburgh | GRYT Run Club" },
       {
         property: "og:description",
         content:
-          "Everything we've learned running the South Hills every Saturday — playbooks, guides, and free tools, shared openly.",
+          "Everything we've learned running the South Hills every Saturday, playbooks, guides, and free tools, shared openly.",
       },
 
       { property: "og:type", content: "website" },
@@ -134,7 +134,7 @@ function FeaturedStory() {
           EQT Pittsburgh 10 Miler 2026: Race Guide, Course Details, and Training Tips
         </h3>
         <p className="mt-5 max-w-xl text-[15px] leading-[1.65] text-paper/85 group-hover:text-ink/80">
-          Course terrain, hill work, pacing targets, and race-day logistics —
+          Course terrain, hill work, pacing targets, and race-day logistics,
           plus how to train for it with a free no-drop crew.
         </p>
         <span className="mt-7 inline-block text-[12px] tracking-[0.22em] uppercase" style={mono}>
@@ -178,7 +178,7 @@ function FeaturedStory() {
           Should You Join a Running Club? An Honest Answer
         </h3>
         <p className="mt-5 max-w-xl text-[15px] leading-[1.65] text-paper/85 group-hover:text-ink/80">
-          Am I too slow, what does it cost, do I have to talk — straight answers
+          Am I too slow, what does it cost, do I have to talk, straight answers
           from Nick Merich before you get out of the car.
         </p>
         <span className="mt-7 inline-block text-[12px] tracking-[0.22em] uppercase" style={mono}>
@@ -200,7 +200,7 @@ function FeaturedStory() {
           Cross-Training for Runners: The Best Low-Impact Options
         </h3>
         <p className="mt-5 max-w-xl text-[15px] leading-[1.65] text-paper/85 group-hover:text-ink/80">
-          Cycling, swimming, elliptical, strength, yoga, hiking, rowing — what
+          Cycling, swimming, elliptical, strength, yoga, hiking, rowing, what
           to do between run days, and how to fit it into a real week.
         </p>
         <span className="mt-7 inline-block text-[12px] tracking-[0.22em] uppercase" style={mono}>
@@ -280,7 +280,7 @@ function Masthead() {
         <p className="text-[22px] md:text-[28px] font-light leading-[1.3] max-w-[720px] text-paper/95"
           style={{ fontFamily: "var(--font-display)" }}
         >
-          Everything we've learned from showing up every Saturday —{" "}
+          Everything we've learned from showing up every Saturday, {" "}
           <span className="text-blue">shared freely.</span> Playbooks,
           interviews, free graphics, and partner opportunities.
         </p>
@@ -314,14 +314,14 @@ const PLAYBOOKS: Array<{
     n: "02",
     title: "How to Start a Run Club From Zero",
     description:
-      "The full playbook Nick used to launch GRYT — location, time, first ten members, keeping them coming back.",
+      "The full playbook Nick used to launch GRYT, location, time, first ten members, keeping them coming back.",
     category: "Community",
   },
   {
     n: "03",
     title: "Consistency Over Intensity",
     description:
-      "Why showing up every Saturday at the same time changes how you see yourself — and the data behind it.",
+      "Why showing up every Saturday at the same time changes how you see yourself, and the data behind it.",
     category: "Training",
   },
   {
@@ -451,7 +451,7 @@ const CONVERSATIONS: Array<{
     guest: "Nick Merich",
     role: "Founder, GRYT Run Club",
     quote:
-      "Saturday morning became the most important appointment of the week. Not because of the run — because of who was at the trailhead.",
+      "Saturday morning became the most important appointment of the week. Not because of the run, because of who was at the trailhead.",
   },
   {
     n: "039",
@@ -463,7 +463,7 @@ const CONVERSATIONS: Array<{
   {
     n: "035",
     guest: "The Community",
-    role: "Members, partners, coaches — soon",
+    role: "Members, partners, coaches, soon",
     quote:
       "The people who kept showing up built the club. This is where their stories will live.",
     comingSoon: true,
@@ -486,7 +486,7 @@ function Conversations() {
               Conversations
             </h2>
             <p className="mt-5 text-paper/80 text-[15px] leading-[1.65] max-w-[280px]">
-              Unfiltered dialogue with the founders and the crew — on
+              Unfiltered dialogue with the founders and the crew, on
               community, consistency, and doing hard things together.
             </p>
             <Link
@@ -527,7 +527,7 @@ function Conversations() {
                 className="not-italic block mt-8 uppercase tracking-[0.14em] text-[13px]"
                 style={{ fontFamily: "var(--font-condensed)" }}
               >
-                — {c.guest}
+                {c.guest}
                 <span className="text-paper/75"> · {c.role}</span>
               </cite>
             </article>
@@ -808,7 +808,7 @@ function NextIssue() {
           email: email.trim(),
           organization: "",
           involvement: "Other",
-          message: "Playbook list signup — send the next GRYT resource when it's ready.",
+          message: "Playbook list signup, send the next GRYT resource when it's ready.",
         },
       });
       setDone(true);
@@ -906,7 +906,7 @@ function PartnerSplit() {
           Build with GRYT.
         </h2>
         <p className="mt-5 text-[15px] leading-[1.65] text-ink/90 max-w-[380px]">
-          Coffee shops, gyms, brands, coaches, local builders — if it helps
+          Coffee shops, gyms, brands, coaches, local builders, if it helps
           the crew, we're open.
         </p>
       </div>
@@ -1171,7 +1171,7 @@ function ShareYourStory() {
           <p className="mt-6 text-paper/85 text-[15px] leading-[1.65] max-w-[440px]">
             Comeback runners. First-timers. People who built community out of
             nothing. If running changed something for you and you think your
-            story could help someone else show up — tell us about it. Nick
+            story could help someone else show up, tell us about it. Nick
             reads every submission.
           </p>
           <ul className="mt-8 space-y-3 text-paper/85 text-[14.5px] leading-[1.6] max-w-[440px]">
@@ -1247,7 +1247,7 @@ function ShareYourStory() {
                 <input id="s-links" type="url" maxLength={600} autoComplete="url"
                   value={links} onChange={(e) => setLinks(e.target.value)}
                   className={swissInput}
-                  placeholder="Strava, Instagram, blog — anything that adds context" />
+                  placeholder="Strava, Instagram, blog, anything that adds context" />
               </div>
               <label className="sm:col-span-2 flex items-start gap-3 text-[14.5px] text-paper/90 leading-[1.5] cursor-pointer">
                 <input type="checkbox" checked={consentContact}

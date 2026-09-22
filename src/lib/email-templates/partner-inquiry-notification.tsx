@@ -23,10 +23,10 @@ interface Props {
 
 const Email = ({
   name = 'Someone',
-  email = '—',
-  organization = '—',
+  email = 'N/A',
+  organization = 'N/A',
   involvement = 'Other',
-  message = '—',
+  message = 'N/A',
   submittedAt,
 }: Props) => {
   const when = submittedAt

@@ -95,7 +95,7 @@ function MembersPage() {
         <p className="eyebrow eyebrow-blue">Canonical roster</p>
         <h1 className="display-condensed text-4xl sm:text-5xl mt-2">GRYT Members</h1>
         <p className="mt-2 text-sm text-muted-foreground max-w-xl">
-          Source of truth: Notion. {data?.length ?? '—'} people on the list.
+          Source of truth: Notion. {data?.length ?? 'N/A'} people on the list.
         </p>
       </div>
 
