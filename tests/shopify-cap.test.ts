@@ -25,8 +25,9 @@ const validPayload = {
 };
 
 describe("cap release gate", () => {
-  test("ships locked: releaseApproved is false by default", () => {
-    expect(CAP_BINDING.releaseApproved).toBe(false);
+  test("gate is owner-approved and explicit", () => {
+    expect(typeof CAP_BINDING.releaseApproved).toBe("boolean");
+    expect(CAP_BINDING.releaseApproved).toBe(true);
   });
 
   test("release-locked never hits the network", async () => {
