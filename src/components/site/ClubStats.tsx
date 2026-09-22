@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { getClubStats } from "@/lib/strava-club.functions";
 import { SAMPLE_CLUB_STATS, STRAVA_CLUB_URL } from "@/lib/strava-club";
+import { StravaClubEmbed } from "./StravaClubEmbed";
 
 function Figure({ value, label }: { value: string; label: string }) {
   return (
