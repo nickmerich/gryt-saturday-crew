@@ -58,9 +58,9 @@ function icsForMonth(year: number, month: number) {
       `DTSTAMP:${stamp}`,
       `DTSTART;TZID=America/New_York:${ymd}T${start}`,
       `DTEND;TZID=America/New_York:${ymd}T${end}`,
-      `SUMMARY:GRYT ${run.label}`,
-      "LOCATION:212 Valley Brook Rd, McMurray, PA 15317",
-      "DESCRIPTION:All paces. Nobody gets dropped. https://grytrunclub.com",
+      `SUMMARY:${escIcs(`GRYT ${run.label}`)}`,
+      `LOCATION:${escIcs("212 Valley Brook Rd, McMurray, PA 15317")}`,
+      `DESCRIPTION:${escIcs("All paces. Nobody gets dropped. https://grytrunclub.com")}`,
       "URL:https://grytrunclub.com",
       "END:VEVENT",
     );
