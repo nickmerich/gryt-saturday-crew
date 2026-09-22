@@ -27,12 +27,11 @@ function icsForMonth(year: number, month: number) {
   const days = new Date(year, month + 1, 0).getDate();
   for (let d = 1; d <= days; d++) {
     const date = new Date(year, month, d);
-    const run =
-      date.getDay() === SAT.day ? SAT : date.getDay() === TUE.day ? TUE : null;
+    const run = date.getDay() === SAT.day ? SAT : null;
     if (!run) continue;
     const ymd = `${year}${pad(month + 1)}${pad(d)}`;
-    const start = run === SAT ? "070000" : "210000";
-    const end = run === SAT ? "080000" : "220000";
+    const start = "070000";
+    const end = "080000";
     lines.push(
       "BEGIN:VEVENT",
       `UID:gryt-${ymd}-${start}@grytrunclub.com`,
