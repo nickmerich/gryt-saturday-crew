@@ -11,6 +11,8 @@ const REVIEW_COPY = [
 ];
 
 const CAP_IMAGE = "/images/gryt-cap-detail.webp";
+/** Flip to true once the reviewed cap photo derivative is committed. */
+const CAP_IMAGE_READY = false;
 
 export function CapDrop() {
   const read = useServerFn(getCapState);
