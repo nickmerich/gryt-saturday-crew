@@ -342,7 +342,7 @@ function CTA() {
           The playbooks only work if you run them. Come find us this Saturday.
         </p>
         <div className="mt-10 flex flex-wrap gap-4 justify-center">
-          <Link to="/" hash="first-time" className="btn-primary">
+          <Link to="/" hash="join" className="btn-primary">
             Join This Saturday →
           </Link>
           <Link
