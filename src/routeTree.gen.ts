@@ -42,6 +42,7 @@ import { Route as ResourcesConversationsRouteImport } from './routes/resources_.
 import { Route as ResourcesBuildARunningBaseRouteImport } from './routes/resources_.build-a-running-base'
 import { Route as MembersKeyRouteImport } from './routes/members.$key'
 import { Route as CheckoutReturnRouteImport } from './routes/checkout.return'
+import { Route as AdminRosterRouteImport } from './routes/admin.roster'
 import { Route as AdminMembersRouteImport } from './routes/admin.members'
 import { Route as AdminInquiriesRouteImport } from './routes/admin.inquiries'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
@@ -235,6 +236,11 @@ const CheckoutReturnRoute = CheckoutReturnRouteImport.update({
   path: '/checkout/return',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRosterRoute = AdminRosterRouteImport.update({
+  id: '/admin/roster',
+  path: '/admin/roster',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminMembersRoute = AdminMembersRouteImport.update({
   id: '/admin/members',
   path: '/admin/members',
@@ -372,6 +378,7 @@ export interface FileRoutesByFullPath {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/inquiries': typeof AdminInquiriesRoute
   '/admin/members': typeof AdminMembersRoute
+  '/admin/roster': typeof AdminRosterRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/members/$key': typeof MembersKeyRoute
   '/resources/build-a-running-base': typeof ResourcesBuildARunningBaseRoute
@@ -428,6 +435,7 @@ export interface FileRoutesByTo {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/inquiries': typeof AdminInquiriesRoute
   '/admin/members': typeof AdminMembersRoute
+  '/admin/roster': typeof AdminRosterRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/members/$key': typeof MembersKeyRoute
   '/resources/build-a-running-base': typeof ResourcesBuildARunningBaseRoute
@@ -485,6 +493,7 @@ export interface FileRoutesById {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/inquiries': typeof AdminInquiriesRoute
   '/admin/members': typeof AdminMembersRoute
+  '/admin/roster': typeof AdminRosterRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/members/$key': typeof MembersKeyRoute
   '/resources_/build-a-running-base': typeof ResourcesBuildARunningBaseRoute
@@ -543,6 +552,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/admin/inquiries'
     | '/admin/members'
+    | '/admin/roster'
     | '/checkout/return'
     | '/members/$key'
     | '/resources/build-a-running-base'
@@ -599,6 +609,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/admin/inquiries'
     | '/admin/members'
+    | '/admin/roster'
     | '/checkout/return'
     | '/members/$key'
     | '/resources/build-a-running-base'
@@ -655,6 +666,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/admin/inquiries'
     | '/admin/members'
+    | '/admin/roster'
     | '/checkout/return'
     | '/members/$key'
     | '/resources_/build-a-running-base'
@@ -712,6 +724,7 @@ export interface RootRouteChildren {
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   AdminInquiriesRoute: typeof AdminInquiriesRoute
   AdminMembersRoute: typeof AdminMembersRoute
+  AdminRosterRoute: typeof AdminRosterRoute
   CheckoutReturnRoute: typeof CheckoutReturnRoute
   ResourcesBuildARunningBaseRoute: typeof ResourcesBuildARunningBaseRoute
   ResourcesConversationsRoute: typeof ResourcesConversationsRoute
@@ -979,6 +992,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CheckoutReturnRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/roster': {
+      id: '/admin/roster'
+      path: '/admin/roster'
+      fullPath: '/admin/roster'
+      preLoaderRoute: typeof AdminRosterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/members': {
       id: '/admin/members'
       path: '/admin/members'
@@ -1163,6 +1183,7 @@ const rootRouteChildren: RootRouteChildren = {
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
   AdminInquiriesRoute: AdminInquiriesRoute,
   AdminMembersRoute: AdminMembersRoute,
+  AdminRosterRoute: AdminRosterRoute,
   CheckoutReturnRoute: CheckoutReturnRoute,
   ResourcesBuildARunningBaseRoute: ResourcesBuildARunningBaseRoute,
   ResourcesConversationsRoute: ResourcesConversationsRoute,
