@@ -71,11 +71,40 @@ export const Route = createFileRoute('/api/public/rsvp')({
           )
         }
 
-        const { name, contact, source, eventLabel, heroVariant, partySize, firstTimer } =
-          parsed.data
+        const {
+          name,
+          contact,
+          source,
+          eventLabel,
+          eventId,
+          eventVersion,
+          heroVariant,
+          partySize,
+          firstTimer,
+        } = parsed.data
+
+        // Validate the canonical occurrence server-side. A stale tab that still
+        // holds a cancelled or superseded run must not silently sign someone up.
+        const eventCheck = validateEventRef(eventId, eventVersion)
+        if (!eventCheck.ok) {
+          return Response.json(
+            {
+              error:
+                eventCheck.reason === 'cancelled'
+                  ? 'That run was cancelled. Refresh the page for the next one.'
+                  : 'The run details changed. Refresh the page and sign up again.',
+              reason: eventCheck.reason,
+              currentEventId: eventCheck.occurrence.id,
+            },
+            { status: 409 },
+          )
+        }
+        const occurrence = eventCheck.occurrence
+
         const supabase: SupabaseClient<any, 'public', any> = createClient(supabaseUrl, supabaseServiceKey)
         const userAgent = request.headers.get('user-agent')?.slice(0, 300) ?? null
         const submittedAt = new Date().toISOString()
+
 
         // 1. Persist the RSVP
         const { data: inserted, error: insertError } = await supabase
