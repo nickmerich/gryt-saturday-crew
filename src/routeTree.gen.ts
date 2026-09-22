@@ -57,6 +57,7 @@ import { Route as ApiPublicRsvpRouteImport } from './routes/api/public/rsvp'
 import { Route as ApiPublicInquiriesRouteImport } from './routes/api/public/inquiries'
 import { Route as ApiNewsletterSubscribeRouteImport } from './routes/api/newsletter/subscribe'
 import { Route as ApiNewsletterStatusRouteImport } from './routes/api/newsletter/status'
+import { Route as ApiAdminStravaConnectRouteImport } from './routes/api/admin/strava-connect'
 import { Route as ApiAdminRosterRouteImport } from './routes/api/admin/roster'
 import { Route as ApiAdminInquiriesRouteImport } from './routes/api/admin/inquiries'
 import { Route as ApiAdminCheckinRouteImport } from './routes/api/admin/checkin'
@@ -319,6 +320,11 @@ const ApiNewsletterStatusRoute = ApiNewsletterStatusRouteImport.update({
   path: '/api/newsletter/status',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAdminStravaConnectRoute = ApiAdminStravaConnectRouteImport.update({
+  id: '/api/admin/strava-connect',
+  path: '/api/admin/strava-connect',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAdminRosterRoute = ApiAdminRosterRouteImport.update({
   id: '/api/admin/roster',
   path: '/api/admin/roster',
@@ -413,6 +419,7 @@ export interface FileRoutesByFullPath {
   '/api/admin/checkin': typeof ApiAdminCheckinRoute
   '/api/admin/inquiries': typeof ApiAdminInquiriesRoute
   '/api/admin/roster': typeof ApiAdminRosterRoute
+  '/api/admin/strava-connect': typeof ApiAdminStravaConnectRoute
   '/api/newsletter/status': typeof ApiNewsletterStatusRoute
   '/api/newsletter/subscribe': typeof ApiNewsletterSubscribeRoute
   '/api/public/inquiries': typeof ApiPublicInquiriesRoute
@@ -472,6 +479,7 @@ export interface FileRoutesByTo {
   '/api/admin/checkin': typeof ApiAdminCheckinRoute
   '/api/admin/inquiries': typeof ApiAdminInquiriesRoute
   '/api/admin/roster': typeof ApiAdminRosterRoute
+  '/api/admin/strava-connect': typeof ApiAdminStravaConnectRoute
   '/api/newsletter/status': typeof ApiNewsletterStatusRoute
   '/api/newsletter/subscribe': typeof ApiNewsletterSubscribeRoute
   '/api/public/inquiries': typeof ApiPublicInquiriesRoute
@@ -532,6 +540,7 @@ export interface FileRoutesById {
   '/api/admin/checkin': typeof ApiAdminCheckinRoute
   '/api/admin/inquiries': typeof ApiAdminInquiriesRoute
   '/api/admin/roster': typeof ApiAdminRosterRoute
+  '/api/admin/strava-connect': typeof ApiAdminStravaConnectRoute
   '/api/newsletter/status': typeof ApiNewsletterStatusRoute
   '/api/newsletter/subscribe': typeof ApiNewsletterSubscribeRoute
   '/api/public/inquiries': typeof ApiPublicInquiriesRoute
@@ -593,6 +602,7 @@ export interface FileRouteTypes {
     | '/api/admin/checkin'
     | '/api/admin/inquiries'
     | '/api/admin/roster'
+    | '/api/admin/strava-connect'
     | '/api/newsletter/status'
     | '/api/newsletter/subscribe'
     | '/api/public/inquiries'
@@ -652,6 +662,7 @@ export interface FileRouteTypes {
     | '/api/admin/checkin'
     | '/api/admin/inquiries'
     | '/api/admin/roster'
+    | '/api/admin/strava-connect'
     | '/api/newsletter/status'
     | '/api/newsletter/subscribe'
     | '/api/public/inquiries'
@@ -711,6 +722,7 @@ export interface FileRouteTypes {
     | '/api/admin/checkin'
     | '/api/admin/inquiries'
     | '/api/admin/roster'
+    | '/api/admin/strava-connect'
     | '/api/newsletter/status'
     | '/api/newsletter/subscribe'
     | '/api/public/inquiries'
@@ -770,6 +782,7 @@ export interface RootRouteChildren {
   ApiAdminCheckinRoute: typeof ApiAdminCheckinRoute
   ApiAdminInquiriesRoute: typeof ApiAdminInquiriesRoute
   ApiAdminRosterRoute: typeof ApiAdminRosterRoute
+  ApiAdminStravaConnectRoute: typeof ApiAdminStravaConnectRoute
   ApiNewsletterStatusRoute: typeof ApiNewsletterStatusRoute
   ApiNewsletterSubscribeRoute: typeof ApiNewsletterSubscribeRoute
   ApiPublicInquiriesRoute: typeof ApiPublicInquiriesRoute
@@ -1123,6 +1136,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiNewsletterStatusRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/admin/strava-connect': {
+      id: '/api/admin/strava-connect'
+      path: '/api/admin/strava-connect'
+      fullPath: '/api/admin/strava-connect'
+      preLoaderRoute: typeof ApiAdminStravaConnectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/admin/roster': {
       id: '/api/admin/roster'
       path: '/api/admin/roster'
@@ -1247,6 +1267,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiAdminCheckinRoute: ApiAdminCheckinRoute,
   ApiAdminInquiriesRoute: ApiAdminInquiriesRoute,
   ApiAdminRosterRoute: ApiAdminRosterRoute,
+  ApiAdminStravaConnectRoute: ApiAdminStravaConnectRoute,
   ApiNewsletterStatusRoute: ApiNewsletterStatusRoute,
   ApiNewsletterSubscribeRoute: ApiNewsletterSubscribeRoute,
   ApiPublicInquiriesRoute: ApiPublicInquiriesRoute,
