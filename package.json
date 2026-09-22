@@ -11,6 +11,8 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "test:e2e": "playwright test",
+    "test:attendance": "tsx --test tests/attendance-foundation.test.ts tests/attendance-database.test.ts",
+    "typecheck": "tsc --noEmit",
     "check:og": "node scripts/check-og-tags.mjs"
   },
   "dependencies": {
@@ -83,6 +85,8 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "0.5.8",
+    "tsx": "4.23.15",
     "@eslint/js": "^9.32.0",
     "@lovable.dev/vite-tanstack-config": "2.23.1",
     "@playwright/test": "1.56.0",
