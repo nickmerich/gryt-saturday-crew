@@ -58,6 +58,7 @@ import { Route as ApiNewsletterSubscribeRouteImport } from './routes/api/newslet
 import { Route as ApiNewsletterStatusRouteImport } from './routes/api/newsletter/status'
 import { Route as ApiAdminRosterRouteImport } from './routes/api/admin/roster'
 import { Route as ApiAdminInquiriesRouteImport } from './routes/api/admin/inquiries'
+import { Route as ApiAdminCheckinRouteImport } from './routes/api/admin/checkin'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
@@ -322,6 +323,11 @@ const ApiAdminInquiriesRoute = ApiAdminInquiriesRouteImport.update({
   path: '/api/admin/inquiries',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAdminCheckinRoute = ApiAdminCheckinRouteImport.update({
+  id: '/api/admin/checkin',
+  path: '/api/admin/checkin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const Char91DotmcpChar93InvokeToolToolRoute =
   Char91DotmcpChar93InvokeToolToolRouteImport.update({
     id: '/.mcp/invoke-tool/$tool',
@@ -397,6 +403,7 @@ export interface FileRoutesByFullPath {
   '/timer/results': typeof TimerResultsRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/api/admin/checkin': typeof ApiAdminCheckinRoute
   '/api/admin/inquiries': typeof ApiAdminInquiriesRoute
   '/api/admin/roster': typeof ApiAdminRosterRoute
   '/api/newsletter/status': typeof ApiNewsletterStatusRoute
@@ -454,6 +461,7 @@ export interface FileRoutesByTo {
   '/timer/results': typeof TimerResultsRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/api/admin/checkin': typeof ApiAdminCheckinRoute
   '/api/admin/inquiries': typeof ApiAdminInquiriesRoute
   '/api/admin/roster': typeof ApiAdminRosterRoute
   '/api/newsletter/status': typeof ApiNewsletterStatusRoute
@@ -512,6 +520,7 @@ export interface FileRoutesById {
   '/timer_/results': typeof TimerResultsRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/api/admin/checkin': typeof ApiAdminCheckinRoute
   '/api/admin/inquiries': typeof ApiAdminInquiriesRoute
   '/api/admin/roster': typeof ApiAdminRosterRoute
   '/api/newsletter/status': typeof ApiNewsletterStatusRoute
@@ -571,6 +580,7 @@ export interface FileRouteTypes {
     | '/timer/results'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
+    | '/api/admin/checkin'
     | '/api/admin/inquiries'
     | '/api/admin/roster'
     | '/api/newsletter/status'
@@ -628,6 +638,7 @@ export interface FileRouteTypes {
     | '/timer/results'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
+    | '/api/admin/checkin'
     | '/api/admin/inquiries'
     | '/api/admin/roster'
     | '/api/newsletter/status'
@@ -685,6 +696,7 @@ export interface FileRouteTypes {
     | '/timer_/results'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
+    | '/api/admin/checkin'
     | '/api/admin/inquiries'
     | '/api/admin/roster'
     | '/api/newsletter/status'
@@ -742,6 +754,7 @@ export interface RootRouteChildren {
   TimerResultsRoute: typeof TimerResultsRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
+  ApiAdminCheckinRoute: typeof ApiAdminCheckinRoute
   ApiAdminInquiriesRoute: typeof ApiAdminInquiriesRoute
   ApiAdminRosterRoute: typeof ApiAdminRosterRoute
   ApiNewsletterStatusRoute: typeof ApiNewsletterStatusRoute
@@ -1104,6 +1117,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAdminInquiriesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/admin/checkin': {
+      id: '/api/admin/checkin'
+      path: '/api/admin/checkin'
+      fullPath: '/api/admin/checkin'
+      preLoaderRoute: typeof ApiAdminCheckinRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/.mcp/invoke-tool/$tool': {
       id: '/.mcp/invoke-tool/$tool'
       path: '/.mcp/invoke-tool/$tool'
@@ -1203,6 +1223,7 @@ const rootRouteChildren: RootRouteChildren = {
   TimerResultsRoute: TimerResultsRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
+  ApiAdminCheckinRoute: ApiAdminCheckinRoute,
   ApiAdminInquiriesRoute: ApiAdminInquiriesRoute,
   ApiAdminRosterRoute: ApiAdminRosterRoute,
   ApiNewsletterStatusRoute: ApiNewsletterStatusRoute,
