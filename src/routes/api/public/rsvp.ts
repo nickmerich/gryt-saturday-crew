@@ -62,7 +62,8 @@ export const Route = createFileRoute('/api/public/rsvp')({
           )
         }
 
-        const { name, contact, source, eventLabel, heroVariant } = parsed.data
+        const { name, contact, source, eventLabel, heroVariant, partySize, firstTimer } =
+          parsed.data
         const supabase: SupabaseClient<any, 'public', any> = createClient(supabaseUrl, supabaseServiceKey)
         const userAgent = request.headers.get('user-agent')?.slice(0, 300) ?? null
         const submittedAt = new Date().toISOString()
