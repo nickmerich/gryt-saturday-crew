@@ -77,6 +77,8 @@ export const Route = createFileRoute('/api/public/rsvp')({
             source: source ?? null,
             event_label: eventLabel ?? null,
             hero_variant: heroVariant ?? null,
+            party_size: partySize,
+            first_timer: firstTimer,
             user_agent: userAgent,
           })
           .select('id')
