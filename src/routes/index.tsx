@@ -4,6 +4,9 @@ import { useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } 
 import { useServerFn } from "@tanstack/react-start";
 import { signWaiver } from "@/lib/waiver.functions";
 import { clearSignupSession, loadSignupSession } from "@/lib/signup-session.functions";
+import { SaturdayWeather } from "@/components/site/SaturdayWeather";
+import { MontourRouteMap } from "@/components/site/MontourRouteMap";
+import { ClubStats } from "@/components/site/ClubStats";
 
 import { submitRecommendation } from "@/lib/recommendations.functions";
 import {
@@ -3881,6 +3884,9 @@ function Landing() {
       <Marquee />
       <GoogleReviewsBlock />
       <RSVP />
+      <SaturdayWeather />
+      <MontourRouteMap />
+      <ClubStats />
       <ResourcesBlock />
 
       <CorePromise />
