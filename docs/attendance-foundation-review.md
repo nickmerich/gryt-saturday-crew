@@ -6,6 +6,8 @@ Implemented for review in `review/attendance-foundation-2026-09-22`, based on `d
 
 The branch establishes the RSVP reliability foundation, not a new attendance system. Actual attendance still requires explicit organizer evidence in the existing operational process. An RSVP, Strava activity, email acceptance, or waiver signature never creates a check-in.
 
+During implementation, upstream `main` independently advanced to `3f8759e` with weather, route and club-stat additions. This task did not make those changes. GitHub reports this draft branch as mergeable, but the tests below cover the original review-branch baseline, not a combined build with those newer additions. Reconcile and retest against current `main` before approval; no upstream history was rewritten or overwritten.
+
 ## Implemented
 
 - **Canonical event occurrence:** Full local dates, stable event IDs and versions, New York timezone conversion, consistent current-run details, Google Calendar URLs and UTC-correct ICS. Today's directions remain available while the run is in progress.
