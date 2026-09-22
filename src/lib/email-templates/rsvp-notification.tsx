@@ -18,6 +18,8 @@ interface Props {
   source?: string
   eventLabel?: string
   submittedAt?: string
+  partySize?: number
+  firstTimer?: boolean
 }
 
 const NOTIFY_TO = 'merichnick@gmail.com'
