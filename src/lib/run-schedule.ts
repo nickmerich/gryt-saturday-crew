@@ -155,3 +155,221 @@ export function nextSaturdayIcsFilename(from: Date = nyNow()): string {
   const { y, m, d } = ymd(upcomingRunSaturday(from));
   return `gryt-run-${y}-${m}-${d}.ics`;
 }
+
+// ---------------------------------------------------------------------------
+// Canonical run occurrence
+// ---------------------------------------------------------------------------
+
+export const RUN_SERIES_ID = "gryt-saturday";
+export const RUN_TIME_ZONE = "America/New_York";
+export const RUN_LOCAL_START = "07:00";
+export const RUN_LOCAL_END = "08:30";
+
+export const RUN_LOCATION = {
+  name: "Peterswood Park lot, Montour / Peters Trail",
+  address: "212 Valley Brook Rd, McMurray, PA 15317",
+  mapsUrl: "https://maps.google.com/?q=212+Valley+Brook+Rd,+McMurray,+PA+15317",
+} as const;
+
+export type RunStatus =
+  | "draft"
+  | "scheduled"
+  | "modified"
+  | "cancelled"
+  | "in-progress"
+  | "completed";
+
+export interface RunOccurrence {
+  /** Opaque, stable id for this occurrence. */
+  id: string;
+  seriesId: string;
+  runNumber: number;
+  /** YYYY-MM-DD in America/New_York. */
+  localDate: string;
+  localStartTime: string;
+  localEndTime: string;
+  timeZone: string;
+  /** Exact instants (ISO, UTC). */
+  startUtc: string;
+  endUtc: string;
+  status: RunStatus;
+  /** Bumped whenever an organizer changes or cancels this occurrence. */
+  version: number;
+  location: { name: string; address: string; mapsUrl: string };
+  routeRef: string;
+  url: string;
+  /** Organizer-visible note shown when status is cancelled or modified. */
+  note?: string;
+}
+
+/** Organizer overrides keyed by local date (YYYY-MM-DD). */
+export const RUN_EXCEPTIONS: Record<
+  string,
+  { status: Extract<RunStatus, "cancelled" | "modified" | "draft">; version?: number; note?: string; localStartTime?: string }
+> = {};
+
+/** Offset of America/New_York from UTC, in minutes, at a given instant. */
+function nyOffsetMinutes(instant: Date): number {
+  const dtf = new Intl.DateTimeFormat("en-US", {
+    timeZone: RUN_TIME_ZONE,
+    hour12: false,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  });
+  const parts = Object.fromEntries(
+    dtf.formatToParts(instant).filter((p) => p.type !== "literal").map((p) => [p.type, Number(p.value)]),
+  ) as Record<string, number>;
+  const asUTC = Date.UTC(
+    parts.year,
+    parts.month - 1,
+    parts.day,
+    parts.hour === 24 ? 0 : parts.hour,
+    parts.minute,
+    parts.second,
+  );
+  return (asUTC - instant.getTime()) / 60000;
+}
+
+/** Convert an America/New_York wall-clock time to the exact UTC instant. */
+export function nyWallClockToUtc(
+  year: number,
+  month: number, // 1-12
+  day: number,
+  hour: number,
+  minute = 0,
+): Date {
+  const naive = Date.UTC(year, month - 1, day, hour, minute, 0, 0);
+  let offset = nyOffsetMinutes(new Date(naive));
+  let instant = naive - offset * 60000;
+  // One correction pass handles DST boundary cases.
+  const corrected = nyOffsetMinutes(new Date(instant));
+  if (corrected !== offset) {
+    offset = corrected;
+    instant = naive - offset * 60000;
+  }
+  return new Date(instant);
+}
+
+function parseLocalDate(localDate: string): { y: number; m: number; d: number } {
+  const [y, m, d] = localDate.split("-").map(Number);
+  return { y: y!, m: m!, d: d! };
+}
+
+function runNumberForDate(localDate: string): number {
+  const { y, m, d } = parseLocalDate(localDate);
+  const weeks = Math.round((Date.UTC(y, m - 1, d) - RUN_ANCHOR_MS) / (7 * 24 * 60 * 60 * 1000));
+  return RUN_ANCHOR_NUMBER + weeks;
+}
+
+function parseHm(v: string): { h: number; min: number } {
+  const [h, min] = v.split(":").map(Number);
+  return { h: h!, min: min! };
+}
+
+/** Build the occurrence for a specific America/New_York Saturday date. */
+export function occurrenceFor(localDate: string, now: Date = new Date()): RunOccurrence {
+  const exception = RUN_EXCEPTIONS[localDate];
+  const { y, m, d } = parseLocalDate(localDate);
+  const localStartTime = exception?.localStartTime ?? RUN_LOCAL_START;
+  const start = nyWallClockToUtc(y, m, d, parseHm(localStartTime).h, parseHm(localStartTime).min);
+  const end = nyWallClockToUtc(y, m, d, parseHm(RUN_LOCAL_END).h, parseHm(RUN_LOCAL_END).min);
+
+  let status: RunStatus = exception?.status ?? "scheduled";
+  if (SKIPPED_RUN_DATES.includes(localDate)) status = "cancelled";
+  if (status === "scheduled" || status === "modified") {
+    const t = now.getTime();
+    if (t >= end.getTime()) status = "completed";
+    else if (t >= start.getTime()) status = "in-progress";
+  }
+
+  return {
+    id: `gryt-run-${localDate}`,
+    seriesId: RUN_SERIES_ID,
+    runNumber: runNumberForDate(localDate),
+    localDate,
+    localStartTime,
+    localEndTime: RUN_LOCAL_END,
+    timeZone: RUN_TIME_ZONE,
+    startUtc: start.toISOString(),
+    endUtc: end.toISOString(),
+    status,
+    version: exception?.version ?? 1,
+    location: { ...RUN_LOCATION },
+    routeRef: "montour-peters-out-and-back",
+    url: "https://grytrunclub.com",
+    ...(exception?.note ? { note: exception.note } : {}),
+  };
+}
+
+function saturdayOnOrAfter(localDate: string): string {
+  const { y, m, d } = parseLocalDate(localDate);
+  const cur = new Date(Date.UTC(y, m - 1, d));
+  const add = (6 - cur.getUTCDay() + 7) % 7;
+  cur.setUTCDate(cur.getUTCDate() + add);
+  return cur.toISOString().slice(0, 10);
+}
+
+/** Local (America/New_York) YYYY-MM-DD for an instant. */
+export function nyDateKey(instant: Date = new Date()): string {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: RUN_TIME_ZONE,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(instant);
+  return parts;
+}
+
+/**
+ * The run a visitor should see right now: today's Saturday run until it has
+ * finished (so nobody driving in at 6:55 loses today's details), otherwise the
+ * next Saturday that isn't cancelled.
+ */
+export function getOccurrence(now: Date = new Date()): RunOccurrence {
+  let candidate = saturdayOnOrAfter(nyDateKey(now));
+  for (let i = 0; i < 60; i++) {
+    const occ = occurrenceFor(candidate, now);
+    if (occ.status !== "completed" && occ.status !== "cancelled" && occ.status !== "draft") return occ;
+    const { y, m, d } = parseLocalDate(candidate);
+    const next = new Date(Date.UTC(y, m - 1, d));
+    next.setUTCDate(next.getUTCDate() + 7);
+    candidate = next.toISOString().slice(0, 10);
+  }
+  return occurrenceFor(candidate, now);
+}
+
+/** Upcoming occurrences including cancelled ones, for organizer/admin views. */
+export function upcomingOccurrences(count: number, now: Date = new Date()): RunOccurrence[] {
+  const out: RunOccurrence[] = [];
+  let candidate = saturdayOnOrAfter(nyDateKey(now));
+  while (out.length < count) {
+    const occ = occurrenceFor(candidate, now);
+    if (occ.status !== "completed") out.push(occ);
+    const { y, m, d } = parseLocalDate(candidate);
+    const next = new Date(Date.UTC(y, m - 1, d));
+    next.setUTCDate(next.getUTCDate() + 7);
+    candidate = next.toISOString().slice(0, 10);
+  }
+  return out;
+}
+
+/** Validate a client-supplied event reference against the server's own view. */
+export function validateEventRef(
+  eventId: string | null | undefined,
+  version: number | null | undefined,
+  now: Date = new Date(),
+): { ok: true; occurrence: RunOccurrence } | { ok: false; reason: "unknown" | "stale" | "cancelled"; occurrence: RunOccurrence } {
+  const current = getOccurrence(now);
+  if (!eventId) return { ok: true, occurrence: current }; // legacy payloads
+  const match = /^gryt-run-(\d{4}-\d{2}-\d{2})$/.exec(eventId);
+  if (!match) return { ok: false, reason: "unknown", occurrence: current };
+  const occ = occurrenceFor(match[1]!, now);
+  if (occ.status === "cancelled") return { ok: false, reason: "cancelled", occurrence: current };
+  if (occ.id !== current.id) return { ok: false, reason: "stale", occurrence: current };
+  if (version != null && version !== occ.version) return { ok: false, reason: "stale", occurrence: current };
+  return { ok: true, occurrence: occ };
+}
