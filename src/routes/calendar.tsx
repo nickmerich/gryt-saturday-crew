@@ -122,11 +122,11 @@ function CalendarPage() {
             Run Calendar
           </h1>
           <p className="mt-5 max-w-xl text-paper/70 leading-relaxed">
-            Two runs a week, same spots, no signup. Saturday mornings we go long.
-            Tuesday nights we go loud. Show up once and you're one of us.
+            One run a week, same spot, no signup. Saturday mornings we go long.
+            Show up once and you're one of us.
           </p>
 
-          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+          <div className="mt-8">
             <div className="border border-blue/50 p-5">
               <div className="eyebrow text-blue mb-2">{SAT.short}</div>
               <div
@@ -137,18 +137,6 @@ function CalendarPage() {
               </div>
               <p className="mt-2 text-sm text-paper/65">
                 212 Valley Brook Rd, McMurray · Montour / Peters Trail · coffee in the lot after.
-              </p>
-            </div>
-            <div className="border border-paper/25 p-5">
-              <div className="eyebrow text-paper/60 mb-2">{TUE.short}</div>
-              <div
-                className="text-2xl uppercase"
-                style={{ fontFamily: "var(--font-display-condensed)" }}
-              >
-                {TUE.label}
-              </div>
-              <p className="mt-2 text-sm text-paper/65">
-                Late miles after the kids are down. Bring a light. Nobody runs alone.
               </p>
             </div>
           </div>
