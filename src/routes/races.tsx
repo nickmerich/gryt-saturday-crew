@@ -206,7 +206,7 @@ function RacesPage() {
             Pick a goal. Then show up Saturday at 7 AM on the Montour Trail in McMurray and train for it with people who'll notice if you don't come back.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
-            <Link to="/" hash="first-time" className="btn-primary">
+            <Link to="/" hash="join" className="btn-primary">
               Train with GRYT Saturdays →
             </Link>
             <Link
@@ -282,7 +282,7 @@ function RacesPage() {
           </div>
 
           <div className="mt-14 flex flex-wrap gap-4">
-            <Link to="/" hash="first-time" className="btn-primary">
+            <Link to="/" hash="join" className="btn-primary">
               RSVP for Saturday →
             </Link>
             <Link

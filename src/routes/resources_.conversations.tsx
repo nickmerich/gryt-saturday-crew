@@ -2,8 +2,9 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 import { ShareButtons } from "@/components/site/ShareButtons";
 import ogImage from "@/assets/og-conversations.jpg";
+import { SITE_ORIGIN } from "@/lib/site";
 
-const SITE = "https://gryt-saturday-crew.lovable.app";
+const SITE = SITE_ORIGIN;
 const URL = `${SITE}/resources/conversations`;
 const TITLE = "Conversations · gryt run club";
 const DESCRIPTION =
