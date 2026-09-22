@@ -69,6 +69,9 @@ export const createEventEntryCheckout = createServerFn({ method: 'POST' })
     environment: StripeEnv;
   }) => {
     if (!/^[a-zA-Z0-9_-]+$/.test(data.eventId)) throw new Error('Invalid eventId');
+    if (RETIRED_RUN_ENTRY_EVENT_IDS.has(data.eventId) || /gryt[_-]?(saturday|run)/i.test(data.eventId)) {
+      throw new Error('GRYT runs are free. There is no entry fee to pay.');
+    }
     if (!data.eventName || data.eventName.length > 120) throw new Error('Invalid event name');
     if (!data.amountInCents || data.amountInCents < 100) throw new Error('Amount must be at least $1');
     if (data.amountInCents > 1_000_000) throw new Error('Amount too large');
