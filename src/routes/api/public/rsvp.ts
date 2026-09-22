@@ -12,6 +12,8 @@ const RsvpSchema = z.object({
   source: z.string().trim().max(40).optional().nullable(),
   eventLabel: z.string().trim().max(120).optional().nullable(),
   heroVariant: z.enum(['a', 'b']).optional().nullable(),
+  partySize: z.coerce.number().int().min(1).max(10).optional().default(1),
+  firstTimer: z.boolean().optional().default(false),
 })
 
 function redactEmail(email: string | null | undefined): string {
