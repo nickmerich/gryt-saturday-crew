@@ -2,7 +2,7 @@
 
 ## Current status
 
-**The isolated Supabase project is created and its database/API-denial checks pass. Real organizer sign-in and authenticated app verification remain pending a staging-only server credential.**
+**The isolated Supabase project is created and its database/API-denial checks pass. The staging-only credential is now saved and available, but real organizer sign-in and authenticated app verification are blocked by certificate verification failure in the secure credential proxy.**
 
 This supersedes the environment-discovery block in the earlier [local staging report](./staging-verification-report.md). The production website and existing Supabase projects remain unchanged. The review branch has not been merged.
 
@@ -89,8 +89,10 @@ No other security-advisor categories were returned in this check. This is a poin
 
 ## Remaining work
 
-- A staging-only server secret is needed for real Supabase Auth administration and privileged app requests. The connector exposes project management and publishable keys, not that server secret.
-- A secure credential form was opened for `ccyejgyootpqnhfblffi.supabase.co`. Use this new project's secret API key, never the production key or organization token.
+- The user saved the requested credential for `ccyejgyootpqnhfblffi.supabase.co` on September 22, 2026. The credential vault reports the host-specific header credential available without further approval. Its value was not retrieved or exposed.
+- Credential-backed requests failed TLS validation before a Supabase authentication result could be obtained. Independent clients reported certificate signature failure in the credential-proxy path. An ordinary request to the staging Auth endpoint, without the credential proxy, completed with valid TLS and the expected HTTP 401 "No API key found" response.
+- This establishes staging reachability, not credential validity. Do not mark the key correct or incorrect until an authenticated request succeeds or returns a provider authentication error. Do not disable certificate or hostname verification to work around the failure.
+- The transport issue was recorded internally. Retry the same saved credential after the proxy certificate issue is resolved; no replacement key or pasted secret is requested.
 - No server secret has been stored in source, emitted in logs or placed in browser code.
 - The running website review server is not yet wired to this hosted project. The environment example is a template, not proof of deployment.
 - Real organizer, member, unconfirmed and expired-session behavior still needs testing through the application.
