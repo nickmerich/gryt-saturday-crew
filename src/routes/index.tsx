@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SITE_TITLE, SITE_DESCRIPTION } from "./__root";
-import { useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } from "react";
+import { currentRun, canRsvp, runNotice, googleCalendarUrl, runIcsDataUrl, type RunOccurrence } from "@/lib/run-occurrence";
+import { confirmationMessage, type DeliveryState } from "@/lib/attendance/schema";
 import { useServerFn } from "@tanstack/react-start";
 import { signWaiver } from "@/lib/waiver.functions";
 import { clearSignupSession, loadSignupSession } from "@/lib/signup-session.functions";
@@ -13,17 +15,6 @@ import {
 import { captureAttribution, getSignupAttribution } from "@/lib/attribution";
 import { useHeroVariant } from "@/lib/ab-hero";
 import { track } from "@/lib/analytics";
-import {
-  
-  nextSaturdayLabel,
-  nextSaturdayLabelLong,
-  nextSaturdayISOs,
-  nextSaturdayIcsDataUrl,
-  nextSaturdayIcsFilename,
-  SKIPPED_RUN_DATES,
-  upcomingRunSaturday,
-  upcomingRunLabel,
-} from "@/lib/run-schedule";
 import pittsburghBridge from "@/assets/pittsburgh-bridge.webp.asset.json";
 import photo1 from "@/assets/photos/run-club-1.jpg.asset.json";
 import photo2 from "@/assets/photos/run-club-2.jpg.asset.json";
@@ -98,9 +89,13 @@ import {
 const SITE_URL = "https://grytrunclub.com";
 const ABS_HERO_IMG = heroImg.startsWith("http") ? heroImg : `${SITE_URL}${heroImg}`;
 
-const EVENT_DATES = nextSaturdayISOs(12);
+const RunContext = createContext<RunOccurrence | null>(null);
+function useRun() { return useContext(RunContext) ?? currentRun(); }
+function RunLabel() { return <>{useRun().label}</>; }
+function RunSummary() { const run = useRun(); return <>{run.label} · {run.location} ({run.route})</>; }
 
 export const Route = createFileRoute("/")({
+  loader: () => ({ run: currentRun() }),
   head: () => ({
     meta: [
       { title: SITE_TITLE },
@@ -163,18 +158,10 @@ export const Route = createFileRoute("/")({
           name: "GRYT Saturday Run",
           description:
             "Free Saturday morning group run on the Montour / Peters Trail. Walk, jog, or run — no pace requirement, no one gets dropped.",
-          eventSchedule: {
-            "@type": "Schedule",
-            repeatFrequency: "P1W",
-            byDay: "https://schema.org/Saturday",
-            startTime: "07:00",
-            endTime: "08:30",
-            scheduleTimezone: "America/New_York",
-          },
-          startDate: EVENT_DATES[0],
-          endDate: EVENT_DATES[0]?.replace("T11:00", "T12:30"),
+          startDate: currentRun().startsAt,
+          endDate: currentRun().endsAt,
           eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-          eventStatus: "https://schema.org/EventScheduled",
+          eventStatus: currentRun().status === "cancelled" ? "https://schema.org/EventCancelled" : "https://schema.org/EventScheduled",
           url: SITE_URL,
           image: ABS_HERO_IMG,
           isAccessibleForFree: true,
@@ -197,14 +184,8 @@ export const Route = createFileRoute("/")({
           },
           location: {
             "@type": "Place",
-            name: "Montour / Peters Trail trailhead",
-            address: {
-              "@type": "PostalAddress",
-              streetAddress: "212 Valley Brook Road",
-              addressLocality: "McMurray",
-              addressRegion: "PA",
-              addressCountry: "US",
-            },
+            name: currentRun().route,
+            address: currentRun().location,
           },
         }),
       },
@@ -227,35 +208,19 @@ export const Route = createFileRoute("/")({
 
 const STRAVA_CLUB = "https://www.strava.com/clubs/1708552";
 
-// Recurring Google Calendar links (America/New_York).
-export const SAT_CAL_URL =
-  "https://www.google.com/calendar/render?action=TEMPLATE" +
-  "&text=" + encodeURIComponent("GRYT Run — Saturday Morning") +
-  "&dates=20260103T070000/20260103T080000" +
-  "&recur=" + encodeURIComponent("RRULE:FREQ=WEEKLY;BYDAY=SA") +
-  "&ctz=America/New_York" +
-  "&location=" + encodeURIComponent("212 Valley Brook Rd, McMurray, PA 15317") +
-  "&details=" + encodeURIComponent("All paces. All parents. 7 AM sharp. Coffee in the lot after. Strava: " + STRAVA_CLUB);
+// One canonical occurrence, including exceptions and correct DST.
+export function saturdayCalendarUrl() { return googleCalendarUrl(currentRun()); }
 
 
 // Milliseconds until the next Saturday 7:00 AM in America/New_York.
-// Uses toLocaleString to translate "now" into NY wall time so DST is handled
-// implicitly. Returns 0 during the live window (Sat 7:00–7:59 AM ET).
+// Compare actual instants, not local wall-clock Date objects.
 function msUntilNextSaturday7amET(from: Date = new Date()): number {
-  const nyNow = new Date(from.toLocaleString("en-US", { timeZone: "America/New_York" }));
-  // Live window only counts on a Saturday the club is actually running.
-  const todayKey = `${nyNow.getFullYear()}-${String(nyNow.getMonth() + 1).padStart(2, "0")}-${String(nyNow.getDate()).padStart(2, "0")}`;
-  if (nyNow.getDay() === 6 && nyNow.getHours() === 7 && !SKIPPED_RUN_DATES.includes(todayKey)) {
-    return 0;
-  }
-  const sat = upcomingRunSaturday(nyNow);
-  const target = new Date(sat);
-  target.setHours(7, 0, 0, 0);
-  return Math.max(0, target.getTime() - nyNow.getTime());
+  return Math.max(0, Date.parse(currentRun(from).startsAt) - from.getTime());
 }
 
 
 function RunCountdown({ className = "" }: { className?: string }) {
+  const run = useRun();
   const [ms, setMs] = useState<number | null>(null);
   useEffect(() => {
     const tick = () => setMs(msUntilNextSaturday7amET());
@@ -263,6 +228,8 @@ function RunCountdown({ className = "" }: { className?: string }) {
     const id = window.setInterval(tick, 1000);
     return () => window.clearInterval(id);
   }, []);
+
+  if (run.status === "cancelled" || run.status === "unconfirmed") return <p className={className}>{runNotice(run)}</p>;
 
   // Reserve height on SSR/first paint to avoid layout shift.
   if (ms === null) {
@@ -281,7 +248,7 @@ function RunCountdown({ className = "" }: { className?: string }) {
 
   const label = live
     ? "We're running right now"
-    : `UNTIL ${upcomingRunLabel(new Date(new Date().toLocaleString("en-US", { timeZone: "America/New_York" }))).toUpperCase()}`;
+    : `UNTIL ${run.label.toUpperCase()}`;
 
   return (
     <div
@@ -328,10 +295,6 @@ function RunCountdown({ className = "" }: { className?: string }) {
 type RsvpDay = "sat";
 
 const DAY_LABEL: Record<RsvpDay, string> = { sat: "Saturday · GRYT Run" };
-const DAY_CAL: Record<RsvpDay, string> = { sat: SAT_CAL_URL };
-const DAY_EVENT_LABEL: Record<RsvpDay, string> = {
-  sat: nextSaturdayLabel(),
-};
 
 const STRAVA_EVENT =
   "https://www.strava.com/clubs/1708552/group_events/3480014931408029926";
@@ -563,7 +526,7 @@ function Hero() {
           <div className="mt-5 md:mt-6 border-l-2 border-blue pl-3">
             <div className="eyebrow text-blue">Next run</div>
             <p className="text-[15px] md:text-base text-paper mt-1 leading-[1.45]">
-              {nextSaturdayLabelLong()} · 212 Valley Brook Road, McMurray (Montour / Peters Trail)
+              <RunSummary />
             </p>
           </div>
 
@@ -703,6 +666,12 @@ function MemberNamesMarquee() {
 }
 
 function RSVP() {
+  const run = useRun();
+  const [savedRun, setSavedRun] = useState<RunOccurrence | null>(null);
+  const [delivery, setDelivery] = useState<DeliveryState>("queued");
+  const [interactive, setInteractive] = useState(false);
+  useEffect(() => setInteractive(true), []);
+  const requestKey = useRef<{ fingerprint: string; key: string } | null>(null);
   const heroVariant = useHeroVariant();
   const [name, setName] = useState("");
   const [contact, setContact] = useState("");
@@ -756,7 +725,9 @@ function RSVP() {
         // Only show the confirmation when the stored RSVP is for the run that
         // is actually coming up. Otherwise prefill the form so a returning
         // runner can RSVP for this week.
-        if (session.eventLabel && session.eventLabel === DAY_EVENT_LABEL.sat) {
+        if (session.eventLabel && session.eventLabel === run.label) {
+          setSavedRun(run);
+          setDelivery(session.confirmationStatus);
           setSubmittedDays(["sat"]);
           setSubmitted(true);
         }
@@ -767,12 +738,12 @@ function RSVP() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [run.id, run.version]);
 
 
   const submit = async () => {
     if (!name.trim() || !contact.trim()) {
-      setError("Add your name and an email or phone so we can send the reminder.");
+      setError("Add your name and a valid email or phone to save your RSVP.");
       track("rsvp_submit_blocked", {
         reason: "missing_contact",
         hero_variant: heroVariant ?? "unknown",
@@ -799,36 +770,36 @@ function RSVP() {
       source: source || "unspecified",
     });
     try {
-      // One RSVP per selected day so each gets the right event label + calendar.
-      const results = await Promise.all(
-        selected.map((d) =>
-          fetch("/api/public/rsvp", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              name: name.trim(),
-              contact: contact.trim(),
-              source: source || null,
-              eventLabel: DAY_EVENT_LABEL[d],
-              heroVariant: heroVariant ?? null,
-            }),
-          }),
-        ),
-      );
-      const failed = results.find((r) => !r.ok);
-      if (failed) {
-        const data = await failed.json().catch(() => ({}));
+      const attribution = getSignupAttribution("saturday_rsvp");
+      try { attribution.referring_site = attribution.referring_site ? new URL(attribution.referring_site).hostname : ""; }
+      catch { attribution.referring_site = ""; }
+      const payload = {
+        name: name.trim(), contact: contact.trim(), source: source || null,
+        eventId: run.id, eventVersion: run.version, heroVariant: heroVariant ?? null,
+        attribution,
+      };
+      const fingerprint = JSON.stringify(payload);
+      if (requestKey.current?.fingerprint !== fingerprint) requestKey.current = { fingerprint, key: crypto.randomUUID() };
+      const result = await fetch("/api/public/rsvp", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...payload, idempotencyKey: requestKey.current.key }),
+      });
+      const data = await result.json().catch(() => ({}));
+      if (!result.ok) {
         setError(data?.error || "Something went wrong. Try again in a moment.");
         track("rsvp_submit_error", {
           hero_variant: heroVariant ?? "unknown",
-          status: failed.status,
+          status: result.status,
           reason: "server_error",
         });
         return;
       }
+      if (!data.success || !data.rsvpId || !data.event) throw new Error("Missing saved RSVP receipt");
+      setSavedRun(data.event);
+      setDelivery(data.confirmationStatus ?? "queued");
       setSubmittedDays(selected);
       setSubmitted(true);
-      track("rsvp_submit_success", {
+      if (data.created) track("rsvp_submit_success", {
         hero_variant: heroVariant ?? "unknown",
         days: selected.join(","),
         day_count: selected.length,
@@ -837,7 +808,7 @@ function RSVP() {
       });
       // Also emit a Saturday-only conversion so GA4 goals can key off it.
       let saturdayFired = false;
-      if (selected.includes("sat")) {
+      if (selected.includes("sat") && data.created) {
         track("rsvp_saturday_success", {
           hero_variant: heroVariant ?? "unknown",
         });
@@ -851,7 +822,7 @@ function RSVP() {
         const hasSaturday = selected.some((d) =>
           (DAY_LABEL[d] ?? "").toLowerCase().includes("saturday"),
         );
-        if (hasSaturday && !saturdayFired) {
+        if (hasSaturday && data.created && !saturdayFired) {
           // eslint-disable-next-line no-console
           console.warn(
             "[analytics] rsvp_saturday_success was NOT fired despite a Saturday selection.",
@@ -863,21 +834,8 @@ function RSVP() {
           });
         }
       });
-      // Save a tiny prefill so the waiver page can auto-populate.
-      try {
-        const contactStr = contact.trim();
-        const looksLikeEmail = /@/.test(contactStr);
-        localStorage.setItem(
-          "gryt_rsvp_prefill",
-          JSON.stringify({
-            name: name.trim(),
-            email: looksLikeEmail ? contactStr.toLowerCase() : "",
-            phone: looksLikeEmail ? "" : contactStr,
-          }),
-        );
-      } catch {
-        // ignore
-      }
+      // Waiver continuation uses in-memory props and the existing opaque,
+      // httpOnly signup session. Do not copy contact details into localStorage.
     } catch {
       setError("Network error. Please try again.");
       track("rsvp_submit_error", {
@@ -911,15 +869,16 @@ function RSVP() {
             RSVP for this Saturday.
           </h2>
           <p className="text-[17px] leading-[1.6] text-paper/80 max-w-[440px] mb-6">
-            Tell us you're coming and we'll send one nudge Friday and a wave Saturday morning.
-            That's it. No spam, no funnel — just a standing invite to the trailhead.
+            Tell us you're coming so we can welcome you. Save the meeting details below.
+            Automatic text reminders are not enabled.
           </p>
+          {runNotice(run) && <p role="status" className="border border-blue p-4 mb-5 text-base">{runNotice(run)}</p>}
           <RunCountdown className="mb-6 max-w-[440px]" />
           <div id="details" className="scroll-mt-24 border-t-2 border-paper/70 max-w-[440px]">
             {([
-              ["When", nextSaturdayLabelLong()],
-              ["Where", <>212 Valley Brook Road, McMurray · <a href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Road%2C%20McMurray%2C%20PA" target="_blank" rel="noopener noreferrer" className="text-blue hover:underline">Get directions</a></>],
-              ["Route", "Montour / Peters Trail · Peters Township & Upper St. Clair"],
+              ["When", run.label],
+              ["Where", <>{run.location} · <a href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(run.location)}`} target="_blank" rel="noopener noreferrer" className="text-blue hover:underline">Get directions</a></>],
+              ["Route", run.route],
               ["Distance", "About 4 miles · out and back"],
               ["Pace", "Walk, jog, run · all welcome"],
               ["Cost", "Free, always"],
@@ -943,14 +902,14 @@ function RSVP() {
           </div>
           <div className="mt-5 flex flex-wrap gap-3 max-w-[440px]">
             <a
-              href={nextSaturdayIcsDataUrl()}
-              download={nextSaturdayIcsFilename()}
+              href={runIcsDataUrl(run)}
+              download={`${run.id}.ics`}
               className="inline-flex items-center gap-2 border border-paper/30 hover:border-blue hover:text-blue text-paper text-[12px] font-bold tracking-[0.14em] uppercase px-4 py-2.5 transition-colors"
             >
               ↓ Add to calendar (.ics)
             </a>
             <a
-              href={SAT_CAL_URL}
+              href={googleCalendarUrl(run)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 border border-paper/15 hover:border-paper/40 text-paper/70 hover:text-paper text-[12px] font-bold tracking-[0.14em] uppercase px-4 py-2.5 transition-colors"
@@ -973,7 +932,7 @@ function RSVP() {
                 <div className="flex items-center gap-3 border-[1.5px] border-ink bg-white px-3.5 py-3">
                   <span className="w-4 h-4 flex items-center justify-center bg-ink text-paper text-[10px]">✓</span>
                   <span className="text-sm font-semibold text-ink">Saturday · GRYT Run</span>
-                  <span className="text-xs text-ink/55 ml-auto">7:00 AM</span>
+                  <span className="text-xs text-ink/55 ml-auto">{run.timeLabel}</span>
                 </div>
               </div>
               {[
@@ -986,17 +945,19 @@ function RSVP() {
                 },
                 {
                   label: "Email or phone",
-                  placeholder: "So we can send the reminder",
+                  placeholder: "Email or phone for your RSVP",
                   value: contact,
                   set: setContact,
                   type: "text",
                 },
               ].map((f) => (
                 <div key={f.label}>
-                  <label className="block text-[11px] font-bold tracking-[0.14em] uppercase text-ink/55 mb-1.5">
+                  <label htmlFor={f.label === "First name" ? "rsvp-name" : "rsvp-contact"} className="block text-[11px] font-bold tracking-[0.14em] uppercase text-ink/55 mb-1.5">
                     {f.label}
                   </label>
                   <input
+                    id={f.label === "First name" ? "rsvp-name" : "rsvp-contact"}
+                    disabled={!interactive}
                     value={f.value}
                     onChange={(e) => f.set(e.target.value)}
                     placeholder={f.placeholder}
@@ -1004,10 +965,11 @@ function RSVP() {
                   />
                 </div>
               ))}
-              <label className="block text-[11px] font-bold tracking-[0.14em] uppercase text-ink/55 mb-1.5">
+              <label htmlFor="rsvp-source" className="block text-[11px] font-bold tracking-[0.14em] uppercase text-ink/55 mb-1.5">
                 How'd you find us?
               </label>
               <select
+                id="rsvp-source"
                 value={source}
                 onChange={(e) => setSource(e.target.value)}
                 className="w-full text-base text-ink bg-white border-[1.5px] border-[#cfcabe] px-3.5 py-3 mb-4 outline-none focus:border-ink"
@@ -1021,21 +983,22 @@ function RSVP() {
                 <option value="Other">Other</option>
               </select>
               {error && (
-                <div className="text-[13px] text-[#b23a2e] mb-3.5">{error}</div>
+                <div role="alert" className="text-[13px] text-[#b23a2e] mb-3.5">{error}</div>
               )}
               <button
                 onClick={submit}
-                disabled={submitting}
+                disabled={!interactive || submitting || !canRsvp(run)}
+                data-testid="rsvp-submit"
                 className="w-full text-sm font-bold tracking-[0.1em] uppercase py-4 bg-ink text-paper hover:bg-[#3a7ca5] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                 style={{ fontFamily: "var(--font-body)" }}
               >
-                {submitting ? "Sending…" : "Lock it in →"}
+                {submitting ? "Saving…" : !canRsvp(run) ? "RSVP unavailable for this run" : "Lock it in →"}
               </button>
               <p className="mt-3.5 text-xs leading-[1.5] text-ink/55 text-center">
-                Free, always. One reminder Friday, one Saturday. Unsubscribe anytime.
+                Free, always. No account or Strava connection required.
               </p>
               <p className="mt-2 text-xs leading-[1.5] text-ink/50 text-center">
-                We'll only use this to send run reminders and GRYT updates. No spam.
+                We use these details for your RSVP and relevant run logistics, not a merch or newsletter subscription.
               </p>
               <p className="mt-2 text-xs text-center">
                 <Link to="/privacy" className="text-ink/50 underline hover:text-ink transition-colors">
@@ -1050,6 +1013,8 @@ function RSVP() {
               days={submittedDays}
               prefill={waiverPrefill}
               waiverOnFile={waiverOnFile}
+              event={savedRun ?? run}
+              delivery={delivery}
               onReset={() => {
                 void clearSignupSession().catch(() => {});
                 setWaiverOnFile(false);
@@ -1058,6 +1023,8 @@ function RSVP() {
                 setName("");
                 setContact("");
                 setSource("");
+                setSavedRun(null);
+                requestKey.current = null;
 
               }}
             />
@@ -1088,6 +1055,8 @@ function RSVPConfirmation({
   days,
   prefill,
   waiverOnFile = false,
+  event,
+  delivery,
   onReset,
 }: {
   name: string;
@@ -1095,6 +1064,8 @@ function RSVPConfirmation({
   days: RsvpDay[];
   prefill?: WaiverPrefill;
   waiverOnFile?: boolean;
+  event: RunOccurrence;
+  delivery: DeliveryState;
   onReset: () => void;
 }) {
   const [waiverSigned, setWaiverSigned] = useState(waiverOnFile);
@@ -1107,13 +1078,13 @@ function RSVPConfirmation({
     ["Contact", masked || "—"],
     ["RSVP", days.map((d) => DAY_LABEL[d]).join(" · ") || "Saturday · GRYT Run"],
     ["Waiver", waiverSigned ? "Signed · covered through Dec 31, 2026" : "Not signed yet"],
-    ["When", nextSaturdayLabelLong()],
+    ["When", event.label],
     [
       "Where",
       <>
-        212 Valley Brook Road, McMurray ·{" "}
+        {event.location} ·{" "}
         <a
-          href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Road%2C%20McMurray%2C%20PA"
+          href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(event.location)}`}
           target="_blank"
           rel="noopener noreferrer"
           className="underline underline-offset-2 hover:text-ink"
@@ -1134,6 +1105,7 @@ function RSVPConfirmation({
           You're in, {firstName}.
         </span>
       </div>
+      <p data-testid="rsvp-delivery-status" className="text-sm leading-relaxed mb-5">{confirmationMessage(delivery)}</p>
 
       <div className="border-[1.5px] border-ink mb-5">
         <div className="text-[11px] font-bold tracking-[0.14em] uppercase text-paper bg-ink px-3.5 py-2">
@@ -1159,18 +1131,18 @@ function RSVPConfirmation({
           {days.map((d) => (
             <a
               key={d}
-              href={DAY_CAL[d]}
+              href={googleCalendarUrl(event)}
               target="_blank"
               rel="noopener"
               className="flex items-center justify-between gap-3 border-[1.5px] border-ink px-3.5 py-2.5 text-sm font-semibold text-ink hover:bg-ink hover:text-paper transition-colors"
             >
               <span>Add {DAY_LABEL[d]}</span>
-              <span className="text-xs tracking-[0.1em] uppercase opacity-70">7:00 AM</span>
+              <span className="text-xs tracking-[0.1em] uppercase opacity-70">{event.timeLabel}</span>
             </a>
           ))}
           <a
-            href={nextSaturdayIcsDataUrl()}
-            download={nextSaturdayIcsFilename()}
+            href={runIcsDataUrl(event)}
+            download={`${event.id}.ics`}
             className="flex items-center justify-between gap-3 border border-[#d8d4cb] px-3.5 py-2.5 text-sm font-semibold text-ink hover:border-ink transition-colors"
           >
             <span>Download .ics (Apple, Outlook)</span>
@@ -1191,7 +1163,7 @@ function RSVPConfirmation({
           ))}
         </div>
         <div className="text-xs text-ink/55">
-          Recurring weekly event — shows up every Saturday.
+          This calendar entry is for this run only. Check the site for changes.
         </div>
       </div>
 
@@ -2309,7 +2281,7 @@ function Community() {
                 Next up
               </span>
               <span className="text-sm font-semibold text-paper">
-                {nextSaturdayLabel()}
+                <RunLabel />
               </span>
             </div>
             <a
@@ -2902,7 +2874,7 @@ function Testimonial() {
 
 function WeeklyRhythm() {
   const stravaUrl = STRAVA_CLUB;
-  const satCal = SAT_CAL_URL;
+  const satCal = saturdayCalendarUrl();
 
   return (
     <section id="rhythm" className="bg-ink text-paper py-20 md:py-28 px-6 sm:px-12 lg:px-24 border-t border-paper/10">
@@ -3872,11 +3844,21 @@ function RegionBand() {
 }
 
 function Landing() {
-
-
+  const { run: initialRun } = Route.useLoaderData();
+  const [run, setRun] = useState(initialRun);
+  useEffect(() => {
+    const timer = window.setInterval(() => setRun(currentRun()), 30000);
+    return () => window.clearInterval(timer);
+  }, []);
   return (
-    <main className="bg-ink text-paper">
+    <RunContext.Provider value={run}>
+    <main className="bg-ink text-paper pb-28 md:pb-0">
       <Nav />
+      {runNotice(run) && <div role="status" className="bg-blue text-ink px-6 py-4 text-base">{runNotice(run)}</div>}
+      <a href="#join" data-testid="mobile-run-action" className="fixed bottom-0 inset-x-0 z-50 md:hidden bg-blue text-ink px-4 py-3 border-t-2 border-ink">
+        <span className="block text-sm font-bold">{canRsvp(run) ? "RSVP Saturday" : "View run status"} · {run.timeLabel}</span>
+        <span className="block text-sm">{run.localDate} · {run.location}</span>
+      </a>
       <Hero />
       <Marquee />
       <GoogleReviewsBlock />
@@ -3901,5 +3883,6 @@ function Landing() {
       <NewsletterBar />
       <Footer />
     </main>
+    </RunContext.Provider>
   );
 }

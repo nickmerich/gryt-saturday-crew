@@ -1,6 +1,7 @@
 import { defineTool, type ToolContext } from "@lovable.dev/mcp-js";
 import { guardToolAccess } from "../public-allowlist";
 import { nextRunNumber, nextSaturdayISODate, nextSaturdayLabel } from "@/lib/run-schedule";
+import { currentRun } from "@/lib/run-occurrence";
 
 const TOOL_NAME = "get_run_schedule";
 
@@ -15,11 +16,11 @@ export default defineTool({
     const runs = [
       {
         day: "Saturday",
-        time: "7:00 AM",
-        location: "Montour / Peters Trail, McMurray, PA",
-        meetingPoint: "212 Valley Brook Road, McMurray, PA",
+        time: currentRun().timeLabel,
+        location: currentRun().route,
+        meetingPoint: currentRun().location,
         pace: "Easy, conversational. All paces welcome.",
-        notes: "Coffee after. No signup required — just show up.",
+        notes: `No membership required. RSVP and sign the required waiver. Status: ${currentRun().status}. ${currentRun().notice}`,
         nextRunNumber: nextRunNumber(),
         nextRunDate: nextSaturdayISODate(),
         nextRunLabel: nextSaturdayLabel(),

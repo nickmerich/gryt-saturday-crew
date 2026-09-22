@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { supabase } from '@/integrations/supabase/client'
 import { isAdminEmail } from '@/lib/admin/allowlist'
 import type { RosterResponse } from '@/lib/roster/types'
+import { AttendanceQueue } from '@/components/site/AttendanceQueue'
 
 export const Route = createFileRoute('/admin/roster')({
   ssr: false,
@@ -179,8 +180,8 @@ function AdminRosterPage() {
         <p className="eyebrow eyebrow-blue">Private · admin only</p>
         <h1 className="display-condensed text-4xl sm:text-5xl mt-2">Runner Roster</h1>
         <p className="mt-2 text-sm text-muted-foreground max-w-xl">
-          Everyone who has RSVP'd, when they signed up, and whether the 2026 waiver is on file. This page is never public
-          and is excluded from search engines.
+          RSVP records, not confirmed attendance. Waivers are shown only for exact name and email matches in the current season.
+          A missing match needs review and does not prove someone never signed. This page is private.
         </p>
         {data && (
           <p className="mt-4 text-xs uppercase tracking-wider text-muted-foreground">
@@ -188,6 +189,8 @@ function AdminRosterPage() {
           </p>
         )}
       </div>
+
+      <AttendanceQueue />
 
       <div className="px-6 sm:px-12 py-6 flex flex-wrap items-center gap-3 border-b border-white/10">
         <label htmlFor="roster-search" className="sr-only">
