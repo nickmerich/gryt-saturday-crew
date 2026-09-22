@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 import ogImage from "@/assets/og-playbooks.jpg";
+import { SITE_ORIGIN } from "@/lib/site";
 
-const SITE = "https://gryt-saturday-crew.lovable.app";
+const SITE = SITE_ORIGIN;
 const URL = `${SITE}/resources/playbooks`;
 const TITLE = "Playbooks · gryt run club";
 const DESCRIPTION =
