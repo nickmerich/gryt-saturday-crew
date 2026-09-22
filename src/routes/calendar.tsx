@@ -92,7 +92,7 @@ function CalendarPage() {
       const dow = new Date(cursor.y, cursor.m, d).getDay();
       out.push({
         d,
-        run: dow === SAT.day ? SAT : dow === TUE.day ? TUE : null,
+        run: dow === SAT.day ? SAT : null,
         isToday:
           d === today.getDate() &&
           cursor.m === today.getMonth() &&
