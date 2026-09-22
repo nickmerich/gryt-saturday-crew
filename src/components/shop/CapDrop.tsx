@@ -55,14 +55,15 @@ export function CapDrop() {
               <p className="display-condensed uppercase text-2xl tracking-[0.02em]">
                 {data.price ?? "Price on Shopify"}
               </p>
-            <a
-              href={data.productUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="self-start bg-blue text-ink px-6 py-4 text-xs font-bold uppercase tracking-[0.14em] hover:bg-paper transition-colors"
-            >
-              View on Shopify
-            </a>
+              <a
+                href={data.productUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="self-start bg-blue text-ink px-6 py-4 text-xs font-bold uppercase tracking-[0.14em] hover:bg-paper transition-colors"
+              >
+                View on Shopify
+              </a>
+            </>
           ) : (
             <p className="border border-paper/20 px-4 py-3 text-sm text-paper/60">
               Not for sale yet. This page is in review while the cap, price and
