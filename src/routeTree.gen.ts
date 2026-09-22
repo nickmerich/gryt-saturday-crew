@@ -13,6 +13,7 @@ import { Route as WaiverRouteImport } from './routes/waiver'
 import { Route as TimerRouteImport } from './routes/timer'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ShopRouteImport } from './routes/shop'
 import { Route as ResourcesRouteImport } from './routes/resources'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as RacesRouteImport } from './routes/races'
@@ -87,6 +88,11 @@ const TermsRoute = TermsRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShopRoute = ShopRouteImport.update({
+  id: '/shop',
+  path: '/shop',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResourcesRoute = ResourcesRouteImport.update({
@@ -394,6 +400,7 @@ export interface FileRoutesByFullPath {
   '/races': typeof RacesRoute
   '/register': typeof RegisterRoute
   '/resources': typeof ResourcesRoute
+  '/shop': typeof ShopRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/timer': typeof TimerRoute
@@ -455,6 +462,7 @@ export interface FileRoutesByTo {
   '/races': typeof RacesRoute
   '/register': typeof RegisterRoute
   '/resources': typeof ResourcesRoute
+  '/shop': typeof ShopRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/timer': typeof TimerRoute
@@ -517,6 +525,7 @@ export interface FileRoutesById {
   '/races': typeof RacesRoute
   '/register': typeof RegisterRoute
   '/resources': typeof ResourcesRoute
+  '/shop': typeof ShopRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/timer': typeof TimerRoute
@@ -580,6 +589,7 @@ export interface FileRouteTypes {
     | '/races'
     | '/register'
     | '/resources'
+    | '/shop'
     | '/sitemap.xml'
     | '/terms'
     | '/timer'
@@ -641,6 +651,7 @@ export interface FileRouteTypes {
     | '/races'
     | '/register'
     | '/resources'
+    | '/shop'
     | '/sitemap.xml'
     | '/terms'
     | '/timer'
@@ -702,6 +713,7 @@ export interface FileRouteTypes {
     | '/races'
     | '/register'
     | '/resources'
+    | '/shop'
     | '/sitemap.xml'
     | '/terms'
     | '/timer'
@@ -764,6 +776,7 @@ export interface RootRouteChildren {
   RacesRoute: typeof RacesRoute
   RegisterRoute: typeof RegisterRoute
   ResourcesRoute: typeof ResourcesRoute
+  ShopRoute: typeof ShopRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
   TimerRoute: typeof TimerRoute
@@ -839,6 +852,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shop': {
+      id: '/shop'
+      path: '/shop'
+      fullPath: '/shop'
+      preLoaderRoute: typeof ShopRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/resources': {
@@ -1254,6 +1274,7 @@ const rootRouteChildren: RootRouteChildren = {
   RacesRoute: RacesRoute,
   RegisterRoute: RegisterRoute,
   ResourcesRoute: ResourcesRoute,
+  ShopRoute: ShopRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
   TimerRoute: TimerRoute,
