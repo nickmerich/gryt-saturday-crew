@@ -278,9 +278,12 @@ export function occurrenceFor(localDate: string, now: Date = new Date()): RunOcc
   const start = nyWallClockToUtc(y, m, d, parseHm(localStartTime).h, parseHm(localStartTime).min);
   const end = nyWallClockToUtc(y, m, d, parseHm(RUN_LOCAL_END).h, parseHm(RUN_LOCAL_END).min);
 
-  let status: RunStatus = exception?.status ?? "scheduled";
-  if (SKIPPED_RUN_DATES.includes(localDate)) status = "cancelled";
-  if (status === "scheduled" || status === "modified") {
+  const baseStatus: RunStatus = SKIPPED_RUN_DATES.includes(localDate)
+    ? "cancelled"
+    : (exception?.status ?? "scheduled");
+  let status: RunStatus = baseStatus;
+  if (baseStatus === "scheduled" || baseStatus === "modified") {
+
     const t = now.getTime();
     if (t >= end.getTime()) status = "completed";
     else if (t >= start.getTime()) status = "in-progress";
