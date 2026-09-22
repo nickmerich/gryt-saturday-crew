@@ -179,6 +179,7 @@ function AdminRosterPage() {
       <div className="border-b border-white/10 px-6 sm:px-12 py-8">
         <p className="eyebrow eyebrow-blue">Private · admin only</p>
         <h1 className="display-condensed text-4xl sm:text-5xl mt-2">Runner Roster</h1>
+        <a href="/admin/check-in" className="inline-block mt-4 text-blue underline underline-offset-4">Open organizer attendance</a>
         <p className="mt-2 text-sm text-muted-foreground max-w-xl">
           RSVP records, not confirmed attendance. Waivers are shown only for exact name and email matches in the current season.
           A missing match needs review and does not prove someone never signed. This page is private.

@@ -1,5 +1,7 @@
 # GRYT Clean Visual Direction
 
+The subsequent organizer attendance pass adds a private check-in desk while preserving this public-site direction. See [Organizer Attendance Review](./organizer-attendance-review.md) for the new tools and current validation scope.
+
 ## Direction and provenance
 
 Applied on the existing attendance review branch at the user's request. The visual reference is the user-supplied `IMG_7509.jpeg`, SHA-256 `a332550949c84e6c1a2ebde04672091cd6a6481451d4e7c82b4a704dc1fa4ac6`. The busier `IMG_7527.jpeg` direction is not used.

@@ -1,5 +1,7 @@
 # GRYT Attendance Foundation Review
 
+This document records the original RSVP-foundation phase. The later organizer phase adds an explicit private attendance ledger and its own un-applied migration; see [Organizer Attendance Review](./organizer-attendance-review.md) for the current check-in scope and staging requirements.
+
 ## Review status
 
 Implemented for review in `review/attendance-foundation-2026-09-22`, based on `d6b478a67f19e003641a00d7b174cd84b37454f4`. This is not a production release. No production migration, scheduler, email, Notion write, member import, payment, merge, or live-site deployment was performed.

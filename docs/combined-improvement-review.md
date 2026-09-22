@@ -46,7 +46,7 @@ These changes intentionally reduce apparent feature completeness in favor of fac
 
 ## Still open
 
-- Organizer event-status editor. Status overrides remain source-controlled.
+- Organizer event-status editor. Status overrides remain source-controlled. The subsequent organizer attendance pass adds a private check-in ledger, documented in `organizer-attendance-review.md`, but does not change public event status.
 - Verified route geometry, exact parking pin and elevation evidence.
 - Forecast-point approval and provider-backed staging checks.
 - Full reviewed Strava integration, if still desired. Do not infer weekly attendance from club activities.
