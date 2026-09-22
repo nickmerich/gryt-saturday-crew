@@ -2,7 +2,12 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import { createFileRoute } from '@tanstack/react-router'
 import { z } from 'zod'
 import { sendInternalTransactionalEmail } from '@/lib/email/send-internal.server'
-import { nextRunNumber, nextSaturdayISODate, nextSaturdayLabel } from '@/lib/run-schedule'
+import {
+  nextRunNumber,
+  nextSaturdayISODate,
+  nextSaturdayLabel,
+  validateEventRef,
+} from '@/lib/run-schedule'
 
 const isEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)
 
@@ -10,11 +15,15 @@ const RsvpSchema = z.object({
   name: z.string().trim().min(1).max(80),
   contact: z.string().trim().min(3).max(200),
   source: z.string().trim().max(40).optional().nullable(),
+  // Legacy display label. Recorded, never trusted as the event identity.
   eventLabel: z.string().trim().max(120).optional().nullable(),
+  eventId: z.string().trim().max(60).optional().nullable(),
+  eventVersion: z.coerce.number().int().min(1).max(999).optional().nullable(),
   heroVariant: z.enum(['a', 'b']).optional().nullable(),
   partySize: z.coerce.number().int().min(1).max(10).optional().default(1),
   firstTimer: z.boolean().optional().default(false),
 })
+
 
 function redactEmail(email: string | null | undefined): string {
   if (!email) return '***'
@@ -62,11 +71,40 @@ export const Route = createFileRoute('/api/public/rsvp')({
           )
         }
 
-        const { name, contact, source, eventLabel, heroVariant, partySize, firstTimer } =
-          parsed.data
+        const {
+          name,
+          contact,
+          source,
+          eventLabel,
+          eventId,
+          eventVersion,
+          heroVariant,
+          partySize,
+          firstTimer,
+        } = parsed.data
+
+        // Validate the canonical occurrence server-side. A stale tab that still
+        // holds a cancelled or superseded run must not silently sign someone up.
+        const eventCheck = validateEventRef(eventId, eventVersion)
+        if (!eventCheck.ok) {
+          return Response.json(
+            {
+              error:
+                eventCheck.reason === 'cancelled'
+                  ? 'That run was cancelled. Refresh the page for the next one.'
+                  : 'The run details changed. Refresh the page and sign up again.',
+              reason: eventCheck.reason,
+              currentEventId: eventCheck.occurrence.id,
+            },
+            { status: 409 },
+          )
+        }
+        const occurrence = eventCheck.occurrence
+
         const supabase: SupabaseClient<any, 'public', any> = createClient(supabaseUrl, supabaseServiceKey)
         const userAgent = request.headers.get('user-agent')?.slice(0, 300) ?? null
         const submittedAt = new Date().toISOString()
+
 
         // 1. Persist the RSVP
         const { data: inserted, error: insertError } = await supabase
@@ -90,8 +128,10 @@ export const Route = createFileRoute('/api/public/rsvp')({
         }
 
         const rsvpId = inserted.id as string
-        const resolvedEventLabel =
-          eventLabel?.trim() || nextSaturdayLabel()
+        const resolvedEventLabel = eventId
+          ? `GRYT Run #${occurrence.runNumber} · Sat, ${new Date(occurrence.startUtc).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: occurrence.timeZone })} · 7 AM`
+          : eventLabel?.trim() || nextSaturdayLabel()
+
 
         // 2. Owner notification (always)
         try {

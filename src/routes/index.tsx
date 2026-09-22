@@ -26,6 +26,10 @@ import {
   SKIPPED_RUN_DATES,
   upcomingRunSaturday,
   upcomingRunLabel,
+  getOccurrence,
+  upcomingOccurrences,
+
+
 } from "@/lib/run-schedule";
 import pittsburghBridge from "@/assets/pittsburgh-bridge.webp.asset.json";
 import photo1 from "@/assets/photos/run-club-1.jpg.asset.json";
@@ -102,6 +106,15 @@ const SITE_URL = "https://grytrunclub.com";
 const ABS_HERO_IMG = heroImg.startsWith("http") ? heroImg : `${SITE_URL}${heroImg}`;
 
 const EVENT_DATES = nextSaturdayISOs(12);
+const CANONICAL_OCCURRENCE = getOccurrence();
+// This calendar Saturday, when the club has called it off (organizer exception).
+const SKIPPED_THIS_WEEK = (() => {
+  const soon = upcomingOccurrences(1);
+  const first = soon[0];
+  return first && first.status === "cancelled" ? first : null;
+})();
+
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -174,8 +187,9 @@ export const Route = createFileRoute("/")({
             endTime: "08:30",
             scheduleTimezone: "America/New_York",
           },
-          startDate: EVENT_DATES[0],
-          endDate: EVENT_DATES[0]?.replace("T11:00", "T12:30"),
+          startDate: CANONICAL_OCCURRENCE.startUtc,
+          endDate: CANONICAL_OCCURRENCE.endUtc,
+
           eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
           eventStatus: "https://schema.org/EventScheduled",
           url: SITE_URL,
@@ -817,6 +831,10 @@ function RSVP() {
               contact: contact.trim(),
               source: source || null,
               eventLabel: DAY_EVENT_LABEL[d],
+              ...(d === "sat"
+                ? { eventId: CANONICAL_OCCURRENCE.id, eventVersion: CANONICAL_OCCURRENCE.version }
+                : {}),
+
               heroVariant: heroVariant ?? null,
               partySize,
               firstTimer,
@@ -920,6 +938,14 @@ function RSVP() {
       <div className="relative max-w-[1080px] mx-auto flex flex-wrap gap-10 lg:gap-16 items-start">
         <div className="flex-1 min-w-[300px] basis-[380px]">
           <div className="eyebrow eyebrow-blue mb-4">Save your spot</div>
+          {SKIPPED_THIS_WEEK ? (
+            <div className="mb-5 border border-brand/60 bg-brand/10 px-4 py-3 text-[15px] leading-[1.5] text-paper">
+              <span className="eyebrow eyebrow-blue block mb-1">Run cancelled</span>
+              {SKIPPED_THIS_WEEK.note ?? "This Saturday's run is off."} Next run:{" "}
+              {CANONICAL_OCCURRENCE.localDate}, 7:00 AM.
+            </div>
+          ) : null}
+
           <h2 className="display-condensed text-paper text-[clamp(38px,5vw,68px)] mb-5">
             RSVP for this Saturday.
           </h2>
