@@ -16,8 +16,8 @@ export const CAP_BINDING = {
   productId: 8670076829868,
   variantId: 46801296982188,
   sku: "GRYT-FM-CAP-01",
-  /** Website release gate. Keep false until the owner approves selling. */
-  releaseApproved: false,
+  /** Website release gate. Owner approved selling on 2026-09-22. */
+  releaseApproved: true,
 } as const;
 
 export const CAP_PRODUCT_JSON_URL = `https://${CAP_BINDING.shopDomain}/products/${CAP_BINDING.handle}.js`;
