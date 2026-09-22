@@ -4,7 +4,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { SiteNav, SiteFooter, MonogramG } from "@/components/site/Chrome";
 import { submitPartnerInquiry } from "@/lib/partner-inquiries.functions";
 import { submitStorySubmission } from "@/lib/story-submissions.functions";
-import lookbookAsset from "@/assets/lookbook-merch.png.asset.json";
+import { CapDrop } from "@/components/site/CapDrop";
 
 export const Route = createFileRoute("/resources")({
   head: () => ({
@@ -63,7 +63,7 @@ function ResourcesPage() {
           <ManifestoCallout />
           <ShareYourStory />
           <ArtifactsAndTools />
-          <Merch />
+          <CapDrop />
           <NextIssueAndPartner />
           <GetInvolved />
         </div>
@@ -271,7 +271,7 @@ function Masthead() {
   return (
     <header className="border-b-2 border-paper pb-10 md:pb-14 mb-20 md:mb-28">
       <h1
-        className="uppercase leading-[0.82] tracking-tight text-[clamp(84px,13vw,200px)]"
+        className="uppercase leading-[0.82] tracking-tight text-[clamp(64px,13vw,200px)]"
         style={{ fontFamily: "var(--font-condensed)" }}
       >
         Resources
@@ -701,78 +701,6 @@ function ArtifactsAndTools() {
 }
 
 /* ─────────────────────────  MERCH  ───────────────────────── */
-
-const MERCH_ITEMS = [
-  { name: "Technical Singlet", price: "Coming Soon", drop: "September", position: "0% 0%" },
-  { name: "Compression Half-Zip", price: "Coming Soon", drop: "October", position: "33% 0%" },
-  { name: "Packable Windbreaker", price: "Coming Soon", drop: "November", position: "66% 0%" },
-  { name: "5-Panel Running Cap", price: "Coming Soon", drop: "September", position: "0% 50%" },
-];
-
-function Merch() {
-  return (
-    <section id="merch" className="mb-24 md:mb-32">
-      <div className="flex items-baseline justify-between gap-6 mb-10 md:mb-14 border-b border-paper/30 pb-5">
-        <div className="flex items-baseline gap-5">
-          <span className="text-blue text-[12px] tracking-[0.22em] uppercase" style={mono}>
-            § 04
-          </span>
-          <h2
-            className="uppercase text-[clamp(34px,5.2vw,72px)] leading-[0.9] tracking-tight"
-            style={{ fontFamily: "var(--font-condensed)" }}
-          >
-            The Drop
-          </h2>
-        </div>
-        <span className="text-[11px] tracking-[0.24em] uppercase text-paper/75 hidden sm:block" style={mono}>
-          Collection 01 · Notify me
-        </span>
-      </div>
-
-      <ul className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 list-none p-0">
-        {MERCH_ITEMS.map((item, i) => (
-          <li key={item.name} className="group">
-            <article aria-label={`${item.name}, drops ${item.drop}, ${item.price}`}>
-              <div className="relative aspect-[3/4] overflow-hidden bg-vintage border border-paper/25 group-hover:border-blue transition-colors">
-                <img
-                  src={lookbookAsset.url}
-                  alt=""
-                  className="absolute inset-0 w-full h-full object-cover brightness-75 group-hover:brightness-100 group-hover:scale-105 transition-all duration-500"
-                  style={{ objectPosition: item.position }}
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-ink/25 group-hover:bg-ink/10 transition-colors" aria-hidden="true" />
-                <span
-                  className="absolute top-3 left-3 text-[11px] tracking-[0.22em] uppercase text-paper bg-ink/85 px-2 py-1"
-                  style={mono}
-                >
-                  0{i + 1} / SS26
-                </span>
-              </div>
-              <div className="pt-4 flex items-baseline justify-between gap-3">
-                <h5
-                  className="text-[16px] font-bold tracking-tight"
-                  style={{ fontFamily: "var(--font-display)" }}
-                >
-                  {item.name}
-                </h5>
-                <span className="text-blue text-[12px] tracking-[0.14em] uppercase shrink-0" style={mono}>
-                  {item.drop}
-                </span>
-              </div>
-              <p className="mt-1 text-[12px] uppercase tracking-[0.18em] text-paper/75" style={mono}>
-                {item.price}
-              </p>
-            </article>
-          </li>
-        ))}
-      </ul>
-      <p className="mt-8 text-paper/75 text-[14px] leading-[1.65] max-w-[560px]">
-        Ships from Pittsburgh. 100% of proceeds support trail events and club gear.
-      </p>
-    </section>
-  );
-}
 
 /* ────────────────  NEXT ISSUE  +  PARTNER  ──────────────── */
 
