@@ -128,8 +128,10 @@ export const Route = createFileRoute('/api/public/rsvp')({
         }
 
         const rsvpId = inserted.id as string
-        const resolvedEventLabel =
-          eventLabel?.trim() || nextSaturdayLabel()
+        const resolvedEventLabel = eventId
+          ? `GRYT Run #${occurrence.runNumber} · Sat, ${new Date(occurrence.startUtc).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: occurrence.timeZone })} · 7 AM`
+          : eventLabel?.trim() || nextSaturdayLabel()
+
 
         // 2. Owner notification (always)
         try {
