@@ -13,6 +13,10 @@ export type CheckinPerson = {
   checkedInAt: string | null
   checkedInBy: string | null
   note: string | null
+  /** Consecutive finished Saturday runs attended, counting back from the last one. */
+  streakCurrent: number
+  /** Best ever run of consecutive attendances. */
+  streakLongest: number
 }
 
 export type CheckinResponse = {
