@@ -15,6 +15,9 @@ function pad(n: number) {
   return String(n).padStart(2, "0");
 }
 
+const escIcs = (s: string) =>
+  s.replace(/[\\,;]/g, (c) => "\\" + c).replace(/\n/g, "\\n");
+
 function icsForMonth(year: number, month: number) {
   const stamp = new Date().toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
   const lines: string[] = [
@@ -23,6 +26,23 @@ function icsForMonth(year: number, month: number) {
     "PRODID:-//GRYT Run Club//Calendar//EN",
     "CALSCALE:GREGORIAN",
     "METHOD:PUBLISH",
+    "BEGIN:VTIMEZONE",
+    "TZID:America/New_York",
+    "BEGIN:STANDARD",
+    "DTSTART:20071104T020000",
+    "RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU",
+    "TZOFFSETFROM:-0400",
+    "TZOFFSETTO:-0500",
+    "TZNAME:EST",
+    "END:STANDARD",
+    "BEGIN:DAYLIGHT",
+    "DTSTART:20070311T020000",
+    "RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU",
+    "TZOFFSETFROM:-0500",
+    "TZOFFSETTO:-0400",
+    "TZNAME:EDT",
+    "END:DAYLIGHT",
+    "END:VTIMEZONE",
   ];
   const days = new Date(year, month + 1, 0).getDate();
   for (let d = 1; d <= days; d++) {
