@@ -96,19 +96,20 @@ export const getClubStats = createServerFn({ method: "GET" }).handler(
           : null,
       }));
 
-      return {
+      const stats: ClubStats = {
         isSample: false,
         members: club.member_count ?? SAMPLE_CLUB_STATS.members,
-        weeklyMiles: Math.round(
+        recentMiles: Math.round(
           runs.slice(0, 20).reduce((s, a) => s + (a.distance ?? 0) * M_TO_MI, 0),
         ),
         totalMiles,
         runsLogged: runs.length,
-        longestStreakWeeks: SAMPLE_CLUB_STATS.longestStreakWeeks,
         recentRuns,
         fetchedAt: new Date().toISOString(),
         note: null,
       };
+      cache = { at: Date.now(), stats };
+      return stats;
     } catch (err) {
       console.error("Club stats failed", err);
       return { ...SAMPLE_CLUB_STATS, note: "Couldn't reach Strava. Showing sample numbers." };
