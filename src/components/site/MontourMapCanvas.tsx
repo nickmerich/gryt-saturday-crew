@@ -16,7 +16,7 @@ function pin(label: string, kind: "park" | "turn", flip = false) {
   const border = kind === "park" ? "#000000" : "#89CFF0";
   return L.divIcon({
     className: "",
-    html: `<div style="transform:translate(${flip ? "-100%" : "0"},-50%);${flip ? "" : ""}font-family:Oswald,system-ui,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:11px;line-height:1;padding:6px 8px;background:${bg};color:${fg};border:2px solid ${border};white-space:nowrap;">${label}</div>`,
+    html: `<div style="width:max-content;transform:translate(${flip ? "calc(-100% - 10px)" : "10px"},-50%);font-family:Oswald,system-ui,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:11px;line-height:1;padding:6px 8px;background:${bg};color:${fg};border:2px solid ${border};white-space:nowrap;">${label}</div>`,
     iconSize: [0, 0],
     iconAnchor: [0, 0],
   });
