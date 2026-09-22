@@ -1,6 +1,39 @@
 import { test, expect } from "@playwright/test";
 import { runOnDate } from "../src/lib/run-occurrence";
 
+test("clean visual direction preserves both hero variants and mobile attendance actions", async ({
+  page,
+}) => {
+  for (const variant of ["a", "b"]) {
+    for (const width of [375, 390, 1440]) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto(`/?v=${variant}`, { waitUntil: "domcontentloaded" });
+      await expect(page.locator("#top")).toHaveAttribute("data-hero-variant", variant);
+      await expect(page.locator("#top")).toHaveAttribute(
+        "data-visual-direction",
+        "clean-blue-2026-09",
+      );
+      await expect(page.locator("#top h1")).toContainText(
+        variant === "a" ? "ATHLETIC PARENTS." : "together.",
+      );
+      await expect(page.locator("#top h1 .gryt-outline")).toBeVisible();
+      await expect(page.locator("#top .gryt-clean-next")).toContainText("Valley Brook");
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+        true,
+      );
+      if (width < 768) await expect(page.getByTestId("mobile-run-action")).toBeVisible();
+    }
+  }
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.locator("#top .btn-primary").focus();
+  expect(
+    await page.locator("#top .btn-primary").evaluate((el) => getComputedStyle(el).outlineStyle),
+  ).not.toBe("none");
+  await page.locator("#top .btn-primary").press("Enter");
+  await expect(page).toHaveURL(/#join$/);
+  await expect(page.getByTestId("rsvp-submit")).toBeEnabled();
+});
+
 // These tests are deliberately local-only. Never submit fixtures to production.
 test.beforeEach(async ({ page, baseURL }) => {
   const host = new URL(baseURL ?? "").hostname;

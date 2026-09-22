@@ -64,7 +64,7 @@ function CalendarPage() {
   return (
     <>
       <SiteNav />
-      <main className="bg-ink text-paper">
+      <main className="gryt-clean gryt-clean-calendar bg-ink text-paper">
         <section className="mx-auto max-w-5xl px-5 sm:px-8 py-16 sm:py-24">
           <p className="eyebrow text-blue mb-4">SATURDAYS · ALL PACES · FREE</p>
           <h1 className="display-condensed text-5xl sm:text-6xl uppercase">Run Calendar</h1>

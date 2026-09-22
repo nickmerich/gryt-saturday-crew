@@ -31,7 +31,6 @@ import insuranceAsset from "@/assets/certificate-of-insurance.pdf.asset.json";
 import { SupportBlock } from "@/components/SupportBlock";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 
-const heroImgAsset = photo1;
 const heroImg = photo4.url;
 const circleImg = photo6.url;
 const foundersImg = nickLauraAsset.url;
@@ -333,7 +332,7 @@ function MissionStamp({
   const alignCls = align === "center" ? "items-center text-center" : "items-start text-left";
   return (
     <div
-      className={`display-condensed inline-flex flex-col leading-[0.92] ${alignCls} ${scale} ${className}`}
+      className={`gryt-mission display-condensed inline-flex flex-col leading-[0.92] ${alignCls} ${scale} ${className}`}
       aria-label="Do hard things together"
     >
       <span>Do hard</span>
@@ -436,101 +435,53 @@ function Hero() {
     <section
       id="top"
       data-hero-variant={variant ?? "a"}
-      className="relative overflow-hidden text-paper bg-ink py-10 md:py-24 lg:py-28 px-6 sm:px-12 lg:px-24"
+      data-visual-direction="clean-blue-2026-09"
+      className="gryt-clean-hero gryt-blue-print"
     >
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(ellipse at 18% 22%, rgba(70,70,70,0.5), transparent 55%), radial-gradient(ellipse at 88% 85%, rgba(4,4,4,0.95), transparent 60%), #0a0a0a",
-        }}
-      />
-      <div
-        className="absolute inset-0 pointer-events-none mix-blend-overlay"
-        style={{
-          backgroundImage:
-            "radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1.2px), radial-gradient(rgba(0,0,0,0.55) 1px, transparent 1.2px)",
-          backgroundSize: "3px 3px, 5px 5px",
-        }}
-      />
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(82deg, transparent 12%, rgba(137,207,240,0.6) 12.4%, rgba(137,207,240,0.6) 13.0%, transparent 13.4%), linear-gradient(82deg, transparent 63%, rgba(137,207,240,0.4) 63.4%, rgba(137,207,240,0.4) 64.0%, transparent 64.4%)",
-        }}
-      />
-
-      <div className="relative max-w-[1240px] mx-auto flex flex-wrap items-center gap-8 lg:gap-16">
-        <div className="flex-1 min-w-[300px] basis-[480px]">
-          <div className="eyebrow-blue eyebrow mb-4 md:mb-6 flex items-center gap-2.5 flex-wrap">
-            <span className="w-2 h-2 bg-blue rounded-full" />
+      <div className="gryt-clean-hero-inner">
+        <img src={grytBearAsset.url} alt="GRYT Run Club" width={96} height={96} className="gryt-clean-crest" />
+        <div className="gryt-clean-content">
+          <div className="gryt-clean-kicker">
             THE GO-TO SOUTH HILLS PITTSBURGH PARENTS RUN CLUB
           </div>
-          <h1 className="display-condensed text-paper text-[clamp(38px,7.2vw,108px)] leading-[0.9] [word-spacing:-0.02em] break-words">
+          <h1 className="gryt-clean-title">
             {isB ? (
               <>
-                Do hard things
-                <br />
-                <span className="relative inline-block">
+                <span className="gryt-outline">Do hard things</span>
+                <span>
                   together.
-                  <span
-                    className="absolute left-[-2px] right-[-2px] -bottom-[0.1em] h-[0.09em] bg-blue"
-                    style={{ transform: "skewX(-8deg)" }}
-                  />
                 </span>
               </>
             ) : (
               <>
-                A RUN CLUB FOR BUSY,
-                <br />
-                <span className="relative inline-block">
+                <span className="gryt-outline">A RUN CLUB FOR BUSY,</span>
+                <span>
                   ATHLETIC PARENTS.
-                  <span
-                    className="absolute left-[-2px] right-[-2px] -bottom-[0.1em] h-[0.09em] bg-blue"
-                    style={{ transform: "skewX(-8deg)" }}
-                  />
                 </span>
 
               </>
             )}
           </h1>
 
-          <div className="mt-4 md:mt-7 max-w-[540px] flex flex-col gap-3">
-            <p className="text-[15px] md:text-lg leading-[1.5] md:leading-[1.55] text-paper/85">
+          <div className="gryt-clean-intro">
+            <p>
               {isB
                 ? "GRYT is a free Pittsburgh running group and South Hills run club — 7 AM sharp Saturdays on the Montour / Peters Trail in McMurray. Former athletes. Busy parents. Comeback runners. Same trail, same time, every week."
                 : "GRYT is a free Pittsburgh running group and South Hills run club for former athletes, busy parents, and comeback runners who miss having a team. We meet every Saturday at 7 AM on the Montour / Peters Trail in McMurray. Come walk, jog, or run and do the hard thing together."}
             </p>
-            <p className="text-base md:text-[17px] font-semibold leading-[1.5] text-paper">
+            <p className="font-semibold text-paper">
               Show up. Do the work. Earn your day.
             </p>
           </div>
 
-          <div className="mt-5 md:mt-7 flex flex-wrap border border-paper/20 max-w-[560px]">
-            {stats.map(([n, l], i) => (
-              <div
-                key={l}
-                className={`flex-1 basis-[104px] px-3 py-3 md:px-4 md:py-4 ${
-                  i !== stats.length - 1 ? "border-r border-paper/15" : ""
-                }`}
-              >
-                <div className="display-condensed text-blue text-[26px] md:text-[34px] leading-[0.85]">{n}</div>
-                <div className="text-[11px] font-semibold tracking-[0.06em] text-paper/70 mt-1.5 uppercase">
-                  {l}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-5 md:mt-6 border-l-2 border-blue pl-3">
+          <div className="gryt-clean-next">
             <div className="eyebrow text-blue">Next run</div>
             <p className="text-[15px] md:text-base text-paper mt-1 leading-[1.45]">
               <RunSummary />
             </p>
           </div>
 
-          <div className="mt-5 md:mt-6 flex flex-wrap gap-3">
+          <div className="gryt-clean-actions">
             <a href="#join" className="btn-primary">
               RSVP Saturday →
             </a>
@@ -552,26 +503,23 @@ function Hero() {
             </a>
             <span className="text-paper/55"> · No membership, no fee, no training plan required.</span>
           </p>
-        </div>
-
-        <div className="relative flex-[0_1_400px] min-w-[260px]">
-          <div className="absolute left-[18px] top-[18px] -right-[18px] -bottom-[18px] bg-blue" />
-          <div className="relative overflow-hidden border border-paper/10">
-            <img
-              src={heroImgAsset.url}
-              alt="GRYT runner at night — motion, grit, and forward momentum"
-              className="block w-full h-[300px] md:h-[520px] object-cover"
-            />
-            <div className="absolute left-0 right-0 bottom-0 flex items-end justify-between gap-3 px-4 pt-5 pb-4 bg-gradient-to-t from-black/85 to-transparent">
-              <span className="display-condensed text-paper text-[22px] leading-none">
-                Montour / Peters Trail
-              </span>
-              <span className="text-[11px] font-semibold tracking-[0.16em] uppercase text-ink bg-blue px-2 py-1.5 whitespace-nowrap">
-                Sat · 7 AM
-              </span>
-            </div>
+          <div className="gryt-clean-stats">
+            {stats.map(([n, l], i) => (
+              <div
+                key={l}
+                className={`flex-1 basis-[104px] px-3 py-3 md:px-4 md:py-4 ${
+                  i !== stats.length - 1 ? "border-r border-paper/15" : ""
+                }`}
+              >
+                <div className="display-condensed text-blue text-[26px] md:text-[34px] leading-[0.85]">{n}</div>
+                <div className="text-xs font-semibold tracking-[0.06em] text-paper/70 mt-1.5 uppercase">
+                  {l}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
+
       </div>
     </section>
   );
@@ -2480,22 +2428,8 @@ function FinalCTA() {
   return (
     <section
       id="ready"
-      className="relative overflow-hidden bg-ink text-paper py-24 md:py-36 px-6 sm:px-12 lg:px-24"
+      className="gryt-blue-print relative overflow-hidden bg-ink text-paper py-24 md:py-36 px-6 sm:px-12 lg:px-24"
     >
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(ellipse at 22% 28%, rgba(70,70,70,0.5), transparent 55%), radial-gradient(ellipse at 85% 82%, rgba(4,4,4,0.95), transparent 60%), #0a0a0a",
-        }}
-      />
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(82deg, transparent 20%, rgba(137,207,240,0.55) 20.4%, rgba(137,207,240,0.55) 21.1%, transparent 21.5%), linear-gradient(82deg, transparent 78%, rgba(137,207,240,0.4) 78.4%, rgba(137,207,240,0.4) 79.1%, transparent 79.5%)",
-        }}
-      />
       <div className="relative max-w-[920px] mx-auto text-center">
         <h2 className="display-condensed text-paper text-[clamp(44px,7vw,104px)] leading-[0.9] mb-6">
           STOP WAITING TO FEEL READY. START NOW.
@@ -3852,7 +3786,7 @@ function Landing() {
   }, []);
   return (
     <RunContext.Provider value={run}>
-    <main className="bg-ink text-paper pb-28 md:pb-0">
+    <main className="gryt-clean bg-ink text-paper pb-28 md:pb-0">
       <Nav />
       {runNotice(run) && <div role="status" className="bg-blue text-ink px-6 py-4 text-base">{runNotice(run)}</div>}
       <a href="#join" data-testid="mobile-run-action" className="fixed bottom-0 inset-x-0 z-50 md:hidden bg-blue text-ink px-4 py-3 border-t-2 border-ink">
