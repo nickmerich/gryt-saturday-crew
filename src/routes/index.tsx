@@ -710,6 +710,10 @@ function RSVP() {
   const [name, setName] = useState("");
   const [contact, setContact] = useState("");
   const [source, setSource] = useState("");
+  const [partySize, setPartySize] = useState(1);
+  const [firstTimer, setFirstTimer] = useState(false);
+  const [submittedParty, setSubmittedParty] = useState(1);
+  const [submittedFirstTimer, setSubmittedFirstTimer] = useState(false);
   const [days, setDays] = useState<Record<RsvpDay, boolean>>({ sat: true });
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
