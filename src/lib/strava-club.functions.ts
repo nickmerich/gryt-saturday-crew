@@ -33,12 +33,17 @@ async function clubAccessToken(): Promise<string | null> {
   return json.access_token ?? null;
 }
 
+/** Server-side cache so homepage views don't each hit Strava's rate limit. */
+const CACHE_MS = 15 * 60 * 1000;
+let cache: { at: number; stats: ClubStats } | null = null;
+
 /**
  * Live club stats when a club-member refresh token is configured, otherwise
  * clearly-labelled sample data with the same shape.
  */
 export const getClubStats = createServerFn({ method: "GET" }).handler(
   async (): Promise<ClubStats> => {
+    if (cache && Date.now() - cache.at < CACHE_MS) return cache.stats;
     try {
       const token = await clubAccessToken();
       if (!token) {
