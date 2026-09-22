@@ -95,6 +95,8 @@ export const template = {
     source: 'Instagram',
     eventLabel: 'GRYT Saturday Run · 7 AM',
     submittedAt: new Date().toISOString(),
+    partySize: 2,
+    firstTimer: true,
   },
 } satisfies TemplateEntry
 
