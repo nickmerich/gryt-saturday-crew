@@ -28,16 +28,19 @@ export function CapDrop() {
   return (
     <section className="border border-paper/15 bg-ink text-paper">
       <div className="grid md:grid-cols-2">
-        <div className="aspect-square bg-paper/5 overflow-hidden border-b md:border-b-0 md:border-r border-paper/15">
-          <img
-            src={CAP_IMAGE}
-            alt="GRYT cap with embroidered crest and blue brim trim"
-            className="w-full h-full object-cover"
-            loading="lazy"
-            onError={(e) => {
-              (e.currentTarget as HTMLImageElement).style.display = "none";
-            }}
-          />
+        <div className="aspect-square bg-paper/5 overflow-hidden border-b md:border-b-0 md:border-r border-paper/15 flex items-center justify-center">
+          {CAP_IMAGE_READY ? (
+            <img
+              src={CAP_IMAGE}
+              alt="GRYT cap with embroidered crest and blue brim trim"
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+          ) : (
+            <span className="eyebrow text-paper/35 px-6 text-center">
+              Cap photo pending review
+            </span>
+          )}
         </div>
         <div className="p-6 sm:p-10 flex flex-col justify-center gap-5">
           <p className="eyebrow text-blue">GRYT · CAP</p>
