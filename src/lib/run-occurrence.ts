@@ -6,7 +6,7 @@ export const RUN_ANCHOR_MS = Date.UTC(2026, 8, 5);
 export const RUN_ANCHOR_NUMBER = 18;
 export const SKIPPED_RUN_DATES: string[] = [];
 
-export type RunStatus = "unconfirmed" | "scheduled" | "modified" | "cancelled";
+export type RunStatus = "unconfirmed" | "scheduled" | "modified" | "cancelled" | "completed";
 export type RunOverride = {
   version: number;
   status?: RunStatus;
@@ -100,6 +100,7 @@ export function runOnDate(date: string, overrides = RUN_OVERRIDES): RunOccurrenc
     timeZone: RUN_TIMEZONE,
     month: "short",
     day: "numeric",
+    year: "numeric",
   }).format(new Date(startsAt));
   const timeLabel = new Intl.DateTimeFormat("en-US", {
     timeZone: RUN_TIMEZONE,
@@ -143,7 +144,23 @@ export function canRsvp(run: RunOccurrence, now = new Date()) {
   );
 }
 
+/** Old receipts are evidence of the saved invitation, not acceptance of later edits. */
+export function sameRunVersion(saved: RunOccurrence | null | undefined, current: RunOccurrence) {
+  return (
+    !!saved &&
+    saved.id === current.id &&
+    saved.version === current.version &&
+    saved.startsAt === current.startsAt &&
+    saved.endsAt === current.endsAt &&
+    saved.location === current.location &&
+    saved.route === current.route &&
+    saved.status === current.status
+  );
+}
+
 export function runNotice(run: RunOccurrence, now = new Date()) {
+  if (run.status === "completed")
+    return run.notice || "This run has finished. Check the current invitation for the next run.";
   if (run.status === "cancelled")
     return run.notice || "This run is cancelled. Please do not travel to the meeting point.";
   if (run.status === "unconfirmed")

@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { DeliveryState } from "@/lib/attendance/schema";
+import type { RunOccurrence } from "@/lib/run-occurrence";
 
 export type SignupSessionSummary = {
   name: string | null;
@@ -10,6 +11,7 @@ export type SignupSessionSummary = {
   contact: string | null;
   contactKind: "email" | "phone" | null;
   eventLabel: string | null;
+  event: RunOccurrence | null;
   rsvpAt: string | null;
   confirmationStatus: DeliveryState;
   waiver: { signedOn: string | null } | null;
@@ -38,6 +40,20 @@ export const loadSignupSession = createServerFn({ method: "GET" }).handler(
     if (!row) return null;
 
     const contact = row.contact;
+    let event: RunOccurrence | null = null;
+    if (row.rsvp_id) {
+      try {
+        const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+        const { data: receipt } = await (supabaseAdmin as SupabaseClient)
+          .from("rsvps")
+          .select("event_snapshot")
+          .eq("id", row.rsvp_id)
+          .maybeSingle();
+        event = receipt?.event_snapshot ?? null;
+      } catch {
+        // Legacy receipts prefill the form, but cannot claim a current event version.
+      }
+    }
     let confirmationStatus: DeliveryState = contact?.includes("@")
       ? "unconfirmed"
       : "not_available";
@@ -87,6 +103,7 @@ export const loadSignupSession = createServerFn({ method: "GET" }).handler(
       contactMasked: mask(contact),
       contactKind: contact ? (contact.includes("@") ? "email" : "phone") : null,
       eventLabel: row.event_label,
+      event,
       rsvpAt: row.rsvp_id ? row.created_at : null,
       confirmationStatus,
       waiver: currentWaiver,

@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SITE_TITLE, SITE_DESCRIPTION } from "./__root";
-import { createContext, useContext, useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } from "react";
-import { currentRun, canRsvp, runNotice, googleCalendarUrl, runIcsDataUrl, type RunOccurrence } from "@/lib/run-occurrence";
-import { confirmationMessage, type DeliveryState } from "@/lib/attendance/schema";
+import { useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } from "react";
+import { currentRun, canRsvp, runNotice, sameRunVersion, googleCalendarUrl, runIcsDataUrl, type RunOccurrence } from "@/lib/run-occurrence";
+import { confirmationMessage, normalizeContact, type DeliveryState } from "@/lib/attendance/schema";
+import { RunContext, useRun } from "@/lib/run-context";
 import { useServerFn } from "@tanstack/react-start";
 import { signWaiver } from "@/lib/waiver.functions";
 import { clearSignupSession, loadSignupSession } from "@/lib/signup-session.functions";
@@ -91,8 +92,6 @@ import {
 const SITE_URL = "https://grytrunclub.com";
 const ABS_HERO_IMG = heroImg.startsWith("http") ? heroImg : `${SITE_URL}${heroImg}`;
 
-const RunContext = createContext<RunOccurrence | null>(null);
-function useRun() { return useContext(RunContext) ?? currentRun(); }
 function RunLabel() { return <>{useRun().label}</>; }
 function RunSummary() { const run = useRun(); return <>{run.label} · {run.location} ({run.route})</>; }
 
@@ -362,6 +361,7 @@ function Nav() {
   ];
   return (
     <nav className="sticky top-0 z-50 bg-ink border-b border-paper/15">
+      <a href="#join" className="gryt-skip-link">Skip to RSVP</a>
       <div className="flex items-center justify-between px-5 sm:px-8 md:px-12 h-[68px]">
         <a href="#top" className="flex items-center gap-2" onClick={() => setOpen(false)}>
           <MonogramG className="h-11 w-11" />
@@ -378,13 +378,11 @@ function Nav() {
         </div>
         <div className="flex items-center gap-2">
           <a
-            href="https://www.strava.com/clubs/1708552"
-            target="_blank"
-            rel="noopener"
+            href="#join"
             className="bg-blue text-ink px-4 sm:px-5 py-3 text-xs font-bold uppercase tracking-[0.1em] hover:bg-paper transition-colors"
             style={{ fontFamily: "var(--font-body)" }}
           >
-            Join on Strava
+            RSVP Saturday
           </a>
           <button
             type="button"
@@ -422,9 +420,9 @@ function Nav() {
 
 function Hero() {
   const stats: Array<[string, string]> = [
-    [REGULARS_LABEL, "regulars each Saturday"],
-    [STRAVA_MEMBERS_LABEL, "runners on Strava"],
-    [INSTAGRAM_LABEL, "followers on Instagram"],
+    ["Free", "No membership required"],
+    ["All paces", "Walk, jog or run"],
+    ["Your crew", "First-timers welcome"],
   ];
 
   // Sticky 50/50 A/B on the hero headline + subcopy. Variant A is the current
@@ -676,11 +674,13 @@ function RSVP() {
         // Only show the confirmation when the stored RSVP is for the run that
         // is actually coming up. Otherwise prefill the form so a returning
         // runner can RSVP for this week.
-        if (session.eventLabel && session.eventLabel === run.label) {
-          setSavedRun(run);
+        if (sameRunVersion(session.event, run)) {
+          setSavedRun(session.event);
           setDelivery(session.confirmationStatus);
           setSubmittedDays(["sat"]);
           setSubmitted(true);
+        } else if (session.event?.id === run.id) {
+          setError("Your earlier RSVP is saved, but this run has changed. Review the current details and ask the organizer to reconcile your RSVP.");
         }
       })
       .catch(() => {
@@ -691,9 +691,21 @@ function RSVP() {
     };
   }, [run.id, run.version]);
 
+  useEffect(() => {
+    if (savedRun && !sameRunVersion(savedRun, run)) {
+      setSubmitted(false);
+      setSavedRun(null);
+      requestKey.current = null;
+      setError(savedRun.id === run.id
+        ? "This run changed after your RSVP. Your earlier receipt is saved; ask the organizer to reconcile it."
+        : "A new run is coming up. Your previous RSVP is saved. Use this form to RSVP for the new date.");
+    }
+  }, [run, savedRun]);
+
 
   const submit = async () => {
-    if (!name.trim() || !contact.trim()) {
+    if (submitting || !canRsvp(run)) return;
+    if (!name.trim() || !normalizeContact(contact)) {
       setError("Add your name and a valid email or phone to save your RSVP.");
       track("rsvp_submit_blocked", {
         reason: "missing_contact",
@@ -801,6 +813,7 @@ function RSVP() {
   return (
     <section
       id="join"
+      tabIndex={-1}
       className="relative overflow-hidden bg-ink text-paper py-16 md:py-24 px-6 sm:px-12 lg:px-24 border-b border-paper/10"
     >
       <div
@@ -872,7 +885,7 @@ function RSVP() {
 
         <div className="flex-1 min-w-[300px] basis-[360px] bg-[#f4f2ed] text-ink p-7 md:p-9">
           {!submitted ? (
-            <div>
+            <form aria-label="RSVP for this run" noValidate onSubmit={(event) => { event.preventDefault(); void submit(); }}>
               <div className="display-condensed text-ink text-[26px] mb-5">
                 I'm in this week
               </div>
@@ -909,6 +922,9 @@ function RSVP() {
                   <input
                     id={f.label === "First name" ? "rsvp-name" : "rsvp-contact"}
                     disabled={!interactive}
+                    maxLength={f.label === "First name" ? 80 : 200}
+                    autoComplete={f.label === "First name" ? "given-name" : "off"}
+                    aria-describedby={error ? "rsvp-validation-error" : undefined}
                     value={f.value}
                     onChange={(e) => f.set(e.target.value)}
                     placeholder={f.placeholder}
@@ -934,10 +950,10 @@ function RSVP() {
                 <option value="Other">Other</option>
               </select>
               {error && (
-                <div role="alert" className="text-[13px] text-[#b23a2e] mb-3.5">{error}</div>
+                <div id="rsvp-validation-error" role="alert" className="text-[13px] text-[#b23a2e] mb-3.5">{error}</div>
               )}
               <button
-                onClick={submit}
+                type="submit"
                 disabled={!interactive || submitting || !canRsvp(run)}
                 data-testid="rsvp-submit"
                 className="w-full text-sm font-bold tracking-[0.1em] uppercase py-4 bg-ink text-paper hover:bg-[#3a7ca5] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
@@ -956,7 +972,7 @@ function RSVP() {
                   Privacy Policy
                 </Link>
               </p>
-            </div>
+            </form>
           ) : (
             <RSVPConfirmation
               name={name}

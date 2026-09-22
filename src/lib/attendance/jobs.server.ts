@@ -1,5 +1,11 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { googleCalendarUrl, runOnDate, type RunOccurrence } from "../run-occurrence";
+import {
+  canRsvp,
+  sameRunVersion,
+  googleCalendarUrl,
+  runOnDate,
+  type RunOccurrence,
+} from "../run-occurrence";
 import { NotionSyncError, syncRsvpToNotion } from "../notion/sync.server";
 
 type Job = { id: string; rsvp_id: string; kind: string; attempts: number; claim_token: string };
@@ -50,13 +56,7 @@ export async function processAttendanceJobs(db: SupabaseClient, limit = 5) {
         if (updated.error) throw new NotionSyncError("Sync result checkpoint failed.", true);
       } else {
         const current = runOnDate(event.localDate);
-        if (
-          job.kind === "confirmation" &&
-          (current.version !== event.version ||
-            current.status === "cancelled" ||
-            current.status === "unconfirmed" ||
-            Date.now() >= Date.parse(current.startsAt))
-        ) {
+        if (job.kind === "confirmation" && (!sameRunVersion(event, current) || !canRsvp(current))) {
           status = "cancelled";
           lastError = "Event changed or started. Do not send a stale confirmation.";
         } else {
@@ -109,8 +109,10 @@ export async function processAttendanceJobs(db: SupabaseClient, limit = 5) {
       })
       .eq("id", job.id)
       .eq("status", "processing")
-      .eq("claim_token", job.claim_token);
-    if (result.error)
+      .eq("claim_token", job.claim_token)
+      .select("id")
+      .maybeSingle();
+    if (result.error || !result.data)
       throw new Error("Worker checkpoint failed. Do not replay until lease review.");
     processed += 1;
   }

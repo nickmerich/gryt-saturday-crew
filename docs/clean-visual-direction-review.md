@@ -23,7 +23,7 @@ RSVP persistence, provider jobs, event dates, waiver terms, auth boundaries, exi
 
 The two existing headline variants are preserved rather than forcing the reference's slogan on both. Variant B carries “Do hard things together”; variant A retains the existing parent-focused headline. No claim is made that the existing displayed community counts were reverified by this visual task.
 
-No upstream merge is included. Newer weather, route and club-stat work on `main` still needs the combined review described in the attendance handoff.
+The subsequent combined improvement pass merged and tested newer weather, route and club-stat work from `main`. See `docs/combined-improvement-review.md` for the latest integration safeguards and remaining activation gates.
 
 ## QA inventory
 
@@ -41,6 +41,6 @@ The attachment is a screenshot review, not a live form. Production credentials r
 
 ## Status
 
-Saved to the existing review branch for the same draft PR. Production publication, database migrations, provider sends and merging remain outside this approval.
+Saved to the existing review branch for the same review PR. Production publication, database migrations, provider sends and merging remain outside this approval.
 
 Typecheck, the credential-free production build and all four local Playwright tests passed after the styling update. Browser checks cover both headline variants at 375, 390 and 1440px, along with the existing RSVP and calendar regressions. `git diff --check` is clean. The earlier repository-wide lint backlog is not represented as resolved.

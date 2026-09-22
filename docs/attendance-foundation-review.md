@@ -6,7 +6,7 @@ Implemented for review in `review/attendance-foundation-2026-09-22`, based on `d
 
 The branch establishes the RSVP reliability foundation, not a new attendance system. Actual attendance still requires explicit organizer evidence in the existing operational process. An RSVP, Strava activity, email acceptance, or waiver signature never creates a check-in.
 
-During implementation, upstream `main` independently advanced to `3f8759e` with weather, route and club-stat additions. This task did not make those changes. GitHub reports this draft branch as mergeable, but the tests below cover the original review-branch baseline, not a combined build with those newer additions. Reconcile and retest against current `main` before approval; no upstream history was rewritten or overwritten.
+During implementation, upstream `main` independently advanced to `3f8759e` with weather, route and club-stat additions. A subsequent improvement pass merged those additions into this review branch, corrected unsafe data fallbacks, and tested the combined build. See `docs/combined-improvement-review.md` for the latest scope and verification; the original-phase test counts below remain a historical record. No upstream history was rewritten or overwritten.
 
 ## Implemented
 
@@ -27,7 +27,7 @@ This review branch does not satisfy every production acceptance gate in the PRD 
 
 | PRD area | Branch implementation | Remaining gate |
 |---|---|---|
-| R01–R03 event consistency/status | Shared model, reviewed source overrides, elapsed-time completion notices | No organizer status editor; no explicit persisted `completed` state. Confirm source-controlled exceptions are acceptable for this release or build an admin editor before calling those criteria complete. |
+| R01–R03 event consistency/status | Shared model, reviewed source overrides, explicit completed status and elapsed-time notices | No organizer status editor. Confirm source-controlled exceptions are acceptable for this release or build an admin editor before calling those criteria complete. |
 | R04–R06 capture, messaging, waiver | Implemented with isolated tests and synthetic browser receipts | Exercise real staging database, cookie restoration, unsigned/expired/version-changed waiver and approved test inboxes. |
 | R07 actual attendance | No automatic attendance or first-timer inference | No new check-in ledger or backfill. Perform one supervised real-run reconciliation after separate approval. |
 | R08–R10 privacy/recovery/identity | Server allowlist, private tables, durable jobs, conservative matching | Test admin sign-in, destination permissions, suppression and external result uncertainty in staging. |
@@ -97,5 +97,5 @@ Keep the additive tables, receipts, jobs and snapshots for audit and controlled 
 
 - **Saved:** Source code, migration, tests and this review runbook.
 - **Tested:** Isolated database, local API/unit checks, synthetic browser flow, typecheck and credential-free build.
-- **Queued for review:** Branch, draft PR and private disconnected preview.
+- **Queued for review:** Branch, review PR and private disconnected preview.
 - **Not activated:** Production schema, external worker, provider sends/sync, live website and real attendance reconciliation.

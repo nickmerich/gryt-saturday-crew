@@ -59,6 +59,7 @@ export function MissionStamp({
 export function SiteNav() {
   return (
     <nav className="sticky top-0 z-50 bg-ink border-b border-paper/15">
+      <a href="/#join" className="gryt-skip-link">Skip to RSVP</a>
       <div className="flex items-center justify-between px-5 sm:px-8 md:px-12 h-[68px]">
         <a href="/" className="flex items-center gap-2">
           <MonogramG className="h-11 w-11" />
@@ -105,13 +106,11 @@ export function SiteNav() {
           </a>
         </div>
         <a
-          href={STRAVA_CLUB}
-          target="_blank"
-          rel="noopener"
+          href="/#join"
           className="bg-blue text-ink px-4 sm:px-5 py-3 text-xs font-bold uppercase tracking-[0.1em] hover:bg-paper transition-colors"
           style={{ fontFamily: "var(--font-body)" }}
         >
-          Join on Strava
+          RSVP Saturday
         </a>
       </div>
     </nav>

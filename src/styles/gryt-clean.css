@@ -1,5 +1,45 @@
 /* Cleaner direction from the user-supplied IMG_7509 reference.
    Existing crest and web blue are retained; no rasterized headline or new logo. */
+.gryt-skip-link { position: absolute; top: 8px; left: 24px; transform: translateY(-200%); z-index: 70; background: #fff; color: #080d13; padding: 12px 20px; font-weight: 700; }
+.gryt-skip-link:focus { transform: translateY(0); outline: 3px solid #89cff0; }
+.gryt-utility-section {
+  padding: clamp(40px, 6vw, 72px) 24px;
+  background: #080d13;
+  border-top: 1px solid rgba(137, 207, 240, 0.2);
+}
+.gryt-utility-inner {
+  max-width: 1080px;
+  margin-inline: auto;
+}
+.gryt-utility-title {
+  font: 700 clamp(30px, 4vw, 48px)/1.12 var(--font-condensed);
+  text-transform: uppercase;
+  margin-top: 16px;
+}
+.gryt-utility-intro {
+  max-width: 720px;
+  font-size: 16px;
+  line-height: 1.65;
+  margin-top: 16px;
+  color: #d4dfe6;
+}
+.gryt-utility-panel {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 24px;
+  margin-top: 24px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+.gryt-weather-value {
+  font-size: clamp(24px, 4vw, 36px);
+  line-height: 1.2;
+  font-weight: 700;
+  margin-top: 8px;
+}
+.gryt-utility-section button:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
 .gryt-clean {
   --clean-surface: #080d13;
   --clean-muted: #c4ccd2;

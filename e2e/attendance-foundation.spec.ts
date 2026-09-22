@@ -96,8 +96,6 @@ test("retry preserves request key; success separates phone capture from delivery
           timeLabel: "7:00 AM",
           status: "scheduled",
           notice: "",
-          location: "Review meeting point",
-          route: "Review route",
           number: 0,
         },
       }),
@@ -113,7 +111,7 @@ test("retry preserves request key; success separates phone capture from delivery
   );
   expect(payloads[0].idempotencyKey).toBe(payloads[1].idempotencyKey);
   expect(payloads[0].eventId).toMatch(/^gryt-saturday-/);
-  await expect(page.getByText("Review meeting point", { exact: false })).toBeVisible();
+  await expect(page.getByText("Synthetic review run", { exact: false })).toBeVisible();
   await page.getByRole("button", { name: "RSVP someone else" }).click();
   await expect(page.getByLabel("First name", { exact: true })).toHaveValue("");
 });
@@ -133,4 +131,43 @@ test("calendar navigation and 375px viewport stay usable", async ({ page }) => {
     /^data:text\/calendar/,
   );
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+
+test("utility panels keep missing data honest and the navigation points to RSVP", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 375, height: 900 });
+  await expect(page.locator("nav").getByRole("link", { name: "RSVP Saturday" })).toHaveAttribute(
+    "href",
+    "#join",
+  );
+  await expect(page.locator("#weather")).toContainText(
+    "The forecast point has not been verified yet",
+  );
+  await expect(page.locator("#weather")).not.toContainText("Dry start");
+  await page.getByRole("button", { name: "6.2 miles", exact: true }).click();
+  await expect(page.locator("#route")).toContainText("3.1 miles out");
+  await page.getByRole("button", { name: "3 miles", exact: true }).click();
+  await expect(page.locator("#route")).toContainText("1.5 miles out");
+  await expect(
+    page.locator("#route").getByRole("link", { name: "Open address directions" }),
+  ).toHaveAttribute("href", /destination=212%20Valley%20Brook/);
+  await expect(page.locator("#club-stats")).not.toContainText("Miles this week");
+  await expect(page.locator("#club-stats")).not.toContainText("Sample data");
+  await expect(page.locator("#club-stats")).toContainText("not a Saturday check-in");
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+
+test("keyboard RSVP validates locally and Enter submits exactly once", async ({ page }) => {
+  let requests = 0;
+  page.on("request", request => { if (new URL(request.url()).pathname === "/api/public/rsvp") requests++; });
+  await page.getByLabel("First name", { exact: true }).fill("Keyboard Fixture");
+  await page.getByLabel("Email or phone", { exact: true }).fill("not a contact");
+  await page.getByLabel("Email or phone", { exact: true }).press("Enter");
+  await expect(page.getByText("Add your name and a valid email or phone to save your RSVP.")).toBeVisible();
+  expect(requests).toBe(0);
+  await page.getByLabel("Email or phone", { exact: true }).fill("keyboard@example.com");
+  await page.getByLabel("Email or phone", { exact: true }).press("Enter");
+  await expect(page.getByText("Fixture storage unavailable. Your RSVP was not saved.")).toBeVisible();
+  expect(requests).toBe(1);
 });
