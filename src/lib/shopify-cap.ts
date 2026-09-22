@@ -102,5 +102,17 @@ export async function readCapProduct(
       ? payload.title.trim()
       : "The Founding Member Cap";
 
-  return { state: "available", title, productUrl: CAP_PRODUCT_URL };
+  const price = formatCents(variant.price) ?? formatCents(payload.price);
+  const imageUrl =
+    absoluteImage(variant.featured_image?.src) ??
+    absoluteImage(payload.featured_image) ??
+    absoluteImage(Array.isArray(payload.images) ? payload.images[0] : null);
+
+  return {
+    state: "available",
+    title,
+    productUrl: CAP_PRODUCT_URL,
+    price,
+    imageUrl,
+  };
 }
