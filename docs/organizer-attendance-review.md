@@ -73,7 +73,7 @@ The existing full attendance suite plus the new organizer tests totals 28 passin
 ## Staging activation checklist
 
 1. Confirm approval to use a staging project and synthetic accounts. Do not use production member data for the first pass.
-2. Apply the attendance-foundation migration, then the organizer-check-in migration. Confirm grants, row-level security and security-definer ownership in real Supabase.
+2. Apply the attendance-foundation migration, the organizer-check-in migration and `20260922080000_checkin_privilege_hardening.sql`. Confirm grants, row-level security and security-definer ownership in real Supabase. The follow-up hardening explicitly removes inherited service-role table-write grants.
 3. Sign in with two approved organizer test sessions. Verify denied access for anonymous, non-admin, unconfirmed and expired sessions.
 4. Seed dated synthetic RSVPs for a completed staging run. Confirm no check-ins exist before explicit writes.
 5. Exercise two simultaneous edits at the same revision, request retries, duplicate-name walk-ins, corrections, close and reopen.
@@ -83,6 +83,8 @@ The existing full attendance suite plus the new organizer tests totals 28 passin
 9. Conduct one supervised attendance reconciliation against a real headcount before using the ledger for growth or retention reporting.
 
 ## Rollback
+
+The subsequent [Staging Verification Report](./staging-verification-report.md) records a passing integrated local rehearsal, a default-privilege compatibility fix and the unresolved hosted-environment access gate. Hosted staging has not been signed off.
 
 Disable or revert the new organizer route and API together if necessary. Preserve the private tables and audit records; do not drop them or rewrite previously recorded attendance as part of a code rollback. No production migration reversal is authorized here.
 

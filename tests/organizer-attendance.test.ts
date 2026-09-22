@@ -172,6 +172,15 @@ test("isolated database: check-in, replay, collisions, revisions, walk-ins, corr
     );
     await db.exec(sql);
     await db.exec(sql);
+    await db.exec(
+      await readFile(
+        new URL(
+          "../supabase/migrations/20260922080000_checkin_privilege_hardening.sql",
+          import.meta.url,
+        ),
+        "utf8",
+      ),
+    );
     await db.query(
       "INSERT INTO rsvps(id,name,contact,event_id,event_snapshot) VALUES($1,'Test Runner','test@example.com',$2,$3)",
       [runner, event.id, JSON.stringify(event)],
