@@ -560,9 +560,16 @@ function Hero() {
             ))}
           </div>
 
-          <div className="mt-5 md:mt-7 flex flex-wrap gap-3">
+          <div className="mt-5 md:mt-6 border-l-2 border-blue pl-3">
+            <div className="eyebrow text-blue">Next run</div>
+            <p className="text-[15px] md:text-base text-paper mt-1 leading-[1.45]">
+              {nextSaturdayLabelLong()} · 212 Valley Brook Road, McMurray (Montour / Peters Trail)
+            </p>
+          </div>
+
+          <div className="mt-5 md:mt-6 flex flex-wrap gap-3">
             <a href="#join" className="btn-primary">
-              RSVP for Saturday →
+              RSVP Saturday →
             </a>
             <a
               href={STRAVA_CLUB}
@@ -573,6 +580,15 @@ function Hero() {
               JOIN THE STRAVA
             </a>
           </div>
+          <p className="mt-3 text-sm text-paper/80">
+            <a
+              href="#first"
+              className="underline underline-offset-4 decoration-blue hover:text-blue transition-colors"
+            >
+              First time? Start here
+            </a>
+            <span className="text-paper/55"> · No membership, no fee, no training plan required.</span>
+          </p>
         </div>
 
         <div className="relative flex-[0_1_400px] min-w-[260px]">

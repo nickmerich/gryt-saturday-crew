@@ -1,14 +1,27 @@
 # GRYT Run Club
 
-> A Pittsburgh run club for former athletes, busy parents, and comeback runners. Saturdays at 7 AM on the Montour / Peters Trail in McMurray, PA. Walk, jog, or run — no pace requirement, no one gets dropped.
+> A free Pittsburgh run club in the South Hills. We meet Saturdays at 7:00 AM at 212 Valley Brook Road, McMurray, PA, and run the Montour / Peters Trail. Walk, jog, or run. All paces welcome, no one gets dropped.
 
-GRYT is a free Saturday-morning community run. The mission is simple: do hard things together. Members coordinate through Strava and show up rain or shine.
+GRYT is a community run, not a paid program. There is no membership and no training plan requirement. First-time runners RSVP on the site and sign a liability waiver before their first run. The crew also coordinates on Strava.
+
+Canonical site: https://grytrunclub.com
 
 ## Pages
 
-- [Home](/): What GRYT is, when and where we run, how to show up, and FAQ.
-- [Resources](/resources): Hub for playbooks, conversations, and graphics that help other run clubs get started.
-- [Playbooks](/resources/playbooks): Step-by-step guides for starting and running a community run club.
-- [Conversations](/resources/conversations): Interviews and Q&As with founders and community members.
-- [Graphics](/resources/graphics): Downloadable logos, posters, pace cards, and social kits.
-- [Waiver](/waiver): Liability waiver for first-time runners.
+- [Home](https://grytrunclub.com/): What GRYT is, the next Saturday run details, what to expect, first-timer info, and the RSVP form.
+- [Calendar](https://grytrunclub.com/calendar): Month view of upcoming Saturday 7 AM runs with a calendar download.
+- [FAQ](https://grytrunclub.com/faq): Common questions about pace, parking, kids, strollers, dogs, weather, and what to bring.
+- [Races](https://grytrunclub.com/races): Pittsburgh-area races the crew runs together.
+- [Waiver](https://grytrunclub.com/waiver): Liability waiver form for runners.
+- [Resources](https://grytrunclub.com/resources): Hub for playbooks, conversations, and graphics for runners and other run club organizers.
+- [Playbooks](https://grytrunclub.com/resources/playbooks): Guides on starting and running a community run club, plus Pittsburgh run club comparisons.
+- [Conversations](https://grytrunclub.com/resources/conversations): Published interviews and Q&As with the founders and crew.
+- [Graphics](https://grytrunclub.com/resources/graphics): Downloadable posters, social graphics, and a Saturday recap graphic generator.
+- [Run plan](https://grytrunclub.com/plan): Builds a suggested week of running around the Saturday GRYT run.
+- [Privacy](https://grytrunclub.com/privacy): How runner information is collected and used.
+- [Terms](https://grytrunclub.com/terms): Website terms of use.
+
+## Notes for assistants
+
+- Run logistics change occasionally. The Home and Calendar pages are the authoritative source for the next run date.
+- Member records, waiver submissions, emergency contacts, admin pages, and account/auth routes are not public and are intentionally excluded from this file.
