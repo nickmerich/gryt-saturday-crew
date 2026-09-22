@@ -41,7 +41,6 @@ import { Route as ResourcesEqtPittsburgh10Miler2026RouteImport } from './routes/
 import { Route as ResourcesCrossTrainingForRunnersRouteImport } from './routes/resources_.cross-training-for-runners'
 import { Route as ResourcesConversationsRouteImport } from './routes/resources_.conversations'
 import { Route as ResourcesBuildARunningBaseRouteImport } from './routes/resources_.build-a-running-base'
-import { Route as ProductHandleRouteImport } from './routes/product.$handle'
 import { Route as MembersKeyRouteImport } from './routes/members.$key'
 import { Route as CheckoutReturnRouteImport } from './routes/checkout.return'
 import { Route as AdminRosterRouteImport } from './routes/admin.roster'
@@ -237,11 +236,6 @@ const ResourcesBuildARunningBaseRoute =
     path: '/resources/build-a-running-base',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ProductHandleRoute = ProductHandleRouteImport.update({
-  id: '/product/$handle',
-  path: '/product/$handle',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const MembersKeyRoute = MembersKeyRouteImport.update({
   id: '/$key',
   path: '/$key',
@@ -419,7 +413,6 @@ export interface FileRoutesByFullPath {
   '/admin/roster': typeof AdminRosterRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/members/$key': typeof MembersKeyRoute
-  '/product/$handle': typeof ProductHandleRoute
   '/resources/build-a-running-base': typeof ResourcesBuildARunningBaseRoute
   '/resources/conversations': typeof ResourcesConversationsRoute
   '/resources/cross-training-for-runners': typeof ResourcesCrossTrainingForRunnersRoute
@@ -482,7 +475,6 @@ export interface FileRoutesByTo {
   '/admin/roster': typeof AdminRosterRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/members/$key': typeof MembersKeyRoute
-  '/product/$handle': typeof ProductHandleRoute
   '/resources/build-a-running-base': typeof ResourcesBuildARunningBaseRoute
   '/resources/conversations': typeof ResourcesConversationsRoute
   '/resources/cross-training-for-runners': typeof ResourcesCrossTrainingForRunnersRoute
@@ -546,7 +538,6 @@ export interface FileRoutesById {
   '/admin/roster': typeof AdminRosterRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/members/$key': typeof MembersKeyRoute
-  '/product/$handle': typeof ProductHandleRoute
   '/resources_/build-a-running-base': typeof ResourcesBuildARunningBaseRoute
   '/resources_/conversations': typeof ResourcesConversationsRoute
   '/resources_/cross-training-for-runners': typeof ResourcesCrossTrainingForRunnersRoute
@@ -611,7 +602,6 @@ export interface FileRouteTypes {
     | '/admin/roster'
     | '/checkout/return'
     | '/members/$key'
-    | '/product/$handle'
     | '/resources/build-a-running-base'
     | '/resources/conversations'
     | '/resources/cross-training-for-runners'
@@ -674,7 +664,6 @@ export interface FileRouteTypes {
     | '/admin/roster'
     | '/checkout/return'
     | '/members/$key'
-    | '/product/$handle'
     | '/resources/build-a-running-base'
     | '/resources/conversations'
     | '/resources/cross-training-for-runners'
@@ -737,7 +726,6 @@ export interface FileRouteTypes {
     | '/admin/roster'
     | '/checkout/return'
     | '/members/$key'
-    | '/product/$handle'
     | '/resources_/build-a-running-base'
     | '/resources_/conversations'
     | '/resources_/cross-training-for-runners'
@@ -800,7 +788,6 @@ export interface RootRouteChildren {
   AdminMembersRoute: typeof AdminMembersRoute
   AdminRosterRoute: typeof AdminRosterRoute
   CheckoutReturnRoute: typeof CheckoutReturnRoute
-  ProductHandleRoute: typeof ProductHandleRoute
   ResourcesBuildARunningBaseRoute: typeof ResourcesBuildARunningBaseRoute
   ResourcesConversationsRoute: typeof ResourcesConversationsRoute
   ResourcesCrossTrainingForRunnersRoute: typeof ResourcesCrossTrainingForRunnersRoute
@@ -1063,13 +1050,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResourcesBuildARunningBaseRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/product/$handle': {
-      id: '/product/$handle'
-      path: '/product/$handle'
-      fullPath: '/product/$handle'
-      preLoaderRoute: typeof ProductHandleRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/members/$key': {
       id: '/members/$key'
       path: '/$key'
@@ -1307,7 +1287,6 @@ const rootRouteChildren: RootRouteChildren = {
   AdminMembersRoute: AdminMembersRoute,
   AdminRosterRoute: AdminRosterRoute,
   CheckoutReturnRoute: CheckoutReturnRoute,
-  ProductHandleRoute: ProductHandleRoute,
   ResourcesBuildARunningBaseRoute: ResourcesBuildARunningBaseRoute,
   ResourcesConversationsRoute: ResourcesConversationsRoute,
   ResourcesCrossTrainingForRunnersRoute: ResourcesCrossTrainingForRunnersRoute,
