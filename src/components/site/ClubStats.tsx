@@ -27,6 +27,13 @@ export function ClubStats() {
   });
   const stats = data ?? SAMPLE_CLUB_STATS;
 
+  const fetchAttendance = useServerFn(getAttendanceStats);
+  const { data: attendance } = useQuery({
+    queryKey: ["gryt-attendance-stats"],
+    queryFn: () => fetchAttendance(),
+    staleTime: 30 * 60 * 1000,
+  });
+
   return (
     <section
       id="club-stats"
