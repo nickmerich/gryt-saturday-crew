@@ -91,6 +91,67 @@ export const ELEVATION: Array<{ mi: number; ft: number }> = [
   { mi: 3.5, ft: 1091 },
 ];
 
+/** Interpolated elevation (ft) at a distance out from the lot. */
+export function elevationAt(mi: number): number {
+  if (mi <= ELEVATION[0].mi) return ELEVATION[0].ft;
+  const last = ELEVATION[ELEVATION.length - 1];
+  if (mi >= last.mi) return last.ft;
+  for (let i = 1; i < ELEVATION.length; i++) {
+    if (ELEVATION[i].mi >= mi) {
+      const a = ELEVATION[i - 1];
+      const b = ELEVATION[i];
+      const t = (mi - a.mi) / (b.mi - a.mi);
+      return Math.round(a.ft + (b.ft - a.ft) * t);
+    }
+  }
+  return last.ft;
+}
+
+export type RouteOption = {
+  id: "3mi" | "5mi" | "10k";
+  label: string;
+  totalMi: number;
+  outMi: number;
+  blurb: string;
+};
+
+export const ROUTE_OPTIONS: RouteOption[] = [
+  { id: "3mi", label: "3 MI", totalMi: 3, outMi: 1.5, blurb: "Short and honest. Everybody finishes." },
+  { id: "5mi", label: "5 MI", totalMi: 5, outMi: 2.5, blurb: "The usual Saturday distance." },
+  { id: "10k", label: "10K", totalMi: 6.2, outMi: 3.107, blurb: "6.2. Push day." },
+];
+
+/** Out-and-back elevation series for one route option. */
+export function profileFor(option: RouteOption): Array<{ mi: number; ft: number }> {
+  const step = 0.25;
+  const out: Array<{ mi: number; ft: number }> = [];
+  for (let m = 0; m < option.outMi; m += step) {
+    out.push({ mi: Number(m.toFixed(2)), ft: elevationAt(m) });
+  }
+  out.push({ mi: Number(option.outMi.toFixed(2)), ft: elevationAt(option.outMi) });
+  for (let m = option.outMi - step; m > 0; m -= step) {
+    out.push({
+      mi: Number((option.outMi * 2 - m).toFixed(2)),
+      ft: elevationAt(m),
+    });
+  }
+  out.push({ mi: Number((option.outMi * 2).toFixed(2)), ft: elevationAt(0) });
+  return out;
+}
+
+/** Total climb (ft) for the out-and-back. */
+export function gainFor(option: RouteOption): number {
+  const series = profileFor(option);
+  let gain = 0;
+  for (let i = 1; i < series.length; i++) {
+    const d = series[i].ft - series[i - 1].ft;
+    if (d > 0) gain += d;
+  }
+  return Math.round(gain);
+}
+
 export const MEET_ADDRESS = "212 Valley Brook Rd, McMurray, PA 15317";
 export const MEET_MAPS_URL =
   "https://www.google.com/maps/search/?api=1&query=212+Valley+Brook+Rd,+McMurray,+PA+15317";
+export const PARKING_NOTE =
+  "Free gravel lot at the trailhead. Room for about 20 cars. Meet by the trail map board.";
