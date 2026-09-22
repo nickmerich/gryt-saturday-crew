@@ -1,6 +1,7 @@
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { isAdminEmail } from '@/lib/admin/allowlist'
 import { getOccurrence, occurrenceFor } from '@/lib/run-schedule'
+import { finishedRunDates, summarizeStreaks } from '@/lib/streaks'
 import { identityKey, normalizeEmail, normalizeName } from './identity'
 import type { CheckinPerson, CheckinResponse } from './types'
 
@@ -128,6 +129,8 @@ export async function checkinList(request: Request) {
       checkedInAt: null,
       checkedInBy: null,
       note: null,
+      streakCurrent: 0,
+      streakLongest: 0,
     })
   }
 
@@ -158,7 +161,34 @@ export async function checkinList(request: Request) {
       checkedInAt: present ? (row.checked_in_at as string) : null,
       checkedInBy: present ? (row.checked_in_by as string) : null,
       note: (row.note as string) ?? null,
+      streakCurrent: 0,
+      streakLongest: 0,
     })
+  }
+
+  // Streaks come from confirmed check-ins at finished runs only, so today's
+  // run neither adds to nor breaks anybody's streak while it is still on.
+  const runDates = finishedRunDates()
+  if (runDates.length > 0 && people.size > 0) {
+    const { data: history } = await db
+      .from('run_checkins')
+      .select('person_key,event_date')
+      .eq('status', 'present')
+      .in('event_date', runDates)
+      .in('person_key', Array.from(people.keys()))
+    const streaks = summarizeStreaks(
+      (history ?? []).map((r) => ({
+        personKey: r.person_key as string,
+        eventDate: r.event_date as string,
+      })),
+      runDates,
+    )
+    for (const person of people.values()) {
+      const s = streaks.get(person.key)
+      if (!s) continue
+      person.streakCurrent = s.current
+      person.streakLongest = s.longest
+    }
   }
 
   const list = Array.from(people.values()).sort((a, b) => a.name.localeCompare(b.name))
