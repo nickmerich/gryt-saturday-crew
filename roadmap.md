@@ -7,5 +7,5 @@
 - [x] Selectable 3 mi / 5 mi / 10K routes, each with its own elevation profile
 - [x] Mobile-first layout for both, quick to read Saturday morning
 - [x] Strava club stats component (miles, members, recent group runs)
-- [ ] Live Strava club data — blocked: needs STRAVA_CLUB_REFRESH_TOKEN (a club member's Strava token). Sample data shown until then.
-- [ ] Attendance streaks from RSVPs — Strava's club API doesn't expose them; derive from sign-ups later.
+- [ ] Live Strava club data — blocked: needs STRAVA_CLUB_REFRESH_TOKEN. Client ID/secret are saved; the token needs a one-time approval at /admin/strava/connect.
+- [x] Saturday attendance streaks from confirmed check-ins (src/lib/streaks.ts, shown on /admin/checkin and the homepage once check-ins exist)
