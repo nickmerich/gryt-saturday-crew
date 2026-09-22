@@ -271,7 +271,7 @@ function Masthead() {
   return (
     <header className="border-b-2 border-paper pb-10 md:pb-14 mb-20 md:mb-28">
       <h1
-        className="uppercase leading-[0.82] tracking-tight text-[clamp(84px,13vw,200px)]"
+        className="uppercase leading-[0.82] tracking-tight text-[clamp(64px,13vw,200px)]"
         style={{ fontFamily: "var(--font-condensed)" }}
       >
         Resources
