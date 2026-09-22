@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useEffect, useMemo, useState } from 'react'
 import { supabase } from '@/integrations/supabase/client'
 import { isAdminEmail } from '@/lib/admin/allowlist'
-import type { RosterEntry, RosterResponse } from '@/lib/roster/types'
+import type { RosterResponse } from '@/lib/roster/types'
 
 export const Route = createFileRoute('/admin/roster')({
   ssr: false,
