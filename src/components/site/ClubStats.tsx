@@ -58,6 +58,18 @@ export function ClubStats() {
           <Figure value={String(stats.runsLogged)} label="Runs logged" />
         </div>
 
+        {attendance && attendance.runsCounted > 0 ? (
+          <div className="mt-4 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            <Figure
+              value={String(attendance.longestActiveStreak)}
+              label="Longest Saturday streak"
+            />
+            <Figure value={String(attendance.lastRunAttendance)} label="At the last run" />
+            <Figure value={String(attendance.peopleCounted)} label="Checked in this season" />
+            <Figure value={String(attendance.runsCounted)} label="Saturdays counted" />
+          </div>
+        ) : null}
+
         <div className="mt-6 border border-paper/20 bg-ink/50">
           <div className="border-b border-paper/15 px-4 sm:px-5 py-3 text-[10px] tracking-[0.22em] uppercase text-blue">
             Recent group runs
