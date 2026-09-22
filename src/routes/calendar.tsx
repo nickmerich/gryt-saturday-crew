@@ -199,9 +199,7 @@ function CalendarPage() {
                         style={{ fontFamily: "var(--font-body)" }}
                       >
                         {cell.run.time}
-                        <span className="block opacity-80">
-                          {cell.run === SAT ? "Long run" : "Night shift"}
-                        </span>
+                        <span className="block opacity-80">Long run</span>
                       </div>
                     )}
                   </>
