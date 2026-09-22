@@ -55,6 +55,7 @@ import { Route as ApiPublicRsvpRouteImport } from './routes/api/public/rsvp'
 import { Route as ApiPublicInquiriesRouteImport } from './routes/api/public/inquiries'
 import { Route as ApiNewsletterSubscribeRouteImport } from './routes/api/newsletter/subscribe'
 import { Route as ApiNewsletterStatusRouteImport } from './routes/api/newsletter/status'
+import { Route as ApiAdminRosterRouteImport } from './routes/api/admin/roster'
 import { Route as ApiAdminInquiriesRouteImport } from './routes/api/admin/inquiries'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
@@ -305,6 +306,11 @@ const ApiNewsletterStatusRoute = ApiNewsletterStatusRouteImport.update({
   path: '/api/newsletter/status',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAdminRosterRoute = ApiAdminRosterRouteImport.update({
+  id: '/api/admin/roster',
+  path: '/api/admin/roster',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAdminInquiriesRoute = ApiAdminInquiriesRouteImport.update({
   id: '/api/admin/inquiries',
   path: '/api/admin/inquiries',
@@ -385,6 +391,7 @@ export interface FileRoutesByFullPath {
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/admin/inquiries': typeof ApiAdminInquiriesRoute
+  '/api/admin/roster': typeof ApiAdminRosterRoute
   '/api/newsletter/status': typeof ApiNewsletterStatusRoute
   '/api/newsletter/subscribe': typeof ApiNewsletterSubscribeRoute
   '/api/public/inquiries': typeof ApiPublicInquiriesRoute
@@ -440,6 +447,7 @@ export interface FileRoutesByTo {
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/admin/inquiries': typeof ApiAdminInquiriesRoute
+  '/api/admin/roster': typeof ApiAdminRosterRoute
   '/api/newsletter/status': typeof ApiNewsletterStatusRoute
   '/api/newsletter/subscribe': typeof ApiNewsletterSubscribeRoute
   '/api/public/inquiries': typeof ApiPublicInquiriesRoute
@@ -496,6 +504,7 @@ export interface FileRoutesById {
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/admin/inquiries': typeof ApiAdminInquiriesRoute
+  '/api/admin/roster': typeof ApiAdminRosterRoute
   '/api/newsletter/status': typeof ApiNewsletterStatusRoute
   '/api/newsletter/subscribe': typeof ApiNewsletterSubscribeRoute
   '/api/public/inquiries': typeof ApiPublicInquiriesRoute
@@ -553,6 +562,7 @@ export interface FileRouteTypes {
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/api/admin/inquiries'
+    | '/api/admin/roster'
     | '/api/newsletter/status'
     | '/api/newsletter/subscribe'
     | '/api/public/inquiries'
@@ -608,6 +618,7 @@ export interface FileRouteTypes {
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/api/admin/inquiries'
+    | '/api/admin/roster'
     | '/api/newsletter/status'
     | '/api/newsletter/subscribe'
     | '/api/public/inquiries'
@@ -663,6 +674,7 @@ export interface FileRouteTypes {
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/api/admin/inquiries'
+    | '/api/admin/roster'
     | '/api/newsletter/status'
     | '/api/newsletter/subscribe'
     | '/api/public/inquiries'
@@ -718,6 +730,7 @@ export interface RootRouteChildren {
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
   ApiAdminInquiriesRoute: typeof ApiAdminInquiriesRoute
+  ApiAdminRosterRoute: typeof ApiAdminRosterRoute
   ApiNewsletterStatusRoute: typeof ApiNewsletterStatusRoute
   ApiNewsletterSubscribeRoute: typeof ApiNewsletterSubscribeRoute
   ApiPublicInquiriesRoute: typeof ApiPublicInquiriesRoute
@@ -1057,6 +1070,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiNewsletterStatusRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/admin/roster': {
+      id: '/api/admin/roster'
+      path: '/api/admin/roster'
+      fullPath: '/api/admin/roster'
+      preLoaderRoute: typeof ApiAdminRosterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/admin/inquiries': {
       id: '/api/admin/inquiries'
       path: '/api/admin/inquiries'
@@ -1163,6 +1183,7 @@ const rootRouteChildren: RootRouteChildren = {
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
   ApiAdminInquiriesRoute: ApiAdminInquiriesRoute,
+  ApiAdminRosterRoute: ApiAdminRosterRoute,
   ApiNewsletterStatusRoute: ApiNewsletterStatusRoute,
   ApiNewsletterSubscribeRoute: ApiNewsletterSubscribeRoute,
   ApiPublicInquiriesRoute: ApiPublicInquiriesRoute,
