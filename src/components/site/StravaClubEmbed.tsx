@@ -6,7 +6,7 @@ export function StravaClubEmbed() {
   return (
     <div className="mt-6 border border-paper/20 bg-ink/50">
       <div className="border-b border-paper/15 px-4 sm:px-5 py-3 text-[10px] tracking-[0.22em] uppercase text-blue">
-        Live from Strava
+        This week on Strava
       </div>
       <div className="p-3 sm:p-4">
         <iframe
