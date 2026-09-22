@@ -929,6 +929,14 @@ function RSVP() {
       <div className="relative max-w-[1080px] mx-auto flex flex-wrap gap-10 lg:gap-16 items-start">
         <div className="flex-1 min-w-[300px] basis-[380px]">
           <div className="eyebrow eyebrow-blue mb-4">Save your spot</div>
+          {SKIPPED_THIS_WEEK ? (
+            <div className="mb-5 border border-brand/60 bg-brand/10 px-4 py-3 text-[15px] leading-[1.5] text-paper">
+              <span className="eyebrow eyebrow-blue block mb-1">Run cancelled</span>
+              {SKIPPED_THIS_WEEK.note ?? "This Saturday's run is off."} Next run:{" "}
+              {CANONICAL_OCCURRENCE.localDate}, 7:00 AM.
+            </div>
+          ) : null}
+
           <h2 className="display-condensed text-paper text-[clamp(38px,5vw,68px)] mb-5">
             RSVP for this Saturday.
           </h2>
