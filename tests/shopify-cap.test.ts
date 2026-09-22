@@ -21,7 +21,9 @@ const validPayload = {
   title: "The Founding Member Cap",
   published_at: "2026-09-01T00:00:00Z",
   available: true,
-  variants: [{ id: CAP_BINDING.variantId, available: true }],
+  price: 3600,
+  featured_image: "//cdn.shopify.com/s/files/1/cap.jpg",
+  variants: [{ id: CAP_BINDING.variantId, available: true, price: 3600 }],
 };
 
 describe("cap release gate", () => {
