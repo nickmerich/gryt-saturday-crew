@@ -818,6 +818,8 @@ function RSVP() {
               source: source || null,
               eventLabel: DAY_EVENT_LABEL[d],
               heroVariant: heroVariant ?? null,
+              partySize,
+              firstTimer,
             }),
           }),
         ),
