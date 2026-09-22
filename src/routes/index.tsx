@@ -1145,6 +1145,8 @@ function RSVPConfirmation({
   days,
   prefill,
   waiverOnFile = false,
+  partySize = 1,
+  firstTimer = false,
   onReset,
 }: {
   name: string;
@@ -1152,6 +1154,8 @@ function RSVPConfirmation({
   days: RsvpDay[];
   prefill?: WaiverPrefill;
   waiverOnFile?: boolean;
+  partySize?: number;
+  firstTimer?: boolean;
   onReset: () => void;
 }) {
   const [waiverSigned, setWaiverSigned] = useState(waiverOnFile);
