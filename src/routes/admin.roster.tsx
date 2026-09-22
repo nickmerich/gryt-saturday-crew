@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useEffect, useMemo, useState } from 'react'
 import { supabase } from '@/integrations/supabase/client'
 import { isAdminEmail } from '@/lib/admin/allowlist'
-import type { RosterEntry } from '@/lib/roster/handlers.server'
+import type { RosterEntry, RosterResponse } from '@/lib/roster/types'
 
 export const Route = createFileRoute('/admin/roster')({
   ssr: false,
@@ -22,8 +22,6 @@ export const Route = createFileRoute('/admin/roster')({
   ),
   notFoundComponent: () => <div className="p-12 text-paper">Not found.</div>,
 })
-
-type RosterResponse = { roster: RosterEntry[]; totals: { people: number; rsvps: number; withWaiver: number } }
 
 const dateFmt = new Intl.DateTimeFormat('en-US', {
   timeZone: 'America/New_York',

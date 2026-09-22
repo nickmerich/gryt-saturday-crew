@@ -1,17 +1,6 @@
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { isAdminEmail } from '@/lib/admin/allowlist'
-
-export type RosterEntry = {
-  key: string
-  name: string
-  contact: string
-  contactKind: 'email' | 'phone' | 'other'
-  firstRsvp: string
-  lastRsvp: string
-  rsvpCount: number
-  eventLabels: string[]
-  waiver: { signedOn: string; season: number; version: string } | null
-}
+import type { RosterEntry } from './types'
 
 function json(data: unknown, status = 200) {
   return Response.json(data, {
