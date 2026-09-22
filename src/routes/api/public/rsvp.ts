@@ -2,7 +2,12 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import { createFileRoute } from '@tanstack/react-router'
 import { z } from 'zod'
 import { sendInternalTransactionalEmail } from '@/lib/email/send-internal.server'
-import { nextRunNumber, nextSaturdayISODate, nextSaturdayLabel } from '@/lib/run-schedule'
+import {
+  nextRunNumber,
+  nextSaturdayISODate,
+  nextSaturdayLabel,
+  validateEventRef,
+} from '@/lib/run-schedule'
 
 const isEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)
 
@@ -10,11 +15,15 @@ const RsvpSchema = z.object({
   name: z.string().trim().min(1).max(80),
   contact: z.string().trim().min(3).max(200),
   source: z.string().trim().max(40).optional().nullable(),
+  // Legacy display label. Recorded, never trusted as the event identity.
   eventLabel: z.string().trim().max(120).optional().nullable(),
+  eventId: z.string().trim().max(60).optional().nullable(),
+  eventVersion: z.coerce.number().int().min(1).max(999).optional().nullable(),
   heroVariant: z.enum(['a', 'b']).optional().nullable(),
   partySize: z.coerce.number().int().min(1).max(10).optional().default(1),
   firstTimer: z.boolean().optional().default(false),
 })
+
 
 function redactEmail(email: string | null | undefined): string {
   if (!email) return '***'
