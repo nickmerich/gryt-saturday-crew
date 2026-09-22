@@ -4,7 +4,6 @@ import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 import { nyNow } from "@/lib/run-schedule";
 
 const SAT = { day: 6, time: "7:00 AM", label: "Saturday Long Run", short: "SAT 7 AM" };
-const TUE = { day: 2, time: "9:00 PM", label: "Tuesday Night Shift", short: "TUE 9 PM" };
 
 const MONTHS = [
   "January", "February", "March", "April", "May", "June",
