@@ -1,5 +1,7 @@
 # GRYT Attendance Staging Verification
 
+Historical preflight and local-rehearsal record. The user subsequently reauthorized Supabase and approved a new isolated project. See [Hosted Staging Verification](./hosted-staging-verification.md) for current results: hosted database checks pass, while real sign-in and app wiring remain pending.
+
 ## Outcome
 
 **Hosted staging is blocked, not passed. The expanded local rehearsal passed.**

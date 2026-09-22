@@ -1,0 +1,21 @@
+{
+  "purpose": "isolated organizer-attendance verification",
+  "projectName": "gryt-attendance-staging",
+  "projectRef": "ccyejgyootpqnhfblffi",
+  "organizationName": "Merich Projects",
+  "organizationId": "prlmntgfgderbxnudaer",
+  "region": "us-east-2",
+  "apiUrl": "https://ccyejgyootpqnhfblffi.supabase.co",
+  "production": false,
+  "existingWebsiteProjectRefDoNotUse": "jmphsnrrxvgscstrbxvx",
+  "approvedQuotedMonthlyCreationCost": 0,
+  "dataPolicy": "Synthetic data only. No production copy, outbound messaging or workers.",
+  "hostedDatabaseVerified": true,
+  "authenticatedApplicationVerified": false,
+  "migrationBatches": [
+    "gryt_staging_rsvp_prerequisites",
+    "gryt_attendance_foundation",
+    "gryt_organizer_checkin",
+    "gryt_checkin_privilege_hardening"
+  ]
+}

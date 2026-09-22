@@ -1,5 +1,7 @@
 # GRYT Organizer Attendance Review
 
+Status update: the user subsequently approved an isolated Supabase staging project and the reviewed attendance migrations have been applied there only. See [Hosted Staging Verification](./hosted-staging-verification.md) for passed database checks and remaining authenticated-app gates. Earlier phase descriptions below refer to the state before staging creation.
+
 ## Review-only implementation
 
 The organizer desk lives at `/admin/check-in` and is linked from the existing private RSVP roster. It extends the attendance foundation without replacing authentication, public RSVP, waivers, messaging jobs or Notion records. It remains on `review/attendance-foundation-2026-09-22` in [PR 15](https://github.com/nickmerich/gryt-saturday-crew/pull/15).
