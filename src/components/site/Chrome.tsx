@@ -103,6 +103,12 @@ export function SiteNav() {
           >
             FAQ
           </a>
+          <a
+            href="/shop"
+            className="eyebrow text-paper/80 hover:text-blue transition-colors"
+          >
+            Shop
+          </a>
         </div>
         <a
           href={STRAVA_CLUB}
