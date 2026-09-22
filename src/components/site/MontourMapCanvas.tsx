@@ -10,15 +10,15 @@ import {
   type RouteOption,
 } from "@/lib/montour-route";
 
-function pin(label: string, kind: "park" | "turn") {
+function pin(label: string, kind: "park" | "turn", flip = false) {
   const bg = kind === "park" ? "#89CFF0" : "#000000";
   const fg = kind === "park" ? "#000000" : "#89CFF0";
   const border = kind === "park" ? "#000000" : "#89CFF0";
   return L.divIcon({
     className: "",
-    html: `<div style="font-family:Oswald,system-ui,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:11px;line-height:1;padding:6px 8px;background:${bg};color:${fg};border:2px solid ${border};white-space:nowrap;">${label}</div>`,
+    html: `<div style="transform:translate(${flip ? "-100%" : "0"},-50%);${flip ? "" : ""}font-family:Oswald,system-ui,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:11px;line-height:1;padding:6px 8px;background:${bg};color:${fg};border:2px solid ${border};white-space:nowrap;">${label}</div>`,
     iconSize: [0, 0],
-    iconAnchor: [0, 10],
+    iconAnchor: [0, 0],
   });
 }
 
@@ -33,10 +33,11 @@ export default function MontourMapCanvas({ option }: { option: RouteOption }) {
       scrollWheelZoom: false,
       attributionControl: true,
     });
-    L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; CARTO',
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       maxZoom: 19,
+      className: "gryt-tiles",
     }).addTo(map);
     layerRef.current = L.layerGroup().addTo(map);
     mapRef.current = map;
@@ -67,7 +68,7 @@ export default function MontourMapCanvas({ option }: { option: RouteOption }) {
       fillColor: "#89CFF0",
       fillOpacity: 1,
     }).addTo(layer);
-    L.marker(TRAILHEAD, { icon: pin("Parking · Valley Brook", "park") }).addTo(layer);
+    L.marker(TRAILHEAD, { icon: pin("Parking · Valley Brook", "park", true) }).addTo(layer);
     L.marker(end, { icon: pin(`${option.label} turnaround`, "turn") }).addTo(layer);
     L.circleMarker(end, {
       radius: 6,
