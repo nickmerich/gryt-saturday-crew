@@ -275,6 +275,12 @@ export function SiteFooter() {
                 FAQ
               </a>
               <a
+                href="/shop"
+                className="eyebrow text-paper/75 hover:text-blue transition-colors"
+              >
+                Shop
+              </a>
+              <a
                 href={insuranceAsset.url}
                 target="_blank"
                 rel="noopener noreferrer"
