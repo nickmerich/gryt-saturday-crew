@@ -56,6 +56,11 @@ const Email = ({
           <Section style={card}>
             <Row label="Name" value={name} />
             <Row label="Contact" value={contact} />
+            <Row
+              label="Heads"
+              value={partySize > 1 ? `${partySize} (bringing ${partySize - 1})` : '1'}
+            />
+            <Row label="First time" value={firstTimer ? 'Yes — say hello' : 'No'} />
             <Row label="Source" value={source} />
             <Row label="Event" value={eventLabel} />
             {when && <Row label="Submitted" value={when} />}
