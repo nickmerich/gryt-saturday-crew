@@ -710,6 +710,10 @@ function RSVP() {
   const [name, setName] = useState("");
   const [contact, setContact] = useState("");
   const [source, setSource] = useState("");
+  const [partySize, setPartySize] = useState(1);
+  const [firstTimer, setFirstTimer] = useState(false);
+  const [submittedParty, setSubmittedParty] = useState(1);
+  const [submittedFirstTimer, setSubmittedFirstTimer] = useState(false);
   const [days, setDays] = useState<Record<RsvpDay, boolean>>({ sat: true });
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -814,6 +818,8 @@ function RSVP() {
               source: source || null,
               eventLabel: DAY_EVENT_LABEL[d],
               heroVariant: heroVariant ?? null,
+              partySize,
+              firstTimer,
             }),
           }),
         ),
@@ -830,11 +836,15 @@ function RSVP() {
         return;
       }
       setSubmittedDays(selected);
+      setSubmittedParty(partySize);
+      setSubmittedFirstTimer(firstTimer);
       setSubmitted(true);
       track("rsvp_submit_success", {
         hero_variant: heroVariant ?? "unknown",
         days: selected.join(","),
         day_count: selected.length,
+        party_size: partySize,
+        first_timer: firstTimer,
         contact_kind: contactIsEmail ? "email" : "phone",
         source: source || "unspecified",
       });
@@ -1008,6 +1018,45 @@ function RSVP() {
                 </div>
               ))}
               <label className="block text-[11px] font-bold tracking-[0.14em] uppercase text-ink/55 mb-1.5">
+                How many coming?
+              </label>
+              <div className="flex gap-2 mb-4">
+                {[1, 2, 3, 4, 5].map((n) => (
+                  <button
+                    key={n}
+                    type="button"
+                    onClick={() => setPartySize(n)}
+                    aria-pressed={partySize === n}
+                    className={`flex-1 border-[1.5px] py-3 text-sm font-bold transition-colors ${
+                      partySize === n
+                        ? "border-ink bg-ink text-paper"
+                        : "border-[#cfcabe] bg-white text-ink hover:border-ink"
+                    }`}
+                  >
+                    {n === 5 ? "5+" : n}
+                  </button>
+                ))}
+              </div>
+              <button
+                type="button"
+                onClick={() => setFirstTimer((v) => !v)}
+                aria-pressed={firstTimer}
+                className={`w-full flex items-center gap-3 border-[1.5px] px-3.5 py-3 mb-4 text-left transition-colors ${
+                  firstTimer ? "border-ink bg-white" : "border-[#cfcabe] bg-white hover:border-ink"
+                }`}
+              >
+                <span
+                  className={`w-4 h-4 shrink-0 flex items-center justify-center text-[10px] border-[1.5px] border-ink ${
+                    firstTimer ? "bg-ink text-paper" : "bg-white text-transparent"
+                  }`}
+                >
+                  ✓
+                </span>
+                <span className="text-sm font-semibold text-ink">
+                  First time running with us
+                </span>
+              </button>
+              <label className="block text-[11px] font-bold tracking-[0.14em] uppercase text-ink/55 mb-1.5">
                 How'd you find us?
               </label>
               <select
@@ -1053,6 +1102,8 @@ function RSVP() {
               days={submittedDays}
               prefill={waiverPrefill}
               waiverOnFile={waiverOnFile}
+              partySize={submittedParty}
+              firstTimer={submittedFirstTimer}
               onReset={() => {
                 void clearSignupSession().catch(() => {});
                 setWaiverOnFile(false);
@@ -1061,6 +1112,9 @@ function RSVP() {
                 setName("");
                 setContact("");
                 setSource("");
+                setPartySize(1);
+                setFirstTimer(false);
+
 
               }}
             />
@@ -1091,6 +1145,8 @@ function RSVPConfirmation({
   days,
   prefill,
   waiverOnFile = false,
+  partySize = 1,
+  firstTimer = false,
   onReset,
 }: {
   name: string;
@@ -1098,6 +1154,8 @@ function RSVPConfirmation({
   days: RsvpDay[];
   prefill?: WaiverPrefill;
   waiverOnFile?: boolean;
+  partySize?: number;
+  firstTimer?: boolean;
   onReset: () => void;
 }) {
   const [waiverSigned, setWaiverSigned] = useState(waiverOnFile);
@@ -1109,6 +1167,17 @@ function RSVPConfirmation({
     ["Runner", name.trim() || "—"],
     ["Contact", masked || "—"],
     ["RSVP", days.map((d) => DAY_LABEL[d]).join(" · ") || "Saturday · GRYT Run"],
+    [
+      "Heads",
+      partySize > 1
+        ? `${partySize === 5 ? "5+" : partySize} · you plus ${partySize === 5 ? "4 or more" : partySize - 1}`
+        : "Just you",
+    ],
+    ...(firstTimer
+      ? ([["First run", "We'll look for you. Come 10 min early."]] as Array<
+          [string, React.ReactNode]
+        >)
+      : []),
     ["Waiver", waiverSigned ? "Signed · covered through Dec 31, 2026" : "Not signed yet"],
     ["When", nextSaturdayLabelLong()],
     [

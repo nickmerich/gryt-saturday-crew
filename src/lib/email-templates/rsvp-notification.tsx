@@ -18,6 +18,8 @@ interface Props {
   source?: string
   eventLabel?: string
   submittedAt?: string
+  partySize?: number
+  firstTimer?: boolean
 }
 
 const NOTIFY_TO = 'merichnick@gmail.com'
@@ -28,6 +30,8 @@ const Email = ({
   source = 'Not provided',
   eventLabel = 'GRYT Run',
   submittedAt,
+  partySize = 1,
+  firstTimer = false,
 }: Props) => {
   const when = submittedAt
     ? new Date(submittedAt).toLocaleString('en-US', {
@@ -52,6 +56,11 @@ const Email = ({
           <Section style={card}>
             <Row label="Name" value={name} />
             <Row label="Contact" value={contact} />
+            <Row
+              label="Heads"
+              value={partySize > 1 ? `${partySize} (bringing ${partySize - 1})` : '1'}
+            />
+            <Row label="First time" value={firstTimer ? 'Yes — say hello' : 'No'} />
             <Row label="Source" value={source} />
             <Row label="Event" value={eventLabel} />
             {when && <Row label="Submitted" value={when} />}
@@ -86,6 +95,8 @@ export const template = {
     source: 'Instagram',
     eventLabel: 'GRYT Saturday Run · 7 AM',
     submittedAt: new Date().toISOString(),
+    partySize: 2,
+    firstTimer: true,
   },
 } satisfies TemplateEntry
 

@@ -12,6 +12,8 @@ const RsvpSchema = z.object({
   source: z.string().trim().max(40).optional().nullable(),
   eventLabel: z.string().trim().max(120).optional().nullable(),
   heroVariant: z.enum(['a', 'b']).optional().nullable(),
+  partySize: z.coerce.number().int().min(1).max(10).optional().default(1),
+  firstTimer: z.boolean().optional().default(false),
 })
 
 function redactEmail(email: string | null | undefined): string {
@@ -60,7 +62,8 @@ export const Route = createFileRoute('/api/public/rsvp')({
           )
         }
 
-        const { name, contact, source, eventLabel, heroVariant } = parsed.data
+        const { name, contact, source, eventLabel, heroVariant, partySize, firstTimer } =
+          parsed.data
         const supabase: SupabaseClient<any, 'public', any> = createClient(supabaseUrl, supabaseServiceKey)
         const userAgent = request.headers.get('user-agent')?.slice(0, 300) ?? null
         const submittedAt = new Date().toISOString()
@@ -74,6 +77,8 @@ export const Route = createFileRoute('/api/public/rsvp')({
             source: source ?? null,
             event_label: eventLabel ?? null,
             hero_variant: heroVariant ?? null,
+            party_size: partySize,
+            first_timer: firstTimer,
             user_agent: userAgent,
           })
           .select('id')
@@ -99,6 +104,8 @@ export const Route = createFileRoute('/api/public/rsvp')({
               source: source || 'Not provided',
               eventLabel: resolvedEventLabel,
               submittedAt,
+              partySize,
+              firstTimer,
             },
             `rsvp-notify-${rsvpId}`,
           )
