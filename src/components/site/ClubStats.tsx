@@ -82,6 +82,8 @@ export function ClubStats() {
           </ul>
         </div>
 
+        <StravaClubEmbed />
+
         {stats.note ? (
           <p className="mt-4 text-[12px] text-paper/50">{stats.note}</p>
         ) : null}
