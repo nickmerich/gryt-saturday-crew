@@ -104,6 +104,8 @@ export const Route = createFileRoute('/api/public/rsvp')({
               source: source || 'Not provided',
               eventLabel: resolvedEventLabel,
               submittedAt,
+              partySize,
+              firstTimer,
             },
             `rsvp-notify-${rsvpId}`,
           )
