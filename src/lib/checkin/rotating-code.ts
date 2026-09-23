@@ -9,7 +9,7 @@
  */
 
 export const CODE_WINDOW_MS = 30_000;
-/** How many past windows still验 verify, covering slow scans and clock drift. */
+/** How many past windows still verify, covering slow scans and clock drift. */
 export const CODE_TOLERANCE_WINDOWS = 3;
 
 function windowIndex(now: number): number {
