@@ -60,7 +60,14 @@ const EMPTY: FormState = {
   agree_adult: false,
 };
 
-type SignedRecord = { id: string; signed_on: string; name: string };
+type SignedRecord = {
+  id: string;
+  signed_on: string;
+  /** The participant. */
+  name: string;
+  /** Parent or legal guardian who signed, when the participant is under 18. */
+  guardian?: string;
+};
 
 function readSigned(): SignedRecord | null {
   try {
