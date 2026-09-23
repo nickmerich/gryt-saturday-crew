@@ -61,6 +61,7 @@ import { Route as ApiNewsletterStatusRouteImport } from './routes/api/newsletter
 import { Route as ApiAdminStravaConnectRouteImport } from './routes/api/admin/strava-connect'
 import { Route as ApiAdminRosterRouteImport } from './routes/api/admin/roster'
 import { Route as ApiAdminInquiriesRouteImport } from './routes/api/admin/inquiries'
+import { Route as ApiAdminCheckinCodeRouteImport } from './routes/api/admin/checkin-code'
 import { Route as ApiAdminCheckinRouteImport } from './routes/api/admin/checkin'
 import { Route as AdminStravaConnectRouteImport } from './routes/admin.strava.connect'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
@@ -342,6 +343,11 @@ const ApiAdminInquiriesRoute = ApiAdminInquiriesRouteImport.update({
   path: '/api/admin/inquiries',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAdminCheckinCodeRoute = ApiAdminCheckinCodeRouteImport.update({
+  id: '/api/admin/checkin-code',
+  path: '/api/admin/checkin-code',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAdminCheckinRoute = ApiAdminCheckinRouteImport.update({
   id: '/api/admin/checkin',
   path: '/api/admin/checkin',
@@ -431,6 +437,7 @@ export interface FileRoutesByFullPath {
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/admin/strava/connect': typeof AdminStravaConnectRoute
   '/api/admin/checkin': typeof ApiAdminCheckinRoute
+  '/api/admin/checkin-code': typeof ApiAdminCheckinCodeRoute
   '/api/admin/inquiries': typeof ApiAdminInquiriesRoute
   '/api/admin/roster': typeof ApiAdminRosterRoute
   '/api/admin/strava-connect': typeof ApiAdminStravaConnectRoute
@@ -493,6 +500,7 @@ export interface FileRoutesByTo {
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/admin/strava/connect': typeof AdminStravaConnectRoute
   '/api/admin/checkin': typeof ApiAdminCheckinRoute
+  '/api/admin/checkin-code': typeof ApiAdminCheckinCodeRoute
   '/api/admin/inquiries': typeof ApiAdminInquiriesRoute
   '/api/admin/roster': typeof ApiAdminRosterRoute
   '/api/admin/strava-connect': typeof ApiAdminStravaConnectRoute
@@ -556,6 +564,7 @@ export interface FileRoutesById {
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/admin/strava/connect': typeof AdminStravaConnectRoute
   '/api/admin/checkin': typeof ApiAdminCheckinRoute
+  '/api/admin/checkin-code': typeof ApiAdminCheckinCodeRoute
   '/api/admin/inquiries': typeof ApiAdminInquiriesRoute
   '/api/admin/roster': typeof ApiAdminRosterRoute
   '/api/admin/strava-connect': typeof ApiAdminStravaConnectRoute
@@ -620,6 +629,7 @@ export interface FileRouteTypes {
     | '/.mcp/invoke-tool/$tool'
     | '/admin/strava/connect'
     | '/api/admin/checkin'
+    | '/api/admin/checkin-code'
     | '/api/admin/inquiries'
     | '/api/admin/roster'
     | '/api/admin/strava-connect'
@@ -682,6 +692,7 @@ export interface FileRouteTypes {
     | '/.mcp/invoke-tool/$tool'
     | '/admin/strava/connect'
     | '/api/admin/checkin'
+    | '/api/admin/checkin-code'
     | '/api/admin/inquiries'
     | '/api/admin/roster'
     | '/api/admin/strava-connect'
@@ -744,6 +755,7 @@ export interface FileRouteTypes {
     | '/.mcp/invoke-tool/$tool'
     | '/admin/strava/connect'
     | '/api/admin/checkin'
+    | '/api/admin/checkin-code'
     | '/api/admin/inquiries'
     | '/api/admin/roster'
     | '/api/admin/strava-connect'
@@ -806,6 +818,7 @@ export interface RootRouteChildren {
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
   AdminStravaConnectRoute: typeof AdminStravaConnectRoute
   ApiAdminCheckinRoute: typeof ApiAdminCheckinRoute
+  ApiAdminCheckinCodeRoute: typeof ApiAdminCheckinCodeRoute
   ApiAdminInquiriesRoute: typeof ApiAdminInquiriesRoute
   ApiAdminRosterRoute: typeof ApiAdminRosterRoute
   ApiAdminStravaConnectRoute: typeof ApiAdminStravaConnectRoute
@@ -1190,6 +1203,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAdminInquiriesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/admin/checkin-code': {
+      id: '/api/admin/checkin-code'
+      path: '/api/admin/checkin-code'
+      fullPath: '/api/admin/checkin-code'
+      preLoaderRoute: typeof ApiAdminCheckinCodeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/admin/checkin': {
       id: '/api/admin/checkin'
       path: '/api/admin/checkin'
@@ -1307,6 +1327,7 @@ const rootRouteChildren: RootRouteChildren = {
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
   AdminStravaConnectRoute: AdminStravaConnectRoute,
   ApiAdminCheckinRoute: ApiAdminCheckinRoute,
+  ApiAdminCheckinCodeRoute: ApiAdminCheckinCodeRoute,
   ApiAdminInquiriesRoute: ApiAdminInquiriesRoute,
   ApiAdminRosterRoute: ApiAdminRosterRoute,
   ApiAdminStravaConnectRoute: ApiAdminStravaConnectRoute,
