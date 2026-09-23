@@ -124,16 +124,23 @@ function WaiverPage() {
 
   const isMinor = age !== null && age < 18;
   const emailValid = /^\S+@\S+\.\S+$/.test(form.email.trim());
+  // A minor's waiver is signed by the parent or legal guardian, so the typed
+  // signature must match the guardian's name instead of the participant's.
+  const signerName = isMinor ? form.guardian_name : form.full_name;
+  const guardianValid =
+    form.guardian_name.trim().length > 1 &&
+    form.guardian_relationship.trim().length > 1;
   const sigMatches =
     form.signature_text.trim().length > 0 &&
+    signerName.trim().length > 0 &&
     form.signature_text.trim().toLowerCase() ===
-      form.full_name.trim().toLowerCase();
+      signerName.trim().toLowerCase();
 
   const step1Valid =
     form.full_name.trim().length > 1 &&
     emailValid &&
     !!form.date_of_birth &&
-    !isMinor;
+    (!isMinor || guardianValid);
   const step2Valid =
     form.emergency_contact_name.trim().length > 1 &&
     form.emergency_contact_phone.trim().length >= 7;
