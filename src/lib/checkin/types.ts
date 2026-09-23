@@ -4,7 +4,7 @@ export type CheckinPerson = {
   name: string
   contact: string
   /** how this person got on the list */
-  source: 'rsvp' | 'walk-in'
+  source: 'rsvp' | 'walk-in' | 'self'
   rsvpCount: number
   partySize: number
   firstTimer: boolean

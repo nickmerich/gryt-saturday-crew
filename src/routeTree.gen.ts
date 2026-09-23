@@ -24,6 +24,7 @@ import { Route as McpRouteImport } from './routes/mcp'
 import { Route as InquireRouteImport } from './routes/inquire'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as EmailStatusRouteImport } from './routes/email-status'
+import { Route as CheckinRouteImport } from './routes/checkin'
 import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
@@ -56,11 +57,13 @@ import { Route as ResourcesPlaybooksBestFreeRunClubsSouthHills2026RouteImport } 
 import { Route as LovableEmailEventsRouteImport } from './routes/lovable/email/events'
 import { Route as ApiPublicRsvpRouteImport } from './routes/api/public/rsvp'
 import { Route as ApiPublicInquiriesRouteImport } from './routes/api/public/inquiries'
+import { Route as ApiPublicCheckinRouteImport } from './routes/api/public/checkin'
 import { Route as ApiNewsletterSubscribeRouteImport } from './routes/api/newsletter/subscribe'
 import { Route as ApiNewsletterStatusRouteImport } from './routes/api/newsletter/status'
 import { Route as ApiAdminStravaConnectRouteImport } from './routes/api/admin/strava-connect'
 import { Route as ApiAdminRosterRouteImport } from './routes/api/admin/roster'
 import { Route as ApiAdminInquiriesRouteImport } from './routes/api/admin/inquiries'
+import { Route as ApiAdminCheckinCodeRouteImport } from './routes/api/admin/checkin-code'
 import { Route as ApiAdminCheckinRouteImport } from './routes/api/admin/checkin'
 import { Route as AdminStravaConnectRouteImport } from './routes/admin.strava.connect'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
@@ -143,6 +146,11 @@ const FaqRoute = FaqRouteImport.update({
 const EmailStatusRoute = EmailStatusRouteImport.update({
   id: '/email-status',
   path: '/email-status',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckinRoute = CheckinRouteImport.update({
+  id: '/checkin',
+  path: '/checkin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CalendarRoute = CalendarRouteImport.update({
@@ -317,6 +325,11 @@ const ApiPublicInquiriesRoute = ApiPublicInquiriesRouteImport.update({
   path: '/api/public/inquiries',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicCheckinRoute = ApiPublicCheckinRouteImport.update({
+  id: '/api/public/checkin',
+  path: '/api/public/checkin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiNewsletterSubscribeRoute = ApiNewsletterSubscribeRouteImport.update({
   id: '/api/newsletter/subscribe',
   path: '/api/newsletter/subscribe',
@@ -340,6 +353,11 @@ const ApiAdminRosterRoute = ApiAdminRosterRouteImport.update({
 const ApiAdminInquiriesRoute = ApiAdminInquiriesRouteImport.update({
   id: '/api/admin/inquiries',
   path: '/api/admin/inquiries',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminCheckinCodeRoute = ApiAdminCheckinCodeRouteImport.update({
+  id: '/api/admin/checkin-code',
+  path: '/api/admin/checkin-code',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiAdminCheckinRoute = ApiAdminCheckinRouteImport.update({
@@ -390,6 +408,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/calendar': typeof CalendarRoute
+  '/checkin': typeof CheckinRoute
   '/email-status': typeof EmailStatusRoute
   '/faq': typeof FaqRoute
   '/inquire': typeof InquireRoute
@@ -431,11 +450,13 @@ export interface FileRoutesByFullPath {
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/admin/strava/connect': typeof AdminStravaConnectRoute
   '/api/admin/checkin': typeof ApiAdminCheckinRoute
+  '/api/admin/checkin-code': typeof ApiAdminCheckinCodeRoute
   '/api/admin/inquiries': typeof ApiAdminInquiriesRoute
   '/api/admin/roster': typeof ApiAdminRosterRoute
   '/api/admin/strava-connect': typeof ApiAdminStravaConnectRoute
   '/api/newsletter/status': typeof ApiNewsletterStatusRoute
   '/api/newsletter/subscribe': typeof ApiNewsletterSubscribeRoute
+  '/api/public/checkin': typeof ApiPublicCheckinRoute
   '/api/public/inquiries': typeof ApiPublicInquiriesRoute
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
   '/lovable/email/events': typeof LovableEmailEventsRoute
@@ -452,6 +473,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/calendar': typeof CalendarRoute
+  '/checkin': typeof CheckinRoute
   '/email-status': typeof EmailStatusRoute
   '/faq': typeof FaqRoute
   '/inquire': typeof InquireRoute
@@ -493,11 +515,13 @@ export interface FileRoutesByTo {
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/admin/strava/connect': typeof AdminStravaConnectRoute
   '/api/admin/checkin': typeof ApiAdminCheckinRoute
+  '/api/admin/checkin-code': typeof ApiAdminCheckinCodeRoute
   '/api/admin/inquiries': typeof ApiAdminInquiriesRoute
   '/api/admin/roster': typeof ApiAdminRosterRoute
   '/api/admin/strava-connect': typeof ApiAdminStravaConnectRoute
   '/api/newsletter/status': typeof ApiNewsletterStatusRoute
   '/api/newsletter/subscribe': typeof ApiNewsletterSubscribeRoute
+  '/api/public/checkin': typeof ApiPublicCheckinRoute
   '/api/public/inquiries': typeof ApiPublicInquiriesRoute
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
   '/lovable/email/events': typeof LovableEmailEventsRoute
@@ -515,6 +539,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/calendar': typeof CalendarRoute
+  '/checkin': typeof CheckinRoute
   '/email-status': typeof EmailStatusRoute
   '/faq': typeof FaqRoute
   '/inquire': typeof InquireRoute
@@ -556,11 +581,13 @@ export interface FileRoutesById {
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/admin/strava/connect': typeof AdminStravaConnectRoute
   '/api/admin/checkin': typeof ApiAdminCheckinRoute
+  '/api/admin/checkin-code': typeof ApiAdminCheckinCodeRoute
   '/api/admin/inquiries': typeof ApiAdminInquiriesRoute
   '/api/admin/roster': typeof ApiAdminRosterRoute
   '/api/admin/strava-connect': typeof ApiAdminStravaConnectRoute
   '/api/newsletter/status': typeof ApiNewsletterStatusRoute
   '/api/newsletter/subscribe': typeof ApiNewsletterSubscribeRoute
+  '/api/public/checkin': typeof ApiPublicCheckinRoute
   '/api/public/inquiries': typeof ApiPublicInquiriesRoute
   '/api/public/rsvp': typeof ApiPublicRsvpRoute
   '/lovable/email/events': typeof LovableEmailEventsRoute
@@ -579,6 +606,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/calendar'
+    | '/checkin'
     | '/email-status'
     | '/faq'
     | '/inquire'
@@ -620,11 +648,13 @@ export interface FileRouteTypes {
     | '/.mcp/invoke-tool/$tool'
     | '/admin/strava/connect'
     | '/api/admin/checkin'
+    | '/api/admin/checkin-code'
     | '/api/admin/inquiries'
     | '/api/admin/roster'
     | '/api/admin/strava-connect'
     | '/api/newsletter/status'
     | '/api/newsletter/subscribe'
+    | '/api/public/checkin'
     | '/api/public/inquiries'
     | '/api/public/rsvp'
     | '/lovable/email/events'
@@ -641,6 +671,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/calendar'
+    | '/checkin'
     | '/email-status'
     | '/faq'
     | '/inquire'
@@ -682,11 +713,13 @@ export interface FileRouteTypes {
     | '/.mcp/invoke-tool/$tool'
     | '/admin/strava/connect'
     | '/api/admin/checkin'
+    | '/api/admin/checkin-code'
     | '/api/admin/inquiries'
     | '/api/admin/roster'
     | '/api/admin/strava-connect'
     | '/api/newsletter/status'
     | '/api/newsletter/subscribe'
+    | '/api/public/checkin'
     | '/api/public/inquiries'
     | '/api/public/rsvp'
     | '/lovable/email/events'
@@ -703,6 +736,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/calendar'
+    | '/checkin'
     | '/email-status'
     | '/faq'
     | '/inquire'
@@ -744,11 +778,13 @@ export interface FileRouteTypes {
     | '/.mcp/invoke-tool/$tool'
     | '/admin/strava/connect'
     | '/api/admin/checkin'
+    | '/api/admin/checkin-code'
     | '/api/admin/inquiries'
     | '/api/admin/roster'
     | '/api/admin/strava-connect'
     | '/api/newsletter/status'
     | '/api/newsletter/subscribe'
+    | '/api/public/checkin'
     | '/api/public/inquiries'
     | '/api/public/rsvp'
     | '/lovable/email/events'
@@ -766,6 +802,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRoute
   CalendarRoute: typeof CalendarRoute
+  CheckinRoute: typeof CheckinRoute
   EmailStatusRoute: typeof EmailStatusRoute
   FaqRoute: typeof FaqRoute
   InquireRoute: typeof InquireRoute
@@ -806,11 +843,13 @@ export interface RootRouteChildren {
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
   AdminStravaConnectRoute: typeof AdminStravaConnectRoute
   ApiAdminCheckinRoute: typeof ApiAdminCheckinRoute
+  ApiAdminCheckinCodeRoute: typeof ApiAdminCheckinCodeRoute
   ApiAdminInquiriesRoute: typeof ApiAdminInquiriesRoute
   ApiAdminRosterRoute: typeof ApiAdminRosterRoute
   ApiAdminStravaConnectRoute: typeof ApiAdminStravaConnectRoute
   ApiNewsletterStatusRoute: typeof ApiNewsletterStatusRoute
   ApiNewsletterSubscribeRoute: typeof ApiNewsletterSubscribeRoute
+  ApiPublicCheckinRoute: typeof ApiPublicCheckinRoute
   ApiPublicInquiriesRoute: typeof ApiPublicInquiriesRoute
   ApiPublicRsvpRoute: typeof ApiPublicRsvpRoute
   LovableEmailEventsRoute: typeof LovableEmailEventsRoute
@@ -929,6 +968,13 @@ declare module '@tanstack/react-router' {
       path: '/email-status'
       fullPath: '/email-status'
       preLoaderRoute: typeof EmailStatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkin': {
+      id: '/checkin'
+      path: '/checkin'
+      fullPath: '/checkin'
+      preLoaderRoute: typeof CheckinRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/calendar': {
@@ -1155,6 +1201,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicInquiriesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/checkin': {
+      id: '/api/public/checkin'
+      path: '/api/public/checkin'
+      fullPath: '/api/public/checkin'
+      preLoaderRoute: typeof ApiPublicCheckinRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/newsletter/subscribe': {
       id: '/api/newsletter/subscribe'
       path: '/api/newsletter/subscribe'
@@ -1188,6 +1241,13 @@ declare module '@tanstack/react-router' {
       path: '/api/admin/inquiries'
       fullPath: '/api/admin/inquiries'
       preLoaderRoute: typeof ApiAdminInquiriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/checkin-code': {
+      id: '/api/admin/checkin-code'
+      path: '/api/admin/checkin-code'
+      fullPath: '/api/admin/checkin-code'
+      preLoaderRoute: typeof ApiAdminCheckinCodeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/admin/checkin': {
@@ -1264,6 +1324,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
   CalendarRoute: CalendarRoute,
+  CheckinRoute: CheckinRoute,
   EmailStatusRoute: EmailStatusRoute,
   FaqRoute: FaqRoute,
   InquireRoute: InquireRoute,
@@ -1307,11 +1368,13 @@ const rootRouteChildren: RootRouteChildren = {
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
   AdminStravaConnectRoute: AdminStravaConnectRoute,
   ApiAdminCheckinRoute: ApiAdminCheckinRoute,
+  ApiAdminCheckinCodeRoute: ApiAdminCheckinCodeRoute,
   ApiAdminInquiriesRoute: ApiAdminInquiriesRoute,
   ApiAdminRosterRoute: ApiAdminRosterRoute,
   ApiAdminStravaConnectRoute: ApiAdminStravaConnectRoute,
   ApiNewsletterStatusRoute: ApiNewsletterStatusRoute,
   ApiNewsletterSubscribeRoute: ApiNewsletterSubscribeRoute,
+  ApiPublicCheckinRoute: ApiPublicCheckinRoute,
   ApiPublicInquiriesRoute: ApiPublicInquiriesRoute,
   ApiPublicRsvpRoute: ApiPublicRsvpRoute,
   LovableEmailEventsRoute: LovableEmailEventsRoute,
