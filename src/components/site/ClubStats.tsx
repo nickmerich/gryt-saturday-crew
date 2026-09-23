@@ -4,6 +4,7 @@ import { getClubStats } from "@/lib/strava-club.functions";
 import { getAttendanceStats } from "@/lib/attendance.functions";
 import { SAMPLE_CLUB_STATS, STRAVA_CLUB_URL } from "@/lib/strava-club";
 import { StravaClubEmbed } from "./StravaClubEmbed";
+import trailPhoto from "@/assets/photos/run-club-5.jpg.asset.json";
 
 function Figure({ value, label }: { value: string; label: string }) {
   return (
@@ -37,8 +38,21 @@ export function ClubStats() {
   return (
     <section
       id="club-stats"
-      className="grit-panel relative overflow-hidden text-paper py-14 sm:py-20 px-5 sm:px-12 lg:px-24"
+      className="relative overflow-hidden text-paper py-14 sm:py-20 px-5 sm:px-12 lg:px-24"
     >
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: `url(${trailPhoto.url})` }}
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to bottom, rgba(8,8,8,0.55), rgba(8,8,8,0.72) 45%, rgba(8,8,8,0.88))",
+        }}
+      />
       <div className="relative max-w-[1180px] mx-auto">
         <div className="eyebrow eyebrow-blue mb-3">On Strava</div>
         <h2 className="display-condensed text-[clamp(30px,7vw,64px)] leading-[0.94]">
