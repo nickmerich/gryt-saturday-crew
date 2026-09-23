@@ -1853,8 +1853,8 @@ function InlineWaiver({
               </p>
               <p>
                 I grant the Club permission to use photos, video, or audio of me taken during
-                activities for promotional purposes, revocable in writing. Participants under 18
-                must sign in person with a parent or guardian — the online form is for adults 18+.
+                activities for promotional purposes, revocable in writing. Runners under 18 are
+                welcome: a parent or legal guardian signs the full waiver on their behalf.
               </p>
               <p>
                 This agreement is effective from signing through <strong>December 31, 2026</strong>{" "}
@@ -1933,7 +1933,11 @@ function InlineWaiver({
                 />
                 {isMinor && (
                   <p className="mt-1.5 text-[13px] text-blue font-semibold">
-                    Minors must sign in person with a parent or guardian.
+                    Under 18. A parent or legal guardian signs for them on the{" "}
+                    <a href="/waiver" className="underline">
+                      full waiver page
+                    </a>
+                    .
                   </p>
                 )}
               </InlineField>
