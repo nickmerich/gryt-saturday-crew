@@ -553,13 +553,17 @@ function SignedView({ record }: { record: SignedRecord }) {
         doc.setTextColor(10, 10, 10);
         doc.text(val, 180, rowY(i));
       };
-      writeRow(0, "Signer", record.name);
-      writeRow(1, "Signed on", record.signed_on);
-      writeRow(2, "Coverage", "Through Dec 31, 2026");
-      writeRow(3, "Confirmation", record.id);
-      writeRow(4, "Version", "gryt-run-club-2026-v1");
+      writeRow(0, "Runner", record.name);
+      let r = 1;
+      if (record.guardian) {
+        writeRow(r++, "Signed by guardian", record.guardian);
+      }
+      writeRow(r++, "Signed on", record.signed_on);
+      writeRow(r++, "Coverage", "Through Dec 31, 2026");
+      writeRow(r++, "Confirmation", record.id);
+      writeRow(r++, "Version", "gryt-run-club-2026-v1");
 
-      y += 160;
+      y += 160 + (record.guardian ? 20 : 0);
       doc.setFont("helvetica", "italic");
       doc.setFontSize(10);
       doc.setTextColor(120, 120, 120);
