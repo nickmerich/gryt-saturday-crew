@@ -54,10 +54,36 @@ function SelfCheckin() {
   const [message, setMessage] = useState('')
 
   const [code, setCode] = useState<string | null>(null)
+  const [ticket, setTicket] = useState<string | null>(null)
+
+  // Swap the scanned code for a longer-lived ticket straight away, and keep
+  // whatever the runner typed so a rescan never means retyping.
+  useEffect(() => {
+    const scanned = new URLSearchParams(window.location.search).get('c') ?? ''
+    setCode(scanned)
+    try {
+      const saved = JSON.parse(localStorage.getItem('gryt-checkin-form') ?? '{}')
+      if (typeof saved.name === 'string') setName(saved.name)
+      if (typeof saved.contact === 'string') setContact(saved.contact)
+    } catch {}
+    if (!scanned) return
+    fetch('/api/public/checkin', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ claim: true, code: scanned }),
+    })
+      .then((r) => r.json())
+      .then((b) => {
+        if (typeof b.ticket === 'string') setTicket(b.ticket)
+      })
+      .catch(() => {})
+  }, [])
 
   useEffect(() => {
-    setCode(new URLSearchParams(window.location.search).get('c') ?? '')
-  }, [])
+    try {
+      localStorage.setItem('gryt-checkin-form', JSON.stringify({ name, contact }))
+    } catch {}
+  }, [name, contact])
 
   async function submit(event: React.FormEvent) {
     event.preventDefault()
@@ -67,7 +93,7 @@ function SelfCheckin() {
       const response = await fetch('/api/public/checkin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ code, name, contact }),
+        body: JSON.stringify({ code, ticket, name, contact }),
       })
       const body = await response.json()
       if (!response.ok) {

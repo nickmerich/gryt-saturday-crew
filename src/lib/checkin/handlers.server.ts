@@ -339,7 +339,7 @@ export async function selfCheckin(request: Request) {
   const secret = qrSecret()
   if (!secret) return json({ error: 'Scan check-in is not set up yet.' }, 503)
 
-  let payload: { code?: string; name?: string; contact?: string }
+  let payload: { code?: string; ticket?: string; claim?: boolean; name?: string; contact?: string }
   try {
     payload = (await request.json()) as typeof payload
   } catch {
@@ -347,13 +347,23 @@ export async function selfCheckin(request: Request) {
   }
 
   const trim = (v: unknown, max: number) => (typeof v === 'string' ? v.trim().slice(0, max) : '')
+  const { verifyCode, issueTicket, verifyTicket } = await import('./rotating-code')
+
+  // On arrival the page swaps the scanned code for a 20-minute ticket.
+  if (payload.claim === true) {
+    if (!(await verifyCode(secret, trim(payload.code, 16)))) {
+      return json({ error: 'That code has expired. Scan the code on the screen again.' }, 403)
+    }
+    return json({ ticket: await issueTicket(secret) })
+  }
+
   const name = trim(payload.name, 80)
   const contact = trim(payload.contact, 200)
   if (name.length < 2) return json({ error: 'Please type your name.' }, 400)
   if (contact.length < 3) return json({ error: 'Please add an email or phone number.' }, 400)
 
-  const { verifyCode } = await import('./rotating-code')
-  if (!(await verifyCode(secret, trim(payload.code, 16)))) {
+  const ticketOk = payload.ticket ? await verifyTicket(secret, trim(payload.ticket, 64)) : false
+  if (!ticketOk && !(await verifyCode(secret, trim(payload.code, 16)))) {
     return json({ error: 'That code has expired. Scan the code on the screen again.' }, 403)
   }
 

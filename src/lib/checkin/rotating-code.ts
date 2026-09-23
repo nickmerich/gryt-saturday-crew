@@ -62,3 +62,26 @@ export async function verifyCode(secret: string, code: string, now = Date.now())
   }
   return false;
 }
+
+/**
+ * Arrival ticket. Scanning a fresh code on arrival swaps it for a ticket that
+ * lasts long enough to type a name with cold hands, so a slow typist is not
+ * turned away once the QR on screen has moved on.
+ */
+export const TICKET_TTL_MS = 20 * 60_000;
+
+function hex(bytes: Uint8Array): string {
+  return Array.from(bytes.slice(0, 16), (b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+export async function issueTicket(secret: string, now = Date.now()): Promise<string> {
+  return `${now}.${hex(await hmac(secret, `gryt-ticket:${now}`))}`;
+}
+
+export async function verifyTicket(secret: string, ticket: string, now = Date.now()): Promise<boolean> {
+  const match = /^(\d{13})\.([0-9a-f]{32})$/.exec(ticket.trim());
+  if (!match) return false;
+  const issued = Number(match[1]);
+  if (issued > now + 60_000 || now - issued > TICKET_TTL_MS) return false;
+  return match[2] === hex(await hmac(secret, `gryt-ticket:${issued}`));
+}
