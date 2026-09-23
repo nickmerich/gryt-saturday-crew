@@ -185,6 +185,7 @@ function WaiverPage() {
         id: res.id,
         signed_on: res.signed_on,
         name: form.full_name.trim(),
+        ...(isMinor ? { guardian: form.guardian_name.trim() } : {}),
       };
       try {
         localStorage.setItem(SIGNED_KEY, JSON.stringify(record));
@@ -605,8 +606,14 @@ function SignedView({ record }: { record: SignedRecord }) {
           </p>
           <div className="border border-paper/20 p-6 md:p-8 bg-ink/40 mb-10 text-[14px] font-mono text-paper/70 flex flex-col gap-1.5">
             <div>
-              <span className="text-paper/40">Signer:</span> {record.name}
+              <span className="text-paper/40">Runner:</span> {record.name}
             </div>
+            {record.guardian && (
+              <div>
+                <span className="text-paper/40">Signed by guardian:</span>{" "}
+                {record.guardian}
+              </div>
+            )}
             <div>
               <span className="text-paper/40">Signed on:</span> {record.signed_on}
             </div>
