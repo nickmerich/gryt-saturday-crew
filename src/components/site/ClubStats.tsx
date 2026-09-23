@@ -59,18 +59,14 @@ export function ClubStats() {
           THE CREW IN NUMBERS
         </h2>
 
-        {stats.isSample ? (
-          <p className="mt-4 inline-block border border-blue/60 px-3 py-1.5 text-[11px] tracking-[0.18em] uppercase text-blue">
-            Sample data · not live yet
-          </p>
+        {!stats.isSample ? (
+          <div className="mt-6 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            <Figure value={String(stats.members)} label="Members" />
+            <Figure value={stats.recentMiles.toLocaleString()} label="Recent club miles" />
+            <Figure value={stats.totalMiles.toLocaleString()} label="Club miles" />
+            <Figure value={String(stats.runsLogged)} label="Runs logged" />
+          </div>
         ) : null}
-
-        <div className="mt-6 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-          <Figure value={String(stats.members)} label="Members" />
-          <Figure value={stats.recentMiles.toLocaleString()} label="Recent club miles" />
-          <Figure value={stats.totalMiles.toLocaleString()} label="Club miles" />
-          <Figure value={String(stats.runsLogged)} label="Runs logged" />
-        </div>
 
         {attendance && attendance.runsCounted > 0 ? (
           <div className="mt-4 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
@@ -84,43 +80,44 @@ export function ClubStats() {
           </div>
         ) : null}
 
-        <div className="mt-6 border border-paper/20 bg-ink/50">
-          <div className="border-b border-paper/15 px-4 sm:px-5 py-3 text-[10px] tracking-[0.22em] uppercase text-blue">
-            Recent group runs
+        {!stats.isSample && stats.recentRuns.length > 0 ? (
+          <div className="mt-6 border border-paper/20 bg-ink/50">
+            <div className="border-b border-paper/15 px-4 sm:px-5 py-3 text-[10px] tracking-[0.22em] uppercase text-blue">
+              Recent group runs
+            </div>
+            <ul>
+              {stats.recentRuns.map((run) => (
+                <li
+                  key={run.id}
+                  className="flex items-baseline justify-between gap-4 border-b border-paper/10 last:border-b-0 px-4 sm:px-5 py-3"
+                >
+                  <div className="min-w-0">
+                    <div className="display-condensed text-[17px] sm:text-[20px] truncate">
+                      {run.name}
+                    </div>
+                    <div className="text-[12px] text-paper/55">
+                      {run.date
+                        ? new Date(`${run.date}T12:00:00`).toLocaleDateString("en-US", {
+                            month: "short",
+                            day: "numeric",
+                          })
+                        : "Recent"}
+                      {run.runners > 1 ? ` · ${run.runners} runners` : ""}
+                    </div>
+                  </div>
+                  <div className="display-condensed shrink-0 text-blue text-[18px] sm:text-[22px]">
+                    {run.distanceMi} mi
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
-          <ul>
-            {stats.recentRuns.map((run) => (
-              <li
-                key={run.id}
-                className="flex items-baseline justify-between gap-4 border-b border-paper/10 last:border-b-0 px-4 sm:px-5 py-3"
-              >
-                <div className="min-w-0">
-                  <div className="display-condensed text-[17px] sm:text-[20px] truncate">
-                    {run.name}
-                  </div>
-                  <div className="text-[12px] text-paper/55">
-                    {run.date
-                      ? new Date(`${run.date}T12:00:00`).toLocaleDateString("en-US", {
-                          month: "short",
-                          day: "numeric",
-                        })
-                      : "Recent"}
-                    {run.runners > 1 ? ` · ${run.runners} runners` : ""}
-                  </div>
-                </div>
-                <div className="display-condensed shrink-0 text-blue text-[18px] sm:text-[22px]">
-                  {run.distanceMi} mi
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <StravaClubEmbed />
-
-        {stats.note ? (
-          <p className="mt-4 text-[12px] text-paper/50">{stats.note}</p>
         ) : null}
+
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 items-start">
+          <StravaClubEmbed variant="summary" />
+          <StravaClubEmbed variant="activity" />
+        </div>
 
         <a
           href={STRAVA_CLUB_URL}
