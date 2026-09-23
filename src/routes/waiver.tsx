@@ -241,7 +241,7 @@ function WaiverPage() {
             {step === 0 && (
               <StepBlock
                 title="Your info"
-                subtitle="Required so we can reach you and confirm you're 18+."
+                subtitle="The runner's details. Under 18? A parent or legal guardian signs for them."
               >
                 <Field label="Full legal name" required>
                   <input
@@ -289,11 +289,41 @@ function WaiverPage() {
                   />
                   {isMinor && (
                     <Hint>
-                      Under 18. Minors must sign in person with a parent or guardian —
-                      we can't accept this online.
+                      Under 18. A parent or legal guardian signs below, and must
+                      run with them or be present at the run.
                     </Hint>
                   )}
                 </Field>
+
+                {isMinor && (
+                  <>
+                    <Field label="Parent or legal guardian full name" required>
+                      <input
+                        type="text"
+                        required
+                        maxLength={120}
+                        value={form.guardian_name}
+                        onChange={(e) => set("guardian_name", e.target.value)}
+                        className={inputCls}
+                        autoComplete="off"
+                      />
+                    </Field>
+                    <Field label="Relationship to the runner" required>
+                      <input
+                        type="text"
+                        required
+                        maxLength={60}
+                        value={form.guardian_relationship}
+                        onChange={(e) =>
+                          set("guardian_relationship", e.target.value)
+                        }
+                        className={inputCls}
+                        placeholder="Mother, father, legal guardian"
+                        autoComplete="off"
+                      />
+                    </Field>
+                  </>
+                )}
               </StepBlock>
             )}
 
