@@ -79,6 +79,24 @@ export const getAttendanceStats = createServerFn({ method: "GET" }).handler(
       }
 
       const lastRunDate = runDates[0] ?? null;
+
+      // Regulars: people confirmed at several of the most recent finished runs.
+      const window = new Set(runDates.slice(0, REGULARS_WINDOW_RUNS));
+      const perPerson = new Map<string, Set<string>>();
+      for (const r of rows) {
+        if (!window.has(r.eventDate)) continue;
+        const seen = perPerson.get(r.personKey) ?? new Set<string>();
+        seen.add(r.eventDate);
+        perPerson.set(r.personKey, seen);
+      }
+      let regulars = 0;
+      for (const seen of perPerson.values()) {
+        if (seen.size >= REGULARS_MIN_RUNS) regulars += 1;
+      }
+      const regularsRunsCounted = new Set(
+        rows.filter((r) => window.has(r.eventDate)).map((r) => r.eventDate),
+      ).size;
+
       return {
         runsCounted: new Set(rows.map((r) => r.eventDate)).size,
         peopleCounted: streaks.size,
@@ -86,6 +104,8 @@ export const getAttendanceStats = createServerFn({ method: "GET" }).handler(
         onLongestStreak,
         lastRunAttendance: rows.filter((r) => r.eventDate === lastRunDate).length,
         lastRunDate,
+        regulars,
+        regularsRunsCounted,
       };
     } catch (err) {
       console.error("Attendance stats failed", err);
