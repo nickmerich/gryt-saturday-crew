@@ -38,6 +38,8 @@ type FormState = {
   emergency_contact_name: string;
   emergency_contact_phone: string;
   signature_text: string;
+  guardian_name: string;
+  guardian_relationship: string;
   agree_release: boolean;
   agree_fitness: boolean;
   agree_adult: boolean;
@@ -51,12 +53,21 @@ const EMPTY: FormState = {
   emergency_contact_name: "",
   emergency_contact_phone: "",
   signature_text: "",
+  guardian_name: "",
+  guardian_relationship: "",
   agree_release: false,
   agree_fitness: false,
   agree_adult: false,
 };
 
-type SignedRecord = { id: string; signed_on: string; name: string };
+type SignedRecord = {
+  id: string;
+  signed_on: string;
+  /** The participant. */
+  name: string;
+  /** Parent or legal guardian who signed, when the participant is under 18. */
+  guardian?: string;
+};
 
 function readSigned(): SignedRecord | null {
   try {
@@ -120,16 +131,23 @@ function WaiverPage() {
 
   const isMinor = age !== null && age < 18;
   const emailValid = /^\S+@\S+\.\S+$/.test(form.email.trim());
+  // A minor's waiver is signed by the parent or legal guardian, so the typed
+  // signature must match the guardian's name instead of the participant's.
+  const signerName = isMinor ? form.guardian_name : form.full_name;
+  const guardianValid =
+    form.guardian_name.trim().length > 1 &&
+    form.guardian_relationship.trim().length > 1;
   const sigMatches =
     form.signature_text.trim().length > 0 &&
+    signerName.trim().length > 0 &&
     form.signature_text.trim().toLowerCase() ===
-      form.full_name.trim().toLowerCase();
+      signerName.trim().toLowerCase();
 
   const step1Valid =
     form.full_name.trim().length > 1 &&
     emailValid &&
     !!form.date_of_birth &&
-    !isMinor;
+    (!isMinor || guardianValid);
   const step2Valid =
     form.emergency_contact_name.trim().length > 1 &&
     form.emergency_contact_phone.trim().length >= 7;
@@ -156,6 +174,8 @@ function WaiverPage() {
           emergency_contact_name: form.emergency_contact_name,
           emergency_contact_phone: form.emergency_contact_phone,
           signature_text: form.signature_text,
+          guardian_name: isMinor ? form.guardian_name : "",
+          guardian_relationship: isMinor ? form.guardian_relationship : "",
           agree_release: form.agree_release as true,
           agree_fitness: form.agree_fitness as true,
           agree_adult: form.agree_adult as true,
@@ -165,6 +185,7 @@ function WaiverPage() {
         id: res.id,
         signed_on: res.signed_on,
         name: form.full_name.trim(),
+        ...(isMinor ? { guardian: form.guardian_name.trim() } : {}),
       };
       try {
         localStorage.setItem(SIGNED_KEY, JSON.stringify(record));
@@ -228,7 +249,7 @@ function WaiverPage() {
             {step === 0 && (
               <StepBlock
                 title="Your info"
-                subtitle="Required so we can reach you and confirm you're 18+."
+                subtitle="The runner's details. Under 18? A parent or legal guardian signs for them."
               >
                 <Field label="Full legal name" required>
                   <input
@@ -276,11 +297,41 @@ function WaiverPage() {
                   />
                   {isMinor && (
                     <Hint>
-                      Under 18. Minors must sign in person with a parent or guardian —
-                      we can't accept this online.
+                      Under 18. A parent or legal guardian signs below, and must
+                      run with them or be present at the run.
                     </Hint>
                   )}
                 </Field>
+
+                {isMinor && (
+                  <>
+                    <Field label="Parent or legal guardian full name" required>
+                      <input
+                        type="text"
+                        required
+                        maxLength={120}
+                        value={form.guardian_name}
+                        onChange={(e) => set("guardian_name", e.target.value)}
+                        className={inputCls}
+                        autoComplete="off"
+                      />
+                    </Field>
+                    <Field label="Relationship to the runner" required>
+                      <input
+                        type="text"
+                        required
+                        maxLength={60}
+                        value={form.guardian_relationship}
+                        onChange={(e) =>
+                          set("guardian_relationship", e.target.value)
+                        }
+                        className={inputCls}
+                        placeholder="Mother, father, legal guardian"
+                        autoComplete="off"
+                      />
+                    </Field>
+                  </>
+                )}
               </StepBlock>
             )}
 
@@ -319,27 +370,50 @@ function WaiverPage() {
             {step === 2 && (
               <StepBlock
                 title="Read & sign"
-                subtitle="Confirm you read the waiver on the left, then type your name."
+                subtitle={
+                  isMinor
+                    ? "Parent or legal guardian: confirm you read the waiver on the left, then type your name."
+                    : "Confirm you read the waiver on the left, then type your name."
+                }
               >
                 <div className="flex flex-col gap-3 pt-1">
                   <Check
                     checked={form.agree_release}
                     onChange={(v) => set("agree_release", v)}
-                    label="I have read and agree to the release of liability."
+                    label={
+                      isMinor
+                        ? "I have read and agree to the release of liability on behalf of my child."
+                        : "I have read and agree to the release of liability."
+                    }
                   />
                   <Check
                     checked={form.agree_fitness}
                     onChange={(v) => set("agree_fitness", v)}
-                    label="I am physically able to participate and have consulted a physician as needed."
+                    label={
+                      isMinor
+                        ? "My child is physically able to participate and we have consulted a physician as needed."
+                        : "I am physically able to participate and have consulted a physician as needed."
+                    }
                   />
                   <Check
                     checked={form.agree_adult}
                     onChange={(v) => set("agree_adult", v)}
-                    label="I am 18 years or older."
+                    label={
+                      isMinor
+                        ? "I am 18 or older and the parent or legal guardian of this runner, and I will be with them at the run."
+                        : "I am 18 years or older."
+                    }
                   />
                 </div>
 
-                <Field label="Type your full name to sign" required>
+                <Field
+                  label={
+                    isMinor
+                      ? "Parent or guardian: type your full name to sign"
+                      : "Type your full name to sign"
+                  }
+                  required
+                >
                   <input
                     type="text"
                     required
@@ -347,12 +421,14 @@ function WaiverPage() {
                     value={form.signature_text}
                     onChange={(e) => set("signature_text", e.target.value)}
                     className={`${inputCls} font-serif italic text-[20px]`}
-                    placeholder={form.full_name || "Your full legal name"}
+                    placeholder={signerName || "Your full legal name"}
                     autoComplete="off"
                   />
                   {form.signature_text.length > 0 && !sigMatches && (
                     <Hint>
-                      Signature must match your full legal name exactly.
+                      {isMinor
+                        ? "Signature must match the parent or guardian's full legal name exactly."
+                        : "Signature must match your full legal name exactly."}
                     </Hint>
                   )}
                 </Field>
@@ -464,7 +540,7 @@ function SignedView({ record }: { record: SignedRecord }) {
       y += 70;
       doc.setDrawColor(10, 10, 10);
       doc.setLineWidth(1.2);
-      doc.rect(48, y, W - 96, 132);
+      doc.rect(48, y, W - 96, 132 + (record.guardian ? 20 : 0));
 
       const rowY = (i: number) => y + 22 + i * 20;
       const writeRow = (i: number, label: string, val: string) => {
@@ -477,13 +553,17 @@ function SignedView({ record }: { record: SignedRecord }) {
         doc.setTextColor(10, 10, 10);
         doc.text(val, 180, rowY(i));
       };
-      writeRow(0, "Signer", record.name);
-      writeRow(1, "Signed on", record.signed_on);
-      writeRow(2, "Coverage", "Through Dec 31, 2026");
-      writeRow(3, "Confirmation", record.id);
-      writeRow(4, "Version", "gryt-run-club-2026-v1");
+      writeRow(0, "Runner", record.name);
+      let r = 1;
+      if (record.guardian) {
+        writeRow(r++, "Signed by guardian", record.guardian);
+      }
+      writeRow(r++, "Signed on", record.signed_on);
+      writeRow(r++, "Coverage", "Through Dec 31, 2026");
+      writeRow(r++, "Confirmation", record.id);
+      writeRow(r++, "Version", "gryt-run-club-2026-v1");
 
-      y += 160;
+      y += 160 + (record.guardian ? 20 : 0);
       doc.setFont("helvetica", "italic");
       doc.setFontSize(10);
       doc.setTextColor(120, 120, 120);
@@ -530,8 +610,14 @@ function SignedView({ record }: { record: SignedRecord }) {
           </p>
           <div className="border border-paper/20 p-6 md:p-8 bg-ink/40 mb-10 text-[14px] font-mono text-paper/70 flex flex-col gap-1.5">
             <div>
-              <span className="text-paper/40">Signer:</span> {record.name}
+              <span className="text-paper/40">Runner:</span> {record.name}
             </div>
+            {record.guardian && (
+              <div>
+                <span className="text-paper/40">Signed by guardian:</span>{" "}
+                {record.guardian}
+              </div>
+            )}
             <div>
               <span className="text-paper/40">Signed on:</span> {record.signed_on}
             </div>
@@ -700,10 +786,15 @@ function WaiverText() {
           permission in writing at any time, after which the Club will use
           reasonable efforts to discontinue future use of identifying media.
         </Clause>
-        <Clause n="7. Minors">
-          Participants under the age of 18 must sign this waiver in person
-          together with a parent or legal guardian. The online form is for
-          adults 18+ only.
+        <Clause n="7. Minors and guardians">
+          Runners under the age of 18 are welcome. A parent or legal guardian
+          must complete and sign this waiver on the minor's behalf, naming the
+          minor as the participant and stating their own relationship to the
+          minor. By signing, the parent or legal guardian agrees to every term
+          above on the minor's behalf and on their own, confirms they are 18 or
+          older, and agrees to accompany the minor at Activities or arrange for
+          another responsible adult to do so. A minor may not sign this
+          agreement for themselves.
         </Clause>
         <Clause n="8. Term and governing law">
           This agreement is effective from the date of signing through{" "}

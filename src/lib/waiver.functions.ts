@@ -12,6 +12,8 @@ const WaiverInput = z.object({
   emergency_contact_name: z.string().trim().min(1).max(120),
   emergency_contact_phone: z.string().trim().min(3).max(40),
   signature_text: z.string().trim().min(1).max(120),
+  guardian_name: z.string().trim().max(120).optional().or(z.literal("")),
+  guardian_relationship: z.string().trim().max(60).optional().or(z.literal("")),
   agree_release: z.literal(true),
   agree_fitness: z.literal(true),
   agree_adult: z.literal(true),
@@ -62,22 +64,34 @@ export const signWaiver = createServerFn({ method: "POST" })
     const startedAt = Date.now();
     logWaiver("attempt", { emailHash });
 
-    // Age 18+ check (also enforced server-side by trigger)
+    // Under-18 participants are allowed when a parent or legal guardian signs
+    // on their behalf (also enforced by the database trigger).
     const dob = new Date(data.date_of_birth);
     const cutoff = new Date();
     cutoff.setFullYear(cutoff.getFullYear() - 18);
-    if (dob > cutoff) {
-      logWaiver("rejected", { emailHash, reason: "under_18" });
-      throw new Error("You must be at least 18 to sign online. Minors must sign in person with a parent or guardian.");
+    const isMinor = dob > cutoff;
+    const guardianName = (data.guardian_name ?? "").trim();
+    const guardianRelationship = (data.guardian_relationship ?? "").trim();
+
+    if (isMinor && (guardianName.length < 2 || guardianRelationship.length < 2)) {
+      logWaiver("rejected", { emailHash, reason: "minor_without_guardian" });
+      throw new Error(
+        "A runner under 18 needs a parent or legal guardian to sign. Add the guardian's full name and relationship.",
+      );
     }
 
-    // Signature must match full name (case-insensitive, trimmed)
+    // The signer types their own legal name: the guardian for a minor,
+    // otherwise the participant.
+    const expectedSigner = isMinor ? guardianName : data.full_name.trim();
     if (
-      data.signature_text.trim().toLowerCase() !==
-      data.full_name.trim().toLowerCase()
+      data.signature_text.trim().toLowerCase() !== expectedSigner.toLowerCase()
     ) {
       logWaiver("rejected", { emailHash, reason: "signature_mismatch" });
-      throw new Error("Your typed signature must match your full legal name exactly.");
+      throw new Error(
+        isMinor
+          ? "The signature must match the parent or legal guardian's full legal name exactly."
+          : "Your typed signature must match your full legal name exactly.",
+      );
     }
 
     // Use service-role client: Zod + the checks above already validate input,
@@ -114,6 +128,9 @@ export const signWaiver = createServerFn({ method: "POST" })
         emergency_contact_name: data.emergency_contact_name.trim(),
         emergency_contact_phone: data.emergency_contact_phone.trim(),
         signature_text: data.signature_text.trim(),
+        is_minor: isMinor,
+        guardian_name: isMinor ? guardianName : null,
+        guardian_relationship: isMinor ? guardianRelationship : null,
         season: 2026,
         waiver_version: "gryt-run-club-2026-v1",
         user_agent: userAgent,
