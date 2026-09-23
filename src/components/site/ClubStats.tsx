@@ -3,6 +3,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { getClubStats } from "@/lib/strava-club.functions";
 import { getAttendanceStats } from "@/lib/attendance.functions";
 import { SAMPLE_CLUB_STATS, STRAVA_CLUB_URL } from "@/lib/strava-club";
+import { STRAVA_MEMBERS_LABEL } from "@/lib/club-stats";
 import { StravaClubEmbed } from "./StravaClubEmbed";
 import trailPhoto from "@/assets/photos/run-club-5.jpg.asset.json";
 
@@ -59,14 +60,18 @@ export function ClubStats() {
           THE CREW IN NUMBERS
         </h2>
 
-        {!stats.isSample ? (
+        {stats.isSample ? (
+          <div className="mt-6 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            <Figure value={STRAVA_MEMBERS_LABEL} label="Members on Strava" />
+          </div>
+        ) : (
           <div className="mt-6 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             <Figure value={String(stats.members)} label="Members" />
             <Figure value={stats.recentMiles.toLocaleString()} label="Recent club miles" />
             <Figure value={stats.totalMiles.toLocaleString()} label="Club miles" />
             <Figure value={String(stats.runsLogged)} label="Runs logged" />
           </div>
-        ) : null}
+        )}
 
         {attendance && attendance.runsCounted > 0 ? (
           <div className="mt-4 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
