@@ -98,7 +98,6 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
 ];
 
 import {
-  REGULARS_LABEL,
   STRAVA_MEMBERS_LABEL,
   INSTAGRAM_LABEL,
 } from "@/lib/club-stats";
