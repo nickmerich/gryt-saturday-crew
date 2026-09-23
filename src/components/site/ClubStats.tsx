@@ -4,6 +4,7 @@ import { getClubStats } from "@/lib/strava-club.functions";
 import { getAttendanceStats } from "@/lib/attendance.functions";
 import { SAMPLE_CLUB_STATS, STRAVA_CLUB_URL } from "@/lib/strava-club";
 import { StravaClubEmbed } from "./StravaClubEmbed";
+import trailPhoto from "@/assets/photos/run-club-5.jpg.asset.json";
 
 function Figure({ value, label }: { value: string; label: string }) {
   return (
