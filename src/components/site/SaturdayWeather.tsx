@@ -58,7 +58,7 @@ export function SaturdayWeather() {
       <div className="relative max-w-[1180px] mx-auto">
         <div className="eyebrow eyebrow-blue mb-3">Saturday conditions</div>
         <h2 className="display-condensed text-[clamp(30px,7vw,64px)] leading-[0.94]">
-          FIRST RUN · SATURDAY 7:00 AM
+          SATURDAY 7:00 AM
         </h2>
         <p className="mt-3 text-[14px] sm:text-[15px] text-paper/70">
           Valley Brook Road lot{data?.dateLabel ? ` · ${data.dateLabel}` : ""}. Forecast pulled
