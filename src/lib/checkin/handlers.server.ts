@@ -1,6 +1,6 @@
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { isAdminEmail } from '@/lib/admin/allowlist'
-import { getOccurrence, occurrenceFor } from '@/lib/run-schedule'
+import { getOccurrence, nyDateKey, occurrenceFor } from '@/lib/run-schedule'
 import { finishedRunDates, summarizeStreaks } from '@/lib/streaks'
 import { identityKey, normalizeEmail, normalizeName } from './identity'
 import type { CheckinPerson, CheckinResponse } from './types'
@@ -299,4 +299,108 @@ export async function checkinMutate(request: Request) {
   })
 
   return json({ ok: true })
+}
+
+/* --------------------------------------------------------------------------
+ * QR self check-in
+ *
+ * The organiser's phone shows a QR that rotates every 30 seconds. A runner
+ * scans it at the trailhead, types their name and contact, and lands in the
+ * same list an organiser check-in would. Off the run day, or with a stale
+ * code, nothing is written.
+ * ------------------------------------------------------------------------ */
+
+function qrSecret(): string | null {
+  return process.env['CHECKIN_QR_SECRET'] ?? null
+}
+
+/** Admin-only: the code the QR on the organiser's phone should encode. */
+export async function checkinCode(request: Request) {
+  const access = await gate(request)
+  if ('error' in access) return access.error
+
+  const secret = qrSecret()
+  if (!secret) return json({ error: 'Scan check-in is not configured yet.' }, 503)
+
+  const { currentCode } = await import('./rotating-code')
+  const occurrence = getOccurrence()
+  const { code, rotatesAt } = await currentCode(secret)
+  return json({
+    code,
+    rotatesAt: new Date(rotatesAt).toISOString(),
+    eventDate: occurrence.localDate,
+    runNumber: occurrence.runNumber,
+    openToday: occurrence.localDate === nyDateKey() && occurrence.status !== 'cancelled',
+  })
+}
+
+/** Public: a runner scanning the QR at the run. */
+export async function selfCheckin(request: Request) {
+  const secret = qrSecret()
+  if (!secret) return json({ error: 'Scan check-in is not set up yet.' }, 503)
+
+  let payload: { code?: string; name?: string; contact?: string }
+  try {
+    payload = (await request.json()) as typeof payload
+  } catch {
+    return json({ error: 'That request could not be read.' }, 400)
+  }
+
+  const trim = (v: unknown, max: number) => (typeof v === 'string' ? v.trim().slice(0, max) : '')
+  const name = trim(payload.name, 80)
+  const contact = trim(payload.contact, 200)
+  if (name.length < 2) return json({ error: 'Please type your name.' }, 400)
+  if (contact.length < 3) return json({ error: 'Please add an email or phone number.' }, 400)
+
+  const { verifyCode } = await import('./rotating-code')
+  if (!(await verifyCode(secret, trim(payload.code, 16)))) {
+    return json({ error: 'That code has expired. Scan the code on the screen again.' }, 403)
+  }
+
+  const occurrence = getOccurrence()
+  if (occurrence.localDate !== nyDateKey() || occurrence.status === 'cancelled') {
+    return json({ error: 'There is no run to check in to right now.' }, 409)
+  }
+
+  let db: SupabaseClient
+  try {
+    db = await database()
+  } catch {
+    return json({ error: 'Check-in is temporarily unavailable.' }, 503)
+  }
+
+  const personKey = identityKey(name, contact)
+  const now = new Date().toISOString()
+  const { data, error } = await db
+    .from('run_checkins')
+    .upsert(
+      {
+        event_id: occurrence.id,
+        event_date: occurrence.localDate,
+        person_key: personKey,
+        name,
+        contact,
+        source: 'self',
+        status: 'present',
+        checked_in_at: now,
+        checked_in_by: 'qr-scan',
+        updated_at: now,
+      },
+      { onConflict: 'event_id,person_key' },
+    )
+    .select('id')
+    .single()
+
+  if (error) return json({ error: 'That check-in did not save. Try again.' }, 503)
+
+  await db.from('run_checkin_audit').insert({
+    checkin_id: data?.id ?? null,
+    event_id: occurrence.id,
+    person_key: personKey,
+    action: 'self-checkin',
+    actor: 'qr-scan',
+    detail: { name },
+  })
+
+  return json({ ok: true, name, runNumber: occurrence.runNumber })
 }
