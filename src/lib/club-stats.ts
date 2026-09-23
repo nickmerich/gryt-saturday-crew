@@ -12,3 +12,9 @@ export const REGULARS_LABEL = `${SATURDAY_REGULARS}+`;
 /** "120+" */
 export const INSTAGRAM_LABEL = `${INSTAGRAM_FOLLOWERS}+`;
 
+
+// All-time club distance from the Strava club page. Earlier screenshot read
+// 2,192.1 mi. Copied by hand; update when you re-check.
+export const STRAVA_TOTAL_MILES = 2192;
+/** "2,192" */
+export const STRAVA_TOTAL_MILES_LABEL = STRAVA_TOTAL_MILES.toLocaleString("en-US");
