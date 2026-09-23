@@ -167,6 +167,8 @@ function WaiverPage() {
           emergency_contact_name: form.emergency_contact_name,
           emergency_contact_phone: form.emergency_contact_phone,
           signature_text: form.signature_text,
+          guardian_name: isMinor ? form.guardian_name : "",
+          guardian_relationship: isMinor ? form.guardian_relationship : "",
           agree_release: form.agree_release as true,
           agree_fitness: form.agree_fitness as true,
           agree_adult: form.agree_adult as true,
