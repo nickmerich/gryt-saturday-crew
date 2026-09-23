@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useServerFn } from "@tanstack/react-start";
-import { getCapState } from "@/lib/shopify-cap.functions";
+import { Loader2, Minus, Plus } from "lucide-react";
+import { toast } from "sonner";
 import { CAP_BINDING } from "@/lib/shopify-cap";
+import { fetchCapVariant } from "@/lib/shopify-storefront";
+import { useCartStore } from "@/stores/cartStore";
 
 const REVIEW_TITLE = "The Founding Member Cap";
 const REVIEW_COPY = [
@@ -10,23 +13,51 @@ const REVIEW_COPY = [
   "You do not need the gear to be part of the crew.",
 ];
 
+function money(amount: string, currency: string) {
+  return new Intl.NumberFormat("en-US", { style: "currency", currency }).format(parseFloat(amount));
+}
 
-export function CapDrop() {
-  const read = useServerFn(getCapState);
-  const { data } = useQuery({
-    queryKey: ["gryt-cap-state", CAP_BINDING.releaseApproved],
-    queryFn: () => read(),
+export function CapDrop({ onAdded }: { onAdded?: () => void }) {
+  const { data, isLoading: reading } = useQuery({
+    queryKey: ["gryt-cap-variant", CAP_BINDING.releaseApproved],
+    queryFn: fetchCapVariant,
     enabled: CAP_BINDING.releaseApproved,
-    staleTime: 5 * 60 * 1000,
+    staleTime: 60 * 1000,
+    retry: 1,
   });
+  const addItem = useCartStore((s) => s.addItem);
+  const adding = useCartStore((s) => s.isLoading);
+  const [qty, setQty] = useState(1);
 
-  const available = data?.state === "available";
+  const listed = Boolean(data);
+  const buyable = Boolean(data?.availableForSale);
+  const maxQty = Math.max(1, Math.min(5, data?.quantityAvailable ?? 5));
+
+  async function add() {
+    if (!data) return;
+    const ok = await addItem({
+      variantId: data.variantId,
+      title: data.productTitle,
+      variantTitle: data.title,
+      imageUrl: data.imageUrl,
+      price: data.price,
+      quantity: qty,
+    });
+    if (ok) {
+      toast.success("Added to cart", { position: "top-center" });
+      onAdded?.();
+    } else {
+      toast.error(useCartStore.getState().error ?? "That did not add. Try again.", {
+        position: "top-center",
+      });
+    }
+  }
 
   return (
     <section className="border border-paper/15 bg-ink text-paper">
       <div className="grid md:grid-cols-2">
         <div className="aspect-square bg-paper/5 overflow-hidden border-b md:border-b-0 md:border-r border-paper/15 flex items-center justify-center">
-          {data?.state === "available" && data.imageUrl ? (
+          {data?.imageUrl ? (
             <img
               src={data.imageUrl}
               alt="GRYT cap with embroidered crest and blue brim trim"
@@ -34,15 +65,13 @@ export function CapDrop() {
               loading="lazy"
             />
           ) : (
-            <span className="eyebrow text-paper/35 px-6 text-center">
-              Cap photo pending review
-            </span>
+            <span className="eyebrow text-paper/35 px-6 text-center">Cap photo pending review</span>
           )}
         </div>
         <div className="p-6 sm:p-10 flex flex-col justify-center gap-5">
           <p className="eyebrow text-blue">GRYT · CAP</p>
           <h2 className="display-condensed uppercase text-[clamp(30px,4.4vw,56px)] leading-[0.94]">
-            {available && data.state === "available" ? data.title : REVIEW_TITLE}
+            {data?.productTitle ?? REVIEW_TITLE}
           </h2>
           {REVIEW_COPY.map((line) => (
             <p key={line} className="text-paper/70 leading-[1.65]">
@@ -50,31 +79,56 @@ export function CapDrop() {
             </p>
           ))}
 
-          {available && data.state === "available" ? (
+          {reading ? (
+            <p className="text-sm text-paper/50">Checking the store…</p>
+          ) : listed && data ? (
             <>
               <p className="display-condensed uppercase text-2xl tracking-[0.02em]">
-                {data.price ?? "Price on Shopify"}
+                {money(data.price.amount, data.price.currencyCode)}
               </p>
-              <a
-                href={data.productUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="self-start bg-blue text-ink px-6 py-4 text-xs font-bold uppercase tracking-[0.14em] hover:bg-paper transition-colors"
-              >
-                View on Shopify
-              </a>
+              {buyable ? (
+                <div className="flex flex-wrap items-center gap-3">
+                  <div className="flex items-center border border-paper/25">
+                    <button
+                      type="button"
+                      aria-label="One fewer"
+                      onClick={() => setQty((q) => Math.max(1, q - 1))}
+                      className="h-12 w-12 grid place-items-center"
+                    >
+                      <Minus className="h-4 w-4" />
+                    </button>
+                    <span className="w-8 text-center" aria-live="polite">
+                      {qty}
+                    </span>
+                    <button
+                      type="button"
+                      aria-label="One more"
+                      onClick={() => setQty((q) => Math.min(maxQty, q + 1))}
+                      className="h-12 w-12 grid place-items-center"
+                    >
+                      <Plus className="h-4 w-4" />
+                    </button>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={add}
+                    disabled={adding}
+                    className="bg-blue text-ink px-6 py-4 text-xs font-bold uppercase tracking-[0.14em] hover:bg-paper transition-colors disabled:opacity-50 flex items-center gap-2"
+                  >
+                    {adding ? <Loader2 className="h-4 w-4 animate-spin" /> : "Add to cart"}
+                  </button>
+                </div>
+              ) : (
+                <p className="border border-paper/20 px-4 py-3 text-sm text-paper/60">Sold out.</p>
+              )}
             </>
           ) : (
             <p className="border border-paper/20 px-4 py-3 text-sm text-paper/60">
-              Not for sale yet. This page is in review while the cap, price and
-              stock are confirmed.
+              Not for sale yet. This page is in review while the cap, price and stock are confirmed.
             </p>
           )}
 
-          <a
-            href="/#join"
-            className="eyebrow text-paper/70 hover:text-blue transition-colors self-start"
-          >
+          <a href="/#join" className="eyebrow text-paper/70 hover:text-blue transition-colors self-start">
             RSVP for Saturday
           </a>
         </div>
