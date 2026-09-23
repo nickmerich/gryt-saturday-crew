@@ -7,6 +7,47 @@ import { STRAVA_MEMBERS_LABEL } from "@/lib/club-stats";
 import { StravaClubEmbed } from "./StravaClubEmbed";
 import trailPhoto from "@/assets/photos/run-club-5.jpg.asset.json";
 
+// Snapshot of Strava's "Last week's leaders" (week of Sep 14, 2026), copied by
+// hand. Strava's API has no leaderboard endpoint, so update this each week.
+// Names are shortened to first name + last initial, as Strava does in its own API.
+const LEADERS_WEEK = "Week of Sep 14";
+const LEADERS: { title: string; rows: [string, string][] }[] = [
+  { title: "Distance", rows: [["Zac K.", "46.8 mi"], ["Brenden P.", "40.0 mi"], ["Nick M.", "39.7 mi"]] },
+  { title: "Time on feet", rows: [["Nick M.", "6:37:32"], ["Zac K.", "6:17:27"], ["Jen P.", "5:58:26"]] },
+  { title: "Climbing", rows: [["Mark W.", "2,693 ft"], ["Alex C.", "2,282 ft"], ["Nick M.", "2,159 ft"]] },
+];
+
+function Leaderboard() {
+  return (
+    <div className="mt-6 border border-paper/20 bg-ink/50">
+      <div className="flex items-baseline justify-between gap-4 border-b border-paper/15 px-4 sm:px-5 py-3">
+        <span className="text-[10px] tracking-[0.22em] uppercase text-blue">Last week's leaders</span>
+        <span className="text-[10px] tracking-[0.14em] uppercase text-paper/50">{LEADERS_WEEK}</span>
+      </div>
+      <div className="grid sm:grid-cols-3">
+        {LEADERS.map((cat) => (
+          <div key={cat.title} className="border-b sm:border-b-0 sm:border-r last:border-0 border-paper/10">
+            <div className="px-4 sm:px-5 pt-3 pb-1 text-[11px] tracking-[0.14em] uppercase text-paper/60">
+              {cat.title}
+            </div>
+            <ol>
+              {cat.rows.map(([name, value], i) => (
+                <li key={name + i} className="flex items-baseline justify-between gap-3 px-4 sm:px-5 py-2">
+                  <span className="flex items-baseline gap-3 min-w-0">
+                    <span className="display-condensed text-blue text-[18px] w-4">{i + 1}</span>
+                    <span className="display-condensed text-[18px] truncate">{name}</span>
+                  </span>
+                  <span className="text-[13px] text-paper/80 shrink-0">{value}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function Figure({ value, label }: { value: string; label: string }) {
   return (
     <div className="border border-paper/20 bg-ink/50 p-4 sm:p-5">
@@ -118,6 +159,8 @@ export function ClubStats() {
             </ul>
           </div>
         ) : null}
+
+        <Leaderboard />
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2 items-start">
           <StravaClubEmbed variant="summary" />
