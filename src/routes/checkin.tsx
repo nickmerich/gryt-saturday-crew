@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export const Route = createFileRoute('/checkin')({
   head: () => ({
@@ -53,8 +53,11 @@ function SelfCheckin() {
   const [state, setState] = useState<'idle' | 'sending' | 'done' | 'error'>('idle')
   const [message, setMessage] = useState('')
 
-  const code =
-    typeof window === 'undefined' ? '' : new URLSearchParams(window.location.search).get('c') ?? ''
+  const [code, setCode] = useState<string | null>(null)
+
+  useEffect(() => {
+    setCode(new URLSearchParams(window.location.search).get('c') ?? '')
+  }, [])
 
   async function submit(event: React.FormEvent) {
     event.preventDefault()
@@ -139,7 +142,7 @@ function SelfCheckin() {
           {state === 'sending' ? 'Checking in…' : "I'm here"}
         </button>
         {state === 'error' && <p className="text-xs text-red-400">{message}</p>}
-        {!code && (
+        {code === '' && (
           <p className="text-xs text-amber-200">
             Scan the code on the organiser's phone to open this page.
           </p>
