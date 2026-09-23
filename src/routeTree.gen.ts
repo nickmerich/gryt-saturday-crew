@@ -24,6 +24,7 @@ import { Route as McpRouteImport } from './routes/mcp'
 import { Route as InquireRouteImport } from './routes/inquire'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as EmailStatusRouteImport } from './routes/email-status'
+import { Route as CheckinRouteImport } from './routes/checkin'
 import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
@@ -145,6 +146,11 @@ const FaqRoute = FaqRouteImport.update({
 const EmailStatusRoute = EmailStatusRouteImport.update({
   id: '/email-status',
   path: '/email-status',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckinRoute = CheckinRouteImport.update({
+  id: '/checkin',
+  path: '/checkin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CalendarRoute = CalendarRouteImport.update({
@@ -402,6 +408,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/calendar': typeof CalendarRoute
+  '/checkin': typeof CheckinRoute
   '/email-status': typeof EmailStatusRoute
   '/faq': typeof FaqRoute
   '/inquire': typeof InquireRoute
@@ -466,6 +473,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/calendar': typeof CalendarRoute
+  '/checkin': typeof CheckinRoute
   '/email-status': typeof EmailStatusRoute
   '/faq': typeof FaqRoute
   '/inquire': typeof InquireRoute
@@ -531,6 +539,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/calendar': typeof CalendarRoute
+  '/checkin': typeof CheckinRoute
   '/email-status': typeof EmailStatusRoute
   '/faq': typeof FaqRoute
   '/inquire': typeof InquireRoute
@@ -597,6 +606,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/calendar'
+    | '/checkin'
     | '/email-status'
     | '/faq'
     | '/inquire'
@@ -661,6 +671,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/calendar'
+    | '/checkin'
     | '/email-status'
     | '/faq'
     | '/inquire'
@@ -725,6 +736,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/calendar'
+    | '/checkin'
     | '/email-status'
     | '/faq'
     | '/inquire'
@@ -790,6 +802,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRoute
   CalendarRoute: typeof CalendarRoute
+  CheckinRoute: typeof CheckinRoute
   EmailStatusRoute: typeof EmailStatusRoute
   FaqRoute: typeof FaqRoute
   InquireRoute: typeof InquireRoute
@@ -955,6 +968,13 @@ declare module '@tanstack/react-router' {
       path: '/email-status'
       fullPath: '/email-status'
       preLoaderRoute: typeof EmailStatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkin': {
+      id: '/checkin'
+      path: '/checkin'
+      fullPath: '/checkin'
+      preLoaderRoute: typeof CheckinRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/calendar': {
@@ -1304,6 +1324,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
   CalendarRoute: CalendarRoute,
+  CheckinRoute: CheckinRoute,
   EmailStatusRoute: EmailStatusRoute,
   FaqRoute: FaqRoute,
   InquireRoute: InquireRoute,
