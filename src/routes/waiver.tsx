@@ -362,27 +362,50 @@ function WaiverPage() {
             {step === 2 && (
               <StepBlock
                 title="Read & sign"
-                subtitle="Confirm you read the waiver on the left, then type your name."
+                subtitle={
+                  isMinor
+                    ? "Parent or legal guardian: confirm you read the waiver on the left, then type your name."
+                    : "Confirm you read the waiver on the left, then type your name."
+                }
               >
                 <div className="flex flex-col gap-3 pt-1">
                   <Check
                     checked={form.agree_release}
                     onChange={(v) => set("agree_release", v)}
-                    label="I have read and agree to the release of liability."
+                    label={
+                      isMinor
+                        ? "I have read and agree to the release of liability on behalf of my child."
+                        : "I have read and agree to the release of liability."
+                    }
                   />
                   <Check
                     checked={form.agree_fitness}
                     onChange={(v) => set("agree_fitness", v)}
-                    label="I am physically able to participate and have consulted a physician as needed."
+                    label={
+                      isMinor
+                        ? "My child is physically able to participate and we have consulted a physician as needed."
+                        : "I am physically able to participate and have consulted a physician as needed."
+                    }
                   />
                   <Check
                     checked={form.agree_adult}
                     onChange={(v) => set("agree_adult", v)}
-                    label="I am 18 years or older."
+                    label={
+                      isMinor
+                        ? "I am 18 or older and the parent or legal guardian of this runner, and I will be with them at the run."
+                        : "I am 18 years or older."
+                    }
                   />
                 </div>
 
-                <Field label="Type your full name to sign" required>
+                <Field
+                  label={
+                    isMinor
+                      ? "Parent or guardian: type your full name to sign"
+                      : "Type your full name to sign"
+                  }
+                  required
+                >
                   <input
                     type="text"
                     required
@@ -390,12 +413,14 @@ function WaiverPage() {
                     value={form.signature_text}
                     onChange={(e) => set("signature_text", e.target.value)}
                     className={`${inputCls} font-serif italic text-[20px]`}
-                    placeholder={form.full_name || "Your full legal name"}
+                    placeholder={signerName || "Your full legal name"}
                     autoComplete="off"
                   />
                   {form.signature_text.length > 0 && !sigMatches && (
                     <Hint>
-                      Signature must match your full legal name exactly.
+                      {isMinor
+                        ? "Signature must match the parent or guardian's full legal name exactly."
+                        : "Signature must match your full legal name exactly."}
                     </Hint>
                   )}
                 </Field>
