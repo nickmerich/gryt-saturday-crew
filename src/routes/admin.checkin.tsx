@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { supabase } from '@/integrations/supabase/client'
 import { isAdminEmail } from '@/lib/admin/allowlist'
 import type { CheckinResponse } from '@/lib/checkin/types'
+import { CheckinQr } from '@/components/site/CheckinQr'
 
 export const Route = createFileRoute('/admin/checkin')({
   ssr: false,
@@ -222,6 +223,8 @@ function CheckinPage() {
         </Link>
       </div>
 
+      <CheckinQr />
+
       {data && (
         <div className="px-5 sm:px-12 py-5 grid grid-cols-2 sm:grid-cols-4 gap-3 border-b border-white/10">
           <Count value={data.totals.present} label="Here now" />
@@ -281,6 +284,11 @@ function CheckinPage() {
                   {row.source === 'walk-in' && (
                     <span className="px-1.5 py-0.5 text-[10px] uppercase tracking-wider bg-white/10">
                       Walk-in
+                    </span>
+                  )}
+                  {row.source === 'self' && (
+                    <span className="px-1.5 py-0.5 text-[10px] uppercase tracking-wider bg-white/10">
+                      Scanned in
                     </span>
                   )}
                   {row.streakCurrent > 1 && (
