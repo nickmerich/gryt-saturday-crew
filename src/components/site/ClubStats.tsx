@@ -50,7 +50,7 @@ export function ClubStats() {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(to bottom, rgba(8,8,8,0.82), rgba(8,8,8,0.9) 45%, rgba(8,8,8,0.95))",
+            "linear-gradient(to bottom, rgba(8,8,8,0.55), rgba(8,8,8,0.72) 45%, rgba(8,8,8,0.88))",
         }}
       />
       <div className="relative max-w-[1180px] mx-auto">
