@@ -1,6 +1,11 @@
 import { createServerFn } from "@tanstack/react-start";
 import { finishedRunDates, summarizeStreaks } from "./streaks";
 
+/** How many recent finished runs the "regulars" figure looks back over. */
+export const REGULARS_WINDOW_RUNS = 8;
+/** Check-ins inside that window needed to count as a regular. */
+export const REGULARS_MIN_RUNS = 2;
+
 export type AttendanceStats = {
   /** Finished runs with at least one confirmed check-in. */
   runsCounted: number;
@@ -13,6 +18,13 @@ export type AttendanceStats = {
   /** Confirmed attendances at the most recent finished run. */
   lastRunAttendance: number;
   lastRunDate: string | null;
+  /**
+   * People checked in at REGULARS_MIN_RUNS or more of the last
+   * REGULARS_WINDOW_RUNS finished runs. 0 when there is nothing to count yet.
+   */
+  regulars: number;
+  /** Finished runs inside the regulars window that had any check-ins. */
+  regularsRunsCounted: number;
 };
 
 const EMPTY: AttendanceStats = {
@@ -22,6 +34,8 @@ const EMPTY: AttendanceStats = {
   onLongestStreak: 0,
   lastRunAttendance: 0,
   lastRunDate: null,
+  regulars: 0,
+  regularsRunsCounted: 0,
 };
 
 /**
@@ -65,6 +79,24 @@ export const getAttendanceStats = createServerFn({ method: "GET" }).handler(
       }
 
       const lastRunDate = runDates[0] ?? null;
+
+      // Regulars: people confirmed at several of the most recent finished runs.
+      const window = new Set(runDates.slice(0, REGULARS_WINDOW_RUNS));
+      const perPerson = new Map<string, Set<string>>();
+      for (const r of rows) {
+        if (!window.has(r.eventDate)) continue;
+        const seen = perPerson.get(r.personKey) ?? new Set<string>();
+        seen.add(r.eventDate);
+        perPerson.set(r.personKey, seen);
+      }
+      let regulars = 0;
+      for (const seen of perPerson.values()) {
+        if (seen.size >= REGULARS_MIN_RUNS) regulars += 1;
+      }
+      const regularsRunsCounted = new Set(
+        rows.filter((r) => window.has(r.eventDate)).map((r) => r.eventDate),
+      ).size;
+
       return {
         runsCounted: new Set(rows.map((r) => r.eventDate)).size,
         peopleCounted: streaks.size,
@@ -72,6 +104,8 @@ export const getAttendanceStats = createServerFn({ method: "GET" }).handler(
         onLongestStreak,
         lastRunAttendance: rows.filter((r) => r.eventDate === lastRunDate).length,
         lastRunDate,
+        regulars,
+        regularsRunsCounted,
       };
     } catch (err) {
       console.error("Attendance stats failed", err);
