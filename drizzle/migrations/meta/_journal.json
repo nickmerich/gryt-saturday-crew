@@ -29,6 +29,13 @@
       "when": 1790082257878,
       "tag": "0003_drop_recaps_noop_deny_policies",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1790166663061,
+      "tag": "0004_waiver_guardian_for_minors",
+      "breakpoints": true
     }
   ]
 }

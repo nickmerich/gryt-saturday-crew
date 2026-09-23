@@ -406,8 +406,11 @@ export type Database = {
           emergency_contact_name: string
           emergency_contact_phone: string
           full_name: string
+          guardian_name: string | null
+          guardian_relationship: string | null
           id: string
           ip_hash: string | null
+          is_minor: boolean
           phone: string | null
           season: number
           signature_text: string
@@ -422,8 +425,11 @@ export type Database = {
           emergency_contact_name: string
           emergency_contact_phone: string
           full_name: string
+          guardian_name?: string | null
+          guardian_relationship?: string | null
           id?: string
           ip_hash?: string | null
+          is_minor?: boolean
           phone?: string | null
           season?: number
           signature_text: string
@@ -438,8 +444,11 @@ export type Database = {
           emergency_contact_name?: string
           emergency_contact_phone?: string
           full_name?: string
+          guardian_name?: string | null
+          guardian_relationship?: string | null
           id?: string
           ip_hash?: string | null
+          is_minor?: boolean
           phone?: string | null
           season?: number
           signature_text?: string
