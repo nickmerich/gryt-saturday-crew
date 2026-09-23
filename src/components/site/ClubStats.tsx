@@ -3,7 +3,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { getClubStats } from "@/lib/strava-club.functions";
 import { getAttendanceStats } from "@/lib/attendance.functions";
 import { SAMPLE_CLUB_STATS, STRAVA_CLUB_URL } from "@/lib/strava-club";
-import { STRAVA_MEMBERS_LABEL } from "@/lib/club-stats";
+import { STRAVA_MEMBERS_LABEL, STRAVA_TOTAL_MILES_LABEL } from "@/lib/club-stats";
 import { StravaClubEmbed } from "./StravaClubEmbed";
 import trailPhoto from "@/assets/photos/run-club-5.jpg.asset.json";
 
@@ -104,6 +104,7 @@ export function ClubStats() {
         {stats.isSample ? (
           <div className="mt-6 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             <Figure value={STRAVA_MEMBERS_LABEL} label="Members on Strava" />
+            <Figure value={STRAVA_TOTAL_MILES_LABEL} label="Miles run together" />
           </div>
         ) : (
           <div className="mt-6 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
