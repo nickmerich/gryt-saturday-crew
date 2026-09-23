@@ -7,6 +7,7 @@ import { clearSignupSession, loadSignupSession } from "@/lib/signup-session.func
 import { SaturdayWeather } from "@/components/site/SaturdayWeather";
 import { MontourRouteMap } from "@/components/site/MontourRouteMap";
 import { ClubStats } from "@/components/site/ClubStats";
+import { useRegularsLabel } from "@/hooks/useRegularsLabel";
 
 import { submitRecommendation } from "@/lib/recommendations.functions";
 import {
@@ -473,8 +474,9 @@ function Nav() {
 }
 
 function Hero() {
+  const regularsLabel = useRegularsLabel();
   const stats: Array<[string, string]> = [
-    [REGULARS_LABEL, "regulars each Saturday"],
+    [regularsLabel, "regulars each Saturday"],
     [STRAVA_MEMBERS_LABEL, "runners on Strava"],
     [INSTAGRAM_LABEL, "followers on Instagram"],
   ];
@@ -632,11 +634,12 @@ function Hero() {
 }
 
 function Marquee() {
+  const regularsLabel = useRegularsLabel();
   const items = [
     "Do hard things together",
     "Real people",
     "Real miles",
-    `${REGULARS_LABEL} regulars`,
+    `${regularsLabel} regulars`,
     "All paces welcome",
     "Do hard things together",
     "Free forever",
@@ -2223,10 +2226,11 @@ function AffiliationList({ name, items }: { name: string; items: string[] }) {
 
 
 function Founders() {
+  const regularsLabel = useRegularsLabel();
   const stats: Array<[string, string]> = [
     [INSTAGRAM_LABEL, "followers on Instagram"],
     ["2014", "running together since"],
-    [REGULARS_LABEL, "regulars each Saturday"],
+    [regularsLabel, "regulars each Saturday"],
     [STRAVA_MEMBERS_LABEL, "total Strava members"],
   ];
 
