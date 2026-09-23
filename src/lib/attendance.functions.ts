@@ -1,6 +1,11 @@
 import { createServerFn } from "@tanstack/react-start";
 import { finishedRunDates, summarizeStreaks } from "./streaks";
 
+/** How many recent finished runs the "regulars" figure looks back over. */
+export const REGULARS_WINDOW_RUNS = 8;
+/** Check-ins inside that window needed to count as a regular. */
+export const REGULARS_MIN_RUNS = 2;
+
 export type AttendanceStats = {
   /** Finished runs with at least one confirmed check-in. */
   runsCounted: number;
@@ -13,6 +18,13 @@ export type AttendanceStats = {
   /** Confirmed attendances at the most recent finished run. */
   lastRunAttendance: number;
   lastRunDate: string | null;
+  /**
+   * People checked in at REGULARS_MIN_RUNS or more of the last
+   * REGULARS_WINDOW_RUNS finished runs. 0 when there is nothing to count yet.
+   */
+  regulars: number;
+  /** Finished runs inside the regulars window that had any check-ins. */
+  regularsRunsCounted: number;
 };
 
 const EMPTY: AttendanceStats = {
@@ -22,6 +34,8 @@ const EMPTY: AttendanceStats = {
   onLongestStreak: 0,
   lastRunAttendance: 0,
   lastRunDate: null,
+  regulars: 0,
+  regularsRunsCounted: 0,
 };
 
 /**
