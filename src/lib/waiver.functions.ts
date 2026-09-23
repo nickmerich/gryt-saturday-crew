@@ -64,22 +64,34 @@ export const signWaiver = createServerFn({ method: "POST" })
     const startedAt = Date.now();
     logWaiver("attempt", { emailHash });
 
-    // Age 18+ check (also enforced server-side by trigger)
+    // Under-18 participants are allowed when a parent or legal guardian signs
+    // on their behalf (also enforced by the database trigger).
     const dob = new Date(data.date_of_birth);
     const cutoff = new Date();
     cutoff.setFullYear(cutoff.getFullYear() - 18);
-    if (dob > cutoff) {
-      logWaiver("rejected", { emailHash, reason: "under_18" });
-      throw new Error("You must be at least 18 to sign online. Minors must sign in person with a parent or guardian.");
+    const isMinor = dob > cutoff;
+    const guardianName = (data.guardian_name ?? "").trim();
+    const guardianRelationship = (data.guardian_relationship ?? "").trim();
+
+    if (isMinor && (guardianName.length < 2 || guardianRelationship.length < 2)) {
+      logWaiver("rejected", { emailHash, reason: "minor_without_guardian" });
+      throw new Error(
+        "A runner under 18 needs a parent or legal guardian to sign. Add the guardian's full name and relationship.",
+      );
     }
 
-    // Signature must match full name (case-insensitive, trimmed)
+    // The signer types their own legal name: the guardian for a minor,
+    // otherwise the participant.
+    const expectedSigner = isMinor ? guardianName : data.full_name.trim();
     if (
-      data.signature_text.trim().toLowerCase() !==
-      data.full_name.trim().toLowerCase()
+      data.signature_text.trim().toLowerCase() !== expectedSigner.toLowerCase()
     ) {
       logWaiver("rejected", { emailHash, reason: "signature_mismatch" });
-      throw new Error("Your typed signature must match your full legal name exactly.");
+      throw new Error(
+        isMinor
+          ? "The signature must match the parent or legal guardian's full legal name exactly."
+          : "Your typed signature must match your full legal name exactly.",
+      );
     }
 
     // Use service-role client: Zod + the checks above already validate input,
