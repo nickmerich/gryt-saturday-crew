@@ -38,6 +38,8 @@ type FormState = {
   emergency_contact_name: string;
   emergency_contact_phone: string;
   signature_text: string;
+  guardian_name: string;
+  guardian_relationship: string;
   agree_release: boolean;
   agree_fitness: boolean;
   agree_adult: boolean;
@@ -51,6 +53,8 @@ const EMPTY: FormState = {
   emergency_contact_name: "",
   emergency_contact_phone: "",
   signature_text: "",
+  guardian_name: "",
+  guardian_relationship: "",
   agree_release: false,
   agree_fitness: false,
   agree_adult: false,
