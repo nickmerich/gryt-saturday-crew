@@ -768,10 +768,15 @@ function WaiverText() {
           permission in writing at any time, after which the Club will use
           reasonable efforts to discontinue future use of identifying media.
         </Clause>
-        <Clause n="7. Minors">
-          Participants under the age of 18 must sign this waiver in person
-          together with a parent or legal guardian. The online form is for
-          adults 18+ only.
+        <Clause n="7. Minors and guardians">
+          Runners under the age of 18 are welcome. A parent or legal guardian
+          must complete and sign this waiver on the minor's behalf, naming the
+          minor as the participant and stating their own relationship to the
+          minor. By signing, the parent or legal guardian agrees to every term
+          above on the minor's behalf and on their own, confirms they are 18 or
+          older, and agrees to accompany the minor at Activities or arrange for
+          another responsible adult to do so. A minor may not sign this
+          agreement for themselves.
         </Clause>
         <Clause n="8. Term and governing law">
           This agreement is effective from the date of signing through{" "}
