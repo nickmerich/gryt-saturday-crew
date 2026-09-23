@@ -12,6 +12,8 @@ const WaiverInput = z.object({
   emergency_contact_name: z.string().trim().min(1).max(120),
   emergency_contact_phone: z.string().trim().min(3).max(40),
   signature_text: z.string().trim().min(1).max(120),
+  guardian_name: z.string().trim().max(120).optional().or(z.literal("")),
+  guardian_relationship: z.string().trim().max(60).optional().or(z.literal("")),
   agree_release: z.literal(true),
   agree_fitness: z.literal(true),
   agree_adult: z.literal(true),
