@@ -540,7 +540,7 @@ function SignedView({ record }: { record: SignedRecord }) {
       y += 70;
       doc.setDrawColor(10, 10, 10);
       doc.setLineWidth(1.2);
-      doc.rect(48, y, W - 96, 132);
+      doc.rect(48, y, W - 96, 132 + (record.guardian ? 20 : 0));
 
       const rowY = (i: number) => y + 22 + i * 20;
       const writeRow = (i: number, label: string, val: string) => {
