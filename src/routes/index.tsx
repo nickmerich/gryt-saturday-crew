@@ -2826,11 +2826,6 @@ function Footer() {
         <div className="border-t border-paper/15 pt-10 pb-2" />
 
         <RecommendationsBar />
-        <nav aria-label="Community experiences" className="flex flex-wrap gap-5 pt-8 text-sm text-paper/70">
-          <a href="/inquire?type=attendee" className="hover:text-blue underline">Takoma field day · planning</a>
-          <a href="/inquire?type=vendor" className="hover:text-blue underline">Local vendor inquiries</a>
-          <a href="/inquire?type=brand" className="hover:text-blue underline">Brand residencies</a>
-        </nav>
         <div className="flex justify-between gap-4 pt-8 flex-wrap eyebrow text-paper/40">
           <span>© 2026 GRYT Run Club. All rights reserved.</span>
           <span>{"\n"}</span>
