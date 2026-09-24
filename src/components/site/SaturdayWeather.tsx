@@ -20,9 +20,9 @@ function Stat({
     <div
       className={`border p-3 sm:p-5 min-w-0 ${hot ? "border-blue bg-blue/10" : "border-paper/20 bg-ink/50"}`}
     >
-      <div className="flex items-center gap-2 text-blue">
+      <div className="flex items-center gap-2 text-blue [&>svg]:hidden sm:[&>svg]:block">
         {icon}
-        <span className="text-[9px] sm:text-[11px] tracking-[0.16em] sm:tracking-[0.2em] uppercase truncate">{label}</span>
+        <span className="text-[9px] sm:text-[11px] tracking-[0.16em] sm:tracking-[0.2em] uppercase leading-tight">{label}</span>
       </div>
       <div className="display-condensed mt-2 text-[clamp(28px,8vw,48px)] leading-[0.95]">
         {value}
