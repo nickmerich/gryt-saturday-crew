@@ -191,6 +191,16 @@ const PLAYBOOKS: Playbook[] = [
     href: "/resources/playbooks/best-free-running-clubs-pittsburgh-2026",
   },
   {
+    slug: "saturday-runs-what-to-expect",
+    title: "GRYT Run Club Saturday Runs: What to Expect on the Montour and Peters Trails",
+    category: "Community",
+    readTime: "7 min read",
+    description:
+      "The route, when and where to show up, the no-drop format, post-run coffee, and what to bring to a GRYT Saturday run in McMurray.",
+    body: [],
+    href: "/resources/playbooks/saturday-runs-what-to-expect",
+  },
+  {
     slug: "gryt-vs-yinz-run-club",
     title: "GRYT vs Yinz Run Club: Which Pittsburgh Run Club Is Right for You?",
     category: "Community",

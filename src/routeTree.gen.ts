@@ -50,6 +50,7 @@ import { Route as AdminInquiriesRouteImport } from './routes/admin.inquiries'
 import { Route as AdminCheckinRouteImport } from './routes/admin.checkin'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
+import { Route as ResourcesPlaybooksSaturdayRunsWhatToExpectRouteImport } from './routes/resources_.playbooks_.saturday-runs-what-to-expect'
 import { Route as ResourcesPlaybooksGrytVsYinzRunClubRouteImport } from './routes/resources_.playbooks_.gryt-vs-yinz-run-club'
 import { Route as ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRouteImport } from './routes/resources_.playbooks_.fleet-feet-pittsburgh-vs-independent-run-clubs'
 import { Route as ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026RouteImport } from './routes/resources_.playbooks_.best-free-running-clubs-pittsburgh-2026'
@@ -286,6 +287,12 @@ const Char91DotmcpChar93ListToolsRoute =
     path: '/.mcp/list-tools',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ResourcesPlaybooksSaturdayRunsWhatToExpectRoute =
+  ResourcesPlaybooksSaturdayRunsWhatToExpectRouteImport.update({
+    id: '/resources_/playbooks_/saturday-runs-what-to-expect',
+    path: '/resources/playbooks/saturday-runs-what-to-expect',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ResourcesPlaybooksGrytVsYinzRunClubRoute =
   ResourcesPlaybooksGrytVsYinzRunClubRouteImport.update({
     id: '/resources_/playbooks_/gryt-vs-yinz-run-club',
@@ -464,6 +471,7 @@ export interface FileRoutesByFullPath {
   '/resources/playbooks/best-free-running-clubs-pittsburgh-2026': typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route
   '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs': typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute
   '/resources/playbooks/gryt-vs-yinz-run-club': typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
+  '/resources/playbooks/saturday-runs-what-to-expect': typeof ResourcesPlaybooksSaturdayRunsWhatToExpectRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -529,6 +537,7 @@ export interface FileRoutesByTo {
   '/resources/playbooks/best-free-running-clubs-pittsburgh-2026': typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route
   '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs': typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute
   '/resources/playbooks/gryt-vs-yinz-run-club': typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
+  '/resources/playbooks/saturday-runs-what-to-expect': typeof ResourcesPlaybooksSaturdayRunsWhatToExpectRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -595,6 +604,7 @@ export interface FileRoutesById {
   '/resources_/playbooks_/best-free-running-clubs-pittsburgh-2026': typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route
   '/resources_/playbooks_/fleet-feet-pittsburgh-vs-independent-run-clubs': typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute
   '/resources_/playbooks_/gryt-vs-yinz-run-club': typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
+  '/resources_/playbooks_/saturday-runs-what-to-expect': typeof ResourcesPlaybooksSaturdayRunsWhatToExpectRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -662,6 +672,7 @@ export interface FileRouteTypes {
     | '/resources/playbooks/best-free-running-clubs-pittsburgh-2026'
     | '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs'
     | '/resources/playbooks/gryt-vs-yinz-run-club'
+    | '/resources/playbooks/saturday-runs-what-to-expect'
     | '/api/public/payments/webhook'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -727,6 +738,7 @@ export interface FileRouteTypes {
     | '/resources/playbooks/best-free-running-clubs-pittsburgh-2026'
     | '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs'
     | '/resources/playbooks/gryt-vs-yinz-run-club'
+    | '/resources/playbooks/saturday-runs-what-to-expect'
     | '/api/public/payments/webhook'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -792,6 +804,7 @@ export interface FileRouteTypes {
     | '/resources_/playbooks_/best-free-running-clubs-pittsburgh-2026'
     | '/resources_/playbooks_/fleet-feet-pittsburgh-vs-independent-run-clubs'
     | '/resources_/playbooks_/gryt-vs-yinz-run-club'
+    | '/resources_/playbooks_/saturday-runs-what-to-expect'
     | '/api/public/payments/webhook'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -857,6 +870,7 @@ export interface RootRouteChildren {
   ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route: typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route
   ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute: typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute
   ResourcesPlaybooksGrytVsYinzRunClubRoute: typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
+  ResourcesPlaybooksSaturdayRunsWhatToExpectRoute: typeof ResourcesPlaybooksSaturdayRunsWhatToExpectRoute
   ApiPublicPaymentsWebhookRoute: typeof ApiPublicPaymentsWebhookRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
@@ -1152,6 +1166,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char91DotmcpChar93ListToolsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/resources_/playbooks_/saturday-runs-what-to-expect': {
+      id: '/resources_/playbooks_/saturday-runs-what-to-expect'
+      path: '/resources/playbooks/saturday-runs-what-to-expect'
+      fullPath: '/resources/playbooks/saturday-runs-what-to-expect'
+      preLoaderRoute: typeof ResourcesPlaybooksSaturdayRunsWhatToExpectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/resources_/playbooks_/gryt-vs-yinz-run-club': {
       id: '/resources_/playbooks_/gryt-vs-yinz-run-club'
       path: '/resources/playbooks/gryt-vs-yinz-run-club'
@@ -1386,6 +1407,8 @@ const rootRouteChildren: RootRouteChildren = {
     ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute,
   ResourcesPlaybooksGrytVsYinzRunClubRoute:
     ResourcesPlaybooksGrytVsYinzRunClubRoute,
+  ResourcesPlaybooksSaturdayRunsWhatToExpectRoute:
+    ResourcesPlaybooksSaturdayRunsWhatToExpectRoute,
   ApiPublicPaymentsWebhookRoute: ApiPublicPaymentsWebhookRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,
