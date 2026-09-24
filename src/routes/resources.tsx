@@ -63,8 +63,6 @@ function ResourcesPage() {
           <ManifestoCallout />
           <ShareYourStory />
           <ArtifactsAndTools />
-          <Merch />
-          <NextIssueAndPartner />
           <GetInvolved />
         </div>
         <SiteFooter />
