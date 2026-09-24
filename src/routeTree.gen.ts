@@ -38,6 +38,7 @@ import { Route as ResourcesRecapRouteImport } from './routes/resources_.recap'
 import { Route as ResourcesPlaybooksRouteImport } from './routes/resources_.playbooks'
 import { Route as ResourcesMoreThanMilesRouteImport } from './routes/resources_.more-than-miles'
 import { Route as ResourcesManifestoRouteImport } from './routes/resources_.manifesto'
+import { Route as ResourcesIncreaseRunningMileageWithoutInjuryRouteImport } from './routes/resources_.increase-running-mileage-without-injury'
 import { Route as ResourcesGraphicsRouteImport } from './routes/resources_.graphics'
 import { Route as ResourcesEqtPittsburgh10Miler2026RouteImport } from './routes/resources_.eqt-pittsburgh-10-miler-2026'
 import { Route as ResourcesCrossTrainingForRunnersRouteImport } from './routes/resources_.cross-training-for-runners'
@@ -225,6 +226,12 @@ const ResourcesManifestoRoute = ResourcesManifestoRouteImport.update({
   path: '/resources/manifesto',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResourcesIncreaseRunningMileageWithoutInjuryRoute =
+  ResourcesIncreaseRunningMileageWithoutInjuryRouteImport.update({
+    id: '/resources_/increase-running-mileage-without-injury',
+    path: '/resources/increase-running-mileage-without-injury',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ResourcesGraphicsRoute = ResourcesGraphicsRouteImport.update({
   id: '/resources_/graphics',
   path: '/resources/graphics',
@@ -464,6 +471,7 @@ export interface FileRoutesByFullPath {
   '/resources/cross-training-for-runners': typeof ResourcesCrossTrainingForRunnersRoute
   '/resources/eqt-pittsburgh-10-miler-2026': typeof ResourcesEqtPittsburgh10Miler2026Route
   '/resources/graphics': typeof ResourcesGraphicsRoute
+  '/resources/increase-running-mileage-without-injury': typeof ResourcesIncreaseRunningMileageWithoutInjuryRoute
   '/resources/manifesto': typeof ResourcesManifestoRoute
   '/resources/more-than-miles': typeof ResourcesMoreThanMilesRoute
   '/resources/playbooks': typeof ResourcesPlaybooksRoute
@@ -533,6 +541,7 @@ export interface FileRoutesByTo {
   '/resources/cross-training-for-runners': typeof ResourcesCrossTrainingForRunnersRoute
   '/resources/eqt-pittsburgh-10-miler-2026': typeof ResourcesEqtPittsburgh10Miler2026Route
   '/resources/graphics': typeof ResourcesGraphicsRoute
+  '/resources/increase-running-mileage-without-injury': typeof ResourcesIncreaseRunningMileageWithoutInjuryRoute
   '/resources/manifesto': typeof ResourcesManifestoRoute
   '/resources/more-than-miles': typeof ResourcesMoreThanMilesRoute
   '/resources/playbooks': typeof ResourcesPlaybooksRoute
@@ -603,6 +612,7 @@ export interface FileRoutesById {
   '/resources_/cross-training-for-runners': typeof ResourcesCrossTrainingForRunnersRoute
   '/resources_/eqt-pittsburgh-10-miler-2026': typeof ResourcesEqtPittsburgh10Miler2026Route
   '/resources_/graphics': typeof ResourcesGraphicsRoute
+  '/resources_/increase-running-mileage-without-injury': typeof ResourcesIncreaseRunningMileageWithoutInjuryRoute
   '/resources_/manifesto': typeof ResourcesManifestoRoute
   '/resources_/more-than-miles': typeof ResourcesMoreThanMilesRoute
   '/resources_/playbooks': typeof ResourcesPlaybooksRoute
@@ -674,6 +684,7 @@ export interface FileRouteTypes {
     | '/resources/cross-training-for-runners'
     | '/resources/eqt-pittsburgh-10-miler-2026'
     | '/resources/graphics'
+    | '/resources/increase-running-mileage-without-injury'
     | '/resources/manifesto'
     | '/resources/more-than-miles'
     | '/resources/playbooks'
@@ -743,6 +754,7 @@ export interface FileRouteTypes {
     | '/resources/cross-training-for-runners'
     | '/resources/eqt-pittsburgh-10-miler-2026'
     | '/resources/graphics'
+    | '/resources/increase-running-mileage-without-injury'
     | '/resources/manifesto'
     | '/resources/more-than-miles'
     | '/resources/playbooks'
@@ -812,6 +824,7 @@ export interface FileRouteTypes {
     | '/resources_/cross-training-for-runners'
     | '/resources_/eqt-pittsburgh-10-miler-2026'
     | '/resources_/graphics'
+    | '/resources_/increase-running-mileage-without-injury'
     | '/resources_/manifesto'
     | '/resources_/more-than-miles'
     | '/resources_/playbooks'
@@ -881,6 +894,7 @@ export interface RootRouteChildren {
   ResourcesCrossTrainingForRunnersRoute: typeof ResourcesCrossTrainingForRunnersRoute
   ResourcesEqtPittsburgh10Miler2026Route: typeof ResourcesEqtPittsburgh10Miler2026Route
   ResourcesGraphicsRoute: typeof ResourcesGraphicsRoute
+  ResourcesIncreaseRunningMileageWithoutInjuryRoute: typeof ResourcesIncreaseRunningMileageWithoutInjuryRoute
   ResourcesManifestoRoute: typeof ResourcesManifestoRoute
   ResourcesMoreThanMilesRoute: typeof ResourcesMoreThanMilesRoute
   ResourcesPlaybooksRoute: typeof ResourcesPlaybooksRoute
@@ -1120,6 +1134,13 @@ declare module '@tanstack/react-router' {
       path: '/resources/manifesto'
       fullPath: '/resources/manifesto'
       preLoaderRoute: typeof ResourcesManifestoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resources_/increase-running-mileage-without-injury': {
+      id: '/resources_/increase-running-mileage-without-injury'
+      path: '/resources/increase-running-mileage-without-injury'
+      fullPath: '/resources/increase-running-mileage-without-injury'
+      preLoaderRoute: typeof ResourcesIncreaseRunningMileageWithoutInjuryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/resources_/graphics': {
@@ -1437,6 +1458,8 @@ const rootRouteChildren: RootRouteChildren = {
   ResourcesEqtPittsburgh10Miler2026Route:
     ResourcesEqtPittsburgh10Miler2026Route,
   ResourcesGraphicsRoute: ResourcesGraphicsRoute,
+  ResourcesIncreaseRunningMileageWithoutInjuryRoute:
+    ResourcesIncreaseRunningMileageWithoutInjuryRoute,
   ResourcesManifestoRoute: ResourcesManifestoRoute,
   ResourcesMoreThanMilesRoute: ResourcesMoreThanMilesRoute,
   ResourcesPlaybooksRoute: ResourcesPlaybooksRoute,
