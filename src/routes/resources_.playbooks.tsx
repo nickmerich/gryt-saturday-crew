@@ -5,9 +5,9 @@ import { SITE_ORIGIN } from "@/lib/site";
 
 const SITE = SITE_ORIGIN;
 const URL = `${SITE}/resources/playbooks`;
-const TITLE = "Playbooks · gryt run club";
+const TITLE = "Free Run Club Playbooks | GRYT Run Club Pittsburgh";
 const DESCRIPTION =
-  "Long-form playbooks from Nick on building a run club from zero, the Saturday system, and training for the comeback. Free to read.";
+  "Free run club playbooks from Nick at GRYT Run Club Pittsburgh. Learn how to start a run club, train consistently, and build real community. Start reading.";
 
 export const Route = createFileRoute("/resources_/playbooks")({
   head: () => ({
@@ -191,16 +191,6 @@ const PLAYBOOKS: Playbook[] = [
     href: "/resources/playbooks/best-free-running-clubs-pittsburgh-2026",
   },
   {
-    slug: "saturday-runs-what-to-expect",
-    title: "GRYT Run Club Saturday Runs: What to Expect on the Montour and Peters Trails",
-    category: "Community",
-    readTime: "7 min read",
-    description:
-      "The route, when and where to show up, the no-drop format, post-run coffee, and what to bring to a GRYT Saturday run in McMurray.",
-    body: [],
-    href: "/resources/playbooks/saturday-runs-what-to-expect",
-  },
-  {
     slug: "gryt-vs-yinz-run-club",
     title: "GRYT vs Yinz Run Club: Which Pittsburgh Run Club Is Right for You?",
     category: "Community",
@@ -238,7 +228,7 @@ function PlaybooksPage() {
           </Link>
           <p className="eyebrow text-blue mt-8 mb-5">LONG-FORM FROM NICK</p>
           <h1 className="display-condensed uppercase text-[clamp(48px,9vw,128px)] leading-[0.9]">
-            Playbooks
+            Free Run Club Playbooks — Build, Train &amp; Show Up
           </h1>
           <p className="mt-7 text-paper/75 text-lg md:text-xl max-w-[640px] leading-[1.55]">
             Everything we've learned about building consistency, community, and
