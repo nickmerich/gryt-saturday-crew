@@ -22,6 +22,7 @@ import { template as partnerInquiryNotification } from './partner-inquiry-notifi
 import { template as waiverConfirmation } from './waiver-confirmation'
 import { template as rsvpConfirmation } from './rsvp-confirmation'
 import { template as rsvpNotification } from './rsvp-notification'
+import { template as saturdayReminder } from './saturday-reminder'
 
 export const TEMPLATES: Record<string, TemplateEntry> = {
   'recommendation-notification': recommendationNotification,
@@ -29,4 +30,5 @@ export const TEMPLATES: Record<string, TemplateEntry> = {
   'waiver-confirmation': waiverConfirmation,
   'rsvp-confirmation': rsvpConfirmation,
   'rsvp-notification': rsvpNotification,
+  'saturday-reminder': saturdayReminder,
 }
