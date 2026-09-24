@@ -162,6 +162,7 @@ export type Database = {
         Row: {
           contact: string
           created_at: string
+          event_id: string | null
           event_label: string | null
           first_timer: boolean
           hero_variant: string | null
@@ -180,6 +181,7 @@ export type Database = {
         Insert: {
           contact: string
           created_at?: string
+          event_id?: string | null
           event_label?: string | null
           first_timer?: boolean
           hero_variant?: string | null
@@ -198,6 +200,7 @@ export type Database = {
         Update: {
           contact?: string
           created_at?: string
+          event_id?: string | null
           event_label?: string | null
           first_timer?: boolean
           hero_variant?: string | null
