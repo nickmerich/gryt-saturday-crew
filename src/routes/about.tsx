@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteNav, SiteFooter, MissionStamp } from "@/components/site/Chrome";
-import nickLauraAsset from "@/assets/photos/nick-laura.jpg.asset.json";
+import mountainAsset from "@/assets/photos/founders-mountain.jpg.asset.json";
+import surfCityAsset from "@/assets/photos/founders-surf-city.jpg.asset.json";
+import bostonAsset from "@/assets/photos/founders-boston.jpg.asset.json";
 import { siteUrl } from "@/lib/site";
 
 const TITLE = "About GRYT Run Club | Nick & Laura Merich";
@@ -106,8 +108,8 @@ function AboutPage() {
             </p>
           </div>
           <img
-            src={nickLauraAsset.url}
-            alt="Nick and Laura Merich, founders of GRYT Run Club"
+            src={mountainAsset.url}
+            alt="Nick and Laura Merich on a mountain summit"
             className="w-full h-auto object-cover"
             loading="eager"
           />
@@ -133,6 +135,12 @@ function AboutPage() {
               just need a place to start, and people worth coming back for.
             </p>
           </div>
+          <img
+            src={surfCityAsset.url}
+            alt="Nick and Laura with finisher medals at the Surf City half marathon"
+            className="mt-10 w-full h-auto"
+            loading="lazy"
+          />
         </div>
       </section>
 
@@ -143,6 +151,12 @@ function AboutPage() {
           <p className="mt-5 text-paper/75 max-w-xl" style={body}>
             Two different backgrounds. One shared belief: effort is better together.
           </p>
+          <img
+            src={bostonAsset.url}
+            alt="Laura with her 2020 Boston Marathon virtual bib, next to Nick"
+            className="mt-10 w-full max-w-md h-auto"
+            loading="lazy"
+          />
           <div className="mt-12 grid gap-12 md:grid-cols-2">
             <Founder
               role="Co-founder / Runner / Community host"
