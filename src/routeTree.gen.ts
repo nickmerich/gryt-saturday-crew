@@ -67,6 +67,7 @@ import { Route as ApiAdminRosterRouteImport } from './routes/api/admin/roster'
 import { Route as ApiAdminInquiriesRouteImport } from './routes/api/admin/inquiries'
 import { Route as ApiAdminCheckinCodeRouteImport } from './routes/api/admin/checkin-code'
 import { Route as ApiAdminCheckinRouteImport } from './routes/api/admin/checkin'
+import { Route as AdminStravaEventRouteImport } from './routes/admin.strava.event'
 import { Route as AdminStravaConnectRouteImport } from './routes/admin.strava.connect'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
@@ -379,6 +380,11 @@ const ApiAdminCheckinRoute = ApiAdminCheckinRouteImport.update({
   path: '/api/admin/checkin',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminStravaEventRoute = AdminStravaEventRouteImport.update({
+  id: '/admin/strava/event',
+  path: '/admin/strava/event',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminStravaConnectRoute = AdminStravaConnectRouteImport.update({
   id: '/admin/strava/connect',
   path: '/admin/strava/connect',
@@ -470,6 +476,7 @@ export interface FileRoutesByFullPath {
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/admin/strava/connect': typeof AdminStravaConnectRoute
+  '/admin/strava/event': typeof AdminStravaEventRoute
   '/api/admin/checkin': typeof ApiAdminCheckinRoute
   '/api/admin/checkin-code': typeof ApiAdminCheckinCodeRoute
   '/api/admin/inquiries': typeof ApiAdminInquiriesRoute
@@ -538,6 +545,7 @@ export interface FileRoutesByTo {
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/admin/strava/connect': typeof AdminStravaConnectRoute
+  '/admin/strava/event': typeof AdminStravaEventRoute
   '/api/admin/checkin': typeof ApiAdminCheckinRoute
   '/api/admin/checkin-code': typeof ApiAdminCheckinCodeRoute
   '/api/admin/inquiries': typeof ApiAdminInquiriesRoute
@@ -607,6 +615,7 @@ export interface FileRoutesById {
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/admin/strava/connect': typeof AdminStravaConnectRoute
+  '/admin/strava/event': typeof AdminStravaEventRoute
   '/api/admin/checkin': typeof ApiAdminCheckinRoute
   '/api/admin/checkin-code': typeof ApiAdminCheckinCodeRoute
   '/api/admin/inquiries': typeof ApiAdminInquiriesRoute
@@ -677,6 +686,7 @@ export interface FileRouteTypes {
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/admin/strava/connect'
+    | '/admin/strava/event'
     | '/api/admin/checkin'
     | '/api/admin/checkin-code'
     | '/api/admin/inquiries'
@@ -745,6 +755,7 @@ export interface FileRouteTypes {
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/admin/strava/connect'
+    | '/admin/strava/event'
     | '/api/admin/checkin'
     | '/api/admin/checkin-code'
     | '/api/admin/inquiries'
@@ -813,6 +824,7 @@ export interface FileRouteTypes {
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/admin/strava/connect'
+    | '/admin/strava/event'
     | '/api/admin/checkin'
     | '/api/admin/checkin-code'
     | '/api/admin/inquiries'
@@ -881,6 +893,7 @@ export interface RootRouteChildren {
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
   AdminStravaConnectRoute: typeof AdminStravaConnectRoute
+  AdminStravaEventRoute: typeof AdminStravaEventRoute
   ApiAdminCheckinRoute: typeof ApiAdminCheckinRoute
   ApiAdminCheckinCodeRoute: typeof ApiAdminCheckinCodeRoute
   ApiAdminInquiriesRoute: typeof ApiAdminInquiriesRoute
@@ -1312,6 +1325,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAdminCheckinRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/strava/event': {
+      id: '/admin/strava/event'
+      path: '/admin/strava/event'
+      fullPath: '/admin/strava/event'
+      preLoaderRoute: typeof AdminStravaEventRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/strava/connect': {
       id: '/admin/strava/connect'
       path: '/admin/strava/connect'
@@ -1430,6 +1450,7 @@ const rootRouteChildren: RootRouteChildren = {
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
   AdminStravaConnectRoute: AdminStravaConnectRoute,
+  AdminStravaEventRoute: AdminStravaEventRoute,
   ApiAdminCheckinRoute: ApiAdminCheckinRoute,
   ApiAdminCheckinCodeRoute: ApiAdminCheckinCodeRoute,
   ApiAdminInquiriesRoute: ApiAdminInquiriesRoute,
