@@ -34,6 +34,7 @@ import { Route as ResourcesWhatToEatBeforeARunRouteImport } from './routes/resou
 import { Route as ResourcesShouldYouJoinARunningClubRouteImport } from './routes/resources_.should-you-join-a-running-club'
 import { Route as ResourcesRunsRouteImport } from './routes/resources_.runs'
 import { Route as ResourcesRunningWithAGroupRouteImport } from './routes/resources_.running-with-a-group'
+import { Route as ResourcesRunningAtNightSafetyPittsburghRouteImport } from './routes/resources_.running-at-night-safety-pittsburgh'
 import { Route as ResourcesRecapRouteImport } from './routes/resources_.recap'
 import { Route as ResourcesPlaybooksRouteImport } from './routes/resources_.playbooks'
 import { Route as ResourcesMoreThanMilesRouteImport } from './routes/resources_.more-than-miles'
@@ -204,6 +205,12 @@ const ResourcesRunningWithAGroupRoute =
   ResourcesRunningWithAGroupRouteImport.update({
     id: '/resources_/running-with-a-group',
     path: '/resources/running-with-a-group',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ResourcesRunningAtNightSafetyPittsburghRoute =
+  ResourcesRunningAtNightSafetyPittsburghRouteImport.update({
+    id: '/resources_/running-at-night-safety-pittsburgh',
+    path: '/resources/running-at-night-safety-pittsburgh',
     getParentRoute: () => rootRouteImport,
   } as any)
 const ResourcesRecapRoute = ResourcesRecapRouteImport.update({
@@ -476,6 +483,7 @@ export interface FileRoutesByFullPath {
   '/resources/more-than-miles': typeof ResourcesMoreThanMilesRoute
   '/resources/playbooks': typeof ResourcesPlaybooksRoute
   '/resources/recap': typeof ResourcesRecapRoute
+  '/resources/running-at-night-safety-pittsburgh': typeof ResourcesRunningAtNightSafetyPittsburghRoute
   '/resources/running-with-a-group': typeof ResourcesRunningWithAGroupRoute
   '/resources/runs': typeof ResourcesRunsRoute
   '/resources/should-you-join-a-running-club': typeof ResourcesShouldYouJoinARunningClubRoute
@@ -546,6 +554,7 @@ export interface FileRoutesByTo {
   '/resources/more-than-miles': typeof ResourcesMoreThanMilesRoute
   '/resources/playbooks': typeof ResourcesPlaybooksRoute
   '/resources/recap': typeof ResourcesRecapRoute
+  '/resources/running-at-night-safety-pittsburgh': typeof ResourcesRunningAtNightSafetyPittsburghRoute
   '/resources/running-with-a-group': typeof ResourcesRunningWithAGroupRoute
   '/resources/runs': typeof ResourcesRunsRoute
   '/resources/should-you-join-a-running-club': typeof ResourcesShouldYouJoinARunningClubRoute
@@ -617,6 +626,7 @@ export interface FileRoutesById {
   '/resources_/more-than-miles': typeof ResourcesMoreThanMilesRoute
   '/resources_/playbooks': typeof ResourcesPlaybooksRoute
   '/resources_/recap': typeof ResourcesRecapRoute
+  '/resources_/running-at-night-safety-pittsburgh': typeof ResourcesRunningAtNightSafetyPittsburghRoute
   '/resources_/running-with-a-group': typeof ResourcesRunningWithAGroupRoute
   '/resources_/runs': typeof ResourcesRunsRoute
   '/resources_/should-you-join-a-running-club': typeof ResourcesShouldYouJoinARunningClubRoute
@@ -689,6 +699,7 @@ export interface FileRouteTypes {
     | '/resources/more-than-miles'
     | '/resources/playbooks'
     | '/resources/recap'
+    | '/resources/running-at-night-safety-pittsburgh'
     | '/resources/running-with-a-group'
     | '/resources/runs'
     | '/resources/should-you-join-a-running-club'
@@ -759,6 +770,7 @@ export interface FileRouteTypes {
     | '/resources/more-than-miles'
     | '/resources/playbooks'
     | '/resources/recap'
+    | '/resources/running-at-night-safety-pittsburgh'
     | '/resources/running-with-a-group'
     | '/resources/runs'
     | '/resources/should-you-join-a-running-club'
@@ -829,6 +841,7 @@ export interface FileRouteTypes {
     | '/resources_/more-than-miles'
     | '/resources_/playbooks'
     | '/resources_/recap'
+    | '/resources_/running-at-night-safety-pittsburgh'
     | '/resources_/running-with-a-group'
     | '/resources_/runs'
     | '/resources_/should-you-join-a-running-club'
@@ -899,6 +912,7 @@ export interface RootRouteChildren {
   ResourcesMoreThanMilesRoute: typeof ResourcesMoreThanMilesRoute
   ResourcesPlaybooksRoute: typeof ResourcesPlaybooksRoute
   ResourcesRecapRoute: typeof ResourcesRecapRoute
+  ResourcesRunningAtNightSafetyPittsburghRoute: typeof ResourcesRunningAtNightSafetyPittsburghRoute
   ResourcesRunningWithAGroupRoute: typeof ResourcesRunningWithAGroupRoute
   ResourcesRunsRoute: typeof ResourcesRunsRoute
   ResourcesShouldYouJoinARunningClubRoute: typeof ResourcesShouldYouJoinARunningClubRoute
@@ -1106,6 +1120,13 @@ declare module '@tanstack/react-router' {
       path: '/resources/running-with-a-group'
       fullPath: '/resources/running-with-a-group'
       preLoaderRoute: typeof ResourcesRunningWithAGroupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resources_/running-at-night-safety-pittsburgh': {
+      id: '/resources_/running-at-night-safety-pittsburgh'
+      path: '/resources/running-at-night-safety-pittsburgh'
+      fullPath: '/resources/running-at-night-safety-pittsburgh'
+      preLoaderRoute: typeof ResourcesRunningAtNightSafetyPittsburghRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/resources_/recap': {
@@ -1464,6 +1485,8 @@ const rootRouteChildren: RootRouteChildren = {
   ResourcesMoreThanMilesRoute: ResourcesMoreThanMilesRoute,
   ResourcesPlaybooksRoute: ResourcesPlaybooksRoute,
   ResourcesRecapRoute: ResourcesRecapRoute,
+  ResourcesRunningAtNightSafetyPittsburghRoute:
+    ResourcesRunningAtNightSafetyPittsburghRoute,
   ResourcesRunningWithAGroupRoute: ResourcesRunningWithAGroupRoute,
   ResourcesRunsRoute: ResourcesRunsRoute,
   ResourcesShouldYouJoinARunningClubRoute:
