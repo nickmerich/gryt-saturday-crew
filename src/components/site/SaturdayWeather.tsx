@@ -18,13 +18,13 @@ function Stat({
 }) {
   return (
     <div
-      className={`border p-4 sm:p-5 ${hot ? "border-blue bg-blue/10" : "border-paper/20 bg-ink/50"}`}
+      className={`border p-3 sm:p-5 min-w-0 ${hot ? "border-blue bg-blue/10" : "border-paper/20 bg-ink/50"}`}
     >
-      <div className="flex items-center gap-2 text-blue">
+      <div className="flex items-center gap-2 text-blue [&>svg]:hidden sm:[&>svg]:block">
         {icon}
-        <span className="text-[10px] sm:text-[11px] tracking-[0.2em] uppercase">{label}</span>
+        <span className="text-[9px] sm:text-[11px] tracking-[0.16em] sm:tracking-[0.2em] uppercase leading-tight">{label}</span>
       </div>
-      <div className="display-condensed mt-2 text-[clamp(30px,9vw,48px)] leading-[0.95]">
+      <div className="display-condensed mt-2 text-[clamp(28px,8vw,48px)] leading-[0.95]">
         {value}
       </div>
       {sub ? <div className="mt-1 text-[12px] text-paper/60">{sub}</div> : null}
@@ -53,7 +53,7 @@ export function SaturdayWeather() {
   return (
     <section
       id="weather"
-      className="relative overflow-hidden concrete grain border-t-2 border-blue text-paper py-14 sm:py-20 px-5 sm:px-12 lg:px-24"
+      className="relative overflow-hidden concrete grain border-t-2 border-blue text-paper py-14 md:py-20 px-6 sm:px-12 lg:px-24"
     >
       <div className="relative max-w-[1180px] mx-auto">
         <div className="eyebrow eyebrow-blue mb-3">Saturday conditions</div>
@@ -90,7 +90,7 @@ export function SaturdayWeather() {
               </div>
             ) : null}
 
-            <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+            <div className="mt-6 grid grid-cols-3 gap-2 sm:gap-4">
               <Stat
                 icon={<Thermometer size={16} strokeWidth={2} />}
                 label="Temp at 7 AM"

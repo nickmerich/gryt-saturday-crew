@@ -35,7 +35,7 @@ export function MontourRouteMap() {
   return (
     <section
       id="route"
-      className="relative overflow-hidden bg-ink text-paper border-t-2 border-blue py-14 sm:py-20 px-5 sm:px-12 lg:px-24"
+      className="relative overflow-hidden bg-ink text-paper border-t-2 border-blue py-14 md:py-20 px-6 sm:px-12 lg:px-24"
     >
       <div className="relative max-w-[1180px] mx-auto">
         <div className="eyebrow eyebrow-blue mb-3">The route</div>
@@ -54,7 +54,7 @@ export function MontourRouteMap() {
                   SATURDAY ROUTE
                 </span>
                 <span className="text-[10px] sm:text-[11px] tracking-[0.22em] uppercase font-bold">
-                  4.2 MI · 81 FT · OUT AND BACK
+                  4.2 MI · 81 FT
                 </span>
               </div>
               <div className="p-2 sm:p-3 bg-vintage">
