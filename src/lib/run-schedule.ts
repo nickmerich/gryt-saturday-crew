@@ -376,3 +376,56 @@ export function validateEventRef(
   if (version != null && version !== occ.version) return { ok: false, reason: "stale", occurrence: current };
   return { ok: true, occurrence: occ };
 }
+
+// ---------------------------------------------------------------------------
+// Per-week details for emails and the Strava event helper
+// ---------------------------------------------------------------------------
+
+/** "Saturday, Sep 26" in America/New_York. */
+export function occurrenceDateLong(occ: RunOccurrence): string {
+  return new Date(occ.startUtc).toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "short",
+    day: "numeric",
+    timeZone: occ.timeZone,
+  });
+}
+
+/** "7:00 AM" in America/New_York. */
+export function occurrenceTime(occ: RunOccurrence): string {
+  return new Date(occ.startUtc).toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    timeZone: occ.timeZone,
+  });
+}
+
+function compactUtc(iso: string): string {
+  return iso.replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+}
+
+/** Google Calendar link with the correct instants for this occurrence. */
+export function occurrenceCalendarUrl(occ: RunOccurrence): string {
+  return (
+    "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+    "&text=" + encodeURIComponent(`GRYT Run #${occ.runNumber}`) +
+    `&dates=${compactUtc(occ.startUtc)}/${compactUtc(occ.endUtc)}` +
+    "&details=" + encodeURIComponent("GRYT Run Club, Saturday 7 AM. Walk, jog or run. Nobody gets dropped. https://grytrunclub.com") +
+    "&location=" + encodeURIComponent(occ.location.address)
+  );
+}
+
+/** Copy-ready text for posting this week's run as a Strava club event. */
+export function occurrenceStravaEvent(occ: RunOccurrence) {
+  return {
+    title: `GRYT Run #${occ.runNumber} · Saturday 7 AM`,
+    date: occurrenceDateLong(occ),
+    time: occurrenceTime(occ),
+    address: occ.location.address,
+    meetingPoint: occ.location.name,
+    description:
+      `Free Saturday run. Meet at ${occ.location.name}, ${occ.location.address}, by the trail map board. ` +
+      "About 4 miles out and back on the Montour and Peters trails. All paces, nobody gets dropped. " +
+      "First time? Sign up and sign the free waiver at https://grytrunclub.com",
+  };
+}
