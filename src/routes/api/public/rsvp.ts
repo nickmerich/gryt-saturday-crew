@@ -3,9 +3,8 @@ import { createFileRoute } from '@tanstack/react-router'
 import { z } from 'zod'
 import { sendInternalTransactionalEmail } from '@/lib/email/send-internal.server'
 import {
-  nextRunNumber,
-  nextSaturdayISODate,
   nextSaturdayLabel,
+  occurrenceCalendarUrl,
   validateEventRef,
 } from '@/lib/run-schedule'
 
@@ -114,6 +113,7 @@ export const Route = createFileRoute('/api/public/rsvp')({
             contact,
             source: source ?? null,
             event_label: eventLabel ?? null,
+            event_id: occurrence.id,
             hero_variant: heroVariant ?? null,
             party_size: partySize,
             first_timer: firstTimer,
@@ -157,18 +157,7 @@ export const Route = createFileRoute('/api/public/rsvp')({
         const contactIsEmail = isEmail(contact.trim())
         if (contactIsEmail) {
           try {
-            const calDay = nextSaturdayISODate().replace(/-/g, '')
-            const calHref =
-              'https://calendar.google.com/calendar/render?action=TEMPLATE' +
-              '&text=' +
-              encodeURIComponent(`GRYT Run #${nextRunNumber()}`) +
-              `&dates=${calDay}T110000Z/${calDay}T120000Z` +
-              '&details=' +
-              encodeURIComponent(
-                'GRYT Run Club — Saturday 7 AM. Walk, jog, or run the Montour/Peters Trail. No one gets dropped. https://www.strava.com/clubs/1708552',
-              ) +
-              '&location=' +
-              encodeURIComponent('212 Valley Brook Road, McMurray, PA')
+            const calHref = occurrenceCalendarUrl(occurrence)
 
             await sendTemplate(
               'rsvp-confirmation',

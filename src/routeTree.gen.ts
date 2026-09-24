@@ -67,6 +67,7 @@ import { Route as ApiAdminRosterRouteImport } from './routes/api/admin/roster'
 import { Route as ApiAdminInquiriesRouteImport } from './routes/api/admin/inquiries'
 import { Route as ApiAdminCheckinCodeRouteImport } from './routes/api/admin/checkin-code'
 import { Route as ApiAdminCheckinRouteImport } from './routes/api/admin/checkin'
+import { Route as AdminStravaEventRouteImport } from './routes/admin.strava.event'
 import { Route as AdminStravaConnectRouteImport } from './routes/admin.strava.connect'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
@@ -74,6 +75,7 @@ import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/l
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
 import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
+import { Route as ApiPublicHooksSaturdayReminderRouteImport } from './routes/api/public/hooks/saturday-reminder'
 
 const WaiverRoute = WaiverRouteImport.update({
   id: '/waiver',
@@ -378,6 +380,11 @@ const ApiAdminCheckinRoute = ApiAdminCheckinRouteImport.update({
   path: '/api/admin/checkin',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminStravaEventRoute = AdminStravaEventRouteImport.update({
+  id: '/admin/strava/event',
+  path: '/admin/strava/event',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminStravaConnectRoute = AdminStravaConnectRouteImport.update({
   id: '/admin/strava/connect',
   path: '/admin/strava/connect',
@@ -414,6 +421,12 @@ const ApiPublicPaymentsWebhookRoute =
   ApiPublicPaymentsWebhookRouteImport.update({
     id: '/api/public/payments/webhook',
     path: '/api/public/payments/webhook',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicHooksSaturdayReminderRoute =
+  ApiPublicHooksSaturdayReminderRouteImport.update({
+    id: '/api/public/hooks/saturday-reminder',
+    path: '/api/public/hooks/saturday-reminder',
     getParentRoute: () => rootRouteImport,
   } as any)
 
@@ -463,6 +476,7 @@ export interface FileRoutesByFullPath {
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/admin/strava/connect': typeof AdminStravaConnectRoute
+  '/admin/strava/event': typeof AdminStravaEventRoute
   '/api/admin/checkin': typeof ApiAdminCheckinRoute
   '/api/admin/checkin-code': typeof ApiAdminCheckinCodeRoute
   '/api/admin/inquiries': typeof ApiAdminInquiriesRoute
@@ -479,6 +493,7 @@ export interface FileRoutesByFullPath {
   '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs': typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute
   '/resources/playbooks/gryt-vs-yinz-run-club': typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
   '/resources/playbooks/saturday-runs-what-to-expect': typeof ResourcesPlaybooksSaturdayRunsWhatToExpectRoute
+  '/api/public/hooks/saturday-reminder': typeof ApiPublicHooksSaturdayReminderRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -530,6 +545,7 @@ export interface FileRoutesByTo {
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/admin/strava/connect': typeof AdminStravaConnectRoute
+  '/admin/strava/event': typeof AdminStravaEventRoute
   '/api/admin/checkin': typeof ApiAdminCheckinRoute
   '/api/admin/checkin-code': typeof ApiAdminCheckinCodeRoute
   '/api/admin/inquiries': typeof ApiAdminInquiriesRoute
@@ -546,6 +562,7 @@ export interface FileRoutesByTo {
   '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs': typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute
   '/resources/playbooks/gryt-vs-yinz-run-club': typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
   '/resources/playbooks/saturday-runs-what-to-expect': typeof ResourcesPlaybooksSaturdayRunsWhatToExpectRoute
+  '/api/public/hooks/saturday-reminder': typeof ApiPublicHooksSaturdayReminderRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -598,6 +615,7 @@ export interface FileRoutesById {
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/admin/strava/connect': typeof AdminStravaConnectRoute
+  '/admin/strava/event': typeof AdminStravaEventRoute
   '/api/admin/checkin': typeof ApiAdminCheckinRoute
   '/api/admin/checkin-code': typeof ApiAdminCheckinCodeRoute
   '/api/admin/inquiries': typeof ApiAdminInquiriesRoute
@@ -614,6 +632,7 @@ export interface FileRoutesById {
   '/resources_/playbooks_/fleet-feet-pittsburgh-vs-independent-run-clubs': typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute
   '/resources_/playbooks_/gryt-vs-yinz-run-club': typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
   '/resources_/playbooks_/saturday-runs-what-to-expect': typeof ResourcesPlaybooksSaturdayRunsWhatToExpectRoute
+  '/api/public/hooks/saturday-reminder': typeof ApiPublicHooksSaturdayReminderRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -667,6 +686,7 @@ export interface FileRouteTypes {
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/admin/strava/connect'
+    | '/admin/strava/event'
     | '/api/admin/checkin'
     | '/api/admin/checkin-code'
     | '/api/admin/inquiries'
@@ -683,6 +703,7 @@ export interface FileRouteTypes {
     | '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs'
     | '/resources/playbooks/gryt-vs-yinz-run-club'
     | '/resources/playbooks/saturday-runs-what-to-expect'
+    | '/api/public/hooks/saturday-reminder'
     | '/api/public/payments/webhook'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -734,6 +755,7 @@ export interface FileRouteTypes {
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/admin/strava/connect'
+    | '/admin/strava/event'
     | '/api/admin/checkin'
     | '/api/admin/checkin-code'
     | '/api/admin/inquiries'
@@ -750,6 +772,7 @@ export interface FileRouteTypes {
     | '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs'
     | '/resources/playbooks/gryt-vs-yinz-run-club'
     | '/resources/playbooks/saturday-runs-what-to-expect'
+    | '/api/public/hooks/saturday-reminder'
     | '/api/public/payments/webhook'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -801,6 +824,7 @@ export interface FileRouteTypes {
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/admin/strava/connect'
+    | '/admin/strava/event'
     | '/api/admin/checkin'
     | '/api/admin/checkin-code'
     | '/api/admin/inquiries'
@@ -817,6 +841,7 @@ export interface FileRouteTypes {
     | '/resources_/playbooks_/fleet-feet-pittsburgh-vs-independent-run-clubs'
     | '/resources_/playbooks_/gryt-vs-yinz-run-club'
     | '/resources_/playbooks_/saturday-runs-what-to-expect'
+    | '/api/public/hooks/saturday-reminder'
     | '/api/public/payments/webhook'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -868,6 +893,7 @@ export interface RootRouteChildren {
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
   AdminStravaConnectRoute: typeof AdminStravaConnectRoute
+  AdminStravaEventRoute: typeof AdminStravaEventRoute
   ApiAdminCheckinRoute: typeof ApiAdminCheckinRoute
   ApiAdminCheckinCodeRoute: typeof ApiAdminCheckinCodeRoute
   ApiAdminInquiriesRoute: typeof ApiAdminInquiriesRoute
@@ -884,6 +910,7 @@ export interface RootRouteChildren {
   ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute: typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute
   ResourcesPlaybooksGrytVsYinzRunClubRoute: typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
   ResourcesPlaybooksSaturdayRunsWhatToExpectRoute: typeof ResourcesPlaybooksSaturdayRunsWhatToExpectRoute
+  ApiPublicHooksSaturdayReminderRoute: typeof ApiPublicHooksSaturdayReminderRoute
   ApiPublicPaymentsWebhookRoute: typeof ApiPublicPaymentsWebhookRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
@@ -1298,6 +1325,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAdminCheckinRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/strava/event': {
+      id: '/admin/strava/event'
+      path: '/admin/strava/event'
+      fullPath: '/admin/strava/event'
+      preLoaderRoute: typeof AdminStravaEventRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/strava/connect': {
       id: '/admin/strava/connect'
       path: '/admin/strava/connect'
@@ -1345,6 +1379,13 @@ declare module '@tanstack/react-router' {
       path: '/api/public/payments/webhook'
       fullPath: '/api/public/payments/webhook'
       preLoaderRoute: typeof ApiPublicPaymentsWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/hooks/saturday-reminder': {
+      id: '/api/public/hooks/saturday-reminder'
+      path: '/api/public/hooks/saturday-reminder'
+      fullPath: '/api/public/hooks/saturday-reminder'
+      preLoaderRoute: typeof ApiPublicHooksSaturdayReminderRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -1409,6 +1450,7 @@ const rootRouteChildren: RootRouteChildren = {
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
   AdminStravaConnectRoute: AdminStravaConnectRoute,
+  AdminStravaEventRoute: AdminStravaEventRoute,
   ApiAdminCheckinRoute: ApiAdminCheckinRoute,
   ApiAdminCheckinCodeRoute: ApiAdminCheckinCodeRoute,
   ApiAdminInquiriesRoute: ApiAdminInquiriesRoute,
@@ -1430,6 +1472,7 @@ const rootRouteChildren: RootRouteChildren = {
     ResourcesPlaybooksGrytVsYinzRunClubRoute,
   ResourcesPlaybooksSaturdayRunsWhatToExpectRoute:
     ResourcesPlaybooksSaturdayRunsWhatToExpectRoute,
+  ApiPublicHooksSaturdayReminderRoute: ApiPublicHooksSaturdayReminderRoute,
   ApiPublicPaymentsWebhookRoute: ApiPublicPaymentsWebhookRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,
