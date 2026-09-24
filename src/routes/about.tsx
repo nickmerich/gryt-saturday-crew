@@ -25,7 +25,7 @@ export const Route = createFileRoute("/about")({
   component: AboutPage,
 });
 
-const condensed = { fontFamily: "var(--font-display-condensed)" };
+const condensed = { fontFamily: "var(--font-condensed)" };
 const body = { fontFamily: "var(--font-body)" };
 
 function Eyebrow({ children, className = "" }: { children: React.ReactNode; className?: string }) {
