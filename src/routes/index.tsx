@@ -925,7 +925,7 @@ function RSVP() {
   return (
     <section
       id="join"
-      className="relative overflow-hidden bg-ink text-paper py-16 md:py-24 px-6 sm:px-12 lg:px-24 border-b border-paper/10"
+      className="relative overflow-hidden bg-ink text-paper py-14 md:py-20 px-6 sm:px-12 lg:px-24 border-b border-paper/10"
     >
       <div
         className="absolute inset-0 pointer-events-none"
@@ -1349,7 +1349,7 @@ function CorePromise() {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-ink text-paper py-20 md:py-28">
+    <section className="relative overflow-hidden bg-ink text-paper py-14 md:py-20">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -1427,7 +1427,7 @@ function WhoItsFor() {
   ];
 
   return (
-    <section id="who" className="bone-panel py-20 md:py-28 px-6 sm:px-12 lg:px-24">
+    <section id="who" className="bone-panel py-14 md:py-20 px-6 sm:px-12 lg:px-24">
       <div className="max-w-[1180px] mx-auto">
         <div className="eyebrow mb-4" style={{ color: "#3a7ca5" }}>
           Who it's for
@@ -1482,7 +1482,7 @@ function FirstTimer() {
   return (
     <section
       id="first"
-      className="bg-blue text-ink py-20 md:py-28 px-6 sm:px-12 lg:px-24"
+      className="bg-blue text-ink py-14 md:py-20 px-6 sm:px-12 lg:px-24"
     >
       <div className="max-w-[1180px] mx-auto">
         <div className="eyebrow text-ink/70 mb-4">First time?</div>
@@ -2111,7 +2111,7 @@ function TheRun() {
   return (
     <section
       id="run"
-      className="bg-ink text-paper py-20 md:py-28 px-6 sm:px-12 lg:px-24"
+      className="bg-ink text-paper py-14 md:py-20 px-6 sm:px-12 lg:px-24"
     >
       <div className="max-w-[1180px] mx-auto flex flex-wrap gap-10 lg:gap-16 items-center">
         <div className="relative flex-1 min-w-[280px] basis-[380px]">
@@ -2234,7 +2234,7 @@ function Founders() {
   ];
 
   return (
-    <section id="founders" className="bone-panel py-20 md:py-28 px-6 sm:px-12 lg:px-24">
+    <section id="founders" className="bone-panel py-14 md:py-20 px-6 sm:px-12 lg:px-24">
       <div className="max-w-[1100px] mx-auto flex flex-wrap gap-8 lg:gap-16 items-start">
         <div className="flex-1 min-w-[300px] basis-[420px]">
           <div className="eyebrow mb-4" style={{ color: "#3a7ca5" }}>
@@ -2315,7 +2315,7 @@ function Founders() {
 
 function Community() {
   return (
-    <section id="community" className="bg-ink text-paper py-20 md:py-28 px-6 sm:px-12 lg:px-24">
+    <section id="community" className="bg-ink text-paper py-14 md:py-20 px-6 sm:px-12 lg:px-24">
       <div className="max-w-[1100px] mx-auto">
         <div className="eyebrow eyebrow-blue mb-4">The community</div>
         <h2 className="display-condensed text-paper text-[clamp(38px,5.2vw,76px)] max-w-[760px] mb-6">
@@ -2484,7 +2484,7 @@ function Beliefs() {
   ];
 
   return (
-    <section id="why" className="bone-panel py-20 md:py-28 px-6 sm:px-12 lg:px-24">
+    <section id="why" className="bone-panel py-14 md:py-20 px-6 sm:px-12 lg:px-24">
       <div className="max-w-[1080px] mx-auto">
         <div className="eyebrow mb-4" style={{ color: "#3a7ca5" }}>
           What we believe
@@ -2563,7 +2563,7 @@ function FAQ() {
   const [open, setOpen] = useState(0);
 
   return (
-    <section id="faq" className="bone-panel py-20 md:py-28 px-6 sm:px-12 lg:px-24">
+    <section id="faq" className="bone-panel py-14 md:py-20 px-6 sm:px-12 lg:px-24">
       <div className="max-w-[920px] mx-auto">
         <div className="flex justify-between items-end border-b-[3px] border-ink pb-3.5 mb-2 flex-wrap gap-3">
           <h2 className="display-condensed text-ink text-[clamp(36px,5vw,66px)] leading-[0.92] m-0">
@@ -2613,7 +2613,7 @@ function FinalCTA() {
   return (
     <section
       id="ready"
-      className="relative overflow-hidden bg-ink text-paper py-24 md:py-36 px-6 sm:px-12 lg:px-24"
+      className="relative overflow-hidden bg-ink text-paper py-16 md:py-24 px-6 sm:px-12 lg:px-24"
     >
       <div
         className="absolute inset-0"
@@ -3005,7 +3005,7 @@ function WeeklyRhythm() {
   const satCal = SAT_CAL_URL;
 
   return (
-    <section id="rhythm" className="bg-ink text-paper py-20 md:py-28 px-6 sm:px-12 lg:px-24 border-t border-paper/10">
+    <section id="rhythm" className="bg-ink text-paper py-14 md:py-20 px-6 sm:px-12 lg:px-24 border-t border-paper/10">
       <div className="max-w-[1180px] mx-auto">
         <div className="eyebrow eyebrow-blue mb-4">One run · one crew · one cadence</div>
         <h2 className="display-condensed text-paper text-[clamp(40px,6vw,80px)] leading-[0.95] max-w-[900px]">
@@ -3790,7 +3790,7 @@ function ResourcesBlock() {
   return (
     <section
       id="resources"
-      className="grit-panel relative overflow-hidden text-paper py-20 md:py-28 px-6 sm:px-12 lg:px-24"
+      className="grit-panel relative overflow-hidden text-paper py-14 md:py-20 px-6 sm:px-12 lg:px-24"
     >
       <span
         aria-hidden="true"
@@ -3893,7 +3893,7 @@ function GoogleReviewsBlock() {
 
   return (
     <section className="bg-ink text-paper border-t border-paper/10">
-      <div className="mx-auto max-w-6xl px-5 sm:px-8 py-16 md:py-24">
+      <div className="mx-auto max-w-6xl px-6 sm:px-8 py-14 md:py-20">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
           <div>
             <div className="eyebrow text-blue">Run reviews · Google</div>

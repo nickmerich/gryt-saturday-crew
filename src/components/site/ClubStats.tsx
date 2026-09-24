@@ -80,7 +80,7 @@ export function ClubStats() {
   return (
     <section
       id="club-stats"
-      className="relative overflow-hidden text-paper py-14 sm:py-20 px-5 sm:px-12 lg:px-24"
+      className="relative overflow-hidden text-paper py-14 md:py-20 px-6 sm:px-12 lg:px-24"
     >
       <div
         aria-hidden
