@@ -54,7 +54,7 @@ export function MontourRouteMap() {
                   SATURDAY ROUTE
                 </span>
                 <span className="text-[10px] sm:text-[11px] tracking-[0.22em] uppercase font-bold">
-                  4.2 MI · 81 FT · OUT AND BACK
+                  4.2 MI · 81 FT
                 </span>
               </div>
               <div className="p-2 sm:p-3 bg-vintage">
