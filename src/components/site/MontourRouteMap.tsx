@@ -17,7 +17,7 @@ function StravaRouteEmbed() {
   }, []);
 
   return (
-    <div className="bg-paper min-h-[280px] sm:min-h-[420px]">
+    <div className="bg-ink min-h-[280px] sm:min-h-[420px]">
       <div
         className="strava-embed-placeholder"
         data-embed-type="route"
@@ -48,8 +48,18 @@ export function MontourRouteMap() {
 
         <div className="mt-6 grid gap-4 lg:grid-cols-[1.35fr_1fr]">
           <div>
-            <div className="border-2 border-blue">
-              <StravaRouteEmbed />
+            <div className="border-2 border-blue bg-ink">
+              <div className="flex items-center justify-between gap-3 bg-blue text-ink px-4 py-2.5">
+                <span className="display-condensed text-[18px] sm:text-[22px] leading-none">
+                  SATURDAY ROUTE
+                </span>
+                <span className="text-[10px] sm:text-[11px] tracking-[0.22em] uppercase font-bold">
+                  4.2 MI · 81 FT · OUT AND BACK
+                </span>
+              </div>
+              <div className="p-2 sm:p-3 bg-vintage">
+                <StravaRouteEmbed />
+              </div>
             </div>
             <a
               href={ROUTE_URL}
