@@ -19,8 +19,6 @@ export const Route = createFileRoute("/about")({
       { property: "og:type", content: "website" },
       { property: "og:url", content: siteUrl("/about") },
       { name: "twitter:card", content: "summary_large_image" },
-      // Private review draft: keep out of search until founders approve.
-      { name: "robots", content: "noindex, nofollow" },
     ],
     links: [{ rel: "canonical", href: siteUrl("/about") }],
   }),
