@@ -48,7 +48,7 @@ function H2({ lines }: { lines: string[] }) {
   );
 }
 
-function Founder({ role, name, paras }: { role: string; name: string; paras: string[] }) {
+function Founder({ role, name, paras, linkedin, first }: { role: string; name: string; paras: string[]; linkedin: string; first: string }) {
   return (
     <article className="border-t-2 border-blue pt-6">
       <Eyebrow className="text-paper/60">{role}</Eyebrow>
@@ -60,6 +60,14 @@ function Founder({ role, name, paras }: { role: string; name: string; paras: str
           {p}
         </p>
       ))}
+      <a
+        href={linkedin}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="eyebrow text-blue hover:text-paper transition-colors"
+      >
+        Meet {first} on LinkedIn
+      </a>
     </article>
   );
 }
@@ -159,6 +167,8 @@ function AboutPage() {
             <Founder
               role="Co-founder / Runner / Community host"
               name="Laura Merich"
+              first="Laura"
+              linkedin="https://www.linkedin.com/in/laura-tlumack-0b0a0a63"
               paras={[
                 "Laura played Division I soccer at Duquesne, where she started every match as a freshman and went on to appear on the 2011 roster. Her running background includes a 3:25:24 finish at the 2019 Mountains 2 Beach Marathon.",
                 "Off the trail, she holds a master's degree in biotechnology from Georgetown and leads eCommerce operations as a VP at Quartzy. At GRYT, she co-hosts the Saturday runs and helps newcomers find their footing with the crew.",
@@ -167,6 +177,8 @@ function AboutPage() {
             <Founder
               role="Co-founder / Builder / Community host"
               name="Nick Merich"
+              first="Nick"
+              linkedin="https://www.linkedin.com/in/nick-merich"
               paras={[
                 "Nick played college baseball as a Point Park University pitcher. He later co-founded Songlink/Odesli and held growth leadership roles at Mint Songs and Kits AI; Songlink was acquired by Linktree in 2021.",
                 "He's also been the busy parent trying to find his way back to fitness, a comeback he has shared publicly. At GRYT, he brings his community-building background to the same practical job as Laura: getting people to the trailhead and making them feel welcome when they arrive.",
