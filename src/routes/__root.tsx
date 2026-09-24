@@ -12,7 +12,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 export const SITE_TITLE =
-  "Do Hard Things Together · Pittsburgh Running Group · South Hills Run Club · gryt";
+  "Do Hard Things · Free Pittsburgh Run Club | GRYT";
 export const SITE_DESCRIPTION =
   "Free Pittsburgh run club on the Montour / Peters Trail in McMurray. Saturdays 7 AM, all paces welcome — no one gets dropped.";
 
