@@ -74,6 +74,7 @@ import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/l
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
 import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
+import { Route as ApiPublicHooksSaturdayReminderRouteImport } from './routes/api/public/hooks/saturday-reminder'
 
 const WaiverRoute = WaiverRouteImport.update({
   id: '/waiver',
@@ -416,6 +417,12 @@ const ApiPublicPaymentsWebhookRoute =
     path: '/api/public/payments/webhook',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicHooksSaturdayReminderRoute =
+  ApiPublicHooksSaturdayReminderRouteImport.update({
+    id: '/api/public/hooks/saturday-reminder',
+    path: '/api/public/hooks/saturday-reminder',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -479,6 +486,7 @@ export interface FileRoutesByFullPath {
   '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs': typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute
   '/resources/playbooks/gryt-vs-yinz-run-club': typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
   '/resources/playbooks/saturday-runs-what-to-expect': typeof ResourcesPlaybooksSaturdayRunsWhatToExpectRoute
+  '/api/public/hooks/saturday-reminder': typeof ApiPublicHooksSaturdayReminderRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -546,6 +554,7 @@ export interface FileRoutesByTo {
   '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs': typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute
   '/resources/playbooks/gryt-vs-yinz-run-club': typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
   '/resources/playbooks/saturday-runs-what-to-expect': typeof ResourcesPlaybooksSaturdayRunsWhatToExpectRoute
+  '/api/public/hooks/saturday-reminder': typeof ApiPublicHooksSaturdayReminderRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -614,6 +623,7 @@ export interface FileRoutesById {
   '/resources_/playbooks_/fleet-feet-pittsburgh-vs-independent-run-clubs': typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute
   '/resources_/playbooks_/gryt-vs-yinz-run-club': typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
   '/resources_/playbooks_/saturday-runs-what-to-expect': typeof ResourcesPlaybooksSaturdayRunsWhatToExpectRoute
+  '/api/public/hooks/saturday-reminder': typeof ApiPublicHooksSaturdayReminderRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -683,6 +693,7 @@ export interface FileRouteTypes {
     | '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs'
     | '/resources/playbooks/gryt-vs-yinz-run-club'
     | '/resources/playbooks/saturday-runs-what-to-expect'
+    | '/api/public/hooks/saturday-reminder'
     | '/api/public/payments/webhook'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -750,6 +761,7 @@ export interface FileRouteTypes {
     | '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs'
     | '/resources/playbooks/gryt-vs-yinz-run-club'
     | '/resources/playbooks/saturday-runs-what-to-expect'
+    | '/api/public/hooks/saturday-reminder'
     | '/api/public/payments/webhook'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -817,6 +829,7 @@ export interface FileRouteTypes {
     | '/resources_/playbooks_/fleet-feet-pittsburgh-vs-independent-run-clubs'
     | '/resources_/playbooks_/gryt-vs-yinz-run-club'
     | '/resources_/playbooks_/saturday-runs-what-to-expect'
+    | '/api/public/hooks/saturday-reminder'
     | '/api/public/payments/webhook'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -884,6 +897,7 @@ export interface RootRouteChildren {
   ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute: typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute
   ResourcesPlaybooksGrytVsYinzRunClubRoute: typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
   ResourcesPlaybooksSaturdayRunsWhatToExpectRoute: typeof ResourcesPlaybooksSaturdayRunsWhatToExpectRoute
+  ApiPublicHooksSaturdayReminderRoute: typeof ApiPublicHooksSaturdayReminderRoute
   ApiPublicPaymentsWebhookRoute: typeof ApiPublicPaymentsWebhookRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
@@ -1347,6 +1361,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicPaymentsWebhookRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/hooks/saturday-reminder': {
+      id: '/api/public/hooks/saturday-reminder'
+      path: '/api/public/hooks/saturday-reminder'
+      fullPath: '/api/public/hooks/saturday-reminder'
+      preLoaderRoute: typeof ApiPublicHooksSaturdayReminderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -1430,6 +1451,7 @@ const rootRouteChildren: RootRouteChildren = {
     ResourcesPlaybooksGrytVsYinzRunClubRoute,
   ResourcesPlaybooksSaturdayRunsWhatToExpectRoute:
     ResourcesPlaybooksSaturdayRunsWhatToExpectRoute,
+  ApiPublicHooksSaturdayReminderRoute: ApiPublicHooksSaturdayReminderRoute,
   ApiPublicPaymentsWebhookRoute: ApiPublicPaymentsWebhookRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,
