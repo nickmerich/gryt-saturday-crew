@@ -283,7 +283,7 @@ function RacesPage() {
 
           <div className="mt-14 flex flex-wrap gap-4">
             <Link to="/" hash="join" className="btn-primary">
-              RSVP for Saturday →
+              RSVP This Saturday →
             </Link>
             <Link
               to="/resources/playbooks"

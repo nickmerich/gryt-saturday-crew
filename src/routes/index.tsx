@@ -587,7 +587,7 @@ function Hero() {
 
           <div className="mt-5 md:mt-6 flex flex-wrap gap-3">
             <a href="#join" className="btn-primary">
-              RSVP Saturday →
+              RSVP This Saturday →
             </a>
             <a
               href={STRAVA_CLUB}
@@ -2458,7 +2458,7 @@ function Community() {
 
         <div className="flex flex-wrap gap-3.5 mt-9">
           <a href="/#join" className="btn-primary">
-            RSVP for this Saturday →
+            RSVP This Saturday →
           </a>
           <a href={STRAVA_CLUB} target="_blank" rel="noopener" className="btn-ghost">
             Join the Strava club
@@ -2644,7 +2644,7 @@ function FinalCTA() {
         </p>
         <div className="flex gap-3.5 justify-center flex-wrap">
           <a href="/#join" className="btn-primary">
-            RSVP for Saturday →
+            RSVP This Saturday →
           </a>
           <a href={STRAVA_CLUB} target="_blank" rel="noopener" className="btn-ghost">
             Join the Strava club
