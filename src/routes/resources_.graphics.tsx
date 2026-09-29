@@ -100,7 +100,7 @@ function GraphicsPage() {
   return (
     <main className="bg-ink text-paper">
       <SiteNav />
-      <section className="px-6 sm:px-12 lg:px-24 py-20 md:py-28 border-b border-paper/15">
+      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
         <div className="max-w-[1100px] mx-auto">
           <Link
             to="/resources"
@@ -119,7 +119,7 @@ function GraphicsPage() {
         </div>
       </section>
 
-      <section className="px-6 sm:px-12 lg:px-24 py-20 md:py-28 border-b border-paper/15">
+      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
         <div className="max-w-[1100px] mx-auto flex flex-col gap-10">
           {GRAPHICS.map((g) => (
             <article
@@ -199,7 +199,7 @@ function GraphicsPage() {
 
 function CTA() {
   return (
-    <section className="bg-black px-6 sm:px-12 lg:px-24 py-24 md:py-32 border-b border-paper/15">
+    <section className="bg-black px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
       <div className="max-w-[900px] mx-auto text-center">
         <p className="eyebrow text-blue mb-5">USING OUR GRAPHICS?</p>
         <h2 className="display-condensed uppercase text-[clamp(36px,6vw,80px)] leading-[0.92]">

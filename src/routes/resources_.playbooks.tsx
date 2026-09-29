@@ -228,7 +228,7 @@ function PlaybooksPage() {
   return (
     <main className="bg-ink text-paper">
       <SiteNav />
-      <section className="px-6 sm:px-12 lg:px-24 py-20 md:py-28 border-b border-paper/15">
+      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
         <div className="max-w-[900px] mx-auto">
           <Link
             to="/resources"
@@ -285,7 +285,7 @@ function PlaybooksPage() {
         </div>
       </section>
 
-      <section className="px-6 sm:px-12 lg:px-24 py-20 md:py-28 border-b border-paper/15">
+      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
         <div className="max-w-[900px] mx-auto flex flex-col gap-16 md:gap-20">
           {PLAYBOOKS.map((p) => (
             <article
@@ -343,7 +343,7 @@ function PlaybooksPage() {
 
 function CTA() {
   return (
-    <section className="bg-black px-6 sm:px-12 lg:px-24 py-24 md:py-32 border-b border-paper/15">
+    <section className="bg-black px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
       <div className="max-w-[900px] mx-auto text-center">
         <p className="eyebrow text-blue mb-5">SATURDAY 8:00 AM</p>
         <h2 className="display-condensed uppercase text-[clamp(36px,6vw,80px)] leading-[0.92]">

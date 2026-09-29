@@ -180,7 +180,7 @@ function CrossTrainingPage() {
   return (
     <main className="bg-ink text-paper">
       <SiteNav />
-      <article className="px-6 sm:px-12 lg:px-24 py-20 md:py-28 border-b border-paper/15">
+      <article className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
         <div className="max-w-[760px] mx-auto">
           <Link to="/resources" className="eyebrow text-blue hover:text-paper transition-colors">
             ← All resources

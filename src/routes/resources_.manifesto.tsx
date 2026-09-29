@@ -385,7 +385,7 @@ function ManifestoPage() {
       </section>
 
       {/* INTRO */}
-      <section className="px-6 sm:px-12 lg:px-24 py-16 md:py-24 border-b border-paper/15">
+      <section className="px-6 sm:px-12 lg:px-24 py-12 md:py-16 border-b border-paper/15">
         <div className="max-w-[720px] mx-auto flex flex-col gap-6">
           {INTRO.map((p, i) => (
             <p
@@ -404,7 +404,7 @@ function ManifestoPage() {
       </section>
 
       {/* PULL QUOTES */}
-      <section className="px-6 sm:px-12 lg:px-24 py-16 md:py-24 border-b border-paper/15 bg-vintage">
+      <section className="px-6 sm:px-12 lg:px-24 py-12 md:py-16 border-b border-paper/15 bg-vintage">
         <div className="max-w-[900px] mx-auto grid md:grid-cols-3 gap-8 md:gap-12">
           {PULL_QUOTES.map((q, i) => (
             <blockquote
@@ -419,7 +419,7 @@ function ManifestoPage() {
       </section>
 
       {/* HUMAN LAYER — PHOTOS */}
-      <section className="px-6 sm:px-12 lg:px-24 py-20 md:py-28 border-b border-paper/15">
+      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
         <div className="max-w-[1180px] mx-auto">
           <div className="max-w-[720px] mb-14">
             <p className="eyebrow text-blue mb-5" style={mono}>
@@ -469,7 +469,7 @@ function ManifestoPage() {
       </section>
 
       {/* SECTIONS */}
-      <section className="px-6 sm:px-12 lg:px-24 py-20 md:py-28 border-b border-paper/15">
+      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
         <div className="max-w-[820px] mx-auto flex flex-col gap-20">
           {SECTIONS.map((s) => (
             <article key={s.id} id={s.id} className="border-t border-paper/20 pt-12">
@@ -517,7 +517,7 @@ function ManifestoPage() {
       </section>
 
       {/* THE MANIFESTO — closing */}
-      <section className="px-6 sm:px-12 lg:px-24 py-24 md:py-32 border-b border-paper/15 bg-black">
+      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15 bg-black">
         <div className="max-w-[820px] mx-auto">
           <p className="eyebrow text-blue mb-6" style={mono}>
             The manifesto
