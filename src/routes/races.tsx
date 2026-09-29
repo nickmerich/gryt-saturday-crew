@@ -193,7 +193,7 @@ function RacesPage() {
     <main className="bg-ink text-paper">
       <SiteNav />
 
-      <section className="px-6 sm:px-12 lg:px-24 py-20 md:py-28 border-b border-paper/15">
+      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
         <div className="max-w-[1080px] mx-auto">
           <p className="eyebrow text-blue mb-5">RACES · PITTSBURGH · 2026–27</p>
           <h1 className="display-condensed uppercase text-[clamp(44px,8vw,112px)] leading-[0.92]">
