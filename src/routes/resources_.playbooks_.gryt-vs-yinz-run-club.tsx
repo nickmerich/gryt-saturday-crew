@@ -252,7 +252,7 @@ function ArticlePage() {
 
           <div className="mt-12 flex flex-wrap gap-4">
             <Link to="/" hash="join" className="btn-primary">
-              RSVP for Saturday →
+              RSVP This Saturday →
             </Link>
             <Link
               to="/resources/playbooks"

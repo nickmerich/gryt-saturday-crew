@@ -199,7 +199,7 @@ function ArticlePage() {
           </div>
 
           <div className="mt-12 flex flex-wrap gap-4">
-            <Link to="/" hash="join" className="btn-primary">RSVP for Saturday →</Link>
+            <Link to="/" hash="join" className="btn-primary">RSVP This Saturday →</Link>
             <Link
               to="/resources/playbooks"
               className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors"

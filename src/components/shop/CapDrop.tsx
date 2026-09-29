@@ -129,7 +129,7 @@ export function CapDrop({ onAdded }: { onAdded?: () => void }) {
           )}
 
           <a href="/#join" className="eyebrow text-paper/70 hover:text-blue transition-colors self-start">
-            RSVP for Saturday
+            RSVP This Saturday →
           </a>
         </div>
       </div>
