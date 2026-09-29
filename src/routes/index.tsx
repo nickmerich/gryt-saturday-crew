@@ -105,14 +105,15 @@ import {
 const SITE_URL = "https://grytrunclub.com";
 const ABS_HERO_IMG = heroImg.startsWith("http") ? heroImg : `${SITE_URL}${heroImg}`;
 
-const EVENT_DATES = nextSaturdayISOs(12);
-const CANONICAL_OCCURRENCE = getOccurrence();
+// Computed per request: server clocks can read zero at startup, which froze
+// these at Jan 1970 on the live site.
+const canonicalOccurrence = () => getOccurrence();
 // This calendar Saturday, when the club has called it off (organizer exception).
-const SKIPPED_THIS_WEEK = (() => {
+const skippedThisWeek = () => {
   const soon = upcomingOccurrences(1);
   const first = soon[0];
   return first && first.status === "cancelled" ? first : null;
-})();
+};
 
 
 
@@ -187,8 +188,8 @@ export const Route = createFileRoute("/")({
             endTime: "08:30",
             scheduleTimezone: "America/New_York",
           },
-          startDate: CANONICAL_OCCURRENCE.startUtc,
-          endDate: CANONICAL_OCCURRENCE.endUtc,
+          startDate: canonicalOccurrence().startUtc,
+          endDate: canonicalOccurrence().endUtc,
 
           eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
           eventStatus: "https://schema.org/EventScheduled",
@@ -346,9 +347,7 @@ type RsvpDay = "sat";
 
 const DAY_LABEL: Record<RsvpDay, string> = { sat: "Saturday · GRYT Run" };
 const DAY_CAL: Record<RsvpDay, string> = { sat: SAT_CAL_URL };
-const DAY_EVENT_LABEL: Record<RsvpDay, string> = {
-  sat: nextSaturdayLabel(),
-};
+const dayEventLabel = (_d: RsvpDay) => nextSaturdayLabel();
 
 const STRAVA_EVENT =
   "https://www.strava.com/clubs/1708552/group_events/3480014931408029926";
@@ -779,7 +778,7 @@ function RSVP() {
         // Only show the confirmation when the stored RSVP is for the run that
         // is actually coming up. Otherwise prefill the form so a returning
         // runner can RSVP for this week.
-        if (session.eventLabel && session.eventLabel === DAY_EVENT_LABEL.sat) {
+        if (session.eventLabel && session.eventLabel === dayEventLabel("sat")) {
           setSubmittedDays(["sat"]);
           setSubmitted(true);
         }
@@ -832,9 +831,9 @@ function RSVP() {
               name: name.trim(),
               contact: contact.trim(),
               source: source || null,
-              eventLabel: DAY_EVENT_LABEL[d],
+              eventLabel: dayEventLabel(d),
               ...(d === "sat"
-                ? { eventId: CANONICAL_OCCURRENCE.id, eventVersion: CANONICAL_OCCURRENCE.version }
+                ? { eventId: canonicalOccurrence().id, eventVersion: canonicalOccurrence().version }
                 : {}),
 
               heroVariant: heroVariant ?? null,
@@ -940,11 +939,11 @@ function RSVP() {
       <div className="relative max-w-[1080px] mx-auto flex flex-wrap gap-10 lg:gap-16 items-start">
         <div className="flex-1 min-w-[300px] basis-[380px]">
           <div className="eyebrow eyebrow-blue mb-4">Save your spot</div>
-          {SKIPPED_THIS_WEEK ? (
+          {skippedThisWeek() ? (
             <div className="mb-5 border border-brand/60 bg-brand/10 px-4 py-3 text-[15px] leading-[1.5] text-paper">
               <span className="eyebrow eyebrow-blue block mb-1">Run cancelled</span>
-              {SKIPPED_THIS_WEEK.note ?? "This Saturday's run is off."} Next run:{" "}
-              {CANONICAL_OCCURRENCE.localDate}, 7:00 AM.
+              {skippedThisWeek()!.note ?? "This Saturday's run is off."} Next run:{" "}
+              {canonicalOccurrence().localDate}, 7:00 AM.
             </div>
           ) : null}
 
@@ -958,7 +957,7 @@ function RSVP() {
           <RunCountdown className="mb-6 max-w-[440px]" />
           <div id="details" className="scroll-mt-24 border-t-2 border-paper/70 max-w-[440px]">
             {([
-              ["When", <>Every Saturday · 7:00 AM<span className="block text-[13px] font-normal text-paper/60 mt-0.5">Next: Saturday, {new Date(CANONICAL_OCCURRENCE.startUtc).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "America/New_York" })}</span></>],
+              ["When", <>Every Saturday · 7:00 AM<span className="block text-[13px] font-normal text-paper/60 mt-0.5">Next: Saturday, {new Date(canonicalOccurrence().startUtc).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "America/New_York" })}</span></>],
               ["Where", <>212 Valley Brook Road, McMurray · <a href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Road%2C%20McMurray%2C%20PA" target="_blank" rel="noopener noreferrer" className="text-blue hover:underline">Get directions</a></>],
               ["Route", "Montour / Peters Trail · Peters Township & Upper St. Clair"],
               ["Distance", "About 4 miles · out and back"],
