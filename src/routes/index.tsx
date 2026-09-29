@@ -958,7 +958,7 @@ function RSVP() {
           <RunCountdown className="mb-6 max-w-[440px]" />
           <div id="details" className="scroll-mt-24 border-t-2 border-paper/70 max-w-[440px]">
             {([
-              ["When", <>Every Saturday · 7:00 AM<span className="block text-[13px] font-normal text-paper/60 mt-0.5">Next run: Sat, {new Date(CANONICAL_OCCURRENCE.startUtc).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "America/New_York" })}</span></>],
+              ["When", <>Every Saturday · 7:00 AM<span className="block text-[13px] font-normal text-paper/60 mt-0.5">Next: Saturday, {new Date(CANONICAL_OCCURRENCE.startUtc).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "America/New_York" })}</span></>],
               ["Where", <>212 Valley Brook Road, McMurray · <a href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Road%2C%20McMurray%2C%20PA" target="_blank" rel="noopener noreferrer" className="text-blue hover:underline">Get directions</a></>],
               ["Route", "Montour / Peters Trail · Peters Township & Upper St. Clair"],
               ["Distance", "About 4 miles · out and back"],
@@ -3116,7 +3116,7 @@ function WeeklyRhythm() {
                   href="#join-sat"
                   className="inline-flex items-center justify-center h-11 px-5 text-[12px] font-bold uppercase tracking-[0.12em] bg-ink text-paper hover:bg-[#3a7ca5] transition-colors"
                 >
-                  RSVP Saturday
+                  RSVP This Saturday →
                 </a>
                 <a
                   href={satCal}
