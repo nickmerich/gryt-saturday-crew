@@ -72,7 +72,7 @@ function icsForMonth(year: number, month: number) {
 export const Route = createFileRoute("/calendar")({
   head: () => ({
     meta: [
-      { title: "Run Calendar · Saturdays 7 AM | GRYT Run Club" },
+      { title: "Run Calendar \u00b7 Saturdays 7 AM | GRYT Run Club" },
       {
         name: "description",
         content:
@@ -80,18 +80,77 @@ export const Route = createFileRoute("/calendar")({
       },
       {
         property: "og:title",
-        content: "Run Calendar · Saturdays 7 AM | GRYT Run Club",
+        content: "Run Calendar \u00b7 Saturdays 7 AM | GRYT Run Club",
       },
       {
         property: "og:description",
         content:
-          "The full monthly schedule for GRYT Run Club in the South Hills — Saturday 7 AM long runs.",
+          "The full monthly schedule for GRYT Run Club in the South Hills \u2014 Saturday 7 AM long runs.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://grytrunclub.com/calendar" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "https://grytrunclub.com/calendar" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": ["SportsClub", "LocalBusiness"],
+          "name": "GRYT Run Club",
+          "url": "https://grytrunclub.com",
+          "description": "Free community run club in McMurray, PA. Saturday long runs at 7 AM. All paces welcome.",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "McMurray",
+            "addressRegion": "PA",
+            "addressCountry": "US",
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 40.2815,
+            "longitude": -80.0912,
+          },
+          "openingHours": "Sa 07:00-09:00",
+          "priceRange": "Free",
+          "sameAs": [
+            "https://www.instagram.com/grytrunclub",
+            "https://www.facebook.com/grytrunclub",
+          ],
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Event",
+          "name": "GRYT Run Club Saturday Long Run",
+          "startDate": "2026-10-04T07:00:00",
+          "eventSchedule": {
+            "@type": "Schedule",
+            "repeatFrequency": "P1W",
+            "byDay": "https://schema.org/Saturday",
+            "startTime": "07:00",
+          },
+          "location": {
+            "@type": "Place",
+            "name": "McMurray, PA",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "McMurray",
+              "addressRegion": "PA",
+            },
+          },
+          "organizer": {
+            "@type": "Organization",
+            "name": "GRYT Run Club",
+            "url": "https://grytrunclub.com",
+          },
+          "isAccessibleForFree": true,
+        }),
+      },
+    ],
   }),
   component: CalendarPage,
 });
@@ -134,7 +193,7 @@ function CalendarPage() {
       <SiteNav />
       <section className="bg-ink text-paper">
         <div className="mx-auto max-w-5xl px-5 sm:px-8 py-16 sm:py-24">
-          <div className="eyebrow text-blue mb-4">EVERY WEEK · ALL PACES · FREE</div>
+          <div className="eyebrow text-blue mb-4">EVERY WEEK \u00b7 ALL PACES \u00b7 FREE</div>
           <h1
             className="text-5xl sm:text-6xl lg:text-7xl uppercase leading-[0.92] tracking-tight"
             style={{ fontFamily: "var(--font-display-condensed)" }}
@@ -156,7 +215,7 @@ function CalendarPage() {
                 {SAT.label}
               </div>
               <p className="mt-2 text-sm text-paper/65">
-                212 Valley Brook Rd, McMurray · Montour / Peters Trail · coffee in the lot after.
+                212 Valley Brook Rd, McMurray \u00b7 Montour / Peters Trail \u00b7 coffee in the lot after.
               </p>
             </div>
           </div>
@@ -166,7 +225,7 @@ function CalendarPage() {
               onClick={() => shift(-1)}
               className="eyebrow border border-paper/25 px-4 py-2 hover:bg-blue hover:text-ink hover:border-blue transition-colors"
             >
-              ← Prev
+              \u2190 Prev
             </button>
             <div
               className="text-3xl sm:text-4xl uppercase"
@@ -178,7 +237,7 @@ function CalendarPage() {
               onClick={() => shift(1)}
               className="eyebrow border border-paper/25 px-4 py-2 hover:bg-blue hover:text-ink hover:border-blue transition-colors"
             >
-              Next →
+              Next \u2192
             </button>
           </div>
 
