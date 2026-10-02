@@ -16,6 +16,10 @@ type Race = {
   url?: string;
   blurb: string;
   tier: "signature" | "local" | "trail";
+  bullets?: string[];
+  quote?: { text: string; cite: string };
+  difficulty?: string;
+  typicalDate?: string;
 };
 
 const RACES: Race[] = [
@@ -29,6 +33,19 @@ const RACES: Race[] = [
     blurb:
       "One of the largest 10Ks in the country. Net-downhill, fast course, big crowds. A rite of passage for Pittsburgh runners. Four weeks out — the Saturday long run is the whole plan now.",
     tier: "signature",
+    difficulty: "Moderate",
+    typicalDate: "Late September",
+    bullets: [
+      "~8,000 runners — one of the largest 10Ks in the United States",
+      "Net downhill course: ~200 ft elevation loss from start to finish",
+      "Point-to-point route from Squirrel Hill to Point State Park",
+      "Registration typically opens in January; sells out early",
+      "GRYT members run together and regroup at the finish for coffee",
+    ],
+    quote: {
+      text: "The Great Race 10K is the perfect fall goal race — fast course, massive crowd energy, and a great benchmark before winter training.",
+      cite: "— Coach Dan, GRYT Run Club",
+    },
   },
   {
     name: "EQT Pittsburgh 10 Miler",
@@ -39,6 +56,19 @@ const RACES: Race[] = [
     blurb:
       "A late-season classic. Great fall goal race if the marathon isn't your thing but you still want something long and honest. Ten weeks out — start the build now.",
     tier: "signature",
+    difficulty: "Moderate–Hard",
+    typicalDate: "November",
+    bullets: [
+      "~4,000 finishers annually across 10-mile and 5K events",
+      "Crosses 4+ Pittsburgh bridges — rolling terrain through the North Shore and South Side",
+      "Typical finish times: 75–110 min for the 10-mile distance",
+      "Registration opens spring; build plan starts in early September",
+      "GRYT training block: 10-week bridge-heavy long run series",
+    ],
+    quote: {
+      text: "The 10 Miler is honest — no charity miles, no flat shortcuts. If you can run this in November, you're ready to build toward the marathon in May.",
+      cite: "— GRYT member, 3× EQT finisher",
+    },
   },
   {
     name: "Pittsburgh Marathon (DICK'S Sporting Goods)",
@@ -49,6 +79,19 @@ const RACES: Race[] = [
     blurb:
       "The city's flagship race weekend. Fast half, brutal-but-loved full through every neighborhood. If you pick one Pittsburgh race per year, this is it. Builds start in January.",
     tier: "signature",
+    difficulty: "Hard",
+    typicalDate: "May",
+    bullets: [
+      "30,000+ participants across all events — largest race weekend in Pittsburgh",
+      "Full marathon: 26.2 miles through all Pittsburgh neighborhoods including the Strip, Lawrenceville, and Oakland",
+      "Half marathon average finish time: ~2:10; full marathon average: ~4:35",
+      "Elevation gain: ~1,100 ft for the full; the hills hit miles 18–22",
+      "16–18 week build plan; GRYT Saturday long runs from January are the backbone",
+    ],
+    quote: {
+      text: "Every Pittsburgh runner should run the full at least once. The neighborhoods come out, strangers cheer your name off your bib, and you remember exactly why you do this.",
+      cite: "— GRYT member, Pittsburgh Marathon finisher",
+    },
   },
   {
     name: "Peters Township Community Day 5K",
@@ -58,6 +101,14 @@ const RACES: Race[] = [
     blurb:
       "A hometown 5K on familiar roads. Good first race, good tune-up, and everyone at GRYT knows the course.",
     tier: "local",
+    difficulty: "Easy",
+    typicalDate: "June",
+    bullets: [
+      "Flat, fast course — ideal for a first 5K or PR attempt",
+      "Family-friendly event; kids' fun run typically included",
+      "GRYT members often pace or volunteer — you'll know faces at the start",
+      "Registration usually opens 6–8 weeks out; low entry fee",
+    ],
   },
   {
     name: "Just a Short Run",
@@ -68,6 +119,14 @@ const RACES: Race[] = [
     blurb:
       "Early-season half in North Park. Rolling, honest, and the traditional spring tune-up for anyone building toward Pittsburgh in May.",
     tier: "local",
+    difficulty: "Moderate",
+    typicalDate: "March",
+    bullets: [
+      "~1,000 participants — low-key, community feel",
+      "Rolling North Park terrain: ~600 ft elevation gain for the half",
+      "Traditional tune-up race 8 weeks before the Pittsburgh Marathon",
+      "Multiple distances make it accessible for all GRYT training groups",
+    ],
   },
   {
     name: "Montour Trail Half Marathon",
@@ -77,6 +136,14 @@ const RACES: Race[] = [
     blurb:
       "Flat crushed-limestone half on the same trail GRYT runs every Saturday. The friendliest 13.1 in the South Hills.",
     tier: "trail",
+    difficulty: "Easy",
+    typicalDate: "Fall",
+    bullets: [
+      "Nearly flat crushed-limestone surface — minimal elevation change (~150 ft total)",
+      "Held on the same trail GRYT uses for Saturday long runs",
+      "Ideal first half marathon; familiar course removes a major variable",
+      "Small field, relaxed atmosphere, post-race cookout",
+    ],
   },
   {
     name: "North Park Trail Runs (Steel City Road Runners)",
@@ -86,6 +153,14 @@ const RACES: Race[] = [
     blurb:
       "Casual trail series. Cheap, low-key, and a great way to dip a toe into off-road racing without committing to an ultra.",
     tier: "trail",
+    difficulty: "Moderate",
+    typicalDate: "Spring–Fall series",
+    bullets: [
+      "Multiple events per year — easy to find a date that fits your schedule",
+      "Entry fees typically under $30; no frills, all running",
+      "North Park singletrack: rooted, muddy in spring, beautiful in fall",
+      "Great gateway race before committing to the Rachel Carson Challenge",
+    ],
   },
   {
     name: "Rachel Carson Trail Challenge",
@@ -96,8 +171,25 @@ const RACES: Race[] = [
     blurb:
       "A sunrise-to-sunset gut check. Not for your first race — but if you've been running consistently for a year and want a story, this is it.",
     tier: "trail",
+    difficulty: "Very Hard",
+    typicalDate: "June",
+    bullets: [
+      "34 miles point-to-point with ~7,000 ft of elevation gain",
+      "Typical finish window: 9–14 hours; cutoffs enforced",
+      "~500 starters per year; finisher rate roughly 60–70%",
+      "Requires a solid year of consistent running — not a first race",
+      "GRYT members doing Rachel Carson train together through spring trail runs",
+    ],
   },
 ];
+
+const COMPARISON_ROWS = RACES.map((r) => ({
+  name: r.name,
+  distance: r.distance,
+  typicalDate: r.typicalDate ?? r.date,
+  location: r.location.includes("Pittsburgh") ? "Pittsburgh, PA" : r.location,
+  difficulty: r.difficulty ?? "—",
+}));
 
 const FAQS = [
   {
@@ -219,6 +311,40 @@ function RacesPage() {
         </div>
       </section>
 
+      {/* Race Comparison Table */}
+      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-16 border-b border-paper/15">
+        <div className="max-w-[1080px] mx-auto">
+          <p className="eyebrow text-blue mb-3">AT A GLANCE</p>
+          <h2 className="display-condensed uppercase text-[clamp(24px,3.5vw,44px)] leading-[0.95] mb-8">
+            Pittsburgh Race Comparison
+          </h2>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm md:text-base border-collapse">
+              <thead>
+                <tr className="border-b border-paper/30">
+                  <th className="text-left py-3 pr-4 text-paper/60 font-bold uppercase tracking-[0.08em] text-xs">Race</th>
+                  <th className="text-left py-3 pr-4 text-paper/60 font-bold uppercase tracking-[0.08em] text-xs">Distance</th>
+                  <th className="text-left py-3 pr-4 text-paper/60 font-bold uppercase tracking-[0.08em] text-xs">Typical Date</th>
+                  <th className="text-left py-3 pr-4 text-paper/60 font-bold uppercase tracking-[0.08em] text-xs">Location</th>
+                  <th className="text-left py-3 text-paper/60 font-bold uppercase tracking-[0.08em] text-xs">Difficulty</th>
+                </tr>
+              </thead>
+              <tbody>
+                {COMPARISON_ROWS.map((row, i) => (
+                  <tr key={i} className="border-b border-paper/10 hover:bg-paper/5 transition-colors">
+                    <td className="py-3 pr-4 font-semibold text-paper">{row.name}</td>
+                    <td className="py-3 pr-4 text-paper/75">{row.distance}</td>
+                    <td className="py-3 pr-4 text-paper/75">{row.typicalDate}</td>
+                    <td className="py-3 pr-4 text-paper/75">{row.location}</td>
+                    <td className="py-3 text-paper/75">{row.difficulty}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
       {groups.map((g) => (
         <section key={g.tier} className="px-6 sm:px-12 lg:px-24 py-16 md:py-20 border-b border-paper/15">
           <div className="max-w-[1080px] mx-auto">
@@ -235,6 +361,22 @@ function RacesPage() {
                     {r.distance} · {r.location}
                   </p>
                   <p className="mt-4 text-paper/80 text-[15px] leading-[1.6]">{r.blurb}</p>
+                  {r.bullets && r.bullets.length > 0 && (
+                    <ul className="mt-4 space-y-1.5 text-paper/70 text-[14px] leading-[1.55]">
+                      {r.bullets.map((b, i) => (
+                        <li key={i} className="flex gap-2">
+                          <span className="text-blue mt-[3px] shrink-0">›</span>
+                          <span>{b}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  {r.quote && (
+                    <blockquote className="mt-5 border-l-2 border-blue pl-4">
+                      <p className="text-paper/75 text-[14px] italic leading-[1.6]">\u201c{r.quote.text}\u201d</p>
+                      <cite className="mt-1 block text-paper/50 text-xs not-italic">{r.quote.cite}</cite>
+                    </blockquote>
+                  )}
                   {r.url && (
                     <a
                       href={r.url}
