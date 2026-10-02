@@ -89,6 +89,33 @@ const FAQ_JSON_LD = {
   })),
 };
 
+const LOCAL_BUSINESS_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": ["SportsClub", "LocalBusiness"],
+  name: "GRYT Run Club",
+  alternateName: "South Hills Run Club",
+  url: "https://grytrunclub.com",
+  description:
+    "Free South Hills run club meeting every Saturday at 7 AM in McMurray, PA. All paces welcome.",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "McMurray",
+    addressRegion: "PA",
+    addressCountry: "US",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 40.2787,
+    longitude: -80.0776,
+  },
+  openingHours: "Sa 07:00-09:00",
+  priceRange: "Free",
+  sameAs: [
+    "https://www.instagram.com/grytrunclub",
+    "https://www.facebook.com/grytrunclub",
+  ],
+};
+
 export const Route = createFileRoute("/faq")({
   head: () => ({
     meta: [
@@ -114,6 +141,10 @@ export const Route = createFileRoute("/faq")({
       {
         type: "application/ld+json",
         children: JSON.stringify(FAQ_JSON_LD),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(LOCAL_BUSINESS_JSON_LD),
       },
     ],
   }),
