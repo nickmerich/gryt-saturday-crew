@@ -8,6 +8,52 @@ const TITLE = "Build Your Run Plan · Free AI Training Plan | GRYT Run Club";
 const DESCRIPTION =
   "Tell GRYT your goal, your schedule, and where you're starting. Get a one-week training plan built around Saturday 7 AM in McMurray, PA.";
 
+const ORGANIZATION_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": ["SportsOrganization", "LocalBusiness"],
+  name: "GRYT Run Club",
+  url: "https://grytrunclub.com",
+  logo: "https://grytrunclub.com/images/gryt-logo.png",
+  description:
+    "GRYT Run Club offers free AI-powered running training plans built around community Saturday runs in McMurray, PA.",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "McMurray",
+    addressRegion: "PA",
+    addressCountry: "US",
+  },
+  sameAs: [
+    "https://www.instagram.com/grytrunclub",
+    "https://www.facebook.com/grytrunclub",
+    "https://www.strava.com/clubs/grytrunclub",
+  ],
+  foundingDate: "2026",
+  sport: "Running",
+};
+
+const FAQ_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Is the AI run plan free?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes, GRYT Run Club's AI training plan is completely free.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Can I customize my training schedule?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes, you can input your goal, available days, and current fitness level to get a personalized plan.",
+      },
+    },
+  ],
+};
+
 export const Route = createFileRoute("/plan")({
   head: () => ({
     meta: [
@@ -20,6 +66,16 @@ export const Route = createFileRoute("/plan")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "https://grytrunclub.com/plan" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(ORGANIZATION_SCHEMA),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(FAQ_SCHEMA),
+      },
+    ],
   }),
   component: PlanPage,
 });
@@ -189,7 +245,7 @@ function PlanPage() {
                 disabled={status === "loading"}
                 className="bg-ink px-8 py-4 uppercase tracking-[0.14em] text-paper transition-colors hover:bg-ink/85 disabled:opacity-60"
               >
-                {status === "loading" ? "Building your plan…" : "Build my plan"}
+                {status === "loading" ? "Building your plan\u2026" : "Build my plan"}
               </button>
               <span className="text-sm text-ink/60">
                 Takes about a minute. Nothing is saved.
@@ -204,7 +260,7 @@ function PlanPage() {
 
             {status === "loading" && (
               <p className="text-ink/70">
-                Coach is working. Hold tight — this takes a minute.
+                Coach is working. Hold tight \u2014 this takes a minute.
               </p>
             )}
 
