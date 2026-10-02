@@ -143,13 +143,42 @@ export const Route = createFileRoute("/races")({
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
+          "@type": ["SportsClub", "LocalBusiness"],
+          name: "GRYT Run Club",
+          url: "https://grytrunclub.com",
+          logo: "https://grytrunclub.com/images/gryt-logo.png",
+          description:
+            "Pittsburgh-based running club offering training plans, group runs, and race guides for the Great Race, EQT 10 Miler, Pittsburgh Marathon, and South Hills trail races.",
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "Pittsburgh",
+            addressRegion: "PA",
+            addressCountry: "US",
+          },
+          areaServed: { "@type": "City", name: "Pittsburgh" },
+          sameAs: [
+            "https://www.instagram.com/grytrunclub",
+            "https://www.facebook.com/grytrunclub",
+            "https://www.strava.com/clubs/grytrunclub",
+          ],
+          contactPoint: {
+            "@type": "ContactPoint",
+            contactType: "customer support",
+            url: "https://grytrunclub.com/about",
+          },
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
           "@type": "ItemList",
           name: "Upcoming Pittsburgh Races 2026–27",
           itemListElement: RACES.map((r, i) => ({
             "@type": "ListItem",
             position: i + 1,
             item: {
-              "@type": "Event",
+              "@type": "SportsEvent",
               name: r.name,
               ...(r.iso ? { startDate: r.iso } : {}),
               eventStatus: "https://schema.org/EventScheduled",
@@ -262,7 +291,7 @@ function RacesPage() {
               Most Pittsburgh race guides forget the South Hills exist. Peters Township, McMurray, Upper St. Clair, Bethel Park — these are runner-heavy neighborhoods with almost no dedicated race coverage.
             </p>
             <p>
-              The Montour / Peters Trail is the training backbone for anyone south of the tunnels. It's flat, crushed limestone, well-maintained, and it connects all the way from Peters Township toward Coraopolis. If you're building toward the Pittsburgh Half or Marathon in May, this is where the miles happen.
+              The Montour / Peters Trail is the training backbone for anyone south of the tunnels. It’s flat, crushed limestone, well-maintained, and it connects all the way from Peters Township toward Coraopolis. If you’re building toward the Pittsburgh Half or Marathon in May, this is where the miles happen.
             </p>
             <p>
               GRYT Run Club runs the trail every Saturday at 7 AM out of McMurray. No cost, no pace requirement, no one gets dropped. Coffee after in the parking lot.
