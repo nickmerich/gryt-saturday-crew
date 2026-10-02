@@ -157,6 +157,29 @@ export const Route = createFileRoute(
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
+          "@type": ["Organization", "SportsClub"],
+          name: "GRYT Run Club",
+          url: SITE,
+          logo: `${SITE}/images/gryt-logo.png`,
+          description:
+            "A free, no-drop run club based in McMurray, PA serving Pittsburgh's South Hills community.",
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "McMurray",
+            addressRegion: "PA",
+            addressCountry: "US",
+          },
+          areaServed: "Pittsburgh South Hills",
+          sameAs: [
+            "https://www.strava.com/clubs/gryt",
+            "https://www.instagram.com/grytrunclub",
+          ],
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
           "@type": "BreadcrumbList",
           itemListElement: [
             {
