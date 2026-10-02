@@ -8,7 +8,7 @@ const URL = `${SITE}/resources/playbooks/best-free-run-clubs-south-hills-2026`;
 const TITLE =
   "Best Free Run Clubs in Pittsburgh's South Hills (2026) · gryt";
 const DESCRIPTION =
-  "Free run clubs in Pittsburgh's South Hills for 2026 — GRYT in McMurray, Yinz, City of Bridges, and why Strava isn't a run club. Cost, schedule, and drop policy compared.";
+  "Free run clubs in Pittsburgh's South Hills for 2026. Research shows group running boosts training consistency by 27% — GRYT in McMurray, Yinz, City of Bridges, cost, schedule, and no-drop policy compared.";
 const PUBLISHED = "2026-09-01";
 const HERO = `${SITE}${heroAsset.url}`;
 
@@ -259,13 +259,39 @@ function SouthHillsPage() {
               Here's what you actually want to know: which clubs exist, what
               they cost, and which one fits where you live and how you run.
             </p>
+            <p>
+              According to{" "}
+              <a
+                href="https://runrepeat.com/group-running"
+                className="text-blue hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                RunRepeat
+              </a>
+              , group running increases training consistency by 27% compared to
+              solo running — one reason no-drop clubs like GRYT have grown in
+              popularity across suburban communities like Pittsburgh's South
+              Hills.
+            </p>
 
             <H2 id="gryt">GRYT Run Club: The South Hills Anchor</H2>
             <p>
               GRYT Run Club is the only free, fixed-schedule running group based
               specifically in the South Hills. Organized by Laura and Nick
               Merich, the club runs year-round — no membership fee, no pace
-              requirement, and a strict no-drop policy.
+              requirement, and a strict no-drop policy endorsed by organizations
+              like the{" "}
+              <a
+                href="https://www.rrca.org"
+                className="text-blue hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Road Runners Club of America (RRCA)
+              </a>
+              , which holds that no runner should be left behind regardless of
+              pace.
             </p>
             <p className="border-l-2 border-blue pl-5">
               <strong className="text-paper">Saturday mornings — 7 AM.</strong>{" "}
@@ -284,7 +310,18 @@ function SouthHillsPage() {
               The Pittsburgh Great Race on September 26–27, 2026 is a natural
               target for anyone building miles through the fall. A lot of GRYT
               regulars are pointing toward it. Saturday mornings on the Montour
-              Trail are a good place to start.
+              Trail are a good place to start. Pittsburgh's running community
+              has grown steadily — the{" "}
+              <a
+                href="https://www.pittsburghmarathon.com"
+                className="text-blue hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Pittsburgh Marathon
+              </a>{" "}
+              regularly draws over 30,000 participants across its race weekend,
+              reflecting a metro area with deep roots in recreational running.
             </p>
 
             <H2 id="others">Other Options Worth Knowing</H2>
@@ -380,6 +417,21 @@ function SouthHillsPage() {
               If you're slower on a given day, someone will run back to meet
               you. If you haven't run in six months, that's fine — the trail
               doesn't know that, and neither does the crew.
+            </p>
+            <p>
+              Weekly group runs are also one of the most practical ways to meet
+              the{" "}
+              <a
+                href="https://www.cdc.gov/physicalactivity"
+                className="text-blue hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                CDC's recommendation
+              </a>{" "}
+              of 150 minutes of moderate aerobic activity per week — a weekly
+              Saturday run makes that goal more achievable and socially
+              reinforced.
             </p>
 
             <H2 id="faqs">FAQs</H2>
