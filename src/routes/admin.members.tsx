@@ -18,7 +18,7 @@ export const Route = createFileRoute('/admin/members')({
   errorComponent: ({ error }) => (
     <div className="min-h-screen bg-ink text-paper p-12">
       <h1 className="display-condensed text-3xl">Admin error</h1>
-      <p className="mt-2 text-sm text-muted-foreground">{error.message}</p>
+      <p className="mt-2 text-sm text-muted-foreground">{error instanceof Error ? error.message : String(error)}</p>
     </div>
   ),
   notFoundComponent: () => <div className="p-12 text-paper">Not found.</div>,
