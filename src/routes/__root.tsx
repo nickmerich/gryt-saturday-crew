@@ -153,6 +153,8 @@ function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
+        {/* @ts-expect-error Impact requires the non-standard `value` attribute */}
+        <meta name="impact-site-verification" value="d0fcc171-1f08-4de2-b194-22ac376b0a1f" />
         <HeadContent />
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-P32BTLV84G"></script>
         <script
