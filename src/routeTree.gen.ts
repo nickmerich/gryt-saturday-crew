@@ -9,164 +9,79 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as WaiverRouteImport } from './routes/waiver'
-import { Route as TimerRouteImport } from './routes/timer'
-import { Route as TermsRouteImport } from './routes/terms'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as ShopRouteImport } from './routes/shop'
-import { Route as ResourcesRouteImport } from './routes/resources'
-import { Route as RegisterRouteImport } from './routes/register'
-import { Route as RacesRouteImport } from './routes/races'
-import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as PlanRouteImport } from './routes/plan'
-import { Route as MembersRouteImport } from './routes/members'
-import { Route as McpRouteImport } from './routes/mcp'
-import { Route as InquireRouteImport } from './routes/inquire'
-import { Route as FaqRouteImport } from './routes/faq'
-import { Route as EmailStatusRouteImport } from './routes/email-status'
-import { Route as CheckinRouteImport } from './routes/checkin'
-import { Route as CalendarRouteImport } from './routes/calendar'
-import { Route as AuthRouteImport } from './routes/auth'
-import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as TimerResultsRouteImport } from './routes/timer_.results'
-import { Route as ResourcesWhatToEatBeforeARunRouteImport } from './routes/resources_.what-to-eat-before-a-run'
-import { Route as ResourcesShouldYouJoinARunningClubRouteImport } from './routes/resources_.should-you-join-a-running-club'
-import { Route as ResourcesRunsRouteImport } from './routes/resources_.runs'
-import { Route as ResourcesRunningWithAGroupRouteImport } from './routes/resources_.running-with-a-group'
-import { Route as ResourcesRunningAtNightSafetyPittsburghRouteImport } from './routes/resources_.running-at-night-safety-pittsburgh'
-import { Route as ResourcesRecapRouteImport } from './routes/resources_.recap'
-import { Route as ResourcesPlaybooksRouteImport } from './routes/resources_.playbooks'
-import { Route as ResourcesMoreThanMilesRouteImport } from './routes/resources_.more-than-miles'
-import { Route as ResourcesManifestoRouteImport } from './routes/resources_.manifesto'
-import { Route as ResourcesIncreaseRunningMileageWithoutInjuryRouteImport } from './routes/resources_.increase-running-mileage-without-injury'
-import { Route as ResourcesGraphicsRouteImport } from './routes/resources_.graphics'
-import { Route as ResourcesEqtPittsburgh10Miler2026RouteImport } from './routes/resources_.eqt-pittsburgh-10-miler-2026'
-import { Route as ResourcesCrossTrainingForRunnersRouteImport } from './routes/resources_.cross-training-for-runners'
-import { Route as ResourcesConversationsRouteImport } from './routes/resources_.conversations'
-import { Route as ResourcesBuildARunningBaseRouteImport } from './routes/resources_.build-a-running-base'
-import { Route as MembersKeyRouteImport } from './routes/members.$key'
-import { Route as CheckoutReturnRouteImport } from './routes/checkout.return'
-import { Route as AdminRosterRouteImport } from './routes/admin.roster'
-import { Route as AdminMembersRouteImport } from './routes/admin.members'
-import { Route as AdminInquiriesRouteImport } from './routes/admin.inquiries'
-import { Route as AdminCheckinRouteImport } from './routes/admin.checkin'
-import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as CalendarRouteImport } from './routes/calendar'
+import { Route as CheckinRouteImport } from './routes/checkin'
+import { Route as EmailStatusRouteImport } from './routes/email-status'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as InquireRouteImport } from './routes/inquire'
+import { Route as McpRouteImport } from './routes/mcp'
+import { Route as MembersRouteImport } from './routes/members'
+import { Route as PlanRouteImport } from './routes/plan'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as RacesRouteImport } from './routes/races'
+import { Route as RegisterRouteImport } from './routes/register'
+import { Route as ResourcesRouteImport } from './routes/resources'
+import { Route as ShopRouteImport } from './routes/shop'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as TermsRouteImport } from './routes/terms'
+import { Route as TimerRouteImport } from './routes/timer'
+import { Route as WaiverRouteImport } from './routes/waiver'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
-import { Route as ResourcesPlaybooksSaturdayRunsWhatToExpectRouteImport } from './routes/resources_.playbooks_.saturday-runs-what-to-expect'
-import { Route as ResourcesPlaybooksGrytVsYinzRunClubRouteImport } from './routes/resources_.playbooks_.gryt-vs-yinz-run-club'
-import { Route as ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRouteImport } from './routes/resources_.playbooks_.fleet-feet-pittsburgh-vs-independent-run-clubs'
-import { Route as ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026RouteImport } from './routes/resources_.playbooks_.best-free-running-clubs-pittsburgh-2026'
-import { Route as ResourcesPlaybooksBestFreeRunClubsSouthHills2026RouteImport } from './routes/resources_.playbooks_.best-free-run-clubs-south-hills-2026'
-import { Route as LovableEmailEventsRouteImport } from './routes/lovable/email/events'
-import { Route as ApiPublicRsvpRouteImport } from './routes/api/public/rsvp'
-import { Route as ApiPublicInquiriesRouteImport } from './routes/api/public/inquiries'
-import { Route as ApiPublicCheckinRouteImport } from './routes/api/public/checkin'
-import { Route as ApiNewsletterSubscribeRouteImport } from './routes/api/newsletter/subscribe'
-import { Route as ApiNewsletterStatusRouteImport } from './routes/api/newsletter/status'
-import { Route as ApiAdminStravaConnectRouteImport } from './routes/api/admin/strava-connect'
-import { Route as ApiAdminRosterRouteImport } from './routes/api/admin/roster'
-import { Route as ApiAdminInquiriesRouteImport } from './routes/api/admin/inquiries'
-import { Route as ApiAdminCheckinCodeRouteImport } from './routes/api/admin/checkin-code'
-import { Route as ApiAdminCheckinRouteImport } from './routes/api/admin/checkin'
-import { Route as AdminStravaEventRouteImport } from './routes/admin.strava.event'
-import { Route as AdminStravaConnectRouteImport } from './routes/admin.strava.connect'
-import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
+import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
+import { Route as AdminCheckinRouteImport } from './routes/admin.checkin'
+import { Route as AdminInquiriesRouteImport } from './routes/admin.inquiries'
+import { Route as AdminMembersRouteImport } from './routes/admin.members'
+import { Route as AdminRosterRouteImport } from './routes/admin.roster'
+import { Route as CheckoutReturnRouteImport } from './routes/checkout.return'
+import { Route as MembersKeyRouteImport } from './routes/members.$key'
+import { Route as ResourcesBuildARunningBaseRouteImport } from './routes/resources_.build-a-running-base'
+import { Route as ResourcesConversationsRouteImport } from './routes/resources_.conversations'
+import { Route as ResourcesCrossTrainingForRunnersRouteImport } from './routes/resources_.cross-training-for-runners'
+import { Route as ResourcesEqtPittsburgh10Miler2026RouteImport } from './routes/resources_.eqt-pittsburgh-10-miler-2026'
+import { Route as ResourcesGraphicsRouteImport } from './routes/resources_.graphics'
+import { Route as ResourcesIncreaseRunningMileageWithoutInjuryRouteImport } from './routes/resources_.increase-running-mileage-without-injury'
+import { Route as ResourcesManifestoRouteImport } from './routes/resources_.manifesto'
+import { Route as ResourcesMoreThanMilesRouteImport } from './routes/resources_.more-than-miles'
+import { Route as ResourcesPlaybooksRouteImport } from './routes/resources_.playbooks'
+import { Route as ResourcesRecapRouteImport } from './routes/resources_.recap'
+import { Route as ResourcesRunningAtNightSafetyPittsburghRouteImport } from './routes/resources_.running-at-night-safety-pittsburgh'
+import { Route as ResourcesRunningWithAGroupRouteImport } from './routes/resources_.running-with-a-group'
+import { Route as ResourcesRunsRouteImport } from './routes/resources_.runs'
+import { Route as ResourcesShouldYouJoinARunningClubRouteImport } from './routes/resources_.should-you-join-a-running-club'
+import { Route as ResourcesWhatToEatBeforeARunRouteImport } from './routes/resources_.what-to-eat-before-a-run'
+import { Route as TimerResultsRouteImport } from './routes/timer_.results'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
-import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
-import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
-import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
-import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
+import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
+import { Route as AdminStravaConnectRouteImport } from './routes/admin.strava.connect'
+import { Route as AdminStravaEventRouteImport } from './routes/admin.strava.event'
+import { Route as ApiAdminCheckinRouteImport } from './routes/api/admin/checkin'
+import { Route as ApiAdminCheckinCodeRouteImport } from './routes/api/admin/checkin-code'
+import { Route as ApiAdminInquiriesRouteImport } from './routes/api/admin/inquiries'
+import { Route as ApiAdminRosterRouteImport } from './routes/api/admin/roster'
+import { Route as ApiAdminStravaConnectRouteImport } from './routes/api/admin/strava-connect'
+import { Route as ApiNewsletterStatusRouteImport } from './routes/api/newsletter/status'
+import { Route as ApiNewsletterSubscribeRouteImport } from './routes/api/newsletter/subscribe'
+import { Route as ApiPublicCheckinRouteImport } from './routes/api/public/checkin'
+import { Route as ApiPublicInquiriesRouteImport } from './routes/api/public/inquiries'
+import { Route as ApiPublicRsvpRouteImport } from './routes/api/public/rsvp'
+import { Route as LovableEmailEventsRouteImport } from './routes/lovable/email/events'
+import { Route as ResourcesPlaybooksBestFreeRunClubsSouthHills2026RouteImport } from './routes/resources_.playbooks_.best-free-run-clubs-south-hills-2026'
+import { Route as ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026RouteImport } from './routes/resources_.playbooks_.best-free-running-clubs-pittsburgh-2026'
+import { Route as ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRouteImport } from './routes/resources_.playbooks_.fleet-feet-pittsburgh-vs-independent-run-clubs'
+import { Route as ResourcesPlaybooksGrytVsYinzRunClubRouteImport } from './routes/resources_.playbooks_.gryt-vs-yinz-run-club'
+import { Route as ResourcesPlaybooksSaturdayRunsWhatToExpectRouteImport } from './routes/resources_.playbooks_.saturday-runs-what-to-expect'
 import { Route as ApiPublicHooksSaturdayReminderRouteImport } from './routes/api/public/hooks/saturday-reminder'
+import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
+import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
+import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
+import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 
-const WaiverRoute = WaiverRouteImport.update({
-  id: '/waiver',
-  path: '/waiver',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TimerRoute = TimerRouteImport.update({
-  id: '/timer',
-  path: '/timer',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TermsRoute = TermsRouteImport.update({
-  id: '/terms',
-  path: '/terms',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ShopRoute = ShopRouteImport.update({
-  id: '/shop',
-  path: '/shop',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ResourcesRoute = ResourcesRouteImport.update({
-  id: '/resources',
-  path: '/resources',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RegisterRoute = RegisterRouteImport.update({
-  id: '/register',
-  path: '/register',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RacesRoute = RacesRouteImport.update({
-  id: '/races',
-  path: '/races',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrivacyRoute = PrivacyRouteImport.update({
-  id: '/privacy',
-  path: '/privacy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PlanRoute = PlanRouteImport.update({
-  id: '/plan',
-  path: '/plan',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MembersRoute = MembersRouteImport.update({
-  id: '/members',
-  path: '/members',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const McpRoute = McpRouteImport.update({
-  id: '/mcp',
-  path: '/mcp',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const InquireRoute = InquireRouteImport.update({
-  id: '/inquire',
-  path: '/inquire',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FaqRoute = FaqRouteImport.update({
-  id: '/faq',
-  path: '/faq',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EmailStatusRoute = EmailStatusRouteImport.update({
-  id: '/email-status',
-  path: '/email-status',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CheckinRoute = CheckinRouteImport.update({
-  id: '/checkin',
-  path: '/checkin',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CalendarRoute = CalendarRouteImport.update({
-  id: '/calendar',
-  path: '/calendar',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthRoute = AuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -174,63 +89,164 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TimerResultsRoute = TimerResultsRouteImport.update({
-  id: '/timer_/results',
-  path: '/timer/results',
+const CalendarRoute = CalendarRouteImport.update({
+  id: '/calendar',
+  path: '/calendar',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ResourcesWhatToEatBeforeARunRoute =
-  ResourcesWhatToEatBeforeARunRouteImport.update({
-    id: '/resources_/what-to-eat-before-a-run',
-    path: '/resources/what-to-eat-before-a-run',
+const CheckinRoute = CheckinRouteImport.update({
+  id: '/checkin',
+  path: '/checkin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmailStatusRoute = EmailStatusRouteImport.update({
+  id: '/email-status',
+  path: '/email-status',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InquireRoute = InquireRouteImport.update({
+  id: '/inquire',
+  path: '/inquire',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const McpRoute = McpRouteImport.update({
+  id: '/mcp',
+  path: '/mcp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MembersRoute = MembersRouteImport.update({
+  id: '/members',
+  path: '/members',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlanRoute = PlanRouteImport.update({
+  id: '/plan',
+  path: '/plan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RacesRoute = RacesRouteImport.update({
+  id: '/races',
+  path: '/races',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResourcesRoute = ResourcesRouteImport.update({
+  id: '/resources',
+  path: '/resources',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShopRoute = ShopRouteImport.update({
+  id: '/shop',
+  path: '/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TimerRoute = TimerRouteImport.update({
+  id: '/timer',
+  path: '/timer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WaiverRoute = WaiverRouteImport.update({
+  id: '/waiver',
+  path: '/waiver',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Char91DotmcpChar93ListToolsRoute =
+  Char91DotmcpChar93ListToolsRouteImport.update({
+    id: '/.mcp/list-tools',
+    path: '/.mcp/list-tools',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ResourcesShouldYouJoinARunningClubRoute =
-  ResourcesShouldYouJoinARunningClubRouteImport.update({
-    id: '/resources_/should-you-join-a-running-club',
-    path: '/resources/should-you-join-a-running-club',
+const Char91DotwellKnownChar93OauthProtectedResourceRoute =
+  Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
+    id: '/.well-known/oauth-protected-resource',
+    path: '/.well-known/oauth-protected-resource',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ResourcesRunsRoute = ResourcesRunsRouteImport.update({
-  id: '/resources_/runs',
-  path: '/resources/runs',
+const AdminCheckinRoute = AdminCheckinRouteImport.update({
+  id: '/admin/checkin',
+  path: '/admin/checkin',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ResourcesRunningWithAGroupRoute =
-  ResourcesRunningWithAGroupRouteImport.update({
-    id: '/resources_/running-with-a-group',
-    path: '/resources/running-with-a-group',
+const AdminInquiriesRoute = AdminInquiriesRouteImport.update({
+  id: '/admin/inquiries',
+  path: '/admin/inquiries',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminMembersRoute = AdminMembersRouteImport.update({
+  id: '/admin/members',
+  path: '/admin/members',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRosterRoute = AdminRosterRouteImport.update({
+  id: '/admin/roster',
+  path: '/admin/roster',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutReturnRoute = CheckoutReturnRouteImport.update({
+  id: '/checkout/return',
+  path: '/checkout/return',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MembersKeyRoute = MembersKeyRouteImport.update({
+  id: '/$key',
+  path: '/$key',
+  getParentRoute: () => MembersRoute,
+} as any)
+const ResourcesBuildARunningBaseRoute =
+  ResourcesBuildARunningBaseRouteImport.update({
+    id: '/resources_/build-a-running-base',
+    path: '/resources/build-a-running-base',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ResourcesRunningAtNightSafetyPittsburghRoute =
-  ResourcesRunningAtNightSafetyPittsburghRouteImport.update({
-    id: '/resources_/running-at-night-safety-pittsburgh',
-    path: '/resources/running-at-night-safety-pittsburgh',
+const ResourcesConversationsRoute = ResourcesConversationsRouteImport.update({
+  id: '/resources_/conversations',
+  path: '/resources/conversations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResourcesCrossTrainingForRunnersRoute =
+  ResourcesCrossTrainingForRunnersRouteImport.update({
+    id: '/resources_/cross-training-for-runners',
+    path: '/resources/cross-training-for-runners',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ResourcesRecapRoute = ResourcesRecapRouteImport.update({
-  id: '/resources_/recap',
-  path: '/resources/recap',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ResourcesPlaybooksRoute = ResourcesPlaybooksRouteImport.update({
-  id: '/resources_/playbooks',
-  path: '/resources/playbooks',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ResourcesMoreThanMilesRoute = ResourcesMoreThanMilesRouteImport.update({
-  id: '/resources_/more-than-miles',
-  path: '/resources/more-than-miles',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ResourcesManifestoRoute = ResourcesManifestoRouteImport.update({
-  id: '/resources_/manifesto',
-  path: '/resources/manifesto',
+const ResourcesEqtPittsburgh10Miler2026Route =
+  ResourcesEqtPittsburgh10Miler2026RouteImport.update({
+    id: '/resources_/eqt-pittsburgh-10-miler-2026',
+    path: '/resources/eqt-pittsburgh-10-miler-2026',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ResourcesGraphicsRoute = ResourcesGraphicsRouteImport.update({
+  id: '/resources_/graphics',
+  path: '/resources/graphics',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResourcesIncreaseRunningMileageWithoutInjuryRoute =
@@ -239,169 +255,63 @@ const ResourcesIncreaseRunningMileageWithoutInjuryRoute =
     path: '/resources/increase-running-mileage-without-injury',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ResourcesGraphicsRoute = ResourcesGraphicsRouteImport.update({
-  id: '/resources_/graphics',
-  path: '/resources/graphics',
+const ResourcesManifestoRoute = ResourcesManifestoRouteImport.update({
+  id: '/resources_/manifesto',
+  path: '/resources/manifesto',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ResourcesEqtPittsburgh10Miler2026Route =
-  ResourcesEqtPittsburgh10Miler2026RouteImport.update({
-    id: '/resources_/eqt-pittsburgh-10-miler-2026',
-    path: '/resources/eqt-pittsburgh-10-miler-2026',
+const ResourcesMoreThanMilesRoute = ResourcesMoreThanMilesRouteImport.update({
+  id: '/resources_/more-than-miles',
+  path: '/resources/more-than-miles',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResourcesPlaybooksRoute = ResourcesPlaybooksRouteImport.update({
+  id: '/resources_/playbooks',
+  path: '/resources/playbooks',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResourcesRecapRoute = ResourcesRecapRouteImport.update({
+  id: '/resources_/recap',
+  path: '/resources/recap',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResourcesRunningAtNightSafetyPittsburghRoute =
+  ResourcesRunningAtNightSafetyPittsburghRouteImport.update({
+    id: '/resources_/running-at-night-safety-pittsburgh',
+    path: '/resources/running-at-night-safety-pittsburgh',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ResourcesCrossTrainingForRunnersRoute =
-  ResourcesCrossTrainingForRunnersRouteImport.update({
-    id: '/resources_/cross-training-for-runners',
-    path: '/resources/cross-training-for-runners',
+const ResourcesRunningWithAGroupRoute =
+  ResourcesRunningWithAGroupRouteImport.update({
+    id: '/resources_/running-with-a-group',
+    path: '/resources/running-with-a-group',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ResourcesConversationsRoute = ResourcesConversationsRouteImport.update({
-  id: '/resources_/conversations',
-  path: '/resources/conversations',
+const ResourcesRunsRoute = ResourcesRunsRouteImport.update({
+  id: '/resources_/runs',
+  path: '/resources/runs',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ResourcesBuildARunningBaseRoute =
-  ResourcesBuildARunningBaseRouteImport.update({
-    id: '/resources_/build-a-running-base',
-    path: '/resources/build-a-running-base',
+const ResourcesShouldYouJoinARunningClubRoute =
+  ResourcesShouldYouJoinARunningClubRouteImport.update({
+    id: '/resources_/should-you-join-a-running-club',
+    path: '/resources/should-you-join-a-running-club',
     getParentRoute: () => rootRouteImport,
   } as any)
-const MembersKeyRoute = MembersKeyRouteImport.update({
-  id: '/$key',
-  path: '/$key',
-  getParentRoute: () => MembersRoute,
-} as any)
-const CheckoutReturnRoute = CheckoutReturnRouteImport.update({
-  id: '/checkout/return',
-  path: '/checkout/return',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminRosterRoute = AdminRosterRouteImport.update({
-  id: '/admin/roster',
-  path: '/admin/roster',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminMembersRoute = AdminMembersRouteImport.update({
-  id: '/admin/members',
-  path: '/admin/members',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminInquiriesRoute = AdminInquiriesRouteImport.update({
-  id: '/admin/inquiries',
-  path: '/admin/inquiries',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminCheckinRoute = AdminCheckinRouteImport.update({
-  id: '/admin/checkin',
-  path: '/admin/checkin',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const Char91DotwellKnownChar93OauthProtectedResourceRoute =
-  Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
-    id: '/.well-known/oauth-protected-resource',
-    path: '/.well-known/oauth-protected-resource',
+const ResourcesWhatToEatBeforeARunRoute =
+  ResourcesWhatToEatBeforeARunRouteImport.update({
+    id: '/resources_/what-to-eat-before-a-run',
+    path: '/resources/what-to-eat-before-a-run',
     getParentRoute: () => rootRouteImport,
   } as any)
-const Char91DotmcpChar93ListToolsRoute =
-  Char91DotmcpChar93ListToolsRouteImport.update({
-    id: '/.mcp/list-tools',
-    path: '/.mcp/list-tools',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ResourcesPlaybooksSaturdayRunsWhatToExpectRoute =
-  ResourcesPlaybooksSaturdayRunsWhatToExpectRouteImport.update({
-    id: '/resources_/playbooks_/saturday-runs-what-to-expect',
-    path: '/resources/playbooks/saturday-runs-what-to-expect',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ResourcesPlaybooksGrytVsYinzRunClubRoute =
-  ResourcesPlaybooksGrytVsYinzRunClubRouteImport.update({
-    id: '/resources_/playbooks_/gryt-vs-yinz-run-club',
-    path: '/resources/playbooks/gryt-vs-yinz-run-club',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute =
-  ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRouteImport.update({
-    id: '/resources_/playbooks_/fleet-feet-pittsburgh-vs-independent-run-clubs',
-    path: '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route =
-  ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026RouteImport.update({
-    id: '/resources_/playbooks_/best-free-running-clubs-pittsburgh-2026',
-    path: '/resources/playbooks/best-free-running-clubs-pittsburgh-2026',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ResourcesPlaybooksBestFreeRunClubsSouthHills2026Route =
-  ResourcesPlaybooksBestFreeRunClubsSouthHills2026RouteImport.update({
-    id: '/resources_/playbooks_/best-free-run-clubs-south-hills-2026',
-    path: '/resources/playbooks/best-free-run-clubs-south-hills-2026',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const LovableEmailEventsRoute = LovableEmailEventsRouteImport.update({
-  id: '/lovable/email/events',
-  path: '/lovable/email/events',
+const TimerResultsRoute = TimerResultsRouteImport.update({
+  id: '/timer_/results',
+  path: '/timer/results',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiPublicRsvpRoute = ApiPublicRsvpRouteImport.update({
-  id: '/api/public/rsvp',
-  path: '/api/public/rsvp',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiPublicInquiriesRoute = ApiPublicInquiriesRouteImport.update({
-  id: '/api/public/inquiries',
-  path: '/api/public/inquiries',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiPublicCheckinRoute = ApiPublicCheckinRouteImport.update({
-  id: '/api/public/checkin',
-  path: '/api/public/checkin',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiNewsletterSubscribeRoute = ApiNewsletterSubscribeRouteImport.update({
-  id: '/api/newsletter/subscribe',
-  path: '/api/newsletter/subscribe',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiNewsletterStatusRoute = ApiNewsletterStatusRouteImport.update({
-  id: '/api/newsletter/status',
-  path: '/api/newsletter/status',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiAdminStravaConnectRoute = ApiAdminStravaConnectRouteImport.update({
-  id: '/api/admin/strava-connect',
-  path: '/api/admin/strava-connect',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiAdminRosterRoute = ApiAdminRosterRouteImport.update({
-  id: '/api/admin/roster',
-  path: '/api/admin/roster',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiAdminInquiriesRoute = ApiAdminInquiriesRouteImport.update({
-  id: '/api/admin/inquiries',
-  path: '/api/admin/inquiries',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiAdminCheckinCodeRoute = ApiAdminCheckinCodeRouteImport.update({
-  id: '/api/admin/checkin-code',
-  path: '/api/admin/checkin-code',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiAdminCheckinRoute = ApiAdminCheckinRouteImport.update({
-  id: '/api/admin/checkin',
-  path: '/api/admin/checkin',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminStravaEventRoute = AdminStravaEventRouteImport.update({
-  id: '/admin/strava/event',
-  path: '/admin/strava/event',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminStravaConnectRoute = AdminStravaConnectRouteImport.update({
-  id: '/admin/strava/connect',
-  path: '/admin/strava/connect',
+const DotlovableOauthConsentRoute = DotlovableOauthConsentRouteImport.update({
+  id: '/.lovable/oauth/consent',
+  path: '/.lovable/oauth/consent',
   getParentRoute: () => rootRouteImport,
 } as any)
 const Char91DotmcpChar93InvokeToolToolRoute =
@@ -410,37 +320,127 @@ const Char91DotmcpChar93InvokeToolToolRoute =
     path: '/.mcp/invoke-tool/$tool',
     getParentRoute: () => rootRouteImport,
   } as any)
-const DotlovableOauthConsentRoute = DotlovableOauthConsentRouteImport.update({
-  id: '/.lovable/oauth/consent',
-  path: '/.lovable/oauth/consent',
+const AdminStravaConnectRoute = AdminStravaConnectRouteImport.update({
+  id: '/admin/strava/connect',
+  path: '/admin/strava/connect',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LovableEmailTransactionalPreviewRoute =
-  LovableEmailTransactionalPreviewRouteImport.update({
-    id: '/lovable/email/transactional/preview',
-    path: '/lovable/email/transactional/preview',
+const AdminStravaEventRoute = AdminStravaEventRouteImport.update({
+  id: '/admin/strava/event',
+  path: '/admin/strava/event',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminCheckinRoute = ApiAdminCheckinRouteImport.update({
+  id: '/api/admin/checkin',
+  path: '/api/admin/checkin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminCheckinCodeRoute = ApiAdminCheckinCodeRouteImport.update({
+  id: '/api/admin/checkin-code',
+  path: '/api/admin/checkin-code',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminInquiriesRoute = ApiAdminInquiriesRouteImport.update({
+  id: '/api/admin/inquiries',
+  path: '/api/admin/inquiries',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminRosterRoute = ApiAdminRosterRouteImport.update({
+  id: '/api/admin/roster',
+  path: '/api/admin/roster',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminStravaConnectRoute = ApiAdminStravaConnectRouteImport.update({
+  id: '/api/admin/strava-connect',
+  path: '/api/admin/strava-connect',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiNewsletterStatusRoute = ApiNewsletterStatusRouteImport.update({
+  id: '/api/newsletter/status',
+  path: '/api/newsletter/status',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiNewsletterSubscribeRoute = ApiNewsletterSubscribeRouteImport.update({
+  id: '/api/newsletter/subscribe',
+  path: '/api/newsletter/subscribe',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicCheckinRoute = ApiPublicCheckinRouteImport.update({
+  id: '/api/public/checkin',
+  path: '/api/public/checkin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicInquiriesRoute = ApiPublicInquiriesRouteImport.update({
+  id: '/api/public/inquiries',
+  path: '/api/public/inquiries',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicRsvpRoute = ApiPublicRsvpRouteImport.update({
+  id: '/api/public/rsvp',
+  path: '/api/public/rsvp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LovableEmailEventsRoute = LovableEmailEventsRouteImport.update({
+  id: '/lovable/email/events',
+  path: '/lovable/email/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResourcesPlaybooksBestFreeRunClubsSouthHills2026Route =
+  ResourcesPlaybooksBestFreeRunClubsSouthHills2026RouteImport.update({
+    id: '/resources_/playbooks_/best-free-run-clubs-south-hills-2026',
+    path: '/resources/playbooks/best-free-run-clubs-south-hills-2026',
     getParentRoute: () => rootRouteImport,
   } as any)
-const LovableEmailAuthWebhookRoute = LovableEmailAuthWebhookRouteImport.update({
-  id: '/lovable/email/auth/webhook',
-  path: '/lovable/email/auth/webhook',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LovableEmailAuthPreviewRoute = LovableEmailAuthPreviewRouteImport.update({
-  id: '/lovable/email/auth/preview',
-  path: '/lovable/email/auth/preview',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiPublicPaymentsWebhookRoute =
-  ApiPublicPaymentsWebhookRouteImport.update({
-    id: '/api/public/payments/webhook',
-    path: '/api/public/payments/webhook',
+const ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route =
+  ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026RouteImport.update({
+    id: '/resources_/playbooks_/best-free-running-clubs-pittsburgh-2026',
+    path: '/resources/playbooks/best-free-running-clubs-pittsburgh-2026',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute =
+  ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRouteImport.update({
+    id: '/resources_/playbooks_/fleet-feet-pittsburgh-vs-independent-run-clubs',
+    path: '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ResourcesPlaybooksGrytVsYinzRunClubRoute =
+  ResourcesPlaybooksGrytVsYinzRunClubRouteImport.update({
+    id: '/resources_/playbooks_/gryt-vs-yinz-run-club',
+    path: '/resources/playbooks/gryt-vs-yinz-run-club',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ResourcesPlaybooksSaturdayRunsWhatToExpectRoute =
+  ResourcesPlaybooksSaturdayRunsWhatToExpectRouteImport.update({
+    id: '/resources_/playbooks_/saturday-runs-what-to-expect',
+    path: '/resources/playbooks/saturday-runs-what-to-expect',
     getParentRoute: () => rootRouteImport,
   } as any)
 const ApiPublicHooksSaturdayReminderRoute =
   ApiPublicHooksSaturdayReminderRouteImport.update({
     id: '/api/public/hooks/saturday-reminder',
     path: '/api/public/hooks/saturday-reminder',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicPaymentsWebhookRoute =
+  ApiPublicPaymentsWebhookRouteImport.update({
+    id: '/api/public/payments/webhook',
+    path: '/api/public/payments/webhook',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LovableEmailAuthPreviewRoute = LovableEmailAuthPreviewRouteImport.update({
+  id: '/lovable/email/auth/preview',
+  path: '/lovable/email/auth/preview',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LovableEmailAuthWebhookRoute = LovableEmailAuthWebhookRouteImport.update({
+  id: '/lovable/email/auth/webhook',
+  path: '/lovable/email/auth/webhook',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LovableEmailTransactionalPreviewRoute =
+  LovableEmailTransactionalPreviewRouteImport.update({
+    id: '/lovable/email/transactional/preview',
+    path: '/lovable/email/transactional/preview',
     getParentRoute: () => rootRouteImport,
   } as any)
 
@@ -947,130 +947,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/waiver': {
-      id: '/waiver'
-      path: '/waiver'
-      fullPath: '/waiver'
-      preLoaderRoute: typeof WaiverRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/timer': {
-      id: '/timer'
-      path: '/timer'
-      fullPath: '/timer'
-      preLoaderRoute: typeof TimerRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/terms': {
-      id: '/terms'
-      path: '/terms'
-      fullPath: '/terms'
-      preLoaderRoute: typeof TermsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/shop': {
-      id: '/shop'
-      path: '/shop'
-      fullPath: '/shop'
-      preLoaderRoute: typeof ShopRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/resources': {
-      id: '/resources'
-      path: '/resources'
-      fullPath: '/resources'
-      preLoaderRoute: typeof ResourcesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/register': {
-      id: '/register'
-      path: '/register'
-      fullPath: '/register'
-      preLoaderRoute: typeof RegisterRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/races': {
-      id: '/races'
-      path: '/races'
-      fullPath: '/races'
-      preLoaderRoute: typeof RacesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/privacy': {
-      id: '/privacy'
-      path: '/privacy'
-      fullPath: '/privacy'
-      preLoaderRoute: typeof PrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/plan': {
-      id: '/plan'
-      path: '/plan'
-      fullPath: '/plan'
-      preLoaderRoute: typeof PlanRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/members': {
-      id: '/members'
-      path: '/members'
-      fullPath: '/members'
-      preLoaderRoute: typeof MembersRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mcp': {
-      id: '/mcp'
-      path: '/mcp'
-      fullPath: '/mcp'
-      preLoaderRoute: typeof McpRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/inquire': {
-      id: '/inquire'
-      path: '/inquire'
-      fullPath: '/inquire'
-      preLoaderRoute: typeof InquireRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/faq': {
-      id: '/faq'
-      path: '/faq'
-      fullPath: '/faq'
-      preLoaderRoute: typeof FaqRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/email-status': {
-      id: '/email-status'
-      path: '/email-status'
-      fullPath: '/email-status'
-      preLoaderRoute: typeof EmailStatusRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/checkin': {
-      id: '/checkin'
-      path: '/checkin'
-      fullPath: '/checkin'
-      preLoaderRoute: typeof CheckinRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/calendar': {
-      id: '/calendar'
-      path: '/calendar'
-      fullPath: '/calendar'
-      preLoaderRoute: typeof CalendarRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -1080,172 +961,130 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/timer_/results': {
-      id: '/timer_/results'
-      path: '/timer/results'
-      fullPath: '/timer/results'
-      preLoaderRoute: typeof TimerResultsRouteImport
+    '/calendar': {
+      id: '/calendar'
+      path: '/calendar'
+      fullPath: '/calendar'
+      preLoaderRoute: typeof CalendarRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/resources_/what-to-eat-before-a-run': {
-      id: '/resources_/what-to-eat-before-a-run'
-      path: '/resources/what-to-eat-before-a-run'
-      fullPath: '/resources/what-to-eat-before-a-run'
-      preLoaderRoute: typeof ResourcesWhatToEatBeforeARunRouteImport
+    '/checkin': {
+      id: '/checkin'
+      path: '/checkin'
+      fullPath: '/checkin'
+      preLoaderRoute: typeof CheckinRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/resources_/should-you-join-a-running-club': {
-      id: '/resources_/should-you-join-a-running-club'
-      path: '/resources/should-you-join-a-running-club'
-      fullPath: '/resources/should-you-join-a-running-club'
-      preLoaderRoute: typeof ResourcesShouldYouJoinARunningClubRouteImport
+    '/email-status': {
+      id: '/email-status'
+      path: '/email-status'
+      fullPath: '/email-status'
+      preLoaderRoute: typeof EmailStatusRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/resources_/runs': {
-      id: '/resources_/runs'
-      path: '/resources/runs'
-      fullPath: '/resources/runs'
-      preLoaderRoute: typeof ResourcesRunsRouteImport
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/resources_/running-with-a-group': {
-      id: '/resources_/running-with-a-group'
-      path: '/resources/running-with-a-group'
-      fullPath: '/resources/running-with-a-group'
-      preLoaderRoute: typeof ResourcesRunningWithAGroupRouteImport
+    '/inquire': {
+      id: '/inquire'
+      path: '/inquire'
+      fullPath: '/inquire'
+      preLoaderRoute: typeof InquireRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/resources_/running-at-night-safety-pittsburgh': {
-      id: '/resources_/running-at-night-safety-pittsburgh'
-      path: '/resources/running-at-night-safety-pittsburgh'
-      fullPath: '/resources/running-at-night-safety-pittsburgh'
-      preLoaderRoute: typeof ResourcesRunningAtNightSafetyPittsburghRouteImport
+    '/mcp': {
+      id: '/mcp'
+      path: '/mcp'
+      fullPath: '/mcp'
+      preLoaderRoute: typeof McpRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/resources_/recap': {
-      id: '/resources_/recap'
-      path: '/resources/recap'
-      fullPath: '/resources/recap'
-      preLoaderRoute: typeof ResourcesRecapRouteImport
+    '/members': {
+      id: '/members'
+      path: '/members'
+      fullPath: '/members'
+      preLoaderRoute: typeof MembersRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/resources_/playbooks': {
-      id: '/resources_/playbooks'
-      path: '/resources/playbooks'
-      fullPath: '/resources/playbooks'
-      preLoaderRoute: typeof ResourcesPlaybooksRouteImport
+    '/plan': {
+      id: '/plan'
+      path: '/plan'
+      fullPath: '/plan'
+      preLoaderRoute: typeof PlanRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/resources_/more-than-miles': {
-      id: '/resources_/more-than-miles'
-      path: '/resources/more-than-miles'
-      fullPath: '/resources/more-than-miles'
-      preLoaderRoute: typeof ResourcesMoreThanMilesRouteImport
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/resources_/manifesto': {
-      id: '/resources_/manifesto'
-      path: '/resources/manifesto'
-      fullPath: '/resources/manifesto'
-      preLoaderRoute: typeof ResourcesManifestoRouteImport
+    '/races': {
+      id: '/races'
+      path: '/races'
+      fullPath: '/races'
+      preLoaderRoute: typeof RacesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/resources_/increase-running-mileage-without-injury': {
-      id: '/resources_/increase-running-mileage-without-injury'
-      path: '/resources/increase-running-mileage-without-injury'
-      fullPath: '/resources/increase-running-mileage-without-injury'
-      preLoaderRoute: typeof ResourcesIncreaseRunningMileageWithoutInjuryRouteImport
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/resources_/graphics': {
-      id: '/resources_/graphics'
-      path: '/resources/graphics'
-      fullPath: '/resources/graphics'
-      preLoaderRoute: typeof ResourcesGraphicsRouteImport
+    '/resources': {
+      id: '/resources'
+      path: '/resources'
+      fullPath: '/resources'
+      preLoaderRoute: typeof ResourcesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/resources_/eqt-pittsburgh-10-miler-2026': {
-      id: '/resources_/eqt-pittsburgh-10-miler-2026'
-      path: '/resources/eqt-pittsburgh-10-miler-2026'
-      fullPath: '/resources/eqt-pittsburgh-10-miler-2026'
-      preLoaderRoute: typeof ResourcesEqtPittsburgh10Miler2026RouteImport
+    '/shop': {
+      id: '/shop'
+      path: '/shop'
+      fullPath: '/shop'
+      preLoaderRoute: typeof ShopRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/resources_/cross-training-for-runners': {
-      id: '/resources_/cross-training-for-runners'
-      path: '/resources/cross-training-for-runners'
-      fullPath: '/resources/cross-training-for-runners'
-      preLoaderRoute: typeof ResourcesCrossTrainingForRunnersRouteImport
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/resources_/conversations': {
-      id: '/resources_/conversations'
-      path: '/resources/conversations'
-      fullPath: '/resources/conversations'
-      preLoaderRoute: typeof ResourcesConversationsRouteImport
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/resources_/build-a-running-base': {
-      id: '/resources_/build-a-running-base'
-      path: '/resources/build-a-running-base'
-      fullPath: '/resources/build-a-running-base'
-      preLoaderRoute: typeof ResourcesBuildARunningBaseRouteImport
+    '/timer': {
+      id: '/timer'
+      path: '/timer'
+      fullPath: '/timer'
+      preLoaderRoute: typeof TimerRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/members/$key': {
-      id: '/members/$key'
-      path: '/$key'
-      fullPath: '/members/$key'
-      preLoaderRoute: typeof MembersKeyRouteImport
-      parentRoute: typeof MembersRoute
-    }
-    '/checkout/return': {
-      id: '/checkout/return'
-      path: '/checkout/return'
-      fullPath: '/checkout/return'
-      preLoaderRoute: typeof CheckoutReturnRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin/roster': {
-      id: '/admin/roster'
-      path: '/admin/roster'
-      fullPath: '/admin/roster'
-      preLoaderRoute: typeof AdminRosterRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin/members': {
-      id: '/admin/members'
-      path: '/admin/members'
-      fullPath: '/admin/members'
-      preLoaderRoute: typeof AdminMembersRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin/inquiries': {
-      id: '/admin/inquiries'
-      path: '/admin/inquiries'
-      fullPath: '/admin/inquiries'
-      preLoaderRoute: typeof AdminInquiriesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin/checkin': {
-      id: '/admin/checkin'
-      path: '/admin/checkin'
-      fullPath: '/admin/checkin'
-      preLoaderRoute: typeof AdminCheckinRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/.well-known/oauth-protected-resource': {
-      id: '/.well-known/oauth-protected-resource'
-      path: '/.well-known/oauth-protected-resource'
-      fullPath: '/.well-known/oauth-protected-resource'
-      preLoaderRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRouteImport
+    '/waiver': {
+      id: '/waiver'
+      path: '/waiver'
+      fullPath: '/waiver'
+      preLoaderRoute: typeof WaiverRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/.mcp/list-tools': {
@@ -1255,137 +1094,165 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char91DotmcpChar93ListToolsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/resources_/playbooks_/saturday-runs-what-to-expect': {
-      id: '/resources_/playbooks_/saturday-runs-what-to-expect'
-      path: '/resources/playbooks/saturday-runs-what-to-expect'
-      fullPath: '/resources/playbooks/saturday-runs-what-to-expect'
-      preLoaderRoute: typeof ResourcesPlaybooksSaturdayRunsWhatToExpectRouteImport
+    '/.well-known/oauth-protected-resource': {
+      id: '/.well-known/oauth-protected-resource'
+      path: '/.well-known/oauth-protected-resource'
+      fullPath: '/.well-known/oauth-protected-resource'
+      preLoaderRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/resources_/playbooks_/gryt-vs-yinz-run-club': {
-      id: '/resources_/playbooks_/gryt-vs-yinz-run-club'
-      path: '/resources/playbooks/gryt-vs-yinz-run-club'
-      fullPath: '/resources/playbooks/gryt-vs-yinz-run-club'
-      preLoaderRoute: typeof ResourcesPlaybooksGrytVsYinzRunClubRouteImport
+    '/admin/checkin': {
+      id: '/admin/checkin'
+      path: '/admin/checkin'
+      fullPath: '/admin/checkin'
+      preLoaderRoute: typeof AdminCheckinRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/resources_/playbooks_/fleet-feet-pittsburgh-vs-independent-run-clubs': {
-      id: '/resources_/playbooks_/fleet-feet-pittsburgh-vs-independent-run-clubs'
-      path: '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs'
-      fullPath: '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs'
-      preLoaderRoute: typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRouteImport
+    '/admin/inquiries': {
+      id: '/admin/inquiries'
+      path: '/admin/inquiries'
+      fullPath: '/admin/inquiries'
+      preLoaderRoute: typeof AdminInquiriesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/resources_/playbooks_/best-free-running-clubs-pittsburgh-2026': {
-      id: '/resources_/playbooks_/best-free-running-clubs-pittsburgh-2026'
-      path: '/resources/playbooks/best-free-running-clubs-pittsburgh-2026'
-      fullPath: '/resources/playbooks/best-free-running-clubs-pittsburgh-2026'
-      preLoaderRoute: typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026RouteImport
+    '/admin/members': {
+      id: '/admin/members'
+      path: '/admin/members'
+      fullPath: '/admin/members'
+      preLoaderRoute: typeof AdminMembersRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/resources_/playbooks_/best-free-run-clubs-south-hills-2026': {
-      id: '/resources_/playbooks_/best-free-run-clubs-south-hills-2026'
-      path: '/resources/playbooks/best-free-run-clubs-south-hills-2026'
-      fullPath: '/resources/playbooks/best-free-run-clubs-south-hills-2026'
-      preLoaderRoute: typeof ResourcesPlaybooksBestFreeRunClubsSouthHills2026RouteImport
+    '/admin/roster': {
+      id: '/admin/roster'
+      path: '/admin/roster'
+      fullPath: '/admin/roster'
+      preLoaderRoute: typeof AdminRosterRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/lovable/email/events': {
-      id: '/lovable/email/events'
-      path: '/lovable/email/events'
-      fullPath: '/lovable/email/events'
-      preLoaderRoute: typeof LovableEmailEventsRouteImport
+    '/checkout/return': {
+      id: '/checkout/return'
+      path: '/checkout/return'
+      fullPath: '/checkout/return'
+      preLoaderRoute: typeof CheckoutReturnRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/rsvp': {
-      id: '/api/public/rsvp'
-      path: '/api/public/rsvp'
-      fullPath: '/api/public/rsvp'
-      preLoaderRoute: typeof ApiPublicRsvpRouteImport
+    '/members/$key': {
+      id: '/members/$key'
+      path: '/$key'
+      fullPath: '/members/$key'
+      preLoaderRoute: typeof MembersKeyRouteImport
+      parentRoute: typeof MembersRoute
+    }
+    '/resources_/build-a-running-base': {
+      id: '/resources_/build-a-running-base'
+      path: '/resources/build-a-running-base'
+      fullPath: '/resources/build-a-running-base'
+      preLoaderRoute: typeof ResourcesBuildARunningBaseRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/inquiries': {
-      id: '/api/public/inquiries'
-      path: '/api/public/inquiries'
-      fullPath: '/api/public/inquiries'
-      preLoaderRoute: typeof ApiPublicInquiriesRouteImport
+    '/resources_/conversations': {
+      id: '/resources_/conversations'
+      path: '/resources/conversations'
+      fullPath: '/resources/conversations'
+      preLoaderRoute: typeof ResourcesConversationsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/checkin': {
-      id: '/api/public/checkin'
-      path: '/api/public/checkin'
-      fullPath: '/api/public/checkin'
-      preLoaderRoute: typeof ApiPublicCheckinRouteImport
+    '/resources_/cross-training-for-runners': {
+      id: '/resources_/cross-training-for-runners'
+      path: '/resources/cross-training-for-runners'
+      fullPath: '/resources/cross-training-for-runners'
+      preLoaderRoute: typeof ResourcesCrossTrainingForRunnersRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/newsletter/subscribe': {
-      id: '/api/newsletter/subscribe'
-      path: '/api/newsletter/subscribe'
-      fullPath: '/api/newsletter/subscribe'
-      preLoaderRoute: typeof ApiNewsletterSubscribeRouteImport
+    '/resources_/eqt-pittsburgh-10-miler-2026': {
+      id: '/resources_/eqt-pittsburgh-10-miler-2026'
+      path: '/resources/eqt-pittsburgh-10-miler-2026'
+      fullPath: '/resources/eqt-pittsburgh-10-miler-2026'
+      preLoaderRoute: typeof ResourcesEqtPittsburgh10Miler2026RouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/newsletter/status': {
-      id: '/api/newsletter/status'
-      path: '/api/newsletter/status'
-      fullPath: '/api/newsletter/status'
-      preLoaderRoute: typeof ApiNewsletterStatusRouteImport
+    '/resources_/graphics': {
+      id: '/resources_/graphics'
+      path: '/resources/graphics'
+      fullPath: '/resources/graphics'
+      preLoaderRoute: typeof ResourcesGraphicsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/admin/strava-connect': {
-      id: '/api/admin/strava-connect'
-      path: '/api/admin/strava-connect'
-      fullPath: '/api/admin/strava-connect'
-      preLoaderRoute: typeof ApiAdminStravaConnectRouteImport
+    '/resources_/increase-running-mileage-without-injury': {
+      id: '/resources_/increase-running-mileage-without-injury'
+      path: '/resources/increase-running-mileage-without-injury'
+      fullPath: '/resources/increase-running-mileage-without-injury'
+      preLoaderRoute: typeof ResourcesIncreaseRunningMileageWithoutInjuryRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/admin/roster': {
-      id: '/api/admin/roster'
-      path: '/api/admin/roster'
-      fullPath: '/api/admin/roster'
-      preLoaderRoute: typeof ApiAdminRosterRouteImport
+    '/resources_/manifesto': {
+      id: '/resources_/manifesto'
+      path: '/resources/manifesto'
+      fullPath: '/resources/manifesto'
+      preLoaderRoute: typeof ResourcesManifestoRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/admin/inquiries': {
-      id: '/api/admin/inquiries'
-      path: '/api/admin/inquiries'
-      fullPath: '/api/admin/inquiries'
-      preLoaderRoute: typeof ApiAdminInquiriesRouteImport
+    '/resources_/more-than-miles': {
+      id: '/resources_/more-than-miles'
+      path: '/resources/more-than-miles'
+      fullPath: '/resources/more-than-miles'
+      preLoaderRoute: typeof ResourcesMoreThanMilesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/admin/checkin-code': {
-      id: '/api/admin/checkin-code'
-      path: '/api/admin/checkin-code'
-      fullPath: '/api/admin/checkin-code'
-      preLoaderRoute: typeof ApiAdminCheckinCodeRouteImport
+    '/resources_/playbooks': {
+      id: '/resources_/playbooks'
+      path: '/resources/playbooks'
+      fullPath: '/resources/playbooks'
+      preLoaderRoute: typeof ResourcesPlaybooksRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/admin/checkin': {
-      id: '/api/admin/checkin'
-      path: '/api/admin/checkin'
-      fullPath: '/api/admin/checkin'
-      preLoaderRoute: typeof ApiAdminCheckinRouteImport
+    '/resources_/recap': {
+      id: '/resources_/recap'
+      path: '/resources/recap'
+      fullPath: '/resources/recap'
+      preLoaderRoute: typeof ResourcesRecapRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/strava/event': {
-      id: '/admin/strava/event'
-      path: '/admin/strava/event'
-      fullPath: '/admin/strava/event'
-      preLoaderRoute: typeof AdminStravaEventRouteImport
+    '/resources_/running-at-night-safety-pittsburgh': {
+      id: '/resources_/running-at-night-safety-pittsburgh'
+      path: '/resources/running-at-night-safety-pittsburgh'
+      fullPath: '/resources/running-at-night-safety-pittsburgh'
+      preLoaderRoute: typeof ResourcesRunningAtNightSafetyPittsburghRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/strava/connect': {
-      id: '/admin/strava/connect'
-      path: '/admin/strava/connect'
-      fullPath: '/admin/strava/connect'
-      preLoaderRoute: typeof AdminStravaConnectRouteImport
+    '/resources_/running-with-a-group': {
+      id: '/resources_/running-with-a-group'
+      path: '/resources/running-with-a-group'
+      fullPath: '/resources/running-with-a-group'
+      preLoaderRoute: typeof ResourcesRunningWithAGroupRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/.mcp/invoke-tool/$tool': {
-      id: '/.mcp/invoke-tool/$tool'
-      path: '/.mcp/invoke-tool/$tool'
-      fullPath: '/.mcp/invoke-tool/$tool'
-      preLoaderRoute: typeof Char91DotmcpChar93InvokeToolToolRouteImport
+    '/resources_/runs': {
+      id: '/resources_/runs'
+      path: '/resources/runs'
+      fullPath: '/resources/runs'
+      preLoaderRoute: typeof ResourcesRunsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resources_/should-you-join-a-running-club': {
+      id: '/resources_/should-you-join-a-running-club'
+      path: '/resources/should-you-join-a-running-club'
+      fullPath: '/resources/should-you-join-a-running-club'
+      preLoaderRoute: typeof ResourcesShouldYouJoinARunningClubRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resources_/what-to-eat-before-a-run': {
+      id: '/resources_/what-to-eat-before-a-run'
+      path: '/resources/what-to-eat-before-a-run'
+      fullPath: '/resources/what-to-eat-before-a-run'
+      preLoaderRoute: typeof ResourcesWhatToEatBeforeARunRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/timer_/results': {
+      id: '/timer_/results'
+      path: '/timer/results'
+      fullPath: '/timer/results'
+      preLoaderRoute: typeof TimerResultsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/.lovable/oauth/consent': {
@@ -1395,25 +1262,144 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DotlovableOauthConsentRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/lovable/email/transactional/preview': {
-      id: '/lovable/email/transactional/preview'
-      path: '/lovable/email/transactional/preview'
-      fullPath: '/lovable/email/transactional/preview'
-      preLoaderRoute: typeof LovableEmailTransactionalPreviewRouteImport
+    '/.mcp/invoke-tool/$tool': {
+      id: '/.mcp/invoke-tool/$tool'
+      path: '/.mcp/invoke-tool/$tool'
+      fullPath: '/.mcp/invoke-tool/$tool'
+      preLoaderRoute: typeof Char91DotmcpChar93InvokeToolToolRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/lovable/email/auth/webhook': {
-      id: '/lovable/email/auth/webhook'
-      path: '/lovable/email/auth/webhook'
-      fullPath: '/lovable/email/auth/webhook'
-      preLoaderRoute: typeof LovableEmailAuthWebhookRouteImport
+    '/admin/strava/connect': {
+      id: '/admin/strava/connect'
+      path: '/admin/strava/connect'
+      fullPath: '/admin/strava/connect'
+      preLoaderRoute: typeof AdminStravaConnectRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/lovable/email/auth/preview': {
-      id: '/lovable/email/auth/preview'
-      path: '/lovable/email/auth/preview'
-      fullPath: '/lovable/email/auth/preview'
-      preLoaderRoute: typeof LovableEmailAuthPreviewRouteImport
+    '/admin/strava/event': {
+      id: '/admin/strava/event'
+      path: '/admin/strava/event'
+      fullPath: '/admin/strava/event'
+      preLoaderRoute: typeof AdminStravaEventRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/checkin': {
+      id: '/api/admin/checkin'
+      path: '/api/admin/checkin'
+      fullPath: '/api/admin/checkin'
+      preLoaderRoute: typeof ApiAdminCheckinRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/checkin-code': {
+      id: '/api/admin/checkin-code'
+      path: '/api/admin/checkin-code'
+      fullPath: '/api/admin/checkin-code'
+      preLoaderRoute: typeof ApiAdminCheckinCodeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/inquiries': {
+      id: '/api/admin/inquiries'
+      path: '/api/admin/inquiries'
+      fullPath: '/api/admin/inquiries'
+      preLoaderRoute: typeof ApiAdminInquiriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/roster': {
+      id: '/api/admin/roster'
+      path: '/api/admin/roster'
+      fullPath: '/api/admin/roster'
+      preLoaderRoute: typeof ApiAdminRosterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/strava-connect': {
+      id: '/api/admin/strava-connect'
+      path: '/api/admin/strava-connect'
+      fullPath: '/api/admin/strava-connect'
+      preLoaderRoute: typeof ApiAdminStravaConnectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/newsletter/status': {
+      id: '/api/newsletter/status'
+      path: '/api/newsletter/status'
+      fullPath: '/api/newsletter/status'
+      preLoaderRoute: typeof ApiNewsletterStatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/newsletter/subscribe': {
+      id: '/api/newsletter/subscribe'
+      path: '/api/newsletter/subscribe'
+      fullPath: '/api/newsletter/subscribe'
+      preLoaderRoute: typeof ApiNewsletterSubscribeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/checkin': {
+      id: '/api/public/checkin'
+      path: '/api/public/checkin'
+      fullPath: '/api/public/checkin'
+      preLoaderRoute: typeof ApiPublicCheckinRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/inquiries': {
+      id: '/api/public/inquiries'
+      path: '/api/public/inquiries'
+      fullPath: '/api/public/inquiries'
+      preLoaderRoute: typeof ApiPublicInquiriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/rsvp': {
+      id: '/api/public/rsvp'
+      path: '/api/public/rsvp'
+      fullPath: '/api/public/rsvp'
+      preLoaderRoute: typeof ApiPublicRsvpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lovable/email/events': {
+      id: '/lovable/email/events'
+      path: '/lovable/email/events'
+      fullPath: '/lovable/email/events'
+      preLoaderRoute: typeof LovableEmailEventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resources_/playbooks_/best-free-run-clubs-south-hills-2026': {
+      id: '/resources_/playbooks_/best-free-run-clubs-south-hills-2026'
+      path: '/resources/playbooks/best-free-run-clubs-south-hills-2026'
+      fullPath: '/resources/playbooks/best-free-run-clubs-south-hills-2026'
+      preLoaderRoute: typeof ResourcesPlaybooksBestFreeRunClubsSouthHills2026RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resources_/playbooks_/best-free-running-clubs-pittsburgh-2026': {
+      id: '/resources_/playbooks_/best-free-running-clubs-pittsburgh-2026'
+      path: '/resources/playbooks/best-free-running-clubs-pittsburgh-2026'
+      fullPath: '/resources/playbooks/best-free-running-clubs-pittsburgh-2026'
+      preLoaderRoute: typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resources_/playbooks_/fleet-feet-pittsburgh-vs-independent-run-clubs': {
+      id: '/resources_/playbooks_/fleet-feet-pittsburgh-vs-independent-run-clubs'
+      path: '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs'
+      fullPath: '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs'
+      preLoaderRoute: typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resources_/playbooks_/gryt-vs-yinz-run-club': {
+      id: '/resources_/playbooks_/gryt-vs-yinz-run-club'
+      path: '/resources/playbooks/gryt-vs-yinz-run-club'
+      fullPath: '/resources/playbooks/gryt-vs-yinz-run-club'
+      preLoaderRoute: typeof ResourcesPlaybooksGrytVsYinzRunClubRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resources_/playbooks_/saturday-runs-what-to-expect': {
+      id: '/resources_/playbooks_/saturday-runs-what-to-expect'
+      path: '/resources/playbooks/saturday-runs-what-to-expect'
+      fullPath: '/resources/playbooks/saturday-runs-what-to-expect'
+      preLoaderRoute: typeof ResourcesPlaybooksSaturdayRunsWhatToExpectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/hooks/saturday-reminder': {
+      id: '/api/public/hooks/saturday-reminder'
+      path: '/api/public/hooks/saturday-reminder'
+      fullPath: '/api/public/hooks/saturday-reminder'
+      preLoaderRoute: typeof ApiPublicHooksSaturdayReminderRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/payments/webhook': {
@@ -1423,11 +1409,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicPaymentsWebhookRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/hooks/saturday-reminder': {
-      id: '/api/public/hooks/saturday-reminder'
-      path: '/api/public/hooks/saturday-reminder'
-      fullPath: '/api/public/hooks/saturday-reminder'
-      preLoaderRoute: typeof ApiPublicHooksSaturdayReminderRouteImport
+    '/lovable/email/auth/preview': {
+      id: '/lovable/email/auth/preview'
+      path: '/lovable/email/auth/preview'
+      fullPath: '/lovable/email/auth/preview'
+      preLoaderRoute: typeof LovableEmailAuthPreviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lovable/email/auth/webhook': {
+      id: '/lovable/email/auth/webhook'
+      path: '/lovable/email/auth/webhook'
+      fullPath: '/lovable/email/auth/webhook'
+      preLoaderRoute: typeof LovableEmailAuthWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lovable/email/transactional/preview': {
+      id: '/lovable/email/transactional/preview'
+      path: '/lovable/email/transactional/preview'
+      fullPath: '/lovable/email/transactional/preview'
+      preLoaderRoute: typeof LovableEmailTransactionalPreviewRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
