@@ -1,9 +1,9 @@
 // Single source of truth for GRYT crew counts. Update here only.
 // Strava member count read from the public GRYT RUN CLUB page (club 1708552)
 // on 2026-09-23. Re-check before quoting it anywhere new.
-export const STRAVA_MEMBERS = 95;
+export const STRAVA_MEMBERS = 100;
 export const SATURDAY_REGULARS = 15;
-export const INSTAGRAM_FOLLOWERS = 123;
+export const INSTAGRAM_FOLLOWERS = 144;
 
 /** "82" */
 export const STRAVA_MEMBERS_LABEL = String(STRAVA_MEMBERS);
