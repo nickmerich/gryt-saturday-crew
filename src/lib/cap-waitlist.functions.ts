@@ -12,9 +12,18 @@ export const joinCapWaitlist = createServerFn({ method: 'POST' })
   .inputValidator((input: unknown) => schema.parse(input))
   .handler(async ({ data }) => {
     const { supabaseAdmin: db } = await import('@/integrations/supabase/client.server')
-    const { error } = await db.from('cap_waitlist').insert({ email: data.email })
+    const { data: row, error } = await db.from('cap_waitlist').insert({ email: data.email }).select('id,created_at').single()
     // Duplicate email counts as success so the list never leaks who signed up.
     if (error && error.code !== '23505') throw new Error('Not saved. Please try again.')
+    if (row) {
+      const { sendInternalTransactionalEmail } = await import('@/lib/email/send-internal.server')
+      await sendInternalTransactionalEmail({
+        templateName: 'cap-waitlist-notification',
+        recipientEmail: 'nick@gryt.club',
+        templateData: { email: data.email, signedUpAt: row.created_at },
+        idempotencyKey: `cap-waitlist-${row.id}`,
+      })
+    }
     return { ok: true }
   })
 
