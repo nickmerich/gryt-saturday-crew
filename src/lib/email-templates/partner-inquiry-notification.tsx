@@ -85,7 +85,7 @@ export const template = {
   subject: (data: Record<string, any>) =>
     `New partner inquiry: ${data.name ?? 'someone'} (${data.involvement ?? 'Other'})`,
   displayName: 'Partner inquiry (owner)',
-  to: 'merichnick@gmail.com',
+  to: 'nick@gryt.club',
   previewData: {
     name: 'Sam Trainer',
     email: 'sam@example.com',

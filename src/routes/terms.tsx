@@ -97,10 +97,10 @@ function TermsPage() {
             <p>
               Reach out at{" "}
               <a
-                href="mailto:hello@grytrunclub.com"
+                href="mailto:nick@gryt.club"
                 className="text-blue underline hover:text-paper transition-colors"
               >
-                hello@grytrunclub.com
+                nick@gryt.club
               </a>
               .
             </p>

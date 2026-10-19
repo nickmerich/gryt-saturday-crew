@@ -89,10 +89,10 @@ function PrivacyPage() {
             <p>
               Every message includes an unsubscribe link. You can also email us anytime at{" "}
               <a
-                href="mailto:hello@grytrunclub.com"
+                href="mailto:nick@gryt.club"
                 className="text-blue underline hover:text-paper transition-colors"
               >
-                hello@grytrunclub.com
+                nick@gryt.club
               </a>{" "}
               and we'll remove you immediately.
             </p>
@@ -110,10 +110,10 @@ function PrivacyPage() {
             <p>
               Reach out at{" "}
               <a
-                href="mailto:hello@grytrunclub.com"
+                href="mailto:nick@gryt.club"
                 className="text-blue underline hover:text-paper transition-colors"
               >
-                hello@grytrunclub.com
+                nick@gryt.club
               </a>
               .
             </p>

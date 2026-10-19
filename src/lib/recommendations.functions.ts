@@ -57,7 +57,7 @@ export const submitRecommendation = createServerFn({ method: "POST" })
       const { sendInternalTransactionalEmail } = await import(
         "./email/send-internal.server"
       );
-      const recipients = ["merichnick@gmail.com"];
+      const recipients = ["nick@gryt.club"];
       const submittedAt = inserted?.created_at ?? new Date().toISOString();
       const baseKey = inserted?.id ?? crypto.randomUUID();
       await Promise.all(

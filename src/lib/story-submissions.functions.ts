@@ -74,7 +74,7 @@ export const submitStorySubmission = createServerFn({ method: "POST" })
       const submittedAt = inserted?.created_at ?? new Date().toISOString();
       await sendInternalTransactionalEmail({
         templateName: "partner-inquiry-notification",
-        recipientEmail: "merichnick@gmail.com",
+        recipientEmail: "nick@gryt.club",
         idempotencyKey: `story-submission-${baseKey}`,
         templateData: {
           name: data.name,

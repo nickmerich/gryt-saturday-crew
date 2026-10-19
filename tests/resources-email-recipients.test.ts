@@ -4,12 +4,12 @@ import { resolve } from "node:path";
 
 /**
  * Guardrail: every Resources page submission server action must only ever
- * notify merichnick@gmail.com. If anyone adds a second recipient (CC, BCC,
+ * notify nick@gryt.club. If anyone adds a second recipient (CC, BCC,
  * extra address in a recipients array, or a different literal) this test
  * fails so the change is caught in review.
  */
 
-const ALLOWED = "merichnick@gmail.com";
+const ALLOWED = "nick@gryt.club";
 
 const FILES = [
   "src/lib/recommendations.functions.ts",
@@ -30,7 +30,7 @@ function extractEmails(src: string): string[] {
   return out;
 }
 
-describe("Resources submissions only email merichnick@gmail.com", () => {
+describe("Resources submissions only email nick@gryt.club", () => {
   for (const file of FILES) {
     test(file, () => {
       const src = read(file);
