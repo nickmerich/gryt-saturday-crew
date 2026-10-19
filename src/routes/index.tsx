@@ -3753,11 +3753,11 @@ function Landing() {
     <main className="bg-ink text-paper">
       <Nav />
       <Hero />
+      <PartnersStrip />
       <RSVP />
       <FirstTimer />
       <SaturdayWeather />
       <MontourRouteMap />
-      <PartnersStrip />
       <section className="border-t border-paper/15 px-6 py-10 sm:px-12 lg:px-24" aria-label="More from GRYT">
         <div className="mx-auto flex max-w-[1180px] flex-wrap gap-x-8 gap-y-4">
           <Link to="/about" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Meet Laura & Nick →</Link>
