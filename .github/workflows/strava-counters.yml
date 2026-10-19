@@ -1,0 +1,32 @@
+name: verified-strava-counters
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "src/**"
+      - "tests/strava-club-stats.test.ts"
+      - "supabase/migrations/20261019060000_verified_strava_connection.sql"
+      - ".github/workflows/strava-counters.yml"
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.3"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install existing dependency set
+        run: bun install --no-save
+      - name: Typecheck
+        run: bunx tsc --noEmit
+      - name: Regression tests
+        run: bun test tests
+      - name: Local PostgreSQL permission and lease test
+        run: |
+          npm install --prefix "$RUNNER_TEMP/gryt-db-test" --no-audit --no-fund @electric-sql/pglite@0.5.10
+          PGLITE_MODULE="$RUNNER_TEMP/gryt-db-test/node_modules/@electric-sql/pglite/dist/index.js" node scripts/test-strava-migration.mjs
+      - name: Production build
+        run: bun run build

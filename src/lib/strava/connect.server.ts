@@ -1,140 +1,90 @@
-import type { SupabaseClient } from '@supabase/supabase-js'
-import { isAdminEmail } from '@/lib/admin/allowlist'
-import { STRAVA_CLUB_ID } from '@/lib/strava-club'
+import type { SupabaseClient } from "@supabase/supabase-js";
+import { isAdminEmail } from "@/lib/admin/allowlist";
+import { STRAVA_CLUB_ID } from "@/lib/strava-club";
+import { createOAuthState, verifyOAuthState } from "./crypto.server";
+import { clubStatsService } from "./service.server";
 
 function json(data: unknown, status = 200) {
   return Response.json(data, {
     status,
     headers: {
-      'Cache-Control': 'no-store',
-      'X-Content-Type-Options': 'nosniff',
-      'X-Robots-Tag': 'noindex, nofollow',
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff",
+      "X-Robots-Tag": "noindex, nofollow",
     },
-  })
-}
-
-async function database(): Promise<SupabaseClient> {
-  const { supabaseAdmin } = await import('@/integrations/supabase/client.server')
-  return supabaseAdmin as unknown as SupabaseClient
+  });
 }
 
 async function requireAdmin(request: Request): Promise<string | null> {
-  const token = request.headers.get('authorization')?.match(/^Bearer (.+)$/)?.[1]
-  if (!token) return null
-  let db: SupabaseClient
+  const token = request.headers.get("authorization")?.match(/^Bearer (.+)$/)?.[1];
+  if (!token) return null;
   try {
-    db = await database()
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const db = supabaseAdmin as unknown as SupabaseClient;
+    const { data, error } = await db.auth.getUser(token);
+    return !error && data.user?.email_confirmed_at && isAdminEmail(data.user.email)
+      ? data.user.email!
+      : null;
   } catch {
-    return null
+    return null;
   }
-  const { data, error } = await db.auth.getUser(token)
-  return !error && data.user?.email_confirmed_at && isAdminEmail(data.user.email)
-    ? data.user.email!
-    : null
 }
+const DENY = { error: "Sign in with an existing GRYT admin account." };
 
-const DENY = { error: 'Sign in with an existing GRYT admin account.' }
-
-/** What the connect page needs to render, without revealing any secret value. */
 export async function stravaConnectConfig(request: Request) {
-  if (!(await requireAdmin(request))) return json(DENY, 403)
+  const actor = await requireAdmin(request);
+  if (!actor) return json(DENY, 403);
+  const secret = process.env.STRAVA_CLIENT_SECRET;
+  const stats = await clubStatsService().get();
   return json({
-    clientIdConfigured: Boolean(process.env['STRAVA_CLIENT_ID']),
-    clientSecretConfigured: Boolean(process.env['STRAVA_CLIENT_SECRET']),
-    refreshTokenConfigured: Boolean(process.env['STRAVA_CLUB_REFRESH_TOKEN']),
-    clientId: process.env['STRAVA_CLIENT_ID'] ?? null,
+    clientIdConfigured: Boolean(process.env.STRAVA_CLIENT_ID),
+    clientSecretConfigured: Boolean(secret),
+    clientId: process.env.STRAVA_CLIENT_ID ?? null,
     clubId: STRAVA_CLUB_ID,
-  })
+    oauthState: secret ? await createOAuthState(actor, secret) : null,
+    stats,
+  });
 }
 
-type TokenResponse = {
-  refresh_token?: string
-  access_token?: string
-  athlete?: { id?: number; firstname?: string; lastname?: string }
-}
-
-/**
- * Exchange the one-time Strava authorization code for a long-lived refresh
- * token. The athlete must belong to the GRYT club, otherwise the token is
- * useless for club reads and we refuse it rather than hand back a dead key.
- */
+/** Only the authenticated admin can connect; credentials never leave the server. */
 export async function stravaExchangeCode(request: Request) {
-  const actor = await requireAdmin(request)
-  if (!actor) return json(DENY, 403)
-
-  const clientId = process.env['STRAVA_CLIENT_ID']
-  const clientSecret = process.env['STRAVA_CLIENT_SECRET']
-  if (!clientId || !clientSecret) {
-    return json({ error: 'The Strava application ID and secret are not configured yet.' }, 503)
+  const actor = await requireAdmin(request);
+  if (!actor) return json(DENY, 403);
+  const secret = process.env.STRAVA_CLIENT_SECRET;
+  if (!secret || !process.env.STRAVA_CLIENT_ID) {
+    return json(
+      {
+        error:
+          "Configure the Strava application in the hosting provider's secure secrets settings.",
+      },
+      503,
+    );
   }
-
-  let body: { code?: unknown }
+  let body: { code?: unknown; state?: unknown };
   try {
-    body = await request.json()
+    body = await request.json();
   } catch {
-    return json({ error: 'Could not read the request.' }, 400)
+    return json({ error: "Invalid request." }, 400);
   }
-  const code = typeof body.code === 'string' ? body.code.trim() : ''
-  if (!code) return json({ error: 'Strava did not send an authorization code.' }, 400)
-
-  let token: TokenResponse
+  if (
+    typeof body.code !== "string" ||
+    body.code.length < 4 ||
+    body.code.length > 512 ||
+    typeof body.state !== "string" ||
+    body.state.length > 2048 ||
+    !(await verifyOAuthState(body.state, actor, secret))
+  )
+    return json({ error: "Approval expired or did not match this admin. Start again." }, 400);
   try {
-    const res = await fetch('https://www.strava.com/api/v3/oauth/token', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        client_id: clientId,
-        client_secret: clientSecret,
-        code,
-        grant_type: 'authorization_code',
-      }),
-    })
-    if (!res.ok) {
-      console.error(`Strava code exchange failed [${res.status}]`)
-      return json(
-        {
-          error:
-            res.status === 400
-              ? 'Strava rejected that approval. It may have already been used. Start again.'
-              : `Strava returned an error (${res.status}). Try again in a moment.`,
-        },
-        502,
-      )
-    }
-    token = (await res.json()) as TokenResponse
+    const stats = await clubStatsService().connect(body.code);
+    return json({ connected: true, stats });
   } catch {
-    return json({ error: 'Could not reach Strava. Check the connection and try again.' }, 502)
+    return json(
+      {
+        error:
+          "Could not save a verified connection. Confirm the migration, server secrets, and club access, then authorize again.",
+      },
+      502,
+    );
   }
-
-  if (!token.refresh_token || !token.access_token) {
-    return json({ error: 'Strava did not return a usable key. Start the approval again.' }, 502)
-  }
-
-  // Confirm this athlete can actually read the club before handing over a key.
-  let clubName: string | null = null
-  try {
-    const clubRes = await fetch(`https://www.strava.com/api/v3/clubs/${STRAVA_CLUB_ID}`, {
-      headers: { Authorization: `Bearer ${token.access_token}` },
-    })
-    if (!clubRes.ok) {
-      return json(
-        {
-          error:
-            'That Strava account cannot see the GRYT club. Sign in to Strava as an account that has joined the club, then try again.',
-        },
-        403,
-      )
-    }
-    const club = (await clubRes.json()) as { name?: string }
-    clubName = club.name ?? null
-  } catch {
-    return json({ error: 'Could not verify club access with Strava. Try again.' }, 502)
-  }
-
-  const athlete = token.athlete
-  return json({
-    refreshToken: token.refresh_token,
-    athleteName: [athlete?.firstname, athlete?.lastname].filter(Boolean).join(' ') || null,
-    clubName,
-  })
 }
