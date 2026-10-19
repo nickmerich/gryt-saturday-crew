@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: "22"
       - name: Install existing dependency set
-        run: bun install --no-save
+        run: bun install --frozen-lockfile
       - name: Typecheck
         run: bunx tsc --noEmit
       - name: Regression tests
