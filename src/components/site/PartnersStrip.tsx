@@ -6,11 +6,22 @@ export const homePartnersQuery = queryOptions({ queryKey: ['partners','all'], qu
 export function PartnersStrip() {
   const { data } = useSuspenseQuery(homePartnersQuery)
   if (!data.length) return null
-  return <section aria-label="Trusted by" className="border-y border-paper/15 bg-vintage px-6 py-7 sm:px-12">
-    <div className="mx-auto flex max-w-[1180px] flex-wrap items-center gap-x-8 gap-y-5">
-      <p className="eyebrow text-paper/55">Trusted by</p>
-      {data.map(p => <span key={p.name} className="font-condensed text-xl uppercase">{p.logo ? <img src={p.logo} alt={`${p.name} logo`} className="h-12 w-28 [object-fit:contain]" /> : p.name}</span>)}
-      <Link to="/partners" className="text-sm text-blue underline underline-offset-4 focus-visible:outline focus-visible:outline-blue">See all partners</Link>
+  return <section aria-label="Trusted by" className="relative border-y border-paper/10 bg-vintage px-5 py-10 sm:px-8 md:px-12 md:py-12">
+    <div className="mx-auto max-w-[1180px]">
+      <div className="mb-6 flex items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <span className="slash" aria-hidden="true" />
+          <p className="eyebrow text-paper/70">Trusted by</p>
+        </div>
+        <Link to="/partners" className="eyebrow text-paper/60 transition-colors hover:text-blue focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue">See all partners →</Link>
+      </div>
+      <ul className="grid grid-cols-2 gap-px border border-paper/10 bg-paper/10 sm:grid-cols-3 lg:grid-cols-6">
+        {data.map(p => <li key={p.name} className="flex h-24 items-center justify-center bg-vintage px-4 transition-colors hover:bg-ink">
+          {p.logo
+            ? <img src={p.logo} alt={`${p.name} logo`} className="max-h-12 w-auto max-w-[120px] [object-fit:contain] opacity-80 transition-opacity hover:opacity-100" />
+            : <span className="font-condensed text-lg uppercase tracking-[0.04em] text-paper/80 text-center leading-tight">{p.name}</span>}
+        </li>)}
+      </ul>
     </div>
   </section>
 }
