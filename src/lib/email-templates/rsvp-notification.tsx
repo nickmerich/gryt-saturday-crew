@@ -22,7 +22,7 @@ interface Props {
   firstTimer?: boolean
 }
 
-const NOTIFY_TO = 'merichnick@gmail.com'
+const NOTIFY_TO = 'nick@gryt.club'
 
 const Email = ({
   name = 'Someone',

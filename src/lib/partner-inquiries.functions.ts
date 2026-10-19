@@ -76,7 +76,7 @@ export const submitPartnerInquiry = createServerFn({ method: "POST" })
       const submittedAt = inserted?.created_at ?? new Date().toISOString();
       const result = await sendInternalTransactionalEmail({
         templateName: "partner-inquiry-notification",
-        recipientEmail: "merichnick@gmail.com",
+        recipientEmail: "nick@gryt.club",
         idempotencyKey: `partner-inquiry-${baseKey}`,
         templateData: {
           name: data.name,
