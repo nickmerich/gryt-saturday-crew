@@ -20,6 +20,7 @@ import { Route as InquireRouteImport } from './routes/inquire'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as MembersRouteImport } from './routes/members'
 import { Route as PlanRouteImport } from './routes/plan'
+import { Route as PressRouteImport } from './routes/press'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RacesRouteImport } from './routes/races'
 import { Route as RegisterRouteImport } from './routes/register'
@@ -132,6 +133,11 @@ const MembersRoute = MembersRouteImport.update({
 const PlanRoute = PlanRouteImport.update({
   id: '/plan',
   path: '/plan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PressRoute = PressRouteImport.update({
+  id: '/press',
+  path: '/press',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyRoute = PrivacyRouteImport.update({
@@ -456,6 +462,7 @@ export interface FileRoutesByFullPath {
   '/mcp': typeof McpRoute
   '/members': typeof MembersRouteWithChildren
   '/plan': typeof PlanRoute
+  '/press': typeof PressRoute
   '/privacy': typeof PrivacyRoute
   '/races': typeof RacesRoute
   '/register': typeof RegisterRoute
@@ -527,6 +534,7 @@ export interface FileRoutesByTo {
   '/mcp': typeof McpRoute
   '/members': typeof MembersRouteWithChildren
   '/plan': typeof PlanRoute
+  '/press': typeof PressRoute
   '/privacy': typeof PrivacyRoute
   '/races': typeof RacesRoute
   '/register': typeof RegisterRoute
@@ -599,6 +607,7 @@ export interface FileRoutesById {
   '/mcp': typeof McpRoute
   '/members': typeof MembersRouteWithChildren
   '/plan': typeof PlanRoute
+  '/press': typeof PressRoute
   '/privacy': typeof PrivacyRoute
   '/races': typeof RacesRoute
   '/register': typeof RegisterRoute
@@ -672,6 +681,7 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/members'
     | '/plan'
+    | '/press'
     | '/privacy'
     | '/races'
     | '/register'
@@ -743,6 +753,7 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/members'
     | '/plan'
+    | '/press'
     | '/privacy'
     | '/races'
     | '/register'
@@ -814,6 +825,7 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/members'
     | '/plan'
+    | '/press'
     | '/privacy'
     | '/races'
     | '/register'
@@ -886,6 +898,7 @@ export interface RootRouteChildren {
   McpRoute: typeof McpRoute
   MembersRoute: typeof MembersRouteWithChildren
   PlanRoute: typeof PlanRoute
+  PressRoute: typeof PressRoute
   PrivacyRoute: typeof PrivacyRoute
   RacesRoute: typeof RacesRoute
   RegisterRoute: typeof RegisterRoute
@@ -1022,6 +1035,13 @@ declare module '@tanstack/react-router' {
       path: '/plan'
       fullPath: '/plan'
       preLoaderRoute: typeof PlanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/press': {
+      id: '/press'
+      path: '/press'
+      fullPath: '/press'
+      preLoaderRoute: typeof PressRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy': {
@@ -1456,6 +1476,7 @@ const rootRouteChildren: RootRouteChildren = {
   McpRoute: McpRoute,
   MembersRoute: MembersRouteWithChildren,
   PlanRoute: PlanRoute,
+  PressRoute: PressRoute,
   PrivacyRoute: PrivacyRoute,
   RacesRoute: RacesRoute,
   RegisterRoute: RegisterRoute,
