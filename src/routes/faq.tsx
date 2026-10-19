@@ -109,7 +109,14 @@ export const Route = createFileRoute("/faq")({
       { property: "og:url", content: "https://grytrunclub.com/faq" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://grytrunclub.com/faq" }],
+    links: [
+      { rel: "canonical", href: "https://grytrunclub.com/faq" },
+      {
+        rel: "preload",
+        as: "style",
+        href: "https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Inter:wght@400;500&display=swap",
+      },
+    ],
     scripts: [
       {
         type: "application/ld+json",
