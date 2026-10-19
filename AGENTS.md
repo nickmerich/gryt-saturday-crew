@@ -8,3 +8,8 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Partners
+- Partner administration reuses verified existing admin-email access at the server boundary; partner tables remain service-only and public reads use a narrowly projected approved-only database function.
+- Partner submissions reuse partner_inquiries with additive source, city and status fields; the new intake sends no messages and applies a database-enforced daily email limit without changing legacy intake.
+- Partner logos use public partner-logos storage with uploads authorized server-side; preserve their aspect ratio and original colors.
