@@ -44,7 +44,7 @@ function PartnerDesk() {
   const partners = (query.data?.partners || []) as Partner[]
   const inquiries = (query.data?.inquiries || []) as PartnerInquiry[]
   const visible = inquiries.filter(r => (!status || r.status === status) && [r.name,r.organization,r.email].join(' ').toLowerCase().includes(search.toLowerCase()))
-  async function act(data: Parameters<typeof manage>[0]['data']) {
+  async function act(data: { action: 'list' } | { action: 'save'; partner: Partner } | { action: 'delete'; id: string } | { action: 'status'; id: string; status: PartnerInquiry['status'] } | { action: 'upload'; png: string }) {
     setBusy(true); setError(''); setMessage('')
     try { const result = await manage({ data }); await query.refetch(); await cache.invalidateQueries({ queryKey: ['partners'] }); setMessage('Saved. No message sent.'); return result }
     catch(e) { setError(e instanceof Error ? e.message : 'Not saved.'); return null }

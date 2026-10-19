@@ -16,7 +16,10 @@ export const getPartners = createServerFn({ method: 'GET' })
       return fetch(input, { ...init, headers })
     } } })
     const { data: rows, error } = await db.rpc('read_approved_partners', { home_only: data.home })
-    if (error) throw new Error('Partners are temporarily unavailable.')
+    if (error) {
+      if (data.home) return []
+      throw new Error('Partners are temporarily unavailable.')
+    }
     const partners = (rows || []) as PublicPartner[]
     // Workspace policy disallows public buckets. Sign only logos from approved rows.
     const { supabaseAdmin } = await import('@/integrations/supabase/client.server')
