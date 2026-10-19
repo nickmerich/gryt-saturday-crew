@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { isAdminEmail } from "@/lib/admin/allowlist";
@@ -27,6 +28,8 @@ async function authHeaders() {
   return { Authorization: `Bearer ${data.session.access_token}` };
 }
 function StravaConnectPage() {
+  const queryClient = useQueryClient();
+  const connectedStats = useRef<ClubStats | null>(null);
   const [email, setEmail] = useState<string | null | undefined>(undefined);
   const [inputEmail, setInputEmail] = useState("");
   const [config, setConfig] = useState<Config | null>(null);
@@ -59,7 +62,7 @@ function StravaConnectPage() {
       const res = await fetch("/api/admin/strava-connect", { headers: await authHeaders() });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? "Could not check the connection.");
-      if (!cancelled) setConfig(data);
+      if (!cancelled) setConfig({ ...data, stats: connectedStats.current ?? data.stats });
     })().catch(() => {
       if (!cancelled) setMessage("Could not check the connection. Reload to retry.");
     });
@@ -85,6 +88,8 @@ function StravaConnectPage() {
     exchange.current
       .then((result) => {
         if (!cancelled) {
+          connectedStats.current = result.stats;
+          queryClient.setQueryData(["strava-club-stats", "verified-v2"], result.stats);
           setConfig((old) => (old ? { ...old, stats: result.stats } : old));
           setMessage(
             `Connected and saved securely. Verified ${result.stats.members} Strava members.`,
@@ -100,7 +105,7 @@ function StravaConnectPage() {
     return () => {
       cancelled = true;
     };
-  }, [allowed, approval]);
+  }, [allowed, approval, queryClient]);
 
   async function signIn(event: React.FormEvent) {
     event.preventDefault();
