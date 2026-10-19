@@ -11,7 +11,7 @@ export function PartnersStrip() {
       <div className="mb-6 flex items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <span className="slash" aria-hidden="true" />
-          <p className="eyebrow text-paper/70">Trusted by</p>
+          <h2 className="display-condensed uppercase text-2xl md:text-3xl tracking-[0.04em] text-paper">Trusted by</h2>
         </div>
         <Link to="/partners" className="eyebrow text-paper/60 transition-colors hover:text-blue focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue">See all partners →</Link>
       </div>
