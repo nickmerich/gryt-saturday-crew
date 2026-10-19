@@ -36,6 +36,7 @@ import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } fr
 import { Route as AdminCheckinRouteImport } from './routes/admin.checkin'
 import { Route as AdminInquiriesRouteImport } from './routes/admin.inquiries'
 import { Route as AdminMembersRouteImport } from './routes/admin.members'
+import { Route as AdminPartnersRouteImport } from './routes/admin.partners'
 import { Route as AdminRosterRouteImport } from './routes/admin.roster'
 import { Route as CheckoutReturnRouteImport } from './routes/checkout.return'
 import { Route as MembersKeyRouteImport } from './routes/members.$key'
@@ -216,6 +217,11 @@ const AdminInquiriesRoute = AdminInquiriesRouteImport.update({
 const AdminMembersRoute = AdminMembersRouteImport.update({
   id: '/admin/members',
   path: '/admin/members',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminPartnersRoute = AdminPartnersRouteImport.update({
+  id: '/admin/partners',
+  path: '/admin/partners',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRosterRoute = AdminRosterRouteImport.update({
@@ -484,6 +490,7 @@ export interface FileRoutesByFullPath {
   '/admin/checkin': typeof AdminCheckinRoute
   '/admin/inquiries': typeof AdminInquiriesRoute
   '/admin/members': typeof AdminMembersRoute
+  '/admin/partners': typeof AdminPartnersRoute
   '/admin/roster': typeof AdminRosterRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/members/$key': typeof MembersKeyRoute
@@ -557,6 +564,7 @@ export interface FileRoutesByTo {
   '/admin/checkin': typeof AdminCheckinRoute
   '/admin/inquiries': typeof AdminInquiriesRoute
   '/admin/members': typeof AdminMembersRoute
+  '/admin/partners': typeof AdminPartnersRoute
   '/admin/roster': typeof AdminRosterRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/members/$key': typeof MembersKeyRoute
@@ -631,6 +639,7 @@ export interface FileRoutesById {
   '/admin/checkin': typeof AdminCheckinRoute
   '/admin/inquiries': typeof AdminInquiriesRoute
   '/admin/members': typeof AdminMembersRoute
+  '/admin/partners': typeof AdminPartnersRoute
   '/admin/roster': typeof AdminRosterRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/members/$key': typeof MembersKeyRoute
@@ -706,6 +715,7 @@ export interface FileRouteTypes {
     | '/admin/checkin'
     | '/admin/inquiries'
     | '/admin/members'
+    | '/admin/partners'
     | '/admin/roster'
     | '/checkout/return'
     | '/members/$key'
@@ -779,6 +789,7 @@ export interface FileRouteTypes {
     | '/admin/checkin'
     | '/admin/inquiries'
     | '/admin/members'
+    | '/admin/partners'
     | '/admin/roster'
     | '/checkout/return'
     | '/members/$key'
@@ -852,6 +863,7 @@ export interface FileRouteTypes {
     | '/admin/checkin'
     | '/admin/inquiries'
     | '/admin/members'
+    | '/admin/partners'
     | '/admin/roster'
     | '/checkout/return'
     | '/members/$key'
@@ -926,6 +938,7 @@ export interface RootRouteChildren {
   AdminCheckinRoute: typeof AdminCheckinRoute
   AdminInquiriesRoute: typeof AdminInquiriesRoute
   AdminMembersRoute: typeof AdminMembersRoute
+  AdminPartnersRoute: typeof AdminPartnersRoute
   AdminRosterRoute: typeof AdminRosterRoute
   CheckoutReturnRoute: typeof CheckoutReturnRoute
   ResourcesBuildARunningBaseRoute: typeof ResourcesBuildARunningBaseRoute
@@ -1160,6 +1173,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/members'
       fullPath: '/admin/members'
       preLoaderRoute: typeof AdminMembersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/partners': {
+      id: '/admin/partners'
+      path: '/admin/partners'
+      fullPath: '/admin/partners'
+      preLoaderRoute: typeof AdminPartnersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/roster': {
@@ -1513,6 +1533,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminCheckinRoute: AdminCheckinRoute,
   AdminInquiriesRoute: AdminInquiriesRoute,
   AdminMembersRoute: AdminMembersRoute,
+  AdminPartnersRoute: AdminPartnersRoute,
   AdminRosterRoute: AdminRosterRoute,
   CheckoutReturnRoute: CheckoutReturnRoute,
   ResourcesBuildARunningBaseRoute: ResourcesBuildARunningBaseRoute,
