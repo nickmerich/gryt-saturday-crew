@@ -11,6 +11,7 @@ Canonical site: https://grytrunclub.com
 - [Home](https://grytrunclub.com/): What GRYT is, the next Saturday run details, what to expect, first-timer info, and the RSVP form.
 - [Calendar](https://grytrunclub.com/calendar): Month view of upcoming Saturday 7 AM runs with a calendar download.
 - [FAQ](https://grytrunclub.com/faq): Common questions about pace, parking, kids, strollers, dogs, weather, and what to bring.
+- [Press](https://grytrunclub.com/press): Coverage, interviews, and event listings featuring GRYT Run Club.
 - [Races](https://grytrunclub.com/races): Pittsburgh-area races the crew runs together.
 - [Waiver](https://grytrunclub.com/waiver): Liability waiver form for runners.
 - [Resources](https://grytrunclub.com/resources): Hub for playbooks, conversations, and graphics for runners and other run club organizers.

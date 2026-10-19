@@ -249,6 +249,12 @@ export function SiteFooter() {
                 About
               </a>
               <a
+                href="/press"
+                className="eyebrow text-paper/75 hover:text-blue transition-colors"
+              >
+                Press
+              </a>
+              <a
                 href="/calendar"
                 className="eyebrow text-paper/75 hover:text-blue transition-colors"
               >

@@ -3977,6 +3977,13 @@ function Landing() {
     <main className="bg-ink text-paper">
       <Nav />
       <Hero />
+      <div className="bg-ink border-b border-paper/10 px-6 py-3.5 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+        <span className="eyebrow text-paper/50">Featured in</span>
+        {["The 51st", "TribLIVE", "The Founder Exhale"].map((o) => (
+          <span key={o} className="display-condensed text-paper text-[17px] uppercase tracking-[0.05em]">{o}</span>
+        ))}
+        <a href="/press" className="eyebrow text-blue hover:text-paper transition-colors">View all coverage →</a>
+      </div>
       <Marquee />
       <GoogleReviewsBlock />
       <RSVP />
