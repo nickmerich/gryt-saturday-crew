@@ -646,8 +646,8 @@ function Marquee() {
   ];
   const Row = ({ ariaHidden = false }: { ariaHidden?: boolean }) => (
     <span className="flex" aria-hidden={ariaHidden}>
-      {items.map((t) => (
-        <span key={t} className="flex items-center">
+      {items.map((t, i) => (
+        <span key={`${i}-${t}`} className="flex items-center">
           <span
             className="display-condensed text-ink px-5 text-[19px] tracking-[0.05em]"
             style={{ fontWeight: 700 }}
