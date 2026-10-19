@@ -615,6 +615,8 @@ function Hero() {
               src={heroImgAsset.url}
               alt="GRYT runner at night — motion, grit, and forward momentum"
               className="block w-full h-[300px] md:h-[520px] object-cover"
+              fetchpriority="high"
+              loading="eager"
             />
             <div className="absolute left-0 right-0 bottom-0 flex items-end justify-between gap-3 px-4 pt-5 pb-4 bg-gradient-to-t from-black/85 to-transparent">
               <span className="display-condensed text-paper text-[22px] leading-none">
@@ -2119,6 +2121,7 @@ function TheRun() {
             src={circleImg}
             alt="On the trail with GRYT"
             className="relative block w-full h-[440px] object-cover border border-paper/10"
+            loading="lazy"
           />
         </div>
         <div className="flex-1 min-w-[280px] basis-[380px]">
@@ -2292,6 +2295,7 @@ function Founders() {
               alt="Laura and Nick Merich at the Pittsburgh Marathon finish"
               className="block w-full h-[420px] object-cover"
               style={{ objectPosition: "center 20%" }}
+              loading="lazy"
             />
             <div className="absolute left-0 right-0 bottom-0 px-4 py-4 bg-gradient-to-t from-black/85 to-transparent flex items-center justify-between gap-2">
               <span className="display-condensed text-paper text-[20px]">Laura & Nick</span>
@@ -2337,6 +2341,7 @@ function Community() {
             alt="The GRYT crew at the trailhead before a Saturday run"
             className="block w-full h-[clamp(280px,42vw,520px)] object-cover"
             style={{ objectPosition: "center 38%" }}
+            loading="lazy"
           />
           <div className="absolute left-0 right-0 bottom-0 px-6 py-6 bg-gradient-to-t from-black/85 to-transparent flex items-end justify-between gap-4 flex-wrap">
             <span className="display-condensed text-paper text-[clamp(22px,3vw,38px)]">
@@ -2355,46 +2360,55 @@ function Community() {
             src={photo2.url}
             alt="Sunny morning crew before heading out"
             className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15 photo-hover"
+            loading="lazy"
           />
           <img
             src={photo3.url}
             alt="Cooling down on the trail after a Saturday run"
             className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15 photo-hover"
+            loading="lazy"
           />
           <img
             src={photoBridge.url}
             alt="The crew running over the bridge on the Montour Trail"
             className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15 photo-hover"
+            loading="lazy"
           />
           <img
             src={photo5.url}
             alt="Three runners heading down the trail at sunrise"
             className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15 photo-hover"
+            loading="lazy"
           />
           <img
             src={photo7.url}
             alt="Crew in the lot before a Saturday run"
             className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15 photo-hover"
+            loading="lazy"
           />
           <img
             src={photo8.url}
             alt="Big crew huddled up after a Saturday run"
             className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15 photo-hover"
+            loading="lazy"
           />
           <img
             src={photo1.url}
             alt="Crew posted up at the trailhead before the Saturday run"
             className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15 photo-hover"
+            loading="lazy"
           />
           <img
             src={photo4.url}
             alt="Runners rolling out on the Montour Trail at first light"
             className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15 photo-hover"
+            loading="lazy"
           />
           <img
             src={photo6.url}
             alt="Post-run coffee and hangs in the lot"
             className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15 photo-hover"
+            loading="lazy"
           />
         </div>
 
