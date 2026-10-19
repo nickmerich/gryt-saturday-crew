@@ -77,7 +77,7 @@ function ErrorComponent({ error, reset }: { error: unknown; reset: () => void })
   );
 }
 
-export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({ 
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -102,17 +102,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/d9453e83-accf-45b7-aa22-28bb004995ee" },
     ],
     links: [
-      { rel: "stylesheet", href: appCss },
       { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32.png" },
       { rel: "icon", type: "image/png", sizes: "192x192", href: "/icon-192.png" },
       { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
       { rel: "manifest", href: "/site.webmanifest" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap",
-      },
     ],
     scripts: [
       {
@@ -149,6 +144,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   errorComponent: ErrorComponent,
 });
 
+const GOOGLE_FONTS_URL =
+  "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap";
+
 function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
@@ -156,7 +154,42 @@ function RootShell({ children }: { children: ReactNode }) {
         {/* @ts-expect-error Impact requires the non-standard `value` attribute */}
         <meta name="impact-site-verification" value="d0fcc171-1f08-4de2-b194-22ac376b0a1f" />
         <HeadContent />
+        {/* Non-blocking load for app CSS — avoids render-blocking on initial paint */}
+        <link
+          rel="preload"
+          href={appCss}
+          // @ts-expect-error `as` is a valid preload attribute not in React's LinkHTMLAttributes
+          as="style"
+          onLoad={(e) => {
+            const el = e.currentTarget as HTMLLinkElement;
+            el.onload = null;
+            el.rel = "stylesheet";
+          }}
+        />
+        <noscript>
+          <link rel="stylesheet" href={appCss} />
+        </noscript>
+        {/* Non-blocking Google Fonts load */}
+        <link
+          rel="preload"
+          href={GOOGLE_FONTS_URL}
+          // @ts-expect-error `as` is a valid preload attribute not in React's LinkHTMLAttributes
+          as="style"
+          onLoad={(e) => {
+            const el = e.currentTarget as HTMLLinkElement;
+            el.onload = null;
+            el.rel = "stylesheet";
+          }}
+        />
+        <noscript>
+          <link rel="stylesheet" href={GOOGLE_FONTS_URL} />
+        </noscript>
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-P32BTLV84G"></script>
+      </head>
+      <body>
+        {children}
+        <Scripts />
+        {/* GA4 config deferred to body — removes render-blocking inline script from head */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -167,10 +200,6 @@ function RootShell({ children }: { children: ReactNode }) {
             `,
           }}
         />
-      </head>
-      <body>
-        {children}
-        <Scripts />
       </body>
     </html>
   );
