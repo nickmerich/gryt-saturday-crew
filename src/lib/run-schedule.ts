@@ -110,7 +110,9 @@ export function nextSaturdayIcsDataUrl(from: Date = nyNow()): string {
   const runNum = nextRunNumber(from);
   const dtStart = `${y}${m}${d}T070000`;
   const dtEnd = `${y}${m}${d}T080000`;
-  const dtStamp = new Date().toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+  // This static series export has a fixed revision timestamp. Using the render
+  // clock here changes the href between SSR and hydration (and on every visit).
+  const dtStamp = new Date(RUN_ANCHOR_MS).toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
   const uid = `gryt-run-${y}${m}${d}@grytrunclub.com`;
   const esc = (s: string) => s.replace(/[\\,;]/g, (c) => "\\" + c).replace(/\n/g, "\\n");
   const lines = [

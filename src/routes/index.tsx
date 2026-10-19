@@ -2224,7 +2224,6 @@ function Community() {
         <div className="mt-5 border border-paper/15 p-5 md:p-7">
           <div className="eyebrow eyebrow-blue mb-4">Live from the club · Strava</div>
           <iframe
-            allowTransparency
             frameBorder={0}
             height={454}
             scrolling="no"
