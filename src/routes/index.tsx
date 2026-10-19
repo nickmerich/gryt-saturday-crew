@@ -410,7 +410,7 @@ function Nav() {
   const links: Array<[string, string]> = [
     ["#details", "Let's Run"],
     ["#first", "Start Here"],
-    ["#community", "Community"],
+    ["/about", "About"],
     ["/resources", "Resources"],
   ];
   return (
@@ -431,13 +431,11 @@ function Nav() {
         </div>
         <div className="flex items-center gap-2">
           <a
-            href="https://www.strava.com/clubs/1708552"
-            target="_blank"
-            rel="noopener"
+            href="#join"
             className="bg-blue text-ink px-4 sm:px-5 py-3 text-xs font-bold uppercase tracking-[0.1em] hover:bg-paper transition-colors"
             style={{ fontFamily: "var(--font-body)" }}
           >
-            Join on Strava
+            RSVP Saturday
           </a>
           <button
             type="button"
@@ -474,160 +472,20 @@ function Nav() {
 }
 
 function Hero() {
-  const regularsLabel = useRegularsLabel();
-  const stats: Array<[string, string]> = [
-    [regularsLabel, "regulars each Saturday"],
-    [STRAVA_MEMBERS_LABEL, "runners on Strava"],
-    [INSTAGRAM_LABEL, "followers on Instagram"],
-  ];
-
-  // Sticky 50/50 A/B on the hero headline + subcopy. Variant A is the current
-  // "You used to have a team" line; variant B leads with the specific
-  // Saturday commitment. Falls back to A during SSR and until the hook
-  // hydrates so the layout never shifts.
-  const variant = useHeroVariant();
-  const isB = variant === "b";
-
   return (
-    <section
-      id="top"
-      data-hero-variant={variant ?? "a"}
-      className="relative overflow-hidden text-paper bg-ink py-10 md:py-24 lg:py-28 px-6 sm:px-12 lg:px-24"
-    >
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(ellipse at 18% 22%, rgba(70,70,70,0.5), transparent 55%), radial-gradient(ellipse at 88% 85%, rgba(4,4,4,0.95), transparent 60%), #0a0a0a",
-        }}
-      />
-      <div
-        className="absolute inset-0 pointer-events-none mix-blend-overlay"
-        style={{
-          backgroundImage:
-            "radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1.2px), radial-gradient(rgba(0,0,0,0.55) 1px, transparent 1.2px)",
-          backgroundSize: "3px 3px, 5px 5px",
-        }}
-      />
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(82deg, transparent 12%, rgba(137,207,240,0.6) 12.4%, rgba(137,207,240,0.6) 13.0%, transparent 13.4%), linear-gradient(82deg, transparent 63%, rgba(137,207,240,0.4) 63.4%, rgba(137,207,240,0.4) 64.0%, transparent 64.4%)",
-        }}
-      />
-
-      <div className="relative max-w-[1240px] mx-auto flex flex-wrap items-center gap-8 lg:gap-16">
-        <div className="flex-1 min-w-[300px] basis-[480px]">
-          <div className="eyebrow-blue eyebrow mb-4 md:mb-6 flex items-center gap-2.5 flex-wrap">
-            <span className="w-2 h-2 bg-blue rounded-full" />
-            THE GO-TO SOUTH HILLS PITTSBURGH PARENTS RUN CLUB
-          </div>
-          <h1 className="display-condensed text-paper text-[clamp(38px,7.2vw,108px)] leading-[0.9] [word-spacing:-0.02em] break-words">
-            {isB ? (
-              <>
-                Do hard things
-                <br />
-                <span className="relative inline-block">
-                  together.
-                  <span
-                    className="absolute left-[-2px] right-[-2px] -bottom-[0.1em] h-[0.09em] bg-blue"
-                    style={{ transform: "skewX(-8deg)" }}
-                  />
-                </span>
-              </>
-            ) : (
-              <>
-                A RUN CLUB FOR BUSY,
-                <br />
-                <span className="relative inline-block">
-                  ATHLETIC PARENTS.
-                  <span
-                    className="absolute left-[-2px] right-[-2px] -bottom-[0.1em] h-[0.09em] bg-blue"
-                    style={{ transform: "skewX(-8deg)" }}
-                  />
-                </span>
-
-              </>
-            )}
-          </h1>
-
-          <div className="mt-4 md:mt-7 max-w-[540px] flex flex-col gap-3">
-            <p className="text-[15px] md:text-lg leading-[1.5] md:leading-[1.55] text-paper/85">
-              {isB
-                ? "GRYT is a free Pittsburgh running group and South Hills run club — 7 AM sharp Saturdays on the Montour / Peters Trail in McMurray. Former athletes. Busy parents. Comeback runners. Same trail, same time, every week."
-                : "GRYT is a free Pittsburgh running group and South Hills run club for former athletes, busy parents, and comeback runners who miss having a team. We meet every Saturday at 7 AM on the Montour / Peters Trail in McMurray. Come walk, jog, or run and do the hard thing together."}
-            </p>
-            <p className="text-base md:text-[17px] font-semibold leading-[1.5] text-paper">
-              Show up. Do the work. Earn your day.
-            </p>
-          </div>
-
-          <div className="mt-5 md:mt-7 flex flex-wrap border border-paper/20 max-w-[560px]">
-            {stats.map(([n, l], i) => (
-              <div
-                key={l}
-                className={`flex-1 basis-[104px] px-3 py-3 md:px-4 md:py-4 ${
-                  i !== stats.length - 1 ? "border-r border-paper/15" : ""
-                }`}
-              >
-                <div className="display-condensed text-blue text-[26px] md:text-[34px] leading-[0.85]">{n}</div>
-                <div className="text-[11px] font-semibold tracking-[0.06em] text-paper/70 mt-1.5 uppercase">
-                  {l}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-5 md:mt-6 border-l-2 border-blue pl-3">
-            <div className="eyebrow text-blue">Next run</div>
-            <p className="text-[15px] md:text-base text-paper mt-1 leading-[1.45]">
-              {nextSaturdayLabelLong()} · 212 Valley Brook Road, McMurray (Montour / Peters Trail)
-            </p>
-          </div>
-
-          <div className="mt-5 md:mt-6 flex flex-wrap gap-3">
-            <a href="#join" className="btn-primary">
-              RSVP This Saturday →
-            </a>
-            <a
-              href={STRAVA_CLUB}
-              target="_blank"
-              rel="noopener"
-              className="btn-ghost"
-            >
-              JOIN THE STRAVA
-            </a>
-          </div>
-          <p className="mt-3 text-sm text-paper/80">
-            <a
-              href="#first"
-              className="underline underline-offset-4 decoration-blue hover:text-blue transition-colors"
-            >
-              First time? Start here
-            </a>
-            <span className="text-paper/55"> · No membership, no fee, no training plan required.</span>
-          </p>
+    <section id="top" className="relative isolate overflow-hidden bg-ink text-paper px-6 py-16 sm:px-12 md:py-24 lg:px-24">
+      <img src={heroImg} alt="The GRYT crew on the Montour / Peters Trail" className="absolute inset-0 -z-20 h-full w-full object-cover" fetchPriority="high" />
+      <div className="absolute inset-0 -z-10 bg-ink/70" aria-hidden="true" />
+      <div className="mx-auto max-w-[1180px]">
+        <p className="eyebrow text-blue mb-5">McMurray · Saturdays · 7 AM</p>
+        <h1 className="display-condensed text-[56px] leading-[0.95] sm:text-[80px] md:text-[104px]">GRYT Run Club</h1>
+        <p className="display-condensed mt-5 text-[28px] leading-[1.1] md:text-[40px]">Do hard things together.</p>
+        <p className="mt-5 max-w-[460px] text-base leading-relaxed text-paper/90">Free Saturday miles on the Montour / Peters Trail. Walk, jog, or run. Come as you are.</p>
+        <div className="mt-7 flex flex-wrap items-center gap-5">
+          <a href="#join" className="btn-primary">RSVP This Saturday →</a>
+          <a href="#first" className="text-sm text-paper underline underline-offset-4 decoration-blue hover:text-blue">First time?</a>
         </div>
-
-        <div className="relative flex-[0_1_400px] min-w-[260px]">
-          <div className="absolute left-[18px] top-[18px] -right-[18px] -bottom-[18px] bg-blue" />
-          <div className="relative overflow-hidden border border-paper/10">
-            <img
-              src={heroImgAsset.url}
-              alt="GRYT runner at night — motion, grit, and forward momentum"
-              className="block w-full h-[300px] md:h-[520px] object-cover"
-            />
-            <div className="absolute left-0 right-0 bottom-0 flex items-end justify-between gap-3 px-4 pt-5 pb-4 bg-gradient-to-t from-black/85 to-transparent">
-              <span className="display-condensed text-paper text-[22px] leading-none">
-                Montour / Peters Trail
-              </span>
-              <span className="text-[11px] font-semibold tracking-[0.16em] uppercase text-ink bg-blue px-2 py-1.5 whitespace-nowrap">
-                Sat · 7 AM
-              </span>
-            </div>
-          </div>
-        </div>
+        <p className="mt-5 text-sm text-paper/80">Next: {nextSaturdayLabelLong()}</p>
       </div>
     </section>
   );
@@ -1458,107 +1316,26 @@ function WhoItsFor() {
 
 function FirstTimer() {
   const steps = [
-    {
-      n: "1",
-      h: "Park at the trailhead.",
-      b: <>Pull into <a href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Road%2C%20McMurray%2C%20PA" target="_blank" rel="noopener noreferrer" className="underline hover:text-ink">212 Valley Brook Road in McMurray, Peters Township</a>. Parking is free and easy. Look for the group near the trail sign. If you are new, come 10 minutes early. Someone will say hey.</>,
-    },
-    {
-      n: "2",
-      h: "We circle up at 7.",
-      b: "Quick names, quick route, quick check for new people. Nothing formal. Just enough so you know who you are running with. Then we move.",
-    },
-    {
-      n: "3",
-      h: "You find your pace.",
-      b: "Walkers, joggers, and runners naturally split into small groups. You can push, cruise, or take it easy. Nobody gets dropped. Nobody cares what your watch says.",
-    },
-    {
-      n: "4",
-      h: "We finish together.",
-      b: "The route is an out-and-back, so everyone ends up back at the same place. Stay for coffee if you can. That is where strangers become regulars.",
-    },
+    { n: "01", h: "Arrive at 6:50.", b: "212 Valley Brook Road, McMurray. Look for the group near the trail sign." },
+    { n: "02", h: "Find your pace.", b: "We start at 7 AM. Walk, jog, or run. Turn around whenever you need." },
+    { n: "03", h: "Stay for coffee.", b: "Finish back at the lot. Hang out after the miles if you can." },
   ];
-
   return (
-    <section
-      id="first"
-      className="bg-blue text-ink py-14 md:py-20 px-6 sm:px-12 lg:px-24"
-    >
-      <div className="max-w-[1180px] mx-auto">
-        <div className="eyebrow text-ink/70 mb-4">First time?</div>
-        <h2 className="display-condensed text-ink text-[clamp(38px,5.4vw,76px)] mb-3">
-          Your first Saturday is simple.
-        </h2>
-        <p className="text-lg leading-[1.55] text-ink font-medium max-w-[560px] mb-12">
-          No insider rules. No awkward guessing. Here is exactly what happens.
-        </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[2px] bg-ink border-2 border-ink">
-          {steps.map((s) => (
-            <div key={s.n} className="bg-blue p-7 md:p-9">
-              <div className="display-condensed text-ink text-6xl leading-[0.85] mb-4">{s.n}</div>
-              <h3 className="display-condensed text-ink text-[24px] mb-2.5">{s.h}</h3>
-              <p className="text-[15px] leading-[1.6] text-[#13313f]">{s.b}</p>
-            </div>
-          ))}
+    <section id="first" className="bg-blue text-ink px-6 py-12 sm:px-12 md:py-16 lg:px-24">
+      <div className="mx-auto max-w-[1180px]">
+        <p className="eyebrow text-ink/70 mb-4">First time?</p>
+        <h2 className="display-condensed text-[36px] leading-[1] md:text-[52px]">Your first Saturday is simple.</h2>
+        <div className="mt-8 grid gap-6 md:grid-cols-3">
+          {steps.map(s => <div key={s.n} className="border-t border-ink/30 pt-5">
+            <span className="text-sm text-ink/60">{s.n}</span>
+            <h3 className="display-condensed mt-3 text-2xl leading-tight">{s.h}</h3>
+            <p className="mt-3 text-sm leading-relaxed text-ink/80">{s.b}</p>
+          </div>)}
         </div>
-        <div className="mt-[2px] border-2 border-t-0 border-ink bg-ink text-paper p-7 md:p-9 grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
-          <div>
-            <h3 className="display-condensed text-paper text-[24px] mb-2.5 uppercase">Sign the waiver before you come.</h3>
-            <p className="text-[15px] leading-[1.6] text-paper/75">
-              One signature covers every gryt run activity through Dec 31, 2026. Takes about a minute. Do it from your couch so Saturday morning is just showing up.
-            </p>
-          </div>
-          <Link
-            to="/waiver"
-            className="inline-block text-[13px] font-bold tracking-[0.1em] uppercase px-6 py-4 bg-blue text-ink text-center hover:bg-paper transition-colors whitespace-nowrap"
-          >
-            Sign the 2026 waiver →
-          </Link>
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-ink/30 pt-6">
+          <p className="text-sm text-ink/80">Sign your waiver before you come.</p>
+          <Link to="/waiver" className="text-sm font-semibold underline underline-offset-4 hover:text-ink/70">Sign the 2026 waiver →</Link>
         </div>
-        
-        <div className="mt-8 border-2 border-ink p-6 md:p-8 max-w-[720px]">
-          <p className="text-[15px] leading-[1.6] text-[#13313f]">
-            <span className="font-semibold">First time? Come 10 minutes early.</span> Nick, Laura, or one of the regulars will introduce you to someone before we start.
-          </p>
-        </div>
-
-        <div className="mt-10 border-2 border-ink">
-          <div className="border-b-2 border-ink bg-ink px-6 py-3 md:px-8">
-            <span className="eyebrow text-paper/80">First-timer questions</span>
-          </div>
-          <dl className="m-0 grid grid-cols-1 gap-[2px] bg-ink md:grid-cols-3">
-            {[
-              {
-                q: "Where do I park?",
-                a: "212 Valley Brook Road in McMurray. Free lot at the trailhead, always room at 7 AM. Look for the group near the trail sign.",
-              },
-              {
-                q: "What happens at mile two?",
-                a: "The pack has spread into small groups and you are talking to somebody. Mile two is where it stops feeling like a workout and starts feeling like a Saturday.",
-              },
-              {
-                q: "Is there a required pace?",
-                a: "No. Walkers, joggers, and runners all start together and nobody gets dropped. Turn around whenever you want — the route is an out-and-back.",
-              },
-            ].map((f) => (
-              <div key={f.q} className="bg-blue p-6 md:p-7">
-                <dt className="display-condensed text-ink text-[20px] mb-2">{f.q}</dt>
-                <dd className="m-0 text-[15px] leading-[1.6] text-[#13313f]">{f.a}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-        <div className="mt-10 flex flex-col sm:flex-row flex-wrap gap-3">
-          <a
-            href="#join"
-            className="inline-block text-sm font-bold tracking-[0.1em] uppercase px-7 py-4 bg-ink text-paper hover:bg-white hover:text-ink transition-colors"
-            style={{ fontFamily: "var(--font-body)" }}
-          >
-            I'm coming this Saturday
-          </a>
-        </div>
-        <InlineWaiver />
       </div>
     </section>
   );
@@ -2827,7 +2604,6 @@ function Footer() {
         </div>
         <div className="border-t border-paper/15 pt-10 pb-2" />
 
-        <RecommendationsBar />
         <div className="flex justify-between gap-4 pt-8 flex-wrap eyebrow text-paper/40">
           <span>© 2026 GRYT Run Club. All rights reserved.</span>
           <span>{"\n"}</span>
@@ -3974,44 +3750,25 @@ function RegionBand() {
 }
 
 function Landing() {
-
-
   return (
     <main className="bg-ink text-paper">
       <Nav />
       <Hero />
-      <div className="bg-ink border-b border-paper/10 px-6 py-3.5 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-        <span className="eyebrow text-paper/50">Featured in</span>
-        {["The 51st", "TribLIVE", "The Founder Exhale"].map((o) => (
-          <span key={o} className="display-condensed text-paper text-[17px] uppercase tracking-[0.05em]">{o}</span>
-        ))}
-        <a href="/press" className="eyebrow text-blue hover:text-paper transition-colors">View all coverage →</a>
-      </div>
-      <Marquee />
-      <GoogleReviewsBlock />
-      <PartnersStrip />
       <RSVP />
+      <FirstTimer />
       <SaturdayWeather />
       <MontourRouteMap />
-      <ClubStats />
-      <ResourcesBlock />
-
-      <CorePromise />
-      <WeeklyRhythm />
-      <WhoItsFor />
-      <MemberNamesMarquee />
-      <FirstTimer />
-      <TheRun />
-      <Founders />
-      <Testimonial />
-      <Community />
-      <RegionBand />
-      <Beliefs />
-      <FAQ />
-      <FinalCTA />
-      <SupportBlock />
-      <PaymentTestModeBanner />
-      <NewsletterBar />
+      <PartnersStrip />
+      <section className="border-t border-paper/15 px-6 py-10 sm:px-12 lg:px-24" aria-label="More from GRYT">
+        <div className="mx-auto flex max-w-[1180px] flex-wrap gap-x-8 gap-y-4">
+          <Link to="/about" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Meet Laura & Nick →</Link>
+          <Link to="/faq" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Run questions →</Link>
+          <Link to="/resources" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Running guides →</Link>
+          <Link to="/press" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Press & conversations →</Link>
+          <Link to="/shop" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Shop →</Link>
+          <a href={STRAVA_CLUB} target="_blank" rel="noopener noreferrer" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Strava club →</a>
+        </div>
+      </section>
       <Footer />
     </main>
   );

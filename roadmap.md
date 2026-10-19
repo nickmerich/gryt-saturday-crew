@@ -1,5 +1,9 @@
 # Roadmap
 
+## Homepage simplification
+- [x] Focus homepage on the run, RSVP, arrival steps, weather and approved trail map; link to secondary pages.
+- [x] Check simplified homepage on phone and desktop: no horizontal overflow, RSVP anchor and mobile menu verified; build OK. No real sign-up submitted.
+
 ## Partners page
 - [x] Add private partner approval, logo upload and inquiry inbox using existing admin access.
 - [x] Add public partners page, conditional homepage strip, footer and sitemap links.
