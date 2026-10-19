@@ -8,6 +8,7 @@ import { SaturdayWeather } from "@/components/site/SaturdayWeather";
 import { MontourRouteMap } from "@/components/site/MontourRouteMap";
 import { ClubStats } from "@/components/site/ClubStats";
 import { useRegularsLabel } from "@/hooks/useRegularsLabel";
+import { PartnersStrip, homePartnersQuery } from "@/components/site/PartnersStrip";
 
 import { submitRecommendation } from "@/lib/recommendations.functions";
 import {
@@ -118,6 +119,7 @@ const skippedThisWeek = () => {
 
 
 export const Route = createFileRoute("/")({
+  loader: ({ context }) => context.queryClient.ensureQueryData(homePartnersQuery),
   head: () => ({
     meta: [
       { title: SITE_TITLE },
@@ -2784,6 +2786,7 @@ function Footer() {
               >
                 Privacy
               </Link>
+              <Link to="/partners" className="eyebrow text-paper/75 hover:text-blue transition-colors">Partners</Link>
               <Link
                 to="/terms"
                 className="eyebrow text-paper/75 hover:text-blue transition-colors"
@@ -3986,6 +3989,7 @@ function Landing() {
       </div>
       <Marquee />
       <GoogleReviewsBlock />
+      <PartnersStrip />
       <RSVP />
       <SaturdayWeather />
       <MontourRouteMap />

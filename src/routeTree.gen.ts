@@ -19,6 +19,7 @@ import { Route as FaqRouteImport } from './routes/faq'
 import { Route as InquireRouteImport } from './routes/inquire'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as MembersRouteImport } from './routes/members'
+import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as PlanRouteImport } from './routes/plan'
 import { Route as PressRouteImport } from './routes/press'
 import { Route as PrivacyRouteImport } from './routes/privacy'
@@ -35,6 +36,7 @@ import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } fr
 import { Route as AdminCheckinRouteImport } from './routes/admin.checkin'
 import { Route as AdminInquiriesRouteImport } from './routes/admin.inquiries'
 import { Route as AdminMembersRouteImport } from './routes/admin.members'
+import { Route as AdminPartnersRouteImport } from './routes/admin.partners'
 import { Route as AdminRosterRouteImport } from './routes/admin.roster'
 import { Route as CheckoutReturnRouteImport } from './routes/checkout.return'
 import { Route as MembersKeyRouteImport } from './routes/members.$key'
@@ -130,6 +132,11 @@ const MembersRoute = MembersRouteImport.update({
   path: '/members',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PartnersRoute = PartnersRouteImport.update({
+  id: '/partners',
+  path: '/partners',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PlanRoute = PlanRouteImport.update({
   id: '/plan',
   path: '/plan',
@@ -210,6 +217,11 @@ const AdminInquiriesRoute = AdminInquiriesRouteImport.update({
 const AdminMembersRoute = AdminMembersRouteImport.update({
   id: '/admin/members',
   path: '/admin/members',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminPartnersRoute = AdminPartnersRouteImport.update({
+  id: '/admin/partners',
+  path: '/admin/partners',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRosterRoute = AdminRosterRouteImport.update({
@@ -461,6 +473,7 @@ export interface FileRoutesByFullPath {
   '/inquire': typeof InquireRoute
   '/mcp': typeof McpRoute
   '/members': typeof MembersRouteWithChildren
+  '/partners': typeof PartnersRoute
   '/plan': typeof PlanRoute
   '/press': typeof PressRoute
   '/privacy': typeof PrivacyRoute
@@ -477,6 +490,7 @@ export interface FileRoutesByFullPath {
   '/admin/checkin': typeof AdminCheckinRoute
   '/admin/inquiries': typeof AdminInquiriesRoute
   '/admin/members': typeof AdminMembersRoute
+  '/admin/partners': typeof AdminPartnersRoute
   '/admin/roster': typeof AdminRosterRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/members/$key': typeof MembersKeyRoute
@@ -533,6 +547,7 @@ export interface FileRoutesByTo {
   '/inquire': typeof InquireRoute
   '/mcp': typeof McpRoute
   '/members': typeof MembersRouteWithChildren
+  '/partners': typeof PartnersRoute
   '/plan': typeof PlanRoute
   '/press': typeof PressRoute
   '/privacy': typeof PrivacyRoute
@@ -549,6 +564,7 @@ export interface FileRoutesByTo {
   '/admin/checkin': typeof AdminCheckinRoute
   '/admin/inquiries': typeof AdminInquiriesRoute
   '/admin/members': typeof AdminMembersRoute
+  '/admin/partners': typeof AdminPartnersRoute
   '/admin/roster': typeof AdminRosterRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/members/$key': typeof MembersKeyRoute
@@ -606,6 +622,7 @@ export interface FileRoutesById {
   '/inquire': typeof InquireRoute
   '/mcp': typeof McpRoute
   '/members': typeof MembersRouteWithChildren
+  '/partners': typeof PartnersRoute
   '/plan': typeof PlanRoute
   '/press': typeof PressRoute
   '/privacy': typeof PrivacyRoute
@@ -622,6 +639,7 @@ export interface FileRoutesById {
   '/admin/checkin': typeof AdminCheckinRoute
   '/admin/inquiries': typeof AdminInquiriesRoute
   '/admin/members': typeof AdminMembersRoute
+  '/admin/partners': typeof AdminPartnersRoute
   '/admin/roster': typeof AdminRosterRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/members/$key': typeof MembersKeyRoute
@@ -680,6 +698,7 @@ export interface FileRouteTypes {
     | '/inquire'
     | '/mcp'
     | '/members'
+    | '/partners'
     | '/plan'
     | '/press'
     | '/privacy'
@@ -696,6 +715,7 @@ export interface FileRouteTypes {
     | '/admin/checkin'
     | '/admin/inquiries'
     | '/admin/members'
+    | '/admin/partners'
     | '/admin/roster'
     | '/checkout/return'
     | '/members/$key'
@@ -752,6 +772,7 @@ export interface FileRouteTypes {
     | '/inquire'
     | '/mcp'
     | '/members'
+    | '/partners'
     | '/plan'
     | '/press'
     | '/privacy'
@@ -768,6 +789,7 @@ export interface FileRouteTypes {
     | '/admin/checkin'
     | '/admin/inquiries'
     | '/admin/members'
+    | '/admin/partners'
     | '/admin/roster'
     | '/checkout/return'
     | '/members/$key'
@@ -824,6 +846,7 @@ export interface FileRouteTypes {
     | '/inquire'
     | '/mcp'
     | '/members'
+    | '/partners'
     | '/plan'
     | '/press'
     | '/privacy'
@@ -840,6 +863,7 @@ export interface FileRouteTypes {
     | '/admin/checkin'
     | '/admin/inquiries'
     | '/admin/members'
+    | '/admin/partners'
     | '/admin/roster'
     | '/checkout/return'
     | '/members/$key'
@@ -897,6 +921,7 @@ export interface RootRouteChildren {
   InquireRoute: typeof InquireRoute
   McpRoute: typeof McpRoute
   MembersRoute: typeof MembersRouteWithChildren
+  PartnersRoute: typeof PartnersRoute
   PlanRoute: typeof PlanRoute
   PressRoute: typeof PressRoute
   PrivacyRoute: typeof PrivacyRoute
@@ -913,6 +938,7 @@ export interface RootRouteChildren {
   AdminCheckinRoute: typeof AdminCheckinRoute
   AdminInquiriesRoute: typeof AdminInquiriesRoute
   AdminMembersRoute: typeof AdminMembersRoute
+  AdminPartnersRoute: typeof AdminPartnersRoute
   AdminRosterRoute: typeof AdminRosterRoute
   CheckoutReturnRoute: typeof CheckoutReturnRoute
   ResourcesBuildARunningBaseRoute: typeof ResourcesBuildARunningBaseRoute
@@ -1030,6 +1056,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MembersRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/partners': {
+      id: '/partners'
+      path: '/partners'
+      fullPath: '/partners'
+      preLoaderRoute: typeof PartnersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/plan': {
       id: '/plan'
       path: '/plan'
@@ -1140,6 +1173,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/members'
       fullPath: '/admin/members'
       preLoaderRoute: typeof AdminMembersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/partners': {
+      id: '/admin/partners'
+      path: '/admin/partners'
+      fullPath: '/admin/partners'
+      preLoaderRoute: typeof AdminPartnersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/roster': {
@@ -1475,6 +1515,7 @@ const rootRouteChildren: RootRouteChildren = {
   InquireRoute: InquireRoute,
   McpRoute: McpRoute,
   MembersRoute: MembersRouteWithChildren,
+  PartnersRoute: PartnersRoute,
   PlanRoute: PlanRoute,
   PressRoute: PressRoute,
   PrivacyRoute: PrivacyRoute,
@@ -1492,6 +1533,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminCheckinRoute: AdminCheckinRoute,
   AdminInquiriesRoute: AdminInquiriesRoute,
   AdminMembersRoute: AdminMembersRoute,
+  AdminPartnersRoute: AdminPartnersRoute,
   AdminRosterRoute: AdminRosterRoute,
   CheckoutReturnRoute: CheckoutReturnRoute,
   ResourcesBuildARunningBaseRoute: ResourcesBuildARunningBaseRoute,

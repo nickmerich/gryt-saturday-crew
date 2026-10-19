@@ -280,6 +280,7 @@ export function SiteFooter() {
               >
                 Privacy
               </Link>
+              <Link to="/partners" className="eyebrow text-paper/75 hover:text-blue transition-colors">Partners</Link>
               <Link
                 to="/terms"
                 className="eyebrow text-paper/75 hover:text-blue transition-colors"

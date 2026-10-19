@@ -1,5 +1,11 @@
 # Roadmap
 
+## Partners page
+- [x] Add private partner approval, logo upload and inquiry inbox using existing admin access.
+- [x] Add public partners page, conditional homepage strip, footer and sitemap links.
+- [x] Verify public approval/privacy/form rules and phone/desktop layouts. Preview only.
+- [ ] Verify admin editing, upload and status/CSV end-to-end: blocked by available test account lacking existing admin permission.
+
 ## Phase 1 — Saturday tools
 - [x] Saturday weather widget (NWS forecast for 7:00 AM at the Valley Brook lot)
 - [x] Rain/wind alert state on the weather widget
