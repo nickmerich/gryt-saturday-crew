@@ -15,7 +15,6 @@ export function StravaClubEmbed({ variant = "summary" }: { variant?: "summary" |
       <div className="p-3 sm:p-4">
         <iframe
           title={activity ? "GRYT Run Club latest runs on Strava" : "GRYT Run Club this week on Strava"}
-          allowTransparency
           frameBorder="0"
           height={activity ? 454 : 160}
           scrolling="no"
