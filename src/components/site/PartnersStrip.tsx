@@ -6,7 +6,7 @@ export const homePartnersQuery = queryOptions({ queryKey: ['partners','all'], qu
 export function PartnersStrip() {
   const { data } = useSuspenseQuery(homePartnersQuery)
   if (!data.length) return null
-  return <section aria-label="Trusted by" className="relative border-y border-paper/10 bg-vintage px-5 py-10 sm:px-8 md:px-12 md:py-12">
+  return <section aria-label="Trusted by" className="relative border-y border-paper/10 bg-vintage mt-6 md:mt-10 px-5 pt-12 pb-10 sm:px-8 md:px-12 md:pt-16 md:pb-12">
     <div className="mx-auto max-w-[1180px]">
       <div className="mb-6 flex items-center justify-between gap-4">
         <div className="flex items-center gap-3">
