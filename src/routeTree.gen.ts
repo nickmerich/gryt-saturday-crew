@@ -33,6 +33,7 @@ import { Route as TimerRouteImport } from './routes/timer'
 import { Route as WaiverRouteImport } from './routes/waiver'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
+import { Route as AdminCapWaitlistRouteImport } from './routes/admin.cap-waitlist'
 import { Route as AdminCheckinRouteImport } from './routes/admin.checkin'
 import { Route as AdminInquiriesRouteImport } from './routes/admin.inquiries'
 import { Route as AdminMembersRouteImport } from './routes/admin.members'
@@ -204,6 +205,11 @@ const Char91DotwellKnownChar93OauthProtectedResourceRoute =
     path: '/.well-known/oauth-protected-resource',
     getParentRoute: () => rootRouteImport,
   } as any)
+const AdminCapWaitlistRoute = AdminCapWaitlistRouteImport.update({
+  id: '/admin/cap-waitlist',
+  path: '/admin/cap-waitlist',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminCheckinRoute = AdminCheckinRouteImport.update({
   id: '/admin/checkin',
   path: '/admin/checkin',
@@ -487,6 +493,7 @@ export interface FileRoutesByFullPath {
   '/waiver': typeof WaiverRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  '/admin/cap-waitlist': typeof AdminCapWaitlistRoute
   '/admin/checkin': typeof AdminCheckinRoute
   '/admin/inquiries': typeof AdminInquiriesRoute
   '/admin/members': typeof AdminMembersRoute
@@ -561,6 +568,7 @@ export interface FileRoutesByTo {
   '/waiver': typeof WaiverRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  '/admin/cap-waitlist': typeof AdminCapWaitlistRoute
   '/admin/checkin': typeof AdminCheckinRoute
   '/admin/inquiries': typeof AdminInquiriesRoute
   '/admin/members': typeof AdminMembersRoute
@@ -636,6 +644,7 @@ export interface FileRoutesById {
   '/waiver': typeof WaiverRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  '/admin/cap-waitlist': typeof AdminCapWaitlistRoute
   '/admin/checkin': typeof AdminCheckinRoute
   '/admin/inquiries': typeof AdminInquiriesRoute
   '/admin/members': typeof AdminMembersRoute
@@ -712,6 +721,7 @@ export interface FileRouteTypes {
     | '/waiver'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
+    | '/admin/cap-waitlist'
     | '/admin/checkin'
     | '/admin/inquiries'
     | '/admin/members'
@@ -786,6 +796,7 @@ export interface FileRouteTypes {
     | '/waiver'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
+    | '/admin/cap-waitlist'
     | '/admin/checkin'
     | '/admin/inquiries'
     | '/admin/members'
@@ -860,6 +871,7 @@ export interface FileRouteTypes {
     | '/waiver'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
+    | '/admin/cap-waitlist'
     | '/admin/checkin'
     | '/admin/inquiries'
     | '/admin/members'
@@ -935,6 +947,7 @@ export interface RootRouteChildren {
   WaiverRoute: typeof WaiverRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  AdminCapWaitlistRoute: typeof AdminCapWaitlistRoute
   AdminCheckinRoute: typeof AdminCheckinRoute
   AdminInquiriesRoute: typeof AdminInquiriesRoute
   AdminMembersRoute: typeof AdminMembersRoute
@@ -1152,6 +1165,13 @@ declare module '@tanstack/react-router' {
       path: '/.well-known/oauth-protected-resource'
       fullPath: '/.well-known/oauth-protected-resource'
       preLoaderRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/cap-waitlist': {
+      id: '/admin/cap-waitlist'
+      path: '/admin/cap-waitlist'
+      fullPath: '/admin/cap-waitlist'
+      preLoaderRoute: typeof AdminCapWaitlistRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/checkin': {
@@ -1530,6 +1550,7 @@ const rootRouteChildren: RootRouteChildren = {
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
+  AdminCapWaitlistRoute: AdminCapWaitlistRoute,
   AdminCheckinRoute: AdminCheckinRoute,
   AdminInquiriesRoute: AdminInquiriesRoute,
   AdminMembersRoute: AdminMembersRoute,
