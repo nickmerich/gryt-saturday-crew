@@ -66,12 +66,17 @@
   ::selection { background: var(--blue); color: var(--ink); }
   body:not(.photos-color) img.object-cover,
   body:not(.photos-color) img.object-contain { filter: grayscale(100%); }
+  /* WCAG AA: override muted token on white-background pages (7:1 on #fff) */
+  .bg-paper { --muted-foreground: #595959; }
+  /* WCAG AA: minimum passing placeholder on white (4.6:1) */
+  ::placeholder { color: #767676; }
 }
 
 @utility bone-panel {
   background-color: #f4f2ed;
   color: var(--ink);
   border-top: 2px solid rgba(0, 0, 0, 0.9);
+  --muted-foreground: #595959; /* WCAG AA on #f4f2ed: 6.3:1 */
 }
 
 @utility grit-panel {
