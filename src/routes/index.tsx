@@ -1,12 +1,18 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SITE_TITLE, SITE_DESCRIPTION } from "./__root";
-import { useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, lazy, Suspense, type FormEvent, type ReactNode } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { signWaiver } from "@/lib/waiver.functions";
 import { clearSignupSession, loadSignupSession } from "@/lib/signup-session.functions";
-import { SaturdayWeather } from "@/components/site/SaturdayWeather";
-import { MontourRouteMap } from "@/components/site/MontourRouteMap";
-import { ClubStats } from "@/components/site/ClubStats";
+const SaturdayWeather = lazy(() =>
+  import("@/components/site/SaturdayWeather").then((m) => ({ default: m.SaturdayWeather }))
+);
+const MontourRouteMap = lazy(() =>
+  import("@/components/site/MontourRouteMap").then((m) => ({ default: m.MontourRouteMap }))
+);
+const ClubStats = lazy(() =>
+  import("@/components/site/ClubStats").then((m) => ({ default: m.ClubStats }))
+);
 import { useRegularsLabel } from "@/hooks/useRegularsLabel";
 
 import { submitRecommendation } from "@/lib/recommendations.functions";
@@ -45,7 +51,9 @@ import photo8 from "@/assets/photos/run-club-8.jpg.asset.json";
 import nickLauraAsset from "@/assets/photos/nick-laura.jpg.asset.json";
 import grytBearAsset from "@/assets/gryt-bear.png.asset.json";
 import insuranceAsset from "@/assets/certificate-of-insurance.pdf.asset.json";
-import { SupportBlock } from "@/components/SupportBlock";
+const SupportBlock = lazy(() =>
+  import("@/components/SupportBlock").then((m) => ({ default: m.SupportBlock }))
+);
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 
 const heroImgAsset = photo1;
@@ -3980,9 +3988,11 @@ function Landing() {
       <Marquee />
       <GoogleReviewsBlock />
       <RSVP />
-      <SaturdayWeather />
-      <MontourRouteMap />
-      <ClubStats />
+      <Suspense>
+        <SaturdayWeather />
+        <MontourRouteMap />
+        <ClubStats />
+      </Suspense>
       <ResourcesBlock />
 
       <CorePromise />
@@ -3998,7 +4008,9 @@ function Landing() {
       <Beliefs />
       <FAQ />
       <FinalCTA />
-      <SupportBlock />
+      <Suspense>
+        <SupportBlock />
+      </Suspense>
       <PaymentTestModeBanner />
       <NewsletterBar />
       <Footer />
