@@ -43,6 +43,13 @@
       "when": 1790230150618,
       "tag": "0005_rsvps_event_id",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1792391648909,
+      "tag": "0006_partners_directory",
+      "breakpoints": true
     }
   ]
 }

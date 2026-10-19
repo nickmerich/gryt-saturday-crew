@@ -103,6 +103,7 @@ export type Database = {
       }
       partner_inquiries: {
         Row: {
+          city: string
           created_at: string
           email: string
           id: string
@@ -111,8 +112,11 @@ export type Database = {
           message: string | null
           name: string
           organization: string | null
+          source: string
+          status: string
         }
         Insert: {
+          city?: string
           created_at?: string
           email: string
           id?: string
@@ -121,8 +125,11 @@ export type Database = {
           message?: string | null
           name: string
           organization?: string | null
+          source?: string
+          status?: string
         }
         Update: {
+          city?: string
           created_at?: string
           email?: string
           id?: string
@@ -131,6 +138,8 @@ export type Database = {
           message?: string | null
           name?: string
           organization?: string | null
+          source?: string
+          status?: string
         }
         Relationships: []
       }
@@ -338,6 +347,60 @@ export type Database = {
         }
         Relationships: []
       }
+      site_partners: {
+        Row: {
+          approved_to_show: boolean
+          category: string
+          city: string
+          created_at: string
+          description: string
+          featured_on_home: boolean
+          id: string
+          is_affiliate: boolean
+          logo: string
+          name: string
+          role: string
+          slug: string
+          sort_order: number
+          updated_at: string
+          website_url: string
+        }
+        Insert: {
+          approved_to_show?: boolean
+          category: string
+          city?: string
+          created_at?: string
+          description?: string
+          featured_on_home?: boolean
+          id?: string
+          is_affiliate?: boolean
+          logo?: string
+          name: string
+          role: string
+          slug: string
+          sort_order?: number
+          updated_at?: string
+          website_url?: string
+        }
+        Update: {
+          approved_to_show?: boolean
+          category?: string
+          city?: string
+          created_at?: string
+          description?: string
+          featured_on_home?: boolean
+          id?: string
+          is_affiliate?: boolean
+          logo?: string
+          name?: string
+          role?: string
+          slug?: string
+          sort_order?: number
+          updated_at?: string
+          website_url?: string
+        }
+        Relationships: []
+      }
       story_submissions: {
         Row: {
           consent_contact: boolean
@@ -466,7 +529,20 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      read_approved_partners: {
+        Args: { home_only?: boolean }
+        Returns: {
+          category: string
+          city: string
+          description: string
+          is_affiliate: boolean
+          logo: string
+          name: string
+          role: string
+          sort_order: number
+          website_url: string
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
