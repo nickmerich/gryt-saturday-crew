@@ -5,6 +5,17 @@ import { toast } from "sonner";
 import { CAP_BINDING } from "@/lib/shopify-cap";
 import { fetchCapVariant } from "@/lib/shopify-storefront";
 import { useCartStore } from "@/stores/cartStore";
+import capFront from "@/assets/cap/cap-front.jpg.asset.json";
+import capSide from "@/assets/cap/cap-side.jpg.asset.json";
+import capAngle from "@/assets/cap/cap-angle.jpg.asset.json";
+import capTrail from "@/assets/cap/cap-trail.jpg.asset.json";
+
+const CAP_PHOTOS = [
+  { src: capFront.url, label: "front crest", alt: "Black GRYT cap, embroidered bear crest, blue brim trim" },
+  { src: capAngle.url, label: "three-quarter view", alt: "GRYT cap from above showing crest and perforated panels" },
+  { src: capSide.url, label: "side wordmark", alt: "Side of the GRYT cap with lowercase gryt print" },
+  { src: capTrail.url, label: "on the trail", alt: "Runner wearing the GRYT cap by the trail" },
+];
 
 const REVIEW_TITLE = "The Founding Member Cap";
 const REVIEW_COPY = [
@@ -28,6 +39,7 @@ export function CapDrop({ onAdded }: { onAdded?: () => void }) {
   const addItem = useCartStore((s) => s.addItem);
   const adding = useCartStore((s) => s.isLoading);
   const [qty, setQty] = useState(1);
+  const [photo, setPhoto] = useState(0);
 
   const listed = Boolean(data);
   const buyable = Boolean(data?.availableForSale);
@@ -56,17 +68,29 @@ export function CapDrop({ onAdded }: { onAdded?: () => void }) {
   return (
     <section className="border border-paper/15 bg-ink text-paper">
       <div className="grid md:grid-cols-2">
-        <div className="aspect-square bg-paper/5 overflow-hidden border-b md:border-b-0 md:border-r border-paper/15 flex items-center justify-center">
-          {data?.imageUrl ? (
+        <div className="border-b md:border-b-0 md:border-r border-paper/15">
+          <div className="aspect-[4/5] overflow-hidden bg-ink">
             <img
-              src={data.imageUrl}
-              alt="GRYT cap with embroidered crest and blue brim trim"
+              src={CAP_PHOTOS[photo].src}
+              alt={CAP_PHOTOS[photo].alt}
               className="w-full h-full object-cover"
-              loading="lazy"
+              style={{ filter: "none" }}
             />
-          ) : (
-            <span className="eyebrow text-paper/35 px-6 text-center">Cap photo pending review</span>
-          )}
+          </div>
+          <div className="grid grid-cols-4 gap-px bg-paper/15 border-t border-paper/15">
+            {CAP_PHOTOS.map((p, i) => (
+              <button
+                key={p.src}
+                type="button"
+                aria-label={`Show ${p.label}`}
+                aria-pressed={i === photo}
+                onClick={() => setPhoto(i)}
+                className={`aspect-square overflow-hidden bg-ink ${i === photo ? "outline outline-2 -outline-offset-2 outline-blue" : "opacity-60 hover:opacity-100"}`}
+              >
+                <img src={p.src} alt="" className="w-full h-full object-cover" style={{ filter: "none" }} loading="lazy" />
+              </button>
+            ))}
+          </div>
         </div>
         <div className="p-6 sm:p-10 flex flex-col justify-center gap-5">
           <p className="eyebrow text-blue">GRYT · CAP</p>
