@@ -19,6 +19,7 @@ export interface TemplateEntry {
  */
 import { template as recommendationNotification } from './recommendation-notification'
 import { template as partnerInquiryNotification } from './partner-inquiry-notification'
+import { template as capWaitlistNotification } from './cap-waitlist-notification'
 import { template as waiverConfirmation } from './waiver-confirmation'
 import { template as rsvpConfirmation } from './rsvp-confirmation'
 import { template as rsvpNotification } from './rsvp-notification'
@@ -27,6 +28,7 @@ import { template as saturdayReminder } from './saturday-reminder'
 export const TEMPLATES: Record<string, TemplateEntry> = {
   'recommendation-notification': recommendationNotification,
   'partner-inquiry-notification': partnerInquiryNotification,
+  'cap-waitlist-notification': capWaitlistNotification,
   'waiver-confirmation': waiverConfirmation,
   'rsvp-confirmation': rsvpConfirmation,
   'rsvp-notification': rsvpNotification,
