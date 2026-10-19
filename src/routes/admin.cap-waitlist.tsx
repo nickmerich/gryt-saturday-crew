@@ -23,7 +23,7 @@ function CapWaitlistPage() {
       <Link to="/admin/roster" className="text-sm text-blue underline">Back to admin</Link>
       <h1 className="mt-6 font-condensed text-4xl uppercase">Cap waitlist</h1>
       {q.isLoading && <p className="mt-6 text-paper/60">Loading...</p>}
-      {q.error && <p className="mt-6 text-blue">{q.error instanceof Error ? q.error.message : 'Sign in with your admin email first.'} <Link to="/auth" className="underline">Sign in</Link></p>}
+      {q.error && <p className="mt-6 text-blue">{q.error instanceof Error ? q.error.message : 'Sign in with your admin email first.'} <Link to="/auth" search={{ next: '/admin/cap-waitlist' }} className="underline">Sign in</Link></p>}
       {q.data && <>
         <div className="mt-4 flex items-center gap-6"><p className="text-paper/70">{rows.length} signed up</p>{rows.length > 0 && <button onClick={exportCsv} className="text-sm text-blue underline">Download CSV</button>}</div>
         <ul className="mt-6 divide-y divide-paper/15 border-y border-paper/15">
