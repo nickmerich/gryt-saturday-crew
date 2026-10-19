@@ -97,10 +97,8 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
   { q: "What is the after like?", a: "We hang in the parking lot after the run with coffee, water, and sometimes fruit. Stay for 10 minutes or stay for an hour. Either way, you are invited." },
 ];
 
-import {
-  STRAVA_MEMBERS_LABEL,
-  INSTAGRAM_LABEL,
-} from "@/lib/club-stats";
+import { INSTAGRAM_LABEL } from "@/lib/club-stats";
+import { StravaMemberCount } from "@/components/site/StravaMemberCount";
 
 const SITE_URL = "https://grytrunclub.com";
 const ABS_HERO_IMG = heroImg.startsWith("http") ? heroImg : `${SITE_URL}${heroImg}`;
@@ -473,9 +471,9 @@ function Nav() {
 
 function Hero() {
   const regularsLabel = useRegularsLabel();
-  const stats: Array<[string, string]> = [
+  const stats: Array<[React.ReactNode, string]> = [
     [regularsLabel, "regulars each Saturday"],
-    [STRAVA_MEMBERS_LABEL, "runners on Strava"],
+    [<StravaMemberCount key="strava" />, "members on Strava"],
     [INSTAGRAM_LABEL, "followers on Instagram"],
   ];
 
@@ -2225,11 +2223,11 @@ function AffiliationList({ name, items }: { name: string; items: string[] }) {
 
 function Founders() {
   const regularsLabel = useRegularsLabel();
-  const stats: Array<[string, string]> = [
+  const stats: Array<[React.ReactNode, string]> = [
     [INSTAGRAM_LABEL, "followers on Instagram"],
     ["2014", "running together since"],
     [regularsLabel, "regulars each Saturday"],
-    [STRAVA_MEMBERS_LABEL, "total Strava members"],
+    [<StravaMemberCount key="strava" tone="light" />, "total Strava members"],
   ];
 
   return (
