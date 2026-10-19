@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { CAP_BINDING } from "@/lib/shopify-cap";
 import { fetchCapVariant } from "@/lib/shopify-storefront";
 import { useCartStore } from "@/stores/cartStore";
+import { CapWaitlist } from "@/components/shop/CapWaitlist";
 import capFront from "@/assets/cap/cap-front.jpg.asset.json";
 import capSide from "@/assets/cap/cap-side.jpg.asset.json";
 import capAngle from "@/assets/cap/cap-angle.jpg.asset.json";
@@ -147,9 +148,12 @@ export function CapDrop({ onAdded }: { onAdded?: () => void }) {
               )}
             </>
           ) : (
-            <p className="border border-paper/20 px-4 py-3 text-sm text-paper/60">
-              Not for sale yet. This page is in review while the cap, price and stock are confirmed.
-            </p>
+            <div>
+              <p className="border border-paper/20 px-4 py-3 text-sm text-paper/60">
+                Not for sale yet. This page is in review while the cap, price and stock are confirmed.
+              </p>
+              <CapWaitlist />
+            </div>
           )}
 
           <a href="/#join" className="eyebrow text-paper/70 hover:text-blue transition-colors self-start">
