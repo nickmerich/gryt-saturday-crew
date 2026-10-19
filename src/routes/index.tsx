@@ -134,7 +134,10 @@ export const Route = createFileRoute("/")({
 
       { name: "twitter:image", content: ABS_HERO_IMG },
     ],
-    links: [{ rel: "canonical", href: SITE_URL }],
+    links: [
+      { rel: "canonical", href: SITE_URL },
+      { rel: "preload", as: "image", href: heroImgAsset.url },
+    ],
     scripts: [
       {
         type: "application/ld+json",
@@ -615,6 +618,9 @@ function Hero() {
               src={heroImgAsset.url}
               alt="GRYT runner at night — motion, grit, and forward momentum"
               className="block w-full h-[300px] md:h-[520px] object-cover"
+              fetchPriority="high"
+              width={800}
+              height={520}
             />
             <div className="absolute left-0 right-0 bottom-0 flex items-end justify-between gap-3 px-4 pt-5 pb-4 bg-gradient-to-t from-black/85 to-transparent">
               <span className="display-condensed text-paper text-[22px] leading-none">
