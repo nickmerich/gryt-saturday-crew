@@ -114,7 +114,10 @@ export const Route = createFileRoute(
       { name: "twitter:description", content: DESCRIPTION },
       { name: "twitter:image", content: HERO },
     ],
-    links: [{ rel: "canonical", href: URL }],
+    links: [
+      { rel: "canonical", href: URL },
+      { rel: "preload", as: "image", href: heroAsset.url, fetchpriority: "high" },
+    ],
     scripts: [
       {
         type: "application/ld+json",
@@ -225,6 +228,7 @@ function SouthHillsPage() {
               alt="Runners on a Pittsburgh trail at dawn with the city skyline and a mapped route overhead"
               className="w-full h-auto"
               loading="eager"
+              fetchPriority="high"
             />
           </figure>
 
