@@ -8,7 +8,7 @@ const URL = `${SITE}/resources/running-with-a-group`;
 const TITLE =
   "Running With a Group: Why It Makes You Faster · gryt run club";
 const DESCRIPTION =
-  "Group running raises your pace without effort, turns motivation into expectation, and keeps you consistent. Why no-drop crews work — and how to find one.";
+  "Group running raises your pace without effort, turns motivation into expectation, and keeps you consistent. Why no-drop crews work, and how to find one.";
 const PUBLISHED = "2026-08-28";
 
 const SECTIONS: Array<{ id: string; label: string }> = [

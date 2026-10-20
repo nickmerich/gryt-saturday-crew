@@ -10,7 +10,7 @@ const URL = `${SITE}/resources/playbooks/gryt-vs-yinz-run-club`;
 const TITLE =
   "GRYT vs Yinz Run Club: Which Pittsburgh Run Club Is Right for You? · gryt run club";
 const DESCRIPTION =
-  "An honest comparison of Yinz Run Club and GRYT Run Club — location, schedule, group size, and post-run culture. Figure out which Pittsburgh run club actually fits your life.";
+  "An honest comparison of Yinz Run Club and GRYT Run Club: location, schedule, group size, and post-run culture. Figure out which Pittsburgh run club actually fits your life.";
 const PUBLISHED = "2026-01-27";
 
 const SECTIONS: Array<{ id: string; label: string }> = [

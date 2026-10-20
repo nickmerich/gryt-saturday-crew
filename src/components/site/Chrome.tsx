@@ -366,7 +366,7 @@ export function SiteFooter() {
           <span>© 2026 GRYT Run Club. All rights reserved.</span>
           <span>Built by Laura & Nick Merich.</span>
         </div>
-        <div className="pt-3 eyebrow text-paper/35">
+        <div className="pt-3 eyebrow text-paper/60">
           Designed, written, and shipped by{" "}
           <a
             href="https://nick.pop.site"

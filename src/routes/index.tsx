@@ -48,6 +48,7 @@ import grytBearAsset from "@/assets/gryt-bear.png.asset.json";
 import insuranceAsset from "@/assets/certificate-of-insurance.pdf.asset.json";
 import { SupportBlock } from "@/components/SupportBlock";
 import { LearnDoorway } from "@/components/site/LearnDoorway";
+import { BringAFriend } from "@/components/site/BringAFriend";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 
 const heroImgAsset = photo1;
@@ -137,7 +138,10 @@ export const Route = createFileRoute("/")({
 
       { name: "twitter:image", content: ABS_HERO_IMG },
     ],
-    links: [{ rel: "canonical", href: SITE_URL }],
+    links: [
+      { rel: "canonical", href: SITE_URL },
+      { rel: "preload", as: "image", href: heroImg, fetchPriority: "high" } as any,
+    ],
     scripts: [
       {
         type: "application/ld+json",
@@ -946,10 +950,11 @@ function RSVP() {
                   First time running with us
                 </span>
               </button>
-              <label className="block text-[11px] font-bold tracking-[0.14em] uppercase text-ink/55 mb-1.5">
+              <label htmlFor="rsvp-source" className="block text-[11px] font-bold tracking-[0.14em] uppercase text-ink/70 mb-1.5">
                 How'd you find us?
               </label>
               <select
+                id="rsvp-source"
                 value={source}
                 onChange={(e) => setSource(e.target.value)}
                 className="w-full text-base text-ink bg-white border-[1.5px] border-[#cfcabe] px-3.5 py-3 mb-4 outline-none focus:border-ink"
@@ -976,11 +981,11 @@ function RSVP() {
               <p className="mt-3.5 text-xs leading-[1.5] text-ink/55 text-center">
                 Free, always. One reminder Friday, one Saturday. Unsubscribe anytime.
               </p>
-              <p className="mt-2 text-xs leading-[1.5] text-ink/50 text-center">
+              <p className="mt-2 text-xs leading-[1.5] text-ink/70 text-center">
                 We'll only use this to send run reminders and GRYT updates. No spam.
               </p>
               <p className="mt-2 text-xs text-center">
-                <Link to="/privacy" className="text-ink/50 underline hover:text-ink transition-colors">
+                <Link to="/privacy" className="text-ink/75 underline hover:text-ink transition-colors">
                   Privacy Policy
                 </Link>
               </p>
@@ -1153,11 +1158,19 @@ function RSVPConfirmation({
           ))}
         </div>
         <div className="text-xs text-ink/55">
-          Recurring weekly event — shows up every Saturday.
+          Recurring weekly event. Shows up every Saturday.
         </div>
       </div>
 
       <RSVPWaiverBlock prefill={prefill} onStatusChange={setWaiverSigned} />
+
+      <BringAFriend
+        dateLabel={new Date(canonicalOccurrence().startUtc).toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          timeZone: "America/New_York",
+        })}
+      />
 
       <a
         href={STRAVA_CLUB}
@@ -1174,7 +1187,7 @@ function RSVPConfirmation({
         RSVP someone else
       </button>
       <p className="mt-3 text-[11px] leading-[1.5] text-ink/45 text-center">
-        Your details stay on this device and in our private roster — nothing personal is ever put in the web address.
+        Your details stay on this device and in our private roster. Nothing personal is ever put in the web address.
       </p>
     </div>
   );
@@ -2610,7 +2623,7 @@ function Footer() {
           <span>© 2026 GRYT Run Club. All rights reserved.</span>
           <span>{"\n"}</span>
         </div>
-        <div className="pt-3 eyebrow text-paper/35">
+        <div className="pt-3 eyebrow text-paper/60">
           Designed, written, and shipped by{" "}
           <a
             href="https://nick.pop.site"

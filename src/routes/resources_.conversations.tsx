@@ -8,7 +8,7 @@ const SITE = SITE_ORIGIN;
 const URL = `${SITE}/resources/conversations`;
 const TITLE = "Conversations · gryt run club";
 const DESCRIPTION =
-  "Interviews and Q&As with the founders, members, and partners of gryt run club — the people behind the miles.";
+  "Interviews and Q&As with the founders, members, and partners of gryt run club: the people behind the miles.";
 
 export const Route = createFileRoute("/resources_/conversations")({
   head: () => ({

@@ -14,6 +14,18 @@ function StravaRouteEmbed() {
     s.src = EMBED_SRC;
     s.async = true;
     document.body.appendChild(s);
+    // The Strava script injects an untitled iframe. Give it an accessible name.
+    const obs = new MutationObserver(() => {
+      document
+        .querySelectorAll<HTMLIFrameElement>('iframe[src*="strava-embeds.com"]:not([title])')
+        .forEach((f) => f.setAttribute("title", "Strava map of the GRYT Saturday route on the Montour Trail"));
+    });
+    obs.observe(document.body, { childList: true, subtree: true });
+    const stop = window.setTimeout(() => obs.disconnect(), 15000);
+    return () => {
+      obs.disconnect();
+      window.clearTimeout(stop);
+    };
   }, []);
 
   return (
