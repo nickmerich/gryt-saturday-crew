@@ -15,7 +15,7 @@ export function FeaturedEvent() {
         <ul className="mt-6 flex flex-wrap gap-2 text-xs uppercase tracking-[0.14em]">
           {['Coach-led warm-up', '4 mi flat', 'Strength-program info', 'Free'].map(t => <li key={t} className="border border-paper/25 px-3 py-1.5 text-paper/80">{t}</li>)}
         </ul>
-        <a href="#rsvp" className="mt-8 inline-flex h-12 items-center bg-blue px-6 font-condensed text-base uppercase text-ink transition-colors hover:bg-paper">RSVP for Nov 7 →</a>
+        <a href="#join" className="mt-8 inline-flex h-12 items-center bg-blue px-6 font-condensed text-base uppercase text-ink transition-colors hover:bg-paper">RSVP for Nov 7 →</a>
       </div>
     </div>
   </section>
