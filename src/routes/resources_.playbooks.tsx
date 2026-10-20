@@ -53,7 +53,7 @@ const PLAYBOOKS: Playbook[] = [
       "The full playbook Nick used to launch GRYT: picking a location, setting a time, finding the first 10 members, and keeping them coming back.",
     body: [
       "Pick one location. Pick one time. Never move either.",
-      "Most new clubs die because the founder treats the schedule like a suggestion. The single biggest unlock for GRYT was deciding Saturday 8:00 AM at the same trailhead — rain, snow, holiday weekend, doesn't matter. People plan their week around what they trust will exist.",
+      "Most new clubs die because the founder treats the schedule like a suggestion. The single biggest unlock for GRYT was deciding Saturday 7:00 AM at the same trailhead. Rain, snow, holiday weekend, doesn't matter. People plan their week around what they trust will exist.",
       "Find your first ten in person. Not on Instagram. Not in a Slack. Text ten people who already run, tell them the time and place, and show up if even one of them does. Week one we had three runners. Week six we had twelve. Week twenty we stopped counting.",
       "Make the loop simple. New runners are scared of the unknown distance more than the distance itself. Pick a flat, well-marked 3–5 mile loop everyone can finish, then layer a longer optional add-on for the faster crew. No one should ever wonder if they're going to get lost or dropped.",
       "End at a place with coffee. The run is the excuse. The community happens in the 30 minutes after.",
@@ -345,7 +345,7 @@ function CTA() {
   return (
     <section className="bg-black px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
       <div className="max-w-[900px] mx-auto text-center">
-        <p className="eyebrow text-blue mb-5">SATURDAY 8:00 AM</p>
+        <p className="eyebrow text-blue mb-5">SATURDAY 7:00 AM</p>
         <h2 className="display-condensed uppercase text-[clamp(36px,6vw,80px)] leading-[0.92]">
           Stop reading. Start showing up.
         </h2>
