@@ -98,6 +98,27 @@ export const LIBRARY: LibraryEntry[] = [
     updated: "2026-09-01",
   },
 
+  {
+    id: "milestones",
+    title: "The GRYT Milestone Club",
+    summary:
+      "Five, ten, 25, 50, and 100 Saturdays. Check your own count privately and make a shareable milestone graphic.",
+    to: "/milestones",
+    topic: "community",
+    kind: "tool",
+    updated: "2026-10-20",
+  },
+  {
+    id: "run-reports",
+    title: "Weekly Run Reports",
+    summary:
+      "Every Saturday, counted: who showed up, who was new, who came back, and who hit a milestone.",
+    to: "/runs",
+    topic: "community",
+    kind: "story",
+    updated: "2026-10-20",
+  },
+
   // ── First run ──────────────────────────────────────────
   {
     id: "saturday-what-to-expect",

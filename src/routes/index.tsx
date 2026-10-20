@@ -49,6 +49,7 @@ import insuranceAsset from "@/assets/certificate-of-insurance.pdf.asset.json";
 import { SupportBlock } from "@/components/SupportBlock";
 import { LearnDoorway } from "@/components/site/LearnDoorway";
 import { BringAFriend } from "@/components/site/BringAFriend";
+import { LastRunStrip } from "@/components/site/LastRunStrip";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 
 const heroImgAsset = photo1;
@@ -3771,6 +3772,7 @@ function Landing() {
       <Hero />
       <PartnersStrip />
       <RSVP />
+      <LastRunStrip />
       <FirstTimer />
       <SaturdayWeather />
       <MontourRouteMap />
@@ -3780,6 +3782,8 @@ function Landing() {
           <Link to="/about" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Meet Laura & Nick →</Link>
           <Link to="/faq" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Run questions →</Link>
           <Link to="/resources" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Running guides →</Link>
+          <Link to="/runs" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Run reports →</Link>
+          <Link to="/milestones" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Milestone Club →</Link>
           <Link to="/press" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Press & conversations →</Link>
           <Link to="/shop" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Shop →</Link>
           <a href={STRAVA_CLUB} target="_blank" rel="noopener noreferrer" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Strava club →</a>

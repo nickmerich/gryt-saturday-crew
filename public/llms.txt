@@ -27,6 +27,11 @@ Canonical site: https://grytrunclub.com
 - [Pace, Effort & Race Time Calculator](https://grytrunclub.com/resources/pace-calculator): Converts time and distance to pace per mile and per kilometer, predicts 5K to marathon times with Riegel's formula, and explains the CDC talk test for easy effort.
 - [What to Wear Running in Pittsburgh](https://grytrunclub.com/resources/what-to-wear-running): Head-to-toe layering list from temperature, wind chill, rain or snow, darkness, and effort. Can load the National Weather Service forecast for the Saturday 7 AM run.
 
+## Community
+
+- [Weekly Run Reports](https://grytrunclub.com/runs): Aggregate counts for each Saturday run (runners, first-timers, returning runners, milestones reached), built from check-ins. Names appear only with consent.
+- [GRYT Milestone Club](https://grytrunclub.com/milestones): Recognition at 5, 10, 25, 50, and 100 Saturdays. Walking, buddying, and sweeping count. Runners can privately look up their own count and download a milestone graphic.
+
 ## Runner guides
 
 - [Saturday Runs: What to Expect](https://grytrunclub.com/resources/playbooks/saturday-runs-what-to-expect): Parking, timing, the no-drop format, and what to bring to a first GRYT run.

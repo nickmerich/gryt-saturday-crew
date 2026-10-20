@@ -38,6 +38,8 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/resources/manifesto", changefreq: "monthly", priority: "0.7" },
           { path: "/resources/recap", changefreq: "monthly", priority: "0.7" },
           { path: "/resources/pace-calculator", changefreq: "monthly", priority: "0.8" },
+          { path: "/runs", changefreq: "weekly", priority: "0.8" },
+          { path: "/milestones", changefreq: "weekly", priority: "0.7" },
           { path: "/resources/what-to-wear-running", changefreq: "weekly", priority: "0.8" },
           { path: "/resources/runs", changefreq: "monthly", priority: "0.6" },
           { path: "/resources/playbooks/best-free-run-clubs-south-hills-2026", changefreq: "monthly", priority: "0.6" },

@@ -19,6 +19,7 @@ import { Route as FaqRouteImport } from './routes/faq'
 import { Route as InquireRouteImport } from './routes/inquire'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as MembersRouteImport } from './routes/members'
+import { Route as MilestonesRouteImport } from './routes/milestones'
 import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as PlanRouteImport } from './routes/plan'
 import { Route as PressRouteImport } from './routes/press'
@@ -26,6 +27,7 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RacesRouteImport } from './routes/races'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as ResourcesRouteImport } from './routes/resources'
+import { Route as RunsRouteImport } from './routes/runs'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TermsRouteImport } from './routes/terms'
@@ -58,6 +60,7 @@ import { Route as ResourcesRunsRouteImport } from './routes/resources_.runs'
 import { Route as ResourcesShouldYouJoinARunningClubRouteImport } from './routes/resources_.should-you-join-a-running-club'
 import { Route as ResourcesWhatToEatBeforeARunRouteImport } from './routes/resources_.what-to-eat-before-a-run'
 import { Route as ResourcesWhatToWearRunningRouteImport } from './routes/resources_.what-to-wear-running'
+import { Route as RunsNumberRouteImport } from './routes/runs_.$number'
 import { Route as TimerResultsRouteImport } from './routes/timer_.results'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
@@ -135,6 +138,11 @@ const MembersRoute = MembersRouteImport.update({
   path: '/members',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MilestonesRoute = MilestonesRouteImport.update({
+  id: '/milestones',
+  path: '/milestones',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PartnersRoute = PartnersRouteImport.update({
   id: '/partners',
   path: '/partners',
@@ -168,6 +176,11 @@ const RegisterRoute = RegisterRouteImport.update({
 const ResourcesRoute = ResourcesRouteImport.update({
   id: '/resources',
   path: '/resources',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RunsRoute = RunsRouteImport.update({
+  id: '/runs',
+  path: '/runs',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShopRoute = ShopRouteImport.update({
@@ -341,6 +354,11 @@ const ResourcesWhatToWearRunningRoute =
     path: '/resources/what-to-wear-running',
     getParentRoute: () => rootRouteImport,
   } as any)
+const RunsNumberRoute = RunsNumberRouteImport.update({
+  id: '/runs_/$number',
+  path: '/runs/$number',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TimerResultsRoute = TimerResultsRouteImport.update({
   id: '/timer_/results',
   path: '/timer/results',
@@ -492,6 +510,7 @@ export interface FileRoutesByFullPath {
   '/inquire': typeof InquireRoute
   '/mcp': typeof McpRoute
   '/members': typeof MembersRouteWithChildren
+  '/milestones': typeof MilestonesRoute
   '/partners': typeof PartnersRoute
   '/plan': typeof PlanRoute
   '/press': typeof PressRoute
@@ -499,6 +518,7 @@ export interface FileRoutesByFullPath {
   '/races': typeof RacesRoute
   '/register': typeof RegisterRoute
   '/resources': typeof ResourcesRoute
+  '/runs': typeof RunsRoute
   '/shop': typeof ShopRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
@@ -531,6 +551,7 @@ export interface FileRoutesByFullPath {
   '/resources/should-you-join-a-running-club': typeof ResourcesShouldYouJoinARunningClubRoute
   '/resources/what-to-eat-before-a-run': typeof ResourcesWhatToEatBeforeARunRoute
   '/resources/what-to-wear-running': typeof ResourcesWhatToWearRunningRoute
+  '/runs/$number': typeof RunsNumberRoute
   '/timer/results': typeof TimerResultsRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -569,6 +590,7 @@ export interface FileRoutesByTo {
   '/inquire': typeof InquireRoute
   '/mcp': typeof McpRoute
   '/members': typeof MembersRouteWithChildren
+  '/milestones': typeof MilestonesRoute
   '/partners': typeof PartnersRoute
   '/plan': typeof PlanRoute
   '/press': typeof PressRoute
@@ -576,6 +598,7 @@ export interface FileRoutesByTo {
   '/races': typeof RacesRoute
   '/register': typeof RegisterRoute
   '/resources': typeof ResourcesRoute
+  '/runs': typeof RunsRoute
   '/shop': typeof ShopRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
@@ -608,6 +631,7 @@ export interface FileRoutesByTo {
   '/resources/should-you-join-a-running-club': typeof ResourcesShouldYouJoinARunningClubRoute
   '/resources/what-to-eat-before-a-run': typeof ResourcesWhatToEatBeforeARunRoute
   '/resources/what-to-wear-running': typeof ResourcesWhatToWearRunningRoute
+  '/runs/$number': typeof RunsNumberRoute
   '/timer/results': typeof TimerResultsRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -647,6 +671,7 @@ export interface FileRoutesById {
   '/inquire': typeof InquireRoute
   '/mcp': typeof McpRoute
   '/members': typeof MembersRouteWithChildren
+  '/milestones': typeof MilestonesRoute
   '/partners': typeof PartnersRoute
   '/plan': typeof PlanRoute
   '/press': typeof PressRoute
@@ -654,6 +679,7 @@ export interface FileRoutesById {
   '/races': typeof RacesRoute
   '/register': typeof RegisterRoute
   '/resources': typeof ResourcesRoute
+  '/runs': typeof RunsRoute
   '/shop': typeof ShopRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
@@ -686,6 +712,7 @@ export interface FileRoutesById {
   '/resources_/should-you-join-a-running-club': typeof ResourcesShouldYouJoinARunningClubRoute
   '/resources_/what-to-eat-before-a-run': typeof ResourcesWhatToEatBeforeARunRoute
   '/resources_/what-to-wear-running': typeof ResourcesWhatToWearRunningRoute
+  '/runs_/$number': typeof RunsNumberRoute
   '/timer_/results': typeof TimerResultsRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -726,6 +753,7 @@ export interface FileRouteTypes {
     | '/inquire'
     | '/mcp'
     | '/members'
+    | '/milestones'
     | '/partners'
     | '/plan'
     | '/press'
@@ -733,6 +761,7 @@ export interface FileRouteTypes {
     | '/races'
     | '/register'
     | '/resources'
+    | '/runs'
     | '/shop'
     | '/sitemap.xml'
     | '/terms'
@@ -765,6 +794,7 @@ export interface FileRouteTypes {
     | '/resources/should-you-join-a-running-club'
     | '/resources/what-to-eat-before-a-run'
     | '/resources/what-to-wear-running'
+    | '/runs/$number'
     | '/timer/results'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
@@ -803,6 +833,7 @@ export interface FileRouteTypes {
     | '/inquire'
     | '/mcp'
     | '/members'
+    | '/milestones'
     | '/partners'
     | '/plan'
     | '/press'
@@ -810,6 +841,7 @@ export interface FileRouteTypes {
     | '/races'
     | '/register'
     | '/resources'
+    | '/runs'
     | '/shop'
     | '/sitemap.xml'
     | '/terms'
@@ -842,6 +874,7 @@ export interface FileRouteTypes {
     | '/resources/should-you-join-a-running-club'
     | '/resources/what-to-eat-before-a-run'
     | '/resources/what-to-wear-running'
+    | '/runs/$number'
     | '/timer/results'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
@@ -880,6 +913,7 @@ export interface FileRouteTypes {
     | '/inquire'
     | '/mcp'
     | '/members'
+    | '/milestones'
     | '/partners'
     | '/plan'
     | '/press'
@@ -887,6 +921,7 @@ export interface FileRouteTypes {
     | '/races'
     | '/register'
     | '/resources'
+    | '/runs'
     | '/shop'
     | '/sitemap.xml'
     | '/terms'
@@ -919,6 +954,7 @@ export interface FileRouteTypes {
     | '/resources_/should-you-join-a-running-club'
     | '/resources_/what-to-eat-before-a-run'
     | '/resources_/what-to-wear-running'
+    | '/runs_/$number'
     | '/timer_/results'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
@@ -958,6 +994,7 @@ export interface RootRouteChildren {
   InquireRoute: typeof InquireRoute
   McpRoute: typeof McpRoute
   MembersRoute: typeof MembersRouteWithChildren
+  MilestonesRoute: typeof MilestonesRoute
   PartnersRoute: typeof PartnersRoute
   PlanRoute: typeof PlanRoute
   PressRoute: typeof PressRoute
@@ -965,6 +1002,7 @@ export interface RootRouteChildren {
   RacesRoute: typeof RacesRoute
   RegisterRoute: typeof RegisterRoute
   ResourcesRoute: typeof ResourcesRoute
+  RunsRoute: typeof RunsRoute
   ShopRoute: typeof ShopRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
@@ -996,6 +1034,7 @@ export interface RootRouteChildren {
   ResourcesShouldYouJoinARunningClubRoute: typeof ResourcesShouldYouJoinARunningClubRoute
   ResourcesWhatToEatBeforeARunRoute: typeof ResourcesWhatToEatBeforeARunRoute
   ResourcesWhatToWearRunningRoute: typeof ResourcesWhatToWearRunningRoute
+  RunsNumberRoute: typeof RunsNumberRoute
   TimerResultsRoute: typeof TimerResultsRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -1096,6 +1135,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MembersRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/milestones': {
+      id: '/milestones'
+      path: '/milestones'
+      fullPath: '/milestones'
+      preLoaderRoute: typeof MilestonesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/partners': {
       id: '/partners'
       path: '/partners'
@@ -1143,6 +1189,13 @@ declare module '@tanstack/react-router' {
       path: '/resources'
       fullPath: '/resources'
       preLoaderRoute: typeof ResourcesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/runs': {
+      id: '/runs'
+      path: '/runs'
+      fullPath: '/runs'
+      preLoaderRoute: typeof RunsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/shop': {
@@ -1369,6 +1422,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResourcesWhatToWearRunningRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/runs_/$number': {
+      id: '/runs_/$number'
+      path: '/runs/$number'
+      fullPath: '/runs/$number'
+      preLoaderRoute: typeof RunsNumberRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/timer_/results': {
       id: '/timer_/results'
       path: '/timer/results'
@@ -1576,6 +1636,7 @@ const rootRouteChildren: RootRouteChildren = {
   InquireRoute: InquireRoute,
   McpRoute: McpRoute,
   MembersRoute: MembersRouteWithChildren,
+  MilestonesRoute: MilestonesRoute,
   PartnersRoute: PartnersRoute,
   PlanRoute: PlanRoute,
   PressRoute: PressRoute,
@@ -1583,6 +1644,7 @@ const rootRouteChildren: RootRouteChildren = {
   RacesRoute: RacesRoute,
   RegisterRoute: RegisterRoute,
   ResourcesRoute: ResourcesRoute,
+  RunsRoute: RunsRoute,
   ShopRoute: ShopRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
@@ -1619,6 +1681,7 @@ const rootRouteChildren: RootRouteChildren = {
     ResourcesShouldYouJoinARunningClubRoute,
   ResourcesWhatToEatBeforeARunRoute: ResourcesWhatToEatBeforeARunRoute,
   ResourcesWhatToWearRunningRoute: ResourcesWhatToWearRunningRoute,
+  RunsNumberRoute: RunsNumberRoute,
   TimerResultsRoute: TimerResultsRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
