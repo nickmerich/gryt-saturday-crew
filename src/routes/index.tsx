@@ -47,6 +47,7 @@ import nickLauraAsset from "@/assets/photos/nick-laura.jpg.asset.json";
 import grytBearAsset from "@/assets/gryt-bear.png.asset.json";
 import insuranceAsset from "@/assets/certificate-of-insurance.pdf.asset.json";
 import { SupportBlock } from "@/components/SupportBlock";
+import { LearnDoorway } from "@/components/site/LearnDoorway";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 
 const heroImgAsset = photo1;
@@ -181,7 +182,7 @@ export const Route = createFileRoute("/")({
           "@type": "Event",
           name: "GRYT Saturday Run",
           description:
-            "Free Saturday morning group run on the Montour / Peters Trail. Walk, jog, or run — no pace requirement, no one gets dropped.",
+            "Free Saturday morning group run on the Montour / Peters Trail. Walk, jog, or run. No pace requirement, no one gets dropped.",
           eventSchedule: {
             "@type": "Schedule",
             repeatFrequency: "P1W",
@@ -410,8 +411,10 @@ function Nav() {
   const links: Array<[string, string]> = [
     ["#details", "Let's Run"],
     ["#first", "Start Here"],
+    ["/resources", "Learn"],
+    ["/races", "Races"],
     ["/about", "About"],
-    ["/resources", "Resources"],
+    ["/faq", "FAQ"],
   ];
   return (
     <nav className="sticky top-0 z-50 bg-ink border-b border-paper/15">
@@ -422,7 +425,7 @@ function Nav() {
             Run Club
           </span>
         </a>
-        <div className="hidden md:flex items-center gap-6 lg:gap-8">
+        <div className="hidden lg:flex items-center gap-7">
           {links.map(([href, label]) => (
             <a key={href} href={href} className="eyebrow text-paper/80 hover:text-blue transition-colors">
               {label}
@@ -443,7 +446,7 @@ function Nav() {
             aria-expanded={open}
             aria-controls="mobile-nav"
             onClick={() => setOpen((v) => !v)}
-            className="md:hidden inline-flex flex-col justify-center items-center w-11 h-11 border border-paper/25 text-paper hover:border-blue hover:text-blue transition-colors"
+            className="lg:hidden inline-flex flex-col justify-center items-center w-11 h-11 border border-paper/25 text-paper hover:border-blue hover:text-blue transition-colors"
           >
             <span className={`block h-[2px] w-5 bg-current transition-transform ${open ? "translate-y-[5px] rotate-45" : ""}`} />
             <span className={`block h-[2px] w-5 bg-current mt-1 transition-opacity ${open ? "opacity-0" : ""}`} />
@@ -452,7 +455,7 @@ function Nav() {
         </div>
       </div>
       {open && (
-        <div id="mobile-nav" className="md:hidden border-t border-paper/15 bg-ink">
+        <div id="mobile-nav" className="lg:hidden border-t border-paper/15 bg-ink">
           <div className="flex flex-col px-5 py-3">
             {links.map(([href, label]) => (
               <a
@@ -3758,6 +3761,7 @@ function Landing() {
       <FirstTimer />
       <SaturdayWeather />
       <MontourRouteMap />
+      <LearnDoorway />
       <section className="border-t border-paper/15 px-6 py-10 sm:px-12 lg:px-24" aria-label="More from GRYT">
         <div className="mx-auto flex max-w-[1180px] flex-wrap gap-x-8 gap-y-4">
           <Link to="/about" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Meet Laura & Nick →</Link>

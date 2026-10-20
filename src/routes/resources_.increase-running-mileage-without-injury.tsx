@@ -253,7 +253,7 @@ function MileagePage() {
           </div>
 
           <div className="mt-14 flex flex-wrap gap-4">
-            <Link to="/" hash="run" className="btn-primary">See Saturday's run →</Link>
+            <Link to="/" hash="join" className="btn-primary">See Saturday's run →</Link>
             <Link to="/resources" className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors">Back to Resources</Link>
           </div>
         </div>

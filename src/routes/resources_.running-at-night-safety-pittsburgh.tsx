@@ -166,7 +166,7 @@ function NightRunPage() {
             <H2 id="group">Running with a group</H2>
             <p>This is the honest answer to most safety concerns: run with other people.</p>
             <p>A group is visible from a distance. You're louder, you take up more of the path, and if someone goes down, help is immediate. GRYT's no-drop policy means no one is left alone at the back of the pack. Every runner finishes with the crew.</p>
-            <p>The same social accountability that gets you out the door is also what keeps you safe once you're out there. If you want a consistent group in the South Hills, GRYT runs every Saturday at 7 AM from the Peterswood Park lot on the Montour / Peters Trail in McMurray. Free, no pace requirement. Details are on the <Link to="/" hash="run" className={link}>homepage</Link>.</p>
+            <p>The same social accountability that gets you out the door is also what keeps you safe once you're out there. If you want a consistent group in the South Hills, GRYT runs every Saturday at 7 AM from the Peterswood Park lot on the Montour / Peters Trail in McMurray. Free, no pace requirement. Details are on the <Link to="/" hash="join" className={link}>homepage</Link>.</p>
 
             <H2 id="weather">Weather and seasonal conditions in Pittsburgh</H2>
             <H3>Fall and winter fog</H3>
@@ -222,7 +222,7 @@ function NightRunPage() {
           </div>
 
           <div className="mt-14 flex flex-wrap gap-4">
-            <Link to="/" hash="run" className="btn-primary">See Saturday's run →</Link>
+            <Link to="/" hash="join" className="btn-primary">See Saturday's run →</Link>
             <Link to="/resources" className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors">Back to Resources</Link>
           </div>
         </div>

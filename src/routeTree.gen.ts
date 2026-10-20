@@ -49,6 +49,7 @@ import { Route as ResourcesGraphicsRouteImport } from './routes/resources_.graph
 import { Route as ResourcesIncreaseRunningMileageWithoutInjuryRouteImport } from './routes/resources_.increase-running-mileage-without-injury'
 import { Route as ResourcesManifestoRouteImport } from './routes/resources_.manifesto'
 import { Route as ResourcesMoreThanMilesRouteImport } from './routes/resources_.more-than-miles'
+import { Route as ResourcesPaceCalculatorRouteImport } from './routes/resources_.pace-calculator'
 import { Route as ResourcesPlaybooksRouteImport } from './routes/resources_.playbooks'
 import { Route as ResourcesRecapRouteImport } from './routes/resources_.recap'
 import { Route as ResourcesRunningAtNightSafetyPittsburghRouteImport } from './routes/resources_.running-at-night-safety-pittsburgh'
@@ -56,6 +57,7 @@ import { Route as ResourcesRunningWithAGroupRouteImport } from './routes/resourc
 import { Route as ResourcesRunsRouteImport } from './routes/resources_.runs'
 import { Route as ResourcesShouldYouJoinARunningClubRouteImport } from './routes/resources_.should-you-join-a-running-club'
 import { Route as ResourcesWhatToEatBeforeARunRouteImport } from './routes/resources_.what-to-eat-before-a-run'
+import { Route as ResourcesWhatToWearRunningRouteImport } from './routes/resources_.what-to-wear-running'
 import { Route as TimerResultsRouteImport } from './routes/timer_.results'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
@@ -289,6 +291,11 @@ const ResourcesMoreThanMilesRoute = ResourcesMoreThanMilesRouteImport.update({
   path: '/resources/more-than-miles',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResourcesPaceCalculatorRoute = ResourcesPaceCalculatorRouteImport.update({
+  id: '/resources_/pace-calculator',
+  path: '/resources/pace-calculator',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ResourcesPlaybooksRoute = ResourcesPlaybooksRouteImport.update({
   id: '/resources_/playbooks',
   path: '/resources/playbooks',
@@ -326,6 +333,12 @@ const ResourcesWhatToEatBeforeARunRoute =
   ResourcesWhatToEatBeforeARunRouteImport.update({
     id: '/resources_/what-to-eat-before-a-run',
     path: '/resources/what-to-eat-before-a-run',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ResourcesWhatToWearRunningRoute =
+  ResourcesWhatToWearRunningRouteImport.update({
+    id: '/resources_/what-to-wear-running',
+    path: '/resources/what-to-wear-running',
     getParentRoute: () => rootRouteImport,
   } as any)
 const TimerResultsRoute = TimerResultsRouteImport.update({
@@ -509,6 +522,7 @@ export interface FileRoutesByFullPath {
   '/resources/increase-running-mileage-without-injury': typeof ResourcesIncreaseRunningMileageWithoutInjuryRoute
   '/resources/manifesto': typeof ResourcesManifestoRoute
   '/resources/more-than-miles': typeof ResourcesMoreThanMilesRoute
+  '/resources/pace-calculator': typeof ResourcesPaceCalculatorRoute
   '/resources/playbooks': typeof ResourcesPlaybooksRoute
   '/resources/recap': typeof ResourcesRecapRoute
   '/resources/running-at-night-safety-pittsburgh': typeof ResourcesRunningAtNightSafetyPittsburghRoute
@@ -516,6 +530,7 @@ export interface FileRoutesByFullPath {
   '/resources/runs': typeof ResourcesRunsRoute
   '/resources/should-you-join-a-running-club': typeof ResourcesShouldYouJoinARunningClubRoute
   '/resources/what-to-eat-before-a-run': typeof ResourcesWhatToEatBeforeARunRoute
+  '/resources/what-to-wear-running': typeof ResourcesWhatToWearRunningRoute
   '/timer/results': typeof TimerResultsRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -584,6 +599,7 @@ export interface FileRoutesByTo {
   '/resources/increase-running-mileage-without-injury': typeof ResourcesIncreaseRunningMileageWithoutInjuryRoute
   '/resources/manifesto': typeof ResourcesManifestoRoute
   '/resources/more-than-miles': typeof ResourcesMoreThanMilesRoute
+  '/resources/pace-calculator': typeof ResourcesPaceCalculatorRoute
   '/resources/playbooks': typeof ResourcesPlaybooksRoute
   '/resources/recap': typeof ResourcesRecapRoute
   '/resources/running-at-night-safety-pittsburgh': typeof ResourcesRunningAtNightSafetyPittsburghRoute
@@ -591,6 +607,7 @@ export interface FileRoutesByTo {
   '/resources/runs': typeof ResourcesRunsRoute
   '/resources/should-you-join-a-running-club': typeof ResourcesShouldYouJoinARunningClubRoute
   '/resources/what-to-eat-before-a-run': typeof ResourcesWhatToEatBeforeARunRoute
+  '/resources/what-to-wear-running': typeof ResourcesWhatToWearRunningRoute
   '/timer/results': typeof TimerResultsRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -660,6 +677,7 @@ export interface FileRoutesById {
   '/resources_/increase-running-mileage-without-injury': typeof ResourcesIncreaseRunningMileageWithoutInjuryRoute
   '/resources_/manifesto': typeof ResourcesManifestoRoute
   '/resources_/more-than-miles': typeof ResourcesMoreThanMilesRoute
+  '/resources_/pace-calculator': typeof ResourcesPaceCalculatorRoute
   '/resources_/playbooks': typeof ResourcesPlaybooksRoute
   '/resources_/recap': typeof ResourcesRecapRoute
   '/resources_/running-at-night-safety-pittsburgh': typeof ResourcesRunningAtNightSafetyPittsburghRoute
@@ -667,6 +685,7 @@ export interface FileRoutesById {
   '/resources_/runs': typeof ResourcesRunsRoute
   '/resources_/should-you-join-a-running-club': typeof ResourcesShouldYouJoinARunningClubRoute
   '/resources_/what-to-eat-before-a-run': typeof ResourcesWhatToEatBeforeARunRoute
+  '/resources_/what-to-wear-running': typeof ResourcesWhatToWearRunningRoute
   '/timer_/results': typeof TimerResultsRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -737,6 +756,7 @@ export interface FileRouteTypes {
     | '/resources/increase-running-mileage-without-injury'
     | '/resources/manifesto'
     | '/resources/more-than-miles'
+    | '/resources/pace-calculator'
     | '/resources/playbooks'
     | '/resources/recap'
     | '/resources/running-at-night-safety-pittsburgh'
@@ -744,6 +764,7 @@ export interface FileRouteTypes {
     | '/resources/runs'
     | '/resources/should-you-join-a-running-club'
     | '/resources/what-to-eat-before-a-run'
+    | '/resources/what-to-wear-running'
     | '/timer/results'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
@@ -812,6 +833,7 @@ export interface FileRouteTypes {
     | '/resources/increase-running-mileage-without-injury'
     | '/resources/manifesto'
     | '/resources/more-than-miles'
+    | '/resources/pace-calculator'
     | '/resources/playbooks'
     | '/resources/recap'
     | '/resources/running-at-night-safety-pittsburgh'
@@ -819,6 +841,7 @@ export interface FileRouteTypes {
     | '/resources/runs'
     | '/resources/should-you-join-a-running-club'
     | '/resources/what-to-eat-before-a-run'
+    | '/resources/what-to-wear-running'
     | '/timer/results'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
@@ -887,6 +910,7 @@ export interface FileRouteTypes {
     | '/resources_/increase-running-mileage-without-injury'
     | '/resources_/manifesto'
     | '/resources_/more-than-miles'
+    | '/resources_/pace-calculator'
     | '/resources_/playbooks'
     | '/resources_/recap'
     | '/resources_/running-at-night-safety-pittsburgh'
@@ -894,6 +918,7 @@ export interface FileRouteTypes {
     | '/resources_/runs'
     | '/resources_/should-you-join-a-running-club'
     | '/resources_/what-to-eat-before-a-run'
+    | '/resources_/what-to-wear-running'
     | '/timer_/results'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
@@ -962,6 +987,7 @@ export interface RootRouteChildren {
   ResourcesIncreaseRunningMileageWithoutInjuryRoute: typeof ResourcesIncreaseRunningMileageWithoutInjuryRoute
   ResourcesManifestoRoute: typeof ResourcesManifestoRoute
   ResourcesMoreThanMilesRoute: typeof ResourcesMoreThanMilesRoute
+  ResourcesPaceCalculatorRoute: typeof ResourcesPaceCalculatorRoute
   ResourcesPlaybooksRoute: typeof ResourcesPlaybooksRoute
   ResourcesRecapRoute: typeof ResourcesRecapRoute
   ResourcesRunningAtNightSafetyPittsburghRoute: typeof ResourcesRunningAtNightSafetyPittsburghRoute
@@ -969,6 +995,7 @@ export interface RootRouteChildren {
   ResourcesRunsRoute: typeof ResourcesRunsRoute
   ResourcesShouldYouJoinARunningClubRoute: typeof ResourcesShouldYouJoinARunningClubRoute
   ResourcesWhatToEatBeforeARunRoute: typeof ResourcesWhatToEatBeforeARunRoute
+  ResourcesWhatToWearRunningRoute: typeof ResourcesWhatToWearRunningRoute
   TimerResultsRoute: typeof TimerResultsRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -1279,6 +1306,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResourcesMoreThanMilesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/resources_/pace-calculator': {
+      id: '/resources_/pace-calculator'
+      path: '/resources/pace-calculator'
+      fullPath: '/resources/pace-calculator'
+      preLoaderRoute: typeof ResourcesPaceCalculatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/resources_/playbooks': {
       id: '/resources_/playbooks'
       path: '/resources/playbooks'
@@ -1326,6 +1360,13 @@ declare module '@tanstack/react-router' {
       path: '/resources/what-to-eat-before-a-run'
       fullPath: '/resources/what-to-eat-before-a-run'
       preLoaderRoute: typeof ResourcesWhatToEatBeforeARunRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resources_/what-to-wear-running': {
+      id: '/resources_/what-to-wear-running'
+      path: '/resources/what-to-wear-running'
+      fullPath: '/resources/what-to-wear-running'
+      preLoaderRoute: typeof ResourcesWhatToWearRunningRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/timer_/results': {
@@ -1567,6 +1608,7 @@ const rootRouteChildren: RootRouteChildren = {
     ResourcesIncreaseRunningMileageWithoutInjuryRoute,
   ResourcesManifestoRoute: ResourcesManifestoRoute,
   ResourcesMoreThanMilesRoute: ResourcesMoreThanMilesRoute,
+  ResourcesPaceCalculatorRoute: ResourcesPaceCalculatorRoute,
   ResourcesPlaybooksRoute: ResourcesPlaybooksRoute,
   ResourcesRecapRoute: ResourcesRecapRoute,
   ResourcesRunningAtNightSafetyPittsburghRoute:
@@ -1576,6 +1618,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResourcesShouldYouJoinARunningClubRoute:
     ResourcesShouldYouJoinARunningClubRoute,
   ResourcesWhatToEatBeforeARunRoute: ResourcesWhatToEatBeforeARunRoute,
+  ResourcesWhatToWearRunningRoute: ResourcesWhatToWearRunningRoute,
   TimerResultsRoute: TimerResultsRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,

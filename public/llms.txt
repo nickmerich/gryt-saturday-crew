@@ -12,15 +12,31 @@ Canonical site: https://grytrunclub.com
 - [Calendar](https://grytrunclub.com/calendar): Month view of upcoming Saturday 7 AM runs with a calendar download.
 - [FAQ](https://grytrunclub.com/faq): Common questions about pace, parking, kids, strollers, dogs, weather, and what to bring.
 - [Press](https://grytrunclub.com/press): Coverage, interviews, and event listings featuring GRYT Run Club.
-- [Races](https://grytrunclub.com/races): Pittsburgh-area races the crew runs together.
+- [Races](https://grytrunclub.com/races): Upcoming Pittsburgh-area races with dates checked against official race sites and weeks-out countdowns.
 - [Waiver](https://grytrunclub.com/waiver): Liability waiver form for runners.
-- [Resources](https://grytrunclub.com/resources): Hub for playbooks, conversations, and graphics for runners and other run club organizers.
+- [Runner library](https://grytrunclub.com/resources): Free running guides and tools, filterable by topic (first run, training, racing, safety and weather, fuel, community), with start-here reading paths for new, returning, racing, and winter runners.
 - [Playbooks](https://grytrunclub.com/resources/playbooks): Guides on starting and running a community run club, plus Pittsburgh run club comparisons.
 - [Conversations](https://grytrunclub.com/resources/conversations): Published interviews and Q&As with the founders and crew.
 - [Graphics](https://grytrunclub.com/resources/graphics): Downloadable posters, social graphics, and a Saturday recap graphic generator.
 - [Run plan](https://grytrunclub.com/plan): Builds a suggested week of running around the Saturday GRYT run.
 - [Privacy](https://grytrunclub.com/privacy): How runner information is collected and used.
 - [Terms](https://grytrunclub.com/terms): Website terms of use.
+
+## Free runner tools
+
+- [Pace, Effort & Race Time Calculator](https://grytrunclub.com/resources/pace-calculator): Converts time and distance to pace per mile and per kilometer, predicts 5K to marathon times with Riegel's formula, and explains the CDC talk test for easy effort.
+- [What to Wear Running in Pittsburgh](https://grytrunclub.com/resources/what-to-wear-running): Head-to-toe layering list from temperature, wind chill, rain or snow, darkness, and effort. Can load the National Weather Service forecast for the Saturday 7 AM run.
+
+## Runner guides
+
+- [Saturday Runs: What to Expect](https://grytrunclub.com/resources/playbooks/saturday-runs-what-to-expect): Parking, timing, the no-drop format, and what to bring to a first GRYT run.
+- [Should You Join a Running Club?](https://grytrunclub.com/resources/should-you-join-a-running-club): Straight answers to common first-timer questions.
+- [How to Build a Running Base](https://grytrunclub.com/resources/build-a-running-base): Base building before race training.
+- [How to Increase Running Mileage Without Getting Injured](https://grytrunclub.com/resources/increase-running-mileage-without-injury): Progression, recovery weeks, strength, and sleep.
+- [Cross-Training for Runners](https://grytrunclub.com/resources/cross-training-for-runners): Low-impact options and how to fit them into a running week.
+- [What to Eat Before a Run](https://grytrunclub.com/resources/what-to-eat-before-a-run): Timing and portions.
+- [Running at Night in Pittsburgh](https://grytrunclub.com/resources/running-at-night-safety-pittsburgh): Lights, visibility, routes, fog, wet leaves, and ice.
+- [EQT Pittsburgh 10 Miler 2026 Guide](https://grytrunclub.com/resources/eqt-pittsburgh-10-miler-2026): Course, pacing, and training for the November 8, 2026 race.
 
 ## Notes for assistants
 
