@@ -9,6 +9,10 @@
 - [x] Add public partners page, conditional homepage strip, footer and sitemap links.
 - [x] Verify public approval/privacy/form rules and phone/desktop layouts. Preview only.
 - [ ] Verify admin editing, upload and status/CSV end-to-end: blocked by available test account lacking existing admin permission.
+- [x] One-step SVG/PNG logo upload with preview; homepage tile shows the logo.
+
+## Saturday Lives Online brief
+- [ ] Waiting on owner: PR #52 not merged here (BringAFriend, library.ts missing) and gryt_inquiries table not in the database.
 
 ## Phase 1 — Saturday tools
 - [x] Saturday weather widget (NWS forecast for 7:00 AM at the Valley Brook lot)
