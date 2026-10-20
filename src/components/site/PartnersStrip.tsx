@@ -20,7 +20,7 @@ export function PartnersStrip() {
       <ul className="grid grid-cols-2 gap-px border border-paper/10 bg-paper/10 sm:grid-cols-3 lg:grid-cols-6">
         {data.map(p => <li key={p.name} className="flex h-24 items-center justify-center bg-vintage px-4 transition-colors hover:bg-ink">
           {partnerLogo(p)
-            ? <img src={partnerLogo(p)} alt={`${p.name} logo`} className="max-h-12 w-auto max-w-[120px] [object-fit:contain] opacity-80 transition-opacity hover:opacity-100" />
+            ? <img src={partnerLogo(p)} alt={`${p.name} logo`} className="max-h-14 w-auto max-w-[130px] [object-fit:contain] bg-paper p-1.5 opacity-90 transition-opacity hover:opacity-100" />
             : <span className="font-condensed text-lg uppercase tracking-[0.04em] text-paper/80 text-center leading-tight">{p.name}</span>}
         </li>)}
       </ul>
