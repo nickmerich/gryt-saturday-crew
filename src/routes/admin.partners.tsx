@@ -38,6 +38,7 @@ function PartnerDesk() {
   const [selected,setSelected] = useState<Partner | null>(null)
   const [busy,setBusy] = useState(false)
   const [message,setMessage] = useState('')
+  const [logoPreview,setLogoPreview] = useState('')
   const [error,setError] = useState('')
   const [search,setSearch] = useState('')
   const [status,setStatus] = useState('')
@@ -88,9 +89,17 @@ function PartnerDesk() {
           <label className="text-sm sm:col-span-2 flex items-center gap-3"><input type="checkbox" checked={selected.is_affiliate} onChange={e => setSelected({...selected,is_affiliate:e.target.checked})} className="size-4 accent-primary"/>Affiliate link</label>
           <div className="sm:col-span-2"><label className="flex items-center gap-2 text-sm"><Upload size={18}/>Logo (SVG or transparent PNG)<input type="file" accept="image/png,image/svg+xml" disabled={busy} className="min-w-0 w-full max-w-xs" onChange={async e => {
             const file = e.target.files?.[0]; if (!file) return
-            try { const png = await pngFile(file); const result = await act({ action: 'upload', png }); if (result) setSelected({...selected,logo:result.logo}) }
+            try {
+              const png = await pngFile(file); const result = await act({ action: 'upload', png })
+              if (!result) return
+              const next = {...selected,logo:result.logo}; setSelected(next); setLogoPreview(`data:image/png;base64,${png}`)
+              // Existing partners: attach right away so the homepage tile updates without a second step.
+              if (next.id) { const parsed = partnerSchema.safeParse(next); if (parsed.success) await act({ action: 'save', partner: parsed.data }) }
+            }
             catch(e) { setError(e instanceof Error ? e.message : 'Could not upload logo.') }
-          }}/></label><p className="text-xs text-paper/55 mt-2">{selected.logo ? 'Logo uploaded. Save the partner to attach it.' : 'No logo attached.'}</p>{selected.logo && <Button type="button" variant="link" onClick={() => setSelected({...selected,logo:''})}>Remove logo</Button>}</div>
+          }}/></label>
+          {logoPreview && selected.logo && <div className="mt-3 flex h-20 w-40 items-center justify-center border border-paper/15 bg-vintage p-3"><img src={logoPreview} alt="Logo preview" className="max-h-full max-w-full [object-fit:contain]" /></div>}
+          <p className="text-xs text-paper/55 mt-2">{selected.logo ? (selected.id ? 'Logo saved. It shows on the homepage tile once this partner is approved.' : 'Logo uploaded. Save the partner to attach it.') : 'No logo attached.'}</p>{selected.logo && <Button type="button" variant="link" onClick={() => { setSelected({...selected,logo:''}); setLogoPreview('') }}>Remove logo</Button>}</div>
           <div className="flex flex-wrap gap-3 sm:col-span-2"><Button disabled={busy} type="submit"><Save/>Save partner</Button><Button type="button" variant="outline" onClick={() => setSelected(null)}>Cancel</Button>{selected.id && <Button type="button" variant="outline" disabled={busy} onClick={async () => { if (selected.id && window.confirm(`Delete ${selected.name}?`)) { if (await act({ action: 'delete', id:selected.id })) setSelected(null) } }}><Trash2/>Delete</Button>}</div>
         </form>
       </section>}
