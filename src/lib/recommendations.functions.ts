@@ -37,15 +37,14 @@ export const submitRecommendation = createServerFn({ method: "POST" })
       // not fatal
     }
 
-    const { data: inserted, error } = await supabase
-      .from("recommendations")
-      .insert({
-        category: data.category,
-        message: data.message,
-        ip_hash: ipHash,
-      })
-      .select("id, created_at")
-      .maybeSingle();
+    // No .select(): anon has INSERT only, and RETURNING would fail RLS.
+    const inserted = { id: crypto.randomUUID(), created_at: new Date().toISOString() };
+    const { error } = await supabase.from("recommendations").insert({
+      id: inserted.id,
+      category: data.category,
+      message: data.message,
+      ip_hash: ipHash,
+    });
 
     if (error) {
       console.error("recommendation insert failed", error);

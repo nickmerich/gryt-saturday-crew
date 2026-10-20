@@ -2,7 +2,8 @@ import { useSuspenseQuery, queryOptions } from '@tanstack/react-query'
 import { Link } from '@tanstack/react-router'
 import { getPartners } from '@/lib/partners.functions'
 // "Trusted by" shows every approved partner, current and past. Unapproved partners never appear.
-export const homePartnersQuery = queryOptions({ queryKey: ['partners','all'], queryFn: () => getPartners({ data: {} }), staleTime: 60000 })
+// Homepage must never fail because of partners: any error hides the strip.
+export const homePartnersQuery = queryOptions({ queryKey: ['partners','home-strip'], queryFn: () => getPartners({ data: {} }).catch(() => []), staleTime: 60000 })
 export function PartnersStrip() {
   const { data } = useSuspenseQuery(homePartnersQuery)
   if (!data.length) return null
