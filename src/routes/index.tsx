@@ -47,6 +47,9 @@ import nickLauraAsset from "@/assets/photos/nick-laura.jpg.asset.json";
 import grytBearAsset from "@/assets/gryt-bear.png.asset.json";
 import insuranceAsset from "@/assets/certificate-of-insurance.pdf.asset.json";
 import { SupportBlock } from "@/components/SupportBlock";
+import { LearnDoorway } from "@/components/site/LearnDoorway";
+import { BringAFriend } from "@/components/site/BringAFriend";
+import { LastRunStrip } from "@/components/site/LastRunStrip";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 
 const heroImgAsset = photo1;
@@ -136,7 +139,10 @@ export const Route = createFileRoute("/")({
 
       { name: "twitter:image", content: ABS_HERO_IMG },
     ],
-    links: [{ rel: "canonical", href: SITE_URL }],
+    links: [
+      { rel: "canonical", href: SITE_URL },
+      { rel: "preload", as: "image", href: heroImg, fetchPriority: "high" } as any,
+    ],
     scripts: [
       {
         type: "application/ld+json",
@@ -181,7 +187,7 @@ export const Route = createFileRoute("/")({
           "@type": "Event",
           name: "GRYT Saturday Run",
           description:
-            "Free Saturday morning group run on the Montour / Peters Trail. Walk, jog, or run — no pace requirement, no one gets dropped.",
+            "Free Saturday morning group run on the Montour / Peters Trail. Walk, jog, or run. No pace requirement, no one gets dropped.",
           eventSchedule: {
             "@type": "Schedule",
             repeatFrequency: "P1W",
@@ -410,8 +416,10 @@ function Nav() {
   const links: Array<[string, string]> = [
     ["#details", "Let's Run"],
     ["#first", "Start Here"],
+    ["/resources", "Learn"],
+    ["/races", "Races"],
     ["/about", "About"],
-    ["/resources", "Resources"],
+    ["/faq", "FAQ"],
   ];
   return (
     <nav className="sticky top-0 z-50 bg-ink border-b border-paper/15">
@@ -422,7 +430,7 @@ function Nav() {
             Run Club
           </span>
         </a>
-        <div className="hidden md:flex items-center gap-6 lg:gap-8">
+        <div className="hidden lg:flex items-center gap-7">
           {links.map(([href, label]) => (
             <a key={href} href={href} className="eyebrow text-paper/80 hover:text-blue transition-colors">
               {label}
@@ -443,7 +451,7 @@ function Nav() {
             aria-expanded={open}
             aria-controls="mobile-nav"
             onClick={() => setOpen((v) => !v)}
-            className="md:hidden inline-flex flex-col justify-center items-center w-11 h-11 border border-paper/25 text-paper hover:border-blue hover:text-blue transition-colors"
+            className="lg:hidden inline-flex flex-col justify-center items-center w-11 h-11 border border-paper/25 text-paper hover:border-blue hover:text-blue transition-colors"
           >
             <span className={`block h-[2px] w-5 bg-current transition-transform ${open ? "translate-y-[5px] rotate-45" : ""}`} />
             <span className={`block h-[2px] w-5 bg-current mt-1 transition-opacity ${open ? "opacity-0" : ""}`} />
@@ -452,7 +460,7 @@ function Nav() {
         </div>
       </div>
       {open && (
-        <div id="mobile-nav" className="md:hidden border-t border-paper/15 bg-ink">
+        <div id="mobile-nav" className="lg:hidden border-t border-paper/15 bg-ink">
           <div className="flex flex-col px-5 py-3">
             {links.map(([href, label]) => (
               <a
@@ -943,10 +951,11 @@ function RSVP() {
                   First time running with us
                 </span>
               </button>
-              <label className="block text-[11px] font-bold tracking-[0.14em] uppercase text-ink/55 mb-1.5">
+              <label htmlFor="rsvp-source" className="block text-[11px] font-bold tracking-[0.14em] uppercase text-ink/70 mb-1.5">
                 How'd you find us?
               </label>
               <select
+                id="rsvp-source"
                 value={source}
                 onChange={(e) => setSource(e.target.value)}
                 className="w-full text-base text-ink bg-white border-[1.5px] border-[#cfcabe] px-3.5 py-3 mb-4 outline-none focus:border-ink"
@@ -973,11 +982,11 @@ function RSVP() {
               <p className="mt-3.5 text-xs leading-[1.5] text-ink/55 text-center">
                 Free, always. One reminder Friday, one Saturday. Unsubscribe anytime.
               </p>
-              <p className="mt-2 text-xs leading-[1.5] text-ink/50 text-center">
+              <p className="mt-2 text-xs leading-[1.5] text-ink/70 text-center">
                 We'll only use this to send run reminders and GRYT updates. No spam.
               </p>
               <p className="mt-2 text-xs text-center">
-                <Link to="/privacy" className="text-ink/50 underline hover:text-ink transition-colors">
+                <Link to="/privacy" className="text-ink/75 underline hover:text-ink transition-colors">
                   Privacy Policy
                 </Link>
               </p>
@@ -1150,11 +1159,19 @@ function RSVPConfirmation({
           ))}
         </div>
         <div className="text-xs text-ink/55">
-          Recurring weekly event — shows up every Saturday.
+          Recurring weekly event. Shows up every Saturday.
         </div>
       </div>
 
       <RSVPWaiverBlock prefill={prefill} onStatusChange={setWaiverSigned} />
+
+      <BringAFriend
+        dateLabel={new Date(canonicalOccurrence().startUtc).toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          timeZone: "America/New_York",
+        })}
+      />
 
       <a
         href={STRAVA_CLUB}
@@ -1171,7 +1188,7 @@ function RSVPConfirmation({
         RSVP someone else
       </button>
       <p className="mt-3 text-[11px] leading-[1.5] text-ink/45 text-center">
-        Your details stay on this device and in our private roster — nothing personal is ever put in the web address.
+        Your details stay on this device and in our private roster. Nothing personal is ever put in the web address.
       </p>
     </div>
   );
@@ -2607,7 +2624,7 @@ function Footer() {
           <span>© 2026 GRYT Run Club. All rights reserved.</span>
           <span>{"\n"}</span>
         </div>
-        <div className="pt-3 eyebrow text-paper/35">
+        <div className="pt-3 eyebrow text-paper/60">
           Designed, written, and shipped by{" "}
           <a
             href="https://nick.pop.site"
@@ -3755,14 +3772,18 @@ function Landing() {
       <Hero />
       <PartnersStrip />
       <RSVP />
+      <LastRunStrip />
       <FirstTimer />
       <SaturdayWeather />
       <MontourRouteMap />
+      <LearnDoorway />
       <section className="border-t border-paper/15 px-6 py-10 sm:px-12 lg:px-24" aria-label="More from GRYT">
         <div className="mx-auto flex max-w-[1180px] flex-wrap gap-x-8 gap-y-4">
           <Link to="/about" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Meet Laura & Nick →</Link>
           <Link to="/faq" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Run questions →</Link>
           <Link to="/resources" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Running guides →</Link>
+          <Link to="/runs" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Run reports →</Link>
+          <Link to="/milestones" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Milestone Club →</Link>
           <Link to="/press" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Press & conversations →</Link>
           <Link to="/shop" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Shop →</Link>
           <a href={STRAVA_CLUB} target="_blank" rel="noopener noreferrer" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Strava club →</a>

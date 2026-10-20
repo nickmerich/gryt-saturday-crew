@@ -9,7 +9,7 @@ const OG_IMAGE = `${SITE}${heroAsset.url}`;
 const TITLE =
   "EQT Pittsburgh 10 Miler 2026: Race Guide & Training · gryt run club";
 const DESCRIPTION =
-  "Course details, hill training, pacing strategy, and race-day logistics for the EQT Pittsburgh 10 Miler 2026 — plus how to train with a free no-drop group.";
+  "Course details, hill training, pacing strategy, and race-day logistics for the EQT Pittsburgh 10 Miler 2026, plus how to train with a free no-drop group.";
 const PUBLISHED = "2026-08-28";
 
 const SECTIONS: Array<{ id: string; label: string }> = [
@@ -409,7 +409,7 @@ function TenMilerPage() {
           </div>
 
           <div className="mt-14 flex flex-wrap gap-4">
-            <Link to="/" hash="run" className="btn-primary">
+            <Link to="/" hash="join" className="btn-primary">
               See Saturday's run →
             </Link>
             <Link

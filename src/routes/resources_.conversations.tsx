@@ -8,7 +8,7 @@ const SITE = SITE_ORIGIN;
 const URL = `${SITE}/resources/conversations`;
 const TITLE = "Conversations · gryt run club";
 const DESCRIPTION =
-  "Interviews and Q&As with the founders, members, and partners of gryt run club — the people behind the miles.";
+  "Interviews and Q&As with the founders, members, and partners of gryt run club: the people behind the miles.";
 
 export const Route = createFileRoute("/resources_/conversations")({
   head: () => ({
@@ -52,7 +52,7 @@ const CONVERSATIONS: Conversation[] = [
     hook: "On why Saturday morning became the most important appointment of the week.",
     qa: [
       {
-        q: "Why Saturday at 8 AM?",
+        q: "Why Saturday at 7 AM?",
         a: "Because nothing else competes with it. Work doesn't. Brunch doesn't. Hangovers do, briefly, until the people you'd be hung over with start running too. The time only works if it's protected, and protecting it is the whole job of being a founder.",
       },
       {

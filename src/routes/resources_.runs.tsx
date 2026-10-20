@@ -19,7 +19,7 @@ export const Route = createFileRoute("/resources_/runs")({
       {
         name: "description",
         content:
-          "Connect Strava and see your recent runs with pace, elevation gain, and mile-by-mile splits — plus GRYT guides to run them better.",
+          "Connect Strava and see your recent runs with pace, elevation gain, and mile-by-mile splits, plus GRYT guides to run them better.",
       },
       { property: "og:title", content: "My runs · pace, elevation, splits · gryt run club" },
       {

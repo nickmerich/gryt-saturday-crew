@@ -8,7 +8,7 @@ const URL = `${SITE}/resources/cross-training-for-runners`;
 const HERO = `${SITE}${heroAsset.url}`;
 const TITLE = "Cross-Training for Runners: Best Low-Impact Options · gryt";
 const DESCRIPTION =
-  "The best low-impact cross-training for runners — cycling, swimming, elliptical, strength, yoga, hiking, rowing — and how to fit it into a real running week.";
+  "The best low-impact cross-training for runners: cycling, swimming, elliptical, strength, yoga, hiking, rowing, and how to fit it into a real running week.";
 const PUBLISHED = "2026-08-31";
 
 const SECTIONS: Array<{ id: string; label: string }> = [
@@ -514,7 +514,7 @@ function CrossTrainingPage() {
           </div>
 
           <div className="mt-14 flex flex-wrap gap-4">
-            <Link to="/" hash="run" className="btn-primary">
+            <Link to="/" hash="join" className="btn-primary">
               See Saturday's run →
             </Link>
             <Link

@@ -7,7 +7,7 @@ const SITE = SITE_ORIGIN;
 const URL = `${SITE}/resources/graphics`;
 const TITLE = "Graphics · gryt run club";
 const DESCRIPTION =
-  "Free downloadable graphics from gryt run club — logos, printable posters, pace cards, and social kits. Free to use, free to share.";
+  "Free downloadable graphics from gryt run club: logos, printable posters, pace cards, and social kits. Free to use, free to share.";
 
 export const Route = createFileRoute("/resources_/graphics")({
   head: () => ({

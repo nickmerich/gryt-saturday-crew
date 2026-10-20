@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { submitRecommendation } from "@/lib/recommendations.functions";
@@ -56,76 +56,94 @@ export function MissionStamp({
   );
 }
 
+const NAV_LINKS: Array<{ href: string; label: string }> = [
+  { href: "/#details", label: "Let's Run" },
+  { href: "/#first", label: "Start Here" },
+  { href: "/calendar", label: "Calendar" },
+  { href: "/resources", label: "Learn" },
+  { href: "/races", label: "Races" },
+  { href: "/about", label: "About" },
+  { href: "/faq", label: "FAQ" },
+  { href: "/shop", label: "Shop" },
+];
+
 export function SiteNav() {
+  const [open, setOpen] = useState(false);
+  const [here, setHere] = useState("");
+  useEffect(() => setHere(window.location.pathname), []);
+  const isCurrent = (href: string) =>
+    !href.includes("#") && (here === href || (href !== "/" && here.startsWith(`${href}/`)));
   return (
-    <nav className="sticky top-0 z-50 bg-ink border-b border-paper/15">
-      <div className="flex items-center justify-between px-5 sm:px-8 md:px-12 h-[68px]">
-        <a href="/" className="flex items-center gap-2">
+    <nav aria-label="Main" className="sticky top-0 z-50 bg-ink border-b border-paper/15">
+      <div className="flex items-center justify-between gap-4 px-5 sm:px-8 md:px-12 h-[68px]">
+        <a href="/" className="flex items-center gap-2 shrink-0" aria-label="GRYT Run Club home">
           <MonogramG className="h-11 w-11" />
           <span className="wordmark uppercase text-[20px] leading-none [text-shadow:2px_2px_0_var(--blue)]">
             Run Club
           </span>
         </a>
-        <div className="hidden md:flex items-center gap-8">
-          <a
-            href="/#details"
-            className="eyebrow text-paper/80 hover:text-blue transition-colors"
-          >
-            The Run
-          </a>
-          <a
-            href="/#first"
-            className="eyebrow text-paper/80 hover:text-blue transition-colors"
-          >
-            First Time
-          </a>
-          <a
-            href="/#founders"
-            className="eyebrow text-paper/80 hover:text-blue transition-colors"
-          >
-            Who We Are
-          </a>
-          <a
-            href="/about"
-            className="eyebrow text-paper/80 hover:text-blue transition-colors"
-          >
-            About
-          </a>
-          <a
-            href="/calendar"
-            className="eyebrow text-paper/80 hover:text-blue transition-colors"
-          >
-            Calendar
-          </a>
-          <a
-            href="/resources"
-            className="eyebrow text-paper/80 hover:text-blue transition-colors"
-          >
-            Resources
-          </a>
-          <a
-            href="/faq"
-            className="eyebrow text-paper/80 hover:text-blue transition-colors"
-          >
-            FAQ
-          </a>
-          <a
-            href="/shop"
-            className="eyebrow text-paper/80 hover:text-blue transition-colors"
-          >
-            Shop
-          </a>
+        <div className="hidden lg:flex items-center gap-7">
+          {NAV_LINKS.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              aria-current={isCurrent(l.href) ? "page" : undefined}
+              className={`eyebrow transition-colors hover:text-blue ${
+                isCurrent(l.href) ? "text-blue" : "text-paper/80"
+              }`}
+            >
+              {l.label}
+            </a>
+          ))}
         </div>
-        <a
-          href={STRAVA_CLUB}
-          target="_blank"
-          rel="noopener"
-          className="bg-blue text-ink px-4 sm:px-5 py-3 text-xs font-bold uppercase tracking-[0.1em] hover:bg-paper transition-colors"
-          style={{ fontFamily: "var(--font-body)" }}
-        >
-          Join on Strava
-        </a>
+        <div className="flex items-center gap-2">
+          <a
+            href="/#join"
+            className="bg-blue text-ink px-4 sm:px-5 py-3 text-xs font-bold uppercase tracking-[0.1em] hover:bg-paper transition-colors whitespace-nowrap"
+            style={{ fontFamily: "var(--font-body)" }}
+          >
+            RSVP Saturday
+          </a>
+          <button
+            type="button"
+            className="lg:hidden inline-flex items-center justify-center h-11 w-11 border border-paper/30 text-paper hover:border-blue"
+            aria-expanded={open}
+            aria-controls="site-mobile-nav"
+            aria-label={open ? "Close menu" : "Open menu"}
+            onClick={() => setOpen((v) => !v)}
+          >
+            <span aria-hidden="true" className="text-[20px] leading-none">{open ? "×" : "≡"}</span>
+          </button>
+        </div>
       </div>
+      {open ? (
+        <div id="site-mobile-nav" className="lg:hidden border-t border-paper/15 bg-ink px-5 sm:px-8 pb-6">
+          <ul className="flex flex-col">
+            {NAV_LINKS.map((l) => (
+              <li key={l.href} className="border-b border-paper/10">
+                <a
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  aria-current={isCurrent(l.href) ? "page" : undefined}
+                  className={`block py-4 text-[17px] font-bold ${isCurrent(l.href) ? "text-blue" : "text-paper"}`}
+                >
+                  {l.label}
+                </a>
+              </li>
+            ))}
+            <li>
+              <a
+                href={STRAVA_CLUB}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block py-4 text-[15px] text-paper/70"
+              >
+                Join the Strava club ↗
+              </a>
+            </li>
+          </ul>
+        </div>
+      ) : null}
     </nav>
   );
 }
@@ -348,7 +366,7 @@ export function SiteFooter() {
           <span>© 2026 GRYT Run Club. All rights reserved.</span>
           <span>Built by Laura & Nick Merich.</span>
         </div>
-        <div className="pt-3 eyebrow text-paper/35">
+        <div className="pt-3 eyebrow text-paper/60">
           Designed, written, and shipped by{" "}
           <a
             href="https://nick.pop.site"

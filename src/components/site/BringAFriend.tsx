@@ -1,0 +1,78 @@
+import { useState } from "react";
+import { track } from "@/lib/analytics";
+
+/** Visible, copyable invite link. utm_source=friend lets first-touch attribution credit the invite. */
+export const FRIEND_INVITE_URL = "https://grytrunclub.com/?utm_source=friend";
+
+export function friendInviteText(dateLabel?: string) {
+  return `I'm running with GRYT this Saturday${dateLabel ? ` (${dateLabel})` : ""} at 7 AM, Peterswood Park lot in McMurray. Free, no-drop, every pace. Come with me: ${FRIEND_INVITE_URL}`;
+}
+
+/**
+ * Shown right after an RSVP. The moment someone commits is the moment they
+ * are most likely to bring someone, so make it one tap.
+ */
+export function BringAFriend({ dateLabel }: { dateLabel?: string }) {
+  const [copied, setCopied] = useState(false);
+  const message = friendInviteText(dateLabel);
+
+  async function share() {
+    track("friend_invite_click", { method: "share" });
+    if (typeof navigator !== "undefined" && navigator.share) {
+      try {
+        await navigator.share({ title: "Run with me Saturday", text: message });
+        return;
+      } catch {
+        /* user dismissed; fall through to copy */
+      }
+    }
+    await copy();
+  }
+
+  async function copy() {
+    track("friend_invite_click", { method: "copy" });
+    try {
+      await navigator.clipboard.writeText(message);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2500);
+    } catch {
+      setCopied(false);
+    }
+  }
+
+  return (
+    <div className="mt-5 border-[1.5px] border-ink bg-[#f4f1ea] p-4">
+      <div className="text-[11px] font-bold tracking-[0.14em] uppercase text-ink/70">Bring a friend</div>
+      <p className="mt-1.5 text-[14px] leading-[1.5] text-ink">
+        Saturday is better with someone you know. Send this to one person.
+      </p>
+      <p className="mt-3 select-all break-words bg-white border border-[#d8d4cb] px-3 py-2.5 text-[13px] leading-[1.5] text-ink">
+        {message}
+      </p>
+      <div className="mt-3 grid grid-cols-2 gap-2">
+        <button
+          type="button"
+          onClick={share}
+          className="text-[12px] font-bold tracking-[0.1em] uppercase py-3 bg-ink text-paper hover:bg-blue hover:text-ink transition-colors"
+        >
+          Send invite
+        </button>
+        <a
+          href={`sms:?&body=${encodeURIComponent(message)}`}
+          onClick={() => track("friend_invite_click", { method: "sms" })}
+          className="text-[12px] font-bold tracking-[0.1em] uppercase py-3 border-[1.5px] border-ink text-ink text-center hover:bg-ink hover:text-paper transition-colors"
+        >
+          Text it
+        </a>
+      </div>
+      <button
+        type="button"
+        onClick={copy}
+        className="mt-2 w-full text-[12px] font-semibold text-ink/75 underline underline-offset-4"
+        aria-live="polite"
+      >
+        {copied ? "Copied. Paste it anywhere." : "Copy message"}
+      </button>
+    </div>
+  );
+}

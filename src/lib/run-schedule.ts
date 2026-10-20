@@ -261,7 +261,7 @@ function parseLocalDate(localDate: string): { y: number; m: number; d: number } 
   return { y: y!, m: m!, d: d! };
 }
 
-function runNumberForDate(localDate: string): number {
+export function runNumberForDate(localDate: string): number {
   const { y, m, d } = parseLocalDate(localDate);
   const weeks = Math.round((Date.UTC(y, m - 1, d) - RUN_ANCHOR_MS) / (7 * 24 * 60 * 60 * 1000));
   return RUN_ANCHOR_NUMBER + weeks;

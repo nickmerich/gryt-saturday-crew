@@ -6,7 +6,7 @@ const SITE = "https://grytrunclub.com";
 const URL = `${SITE}/resources/should-you-join-a-running-club`;
 const TITLE = "Should You Join a Running Club? An Honest Answer · gryt";
 const DESCRIPTION =
-  "Am I too slow? Do I have to talk? What does it cost? A straight answer to the questions people actually ask before showing up to a run club — from a South Hills Pittsburgh crew.";
+  "Am I too slow? Do I have to talk? What does it cost? A straight answer to the questions people actually ask before showing up to a run club: from a South Hills Pittsburgh crew.";
 const PUBLISHED = "2026-08-31";
 
 const SECTIONS: Array<{ id: string; label: string }> = [
@@ -328,7 +328,7 @@ function ShouldYouJoinPage() {
           </div>
 
           <div className="mt-14 flex flex-wrap gap-4">
-            <Link to="/" hash="run" className="btn-primary">
+            <Link to="/" hash="join" className="btn-primary">
               See Saturday's run →
             </Link>
             <Link

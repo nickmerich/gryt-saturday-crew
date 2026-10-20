@@ -444,7 +444,7 @@ function RunningBasePage() {
           </div>
 
           <div className="mt-14 flex flex-wrap gap-4">
-            <Link to="/" hash="run" className="btn-primary">
+            <Link to="/" hash="join" className="btn-primary">
               See Saturday's run →
             </Link>
             <Link

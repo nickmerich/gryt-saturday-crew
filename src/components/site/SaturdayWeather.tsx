@@ -69,7 +69,7 @@ export function SaturdayWeather() {
           <div className="mt-8 h-[120px] border border-paper/15 bg-ink/40 animate-pulse" />
         ) : isError || !data?.available ? (
           <div className="mt-8 border border-paper/20 bg-ink/50 p-5 text-[14px] text-paper/70">
-            Forecast isn't out for that Saturday yet. Check back midweek — the run goes either
+            Forecast isn't out for that Saturday yet. Check back midweek. The run goes either
             way.
           </div>
         ) : (
@@ -116,6 +116,12 @@ export function SaturdayWeather() {
                 }
               />
             </div>
+            <a
+              href="/resources/what-to-wear-running?saturday=1"
+              className="mt-5 inline-block text-[14px] font-bold text-blue underline underline-offset-4 hover:text-paper"
+            >
+              What should I wear for this? Build your outfit →
+            </a>
           </>
         )}
       </div>

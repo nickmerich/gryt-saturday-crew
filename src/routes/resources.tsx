@@ -5,6 +5,7 @@ import { SiteNav, SiteFooter, MonogramG } from "@/components/site/Chrome";
 import { submitPartnerInquiry } from "@/lib/partner-inquiries.functions";
 import { submitStorySubmission } from "@/lib/story-submissions.functions";
 import lookbookAsset from "@/assets/lookbook-merch.png.asset.json";
+import { TwoDoors, StartHere, Library } from "@/components/site/RunnerLibrary";
 
 export const Route = createFileRoute("/resources")({
   head: () => ({
@@ -13,13 +14,13 @@ export const Route = createFileRoute("/resources")({
       {
         name: "description",
         content:
-          "Playbooks, interviews, free graphics, merch, and partner opportunities from the founders of GRYT — a free South Hills run club in Pittsburgh, PA.",
+          "Free running guides and tools from GRYT, a free South Hills run club in Pittsburgh: pace calculator, what to wear by temperature, first-run guides, training, racing, and safety.",
       },
       { property: "og:title", content: "Running Resources · South Hills Pittsburgh | GRYT Run Club" },
       {
         property: "og:description",
         content:
-          "Everything we've learned running the South Hills every Saturday — playbooks, guides, and free tools, shared openly.",
+          "Everything we've learned running the South Hills every Saturday. Guides, free tools, and start-here paths, shared openly.",
       },
 
       { property: "og:type", content: "website" },
@@ -61,8 +62,9 @@ function ResourcesPage() {
         <SiteNav />
         <div className="mx-auto max-w-[1240px] px-6 lg:px-10 pt-16 md:pt-24 pb-24">
           <Masthead />
-          <FeaturedStory />
-          <Playbooks />
+          <TwoDoors />
+          <StartHere />
+          <Library />
           <Conversations />
           <ManifestoCallout />
           <ShareYourStory />
@@ -75,211 +77,6 @@ function ResourcesPage() {
   );
 }
 
-function FeaturedStory() {
-  return (
-    <section className="mb-24 md:mb-32">
-      <Link
-        to="/resources/more-than-miles"
-        className={`group block border border-blue bg-blue/[0.06] p-8 md:p-12 hover:bg-blue hover:text-ink transition-colors ${focusRing}`}
-      >
-        <span className="text-blue text-[12px] tracking-[0.22em] uppercase mb-6 block group-hover:text-ink" style={mono}>
-          § 00 / Community · New Story
-        </span>
-        <h3
-          className="text-[clamp(28px,4.4vw,60px)] font-bold leading-[1.04] tracking-tight max-w-[20ch]"
-          style={{ fontFamily: "var(--font-display)" }}
-        >
-          More Than Miles: 5 Things You Wouldn't Guess From the Parking Lot
-        </h3>
-        <p className="mt-6 max-w-xl text-[15px] leading-[1.65] text-paper/85 group-hover:text-ink/80">
-          A Boston-standard marathoner waiting for the last runner, a 64-minute
-          PR in 23 weeks, and route maps drawn by a real cartographer.
-        </p>
-        <span className="mt-8 inline-block text-[12px] tracking-[0.22em] uppercase" style={mono}>
-          Read the story →
-        </span>
-      </Link>
-
-      <Link
-        to="/resources/running-with-a-group"
-        className={`group block border border-paper/20 bg-vintage p-8 md:p-10 mt-px hover:bg-blue hover:text-ink transition-colors ${focusRing}`}
-      >
-        <span className="text-blue text-[12px] tracking-[0.22em] uppercase mb-5 block group-hover:text-ink" style={mono}>
-          § 00.1 / Community · Blog
-        </span>
-        <h3
-          className="text-[clamp(24px,3.4vw,44px)] font-bold leading-[1.06] tracking-tight max-w-[24ch]"
-          style={{ fontFamily: "var(--font-display)" }}
-        >
-          Running With a Group: Why It Makes You Faster and Less Likely to Quit
-        </h3>
-        <p className="mt-5 max-w-xl text-[15px] leading-[1.65] text-paper/85 group-hover:text-ink/80">
-          Social facilitation, no-drop crews, and why expectation beats
-          motivation every Saturday at 7 AM.
-        </p>
-        <span className="mt-7 inline-block text-[12px] tracking-[0.22em] uppercase" style={mono}>
-          Read the blog →
-        </span>
-      </Link>
-
-      <Link
-        to="/resources/eqt-pittsburgh-10-miler-2026"
-        className={`group block border border-paper/20 bg-vintage p-8 md:p-10 mt-px hover:bg-blue hover:text-ink transition-colors ${focusRing}`}
-      >
-        <span className="text-blue text-[12px] tracking-[0.22em] uppercase mb-5 block group-hover:text-ink" style={mono}>
-          § 00.2 / Racing · Guide
-        </span>
-        <h3
-          className="text-[clamp(24px,3.4vw,44px)] font-bold leading-[1.06] tracking-tight max-w-[24ch]"
-          style={{ fontFamily: "var(--font-display)" }}
-        >
-          EQT Pittsburgh 10 Miler 2026: Race Guide, Course Details, and Training Tips
-        </h3>
-        <p className="mt-5 max-w-xl text-[15px] leading-[1.65] text-paper/85 group-hover:text-ink/80">
-          Course terrain, hill work, pacing targets, and race-day logistics —
-          plus how to train for it with a free no-drop crew.
-        </p>
-        <span className="mt-7 inline-block text-[12px] tracking-[0.22em] uppercase" style={mono}>
-          Read the guide →
-        </span>
-      </Link>
-
-      <Link
-        to="/resources/what-to-eat-before-a-run"
-        className={`group block border border-paper/20 bg-vintage p-8 md:p-10 mt-px hover:bg-blue hover:text-ink transition-colors ${focusRing}`}
-      >
-        <span className="text-blue text-[12px] tracking-[0.22em] uppercase mb-5 block group-hover:text-ink" style={mono}>
-          § 00.3 / Training · Guide
-        </span>
-        <h3
-          className="text-[clamp(24px,3.4vw,44px)] font-bold leading-[1.06] tracking-tight max-w-[24ch]"
-          style={{ fontFamily: "var(--font-display)" }}
-        >
-          What to Eat Before a Run: Timing, Portions, and Foods That Work
-        </h3>
-        <p className="mt-5 max-w-xl text-[15px] leading-[1.65] text-paper/85 group-hover:text-ink/80">
-          Fueling windows, portion sizes, foods that hold up mid-run, and the
-          ones that turn into a side stitch at mile two.
-        </p>
-        <span className="mt-7 inline-block text-[12px] tracking-[0.22em] uppercase" style={mono}>
-          Read the guide →
-        </span>
-      </Link>
-
-      <Link
-        to="/resources/should-you-join-a-running-club"
-        className={`group block border border-paper/20 bg-vintage p-8 md:p-10 mt-px hover:bg-blue hover:text-ink transition-colors ${focusRing}`}
-      >
-        <span className="text-blue text-[12px] tracking-[0.22em] uppercase mb-5 block group-hover:text-ink" style={mono}>
-          § 00.4 / Community · Blog
-        </span>
-        <h3
-          className="text-[clamp(24px,3.4vw,44px)] font-bold leading-[1.06] tracking-tight max-w-[24ch]"
-          style={{ fontFamily: "var(--font-display)" }}
-        >
-          Should You Join a Running Club? An Honest Answer
-        </h3>
-        <p className="mt-5 max-w-xl text-[15px] leading-[1.65] text-paper/85 group-hover:text-ink/80">
-          Am I too slow, what does it cost, do I have to talk — straight answers
-          from Nick Merich before you get out of the car.
-        </p>
-        <span className="mt-7 inline-block text-[12px] tracking-[0.22em] uppercase" style={mono}>
-          Read the blog →
-        </span>
-      </Link>
-
-      <Link
-        to="/resources/cross-training-for-runners"
-        className={`group block border border-paper/20 bg-vintage p-8 md:p-10 mt-px hover:bg-blue hover:text-ink transition-colors ${focusRing}`}
-      >
-        <span className="text-blue text-[12px] tracking-[0.22em] uppercase mb-5 block group-hover:text-ink" style={mono}>
-          § 00.6 / Training · Guide
-        </span>
-        <h3
-          className="text-[clamp(24px,3.4vw,44px)] font-bold leading-[1.06] tracking-tight max-w-[24ch]"
-          style={{ fontFamily: "var(--font-display)" }}
-        >
-          Cross-Training for Runners: The Best Low-Impact Options
-        </h3>
-        <p className="mt-5 max-w-xl text-[15px] leading-[1.65] text-paper/85 group-hover:text-ink/80">
-          Cycling, swimming, elliptical, strength, yoga, hiking, rowing — what
-          to do between run days, and how to fit it into a real week.
-        </p>
-        <span className="mt-7 inline-block text-[12px] tracking-[0.22em] uppercase" style={mono}>
-          Read the guide →
-        </span>
-      </Link>
-
-      <Link
-        to="/resources/increase-running-mileage-without-injury"
-        className={`group block border border-paper/20 bg-vintage p-8 md:p-10 mt-px hover:bg-blue hover:text-ink transition-colors ${focusRing}`}
-      >
-        <span className="text-blue text-[12px] tracking-[0.22em] uppercase mb-5 block group-hover:text-ink" style={mono}>
-          § 00.6 / Training · Guide
-        </span>
-        <h3
-          className="text-[clamp(24px,3.4vw,44px)] font-bold leading-[1.06] tracking-tight max-w-[24ch]"
-          style={{ fontFamily: "var(--font-display)" }}
-        >
-          How to Increase Running Mileage Without Getting Injured
-        </h3>
-        <p className="mt-5 max-w-xl text-[15px] leading-[1.65] text-paper/85 group-hover:text-ink/80">
-          The 10 percent rule, recovery weeks, one long run, strength work,
-          and why a crew keeps you consistent.
-        </p>
-        <span className="mt-7 inline-block text-[12px] tracking-[0.22em] uppercase" style={mono}>
-          Read the guide →
-        </span>
-      </Link>
-
-      <Link
-        to="/resources/running-at-night-safety-pittsburgh"
-        className={`group block border border-paper/20 bg-vintage p-8 md:p-10 mt-px hover:bg-blue hover:text-ink transition-colors ${focusRing}`}
-      >
-        <span className="text-blue text-[12px] tracking-[0.22em] uppercase mb-5 block group-hover:text-ink" style={mono}>
-          § 00.7 / Safety · Guide
-        </span>
-        <h3
-          className="text-[clamp(24px,3.4vw,44px)] font-bold leading-[1.06] tracking-tight max-w-[24ch]"
-          style={{ fontFamily: "var(--font-display)" }}
-        >
-          Running at Night: How to Stay Safe on Evening Runs in Pittsburgh
-        </h3>
-        <p className="mt-5 max-w-xl text-[15px] leading-[1.65] text-paper/85 group-hover:text-ink/80">
-          Headlamps, reflective gear, route choice, fog, wet leaves and ice,
-          plus a two-minute checklist.
-        </p>
-        <span className="mt-7 inline-block text-[12px] tracking-[0.22em] uppercase" style={mono}>
-          Read the guide →
-        </span>
-      </Link>
-
-      <Link
-        to="/resources/build-a-running-base"
-        className={`group block border border-paper/20 bg-vintage p-8 md:p-10 mt-px hover:bg-blue hover:text-ink transition-colors ${focusRing}`}
-      >
-        <span className="text-blue text-[12px] tracking-[0.22em] uppercase mb-5 block group-hover:text-ink" style={mono}>
-          § 00.5 / Training · Guide
-        </span>
-        <h3
-          className="text-[clamp(24px,3.4vw,44px)] font-bold leading-[1.06] tracking-tight max-w-[24ch]"
-          style={{ fontFamily: "var(--font-display)" }}
-        >
-          How to Build a Running Base Before Your First Race
-        </h3>
-        <p className="mt-5 max-w-xl text-[15px] leading-[1.65] text-paper/85 group-hover:text-ink/80">
-          How long the base phase takes, how many days a week, what easy
-          actually feels like, and when you're ready for a plan.
-        </p>
-        <span className="mt-7 inline-block text-[12px] tracking-[0.22em] uppercase" style={mono}>
-          Read the guide →
-        </span>
-      </Link>
-    </section>
-  );
-}
-
-/* Shared a11y helpers */
 const focusRing =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ink";
 const focusRingLight =
@@ -326,160 +123,15 @@ function Masthead() {
         <p className="text-[22px] md:text-[28px] font-light leading-[1.3] max-w-[720px] text-paper/95"
           style={{ fontFamily: "var(--font-display)" }}
         >
-          Everything we've learned from showing up every Saturday —{" "}
-          <span className="text-blue">shared freely.</span> Playbooks,
-          interviews, free graphics, and partner opportunities.
+          Some people come here for Saturday. Some come to learn.{" "}
+          <span className="text-blue">Both are welcome.</span> Everything we've
+          learned from showing up every week, shared freely.
         </p>
         <p className="text-[12px] tracking-[0.24em] uppercase text-paper/70 shrink-0" style={mono}>
           An open field manual<br className="hidden md:block" /> · Pittsburgh, PA
         </p>
       </div>
     </header>
-  );
-}
-
-/* ─────────────────────────  PLAYBOOKS  ───────────────────── */
-
-const PLAYBOOKS: Array<{
-  n: string;
-  title: string;
-  description: string;
-  category: string;
-  featured?: boolean;
-  comingSoon?: boolean;
-}> = [
-  {
-    n: "01",
-    title: "How to Find a Running Club That Actually Fits Your Life",
-    description:
-      "The no-BS field guide to picking a run club: schedule, pace, cost, post-run culture, and what to watch out for.",
-    category: "Community",
-    featured: true,
-  },
-  {
-    n: "02",
-    title: "How to Start a Run Club From Zero",
-    description:
-      "The full playbook Nick used to launch GRYT — location, time, first ten members, keeping them coming back.",
-    category: "Community",
-  },
-  {
-    n: "03",
-    title: "Consistency Over Intensity",
-    description:
-      "Why showing up every Saturday at the same time changes how you see yourself — and the data behind it.",
-    category: "Training",
-  },
-  {
-    n: "04",
-    title: "The Comeback Runner's Guide",
-    description:
-      "For former athletes returning to endurance sport: mindset resets, training principles, what actually matters.",
-    category: "Running",
-  },
-  {
-    n: "05",
-    title: "Building Community in Home Services",
-    description:
-      "How the same principles that built GRYT apply to franchise growth and local brand trust.",
-    category: "Business",
-    comingSoon: true,
-  },
-];
-
-function Playbooks() {
-  const featured = PLAYBOOKS.find((p) => p.featured)!;
-  const rest = PLAYBOOKS.filter((p) => !p.featured);
-
-  return (
-    <section className="mb-24 md:mb-32">
-      <SectionRule number="§ 01" title="Playbooks" />
-
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-px bg-paper/20 border border-paper/20">
-        {/* Featured */}
-        <Link
-          to="/resources/playbooks"
-          className={`md:col-span-8 bg-ink p-8 md:p-12 flex flex-col justify-between group cursor-pointer min-h-[420px] hover:bg-vintage transition-colors ${focusRing}`}
-        >
-          <div>
-            <span className="text-blue text-[12px] tracking-[0.22em] uppercase mb-6 block" style={mono}>
-              {featured.n} / {featured.category} · Featured
-            </span>
-            <h3
-              className="text-[clamp(32px,5vw,68px)] font-bold leading-[1.02] tracking-tight max-w-[16ch]"
-              style={{ fontFamily: "var(--font-display)" }}
-            >
-              {featured.title}
-            </h3>
-          </div>
-          <div className="flex items-end justify-between gap-8 mt-10">
-            <p className="max-w-md text-[15px] leading-[1.65] text-paper/85">
-              {featured.description}
-            </p>
-            <span
-              className="w-14 h-14 border border-paper flex items-center justify-center shrink-0 group-hover:bg-blue group-hover:border-blue group-hover:text-ink transition-colors"
-              aria-hidden="true"
-            >
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </span>
-          </div>
-        </Link>
-
-        {/* Right column: 2 stacked */}
-        <div className="md:col-span-4 grid grid-cols-1 md:grid-rows-2 gap-px bg-paper/20">
-          {rest.slice(0, 2).map((p) => (
-            <PlaybookMini key={p.title} p={p} />
-          ))}
-        </div>
-
-        {/* Bottom row: 3 across */}
-        {rest.slice(2).map((p) => (
-          <div key={p.title} className="md:col-span-4">
-            <PlaybookMini p={p} />
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function PlaybookMini({ p }: { p: (typeof PLAYBOOKS)[number] }) {
-  const Wrap: any = p.comingSoon ? "div" : Link;
-  const wrapProps = p.comingSoon
-    ? {}
-    : { to: "/resources/playbooks" };
-
-  return (
-    <Wrap
-      {...wrapProps}
-      className={`h-full block bg-vintage p-7 md:p-8 flex flex-col justify-between min-h-[220px] transition-colors ${
-        p.comingSoon
-          ? "opacity-70 cursor-default"
-          : `hover:bg-blue hover:text-ink group cursor-pointer ${focusRing}`
-      }`}
-      {...(p.comingSoon ? { "aria-disabled": true } : {})}
-    >
-      <span
-        className="text-[12px] tracking-[0.22em] uppercase text-paper/75 group-hover:text-ink/80"
-        style={mono}
-      >
-        {p.n} / {p.category}
-      </span>
-      <h4
-        className="text-[22px] md:text-[26px] font-bold leading-[1.15] tracking-tight mt-4"
-        style={{ fontFamily: "var(--font-display)" }}
-      >
-        {p.title}
-      </h4>
-      <p className="mt-3 text-[14px] leading-[1.55] text-paper/80 group-hover:text-ink/80 line-clamp-2">
-        {p.description}
-      </p>
-      <p className="mt-5 text-[11px] tracking-[0.24em] uppercase text-blue group-hover:text-ink" style={mono}>
-        {p.comingSoon ? "Coming Soon" : "Read →"}
-      </p>
-    </Wrap>
   );
 }
 

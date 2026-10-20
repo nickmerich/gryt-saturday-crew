@@ -96,7 +96,7 @@ export const Route = createFileRoute("/faq")({
       {
         name: "description",
         content:
-          "Pace, cost, parking, gear, weather, and waiver questions for GRYT — the free South Hills run club meeting Saturdays 7 AM in McMurray, PA.",
+          "Pace, cost, parking, gear, weather, and waiver questions for GRYT, the free South Hills run club meeting Saturdays 7 AM in McMurray, PA.",
       },
       { property: "og:title", content: "South Hills Run Club FAQ · McMurray, PA | GRYT" },
       {

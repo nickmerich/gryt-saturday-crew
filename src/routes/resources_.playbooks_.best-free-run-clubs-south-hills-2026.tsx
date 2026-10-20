@@ -8,7 +8,7 @@ const URL = `${SITE}/resources/playbooks/best-free-run-clubs-south-hills-2026`;
 const TITLE =
   "Best Free Run Clubs in Pittsburgh's South Hills (2026) · gryt";
 const DESCRIPTION =
-  "Free run clubs in Pittsburgh's South Hills for 2026 — GRYT in McMurray, Yinz, City of Bridges, and why Strava isn't a run club. Cost, schedule, and drop policy compared.";
+  "Free run clubs in Pittsburgh's South Hills for 2026: GRYT in McMurray, Yinz, City of Bridges, and why Strava isn't a run club. Cost, schedule, and drop policy compared.";
 const PUBLISHED = "2026-09-01";
 const HERO = `${SITE}${heroAsset.url}`;
 
