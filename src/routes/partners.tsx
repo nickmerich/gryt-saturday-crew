@@ -1,3 +1,4 @@
+import { partnerLogo } from '@/lib/partner-logos'
 import { createFileRoute } from '@tanstack/react-router'
 import { queryOptions, useSuspenseQuery } from '@tanstack/react-query'
 import { useServerFn } from '@tanstack/react-start'
@@ -21,7 +22,7 @@ const inputClass = 'mt-2 w-full min-w-0 border border-paper/25 bg-ink px-3 py-3 
 function PartnerCard({ partner: p }: { partner: PublicPartner }) {
   const content = <>
     <div className="flex h-28 items-center justify-center border-b border-paper/10 px-4">
-      {p.logo ? <img src={p.logo} alt={`${p.name} logo`} className="max-h-20 max-w-full" loading="lazy" /> : <span className="font-condensed text-2xl uppercase text-center break-words">{p.name}</span>}
+      {partnerLogo(p) ? <img src={partnerLogo(p)} alt={`${p.name} logo`} className="max-h-20 max-w-full bg-paper p-2" loading="lazy" /> : <span className="font-condensed text-2xl uppercase text-center break-words">{p.name}</span>}
     </div>
     <div className="p-4"><div className="flex items-start justify-between gap-2"><h3 className="font-semibold break-words">{p.name}</h3>{p.website_url && <ArrowUpRight size={16} className="shrink-0 text-blue" aria-hidden />}</div>
       <p className="mt-1 text-sm text-paper/70">{p.role}</p>{p.city && <p className="mt-1 text-xs text-paper/50">{p.city}</p>}

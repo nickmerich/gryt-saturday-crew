@@ -9,6 +9,7 @@ import { MontourRouteMap } from "@/components/site/MontourRouteMap";
 import { ClubStats } from "@/components/site/ClubStats";
 import { useRegularsLabel } from "@/hooks/useRegularsLabel";
 import { PartnersStrip, homePartnersQuery } from "@/components/site/PartnersStrip";
+import { FeaturedEvent } from "@/components/site/FeaturedEvent";
 
 import { submitRecommendation } from "@/lib/recommendations.functions";
 import {
@@ -3771,6 +3772,7 @@ function Landing() {
       <Nav />
       <Hero />
       <PartnersStrip />
+      <FeaturedEvent />
       <RSVP />
       <LastRunStrip />
       <FirstTimer />
