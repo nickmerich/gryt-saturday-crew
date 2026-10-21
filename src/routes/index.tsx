@@ -1334,6 +1334,7 @@ function WhoItsFor() {
 
 
 function RunnerHighlights() {
+  const [photoFailed, setPhotoFailed] = useState(false);
   // Highlights drawn from the existing public More Than Miles story.
   const runners = [
     { name: "Laura", label: "No-drop run lead", headline: "Fast. Patient. There for the last runner.", detail: "Laura leads our no-drop group. Her 3:25:24 marathon at Mountains 2 Beach is inside the Boston-qualifying standard for her age group. On Saturdays, she runs at the pace of whoever shows up.", stat: "3:25:24", statLabel: "Marathon PR", anchor: "patient-fast" },
@@ -1346,7 +1347,14 @@ function RunnerHighlights() {
         <h2 id="runner-highlights-title" className="display-condensed text-6xl leading-none tracking-normal md:text-8xl">GRYT 100</h2>
         <div className="mt-8 grid gap-8 md:grid-cols-[0.9fr_1.1fr] md:gap-12">
           <figure className="min-w-0">
-            <img src={nickLauraAsset.url} alt="Nick Merich and Laura wearing race medals in front of a Pittsburgh Marathon backdrop" loading="lazy" className="aspect-[4/3] w-full object-cover md:aspect-[4/5]" />
+            {photoFailed ? (
+              <div role="status" className="flex aspect-[4/3] flex-col justify-center border border-paper/20 bg-ink p-6 text-paper md:aspect-[4/5]">
+                <p className="font-condensed text-3xl font-bold uppercase">Nick and Laura</p>
+                <p className="mt-3 text-base leading-relaxed text-paper/85">Photo unavailable. Their runner highlights and full stories are below.</p>
+              </div>
+            ) : (
+              <img src={nickLauraAsset.url} alt="Nick Merich and Laura wearing race medals in front of a Pittsburgh Marathon backdrop" loading="lazy" onError={() => setPhotoFailed(true)} className="aspect-[4/3] w-full object-cover md:aspect-[4/5]" />
+            )}
             <figcaption className="mt-3 text-sm text-paper/80">Nick and Laura. More than miles.</figcaption>
           </figure>
           <div className="min-w-0 divide-y divide-paper/20 border-t border-paper/20">
