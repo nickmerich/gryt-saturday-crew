@@ -23,3 +23,6 @@
 - [x] Strava club stats component (miles, members, recent group runs)
 - [ ] Live Strava club data — blocked: needs STRAVA_CLUB_REFRESH_TOKEN. Client ID/secret are saved; the token needs a one-time approval at /admin/strava/connect.
 - [x] Saturday attendance streaks from confirmed check-ins (src/lib/streaks.ts, shown on /admin/checkin and the homepage once check-ins exist)
+
+## Music Tectonics event page
+- [ ] /music-tectonics page, RSVP form, success state (announced to screen readers, focus moves to it), admin view + consent-only CSV
