@@ -1,6 +1,7 @@
 # Roadmap
 
 ## Recap graphic page
+- [x] Enlarge editing controls to 48px, stack numeric fields on phones and label units/photo movement clearly; verified upload, zoom, reset, remove and no overflow at 375/390/1440px. Build OK; preview only.
 - [x] Polish recap headings, contrast, fields, shared controls and compact preview; remove duplicate style selector and fix phone navigation overflow. Verified manual edit, PNG download and reset at 375/390/1440px; build OK. Saved data and graphic templates unchanged; external account import/share upload untested. Preview only.
 
 ## GRYT 100 runner highlights
