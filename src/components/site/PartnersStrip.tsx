@@ -12,9 +12,9 @@ export const HOME_TESTIMONIAL: { quote: string; name: string; org?: string } | n
 export const homePartnersQuery = queryOptions({ queryKey: ['partners','home-strip'], queryFn: () => getPartners({ data: {} }).catch(() => []), staleTime: 60000 })
 
 type P = Parameters<typeof partnerLogo>[0] & { name: string }
-function Item({ p }: { p: P }) {
+function Item({ p, dup }: { p: P; dup?: boolean }) {
   const logo = partnerLogo(p)
-  return <li className="flex shrink-0 items-center gap-4 px-8 md:px-12">
+  return <li aria-hidden={dup || undefined} className={`${dup ? 'motion-reduce:hidden ' : ''}flex shrink-0 items-center gap-4 px-8 md:px-12">
     {logo && <span className="flex h-16 w-16 md:h-20 md:w-20 items-center justify-center bg-paper p-2"><img src={logo} alt="" className="max-h-full max-w-full object-contain grayscale contrast-125" /></span>}
     <span className="font-condensed text-2xl md:text-4xl uppercase tracking-[0.03em] text-paper whitespace-nowrap">{p.name}</span>
   </li>
@@ -34,11 +34,11 @@ export function PartnersStrip() {
       <Link to="/partners" className="eyebrow text-paper/70 transition-colors hover:text-blue focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue">See all partners →</Link>
     </div>
     <div className="overflow-hidden border-t border-paper/10 py-6 md:py-8 [mask-image:linear-gradient(90deg,transparent,black_6%,black_94%,transparent)]">
-      <ul className="marquee-track motion-reduce:animate-none hover:[animation-play-state:paused]">
+      <ul className="marquee-track hover:[animation-play-state:paused] motion-reduce:!w-auto motion-reduce:flex-wrap motion-reduce:justify-center motion-reduce:gap-y-6 motion-reduce:[animation:none]">
         {data.map(p => <Item key={p.name} p={p as P} />)}
+        {/* Second run makes the loop seamless; hidden from screen readers. */}
+        {data.map(p => <Item key={`dup-${p.name}`} p={p as P} dup />)}
       </ul>
-      {/* Duplicate run for the seamless loop; hidden from screen readers. */}
-      <ul aria-hidden="true" className="sr-only" />
     </div>
   </section>
 }
