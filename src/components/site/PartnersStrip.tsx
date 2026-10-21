@@ -30,7 +30,7 @@ export function PartnersStrip() {
       <figcaption className="eyebrow mt-5 text-blue">{t.name}{t.org ? ` · ${t.org}` : ''}</figcaption>
     </figure>}
     <div className="mx-auto mb-6 flex max-w-[1180px] items-center justify-between gap-4 px-5 sm:px-8 md:px-12">
-      <div className="flex items-center gap-3"><span className="slash" aria-hidden="true" /><h2 className="display-condensed uppercase text-2xl md:text-3xl tracking-[0.04em] text-paper">Trusted by</h2></div>
+      <div className="flex items-center gap-3"><span className="slash" aria-hidden="true" /><h2 className="display-condensed uppercase text-2xl md:text-3xl tracking-[0.04em] text-paper whitespace-nowrap">Trusted by</h2></div>
       <Link to="/partners" className="eyebrow text-paper/70 transition-colors hover:text-blue focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue">See all partners →</Link>
     </div>
     <div className="overflow-hidden border-t border-paper/10 py-6 md:py-8 [mask-image:linear-gradient(90deg,transparent,black_6%,black_94%,transparent)]">
