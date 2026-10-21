@@ -111,6 +111,11 @@ export function CapDrop({ onAdded }: { onAdded?: () => void }) {
               <p className="display-condensed uppercase text-2xl tracking-[0.02em]">
                 {money(data.price.amount, data.price.currencyCode)}
               </p>
+              {data.quantityAvailable !== null && (
+                <p className="font-mono text-base text-blue" aria-live="polite">
+                  {data.quantityAvailable}/{CAP_BINDING.editionSize} hats left
+                </p>
+              )}
               {buyable ? (
                 <div className="flex flex-wrap items-center gap-3">
                   <div className="flex items-center border border-paper/25">
@@ -150,7 +155,7 @@ export function CapDrop({ onAdded }: { onAdded?: () => void }) {
           ) : (
             <div>
               <p className="border border-paper/20 px-4 py-3 text-sm text-paper/60">
-                Not for sale yet. This page is in review while the cap, price and stock are confirmed.
+                Online checkout is not available yet. Get notified when the hat is ready to buy here.
               </p>
               <CapWaitlist />
             </div>

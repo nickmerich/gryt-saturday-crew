@@ -10,7 +10,8 @@
  */
 export const CAP_BINDING = {
   shopDomain: "cidbxi-3p.myshopify.com",
-  handle: "the-founding-member-cap",
+  handle: "gryt-club-running-hat",
+  editionSize: 100,
   productGid: "gid://shopify/Product/8670076829868",
   variantGid: "gid://shopify/ProductVariant/46801296982188",
   productId: 8670076829868,
@@ -32,7 +33,7 @@ export type CapState =
       state: "available";
       title: string;
       productUrl: string;
-      /** Formatted from the storefront payload, e.g. "$36.00". Null when the payload has no usable price. */
+      /** Formatted from the storefront payload. Null when the payload has no usable price. */
       price: string | null;
       /** Absolute https image URL from the storefront payload, or null. */
       imageUrl: string | null;

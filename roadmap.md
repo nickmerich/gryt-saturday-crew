@@ -1,5 +1,9 @@
 # Roadmap
 
+## Founding member hat
+- [x] Verify Shopify price $30 and active status; update renamed product handle, current API and automatic inventory display out of 100.
+- [ ] Set remaining inventory to 5 and make product available to website checkout. Blocked: Shopify shows 10 and returns no product to the website; available tools cannot change inventory or sales-channel publication. Owner must update these in Shopify.
+
 ## Recap graphic page
 - [x] Tested touch editing at 320/360/375/390/414/430px; fixed 36px sharing/reset buttons to 48px, stacked mobile actions and enlarged consent checkbox. Photo adjustments, download and reset pass at all six widths without overflow or runtime errors. Build OK; external sharing untested. Preview only.
 - [x] Enlarge editing controls to 48px, stack numeric fields on phones and label units/photo movement clearly; verified upload, zoom, reset, remove and no overflow at 375/390/1440px. Build OK; preview only.
