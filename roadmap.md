@@ -1,6 +1,7 @@
 # Roadmap
 
 ## Recap graphic page
+- [x] Tested touch editing at 320/360/375/390/414/430px; fixed 36px sharing/reset buttons to 48px, stacked mobile actions and enlarged consent checkbox. Photo adjustments, download and reset pass at all six widths without overflow or runtime errors. Build OK; external sharing untested. Preview only.
 - [x] Enlarge editing controls to 48px, stack numeric fields on phones and label units/photo movement clearly; verified upload, zoom, reset, remove and no overflow at 375/390/1440px. Build OK; preview only.
 - [x] Polish recap headings, contrast, fields, shared controls and compact preview; remove duplicate style selector and fix phone navigation overflow. Verified manual edit, PNG download and reset at 375/390/1440px; build OK. Saved data and graphic templates unchanged; external account import/share upload untested. Preview only.
 
