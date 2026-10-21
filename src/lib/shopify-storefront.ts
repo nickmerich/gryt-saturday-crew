@@ -5,7 +5,7 @@
  */
 import { CAP_BINDING } from "./shopify-cap";
 
-export const SHOPIFY_API_VERSION = "2025-07";
+export const SHOPIFY_API_VERSION = "2026-10";
 export const SHOPIFY_STORE_PERMANENT_DOMAIN = CAP_BINDING.shopDomain;
 const SHOPIFY_STOREFRONT_URL = `https://${SHOPIFY_STORE_PERMANENT_DOMAIN}/api/${SHOPIFY_API_VERSION}/graphql.json`;
 const SHOPIFY_STOREFRONT_TOKEN = "a3f6af19e9bdcbb3ab9ef6f20c089c95";

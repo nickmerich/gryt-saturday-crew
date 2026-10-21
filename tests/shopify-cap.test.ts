@@ -21,12 +21,15 @@ const validPayload = {
   title: "The Founding Member Cap",
   published_at: "2026-09-01T00:00:00Z",
   available: true,
-  price: 3600,
+  price: 3000,
   featured_image: "//cdn.shopify.com/s/files/1/cap.jpg",
-  variants: [{ id: CAP_BINDING.variantId, available: true, price: 3600 }],
+  variants: [{ id: CAP_BINDING.variantId, available: true, price: 3000 }],
 };
 
 describe("cap release gate", () => {
+  test("founding hat edition contains 100 hats", () => {
+    expect(CAP_BINDING.editionSize).toBe(100);
+  });
   test("gate is owner-approved and explicit", () => {
     expect(typeof CAP_BINDING.releaseApproved).toBe("boolean");
     expect(CAP_BINDING.releaseApproved).toBe(true);
@@ -50,7 +53,7 @@ describe("cap identity validation", () => {
       state: "available",
       title: "The Founding Member Cap",
       productUrl: CAP_PRODUCT_URL,
-      price: "$36.00",
+      price: "$30.00",
       imageUrl: "https://cdn.shopify.com/s/files/1/cap.jpg",
     });
   });
