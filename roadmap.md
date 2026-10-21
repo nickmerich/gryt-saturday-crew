@@ -1,6 +1,7 @@
 # Roadmap
 
 ## GRYT 100 runner highlights
+- [ ] Add Meet all runners link, descriptive photo text and visible keyboard focus; verify all three story links.
 - [x] Refine hierarchy with results beneath names, 16px body text, stronger contrast and 44px story links; verified 375/390/1440px without overflow, both story targets and minimum text contrast 12.25:1. Build OK; preview only.
 - [x] Replace the homepage first-Saturday section with Laura and Nick's public runner stories, real photography, concise labels and supporting details.
 - [x] Verify loaded photography, Laura's story link, removed old section and phone/desktop layout without overflow; build OK. Preview only, no publishing.

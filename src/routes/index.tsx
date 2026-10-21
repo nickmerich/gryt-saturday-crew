@@ -1346,7 +1346,7 @@ function RunnerHighlights() {
         <h2 id="runner-highlights-title" className="display-condensed text-6xl leading-none tracking-normal md:text-8xl">GRYT 100</h2>
         <div className="mt-8 grid gap-8 md:grid-cols-[0.9fr_1.1fr] md:gap-12">
           <figure className="min-w-0">
-            <img src={nickLauraAsset.url} alt="Nick and Laura together at a marathon" loading="lazy" className="aspect-[4/3] w-full object-cover md:aspect-[4/5]" />
+            <img src={nickLauraAsset.url} alt="Nick Merich and Laura wearing race medals in front of a Pittsburgh Marathon backdrop" loading="lazy" className="aspect-[4/3] w-full object-cover md:aspect-[4/5]" />
             <figcaption className="mt-3 text-sm text-paper/80">Nick and Laura. More than miles.</figcaption>
           </figure>
           <div className="min-w-0 divide-y divide-paper/20 border-t border-paper/20">
@@ -1359,11 +1359,16 @@ function RunnerHighlights() {
               </dl>
               <p className="mt-3 text-lg font-semibold leading-snug">{runner.headline}</p>
               <p className="mt-3 max-w-prose text-base leading-relaxed text-paper/85">{runner.detail}</p>
-              <Button asChild variant="link" className="mt-4 min-h-11 px-0 py-3 text-base underline underline-offset-4 focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-4 focus-visible:ring-offset-ink">
+              <Button asChild variant="link" className="mt-4 min-h-11 px-0 py-3 text-base underline underline-offset-4 focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-4 focus-visible:ring-offset-ink focus-visible:bg-blue focus-visible:text-ink">
                 <Link to="/resources/more-than-miles" hash={runner.anchor}>Read {runner.name === "Laura" ? "Laura’s" : "Nick’s"} story <span aria-hidden="true">→</span></Link>
               </Button>
             </article>)}
           </div>
+        </div>
+        <div className="mt-8 border-t border-paper/20 pt-6 md:mt-10">
+          <Button asChild variant="link" className="min-h-12 max-w-full px-0 py-3 text-xl font-semibold text-blue underline underline-offset-4 focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-4 focus-visible:ring-offset-ink focus-visible:bg-blue focus-visible:text-ink">
+            <Link to="/resources/more-than-miles">Meet all runners <span aria-hidden="true">→</span></Link>
+          </Button>
         </div>
       </div>
     </section>
