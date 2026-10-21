@@ -1,6 +1,7 @@
 # Roadmap
 
 ## GRYT 100 runner highlights
+- [ ] Refine mobile/desktop hierarchy, text contrast and story-link tap targets; verify both runner links.
 - [x] Replace the homepage first-Saturday section with Laura and Nick's public runner stories, real photography, concise labels and supporting details.
 - [x] Verify loaded photography, Laura's story link, removed old section and phone/desktop layout without overflow; build OK. Preview only, no publishing.
 
