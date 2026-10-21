@@ -39,6 +39,7 @@ import { Route as AdminCapWaitlistRouteImport } from './routes/admin.cap-waitlis
 import { Route as AdminCheckinRouteImport } from './routes/admin.checkin'
 import { Route as AdminInquiriesRouteImport } from './routes/admin.inquiries'
 import { Route as AdminMembersRouteImport } from './routes/admin.members'
+import { Route as AdminMusicTectonicsRouteImport } from './routes/admin.music-tectonics'
 import { Route as AdminPartnersRouteImport } from './routes/admin.partners'
 import { Route as AdminRosterRouteImport } from './routes/admin.roster'
 import { Route as CheckoutReturnRouteImport } from './routes/checkout.return'
@@ -238,6 +239,11 @@ const AdminInquiriesRoute = AdminInquiriesRouteImport.update({
 const AdminMembersRoute = AdminMembersRouteImport.update({
   id: '/admin/members',
   path: '/admin/members',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminMusicTectonicsRoute = AdminMusicTectonicsRouteImport.update({
+  id: '/admin/music-tectonics',
+  path: '/admin/music-tectonics',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminPartnersRoute = AdminPartnersRouteImport.update({
@@ -530,6 +536,7 @@ export interface FileRoutesByFullPath {
   '/admin/checkin': typeof AdminCheckinRoute
   '/admin/inquiries': typeof AdminInquiriesRoute
   '/admin/members': typeof AdminMembersRoute
+  '/admin/music-tectonics': typeof AdminMusicTectonicsRoute
   '/admin/partners': typeof AdminPartnersRoute
   '/admin/roster': typeof AdminRosterRoute
   '/checkout/return': typeof CheckoutReturnRoute
@@ -610,6 +617,7 @@ export interface FileRoutesByTo {
   '/admin/checkin': typeof AdminCheckinRoute
   '/admin/inquiries': typeof AdminInquiriesRoute
   '/admin/members': typeof AdminMembersRoute
+  '/admin/music-tectonics': typeof AdminMusicTectonicsRoute
   '/admin/partners': typeof AdminPartnersRoute
   '/admin/roster': typeof AdminRosterRoute
   '/checkout/return': typeof CheckoutReturnRoute
@@ -691,6 +699,7 @@ export interface FileRoutesById {
   '/admin/checkin': typeof AdminCheckinRoute
   '/admin/inquiries': typeof AdminInquiriesRoute
   '/admin/members': typeof AdminMembersRoute
+  '/admin/music-tectonics': typeof AdminMusicTectonicsRoute
   '/admin/partners': typeof AdminPartnersRoute
   '/admin/roster': typeof AdminRosterRoute
   '/checkout/return': typeof CheckoutReturnRoute
@@ -773,6 +782,7 @@ export interface FileRouteTypes {
     | '/admin/checkin'
     | '/admin/inquiries'
     | '/admin/members'
+    | '/admin/music-tectonics'
     | '/admin/partners'
     | '/admin/roster'
     | '/checkout/return'
@@ -853,6 +863,7 @@ export interface FileRouteTypes {
     | '/admin/checkin'
     | '/admin/inquiries'
     | '/admin/members'
+    | '/admin/music-tectonics'
     | '/admin/partners'
     | '/admin/roster'
     | '/checkout/return'
@@ -933,6 +944,7 @@ export interface FileRouteTypes {
     | '/admin/checkin'
     | '/admin/inquiries'
     | '/admin/members'
+    | '/admin/music-tectonics'
     | '/admin/partners'
     | '/admin/roster'
     | '/checkout/return'
@@ -1014,6 +1026,7 @@ export interface RootRouteChildren {
   AdminCheckinRoute: typeof AdminCheckinRoute
   AdminInquiriesRoute: typeof AdminInquiriesRoute
   AdminMembersRoute: typeof AdminMembersRoute
+  AdminMusicTectonicsRoute: typeof AdminMusicTectonicsRoute
   AdminPartnersRoute: typeof AdminPartnersRoute
   AdminRosterRoute: typeof AdminRosterRoute
   CheckoutReturnRoute: typeof CheckoutReturnRoute
@@ -1273,6 +1286,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/members'
       fullPath: '/admin/members'
       preLoaderRoute: typeof AdminMembersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/music-tectonics': {
+      id: '/admin/music-tectonics'
+      path: '/admin/music-tectonics'
+      fullPath: '/admin/music-tectonics'
+      preLoaderRoute: typeof AdminMusicTectonicsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/partners': {
@@ -1657,6 +1677,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminCheckinRoute: AdminCheckinRoute,
   AdminInquiriesRoute: AdminInquiriesRoute,
   AdminMembersRoute: AdminMembersRoute,
+  AdminMusicTectonicsRoute: AdminMusicTectonicsRoute,
   AdminPartnersRoute: AdminPartnersRoute,
   AdminRosterRoute: AdminRosterRoute,
   CheckoutReturnRoute: CheckoutReturnRoute,
