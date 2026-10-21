@@ -1,5 +1,9 @@
 # Roadmap
 
+## GRYT 100 runner highlights
+- [x] Replace the homepage first-Saturday section with Laura and Nick's public runner stories, real photography, concise labels and supporting details.
+- [x] Verify loaded photography, Laura's story link, removed old section and phone/desktop layout without overflow; build OK. Preview only, no publishing.
+
 ## Homepage simplification
 - [x] Focus homepage on the run, RSVP, arrival steps, weather and approved trail map; link to secondary pages.
 - [x] Check simplified homepage on phone and desktop: no horizontal overflow, RSVP anchor and mobile menu verified; build OK. No real sign-up submitted.

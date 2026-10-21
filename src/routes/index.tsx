@@ -10,6 +10,7 @@ import { ClubStats } from "@/components/site/ClubStats";
 import { useRegularsLabel } from "@/hooks/useRegularsLabel";
 import { PartnersStrip, homePartnersQuery } from "@/components/site/PartnersStrip";
 import { FeaturedEvent } from "@/components/site/FeaturedEvent";
+import { Button } from "@/components/ui/button";
 
 import { submitRecommendation } from "@/lib/recommendations.functions";
 import {
@@ -1332,27 +1333,37 @@ function WhoItsFor() {
 }
 
 
-function FirstTimer() {
-  const steps = [
-    { n: "01", h: "Arrive at 6:50.", b: "212 Valley Brook Road, McMurray. Look for the group near the trail sign." },
-    { n: "02", h: "Find your pace.", b: "We start at 7 AM. Walk, jog, or run. Turn around whenever you need." },
-    { n: "03", h: "Stay for coffee.", b: "Finish back at the lot. Hang out after the miles if you can." },
+function RunnerHighlights() {
+  // Highlights drawn from the existing public More Than Miles story.
+  const runners = [
+    { name: "Laura", label: "No-drop run lead", headline: "Fast. Patient. There for the last runner.", detail: "Laura leads our no-drop group. Her 3:25:24 marathon at Mountains 2 Beach is inside the Boston-qualifying standard for her age group. On Saturdays, she runs at the pace of whoever shows up.", stat: "3:25:24", statLabel: "Marathon PR", anchor: "patient-fast" },
+    { name: "Nick Merich", label: "Consistency pays off", headline: "64 minutes faster. One season together.", detail: "Nick went from 5:18:15 at Pittsburgh to 4:13:33 at Columbus in 23 weeks. His story is about coming back to running and no longer training alone.", stat: "23 weeks", statLabel: "Pittsburgh to Columbus", anchor: "sixty-four" },
   ];
   return (
-    <section id="first" className="bg-blue text-ink px-6 py-12 sm:px-12 md:py-16 lg:px-24">
+    <section id="first" aria-labelledby="runner-highlights-title" className="border-y border-paper/15 bg-ink text-paper px-6 py-12 sm:px-12 md:py-16 lg:px-24">
       <div className="mx-auto max-w-[1180px]">
-        <p className="eyebrow text-ink/70 mb-4">First time?</p>
-        <h2 className="display-condensed text-[36px] leading-[1] md:text-[52px]">Your first Saturday is simple.</h2>
-        <div className="mt-8 grid gap-6 md:grid-cols-3">
-          {steps.map(s => <div key={s.n} className="border-t border-ink/30 pt-5">
-            <span className="text-sm text-ink/60">{s.n}</span>
-            <h3 className="display-condensed mt-3 text-2xl leading-tight">{s.h}</h3>
-            <p className="mt-3 text-sm leading-relaxed text-ink/80">{s.b}</p>
-          </div>)}
-        </div>
-        <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-ink/30 pt-6">
-          <p className="text-sm text-ink/80">Sign your waiver before you come.</p>
-          <Link to="/waiver" className="text-sm font-semibold underline underline-offset-4 hover:text-ink/70">Sign the 2026 waiver →</Link>
+        <p className="eyebrow text-blue mb-4">Runner highlights</p>
+        <h2 id="runner-highlights-title" className="display-condensed text-6xl leading-none tracking-normal md:text-8xl">GRYT 100</h2>
+        <div className="mt-8 grid gap-8 md:grid-cols-[0.9fr_1.1fr] md:gap-12">
+          <figure className="min-w-0">
+            <img src={nickLauraAsset.url} alt="Nick and Laura together at a marathon" loading="lazy" className="aspect-[4/5] w-full object-cover" />
+            <figcaption className="mt-3 text-xs text-paper/60">Nick and Laura. More than miles.</figcaption>
+          </figure>
+          <div className="min-w-0 divide-y divide-paper/20 border-t border-paper/20">
+            {runners.map(runner => <article key={runner.name} className="py-7 first:pt-6 last:pb-0">
+              <p className="eyebrow text-blue">{runner.label}</p>
+              <h3 className="mt-3 font-condensed text-4xl font-bold uppercase leading-tight tracking-normal">{runner.name}</h3>
+              <p className="mt-3 text-lg font-semibold leading-snug">{runner.headline}</p>
+              <p className="mt-3 text-sm leading-relaxed text-paper/75">{runner.detail}</p>
+              <dl className="mt-5 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <dd className="font-mono text-2xl text-blue">{runner.stat}</dd>
+                <dt className="text-xs uppercase text-paper/60">{runner.statLabel}</dt>
+              </dl>
+              <Button asChild variant="link" className="mt-4 h-auto px-0 py-2 text-sm">
+                <Link to="/resources/more-than-miles" hash={runner.anchor}>Read {runner.name === "Laura" ? "Laura’s" : "Nick’s"} story <span aria-hidden="true">→</span></Link>
+              </Button>
+            </article>)}
+          </div>
         </div>
       </div>
     </section>
@@ -3775,7 +3786,7 @@ function Landing() {
       <FeaturedEvent />
       <RSVP />
       <LastRunStrip />
-      <FirstTimer />
+      <RunnerHighlights />
       <SaturdayWeather />
       <MontourRouteMap />
       <LearnDoorway />
