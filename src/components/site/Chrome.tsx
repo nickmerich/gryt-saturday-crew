@@ -75,10 +75,10 @@ export function SiteNav() {
     !href.includes("#") && (here === href || (href !== "/" && here.startsWith(`${href}/`)));
   return (
     <nav aria-label="Main" className="sticky top-0 z-50 bg-ink border-b border-paper/15">
-      <div className="flex items-center justify-between gap-4 px-5 sm:px-8 md:px-12 h-[68px]">
-        <a href="/" className="flex items-center gap-2 shrink-0" aria-label="GRYT Run Club home">
+      <div className="grid grid-cols-[minmax(0,1fr)_auto] lg:flex items-center justify-between gap-2 sm:gap-4 px-4 sm:px-8 md:px-12 h-[68px]">
+        <a href="/" className="flex min-w-0 items-center gap-2" aria-label="GRYT Run Club home">
           <MonogramG className="h-11 w-11" />
-          <span className="wordmark uppercase text-[20px] leading-none [text-shadow:2px_2px_0_var(--blue)]">
+          <span className="wordmark uppercase truncate text-[20px] leading-none [text-shadow:2px_2px_0_var(--blue)]">
             Run Club
           </span>
         </a>
