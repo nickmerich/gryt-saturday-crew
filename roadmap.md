@@ -1,6 +1,10 @@
 # Roadmap
 
+## Recap graphic page
+- [ ] Polish the existing recap page presentation and verify its central flow without changing saved recap data.
+
 ## GRYT 100 runner highlights
+- [ ] Add accessible photo-load fallback and recheck all three full-story destinations on phone and desktop.
 - [x] Add Meet all runners beneath highlights, descriptive photo text and inverse-color keyboard focus; verified all three destinations and focus at 375/1440px without overflow. Build OK; preview only.
 - [x] Refine hierarchy with results beneath names, 16px body text, stronger contrast and 44px story links; verified 375/390/1440px without overflow, both story targets and minimum text contrast 12.25:1. Build OK; preview only.
 - [x] Replace the homepage first-Saturday section with Laura and Nick's public runner stories, real photography, concise labels and supporting details.
