@@ -26,3 +26,4 @@
 
 ## Music Tectonics event page
 - [ ] /music-tectonics page, RSVP form, success state (announced to screen readers, focus moves to it), admin view + consent-only CSV
+- [ ] Verify success state, details, calendar download and badge reminder on phone and desktop
