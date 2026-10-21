@@ -3,6 +3,8 @@ import { useCallback, useEffect, useRef, useState, type ChangeEvent } from "reac
 import { useServerFn } from "@tanstack/react-start";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { Download, Link2, RotateCcw, Camera, Upload } from "lucide-react";
 import {
   exchangeStravaCode,
   getStravaActivities,
@@ -440,17 +442,17 @@ function RecapGeneratorPage() {
     <main className="bg-ink text-paper">
       <SiteNav />
 
-      <section className="px-5 sm:px-10 lg:px-20 pt-14 pb-8 border-b border-paper/12">
+      <section className="px-5 sm:px-10 lg:px-20 pt-10 pb-8 border-b border-paper/12">
         <div className="max-w-[1240px] mx-auto">
           <p className="eyebrow text-blue mb-3">
-            <Link to="/resources" className="hover:text-paper">
+            <Link to="/resources" className="hover:text-paper focus-visible:outline-2 focus-visible:outline-blue focus-visible:outline-offset-4">
               ← Resources
             </Link>
           </p>
-          <h1 className="display-condensed uppercase text-[clamp(34px,6vw,72px)] leading-[0.92]">
+          <h1 className="display-condensed uppercase text-4xl sm:text-6xl lg:text-7xl leading-none tracking-normal">
             Create your run recap
           </h1>
-          <p className="mt-3 text-paper/70 text-base sm:text-lg max-w-[560px] leading-[1.5]">
+          <p className="mt-3 text-paper/85 text-base sm:text-lg max-w-[560px] leading-[1.5]">
             Turn today's run into a graphic worth sharing.
           </p>
           <p className="mt-3 text-sm">
@@ -464,7 +466,7 @@ function RecapGeneratorPage() {
       <section className="px-5 sm:px-10 lg:px-20 py-10 md:py-14">
         <div className="max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,460px)] gap-10 lg:gap-14 items-start">
           {/* ── Steps ── */}
-          <div className="order-2 lg:order-1 flex flex-col gap-10">
+          <div className="order-2 lg:order-1 min-w-0 flex flex-col gap-10">
             {/* Step 1 */}
             <StepBlock n={1} title="Connect your run">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -476,7 +478,6 @@ function RecapGeneratorPage() {
                       : "Import recent runs"
                   }
                   active={source === "strava"}
-                  accent="#FC4C02"
                   busy={stravaState === "connecting"}
                   onClick={stravaConnected ? () => setSource("strava") : connectStrava}
                 />
@@ -484,7 +485,6 @@ function RecapGeneratorPage() {
                   label="Connect Garmin"
                   hint="Account sync soon"
                   active={source === "garmin"}
-                  accent="#00A3E0"
                   onClick={() => {
                     setSource("garmin");
                     setShowFileImport(true);
@@ -497,18 +497,17 @@ function RecapGeneratorPage() {
                   label="Enter manually"
                   hint="Type it in"
                   active={source === "manual"}
-                  accent="#89CFF0"
                   onClick={() => setSource("manual")}
                 />
               </div>
 
-              <button
+              <Button variant="ghost"
                 type="button"
                 onClick={() => setShowFileImport((v) => !v)}
-                className="mt-3 text-xs font-bold uppercase tracking-[0.14em] text-paper/60 hover:text-blue underline underline-offset-4"
+                className="mt-3 text-xs font-bold uppercase tracking-[0.14em] text-paper/80 hover:text-blue underline underline-offset-4"
               >
-                Import from file instead
-              </button>
+                <Upload aria-hidden="true" />Import activity file
+              </Button>
 
               {showFileImport && <GarminFilePanel onParsed={applyParsedActivity} />}
 
@@ -532,7 +531,7 @@ function RecapGeneratorPage() {
                 {THEMES.map((t) => {
                   const active = theme === t.id;
                   return (
-                    <button
+                    <Button variant="ghost"
                       key={t.id}
                       type="button"
                       onClick={() => setTheme(t.id)}
@@ -544,7 +543,7 @@ function RecapGeneratorPage() {
                       }`}
                     >
                       {t.label}
-                    </button>
+                    </Button>
                   );
                 })}
               </div>
@@ -630,7 +629,7 @@ function RecapGeneratorPage() {
                   onChange={(e) => setAcceptedTerms(e.target.checked)}
                   className="mt-1 h-4 w-4 shrink-0 accent-blue cursor-pointer"
                 />
-                <span className="text-xs leading-[1.55] text-paper/75 group-hover:text-paper transition-colors">
+                <span className="text-sm leading-[1.55] text-paper/75 group-hover:text-paper transition-colors">
                   I have the right to use this photo and agree to the{" "}
                   <Link to="/terms" target="_blank" className="text-blue underline">
                     terms
@@ -640,17 +639,16 @@ function RecapGeneratorPage() {
               </label>
 
               <div className="mt-4 flex flex-wrap gap-2.5">
-                <button
+                <Button variant="ghost"
                   type="button"
                   onClick={download}
                   disabled={!acceptedTerms || status === "saving"}
-                  className="btn-primary disabled:opacity-60 disabled:cursor-not-allowed"
-                  style={{ fontFamily: "var(--font-body)" }}
+                  className="min-h-12 rounded-none bg-blue px-5 text-ink hover:bg-paper hover:text-ink disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  {status === "saving" ? "Saving…" : "Download"}
-                </button>
+                  <Download aria-hidden="true" />{status === "saving" ? "Saving…" : "Download PNG"}
+                </Button>
                 <SecondaryBtn onClick={copyLink} disabled={!acceptedTerms || shareState === "generating"}>
-                  {shareState === "generating" ? "Working…" : "Copy link"}
+                  <Link2 aria-hidden="true" />{shareState === "generating" ? "Working…" : "Copy link"}
                 </SecondaryBtn>
                 <SecondaryBtn onClick={shareToStory} disabled={!acceptedTerms}>
                   Instagram Story
@@ -658,7 +656,7 @@ function RecapGeneratorPage() {
                 <SecondaryBtn onClick={challengeFriend} disabled={!acceptedTerms}>
                   Challenge a friend
                 </SecondaryBtn>
-                <GhostBtn onClick={startOver}>Start over</GhostBtn>
+                <GhostBtn onClick={startOver}><RotateCcw aria-hidden="true" />Start over</GhostBtn>
               </div>
 
               {shareState === "ready" && shareUrl && (
@@ -681,10 +679,10 @@ function RecapGeneratorPage() {
               )}
 
               {shareState === "error" && (
-                <p className="mt-3 text-sm text-red-300">Couldn't create a link. Try again.</p>
+                <p className="mt-3 text-sm text-paper">Couldn't create a link. Try again.</p>
               )}
 
-              <div className="mt-6 border border-paper/15 bg-paper/[0.03] p-4">
+              <div className="mt-6 border-t border-paper/20 pt-4">
                 <p className="eyebrow text-blue mb-1.5">Keep it going</p>
                 <p className="text-sm text-paper/80 leading-[1.55]">
                   Tag <span className="text-paper font-bold">@grytrunclub</span> when you post, then
@@ -695,8 +693,9 @@ function RecapGeneratorPage() {
           </div>
 
           {/* ── Preview ── */}
-          <div className="order-1 lg:order-2 lg:sticky lg:top-24">
-            <div className="relative bg-black border border-paper/15 overflow-hidden">
+          <div className="order-1 lg:order-2 min-w-0 w-full max-w-[280px] sm:max-w-[360px] lg:max-w-none mx-auto lg:sticky lg:top-24">
+            <div className="mb-3 flex items-baseline justify-between gap-3"><p className="eyebrow text-paper/80">Your recap</p><span className="font-mono text-xs text-blue">1080 × 1920</span></div>
+            <div className="relative bg-ink border border-paper/25 overflow-hidden">
               <canvas
                 ref={canvasRef}
                 width={CANVAS_W}
@@ -706,26 +705,11 @@ function RecapGeneratorPage() {
                 onPointerUp={onCanvasPointerUp}
                 onPointerCancel={onCanvasPointerUp}
                 className={`block w-full h-auto ${photoImg ? "cursor-move touch-none" : ""}`}
-                aria-label="Preview of your recap graphic. Drag to reposition the photo."
+                role="img"
+                aria-label={`Run recap: ${form.title}, ${form.date}, ${form.distance} miles, time ${form.time}, pace ${form.pace} per mile, ${form.athlete}`}
               />
             </div>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {THEMES.map((t) => (
-                <button
-                  key={t.id}
-                  type="button"
-                  onClick={() => setTheme(t.id)}
-                  aria-pressed={theme === t.id}
-                  className={`px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.14em] border transition-colors ${
-                    theme === t.id
-                      ? "border-blue text-blue"
-                      : "border-paper/20 text-paper/60 hover:text-paper"
-                  }`}
-                >
-                  {t.label}
-                </button>
-              ))}
-            </div>
+
           </div>
         </div>
       </section>
@@ -748,11 +732,11 @@ function StepBlock({
 }) {
   return (
     <section>
-      <div className="flex items-center gap-3 mb-4">
-        <span className="inline-flex h-7 w-7 items-center justify-center bg-blue text-ink text-xs font-bold">
+      <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3 mb-5 border-t border-paper/20 pt-5">
+        <span className="inline-flex h-9 w-9 items-center justify-center bg-blue text-ink text-xs font-bold">
           {n}
         </span>
-        <h2 className="display-condensed uppercase text-[22px] sm:text-[26px] leading-none">
+        <h2 className="display-condensed uppercase text-3xl sm:text-4xl tracking-normal leading-none">
           {title}
         </h2>
       </div>
@@ -765,32 +749,30 @@ function SourceCard({
   label,
   hint,
   active,
-  accent,
   busy,
   onClick,
 }: {
   label: string;
   hint: string;
   active: boolean;
-  accent: string;
   busy?: boolean;
   onClick: () => void;
 }) {
   return (
-    <button
+    <Button variant="ghost"
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`text-left p-4 border transition-colors ${
+      className={`h-auto min-h-24 flex-col items-start justify-start whitespace-normal rounded-none text-left p-4 border transition-colors ${
         active ? "border-blue bg-blue/10" : "border-paper/18 bg-paper/[0.03] hover:border-paper/40"
       }`}
     >
-      <span className="block h-1.5 w-8 mb-3" style={{ background: accent }} aria-hidden />
+      <span className="block h-1 w-8 mb-3 bg-blue" aria-hidden />
       <span className="block text-sm font-bold uppercase tracking-[0.1em] text-paper">
         {busy ? "Connecting…" : label}
       </span>
-      <span className="block text-xs text-paper/60 mt-1">{hint}</span>
-    </button>
+      <span className="block text-xs text-paper/80 mt-1">{hint}</span>
+    </Button>
   );
 }
 
@@ -804,26 +786,26 @@ function SecondaryBtn({
   disabled?: boolean;
 }) {
   return (
-    <button
+    <Button variant="ghost"
       type="button"
       onClick={onClick}
       disabled={disabled}
       className="px-4 py-3 text-xs font-bold uppercase tracking-[0.12em] border border-blue text-blue hover:bg-blue hover:text-ink transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
     >
       {children}
-    </button>
+    </Button>
   );
 }
 
 function GhostBtn({ children, onClick }: { children: React.ReactNode; onClick: () => void }) {
   return (
-    <button
+    <Button variant="ghost"
       type="button"
       onClick={onClick}
       className="px-4 py-3 text-xs font-bold uppercase tracking-[0.12em] border border-paper/25 text-paper/75 hover:border-blue hover:text-blue transition-colors"
     >
       {children}
-    </button>
+    </Button>
   );
 }
 
@@ -841,15 +823,15 @@ function Field({
   maxLength?: number;
 }) {
   return (
-    <label className="block">
-      <span className="eyebrow text-paper/55 block mb-1.5">{label}</span>
+    <label className="block min-w-0">
+      <span className="eyebrow text-paper/80 block mb-1.5">{label}</span>
       <input
         type="text"
         value={value}
         maxLength={maxLength}
         placeholder={placeholder}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full bg-transparent border-0 border-b-2 border-paper/20 text-paper placeholder:text-paper/30 pb-2 pt-1 text-[15px] focus:outline-none focus:border-blue transition-colors"
+        className="w-full bg-transparent border-0 border-b-2 border-paper/20 text-paper placeholder:text-muted-foreground pb-2 pt-1 text-base focus:outline-none focus:border-blue transition-colors"
       />
     </label>
   );
@@ -869,15 +851,15 @@ function PhotoPicker({
   const inputRef = useRef<HTMLInputElement>(null);
   return (
     <div>
-      <span className="eyebrow text-paper/55 block mb-1.5">Cover photo</span>
+      <span className="eyebrow text-paper/80 block mb-1.5">Cover photo</span>
       <div className="flex flex-wrap items-center gap-3">
-        <button
+        <Button variant="ghost"
           type="button"
           onClick={() => inputRef.current?.click()}
           className="inline-flex items-center px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] border border-paper/30 text-paper/85 hover:border-blue hover:text-blue transition-colors"
         >
-          {hasPhoto ? "Replace photo" : "Add photo"}
-        </button>
+          <Camera aria-hidden="true" />{hasPhoto ? "Replace photo" : "Add photo"}
+        </Button>
         <input
           ref={inputRef}
           type="file"
@@ -895,20 +877,20 @@ function PhotoPicker({
         />
         {hasPhoto && (
           <>
-            <button
+            <Button variant="ghost"
               type="button"
               onClick={onAdjust}
-              className="text-xs text-paper/60 hover:text-blue underline underline-offset-4"
+              className="text-xs text-paper/80 hover:text-blue underline underline-offset-4"
             >
               Adjust
-            </button>
-            <button
+            </Button>
+            <Button variant="ghost"
               type="button"
               onClick={onClear}
-              className="text-xs text-paper/55 hover:text-paper underline underline-offset-4"
+              className="text-xs text-paper/80 hover:text-paper underline underline-offset-4"
             >
               Remove
-            </button>
+            </Button>
           </>
         )}
       </div>
@@ -928,14 +910,14 @@ function PhotoControls({
   return (
     <div className="border border-paper/15 p-4 flex flex-col gap-3">
       <div className="flex items-center justify-between">
-        <p className="eyebrow text-paper/55">Adjust photo</p>
-        <button
+        <p className="eyebrow text-paper/80">Adjust photo</p>
+        <Button variant="ghost"
           type="button"
           onClick={onReset}
-          className="text-[11px] uppercase tracking-[0.12em] font-bold text-paper/60 hover:text-blue"
+          className="text-[11px] uppercase tracking-[0.12em] font-bold text-paper/80 hover:text-blue"
         >
           Recenter
-        </button>
+        </Button>
       </div>
       <RangeControl
         label="Zoom"
@@ -995,7 +977,7 @@ function RangeControl({
   onChange: (v: number) => void;
 }) {
   return (
-    <label className="block">
+    <label className="block min-w-0">
       <span className="flex items-baseline justify-between mb-1.5">
         <span className="text-[11px] uppercase tracking-[0.12em] font-bold text-paper/70">
           {label}
@@ -1037,39 +1019,39 @@ function StravaRuns({
   return (
     <div className="mt-4">
       {state === "error" && error && (
-        <div role="alert" className="border border-red-400/40 bg-red-500/[0.06] p-3 text-xs text-paper/85">
-          <p className="text-red-300 font-medium">{error}</p>
-          <button
+        <div role="alert" className="border border-paper/40 bg-vintage p-3 text-xs text-paper/85">
+          <p className="text-paper font-medium">{error}</p>
+          <Button variant="ghost"
             type="button"
             onClick={onConnect}
-            className="mt-3 px-3 py-1.5 bg-[#FC4C02] text-white text-[11px] font-bold uppercase tracking-[0.12em] hover:brightness-110"
+            className="mt-3 px-3 py-1.5 bg-blue text-ink text-[11px] font-bold uppercase tracking-[0.12em] hover:brightness-110"
           >
             Try again
-          </button>
+          </Button>
         </div>
       )}
 
-      {state === "loading" && <p className="text-xs text-paper/60">Loading your runs…</p>}
+      {state === "loading" && <p className="text-xs text-paper/80">Loading your runs…</p>}
 
       {state === "ready" && activities && activities.length > 0 && (
         <>
           <div className="flex items-center justify-between mb-2">
-            <span className="eyebrow text-paper/55">Your runs</span>
+            <span className="eyebrow text-paper/80">Your runs</span>
             <div className="flex gap-4">
-              <button
+              <Button variant="ghost"
                 type="button"
                 onClick={onRefresh}
-                className="text-[11px] font-bold uppercase tracking-[0.12em] text-paper/60 hover:text-blue"
+                className="text-[11px] font-bold uppercase tracking-[0.12em] text-paper/80 hover:text-blue"
               >
                 Refresh
-              </button>
-              <button
+              </Button>
+              <Button variant="ghost"
                 type="button"
                 onClick={onDisconnect}
-                className="text-[11px] font-bold uppercase tracking-[0.12em] text-paper/60 hover:text-paper"
+                className="text-[11px] font-bold uppercase tracking-[0.12em] text-paper/80 hover:text-paper"
               >
                 Disconnect
-              </button>
+              </Button>
             </div>
           </div>
           <ul className="max-h-72 overflow-y-auto divide-y divide-paper/10 border border-paper/12">
@@ -1079,7 +1061,7 @@ function StravaRuns({
               const active = selectedId === a.id;
               return (
                 <li key={a.id}>
-                  <button
+                  <Button variant="ghost"
                     type="button"
                     onClick={() => onPick(a)}
                     aria-pressed={active}
@@ -1089,17 +1071,17 @@ function StravaRuns({
                   >
                     <div className="min-w-0">
                       <p className="text-sm text-paper truncate">{a.name}</p>
-                      <p className="text-[11px] uppercase tracking-[0.1em] text-paper/55 mt-0.5">
+                      <p className="text-[11px] uppercase tracking-[0.1em] text-paper/80 mt-0.5">
                         {formatDate(new Date(a.start_date_local))} · {miles.toFixed(miles >= 10 ? 1 : 2)} mi
                       </p>
                     </div>
                     <div className="text-right shrink-0">
                       <p className="text-sm text-paper tabular-nums">{formatDuration(a.moving_time)}</p>
-                      <p className="text-[11px] text-paper/55 mt-0.5 tabular-nums">
+                      <p className="text-[11px] text-paper/80 mt-0.5 tabular-nums">
                         {paceSec > 0 ? `${formatPace(paceSec)}/mi` : "—"}
                       </p>
                     </div>
-                  </button>
+                  </Button>
                 </li>
               );
             })}
@@ -1108,7 +1090,7 @@ function StravaRuns({
       )}
 
       {state === "ready" && activities && activities.length === 0 && (
-        <p className="text-xs text-paper/60">No runs yet. Log one, then refresh.</p>
+        <p className="text-xs text-paper/80">No runs yet. Log one, then refresh.</p>
       )}
     </div>
   );
@@ -1146,23 +1128,23 @@ function GarminFilePanel({ onParsed }: { onParsed: (a: ParsedActivity) => void }
         onChange={(e) => handleFile(e.target.files?.[0] ?? null)}
         className="sr-only"
       />
-      <button
+      <Button variant="ghost"
         type="button"
         onClick={() => inputRef.current?.click()}
         disabled={state === "parsing"}
         className="px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] border border-paper/30 text-paper/85 hover:border-blue hover:text-blue transition-colors disabled:opacity-60"
       >
         {state === "parsing" ? "Reading…" : "Choose a file"}
-      </button>
+      </Button>
       {state === "error" && error && (
         <div role="alert" className="mt-3 text-xs text-paper/85">
-          <p className="text-red-300">{error}</p>
-          <p className="mt-1.5 text-paper/60">
+          <p className="text-paper">{error}</p>
+          <p className="mt-1.5 text-paper/80">
             In Garmin Connect: open the activity → … → Export Original (.fit) or GPX / TCX.
           </p>
         </div>
       )}
-      {state === "done" && <p className="mt-3 text-xs text-paper/60">Loaded.</p>}
+      {state === "done" && <p className="mt-3 text-xs text-paper/80">Loaded.</p>}
     </div>
   );
 }
