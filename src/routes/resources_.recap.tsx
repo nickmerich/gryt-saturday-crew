@@ -527,7 +527,8 @@ function RecapGeneratorPage() {
 
             {/* Step 2 */}
             <StepBlock n={2} title="Make it yours">
-              <div className="flex flex-wrap gap-2" role="group" aria-label="Styles">
+              <p className="mb-3 text-sm font-medium text-paper/85">Graphic style</p>
+              <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap" role="group" aria-label="Styles">
                 {THEMES.map((t) => {
                   const active = theme === t.id;
                   return (
@@ -536,7 +537,7 @@ function RecapGeneratorPage() {
                       type="button"
                       onClick={() => setTheme(t.id)}
                       aria-pressed={active}
-                      className={`px-3.5 py-2 text-xs font-bold uppercase tracking-[0.12em] border transition-colors ${
+                      className={`min-h-12 rounded-none px-3.5 py-3 text-sm font-bold uppercase tracking-normal border transition-colors ${
                         active
                           ? "border-blue bg-blue text-ink"
                           : "border-paper/25 text-paper/85 hover:border-blue hover:text-blue"
@@ -589,10 +590,10 @@ function RecapGeneratorPage() {
                 </div>
               )}
 
-              <div className="mt-5 grid grid-cols-3 gap-4">
-                <Field label="Distance" value={form.distance} onChange={(v) => update("distance", v)} maxLength={8} />
-                <Field label="Time" value={form.time} onChange={(v) => update("time", v)} maxLength={10} />
-                <Field label="Pace" value={form.pace} onChange={(v) => update("pace", v)} maxLength={8} />
+              <div className="mt-5 grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <Field label="Distance (miles)" value={form.distance} onChange={(v) => update("distance", v)} maxLength={8} inputMode="decimal" />
+                <Field label="Time (h:mm:ss)" value={form.time} onChange={(v) => update("time", v)} maxLength={10} />
+                <Field label="Pace (min/mile)" value={form.pace} onChange={(v) => update("pace", v)} maxLength={8} />
               </div>
 
               <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-5">
@@ -815,23 +816,26 @@ function Field({
   onChange,
   placeholder,
   maxLength,
+  inputMode,
 }: {
   label: string;
   value: string;
   onChange: (v: string) => void;
   placeholder?: string;
   maxLength?: number;
+  inputMode?: "decimal" | "text";
 }) {
   return (
     <label className="block min-w-0">
-      <span className="eyebrow text-paper/80 block mb-1.5">{label}</span>
+      <span className="block mb-2 text-sm font-medium text-paper/85">{label}</span>
       <input
         type="text"
         value={value}
         maxLength={maxLength}
+        inputMode={inputMode}
         placeholder={placeholder}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full bg-transparent border-0 border-b-2 border-paper/20 text-paper placeholder:text-muted-foreground pb-2 pt-1 text-base focus:outline-none focus:border-blue transition-colors"
+        className="min-h-12 w-full rounded-none bg-vintage border border-paper/30 text-paper placeholder:text-muted-foreground px-3 py-3 text-base focus:outline-none focus:border-blue focus-visible:ring-2 focus-visible:ring-blue transition-colors"
       />
     </label>
   );
@@ -856,7 +860,7 @@ function PhotoPicker({
         <Button variant="ghost"
           type="button"
           onClick={() => inputRef.current?.click()}
-          className="inline-flex items-center px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] border border-paper/30 text-paper/85 hover:border-blue hover:text-blue transition-colors"
+          className="min-h-12 inline-flex items-center rounded-none px-4 py-3 text-sm font-bold border border-paper/30 text-paper/85 hover:border-blue hover:text-blue transition-colors"
         >
           <Camera aria-hidden="true" />{hasPhoto ? "Replace photo" : "Add photo"}
         </Button>
@@ -880,16 +884,16 @@ function PhotoPicker({
             <Button variant="ghost"
               type="button"
               onClick={onAdjust}
-              className="text-xs text-paper/80 hover:text-blue underline underline-offset-4"
+              className="min-h-12 rounded-none text-sm text-paper/85 hover:text-blue underline underline-offset-4"
             >
-              Adjust
+              Adjust photo
             </Button>
             <Button variant="ghost"
               type="button"
               onClick={onClear}
-              className="text-xs text-paper/80 hover:text-paper underline underline-offset-4"
+              className="min-h-12 rounded-none text-sm text-paper/85 hover:text-paper underline underline-offset-4"
             >
-              Remove
+              Remove photo
             </Button>
           </>
         )}
@@ -909,14 +913,14 @@ function PhotoControls({
 }) {
   return (
     <div className="border border-paper/15 p-4 flex flex-col gap-3">
-      <div className="flex items-center justify-between">
+      <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2">
         <p className="eyebrow text-paper/80">Adjust photo</p>
         <Button variant="ghost"
           type="button"
           onClick={onReset}
-          className="text-[11px] uppercase tracking-[0.12em] font-bold text-paper/80 hover:text-blue"
+          className="min-h-12 rounded-none text-sm font-bold text-paper/85 hover:text-blue"
         >
-          Recenter
+          Reset photo
         </Button>
       </div>
       <RangeControl
@@ -929,7 +933,7 @@ function PhotoControls({
         onChange={(v) => onChange({ scale: v })}
       />
       <RangeControl
-        label="Horizontal"
+        label="Move left / right"
         value={transform.offsetX}
         min={-1}
         max={1}
@@ -938,7 +942,7 @@ function PhotoControls({
         onChange={(v) => onChange({ offsetX: v })}
       />
       <RangeControl
-        label="Vertical"
+        label="Move up / down"
         value={transform.offsetY}
         min={-1}
         max={1}
@@ -979,10 +983,10 @@ function RangeControl({
   return (
     <label className="block min-w-0">
       <span className="flex items-baseline justify-between mb-1.5">
-        <span className="text-[11px] uppercase tracking-[0.12em] font-bold text-paper/70">
+        <span className="text-sm font-medium text-paper/85">
           {label}
         </span>
-        <span className="text-[11px] font-mono text-blue">{format(value)}</span>
+        <span className="text-sm font-mono text-blue">{format(value)}</span>
       </span>
       <input
         type="range"
@@ -991,7 +995,7 @@ function RangeControl({
         step={step}
         value={value}
         onChange={(e) => onChange(parseFloat(e.target.value))}
-        className="w-full accent-blue cursor-pointer"
+        className="h-12 w-full accent-blue cursor-pointer focus-visible:outline-2 focus-visible:outline-blue focus-visible:outline-offset-2"
       />
     </label>
   );
