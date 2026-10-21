@@ -122,6 +122,63 @@ export type Database = {
         }
         Relationships: []
       }
+      event_rsvps: {
+        Row: {
+          badge_status: string
+          company: string | null
+          created_at: string
+          email: string
+          event_slug: string
+          full_name: string
+          group_choice: string
+          id: string
+          is_test: boolean
+          marketing_opt_in: boolean
+          marketing_opt_in_at: string | null
+          role: string | null
+          share_consent: boolean
+          share_consent_at: string | null
+          share_consent_version: string | null
+          updated_at: string
+        }
+        Insert: {
+          badge_status: string
+          company?: string | null
+          created_at?: string
+          email: string
+          event_slug: string
+          full_name: string
+          group_choice: string
+          id?: string
+          is_test?: boolean
+          marketing_opt_in?: boolean
+          marketing_opt_in_at?: string | null
+          role?: string | null
+          share_consent?: boolean
+          share_consent_at?: string | null
+          share_consent_version?: string | null
+          updated_at?: string
+        }
+        Update: {
+          badge_status?: string
+          company?: string | null
+          created_at?: string
+          email?: string
+          event_slug?: string
+          full_name?: string
+          group_choice?: string
+          id?: string
+          is_test?: boolean
+          marketing_opt_in?: boolean
+          marketing_opt_in_at?: string | null
+          role?: string | null
+          share_consent?: boolean
+          share_consent_at?: string | null
+          share_consent_version?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       partner_inquiries: {
         Row: {
           city: string
