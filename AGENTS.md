@@ -13,3 +13,4 @@
 - Partner administration reuses verified existing admin-email access at the server boundary; partner tables remain service-only and public reads use a narrowly projected approved-only database function.
 - Partner submissions reuse partner_inquiries with additive source, city and status fields; the new intake sends no messages and applies a database-enforced daily email limit without changing legacy intake.
 - Partner logos use private partner-logos storage with server-authorized uploads and approved-only signed public display URLs because workspace policy blocks public buckets; preserve their aspect ratio and original colors.
+- Event pages keep all logistics in one config module under src/lib/events/ and store signups in event_rsvps keyed by event slug + email (service-only); keeps Saturday RSVPs untouched.
