@@ -623,12 +623,12 @@ function RecapGeneratorPage() {
 
             {/* Step 3 */}
             <StepBlock n={3} title="Share it">
-              <label className="flex items-start gap-3 cursor-pointer group">
+              <label className="flex min-h-12 items-start gap-3 py-2 cursor-pointer group">
                 <input
                   type="checkbox"
                   checked={acceptedTerms}
                   onChange={(e) => setAcceptedTerms(e.target.checked)}
-                  className="mt-1 h-4 w-4 shrink-0 accent-blue cursor-pointer"
+                  className="mt-1 h-6 w-6 shrink-0 accent-blue cursor-pointer focus-visible:outline-2 focus-visible:outline-blue focus-visible:outline-offset-2"
                 />
                 <span className="text-sm leading-[1.55] text-paper/75 group-hover:text-paper transition-colors">
                   I have the right to use this photo and agree to the{" "}
@@ -639,7 +639,7 @@ function RecapGeneratorPage() {
                 </span>
               </label>
 
-              <div className="mt-4 flex flex-wrap gap-2.5">
+              <div className="mt-4 grid grid-cols-1 gap-2.5 sm:flex sm:flex-wrap">
                 <Button variant="ghost"
                   type="button"
                   onClick={download}
@@ -791,7 +791,7 @@ function SecondaryBtn({
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className="px-4 py-3 text-xs font-bold uppercase tracking-[0.12em] border border-blue text-blue hover:bg-blue hover:text-ink transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+      className="min-h-12 rounded-none px-4 py-3 text-xs font-bold uppercase tracking-[0.12em] border border-blue text-blue hover:bg-blue hover:text-ink transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
     >
       {children}
     </Button>
@@ -803,7 +803,7 @@ function GhostBtn({ children, onClick }: { children: React.ReactNode; onClick: (
     <Button variant="ghost"
       type="button"
       onClick={onClick}
-      className="px-4 py-3 text-xs font-bold uppercase tracking-[0.12em] border border-paper/25 text-paper/75 hover:border-blue hover:text-blue transition-colors"
+      className="min-h-12 rounded-none px-4 py-3 text-xs font-bold uppercase tracking-[0.12em] border border-paper/25 text-paper/75 hover:border-blue hover:text-blue transition-colors"
     >
       {children}
     </Button>
