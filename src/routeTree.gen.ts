@@ -84,6 +84,7 @@ import { Route as ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026RouteImpor
 import { Route as ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRouteImport } from './routes/resources_.playbooks_.fleet-feet-pittsburgh-vs-independent-run-clubs'
 import { Route as ResourcesPlaybooksGrytVsYinzRunClubRouteImport } from './routes/resources_.playbooks_.gryt-vs-yinz-run-club'
 import { Route as ResourcesPlaybooksSaturdayRunsWhatToExpectRouteImport } from './routes/resources_.playbooks_.saturday-runs-what-to-expect'
+import { Route as ResourcesPlaybooksWinterDurabilityPlanRouteImport } from './routes/resources_.playbooks_.winter-durability-plan'
 import { Route as ApiPublicHooksSaturdayReminderRouteImport } from './routes/api/public/hooks/saturday-reminder'
 import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
@@ -482,6 +483,12 @@ const ResourcesPlaybooksSaturdayRunsWhatToExpectRoute =
     path: '/resources/playbooks/saturday-runs-what-to-expect',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ResourcesPlaybooksWinterDurabilityPlanRoute =
+  ResourcesPlaybooksWinterDurabilityPlanRouteImport.update({
+    id: '/resources_/playbooks_/winter-durability-plan',
+    path: '/resources/playbooks/winter-durability-plan',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicHooksSaturdayReminderRoute =
   ApiPublicHooksSaturdayReminderRouteImport.update({
     id: '/api/public/hooks/saturday-reminder',
@@ -587,6 +594,7 @@ export interface FileRoutesByFullPath {
   '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs': typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute
   '/resources/playbooks/gryt-vs-yinz-run-club': typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
   '/resources/playbooks/saturday-runs-what-to-expect': typeof ResourcesPlaybooksSaturdayRunsWhatToExpectRoute
+  '/resources/playbooks/winter-durability-plan': typeof ResourcesPlaybooksWinterDurabilityPlanRoute
   '/api/public/hooks/saturday-reminder': typeof ApiPublicHooksSaturdayReminderRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
@@ -669,6 +677,7 @@ export interface FileRoutesByTo {
   '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs': typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute
   '/resources/playbooks/gryt-vs-yinz-run-club': typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
   '/resources/playbooks/saturday-runs-what-to-expect': typeof ResourcesPlaybooksSaturdayRunsWhatToExpectRoute
+  '/resources/playbooks/winter-durability-plan': typeof ResourcesPlaybooksWinterDurabilityPlanRoute
   '/api/public/hooks/saturday-reminder': typeof ApiPublicHooksSaturdayReminderRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
@@ -752,6 +761,7 @@ export interface FileRoutesById {
   '/resources_/playbooks_/fleet-feet-pittsburgh-vs-independent-run-clubs': typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute
   '/resources_/playbooks_/gryt-vs-yinz-run-club': typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
   '/resources_/playbooks_/saturday-runs-what-to-expect': typeof ResourcesPlaybooksSaturdayRunsWhatToExpectRoute
+  '/resources_/playbooks_/winter-durability-plan': typeof ResourcesPlaybooksWinterDurabilityPlanRoute
   '/api/public/hooks/saturday-reminder': typeof ApiPublicHooksSaturdayReminderRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
@@ -836,6 +846,7 @@ export interface FileRouteTypes {
     | '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs'
     | '/resources/playbooks/gryt-vs-yinz-run-club'
     | '/resources/playbooks/saturday-runs-what-to-expect'
+    | '/resources/playbooks/winter-durability-plan'
     | '/api/public/hooks/saturday-reminder'
     | '/api/public/payments/webhook'
     | '/lovable/email/auth/preview'
@@ -918,6 +929,7 @@ export interface FileRouteTypes {
     | '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs'
     | '/resources/playbooks/gryt-vs-yinz-run-club'
     | '/resources/playbooks/saturday-runs-what-to-expect'
+    | '/resources/playbooks/winter-durability-plan'
     | '/api/public/hooks/saturday-reminder'
     | '/api/public/payments/webhook'
     | '/lovable/email/auth/preview'
@@ -1000,6 +1012,7 @@ export interface FileRouteTypes {
     | '/resources_/playbooks_/fleet-feet-pittsburgh-vs-independent-run-clubs'
     | '/resources_/playbooks_/gryt-vs-yinz-run-club'
     | '/resources_/playbooks_/saturday-runs-what-to-expect'
+    | '/resources_/playbooks_/winter-durability-plan'
     | '/api/public/hooks/saturday-reminder'
     | '/api/public/payments/webhook'
     | '/lovable/email/auth/preview'
@@ -1082,6 +1095,7 @@ export interface RootRouteChildren {
   ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute: typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute
   ResourcesPlaybooksGrytVsYinzRunClubRoute: typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
   ResourcesPlaybooksSaturdayRunsWhatToExpectRoute: typeof ResourcesPlaybooksSaturdayRunsWhatToExpectRoute
+  ResourcesPlaybooksWinterDurabilityPlanRoute: typeof ResourcesPlaybooksWinterDurabilityPlanRoute
   ApiPublicHooksSaturdayReminderRoute: typeof ApiPublicHooksSaturdayReminderRoute
   ApiPublicPaymentsWebhookRoute: typeof ApiPublicPaymentsWebhookRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
@@ -1616,6 +1630,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResourcesPlaybooksSaturdayRunsWhatToExpectRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/resources_/playbooks_/winter-durability-plan': {
+      id: '/resources_/playbooks_/winter-durability-plan'
+      path: '/resources/playbooks/winter-durability-plan'
+      fullPath: '/resources/playbooks/winter-durability-plan'
+      preLoaderRoute: typeof ResourcesPlaybooksWinterDurabilityPlanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/hooks/saturday-reminder': {
       id: '/api/public/hooks/saturday-reminder'
       path: '/api/public/hooks/saturday-reminder'
@@ -1750,6 +1771,8 @@ const rootRouteChildren: RootRouteChildren = {
     ResourcesPlaybooksGrytVsYinzRunClubRoute,
   ResourcesPlaybooksSaturdayRunsWhatToExpectRoute:
     ResourcesPlaybooksSaturdayRunsWhatToExpectRoute,
+  ResourcesPlaybooksWinterDurabilityPlanRoute:
+    ResourcesPlaybooksWinterDurabilityPlanRoute,
   ApiPublicHooksSaturdayReminderRoute: ApiPublicHooksSaturdayReminderRoute,
   ApiPublicPaymentsWebhookRoute: ApiPublicPaymentsWebhookRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
