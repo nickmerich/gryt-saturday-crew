@@ -15,7 +15,8 @@ type P = Parameters<typeof partnerLogo>[0] & { name: string }
 function Item({ p, dup }: { p: P; dup?: boolean }) {
   const logo = partnerLogo(p)
   return <li aria-hidden={dup || undefined} className={`${dup ? 'motion-reduce:hidden ' : ''}flex shrink-0 items-center gap-4 px-8 md:px-12`}>
-    {logo && <span className="flex h-16 w-16 md:h-20 md:w-20 items-center justify-center bg-paper p-2"><img src={logo} alt="" className="max-h-full max-w-full object-contain grayscale contrast-125" /></span>}
+    {/* Perplexity's file sits its mark ~3% above center; nudge it down to optically center. */}
+    {logo && <span className="flex h-16 w-16 md:h-20 md:w-20 items-center justify-center bg-paper p-2"><img src={logo} alt="" className={`max-h-full max-w-full object-contain grayscale contrast-125${p.name.trim().toLowerCase() === 'perplexity' ? ' translate-y-[2.7%]' : ''}`} /></span>}
     <span className="font-condensed text-2xl md:text-4xl uppercase tracking-[0.03em] text-paper whitespace-nowrap">{p.name}</span>
   </li>
 }
