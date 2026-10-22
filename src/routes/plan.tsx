@@ -34,6 +34,29 @@ const EXPERIENCE: { value: PlanInputType["experience"]; label: string }[] = [
 const body = { fontFamily: "var(--font-body)" } as const;
 const condensed = { fontFamily: "var(--font-display-condensed)" } as const;
 
+const FAQ = [
+  {
+    q: "How does GRYT build my training plan?",
+    a: "We use your goal, experience level, available days, and current mileage to generate a structured one-week plan calibrated to Saturday's group run at Valley Brook. The plan balances easy miles, one quality session, and appropriate rest so you arrive at Saturday's 7 AM run ready — not exhausted.",
+  },
+  {
+    q: "Do I need to be a GRYT member to use this?",
+    a: "No. The plan tool is free and open to any runner. If you enjoy training with a community, we run every Saturday morning at Valley Brook in McMurray, PA — all paces welcome.",
+  },
+  {
+    q: "How many days per week should I train?",
+    a: "Three to four days suits most recreational runners aiming to finish a race or maintain fitness without injury risk. Competitive runners chasing a PR often train five to six days, with one or two of those being easy recovery runs. If you're new to running, start at three days and build from there.",
+  },
+  {
+    q: "Can I request a plan if I have an injury or physical limitation?",
+    a: "Yes — use the constraints field to describe anything relevant (bad knee, plantar fasciitis, limited hip mobility). The plan will factor in your note. That said, this tool is not a substitute for medical advice: if something hurts, see a doctor before starting a new training block.",
+  },
+  {
+    q: "Is my plan saved anywhere?",
+    a: "No. Nothing you enter is stored. If you want to keep your plan, copy it to a notes app or print the page before you close it.",
+  },
+];
+
 function PlanPage() {
   const run = useServerFn(createRunPlan);
   const [form, setForm] = useState<PlanInputType>({
@@ -98,6 +121,15 @@ function PlanPage() {
             Tell us the goal, the days you actually have, and where you're
             starting. You'll get a one-week plan built around the 7 AM
             Saturday run at Valley Brook.
+          </p>
+
+          <p className="mt-4 max-w-xl text-base text-ink/70" style={body}>
+            Whether you're training for your first 5K, targeting a half-marathon PR,
+            or simply trying to run three days a week without burning out, a structured
+            plan makes the difference. GRYT's free AI training plan tool takes your
+            goal, your schedule, and your current fitness level and builds a practical
+            week of training tailored specifically to you — anchored to our Saturday
+            morning group run in McMurray, PA.
           </p>
 
           <form onSubmit={onSubmit} className="mt-12 grid gap-6" style={body}>
@@ -189,7 +221,7 @@ function PlanPage() {
                 disabled={status === "loading"}
                 className="bg-ink px-8 py-4 uppercase tracking-[0.14em] text-paper transition-colors hover:bg-ink/85 disabled:opacity-60"
               >
-                {status === "loading" ? "Building your plan…" : "Build my plan"}
+                {status === "loading" ? "Building your plan\u2026" : "Build my plan"}
               </button>
               <span className="text-sm text-ink/60">
                 Takes about a minute. Nothing is saved.
@@ -270,6 +302,78 @@ function PlanPage() {
               </article>
             )}
           </div>
+
+          <section className="mt-20 border-t border-ink/15 pt-12" style={body}>
+            <h2
+              className="text-3xl uppercase leading-tight tracking-tight sm:text-4xl"
+              style={condensed}
+            >
+              How it works
+            </h2>
+            <p className="mt-4 text-ink/70">
+              Good training is built on three things: a clear goal, an honest starting point,
+              and a schedule you can actually keep. Most generic plans ignore at least one of
+              those. GRYT's plan tool asks for all three upfront, then builds a week that fits
+              your life — not a hypothetical runner's life.
+            </p>
+            <div className="mt-8 grid gap-8 sm:grid-cols-3" style={body}>
+              <div>
+                <h3 className="font-semibold uppercase tracking-wide text-ink">
+                  Tell us your goal
+                </h3>
+                <p className="mt-2 text-sm text-ink/70">
+                  Write it the way you'd say it out loud: "Finish the EQT 10 Miler," "Run
+                  three times a week without burning out," or "Get back to 30 miles after
+                  my injury." Specificity helps the plan hit closer to what you actually need.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-semibold uppercase tracking-wide text-ink">
+                  We build around your week
+                </h3>
+                <p className="mt-2 text-sm text-ink/70">
+                  You pick how many days you can realistically train. The plan slots in an
+                  easy run, a quality session, and a long run on Saturday — then fills the
+                  rest with rest or cross-training so you recover properly between efforts.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-semibold uppercase tracking-wide text-ink">
+                  Show up Saturday ready
+                </h3>
+                <p className="mt-2 text-sm text-ink/70">
+                  Every plan anchors to the GRYT Saturday 7 AM group run at Valley Brook in
+                  McMurray, PA. Your week is structured so Saturday's miles feel like a
+                  reward, not a surprise — whether you're running with the group or on your own.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section className="mt-20 border-t border-ink/15 pt-12" style={body}>
+            <h2
+              className="text-3xl uppercase leading-tight tracking-tight sm:text-4xl"
+              style={condensed}
+            >
+              Common questions
+            </h2>
+            <dl className="mt-8 grid gap-8">
+              {FAQ.map((item, i) => (
+                <div key={i}>
+                  <dt className="font-semibold text-ink">{item.q}</dt>
+                  <dd className="mt-2 text-ink/70">{item.a}</dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+
+          <section className="mt-20 border-t border-ink/15 pt-12" style={body}>
+            <p className="max-w-xl text-lg text-ink/80">
+              Training is more consistent when you're not training alone. GRYT Run Club meets
+              every Saturday at 7 AM at Valley Brook in McMurray, PA. All paces, all distances,
+              all welcome. Build your plan above — then come run it with us.
+            </p>
+          </section>
         </div>
       </section>
       <SiteFooter />
