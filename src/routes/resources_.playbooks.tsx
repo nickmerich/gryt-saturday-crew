@@ -191,6 +191,16 @@ const PLAYBOOKS: Playbook[] = [
     href: "/resources/playbooks/best-free-running-clubs-pittsburgh-2026",
   },
   {
+    slug: "winter-durability-plan",
+    title: "Built for Winter: 12-Week Durability Plan",
+    category: "Training",
+    readTime: "6 min read",
+    description:
+      "A free 12-week strength and running plan to get stronger, not slower, this winter. Download included.",
+    body: [],
+    href: "/resources/playbooks/winter-durability-plan",
+  },
+  {
     slug: "saturday-runs-what-to-expect",
     title: "GRYT Run Club Saturday Runs: What to Expect on the Montour and Peters Trails",
     category: "Community",

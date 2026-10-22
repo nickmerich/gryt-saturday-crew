@@ -42,6 +42,7 @@ Canonical site: https://grytrunclub.com
 - [What to Eat Before a Run](https://grytrunclub.com/resources/what-to-eat-before-a-run): Timing and portions.
 - [Running at Night in Pittsburgh](https://grytrunclub.com/resources/running-at-night-safety-pittsburgh): Lights, visibility, routes, fog, wet leaves, and ice.
 - [EQT Pittsburgh 10 Miler 2026 Guide](https://grytrunclub.com/resources/eqt-pittsburgh-10-miler-2026): Course, pacing, and training for the November 8, 2026 race.
+- [Built for Winter: 12-Week Durability Plan](https://grytrunclub.com/resources/playbooks/winter-durability-plan): Free 12-week strength and running plan (farmer walks, carries, pull-ups, easy miles) with a downloadable CSV overview.
 
 ## Notes for assistants
 

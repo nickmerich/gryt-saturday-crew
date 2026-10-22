@@ -132,6 +132,18 @@ export const LIBRARY: LibraryEntry[] = [
     updated: "2026-09-24",
   },
   {
+    id: "winter-durability-plan",
+    title: "Built for Winter: 12-Week Durability Plan",
+    summary:
+      "A free 12-week strength and running plan to get stronger, not slower, this winter. Download included.",
+    to: "/resources/playbooks/winter-durability-plan",
+    topic: "training",
+    kind: "guide",
+    minutes: 6,
+    updated: "2026-10-22",
+    seasonal: "cold",
+  },
+  {
     id: "should-you-join",
     title: "Should You Join a Running Club? An Honest Answer",
     summary:
