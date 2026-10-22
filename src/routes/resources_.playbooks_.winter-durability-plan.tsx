@@ -13,6 +13,8 @@ const DESCRIPTION =
 const OG_IMAGE = siteUrl("/og-resources.jpg");
 const CSV_HREF = "/downloads/gryt-12-week-durability-plan.csv";
 const CSV_NAME = "gryt-12-week-durability-plan.csv";
+const XLSX_HREF = "/downloads/gryt-12-week-durability-plan.xlsx";
+const XLSX_NAME = "gryt-12-week-durability-plan.xlsx";
 
 const BLOCKS = [
   { weeks: "Weeks 1 to 3", name: "Base", body: "Build load tolerance. 50 to 60 lb carries, easy run mileage, pull-up volume." },
@@ -87,14 +89,28 @@ function DownloadBlock({ id }: { id?: string }) {
       <p className="eyebrow text-blue mb-3">Free download · No signup</p>
       <p className="text-[18px] md:text-[20px] font-bold leading-[1.35]">The GRYT 12-Week Durability Plan</p>
       <p className="mt-2 text-paper/75 text-[15px]">
-        Plan overview: block structure, the five things you'll train, and the phone setup. CSV file, opens in Google Sheets or Excel.
+        The full workbook: weekly plan, 84-day log, progression rules, missed-session logic, dashboard and load targets. Opens in Excel or Google Sheets.
       </p>
-      <a href={CSV_HREF} download={CSV_NAME} type="text/csv" className="btn-primary mt-5 inline-flex">
-        Download the plan · Plan overview (CSV)
-      </a>
+      <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-4">
+        <a href={XLSX_HREF} download={XLSX_NAME} className="btn-primary inline-flex">
+          Download the workbook (.xlsx)
+        </a>
+        <a href={CSV_HREF} download={CSV_NAME} type="text/csv" className="text-blue underline underline-offset-4 hover:text-paper transition-colors text-[15px]">
+          Quick reference (CSV)
+        </a>
+      </div>
     </section>
   );
 }
+
+const WORKBOOK_TABS = [
+  { name: "Weekly Plan", body: "The 12-week roadmap. Volume, intensity and key sessions for each week." },
+  { name: "Daily Log", body: "All 84 days. Fill in Completed?, Load, effort and Notes. The rest calculates on its own." },
+  { name: "Progression Rules", body: "When to add weight, distance or reps. The decision tree." },
+  { name: "Missed-Session Logic", body: "What to do when life happens. Not every miss is equal." },
+  { name: "Dashboard", body: "Charts and totals. Weekly load, run mileage trend, adherence and warning flags." },
+  { name: "Load Targets", body: "Reference table: what load for what week." },
+];
 
 function WinterPlanPage() {
   return (
@@ -119,15 +135,18 @@ function WinterPlanPage() {
                 Winter doesn't have to be the season you lose your fitness. It can be the season you get harder to break.
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
-                <a href={CSV_HREF} download={CSV_NAME} type="text/csv" className="btn-primary">
-                  Download the plan
+                <a href={XLSX_HREF} download={XLSX_NAME} className="btn-primary">
+                  Download the workbook
+                </a>
+                <a href={CSV_HREF} download={CSV_NAME} type="text/csv" className="text-blue underline underline-offset-4 hover:text-paper transition-colors text-[15px]">
+                  Quick reference (CSV)
                 </a>
                 <Link to="/" hash="join" className="text-blue underline underline-offset-4 hover:text-paper transition-colors text-[15px]">
                   First time running with us? RSVP Saturday
                 </Link>
               </div>
               <p className="mt-3 text-[12px] tracking-[0.14em] uppercase text-paper/60 font-mono">
-                CSV · Opens in Google Sheets or Excel
+                .xlsx · Opens in Excel or Google Sheets
               </p>
             </div>
           </div>
@@ -198,6 +217,16 @@ function WinterPlanPage() {
               <li>Use traction on icy trails and wear reflective gear or a light for early or late runs.</li>
               <li>Warm up a little longer when it's cold.</li>
               <li>Show up Saturdays. Training alone all winter is hard. Training with a crew is a lot easier.</li>
+            </ul>
+
+            <H2>What's in the workbook</H2>
+            <ul className="grid gap-px bg-paper/15 border border-paper/15 sm:grid-cols-2">
+              {WORKBOOK_TABS.map((t) => (
+                <li key={t.name} className="bg-ink p-5">
+                  <h3 className="font-bold text-paper text-[17px] leading-[1.3]">{t.name}</h3>
+                  <p className="mt-2 text-[15px] text-paper/80">{t.body}</p>
+                </li>
+              ))}
             </ul>
 
             <H2>How to use it on your phone</H2>
