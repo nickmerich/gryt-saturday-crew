@@ -1,5 +1,8 @@
 # Roadmap
 
+## Executive producer story
+- [x] Add approved origin story to About, text-only Music Nerd footer credit and factual llms line; verified 375/390/1440px without overflow or runtime errors, RSVP destination, waiver form and plain-text llms response. Build OK. Preview only; C.Y. quote excluded. No RSVP submitted or auth changes.
+
 ## Founding member hat
 - [x] Verify Shopify price $30 and active status; update renamed product handle, current API and automatic inventory display out of 100.
 - [ ] Set remaining inventory to 5 and make product available to website checkout. Blocked: Shopify shows 10 and returns no product to the website; available tools cannot change inventory or sales-channel publication. Owner must update these in Shopify.

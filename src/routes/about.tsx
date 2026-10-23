@@ -103,8 +103,8 @@ function AboutPage() {
               parents, and comeback runners who miss having a team. We meet on Saturday mornings in
               the South Hills to walk, jog, run, and do hard things together.
             </p>
-            <a href="/#join" className="btn-primary inline-block mt-8">
-              Come run with us
+            <a href="/#join" className="btn-primary inline-block mt-8 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue">
+              RSVP Saturday
             </a>
             <p className="mt-4 eyebrow text-paper/70" style={body}>
               Saturdays, 7 AM · Montour / Peters Trail
@@ -122,31 +122,39 @@ function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-paper text-ink">
+      <section className="bg-paper text-ink" aria-labelledby="origin-heading">
         <div className="mx-auto max-w-3xl px-6 py-16 sm:py-24">
-          <Eyebrow className="text-ink/60">Why we're here</Eyebrow>
-          <H2 lines={["We needed this, too."]} />
+          <Eyebrow className="text-ink/70">WHO'S BEHIND GRYT</Eyebrow>
+          <h2 id="origin-heading" className="font-condensed font-bold text-4xl sm:text-5xl leading-tight">
+            Built by people who've done hard things before.
+          </h2>
           <div className="mt-6 space-y-4 text-lg text-ink/80 leading-relaxed" style={body}>
             <p>
-              Work. Family. Training when you can fit it in. A week can fill up without leaving much
-              room for a team.
+              Before GRYT, Nick spent ten years in music tech. He co-founded Songlink, the music link millions of artists used in 180+ countries, and sold it to Linktree. He scaled growth at Mint Songs through its sale to Napster, then grew Kits AI until Splice bought it.
+            </p>
+            <p className="text-sm font-medium text-ink/70">The founders' perspective</p>
+            <p>
+              C.Y. Lee, CEO of Music Nerd, watched that whole run from the sidelines. He was also early on IRL. Before run clubs and real-world community became a cultural moment, C.Y. saw that people wanted to be in a room together again. When he and Nick finally sat down for coffee, C.Y. didn't want to talk about growth hacks. He wanted to hear the story. He left believing Nick was a storyteller, and he signed on to executive produce GRYT.
             </p>
             <p>
-              Nick and Laura started GRYT because they wanted one place on the calendar to keep
-              showing up, with other people who wanted that too. That's the idea behind the Saturday
-              ritual: make room for something worth coming back to.
-            </p>
-            <p>
-              You don't need to be who you were at 20. You don't need a race on the calendar. You
-              just need a place to start, and people worth coming back for.
+              That's the whole idea behind this crew. Somebody believed in us before there was anything to show. Every Saturday, we try to do that for each other.
             </p>
           </div>
+          <figure className="mt-8 border-l-2 border-ink pl-6">
+            <blockquote className="text-xl sm:text-2xl leading-relaxed font-medium">
+              "C.Y. saw the storyteller before I did. GRYT is what I'm doing with that."
+            </blockquote>
+            <figcaption className="mt-4 text-sm text-ink/75">Nick Merich, co-founder, GRYT Run Club</figcaption>
+          </figure>
           <img
             src={surfCityAsset.url}
             alt="Nick and Laura with finisher medals at the Surf City half marathon"
             className="mt-10 w-full h-auto"
             loading="lazy"
           />
+          <a href="/#join" className="mt-6 inline-flex min-h-11 items-center text-ink underline underline-offset-4 hover:decoration-2 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink">
+            Meet the crew on Saturday.
+          </a>
         </div>
       </section>
 
@@ -246,8 +254,8 @@ function AboutPage() {
           </div>
           <div className="mt-16 flex flex-wrap items-end justify-between gap-8">
             <MissionStamp size="lg" className="text-paper" />
-            <a href="/#join" className="btn-primary">
-              Come run with us
+            <a href="/#join" className="btn-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue">
+              RSVP Saturday
             </a>
           </div>
         </div>

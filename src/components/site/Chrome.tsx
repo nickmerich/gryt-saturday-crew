@@ -378,6 +378,17 @@ export function SiteFooter() {
           </a>
           .
         </div>
+        <p className="pt-3 text-sm leading-relaxed text-paper/70">
+          Executive produced by C.Y. Lee ·{" "}
+          <a
+            href="https://www.musicnerd.xyz/"
+            target="_blank"
+            rel="noopener"
+            className="underline underline-offset-4 hover:text-blue focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue"
+          >
+            Music Nerd
+          </a>
+        </p>
       </div>
     </footer>
   );
