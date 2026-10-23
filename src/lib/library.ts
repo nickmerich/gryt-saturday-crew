@@ -79,6 +79,16 @@ export const LIBRARY: LibraryEntry[] = [
     updated: "2026-10-01",
   },
   {
+    id: "the-work",
+    title: "The Work: Skills & Workflows",
+    summary:
+      "Set a goal, write a four-week run and strength program around Saturday, log your benchmark, and check in weekly. Free, saved on your device.",
+    to: "/work",
+    topic: "training",
+    kind: "tool",
+    updated: "2026-10-23",
+  },
+  {
     id: "race-calendar",
     title: "Pittsburgh Race Calendar",
     summary:

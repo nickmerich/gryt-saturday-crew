@@ -34,6 +34,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as TimerRouteImport } from './routes/timer'
 import { Route as WaiverRouteImport } from './routes/waiver'
+import { Route as WorkRouteImport } from './routes/work'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as AdminCapWaitlistRouteImport } from './routes/admin.cap-waitlist'
@@ -85,6 +86,8 @@ import { Route as ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRout
 import { Route as ResourcesPlaybooksGrytVsYinzRunClubRouteImport } from './routes/resources_.playbooks_.gryt-vs-yinz-run-club'
 import { Route as ResourcesPlaybooksSaturdayRunsWhatToExpectRouteImport } from './routes/resources_.playbooks_.saturday-runs-what-to-expect'
 import { Route as ResourcesPlaybooksWinterDurabilityPlanRouteImport } from './routes/resources_.playbooks_.winter-durability-plan'
+import { Route as WorkSkillsSlugRouteImport } from './routes/work_.skills.$slug'
+import { Route as WorkWorkflowsSlugRouteImport } from './routes/work_.workflows.$slug'
 import { Route as ApiPublicHooksSaturdayReminderRouteImport } from './routes/api/public/hooks/saturday-reminder'
 import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
@@ -214,6 +217,11 @@ const TimerRoute = TimerRouteImport.update({
 const WaiverRoute = WaiverRouteImport.update({
   id: '/waiver',
   path: '/waiver',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WorkRoute = WorkRouteImport.update({
+  id: '/work',
+  path: '/work',
   getParentRoute: () => rootRouteImport,
 } as any)
 const Char91DotmcpChar93ListToolsRoute =
@@ -489,6 +497,16 @@ const ResourcesPlaybooksWinterDurabilityPlanRoute =
     path: '/resources/playbooks/winter-durability-plan',
     getParentRoute: () => rootRouteImport,
   } as any)
+const WorkSkillsSlugRoute = WorkSkillsSlugRouteImport.update({
+  id: '/work_/skills/$slug',
+  path: '/work/skills/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WorkWorkflowsSlugRoute = WorkWorkflowsSlugRouteImport.update({
+  id: '/work_/workflows/$slug',
+  path: '/work/workflows/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicHooksSaturdayReminderRoute =
   ApiPublicHooksSaturdayReminderRouteImport.update({
     id: '/api/public/hooks/saturday-reminder',
@@ -544,6 +562,7 @@ export interface FileRoutesByFullPath {
   '/terms': typeof TermsRoute
   '/timer': typeof TimerRoute
   '/waiver': typeof WaiverRoute
+  '/work': typeof WorkRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/cap-waitlist': typeof AdminCapWaitlistRoute
@@ -595,6 +614,8 @@ export interface FileRoutesByFullPath {
   '/resources/playbooks/gryt-vs-yinz-run-club': typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
   '/resources/playbooks/saturday-runs-what-to-expect': typeof ResourcesPlaybooksSaturdayRunsWhatToExpectRoute
   '/resources/playbooks/winter-durability-plan': typeof ResourcesPlaybooksWinterDurabilityPlanRoute
+  '/work/skills/$slug': typeof WorkSkillsSlugRoute
+  '/work/workflows/$slug': typeof WorkWorkflowsSlugRoute
   '/api/public/hooks/saturday-reminder': typeof ApiPublicHooksSaturdayReminderRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
@@ -627,6 +648,7 @@ export interface FileRoutesByTo {
   '/terms': typeof TermsRoute
   '/timer': typeof TimerRoute
   '/waiver': typeof WaiverRoute
+  '/work': typeof WorkRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/cap-waitlist': typeof AdminCapWaitlistRoute
@@ -678,6 +700,8 @@ export interface FileRoutesByTo {
   '/resources/playbooks/gryt-vs-yinz-run-club': typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
   '/resources/playbooks/saturday-runs-what-to-expect': typeof ResourcesPlaybooksSaturdayRunsWhatToExpectRoute
   '/resources/playbooks/winter-durability-plan': typeof ResourcesPlaybooksWinterDurabilityPlanRoute
+  '/work/skills/$slug': typeof WorkSkillsSlugRoute
+  '/work/workflows/$slug': typeof WorkWorkflowsSlugRoute
   '/api/public/hooks/saturday-reminder': typeof ApiPublicHooksSaturdayReminderRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
@@ -711,6 +735,7 @@ export interface FileRoutesById {
   '/terms': typeof TermsRoute
   '/timer': typeof TimerRoute
   '/waiver': typeof WaiverRoute
+  '/work': typeof WorkRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/cap-waitlist': typeof AdminCapWaitlistRoute
@@ -762,6 +787,8 @@ export interface FileRoutesById {
   '/resources_/playbooks_/gryt-vs-yinz-run-club': typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
   '/resources_/playbooks_/saturday-runs-what-to-expect': typeof ResourcesPlaybooksSaturdayRunsWhatToExpectRoute
   '/resources_/playbooks_/winter-durability-plan': typeof ResourcesPlaybooksWinterDurabilityPlanRoute
+  '/work_/skills/$slug': typeof WorkSkillsSlugRoute
+  '/work_/workflows/$slug': typeof WorkWorkflowsSlugRoute
   '/api/public/hooks/saturday-reminder': typeof ApiPublicHooksSaturdayReminderRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
@@ -796,6 +823,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/timer'
     | '/waiver'
+    | '/work'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/cap-waitlist'
@@ -847,6 +875,8 @@ export interface FileRouteTypes {
     | '/resources/playbooks/gryt-vs-yinz-run-club'
     | '/resources/playbooks/saturday-runs-what-to-expect'
     | '/resources/playbooks/winter-durability-plan'
+    | '/work/skills/$slug'
+    | '/work/workflows/$slug'
     | '/api/public/hooks/saturday-reminder'
     | '/api/public/payments/webhook'
     | '/lovable/email/auth/preview'
@@ -879,6 +909,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/timer'
     | '/waiver'
+    | '/work'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/cap-waitlist'
@@ -930,6 +961,8 @@ export interface FileRouteTypes {
     | '/resources/playbooks/gryt-vs-yinz-run-club'
     | '/resources/playbooks/saturday-runs-what-to-expect'
     | '/resources/playbooks/winter-durability-plan'
+    | '/work/skills/$slug'
+    | '/work/workflows/$slug'
     | '/api/public/hooks/saturday-reminder'
     | '/api/public/payments/webhook'
     | '/lovable/email/auth/preview'
@@ -962,6 +995,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/timer'
     | '/waiver'
+    | '/work'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/cap-waitlist'
@@ -1013,6 +1047,8 @@ export interface FileRouteTypes {
     | '/resources_/playbooks_/gryt-vs-yinz-run-club'
     | '/resources_/playbooks_/saturday-runs-what-to-expect'
     | '/resources_/playbooks_/winter-durability-plan'
+    | '/work_/skills/$slug'
+    | '/work_/workflows/$slug'
     | '/api/public/hooks/saturday-reminder'
     | '/api/public/payments/webhook'
     | '/lovable/email/auth/preview'
@@ -1046,6 +1082,7 @@ export interface RootRouteChildren {
   TermsRoute: typeof TermsRoute
   TimerRoute: typeof TimerRoute
   WaiverRoute: typeof WaiverRoute
+  WorkRoute: typeof WorkRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   AdminCapWaitlistRoute: typeof AdminCapWaitlistRoute
@@ -1096,6 +1133,8 @@ export interface RootRouteChildren {
   ResourcesPlaybooksGrytVsYinzRunClubRoute: typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
   ResourcesPlaybooksSaturdayRunsWhatToExpectRoute: typeof ResourcesPlaybooksSaturdayRunsWhatToExpectRoute
   ResourcesPlaybooksWinterDurabilityPlanRoute: typeof ResourcesPlaybooksWinterDurabilityPlanRoute
+  WorkSkillsSlugRoute: typeof WorkSkillsSlugRoute
+  WorkWorkflowsSlugRoute: typeof WorkWorkflowsSlugRoute
   ApiPublicHooksSaturdayReminderRoute: typeof ApiPublicHooksSaturdayReminderRoute
   ApiPublicPaymentsWebhookRoute: typeof ApiPublicPaymentsWebhookRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
@@ -1278,6 +1317,13 @@ declare module '@tanstack/react-router' {
       path: '/waiver'
       fullPath: '/waiver'
       preLoaderRoute: typeof WaiverRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/work': {
+      id: '/work'
+      path: '/work'
+      fullPath: '/work'
+      preLoaderRoute: typeof WorkRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/.mcp/list-tools': {
@@ -1637,6 +1683,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResourcesPlaybooksWinterDurabilityPlanRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/work_/skills/$slug': {
+      id: '/work_/skills/$slug'
+      path: '/work/skills/$slug'
+      fullPath: '/work/skills/$slug'
+      preLoaderRoute: typeof WorkSkillsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/work_/workflows/$slug': {
+      id: '/work_/workflows/$slug'
+      path: '/work/workflows/$slug'
+      fullPath: '/work/workflows/$slug'
+      preLoaderRoute: typeof WorkWorkflowsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/hooks/saturday-reminder': {
       id: '/api/public/hooks/saturday-reminder'
       path: '/api/public/hooks/saturday-reminder'
@@ -1712,6 +1772,7 @@ const rootRouteChildren: RootRouteChildren = {
   TermsRoute: TermsRoute,
   TimerRoute: TimerRoute,
   WaiverRoute: WaiverRoute,
+  WorkRoute: WorkRoute,
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
@@ -1773,6 +1834,8 @@ const rootRouteChildren: RootRouteChildren = {
     ResourcesPlaybooksSaturdayRunsWhatToExpectRoute,
   ResourcesPlaybooksWinterDurabilityPlanRoute:
     ResourcesPlaybooksWinterDurabilityPlanRoute,
+  WorkSkillsSlugRoute: WorkSkillsSlugRoute,
+  WorkWorkflowsSlugRoute: WorkWorkflowsSlugRoute,
   ApiPublicHooksSaturdayReminderRoute: ApiPublicHooksSaturdayReminderRoute,
   ApiPublicPaymentsWebhookRoute: ApiPublicPaymentsWebhookRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,

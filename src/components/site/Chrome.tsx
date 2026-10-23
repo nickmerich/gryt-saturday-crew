@@ -61,6 +61,7 @@ const NAV_LINKS: Array<{ href: string; label: string }> = [
   { href: "/#first", label: "Start Here" },
   { href: "/calendar", label: "Calendar" },
   { href: "/resources", label: "Learn" },
+  { href: "/work", label: "Train" },
   { href: "/races", label: "Races" },
   { href: "/about", label: "About" },
   { href: "/faq", label: "FAQ" },

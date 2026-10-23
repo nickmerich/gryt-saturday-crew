@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
+import { SKILLS, WORKFLOWS } from "@/lib/the-work";
 
 const BASE_URL = "https://grytrunclub.com";
 
@@ -24,6 +25,17 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/partners", changefreq: "monthly", priority: "0.6" },
           { path: "/music-tectonics", changefreq: "weekly", priority: "0.6" },
           { path: "/plan", changefreq: "monthly", priority: "0.6" },
+          { path: "/work", changefreq: "monthly", priority: "0.7" },
+          ...WORKFLOWS.map((w) => ({
+            path: `/work/workflows/${w.slug}`,
+            changefreq: "monthly" as const,
+            priority: "0.6",
+          })),
+          ...SKILLS.map((s) => ({
+            path: `/work/skills/${s.slug}`,
+            changefreq: "monthly" as const,
+            priority: "0.5",
+          })),
           { path: "/resources/playbooks", changefreq: "monthly", priority: "0.7" },
           { path: "/resources/conversations", changefreq: "monthly", priority: "0.7" },
           { path: "/resources/more-than-miles", changefreq: "monthly", priority: "0.7" },
