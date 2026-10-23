@@ -109,10 +109,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "manifest", href: "/site.webmanifest" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap",
-      },
     ],
     scripts: [
       {
@@ -156,6 +152,19 @@ function RootShell({ children }: { children: ReactNode }) {
         {/* @ts-expect-error Impact requires the non-standard `value` attribute */}
         <meta name="impact-site-verification" value="d0fcc171-1f08-4de2-b194-22ac376b0a1f" />
         <HeadContent />
+        {/* Load Google Fonts asynchronously to eliminate render-blocking */}
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+          media="print"
+          onLoad={(e) => { (e.currentTarget as HTMLLinkElement).media = "all"; }}
+        />
+        <noscript>
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+          />
+        </noscript>
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-P32BTLV84G"></script>
         <script
           dangerouslySetInnerHTML={{
