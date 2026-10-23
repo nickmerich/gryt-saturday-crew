@@ -6,7 +6,38 @@ import { createRunPlan, type RunPlan, type PlanInputType } from "@/lib/training-
 
 const TITLE = "Build Your Run Plan · Free AI Training Plan | GRYT Run Club";
 const DESCRIPTION =
-  "Tell GRYT your goal, your schedule, and where you're starting. Get a one-week training plan built around Saturday 7 AM in McMurray, PA.";
+  "Build your run plan in minutes. Tell GRYT your goal, your schedule, and your starting point — get a free AI training plan built around Saturday 7 AM in McMurray, PA.";
+
+const FAQ_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Is the plan free?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. GRYT Run Club's AI training plan builder is completely free. Enter your goal and schedule, and you'll get a personalized one-week plan in about a minute. Nothing is saved and no account is required.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Can I adjust my schedule?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Absolutely. You choose how many days per week you can run and can add any constraints — injuries, family commitments, travel — in the notes field. The AI coach builds the plan around your actual availability.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What if I'm a beginner?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Beginners are welcome. Select 'New to running' as your experience level and describe where you're starting. The plan will be conservative, with walk-run intervals and short mileage that builds gradually.",
+      },
+    },
+  ],
+};
 
 export const Route = createFileRoute("/plan")({
   head: () => ({
@@ -90,9 +121,9 @@ function PlanPage() {
             className="text-5xl sm:text-6xl lg:text-7xl uppercase leading-[0.92] tracking-tight"
             style={condensed}
           >
-            Your plan.
+            Build Your Run Plan &mdash;
             <br />
-            Our Saturday.
+            Personalized for Your Goal &amp; Schedule
           </h1>
           <p className="mt-6 max-w-xl text-lg text-ink/80" style={body}>
             Tell us the goal, the days you actually have, and where you're
@@ -189,7 +220,7 @@ function PlanPage() {
                 disabled={status === "loading"}
                 className="bg-ink px-8 py-4 uppercase tracking-[0.14em] text-paper transition-colors hover:bg-ink/85 disabled:opacity-60"
               >
-                {status === "loading" ? "Building your plan…" : "Build my plan"}
+                {status === "loading" ? "Building your plan\u2026" : "Build my plan"}
               </button>
               <span className="text-sm text-ink/60">
                 Takes about a minute. Nothing is saved.
@@ -270,8 +301,101 @@ function PlanPage() {
               </article>
             )}
           </div>
+          {/* SEO content sections */}
+          <div className="mt-20 border-t border-ink/15 pt-16 grid gap-14" style={body}>
+            <div>
+              <h2
+                className="text-3xl sm:text-4xl uppercase leading-tight tracking-tight mb-6"
+                style={condensed}
+              >
+                How to Build Your Run Plan
+              </h2>
+              <ol className="grid gap-4 sm:grid-cols-3">
+                <li className="border-l-2 border-ink pl-4">
+                  <div className="eyebrow text-ink/60 mb-1">STEP 1</div>
+                  <p className="font-semibold uppercase tracking-wide mb-1">Enter your goal</p>
+                  <p className="text-ink/80 text-sm">
+                    Tell the AI coach what you're chasing — a first 5K, a sub-2-hour half, finishing a trail race without walking. Be as specific as you like.
+                  </p>
+                </li>
+                <li className="border-l-2 border-ink pl-4">
+                  <div className="eyebrow text-ink/60 mb-1">STEP 2</div>
+                  <p className="font-semibold uppercase tracking-wide mb-1">Set your schedule</p>
+                  <p className="text-ink/80 text-sm">
+                    Choose how many days per week you can realistically train. Add any constraints — nagging injuries, busy weekends, travel weeks — so the plan fits your actual life.
+                  </p>
+                </li>
+                <li className="border-l-2 border-ink pl-4">
+                  <div className="eyebrow text-ink/60 mb-1">STEP 3</div>
+                  <p className="font-semibold uppercase tracking-wide mb-1">Get your plan</p>
+                  <p className="text-ink/80 text-sm">
+                    In about a minute, you'll receive a full one-week training plan with daily workouts, target mileage, pace guidance, and a four-week progression — anchored to Saturday 7 AM at Valley Brook.
+                  </p>
+                </li>
+              </ol>
+            </div>
+
+            <div>
+              <h2
+                className="text-3xl sm:text-4xl uppercase leading-tight tracking-tight mb-6"
+                style={condensed}
+              >
+                What's Included in Your Free AI Training Plan
+              </h2>
+              <ul className="grid gap-3 sm:grid-cols-2">
+                {[
+                  ["Weekly mileage target", "A total distance that fits your current fitness and scales over time without overloading you."],
+                  ["Daily workout breakdown", "Every day of the week assigned — easy runs, tempo efforts, rest days, and the Saturday long run."],
+                  ["Pace guidance", "Effort descriptions for each workout so you know when to push and when to hold back."],
+                  ["Rest and recovery days", "Structured off days and cross-training suggestions built around your schedule, not ignored."],
+                  ["Four-week progression", "A roadmap for the weeks after this one, so you know where the plan is heading."],
+                  ["Watch-outs", "Specific cautions based on your experience level, injury history, and goal timeline."],
+                ].map(([title, desc]) => (
+                  <li key={title} className="border-b border-ink/10 pb-4">
+                    <p className="font-semibold uppercase tracking-wide text-sm mb-1">{title}</p>
+                    <p className="text-ink/80 text-sm">{desc}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h2
+                className="text-3xl sm:text-4xl uppercase leading-tight tracking-tight mb-4"
+                style={condensed}
+              >
+                Why Saturday 7 AM
+              </h2>
+              <p className="text-ink/80 max-w-2xl">
+                Every plan built here is anchored to the GRYT Run Club's Saturday 7 AM group run at Valley Brook in McMurray, PA. That's not an arbitrary detail — it's the social spine of the plan. Running with a group on your long day improves consistency, pushes pace on the days you need it, and builds the kind of accountability that gets you out the door when motivation dips. If you're local to the South Hills, show up. If you're not, the Saturday long run slot still gives your week a fixed point to build around.
+              </p>
+            </div>
+
+            <div>
+              <h2
+                className="text-3xl sm:text-4xl uppercase leading-tight tracking-tight mb-6"
+                style={condensed}
+              >
+                Frequently Asked Questions
+              </h2>
+              <dl className="grid gap-6">
+                {FAQ_SCHEMA.mainEntity.map((item) => (
+                  <div key={item.name} className="border-b border-ink/10 pb-6">
+                    <dt className="font-semibold uppercase tracking-wide mb-2">{item.name}</dt>
+                    <dd className="text-ink/80">{item.acceptedAnswer.text}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </div>
         </div>
       </section>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_SCHEMA) }}
+      />
+
       <SiteFooter />
     </>
   );
