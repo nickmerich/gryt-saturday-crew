@@ -13,19 +13,19 @@ type FAQ = { q: string; a: string; href?: string; hrefLabel?: string };
 const FAQS: FAQ[] = [
   {
     q: "Am I too slow to join GRYT?",
-    a: "No. Every Saturday we have walkers, joggers, and runners. Go your pace. We regroup at turnarounds so nobody runs alone and nobody gets dropped.",
+    a: "No. Every Saturday we have walkers, joggers, and runners of every pace. Go your own speed — we regroup at turnarounds so nobody runs alone and nobody gets dropped. GRYT is designed around the idea that showing up matters more than pace.",
   },
   {
     q: "Will I get left behind?",
-    a: "No — that's rule one. We hold pockets at every turn and the group waits at the trailhead until the last person is back in. If you're new, tell someone at the sign-in and we'll pair you up.",
+    a: "No — that's rule one. We hold pockets at every turn and the group waits at the trailhead until the last person is back in. If you're new, tell someone at the sign-in and we'll pair you up. No one finishes a GRYT Saturday alone.",
   },
   {
     q: "Do I need to be able to run a 5K without stopping?",
-    a: "No. If you can walk for 30 minutes you can do a GRYT Saturday. Walk-run intervals are welcome. Nobody is timing you.",
+    a: "No. If you can walk for 30 minutes you can do a GRYT Saturday. Walk-run intervals are welcome and common in the group. Nobody is timing you, and nobody will judge your method.",
   },
   {
     q: "How much does it cost?",
-    a: "It's free. There are no dues, no membership fees, and no signup required. Donations keep the coffee and swag going — you can chip in from the Support GRYT block on the homepage, but it's optional.",
+    a: "GRYT is completely free to join — no membership fees, no registration, and no recurring charges. We believe running should be accessible to everyone in the South Hills community. Donations keep the coffee and swag going, but they're entirely optional.",
   },
   {
     q: "Do I need to RSVP or just show up?",
@@ -33,49 +33,61 @@ const FAQS: FAQ[] = [
   },
   {
     q: "Is there a waiver?",
-    a: "Yes. Sign it once on the Waiver page and you're good for every run after that. It takes under a minute.",
+    a: "Yes. Sign it once on the Waiver page and you're good for every run after that. It takes under a minute and only needs to be completed one time. We keep it on file so you never have to sign again.",
   },
   {
     q: "Is the run club insured?",
-    a: "Yes. GRYT Run Club carries general liability insurance. You can view the certificate of insurance any time.",
+    a: "Yes. GRYT Run Club carries general liability insurance covering all Saturday group runs. This protects both the club and participants during organized activities. You can view the certificate of insurance any time.",
     href: insuranceAsset.url,
     hrefLabel: "View proof of insurance (PDF)",
   },
   {
     q: "What should I wear and bring?",
-    a: "Whatever you'd normally run in. Layers if it's cold. Bring water for anything longer than 45 minutes. In winter, a headlamp helps for the first mile or two before the sun's up.",
+    a: "Whatever you'd normally run or walk in. Layers if it's cold, and bring water for anything longer than 45 minutes. In winter, a headlamp helps for the first mile or two before the sun's up. The trail is mostly flat crushed limestone, so trail shoes are not required.",
   },
   {
     q: "What if it rains or snows?",
-    a: "We run. Trail is mostly crushed limestone under a tree canopy, so it drains fast. We only cancel for lightning or ice that makes the trail dangerous — check the Instagram or Strava the morning of.",
+    a: "We run. Trail is mostly crushed limestone under a tree canopy, so it drains fast. We only cancel for lightning or ice that makes the trail dangerous — check the Instagram or Strava the morning of. Cancellations are rare.",
   },
   {
     q: "Where do you actually run?",
-    a: "The Montour / Peters Creek Trail out of the Valley Brook trailhead in McMurray. Flat, shaded, out-and-back. You pick your distance — turn around at 1 mile, 2 miles, or go long. Directions are on the homepage.",
+    a: "The Montour / Peters Creek Trail out of the Valley Brook trailhead in McMurray, PA. It's flat, shaded, and out-and-back so you pick your distance — turn around at 1 mile, 2 miles, or go long. Directions and a map are on the homepage.",
   },
   {
     q: "How long is the run?",
-    a: "As long as you want. Most people do 3–6 miles. Some go 8+. The group is out on the trail together, then we meet back at the trailhead.",
+    a: "As long as you want. Most people do 3–6 miles, but some go 8+. The group is out on the trail together and we all meet back at the trailhead when we're done. There's no required minimum distance.",
   },
   {
     q: "Is it safe for women running solo?",
-    a: "Yes. The trail is busy on Saturday mornings and we run as a group. You'll never be alone unless you want to be. Several of our regulars are women who started as first-timers.",
+    a: "Yes. The trail is busy on Saturday mornings and we run as a group in the South Hills. You'll never be alone unless you want to be. Several of our regulars are women who started as first-timers and kept coming back.",
   },
   {
     q: "Can I bring my dog or a stroller?",
-    a: "Leashed dogs and strollers are welcome — the trail is wide and flat. Just start toward the back so nobody trips over a leash.",
+    a: "Leashed dogs and strollers are welcome — the trail is wide and flat enough for both. Just start toward the back so nobody trips over a leash. We have regulars who bring dogs and kids every week.",
   },
   {
     q: "Do I have to come every week?",
-    a: "No. Come when you can. Some people come every Saturday, some once a month. Zero pressure.",
+    a: "No. Come when you can — some people come every Saturday, some once a month. There's zero pressure or obligation to maintain any schedule. GRYT works for people with busy lives too.",
   },
   {
     q: "Is there something after the run?",
-    a: "Sometimes coffee, sometimes tacos, sometimes just a parking-lot chat. Nothing formal. Stay if you want to.",
+    a: "Sometimes coffee, sometimes tacos, sometimes just a parking-lot chat. Nothing is formal or required. Stay and hang out if you want to, or head home right after — both are completely fine.",
   },
   {
     q: "How do I find out about weekly updates and events?",
-    a: "Join the Strava club (linked on the homepage) or follow @grytrunclub on Instagram. That's where route changes, weather calls, and special runs get posted.",
+    a: "Join the Strava club (linked on the homepage) or follow @grytrunclub on Instagram. That's where route changes, weather calls, and special runs get posted. Checking either one on Friday evening or Saturday morning is the best way to stay current.",
+  },
+  {
+    q: "Is GRYT Run Club affiliated with any national running organization?",
+    a: "No. GRYT Run Club is an independent, community-run group based in the South Hills of Pittsburgh, PA. We are not affiliated with Road Runners Club of America (RRCA) or any national organization. That means no bureaucracy — just neighbors showing up to run together every Saturday.",
+  },
+  {
+    q: "What is the meeting location address for the South Hills run club?",
+    a: "GRYT meets at 212 Valley Brook Road, McMurray, PA 15317 — the Valley Brook trailhead parking lot for the Montour / Peters Creek Trail. It's in Peters Township, just off Valley Brook Road. Parking is free and the lot is well-marked.",
+  },
+  {
+    q: "How do I join the GRYT Run Club email list or group chat?",
+    a: "Follow @grytrunclub on Instagram or join the GRYT Strava club — both are linked on the homepage. That's where group updates, weather calls, and event announcements are posted. You can also just show up on a Saturday morning and ask someone in person.",
   },
 ];
 
@@ -137,9 +149,7 @@ function FaqPage() {
               className="text-5xl sm:text-6xl lg:text-7xl uppercase leading-[0.92] tracking-tight"
               style={{ fontFamily: "var(--font-display-condensed)" }}
             >
-              Frequently
-              <br />
-              asked questions.
+              South Hills Run Club FAQ — GRYT McMurray, PA
             </h1>
             <p
               className="mt-6 text-lg text-ink/80 max-w-xl"
