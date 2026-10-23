@@ -298,3 +298,12 @@ body.photos-color .photo-hover:hover {
   color: var(--blue) !important;
   border-color: rgba(137, 207, 240, 0.45) !important;
 }
+
+/* The Work: print only the program block. */
+@media print {
+  body * { visibility: hidden; }
+  .print-area, .print-area * { visibility: visible; }
+  .print-area { position: absolute; inset: 0 auto auto 0; width: 100%; background: #fff; color: #000; padding: 0.5in; }
+  .print-area a { color: #000; text-decoration: none; }
+  .print-area * { color: #000 !important; }
+}

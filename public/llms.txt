@@ -21,6 +21,7 @@ GRYT Run Club is a free Pittsburgh run club founded by Laura and Nick Merich and
 - [Conversations](https://grytrunclub.com/resources/conversations): Published interviews and Q&As with the founders and crew.
 - [Graphics](https://grytrunclub.com/resources/graphics): Downloadable posters, social graphics, and a Saturday recap graphic generator.
 - [Run plan](https://grytrunclub.com/plan): Builds a suggested week of running around the Saturday GRYT run.
+- [The Work](https://grytrunclub.com/work): Free, optional skills and step-by-step workflows to set a goal, build a four-week run and strength program around the Saturday run, log a simple benchmark, and do a weekly check-in. Entries are saved on the visitor's device only.
 - [Privacy](https://grytrunclub.com/privacy): How runner information is collected and used.
 - [Terms](https://grytrunclub.com/terms): Website terms of use.
 
