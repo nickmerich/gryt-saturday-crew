@@ -1,11 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState, type FormEvent } from "react";
+import { useState, lazy, Suspense, type FormEvent } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { SiteNav, SiteFooter, MonogramG } from "@/components/site/Chrome";
 import { submitPartnerInquiry } from "@/lib/partner-inquiries.functions";
 import { submitStorySubmission } from "@/lib/story-submissions.functions";
 import lookbookAsset from "@/assets/lookbook-merch.png.asset.json";
-import { TwoDoors, StartHere, Library } from "@/components/site/RunnerLibrary";
+import { TwoDoors, StartHere } from "@/components/site/RunnerLibrary";
+
+// Defer the filter/search widget so it doesn't block the initial paint (LCP fix)
+const Library = lazy(() =>
+  import("@/components/site/RunnerLibrary").then((m) => ({ default: m.Library }))
+);
 
 export const Route = createFileRoute("/resources")({
   head: () => ({
@@ -64,7 +69,9 @@ function ResourcesPage() {
           <Masthead />
           <TwoDoors />
           <StartHere />
-          <Library />
+          <Suspense fallback={<div className="mb-24 md:mb-32 h-40 border border-paper/20" aria-hidden="true" />}>
+            <Library />
+          </Suspense>
           <Conversations />
           <ManifestoCallout />
           <ShareYourStory />
