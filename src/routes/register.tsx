@@ -71,6 +71,40 @@ function RegisterRetiredPage() {
             RSVP free for Saturday →
           </Link>
 
+          <div className="mt-10 grid gap-6 text-ink/80 text-[15px] leading-[1.7]">
+            <div>
+              <h2 className="font-display text-xl uppercase text-ink">How to join your first run</h2>
+              <ol className="mt-2 list-decimal pl-5 space-y-1">
+                <li>RSVP on the home page so we know to look for you.</li>
+                <li>Sign the short liability waiver online before your first Saturday.</li>
+                <li>Arrive around 6:50 AM at 212 Valley Brook Road in McMurray. A founder or regular will find you.</li>
+                <li>Walk, jog, or run the Montour/Peters Trail. The route is roughly four miles out and back, and you can turn around anytime.</li>
+                <li>Stay for coffee in the parking lot after.</li>
+              </ol>
+            </div>
+            <div>
+              <h2 className="font-display text-xl uppercase text-ink">What it costs</h2>
+              <p className="mt-2">
+                Nothing. No membership, no entry fee, no training plan to buy. GRYT is a free community run club in
+                Pittsburgh's South Hills, and it stays that way. Every pace is welcome and no one gets dropped.
+              </p>
+            </div>
+            <div>
+              <h2 className="font-display text-xl uppercase text-ink">Before you go</h2>
+              <p className="mt-2">
+                Check the{" "}
+                <Link to="/faq" className="underline">FAQ</Link>{" "}
+                for parking, weather, kids, and what to bring, and the{" "}
+                <Link to="/calendar" className="underline">calendar</Link>{" "}
+                for upcoming Saturdays. New to group runs? Start with{" "}
+                <Link to="/resources/playbooks/saturday-runs-what-to-expect" className="underline">
+                  what to expect on a Saturday run
+                </Link>
+                .
+              </p>
+            </div>
+          </div>
+
           <p className="mt-8 text-sm text-ink/60">
             If you paid for a GRYT run entry at any point, email us and we'll sort it
             out. You were never supposed to be charged to run.

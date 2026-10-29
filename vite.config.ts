@@ -22,6 +22,11 @@ export default defineConfig({
   },
   vite: {
     plugins: [mcpPlugin()],
+    // Unique per build. src/server.ts uses it to version the edge HTML cache so a
+    // new deploy never serves HTML that points at the previous build's JS chunks.
+    define: {
+      __GRYT_BUILD_ID__: JSON.stringify(Date.now().toString(36)),
+    },
     resolve: {
       alias: {
         "entities/lib/decode.js": path.resolve(

@@ -46,7 +46,6 @@ import photoBridge from "@/assets/photos/run-club-bridge.jpg.asset.json";
 import photo7 from "@/assets/photos/run-club-7.jpg.asset.json";
 import photo8 from "@/assets/photos/run-club-8.jpg.asset.json";
 import nickLauraAsset from "@/assets/photos/nick-laura.jpg.asset.json";
-import grytBearAsset from "@/assets/gryt-bear.png.asset.json";
 import insuranceAsset from "@/assets/certificate-of-insurance.pdf.asset.json";
 import { SupportBlock } from "@/components/SupportBlock";
 import { LearnDoorway } from "@/components/site/LearnDoorway";
@@ -368,7 +367,7 @@ const STRAVA_EVENT_URL: Record<RsvpDay, string> = {
 function MonogramG({ className = "" }: { className?: string }) {
   return (
     <img
-      src={grytBearAsset.url}
+      src="/img/gryt-bear.webp"
       alt="gryt club bear"
       className={className}
       width={124}
@@ -3790,6 +3789,92 @@ function RegionBand() {
   );
 }
 
+function AboutGrytText() {
+  return (
+    <section
+      id="about-gryt"
+      aria-labelledby="about-gryt-title"
+      className="border-t border-paper/15 bg-ink text-paper px-6 py-14 sm:px-12 md:py-20 lg:px-24"
+    >
+      <div className="mx-auto max-w-[1080px]">
+        <p className="eyebrow text-blue mb-4">Free run club · Pittsburgh South Hills</p>
+        <h2
+          id="about-gryt-title"
+          className="display-condensed uppercase text-[clamp(34px,5vw,64px)] leading-[0.95]"
+        >
+          A free Pittsburgh run club for people who aren't fast
+        </h2>
+        <div className="mt-8 grid gap-8 md:grid-cols-2 text-paper/80 text-[16px] leading-[1.7]">
+          <div className="space-y-4">
+            <p>
+              GRYT Run Club is a free community running group in Pittsburgh's South Hills. We meet every
+              Saturday at 7 AM at 212 Valley Brook Road in McMurray, PA, and run the Montour/Peters Trail, a
+              flat, paved rail trail. The route is roughly four miles out and back, so you can turn around
+              whenever you want and still finish with the group.
+            </p>
+            <p>
+              GRYT is no-drop. Walkers, joggers, comeback runners, and people training for races all start
+              together, and the run ends when the last person finishes. There is no membership, no fee, and no
+              pace requirement. First-timers RSVP on this page and sign a short waiver, and a founder or regular
+              will find you before the start. Afterward, people hang out in the parking lot with coffee.
+            </p>
+            <p>
+              The club was founded by Laura and Nick Merich for former athletes, busy parents, and anyone who
+              misses having a team. It's built to be close to home for runners in McMurray, Peters Township,
+              Upper St. Clair, Bethel Park, and across Washington County.
+            </p>
+          </div>
+          <div className="space-y-4">
+            <h3 className="text-paper font-bold text-[18px]">Comparing free run clubs in Pittsburgh?</h3>
+            <p>
+              Pittsburgh has good free options, and the right one is the one you'll keep showing up to. These
+              honest guides compare schedules, cost, and who each club fits:
+            </p>
+            <ul className="space-y-2">
+              <li>
+                <Link to="/resources/playbooks/best-free-running-clubs-pittsburgh-2026" className="text-blue underline underline-offset-4 hover:text-paper">
+                  Best free running clubs in Pittsburgh (2026)
+                </Link>
+              </li>
+              <li>
+                <Link to="/resources/playbooks/best-free-run-clubs-south-hills-2026" className="text-blue underline underline-offset-4 hover:text-paper">
+                  Best free run clubs in the South Hills
+                </Link>
+              </li>
+              <li>
+                <Link to="/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs" className="text-blue underline underline-offset-4 hover:text-paper">
+                  GRYT Run Club vs Fleet Feet Pittsburgh
+                </Link>
+              </li>
+              <li>
+                <Link to="/resources/playbooks/gryt-vs-parkrun-pittsburgh" className="text-blue underline underline-offset-4 hover:text-paper">
+                  GRYT Run Club vs parkrun Pittsburgh
+                </Link>
+              </li>
+              <li>
+                <Link to="/resources/playbooks/gryt-vs-city-of-bridges-run-club" className="text-blue underline underline-offset-4 hover:text-paper">
+                  GRYT Run Club vs City of Bridges Run Club
+                </Link>
+              </li>
+            </ul>
+            <p>
+              Coming back after a long break? Start with{" "}
+              <Link to="/resources/should-you-join-a-running-club" className="text-blue underline underline-offset-4 hover:text-paper">
+                should you join a running club
+              </Link>{" "}
+              and{" "}
+              <Link to="/resources/playbooks/saturday-runs-what-to-expect" className="text-blue underline underline-offset-4 hover:text-paper">
+                what to expect on a Saturday run
+              </Link>
+              .
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Landing() {
   return (
     <main className="bg-ink text-paper">
@@ -3803,6 +3888,7 @@ function Landing() {
       <SaturdayWeather />
       <MontourRouteMap />
       <LearnDoorway />
+      <AboutGrytText />
       <section className="border-t border-paper/15 px-6 py-10 sm:px-12 lg:px-24" aria-label="More from GRYT">
         <div className="mx-auto flex max-w-[1180px] flex-wrap gap-x-8 gap-y-4">
           <Link to="/about" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Meet Laura & Nick →</Link>

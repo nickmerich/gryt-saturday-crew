@@ -222,13 +222,33 @@ const PLAYBOOKS: Playbook[] = [
   },
   {
     slug: "fleet-feet-pittsburgh-vs-independent-run-clubs",
-    title: "Fleet Feet Pittsburgh Running Group vs Independent Run Clubs — Which Should You Join?",
+    title: "GRYT Run Club vs Fleet Feet Pittsburgh: Which Free Run Club Fits You?",
     category: "Community",
     readTime: "9 min read",
     description:
-      "An honest breakdown of Fleet Feet Pittsburgh's running group, independent run clubs, and where GRYT fits if you're a South Hills runner who wants community without the commute.",
+      "Fleet Feet Pittsburgh's store-backed club vs independent run clubs like GRYT: schedules, cost, South Hills options, and who each one fits.",
     body: [],
     href: "/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs",
+  },
+  {
+    slug: "gryt-vs-parkrun-pittsburgh",
+    title: "GRYT Run Club vs parkrun Pittsburgh: Two Free Saturday Mornings",
+    category: "Community",
+    readTime: "6 min read",
+    description:
+      "A no-drop group run in McMurray at 7 AM or a free timed 5K on the North Shore at 9 AM. How the two compare and who each one fits.",
+    body: [],
+    href: "/resources/playbooks/gryt-vs-parkrun-pittsburgh",
+  },
+  {
+    slug: "gryt-vs-city-of-bridges-run-club",
+    title: "GRYT Run Club vs City of Bridges Run Club: Which Fits Your Week?",
+    category: "Community",
+    readTime: "7 min read",
+    description:
+      "CBRC's multi-day, rotating schedule and pace groups vs GRYT's one fixed Saturday run in McMurray, plus how to stay motivated with a free club.",
+    body: [],
+    href: "/resources/playbooks/gryt-vs-city-of-bridges-run-club",
   },
 
 

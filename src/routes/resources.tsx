@@ -4,7 +4,6 @@ import { useServerFn } from "@tanstack/react-start";
 import { SiteNav, SiteFooter, MonogramG } from "@/components/site/Chrome";
 import { submitPartnerInquiry } from "@/lib/partner-inquiries.functions";
 import { submitStorySubmission } from "@/lib/story-submissions.functions";
-import lookbookAsset from "@/assets/lookbook-merch.png.asset.json";
 import { TwoDoors, StartHere, Library } from "@/components/site/RunnerLibrary";
 
 export const Route = createFileRoute("/resources")({
@@ -129,6 +128,21 @@ function Masthead() {
         </p>
         <p className="text-[12px] tracking-[0.24em] uppercase text-paper/70 shrink-0" style={mono}>
           An open field manual<br className="hidden md:block" /> · Pittsburgh, PA
+        </p>
+      </div>
+      <div className="mt-10 grid md:grid-cols-2 gap-6 md:gap-10 max-w-[1040px] text-paper/80 text-[16px] leading-[1.7]">
+        <p>
+          This is the free runner library from GRYT Run Club, a no-drop community run club in Pittsburgh's
+          South Hills that meets every Saturday at 7 AM on the Montour/Peters Trail in McMurray. The guides cover
+          the questions people actually ask us at the trailhead: how to start running again after a long break,
+          how to build a running base, how to add mileage without getting hurt, what to eat before a run, and
+          how to stay safe running at night or in a Pittsburgh winter.
+        </p>
+        <p>
+          You'll also find free tools, including a pace and race time calculator, a what-to-wear guide that reads
+          the Saturday forecast, and a run plan builder, plus honest comparisons of Pittsburgh run clubs like Fleet
+          Feet, City of Bridges, parkrun, and Yinz. Everything here is free to read, with no email required. If it
+          helps you get out the door, come run with us on Saturday.
         </p>
       </div>
     </header>
@@ -433,7 +447,10 @@ function Merch() {
             <article aria-label={`${item.name}, drops ${item.drop}, ${item.price}`}>
               <div className="relative aspect-[3/4] overflow-hidden bg-vintage border border-paper/25 group-hover:border-blue transition-colors">
                 <img
-                  src={lookbookAsset.url}
+                  src="/img/lookbook-merch.webp"
+                  width={900}
+                  height={900}
+                  decoding="async"
                   alt=""
                   className="absolute inset-0 w-full h-full object-cover brightness-75 group-hover:brightness-100 group-hover:scale-105 transition-all duration-500"
                   style={{ objectPosition: item.position }}

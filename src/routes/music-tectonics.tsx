@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useServerFn } from '@tanstack/react-start'
 import { useEffect, useRef, useState, type FormEvent } from 'react'
-import grytBearAsset from '@/assets/gryt-bear.png.asset.json'
 import { CONSENT_TEXT, MT_EVENT as E, ROLES, buildIcs } from '@/lib/events/music-tectonics'
 import { submitMtRsvp } from '@/lib/events/music-tectonics.functions'
 
@@ -35,7 +34,7 @@ function Page() {
   return <main className="min-h-screen bg-ink text-paper">
     {(E.STATUS === 'changed' || E.STATUS === 'cancelled') && <div role="alert" className="bg-blue px-6 py-3 text-center font-bold text-ink">{E.STATUS === 'cancelled' ? 'This run is cancelled.' : 'Details changed. Check the time and meetup spot below.'}</div>}
     <section className="mx-auto max-w-3xl px-5 pt-6 pb-10">
-      <div className="flex items-center gap-3"><img src={grytBearAsset.url} alt="GRYT crest" className="h-10 w-auto" /><span className="eyebrow text-xs uppercase tracking-[0.14em] text-blue">GRYT x Music Tectonics</span></div>
+      <div className="flex items-center gap-3"><img src="/img/gryt-bear.webp" alt="GRYT crest" className="h-10 w-auto" /><span className="eyebrow text-xs uppercase tracking-[0.14em] text-blue">GRYT x Music Tectonics</span></div>
       <h1 className="mt-4 font-condensed text-5xl uppercase leading-[0.92] sm:text-7xl">Run or walk Day 3 with us.</h1>
       <p className="mt-3 text-paper/80">An easy oceanfront morning before the conference picks back up. Every pace welcome. Nobody gets left behind.</p>
       <dl className="mt-4 grid gap-1 border-l-2 border-blue pl-3 text-sm">

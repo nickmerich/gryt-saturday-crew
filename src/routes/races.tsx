@@ -4,9 +4,9 @@ import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 
 const SITE = "https://grytrunclub.com";
 const URL = `${SITE}/races`;
-const TITLE = "Pittsburgh Races 2026 to 2027 · Dates & Training Guide · gryt run club";
+const TITLE = "Pittsburgh Races 2026-2027: Dates & Training | GRYT";
 const DESCRIPTION =
-  "Verified dates for upcoming Pittsburgh races: the EQT 10 Miler, Thanksgiving 5Ks in Peters Township and the city, Just A Short Run, the 2027 Pittsburgh Marathon, and the Great Race. Pick your goal and train with GRYT.";
+  "Verified dates for Pittsburgh races in 2026-2027: EQT 10 Miler, Thanksgiving 5Ks, the 2027 Pittsburgh Marathon, and more. Pick a goal and train with GRYT.";
 
 type Race = {
   name: string;

@@ -34,6 +34,15 @@ GRYT Run Club is a free Pittsburgh run club founded by Laura and Nick Merich and
 - [Weekly Run Reports](https://grytrunclub.com/runs): Aggregate counts for each Saturday run (runners, first-timers, returning runners, milestones reached), built from check-ins. Names appear only with consent.
 - [GRYT Milestone Club](https://grytrunclub.com/milestones): Recognition at 5, 10, 25, 50, and 100 Saturdays. Walking, buddying, and sweeping count. Runners can privately look up their own count and download a milestone graphic.
 
+## Pittsburgh run club comparisons
+
+- [Best Free Running Clubs in Pittsburgh (2026)](https://grytrunclub.com/resources/playbooks/best-free-running-clubs-pittsburgh-2026): Yinz, Fleet Feet, City of Bridges, parkrun, Steel City Road Runners, Kool, Pharaoh Hounds, and GRYT, with schedules and who each fits.
+- [Best Free Run Clubs in Pittsburgh's South Hills (2026)](https://grytrunclub.com/resources/playbooks/best-free-run-clubs-south-hills-2026): South Hills options compared, plus how to stay motivated running with a free group.
+- [GRYT Run Club vs Fleet Feet Pittsburgh](https://grytrunclub.com/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs): Store-backed club vs independent free run clubs.
+- [GRYT Run Club vs parkrun Pittsburgh](https://grytrunclub.com/resources/playbooks/gryt-vs-parkrun-pittsburgh): Saturday 7 AM no-drop group run in McMurray vs the free 9 AM timed 5K on the North Shore.
+- [GRYT Run Club vs City of Bridges Run Club](https://grytrunclub.com/resources/playbooks/gryt-vs-city-of-bridges-run-club): One fixed Saturday run vs a multi-day rotating schedule with pace groups.
+- [GRYT vs Yinz Run Club](https://grytrunclub.com/resources/playbooks/gryt-vs-yinz-run-club): Location, schedule, and culture compared.
+
 ## Runner guides
 
 - [Saturday Runs: What to Expect](https://grytrunclub.com/resources/playbooks/saturday-runs-what-to-expect): Parking, timing, the no-drop format, and what to bring to a first GRYT run.

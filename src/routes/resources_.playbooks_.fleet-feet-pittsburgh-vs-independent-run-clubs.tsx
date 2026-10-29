@@ -8,10 +8,11 @@ import ogImage from "@/assets/og-playbooks.jpg";
 const SITE = "https://grytrunclub.com";
 const URL = `${SITE}/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs`;
 const TITLE =
-  "Fleet Feet Pittsburgh Running Group vs Independent Run Clubs — Which Should You Join? · gryt run club";
+  "GRYT Run Club vs Fleet Feet Pittsburgh: Free Run Clubs Compared · gryt";
 const DESCRIPTION =
-  "An honest breakdown of Fleet Feet Pittsburgh's running group, independent run clubs, and where GRYT Run Club fits if you're a South Hills or Washington County runner who wants community without the commute.";
+  "GRYT Run Club vs Fleet Feet Pittsburgh: schedules, cost, locations, and who each free run club fits, plus how a store run club differs from an independent one.";
 const PUBLISHED = "2026-02-03";
+const MODIFIED = "2026-10-29";
 
 const SECTIONS: Array<{ id: string; label: string }> = [
   { id: "fleet-feet-offers", label: "What Fleet Feet Pittsburgh's Running Group Offers" },
@@ -36,11 +37,11 @@ const FAQS: Array<{ q: string; a: string }> = [
   },
   {
     q: "Does Fleet Feet Pittsburgh have any runs in the South Hills?",
-    a: "No. All Fleet Feet Pittsburgh club runs are anchored to the east end of the city — Bakery Square and Schenley Park. There is no consistent Fleet Feet presence in McMurray, Peters Township, Upper St. Clair, or Bethel Park.",
+    a: "Yes, one. Fleet Feet Pittsburgh has a South Hills store at 1751 N. Highland Road and lists a South Hills Pub Run on Tuesday evenings at 6:30 PM from Arthur's Korner Pub in Mt. Lebanon. Its other club runs are anchored to Bakery Square and the east end. Check Fleet Feet's own calendar for the current schedule.",
   },
   {
     q: "What free independent run clubs operate in Pittsburgh's South Hills?",
-    a: "GRYT Run Club is the only free, weekly, trail-based run club consistently operating in the McMurray/South Hills corridor. It meets every Saturday at 7 AM on the Montour/Peters Trail — no fees, no pace requirements, no store affiliation.",
+    a: "GRYT Run Club meets every Saturday at 7 AM on the Montour/Peters Trail in McMurray, with no fees, no pace requirement, and no store affiliation. City of Bridges Run Club also runs a free Thursday evening South Hills group run at rotating spots in Mt. Lebanon, Castle Shannon, and Carnegie, and Fleet Feet runs a Tuesday pub run in Mt. Lebanon.",
   },
   {
     q: "What's the difference between a retail-backed run club and an independent run club?",
@@ -56,7 +57,15 @@ const FAQS: Array<{ q: string; a: string }> = [
   },
   {
     q: "Can I do both Fleet Feet Pittsburgh and GRYT Run Club?",
-    a: "Absolutely. Fleet Feet's weeknight schedule and GRYT's Saturday morning slot don't overlap. If you're in the South Hills and want more weekly mileage with community, running both makes sense.",
+    a: "Absolutely. Fleet Feet's weeknight and Sunday schedule and GRYT's Saturday morning slot don't overlap. If you're in the South Hills and want more weekly mileage with community, running both makes sense.",
+  },
+  {
+    q: "Fleet Feet Pittsburgh vs free local run clubs: which is better?",
+    a: "Neither is better in the abstract. Fleet Feet Pittsburgh's club runs are free and well organized, with weeknight runs, a Sunday long run, and optional paid training programs. Independent clubs like GRYT Run Club have no store attached and are built around one fixed weekly time and place. Pick the one closest to you at a time you can protect every week.",
+  },
+  {
+    q: "Which free Pittsburgh run club is best if I'm not fast?",
+    a: "Look for a no-drop policy and a walk or run-walk option. GRYT Run Club is no-drop and welcomes walkers on its Saturday 7 AM run in McMurray. Fleet Feet's Sunday long run lists team leads down to walk/jog intervals and a walking division.",
   },
 ];
 
@@ -96,10 +105,10 @@ export const Route = createFileRoute(
           "@context": "https://schema.org",
           "@type": "Article",
           headline:
-            "Fleet Feet Pittsburgh Running Group vs Independent Run Clubs — Which Should You Join?",
+            "GRYT Run Club vs Fleet Feet Pittsburgh: Which Free Run Club Fits You?",
           description: DESCRIPTION,
           datePublished: PUBLISHED,
-          dateModified: PUBLISHED,
+          dateModified: MODIFIED,
           author: { "@type": "Person", name: "Nick Merich" },
           publisher: {
             "@type": "Organization",
@@ -134,7 +143,7 @@ export const Route = createFileRoute(
             {
               "@type": "ListItem",
               position: 3,
-              name: "Fleet Feet Pittsburgh vs Independent Run Clubs",
+              name: "GRYT Run Club vs Fleet Feet Pittsburgh",
               item: URL,
             },
           ],
@@ -159,7 +168,7 @@ function ArticlePage() {
           </Link>
           <p className="eyebrow text-blue mt-8 mb-5">COMMUNITY · 9 MIN READ</p>
           <h1 className="display-condensed uppercase text-[clamp(40px,7vw,96px)] leading-[0.95]">
-            Fleet Feet Pittsburgh Running Group vs Independent Run Clubs — Which Should You Join?
+            GRYT Run Club vs Fleet Feet Pittsburgh: Which Free Run Club Fits You?
           </h1>
           <p className="mt-7 text-paper/75 text-lg md:text-xl leading-[1.55]">
             {DESCRIPTION}
@@ -189,6 +198,11 @@ function ArticlePage() {
           <div className="mt-12 space-y-5 text-paper/85 text-[16px] md:text-[17px] leading-[1.7]">
             <p>You're standing in a parking lot at 6:58 AM, coffee still at home, wondering if you picked the right group. It's a fair question. Pittsburgh has options now — retail-backed clubs, free independents, city runs, trail runs. And if you're in the South Hills, most of those options are 45 minutes away before you've even tied your shoes.</p>
             <p>Here's a straight breakdown of what Fleet Feet Pittsburgh's running group offers, what independent clubs offer, and where GRYT Run Club fits if you're a South Hills or Washington County runner who wants community without the commute.</p>
+            <div className="border-l-2 border-blue pl-5">
+              <p className="font-bold text-paper">Quick answer: GRYT Run Club vs Fleet Feet Pittsburgh</p>
+              <p className="mt-2">Both are free to run with. Fleet Feet Pittsburgh is a store-backed club with weeknight runs, a Sunday 7:30 AM long run from rotating spots, a Tuesday pub run in Mt. Lebanon, and optional paid training programs. GRYT Run Club is independent, meets one time every week (Saturday at 7 AM on the Montour/Peters Trail in McMurray), welcomes walkers, and never drops anyone. If you live near the east end and want several runs a week, start with Fleet Feet. If you want a Saturday morning ritual in the South Hills, start with GRYT. Plenty of people do both.</p>
+              <p className="mt-2 text-paper/60 text-[14px]">Updated October 29, 2026. Fleet Feet details come from Fleet Feet Pittsburgh's published run pages; confirm times on their calendar before you go.</p>
+            </div>
 
             <h2 id="fleet-feet-offers" className="text-2xl md:text-3xl font-bold mt-12 mb-2 scroll-mt-24">What Fleet Feet Pittsburgh's Running Group Offers</h2>
             <p>Fleet Feet Pittsburgh is retail-backed and anchored to the east end of the city. Their club runs are genuinely free — join with code FREECLUB — and the schedule is consistent:</p>
@@ -197,6 +211,7 @@ function ArticlePage() {
               <li>Wednesday track club, Schenley Park Oval, 6:30 PM</li>
               <li>Thursday East End pub runs, Bakery Square, 6:30 PM</li>
               <li>Sunday long runs, rotating location, 7:30 AM</li>
+              <li>Tuesday South Hills Pub Run, Arthur's Korner Pub in Mt. Lebanon, 6:30 PM</li>
             </ul>
             <p>Four days a week of free programming is real. Worth saying plainly. If you live near Squirrel Hill, Shadyside, or anywhere in the east end, that schedule is convenient and well-organized.</p>
 
@@ -205,7 +220,7 @@ function ArticlePage() {
             <p>The free club runs and the paid programs serve different purposes. Club runs are social. Training programs are performance-focused. That distinction matters when you're figuring out what you actually need.</p>
 
             <h3 id="geographic-reality" className="text-xl md:text-2xl font-bold mt-8 mb-1 scroll-mt-24">The Geographic Reality</h3>
-            <p>Here's the honest part: Fleet Feet has no South Hills presence. Every run is anchored to Bakery Square or Schenley Park. If you're in McMurray, Peters Township, Upper St. Clair, or Bethel Park, you're looking at a 30-to-45-minute drive each way before a 6:30 PM weeknight run. After work, with kids, that math rarely works.</p>
+            <p>Most Fleet Feet club runs are anchored to Bakery Square and the east end, with the Sunday long run rotating between city spots. Fleet Feet does have a South Hills store on N. Highland Road and lists a Tuesday 6:30 PM South Hills Pub Run from Arthur's Korner Pub in Mt. Lebanon. If you're in McMurray, Peters Township, or Canonsburg, the east end runs still mean a 30 to 45 minute drive each way, and the Mt. Lebanon pub run is a weeknight. If weeknights don't work for your family, that's the gap a Saturday morning club fills.</p>
 
             <h2 id="independent-offers" className="text-2xl md:text-3xl font-bold mt-12 mb-2 scroll-mt-24">What Independent Run Clubs Offer</h2>
             <p>Independent clubs — no retail sponsor, no store affiliation, no paid programs attached — operate differently. The best ones are built around a specific time, place, and culture rather than a product ecosystem.</p>
@@ -247,7 +262,7 @@ function ArticlePage() {
               <li>You're a former athlete, a busy parent, or a comeback runner who wants community without competition</li>
               <li>You want zero cost, zero pace pressure, and coffee after with no sales pitch attached</li>
             </ul>
-            <p>There is no other free, weekly, trail-based run club consistently operating in the McMurray/South Hills corridor. GRYT holds that ground alone. If you're in the South Hills, the real choice isn't Fleet Feet vs. GRYT — it's GRYT vs. running alone on Saturday.</p>
+            <p>GRYT is the free Saturday morning trail run based in McMurray and Peters Township. If you're in that corner of the South Hills, the real choice usually isn't Fleet Feet vs. GRYT. It's GRYT vs. running alone on Saturday.</p>
 
             <h2 id="comparison" className="text-2xl md:text-3xl font-bold mt-12 mb-2 scroll-mt-24">The Honest Comparison</h2>
             <div className="overflow-x-auto -mx-2">
@@ -262,13 +277,13 @@ function ArticlePage() {
                 <tbody className="text-paper/85">
                   {[
                     ["Cost", "Free (club runs) / $75–$150 (training)", "Always free"],
-                    ["Schedule", "Mon/Wed/Thu/Sun", "Every Saturday"],
+                    ["Schedule", "Weeknights + Sunday long run", "Every Saturday"],
                     ["Time", "6:30 PM weeknights / 7:30 AM Sunday", "7:00 AM Saturday"],
-                    ["Location", "East end (Bakery Square, Schenley)", "McMurray, Montour/Peters Trail"],
+                    ["Location", "Mostly east end (Bakery Square, Schenley), rotating Sunday spots", "McMurray, Montour/Peters Trail"],
                     ["Format", "Road, track, pub run", "Trail, out-and-back"],
                     ["Post-run", "Pub (Thu) / varies", "Coffee in the parking lot"],
                     ["Coaching", "Paid programs available", "No — peer-led"],
-                    ["South Hills presence", "None", "That's the whole point"],
+                    ["South Hills presence", "N. Highland Rd store + Tuesday pub run in Mt. Lebanon", "Home base: McMurray / Peters Township"],
                   ].map(([k, a, b]) => (
                     <tr key={k} className="border-b border-paper/10 align-top">
                       <td className="py-2 px-2 font-semibold text-paper">{k}</td>

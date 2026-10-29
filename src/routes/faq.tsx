@@ -137,9 +137,9 @@ function FaqPage() {
               className="text-5xl sm:text-6xl lg:text-7xl uppercase leading-[0.92] tracking-tight"
               style={{ fontFamily: "var(--font-display-condensed)" }}
             >
-              Frequently
+              South Hills run club
               <br />
-              asked questions.
+              FAQ.
             </h1>
             <p
               className="mt-6 text-lg text-ink/80 max-w-xl"
