@@ -144,6 +144,17 @@ export const LIBRARY: LibraryEntry[] = [
     seasonal: "cold",
   },
   {
+    id: "articles",
+    title: "Running Articles: Training, Gear, Racing & Clubs",
+    summary:
+      "Fact-checked guides on 5K to half marathon plans, easy pace, hills, shoes, socks, watches, apps, race day, and finding a run club near you.",
+    to: "/resources/articles",
+    topic: "training",
+    kind: "guide",
+    minutes: 5,
+    updated: "2026-10-29",
+  },
+  {
     id: "should-you-join",
     title: "Should You Join a Running Club? An Honest Answer",
     summary:

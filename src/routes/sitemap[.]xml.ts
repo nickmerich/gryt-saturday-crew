@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
+import { ARTICLES } from "@/lib/articles-index";
 
 const BASE_URL = "https://grytrunclub.com";
 
@@ -51,6 +52,8 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/resources/playbooks/gryt-vs-city-of-bridges-run-club", changefreq: "monthly", priority: "0.6" },
           { path: "/resources/playbooks/saturday-runs-what-to-expect", changefreq: "monthly", priority: "0.6" },
           { path: "/resources/playbooks/winter-durability-plan", changefreq: "monthly", priority: "0.7" },
+          { path: "/resources/articles", changefreq: "weekly", priority: "0.7" },
+          ...ARTICLES.map((a) => ({ path: `/resources/articles/${a.slug}`, changefreq: "monthly" as const, priority: "0.6" })),
           // /register is retired (paid run entry removed) and is noindex — not listed here.
           { path: "/privacy", changefreq: "yearly", priority: "0.3" },
           { path: "/terms", changefreq: "yearly", priority: "0.3" },
