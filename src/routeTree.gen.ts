@@ -82,6 +82,8 @@ import { Route as LovableEmailEventsRouteImport } from './routes/lovable/email/e
 import { Route as ResourcesPlaybooksBestFreeRunClubsSouthHills2026RouteImport } from './routes/resources_.playbooks_.best-free-run-clubs-south-hills-2026'
 import { Route as ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026RouteImport } from './routes/resources_.playbooks_.best-free-running-clubs-pittsburgh-2026'
 import { Route as ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRouteImport } from './routes/resources_.playbooks_.fleet-feet-pittsburgh-vs-independent-run-clubs'
+import { Route as ResourcesPlaybooksGrytVsCityOfBridgesRunClubRouteImport } from './routes/resources_.playbooks_.gryt-vs-city-of-bridges-run-club'
+import { Route as ResourcesPlaybooksGrytVsParkrunPittsburghRouteImport } from './routes/resources_.playbooks_.gryt-vs-parkrun-pittsburgh'
 import { Route as ResourcesPlaybooksGrytVsYinzRunClubRouteImport } from './routes/resources_.playbooks_.gryt-vs-yinz-run-club'
 import { Route as ResourcesPlaybooksSaturdayRunsWhatToExpectRouteImport } from './routes/resources_.playbooks_.saturday-runs-what-to-expect'
 import { Route as ResourcesPlaybooksWinterDurabilityPlanRouteImport } from './routes/resources_.playbooks_.winter-durability-plan'
@@ -471,6 +473,18 @@ const ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute =
     path: '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ResourcesPlaybooksGrytVsCityOfBridgesRunClubRoute =
+  ResourcesPlaybooksGrytVsCityOfBridgesRunClubRouteImport.update({
+    id: '/resources_/playbooks_/gryt-vs-city-of-bridges-run-club',
+    path: '/resources/playbooks/gryt-vs-city-of-bridges-run-club',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ResourcesPlaybooksGrytVsParkrunPittsburghRoute =
+  ResourcesPlaybooksGrytVsParkrunPittsburghRouteImport.update({
+    id: '/resources_/playbooks_/gryt-vs-parkrun-pittsburgh',
+    path: '/resources/playbooks/gryt-vs-parkrun-pittsburgh',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ResourcesPlaybooksGrytVsYinzRunClubRoute =
   ResourcesPlaybooksGrytVsYinzRunClubRouteImport.update({
     id: '/resources_/playbooks_/gryt-vs-yinz-run-club',
@@ -592,6 +606,8 @@ export interface FileRoutesByFullPath {
   '/resources/playbooks/best-free-run-clubs-south-hills-2026': typeof ResourcesPlaybooksBestFreeRunClubsSouthHills2026Route
   '/resources/playbooks/best-free-running-clubs-pittsburgh-2026': typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route
   '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs': typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute
+  '/resources/playbooks/gryt-vs-city-of-bridges-run-club': typeof ResourcesPlaybooksGrytVsCityOfBridgesRunClubRoute
+  '/resources/playbooks/gryt-vs-parkrun-pittsburgh': typeof ResourcesPlaybooksGrytVsParkrunPittsburghRoute
   '/resources/playbooks/gryt-vs-yinz-run-club': typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
   '/resources/playbooks/saturday-runs-what-to-expect': typeof ResourcesPlaybooksSaturdayRunsWhatToExpectRoute
   '/resources/playbooks/winter-durability-plan': typeof ResourcesPlaybooksWinterDurabilityPlanRoute
@@ -675,6 +691,8 @@ export interface FileRoutesByTo {
   '/resources/playbooks/best-free-run-clubs-south-hills-2026': typeof ResourcesPlaybooksBestFreeRunClubsSouthHills2026Route
   '/resources/playbooks/best-free-running-clubs-pittsburgh-2026': typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route
   '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs': typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute
+  '/resources/playbooks/gryt-vs-city-of-bridges-run-club': typeof ResourcesPlaybooksGrytVsCityOfBridgesRunClubRoute
+  '/resources/playbooks/gryt-vs-parkrun-pittsburgh': typeof ResourcesPlaybooksGrytVsParkrunPittsburghRoute
   '/resources/playbooks/gryt-vs-yinz-run-club': typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
   '/resources/playbooks/saturday-runs-what-to-expect': typeof ResourcesPlaybooksSaturdayRunsWhatToExpectRoute
   '/resources/playbooks/winter-durability-plan': typeof ResourcesPlaybooksWinterDurabilityPlanRoute
@@ -759,6 +777,8 @@ export interface FileRoutesById {
   '/resources_/playbooks_/best-free-run-clubs-south-hills-2026': typeof ResourcesPlaybooksBestFreeRunClubsSouthHills2026Route
   '/resources_/playbooks_/best-free-running-clubs-pittsburgh-2026': typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route
   '/resources_/playbooks_/fleet-feet-pittsburgh-vs-independent-run-clubs': typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute
+  '/resources_/playbooks_/gryt-vs-city-of-bridges-run-club': typeof ResourcesPlaybooksGrytVsCityOfBridgesRunClubRoute
+  '/resources_/playbooks_/gryt-vs-parkrun-pittsburgh': typeof ResourcesPlaybooksGrytVsParkrunPittsburghRoute
   '/resources_/playbooks_/gryt-vs-yinz-run-club': typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
   '/resources_/playbooks_/saturday-runs-what-to-expect': typeof ResourcesPlaybooksSaturdayRunsWhatToExpectRoute
   '/resources_/playbooks_/winter-durability-plan': typeof ResourcesPlaybooksWinterDurabilityPlanRoute
@@ -844,6 +864,8 @@ export interface FileRouteTypes {
     | '/resources/playbooks/best-free-run-clubs-south-hills-2026'
     | '/resources/playbooks/best-free-running-clubs-pittsburgh-2026'
     | '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs'
+    | '/resources/playbooks/gryt-vs-city-of-bridges-run-club'
+    | '/resources/playbooks/gryt-vs-parkrun-pittsburgh'
     | '/resources/playbooks/gryt-vs-yinz-run-club'
     | '/resources/playbooks/saturday-runs-what-to-expect'
     | '/resources/playbooks/winter-durability-plan'
@@ -927,6 +949,8 @@ export interface FileRouteTypes {
     | '/resources/playbooks/best-free-run-clubs-south-hills-2026'
     | '/resources/playbooks/best-free-running-clubs-pittsburgh-2026'
     | '/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs'
+    | '/resources/playbooks/gryt-vs-city-of-bridges-run-club'
+    | '/resources/playbooks/gryt-vs-parkrun-pittsburgh'
     | '/resources/playbooks/gryt-vs-yinz-run-club'
     | '/resources/playbooks/saturday-runs-what-to-expect'
     | '/resources/playbooks/winter-durability-plan'
@@ -1010,6 +1034,8 @@ export interface FileRouteTypes {
     | '/resources_/playbooks_/best-free-run-clubs-south-hills-2026'
     | '/resources_/playbooks_/best-free-running-clubs-pittsburgh-2026'
     | '/resources_/playbooks_/fleet-feet-pittsburgh-vs-independent-run-clubs'
+    | '/resources_/playbooks_/gryt-vs-city-of-bridges-run-club'
+    | '/resources_/playbooks_/gryt-vs-parkrun-pittsburgh'
     | '/resources_/playbooks_/gryt-vs-yinz-run-club'
     | '/resources_/playbooks_/saturday-runs-what-to-expect'
     | '/resources_/playbooks_/winter-durability-plan'
@@ -1093,6 +1119,8 @@ export interface RootRouteChildren {
   ResourcesPlaybooksBestFreeRunClubsSouthHills2026Route: typeof ResourcesPlaybooksBestFreeRunClubsSouthHills2026Route
   ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route: typeof ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route
   ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute: typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute
+  ResourcesPlaybooksGrytVsCityOfBridgesRunClubRoute: typeof ResourcesPlaybooksGrytVsCityOfBridgesRunClubRoute
+  ResourcesPlaybooksGrytVsParkrunPittsburghRoute: typeof ResourcesPlaybooksGrytVsParkrunPittsburghRoute
   ResourcesPlaybooksGrytVsYinzRunClubRoute: typeof ResourcesPlaybooksGrytVsYinzRunClubRoute
   ResourcesPlaybooksSaturdayRunsWhatToExpectRoute: typeof ResourcesPlaybooksSaturdayRunsWhatToExpectRoute
   ResourcesPlaybooksWinterDurabilityPlanRoute: typeof ResourcesPlaybooksWinterDurabilityPlanRoute
@@ -1616,6 +1644,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/resources_/playbooks_/gryt-vs-city-of-bridges-run-club': {
+      id: '/resources_/playbooks_/gryt-vs-city-of-bridges-run-club'
+      path: '/resources/playbooks/gryt-vs-city-of-bridges-run-club'
+      fullPath: '/resources/playbooks/gryt-vs-city-of-bridges-run-club'
+      preLoaderRoute: typeof ResourcesPlaybooksGrytVsCityOfBridgesRunClubRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resources_/playbooks_/gryt-vs-parkrun-pittsburgh': {
+      id: '/resources_/playbooks_/gryt-vs-parkrun-pittsburgh'
+      path: '/resources/playbooks/gryt-vs-parkrun-pittsburgh'
+      fullPath: '/resources/playbooks/gryt-vs-parkrun-pittsburgh'
+      preLoaderRoute: typeof ResourcesPlaybooksGrytVsParkrunPittsburghRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/resources_/playbooks_/gryt-vs-yinz-run-club': {
       id: '/resources_/playbooks_/gryt-vs-yinz-run-club'
       path: '/resources/playbooks/gryt-vs-yinz-run-club'
@@ -1767,6 +1809,10 @@ const rootRouteChildren: RootRouteChildren = {
     ResourcesPlaybooksBestFreeRunningClubsPittsburgh2026Route,
   ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute:
     ResourcesPlaybooksFleetFeetPittsburghVsIndependentRunClubsRoute,
+  ResourcesPlaybooksGrytVsCityOfBridgesRunClubRoute:
+    ResourcesPlaybooksGrytVsCityOfBridgesRunClubRoute,
+  ResourcesPlaybooksGrytVsParkrunPittsburghRoute:
+    ResourcesPlaybooksGrytVsParkrunPittsburghRoute,
   ResourcesPlaybooksGrytVsYinzRunClubRoute:
     ResourcesPlaybooksGrytVsYinzRunClubRoute,
   ResourcesPlaybooksSaturdayRunsWhatToExpectRoute:

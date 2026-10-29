@@ -9,6 +9,21 @@ const TITLE = "About GRYT Run Club | Nick & Laura Merich";
 const DESC =
   "Meet Nick and Laura Merich, the founders of GRYT Run Club. Free Saturday runs in Pittsburgh's South Hills for former athletes, busy parents, and comeback runners.";
 
+const ABOUT_FAQS = [
+  {
+    q: "Is GRYT a good free running group in the Pittsburgh suburbs for people who aren't fast?",
+    a: "That's who it's built for. GRYT is free, no-drop, and walk-friendly. The Saturday 7 AM route on the Montour/Peters Trail in McMurray is flat and out and back, so you can turn around early and still finish with everyone. Faster runners loop back so nobody finishes alone.",
+  },
+  {
+    q: "I'm starting again after a long break. Will anyone judge my pace?",
+    a: "No. Plenty of the crew are comeback runners, busy parents, and former athletes rebuilding. There's no clock, no results list, and no pace groups to qualify for. Walk, jog, or mix both. The goal is showing up next Saturday.",
+  },
+  {
+    q: "How does GRYT help people stay motivated?",
+    a: "One fixed time and place every week (Saturday, 7 AM, 212 Valley Brook Road), a crew that notices when you're there, coffee after the run, and the Milestone Club, which recognizes 5, 10, 25, 50, and 100 Saturdays. Walking counts.",
+  },
+];
+
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
@@ -21,6 +36,20 @@ export const Route = createFileRoute("/about")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: siteUrl("/about") }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: ABOUT_FAQS.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        }),
+      },
+    ],
   }),
   component: AboutPage,
 });
@@ -258,6 +287,42 @@ function AboutPage() {
               RSVP Saturday
             </a>
           </div>
+        </div>
+      </section>
+
+      <section className="bg-paper text-ink" aria-labelledby="not-fast-heading">
+        <div className="mx-auto max-w-3xl px-6 py-16 sm:py-24">
+          <Eyebrow className="text-ink/70">If you're not fast</Eyebrow>
+          <h2 id="not-fast-heading" className="font-condensed font-bold text-4xl sm:text-5xl leading-tight">
+            A free run club for every pace in Pittsburgh's South Hills
+          </h2>
+          <div className="mt-8 space-y-8" style={body}>
+            {ABOUT_FAQS.map((f) => (
+              <div key={f.q}>
+                <h3 className="text-xl sm:text-2xl font-bold leading-snug">{f.q}</h3>
+                <p className="mt-2 text-lg text-ink/80 leading-relaxed">{f.a}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-10 text-lg text-ink/80 leading-relaxed" style={body}>
+            Comparing options? Read our guide to{" "}
+            <a href="/resources/playbooks/best-free-running-clubs-pittsburgh-2026" className="underline underline-offset-4">
+              free running clubs in Pittsburgh
+            </a>{" "}
+            or see how GRYT compares with{" "}
+            <a href="/resources/playbooks/gryt-vs-parkrun-pittsburgh" className="underline underline-offset-4">
+              parkrun
+            </a>
+            ,{" "}
+            <a href="/resources/playbooks/gryt-vs-city-of-bridges-run-club" className="underline underline-offset-4">
+              City of Bridges
+            </a>
+            , and{" "}
+            <a href="/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs" className="underline underline-offset-4">
+              Fleet Feet
+            </a>
+            .
+          </p>
         </div>
       </section>
 

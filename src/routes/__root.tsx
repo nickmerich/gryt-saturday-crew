@@ -13,6 +13,9 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 
 export const SITE_TITLE =
   "Do Hard Things Together · Pittsburgh Running Group · South Hills Run Club · gryt";
+const GOOGLE_FONTS_HREF =
+  "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap";
+
 export const SITE_DESCRIPTION =
   "Free Pittsburgh run club on the Montour / Peters Trail in McMurray. Saturdays 7 AM, all paces welcome, no one gets dropped.";
 
@@ -109,10 +112,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "manifest", href: "/site.webmanifest" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap",
-      },
+      // Fonts are preloaded here and attached as a stylesheet by a tiny inline
+      // script in RootShell, so the Google Fonts CSS never blocks first paint.
+      { rel: "preload", as: "style", href: GOOGLE_FONTS_HREF },
     ],
     scripts: [
       {
@@ -156,6 +158,14 @@ function RootShell({ children }: { children: ReactNode }) {
         {/* @ts-expect-error Impact requires the non-standard `value` attribute */}
         <meta name="impact-site-verification" value="d0fcc171-1f08-4de2-b194-22ac376b0a1f" />
         <HeadContent />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var l=document.createElement('link');l.rel='stylesheet';l.href=${JSON.stringify(GOOGLE_FONTS_HREF)};document.head.appendChild(l);})();`,
+          }}
+        />
+        <noscript>
+          <link rel="stylesheet" href={GOOGLE_FONTS_HREF} />
+        </noscript>
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-P32BTLV84G"></script>
         <script
           dangerouslySetInnerHTML={{

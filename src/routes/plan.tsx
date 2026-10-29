@@ -6,7 +6,7 @@ import { createRunPlan, type RunPlan, type PlanInputType } from "@/lib/training-
 
 const TITLE = "Build Your Run Plan · Free AI Training Plan | GRYT Run Club";
 const DESCRIPTION =
-  "Tell GRYT your goal, your schedule, and where you're starting. Get a one-week training plan built around Saturday 7 AM in McMurray, PA.";
+  "Build your run plan free: share your goal, schedule, and starting point. Get a one-week plan built around GRYT's Saturday 7 AM run in McMurray, PA.";
 
 export const Route = createFileRoute("/plan")({
   head: () => ({
@@ -81,6 +81,7 @@ function PlanPage() {
   return (
     <>
       <SiteNav />
+      <main id="main-content">
       <section className="bg-paper text-ink">
         <div className="mx-auto max-w-3xl px-6 py-16 sm:py-24">
           <div className="eyebrow text-ink/60 mb-4" style={body}>
@@ -90,7 +91,7 @@ function PlanPage() {
             className="text-5xl sm:text-6xl lg:text-7xl uppercase leading-[0.92] tracking-tight"
             style={condensed}
           >
-            Your plan.
+            Build your run.
             <br />
             Our Saturday.
           </h1>
@@ -272,6 +273,7 @@ function PlanPage() {
           </div>
         </div>
       </section>
+      </main>
       <SiteFooter />
     </>
   );

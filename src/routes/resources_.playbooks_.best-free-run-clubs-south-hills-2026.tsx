@@ -1,21 +1,22 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 import { ShareButtons } from "@/components/site/ShareButtons";
-import heroAsset from "@/assets/south-hills-run-clubs.png.asset.json";
 
 const SITE = "https://grytrunclub.com";
 const URL = `${SITE}/resources/playbooks/best-free-run-clubs-south-hills-2026`;
 const TITLE =
   "Best Free Run Clubs in Pittsburgh's South Hills (2026) · gryt";
 const DESCRIPTION =
-  "Free run clubs in Pittsburgh's South Hills for 2026: GRYT in McMurray, Yinz, City of Bridges, and why Strava isn't a run club. Cost, schedule, and drop policy compared.";
+  "Free run clubs in Pittsburgh's South Hills for 2026: GRYT in McMurray, Yinz, City of Bridges, and Fleet Feet. Cost, schedule, drop policy, and how to stay motivated.";
 const PUBLISHED = "2026-09-01";
-const HERO = `${SITE}${heroAsset.url}`;
+const MODIFIED = "2026-10-29";
+const HERO = `${SITE}/img/south-hills-run-clubs-og.jpg`;
 
 const SECTIONS: Array<{ id: string; label: string }> = [
   { id: "gryt", label: "GRYT Run Club: The South Hills Anchor" },
   { id: "others", label: "Other Options Worth Knowing" },
   { id: "compare", label: "Side-by-Side Comparison" },
+  { id: "motivation", label: "How to Stay Motivated With a Free Group" },
   { id: "first-run", label: "What to Expect at Your First GRYT Run" },
   { id: "faqs", label: "FAQs" },
 ];
@@ -31,7 +32,7 @@ const FAQS: Array<{ q: string; a: string }> = [
   },
   {
     q: "Do I need to sign up before showing up to GRYT Run Club?",
-    a: "No. Just show up. Saturday at 7 AM at the Valley Brook Road trailhead in McMurray. No registration, no membership, no fee.",
+    a: "There's no membership and no fee. First-timers RSVP on grytrunclub.com and sign a quick liability waiver before their first run, then meet the crew Saturday at 7 AM at 212 Valley Brook Road in McMurray.",
   },
   {
     q: "What should I bring to my first group run?",
@@ -44,6 +45,10 @@ const FAQS: Array<{ q: string; a: string }> = [
   {
     q: "What's the difference between GRYT Run Club and Yinz Run Club?",
     a: "GRYT is South Hills-based, runs weekly on a fixed Saturday schedule, and operates as a free drop-in group. Yinz Run Club is larger, city-adjacent, and runs biweekly. Both are free. GRYT is the better fit if you live in the South Hills and want a consistent weekly group close to home.",
+  },
+  {
+    q: "How do you stay motivated running with a free community group in Pittsburgh?",
+    a: "Pick one fixed weekly run close to home and treat it like an appointment, tell someone you'll be there, and count showing up rather than pace or distance. A no-drop group helps because a slow day never means running alone. At GRYT, the Saturday 7 AM time never changes, milestones are recognized at 5, 10, 25, 50, and 100 Saturdays, and walking counts.",
   },
   {
     q: "Is Strava a run club?",
@@ -73,11 +78,18 @@ const COMPARISON: Array<{
     drop: "Varies by run",
   },
   {
-    club: "City of Bridges Running Club",
-    proximity: "South Hills group run in rotation",
-    cost: "Paid membership",
-    schedule: "Structured / coached",
-    drop: "Coached pacing",
+    club: "City of Bridges Run Club",
+    proximity: "Thursday South Hills run at rotating spots; Saturdays in the city",
+    cost: "Runs free (register); optional $55/yr membership",
+    schedule: "Weeknights 6:30 PM + Saturday 8 AM",
+    drop: "Pace groups",
+  },
+  {
+    club: "Fleet Feet Pittsburgh",
+    proximity: "Tuesday pub run in Mt. Lebanon; most runs east end",
+    cost: "Free club; paid training programs optional",
+    schedule: "Weeknights + Sunday 7:30 AM",
+    drop: "Team leads by pace",
   },
   {
     club: "Strava",
@@ -98,7 +110,7 @@ export const Route = createFileRoute(
       {
         name: "keywords",
         content:
-          "free run clubs South Hills, South Hills running club, McMurray run club, Peters Township running group, Montour Trail run club, Pittsburgh no-drop run club, Yinz Run Club, City of Bridges Running Club",
+          "free run clubs South Hills, South Hills running club, McMurray run club, Peters Township running group, Montour Trail run club, Pittsburgh no-drop run club, Yinz Run Club, City of Bridges Run Club, Fleet Feet South Hills pub run, stay motivated running Pittsburgh",
       },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
@@ -124,7 +136,7 @@ export const Route = createFileRoute(
           headline: "Best Free Run Clubs in Pittsburgh's South Hills (2026 Guide)",
           description: DESCRIPTION,
           datePublished: PUBLISHED,
-          dateModified: PUBLISHED,
+          dateModified: MODIFIED,
           author: { "@type": "Person", name: "Nick Merich" },
           publisher: {
             "@type": "Organization",
@@ -136,7 +148,8 @@ export const Route = createFileRoute(
           about: [
             "GRYT Run Club",
             "Yinz Run Club",
-            "City of Bridges Running Club",
+            "City of Bridges Run Club",
+            "Fleet Feet Pittsburgh",
             "Strava",
           ],
         }),
@@ -221,10 +234,16 @@ function SouthHillsPage() {
 
           <figure className="mt-10 border border-paper/15">
             <img
-              src={heroAsset.url}
+              src="/img/south-hills-run-clubs.webp"
+              srcSet="/img/south-hills-run-clubs-760.webp 760w, /img/south-hills-run-clubs.webp 1520w"
+              sizes="(max-width: 808px) 100vw, 760px"
+              width={1520}
+              height={1013}
               alt="Runners on a Pittsburgh trail at dawn with the city skyline and a mapped route overhead"
               className="w-full h-auto"
               loading="eager"
+              fetchPriority="high"
+              decoding="async"
             />
           </figure>
 
@@ -281,10 +300,14 @@ function SouthHillsPage() {
               in the group are usually the ones waiting at the turnaround.
             </p>
             <p>
-              The Pittsburgh Great Race on September 26–27, 2026 is a natural
-              target for anyone building miles through the fall. A lot of GRYT
-              regulars are pointing toward it. Saturday mornings on the Montour
-              Trail are a good place to start.
+              Looking for a target? The EQT Pittsburgh 10 Miler is November 8,
+              2026, the Thanksgiving 5Ks follow on November 26, and the 2027
+              Pittsburgh Marathon is May 2, 2027. The{" "}
+              <Link to="/races" className="underline hover:text-blue">
+                GRYT races page
+              </Link>{" "}
+              keeps the verified dates. Saturday mornings on the Montour Trail
+              are a good place to start building.
             </p>
 
             <H2 id="others">Other Options Worth Knowing</H2>
@@ -307,15 +330,46 @@ function SouthHillsPage() {
             </p>
 
             <h3 className="text-xl md:text-2xl font-bold mt-10 mb-1">
-              City of Bridges Running Club
+              City of Bridges Run Club
             </h3>
             <p>
-              City of Bridges is a paid membership club with coached runs and a
-              citywide structure. They do have a South Hills group run in their
-              rotation, but it operates as a coached, fee-based program — not a
-              free drop-in group. If you want structured training with a coach,
-              it's worth looking into. If you want free and flexible, it's not
-              the right fit.
+              City of Bridges (CBRC) is an all-volunteer 501(c)(3) club and an
+              RRCA member with certified coaches. Its group runs are free and
+              open to everyone, and it asks runners to register for each one.
+              An optional adult membership is $55 a year and adds a shirt,
+              race discounts, and training plans. CBRC runs a Thursday 6:30 PM
+              South Hills group run from rotating spots in Mt. Lebanon, Castle
+              Shannon, and Carnegie, plus a Saturday 8 AM run that moves around
+              the city with posted pace groups.
+            </p>
+            <p>
+              The tradeoff: the South Hills run is a weeknight, and Saturdays
+              usually mean driving into the city. If you want pace groups and a
+              big multi-day schedule, CBRC is a great option. See our{" "}
+              <Link
+                to="/resources/playbooks/gryt-vs-city-of-bridges-run-club"
+                className="underline hover:text-blue"
+              >
+                GRYT vs City of Bridges comparison
+              </Link>
+              .
+            </p>
+
+            <h3 className="text-xl md:text-2xl font-bold mt-10 mb-1">
+              Fleet Feet Pittsburgh
+            </h3>
+            <p>
+              The running store's club is free to join. It has a South Hills
+              store on N. Highland Road and lists a Tuesday 6:30 PM South Hills
+              Pub Run from Arthur's Korner Pub in Mt. Lebanon, with most other
+              club runs based at Bakery Square. Read the full{" "}
+              <Link
+                to="/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs"
+                className="underline hover:text-blue"
+              >
+                GRYT vs Fleet Feet Pittsburgh comparison
+              </Link>
+              .
             </p>
 
             <h3 className="text-xl md:text-2xl font-bold mt-10 mb-1">Strava</h3>
@@ -365,10 +419,60 @@ function SouthHillsPage() {
               </table>
             </div>
 
+            <H2 id="motivation">How to Stay Motivated Running With a Free Group in Pittsburgh</H2>
+            <p>
+              Free groups remove the money excuse, but they also remove the
+              sunk cost that gets people out the door. Motivation has to come
+              from somewhere else. Here's what works for the people who keep
+              showing up on Saturdays.
+            </p>
+            <ul className="list-disc pl-6 space-y-2">
+              <li>
+                <strong className="text-paper">One fixed time, close to home.</strong>{" "}
+                A run you have to plan around every week is a run you'll skip.
+                GRYT is always Saturday at 7 AM, always at Valley Brook Road, so
+                there's no weekly decision to make.
+              </li>
+              <li>
+                <strong className="text-paper">Count showing up, not pace.</strong>{" "}
+                Pick a streak goal (four Saturdays in a row) instead of a speed
+                goal. The{" "}
+                <Link to="/milestones" className="underline hover:text-blue">
+                  GRYT Milestone Club
+                </Link>{" "}
+                recognizes 5, 10, 25, 50, and 100 Saturdays, and walking counts.
+              </li>
+              <li>
+                <strong className="text-paper">Run no-drop.</strong> The fastest
+                way to quit a group is getting left behind on a bad day. In a
+                no-drop group, someone loops back. You never finish alone.
+              </li>
+              <li>
+                <strong className="text-paper">Tell one person you're coming.</strong>{" "}
+                RSVP, text a friend, or post in the Strava club. A name
+                expecting you at 7 AM beats any alarm.
+              </li>
+              <li>
+                <strong className="text-paper">Stay for coffee.</strong> The
+                conversation after the run is the part people come back for.
+                Friends are better accountability than a training plan.
+              </li>
+              <li>
+                <strong className="text-paper">Put a race on the calendar.</strong>{" "}
+                A Thanksgiving 5K or a spring half gives the Saturdays a point.
+                Our{" "}
+                <Link to="/plan" className="underline hover:text-blue">
+                  free run plan builder
+                </Link>{" "}
+                fits the rest of your week around the group run.
+              </li>
+            </ul>
+
             <H2 id="first-run">What to Expect at Your First GRYT Run</H2>
             <p>
-              No registration. No email required. Show up at Valley Brook Road
-              at 7 AM on a Saturday and you'll find the crew.
+              No membership and no fee. RSVP on the home page and sign the
+              short waiver, then show up at 212 Valley Brook Road at 7 AM on a
+              Saturday and you'll find the crew.
             </p>
             <p>
               Bring water if it's warm. Wear layers if it's cold. The
@@ -395,8 +499,8 @@ function SouthHillsPage() {
             </div>
 
             <p className="text-paper text-lg md:text-xl font-bold mt-12">
-              If you've been waiting for a reason to start showing up, the
-              Pittsburgh Great Race is a good one.
+              If you've been waiting for a reason to start showing up, this
+              Saturday is a good one.
             </p>
             <p className="text-paper/70">
               Show up Saturday. 7 AM. Valley Brook Road trailhead.
