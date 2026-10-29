@@ -124,6 +124,7 @@ function FaqPage() {
   return (
     <>
       <SiteNav />
+      <main id="main-content">
       <section className="bg-paper text-ink">
         <div className="mx-auto max-w-3xl px-6 py-16 sm:py-24">
           <div className="mb-10 sm:mb-14">
@@ -213,6 +214,7 @@ function FaqPage() {
           </div>
         </div>
       </section>
+      </main>
       <SiteFooter />
     </>
 

@@ -81,6 +81,7 @@ function PlanPage() {
   return (
     <>
       <SiteNav />
+      <main id="main-content">
       <section className="bg-paper text-ink">
         <div className="mx-auto max-w-3xl px-6 py-16 sm:py-24">
           <div className="eyebrow text-ink/60 mb-4" style={body}>
@@ -272,6 +273,7 @@ function PlanPage() {
           </div>
         </div>
       </section>
+      </main>
       <SiteFooter />
     </>
   );

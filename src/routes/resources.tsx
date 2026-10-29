@@ -13,7 +13,7 @@ export const Route = createFileRoute("/resources")({
       {
         name: "description",
         content:
-          "Free running guides and tools from GRYT, a free South Hills run club in Pittsburgh: pace calculator, what to wear by temperature, first-run guides, training, racing, and safety.",
+          "Free running guides and tools from GRYT, a South Hills run club in Pittsburgh: pace calculator, what to wear, first-run guides, training, and safety.",
       },
       { property: "og:title", content: "Running Resources · South Hills Pittsburgh | GRYT Run Club" },
       {

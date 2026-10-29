@@ -132,6 +132,7 @@ function CalendarPage() {
   return (
     <>
       <SiteNav />
+      <main id="main-content">
       <section className="bg-ink text-paper">
         <div className="mx-auto max-w-5xl px-5 sm:px-8 py-16 sm:py-24">
           <div className="eyebrow text-blue mb-4">EVERY WEEK · ALL PACES · FREE</div>
@@ -247,6 +248,7 @@ function CalendarPage() {
           </div>
         </div>
       </section>
+      </main>
       <SiteFooter />
     </>
   );
