@@ -179,6 +179,168 @@ export type Database = {
         }
         Relationships: []
       }
+      gryt_partner_packages: {
+        Row: {
+          active: boolean
+          amount_cents: number
+          created_at: string
+          description: string
+          id: string
+          name: string
+          partner_name: string
+          token_hash: string
+        }
+        Insert: {
+          active?: boolean
+          amount_cents: number
+          created_at?: string
+          description?: string
+          id?: string
+          name: string
+          partner_name: string
+          token_hash: string
+        }
+        Update: {
+          active?: boolean
+          amount_cents?: number
+          created_at?: string
+          description?: string
+          id?: string
+          name?: string
+          partner_name?: string
+          token_hash?: string
+        }
+        Relationships: []
+      }
+      gryt_payment_orders: {
+        Row: {
+          amount_cents: number
+          attendee_name: string
+          created_at: string
+          email: string
+          environment: string
+          expires_at: string
+          fulfillment: string
+          id: string
+          item: string
+          item_id: string | null
+          monthly: boolean
+          quantity: number
+          return_path: string
+          status: string
+          stripe_customer_id: string | null
+          stripe_session_id: string | null
+          stripe_subscription_id: string | null
+          type: string
+        }
+        Insert: {
+          amount_cents: number
+          attendee_name?: string
+          created_at?: string
+          email: string
+          environment?: string
+          expires_at?: string
+          fulfillment?: string
+          id?: string
+          item: string
+          item_id?: string | null
+          monthly?: boolean
+          quantity?: number
+          return_path: string
+          status?: string
+          stripe_customer_id?: string | null
+          stripe_session_id?: string | null
+          stripe_subscription_id?: string | null
+          type: string
+        }
+        Update: {
+          amount_cents?: number
+          attendee_name?: string
+          created_at?: string
+          email?: string
+          environment?: string
+          expires_at?: string
+          fulfillment?: string
+          id?: string
+          item?: string
+          item_id?: string | null
+          monthly?: boolean
+          quantity?: number
+          return_path?: string
+          status?: string
+          stripe_customer_id?: string | null
+          stripe_session_id?: string | null
+          stripe_subscription_id?: string | null
+          type?: string
+        }
+        Relationships: []
+      }
+      gryt_payment_products: {
+        Row: {
+          active: boolean
+          amount_cents: number
+          created_at: string
+          description: string
+          id: string
+          name: string
+          sku: string
+        }
+        Insert: {
+          active?: boolean
+          amount_cents: number
+          created_at?: string
+          description?: string
+          id?: string
+          name: string
+          sku: string
+        }
+        Update: {
+          active?: boolean
+          amount_cents?: number
+          created_at?: string
+          description?: string
+          id?: string
+          name?: string
+          sku?: string
+        }
+        Relationships: []
+      }
+      gryt_ticket_events: {
+        Row: {
+          active: boolean
+          amount_cents: number
+          capacity: number
+          created_at: string
+          event_date: string
+          id: string
+          location: string
+          name: string
+          slug: string
+        }
+        Insert: {
+          active?: boolean
+          amount_cents: number
+          capacity: number
+          created_at?: string
+          event_date: string
+          id?: string
+          location: string
+          name: string
+          slug: string
+        }
+        Update: {
+          active?: boolean
+          amount_cents?: number
+          capacity?: number
+          created_at?: string
+          event_date?: string
+          id?: string
+          location?: string
+          name?: string
+          slug?: string
+        }
+        Relationships: []
+      }
       partner_inquiries: {
         Row: {
           city: string
@@ -220,6 +382,59 @@ export type Database = {
           status?: string
         }
         Relationships: []
+      }
+      payments: {
+        Row: {
+          amount: number
+          created_at: string
+          email: string
+          environment: string
+          id: string
+          item: string
+          order_id: string | null
+          status: string
+          stripe_event_id: string
+          stripe_invoice_id: string | null
+          stripe_session_id: string | null
+          type: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          email: string
+          environment?: string
+          id?: string
+          item: string
+          order_id?: string | null
+          status: string
+          stripe_event_id: string
+          stripe_invoice_id?: string | null
+          stripe_session_id?: string | null
+          type: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          email?: string
+          environment?: string
+          id?: string
+          item?: string
+          order_id?: string | null
+          status?: string
+          stripe_event_id?: string
+          stripe_invoice_id?: string | null
+          stripe_session_id?: string | null
+          type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "gryt_payment_orders"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       recommendations: {
         Row: {
@@ -607,6 +822,8 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      gryt_reserve_test_order: { Args: { payload: Json }; Returns: string }
+      gryt_test_catalog: { Args: { event_slug?: string }; Returns: Json }
       read_approved_partners: {
         Args: { home_only?: boolean }
         Returns: {
