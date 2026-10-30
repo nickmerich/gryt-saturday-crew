@@ -31,7 +31,9 @@ import { Route as ResourcesRouteImport } from './routes/resources'
 import { Route as RunsRouteImport } from './routes/runs'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SupportRouteImport } from './routes/support'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as ThankYouRouteImport } from './routes/thank-you'
 import { Route as TimerRouteImport } from './routes/timer'
 import { Route as WaiverRouteImport } from './routes/waiver'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
@@ -42,9 +44,12 @@ import { Route as AdminInquiriesRouteImport } from './routes/admin.inquiries'
 import { Route as AdminMembersRouteImport } from './routes/admin.members'
 import { Route as AdminMusicTectonicsRouteImport } from './routes/admin.music-tectonics'
 import { Route as AdminPartnersRouteImport } from './routes/admin.partners'
+import { Route as AdminPaymentsRouteImport } from './routes/admin.payments'
 import { Route as AdminRosterRouteImport } from './routes/admin.roster'
 import { Route as CheckoutReturnRouteImport } from './routes/checkout.return'
+import { Route as EventsSlugRouteImport } from './routes/events.$slug'
 import { Route as MembersKeyRouteImport } from './routes/members.$key'
+import { Route as PartnersPayRouteImport } from './routes/partners_.pay'
 import { Route as ResourcesArticlesRouteImport } from './routes/resources_.articles'
 import { Route as ResourcesBuildARunningBaseRouteImport } from './routes/resources_.build-a-running-base'
 import { Route as ResourcesConversationsRouteImport } from './routes/resources_.conversations'
@@ -64,6 +69,7 @@ import { Route as ResourcesShouldYouJoinARunningClubRouteImport } from './routes
 import { Route as ResourcesWhatToEatBeforeARunRouteImport } from './routes/resources_.what-to-eat-before-a-run'
 import { Route as ResourcesWhatToWearRunningRouteImport } from './routes/resources_.what-to-wear-running'
 import { Route as RunsNumberRouteImport } from './routes/runs_.$number'
+import { Route as ShopCheckoutRouteImport } from './routes/shop_.checkout'
 import { Route as TimerResultsRouteImport } from './routes/timer_.results'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
@@ -205,9 +211,19 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SupportRoute = SupportRouteImport.update({
+  id: '/support',
+  path: '/support',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ThankYouRoute = ThankYouRouteImport.update({
+  id: '/thank-you',
+  path: '/thank-you',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TimerRoute = TimerRouteImport.update({
@@ -262,6 +278,11 @@ const AdminPartnersRoute = AdminPartnersRouteImport.update({
   path: '/admin/partners',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminPaymentsRoute = AdminPaymentsRouteImport.update({
+  id: '/admin/payments',
+  path: '/admin/payments',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminRosterRoute = AdminRosterRouteImport.update({
   id: '/admin/roster',
   path: '/admin/roster',
@@ -272,10 +293,20 @@ const CheckoutReturnRoute = CheckoutReturnRouteImport.update({
   path: '/checkout/return',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EventsSlugRoute = EventsSlugRouteImport.update({
+  id: '/events/$slug',
+  path: '/events/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MembersKeyRoute = MembersKeyRouteImport.update({
   id: '/$key',
   path: '/$key',
   getParentRoute: () => MembersRoute,
+} as any)
+const PartnersPayRoute = PartnersPayRouteImport.update({
+  id: '/partners_/pay',
+  path: '/partners/pay',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ResourcesArticlesRoute = ResourcesArticlesRouteImport.update({
   id: '/resources_/articles',
@@ -379,6 +410,11 @@ const ResourcesWhatToWearRunningRoute =
 const RunsNumberRoute = RunsNumberRouteImport.update({
   id: '/runs_/$number',
   path: '/runs/$number',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShopCheckoutRoute = ShopCheckoutRouteImport.update({
+  id: '/shop_/checkout',
+  path: '/shop/checkout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TimerResultsRoute = TimerResultsRouteImport.update({
@@ -567,7 +603,9 @@ export interface FileRoutesByFullPath {
   '/runs': typeof RunsRoute
   '/shop': typeof ShopRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/support': typeof SupportRoute
   '/terms': typeof TermsRoute
+  '/thank-you': typeof ThankYouRoute
   '/timer': typeof TimerRoute
   '/waiver': typeof WaiverRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
@@ -578,9 +616,12 @@ export interface FileRoutesByFullPath {
   '/admin/members': typeof AdminMembersRoute
   '/admin/music-tectonics': typeof AdminMusicTectonicsRoute
   '/admin/partners': typeof AdminPartnersRoute
+  '/admin/payments': typeof AdminPaymentsRoute
   '/admin/roster': typeof AdminRosterRoute
   '/checkout/return': typeof CheckoutReturnRoute
+  '/events/$slug': typeof EventsSlugRoute
   '/members/$key': typeof MembersKeyRoute
+  '/partners/pay': typeof PartnersPayRoute
   '/resources/articles': typeof ResourcesArticlesRoute
   '/resources/build-a-running-base': typeof ResourcesBuildARunningBaseRoute
   '/resources/conversations': typeof ResourcesConversationsRoute
@@ -600,6 +641,7 @@ export interface FileRoutesByFullPath {
   '/resources/what-to-eat-before-a-run': typeof ResourcesWhatToEatBeforeARunRoute
   '/resources/what-to-wear-running': typeof ResourcesWhatToWearRunningRoute
   '/runs/$number': typeof RunsNumberRoute
+  '/shop/checkout': typeof ShopCheckoutRoute
   '/timer/results': typeof TimerResultsRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -654,7 +696,9 @@ export interface FileRoutesByTo {
   '/runs': typeof RunsRoute
   '/shop': typeof ShopRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/support': typeof SupportRoute
   '/terms': typeof TermsRoute
+  '/thank-you': typeof ThankYouRoute
   '/timer': typeof TimerRoute
   '/waiver': typeof WaiverRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
@@ -665,9 +709,12 @@ export interface FileRoutesByTo {
   '/admin/members': typeof AdminMembersRoute
   '/admin/music-tectonics': typeof AdminMusicTectonicsRoute
   '/admin/partners': typeof AdminPartnersRoute
+  '/admin/payments': typeof AdminPaymentsRoute
   '/admin/roster': typeof AdminRosterRoute
   '/checkout/return': typeof CheckoutReturnRoute
+  '/events/$slug': typeof EventsSlugRoute
   '/members/$key': typeof MembersKeyRoute
+  '/partners/pay': typeof PartnersPayRoute
   '/resources/articles': typeof ResourcesArticlesRoute
   '/resources/build-a-running-base': typeof ResourcesBuildARunningBaseRoute
   '/resources/conversations': typeof ResourcesConversationsRoute
@@ -687,6 +734,7 @@ export interface FileRoutesByTo {
   '/resources/what-to-eat-before-a-run': typeof ResourcesWhatToEatBeforeARunRoute
   '/resources/what-to-wear-running': typeof ResourcesWhatToWearRunningRoute
   '/runs/$number': typeof RunsNumberRoute
+  '/shop/checkout': typeof ShopCheckoutRoute
   '/timer/results': typeof TimerResultsRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -742,7 +790,9 @@ export interface FileRoutesById {
   '/runs': typeof RunsRoute
   '/shop': typeof ShopRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/support': typeof SupportRoute
   '/terms': typeof TermsRoute
+  '/thank-you': typeof ThankYouRoute
   '/timer': typeof TimerRoute
   '/waiver': typeof WaiverRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
@@ -753,9 +803,12 @@ export interface FileRoutesById {
   '/admin/members': typeof AdminMembersRoute
   '/admin/music-tectonics': typeof AdminMusicTectonicsRoute
   '/admin/partners': typeof AdminPartnersRoute
+  '/admin/payments': typeof AdminPaymentsRoute
   '/admin/roster': typeof AdminRosterRoute
   '/checkout/return': typeof CheckoutReturnRoute
+  '/events/$slug': typeof EventsSlugRoute
   '/members/$key': typeof MembersKeyRoute
+  '/partners_/pay': typeof PartnersPayRoute
   '/resources_/articles': typeof ResourcesArticlesRoute
   '/resources_/build-a-running-base': typeof ResourcesBuildARunningBaseRoute
   '/resources_/conversations': typeof ResourcesConversationsRoute
@@ -775,6 +828,7 @@ export interface FileRoutesById {
   '/resources_/what-to-eat-before-a-run': typeof ResourcesWhatToEatBeforeARunRoute
   '/resources_/what-to-wear-running': typeof ResourcesWhatToWearRunningRoute
   '/runs_/$number': typeof RunsNumberRoute
+  '/shop_/checkout': typeof ShopCheckoutRoute
   '/timer_/results': typeof TimerResultsRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -831,7 +885,9 @@ export interface FileRouteTypes {
     | '/runs'
     | '/shop'
     | '/sitemap.xml'
+    | '/support'
     | '/terms'
+    | '/thank-you'
     | '/timer'
     | '/waiver'
     | '/.mcp/list-tools'
@@ -842,9 +898,12 @@ export interface FileRouteTypes {
     | '/admin/members'
     | '/admin/music-tectonics'
     | '/admin/partners'
+    | '/admin/payments'
     | '/admin/roster'
     | '/checkout/return'
+    | '/events/$slug'
     | '/members/$key'
+    | '/partners/pay'
     | '/resources/articles'
     | '/resources/build-a-running-base'
     | '/resources/conversations'
@@ -864,6 +923,7 @@ export interface FileRouteTypes {
     | '/resources/what-to-eat-before-a-run'
     | '/resources/what-to-wear-running'
     | '/runs/$number'
+    | '/shop/checkout'
     | '/timer/results'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
@@ -918,7 +978,9 @@ export interface FileRouteTypes {
     | '/runs'
     | '/shop'
     | '/sitemap.xml'
+    | '/support'
     | '/terms'
+    | '/thank-you'
     | '/timer'
     | '/waiver'
     | '/.mcp/list-tools'
@@ -929,9 +991,12 @@ export interface FileRouteTypes {
     | '/admin/members'
     | '/admin/music-tectonics'
     | '/admin/partners'
+    | '/admin/payments'
     | '/admin/roster'
     | '/checkout/return'
+    | '/events/$slug'
     | '/members/$key'
+    | '/partners/pay'
     | '/resources/articles'
     | '/resources/build-a-running-base'
     | '/resources/conversations'
@@ -951,6 +1016,7 @@ export interface FileRouteTypes {
     | '/resources/what-to-eat-before-a-run'
     | '/resources/what-to-wear-running'
     | '/runs/$number'
+    | '/shop/checkout'
     | '/timer/results'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
@@ -1005,7 +1071,9 @@ export interface FileRouteTypes {
     | '/runs'
     | '/shop'
     | '/sitemap.xml'
+    | '/support'
     | '/terms'
+    | '/thank-you'
     | '/timer'
     | '/waiver'
     | '/.mcp/list-tools'
@@ -1016,9 +1084,12 @@ export interface FileRouteTypes {
     | '/admin/members'
     | '/admin/music-tectonics'
     | '/admin/partners'
+    | '/admin/payments'
     | '/admin/roster'
     | '/checkout/return'
+    | '/events/$slug'
     | '/members/$key'
+    | '/partners_/pay'
     | '/resources_/articles'
     | '/resources_/build-a-running-base'
     | '/resources_/conversations'
@@ -1038,6 +1109,7 @@ export interface FileRouteTypes {
     | '/resources_/what-to-eat-before-a-run'
     | '/resources_/what-to-wear-running'
     | '/runs_/$number'
+    | '/shop_/checkout'
     | '/timer_/results'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
@@ -1093,7 +1165,9 @@ export interface RootRouteChildren {
   RunsRoute: typeof RunsRoute
   ShopRoute: typeof ShopRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  SupportRoute: typeof SupportRoute
   TermsRoute: typeof TermsRoute
+  ThankYouRoute: typeof ThankYouRoute
   TimerRoute: typeof TimerRoute
   WaiverRoute: typeof WaiverRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
@@ -1104,8 +1178,11 @@ export interface RootRouteChildren {
   AdminMembersRoute: typeof AdminMembersRoute
   AdminMusicTectonicsRoute: typeof AdminMusicTectonicsRoute
   AdminPartnersRoute: typeof AdminPartnersRoute
+  AdminPaymentsRoute: typeof AdminPaymentsRoute
   AdminRosterRoute: typeof AdminRosterRoute
   CheckoutReturnRoute: typeof CheckoutReturnRoute
+  EventsSlugRoute: typeof EventsSlugRoute
+  PartnersPayRoute: typeof PartnersPayRoute
   ResourcesArticlesRoute: typeof ResourcesArticlesRoute
   ResourcesBuildARunningBaseRoute: typeof ResourcesBuildARunningBaseRoute
   ResourcesConversationsRoute: typeof ResourcesConversationsRoute
@@ -1125,6 +1202,7 @@ export interface RootRouteChildren {
   ResourcesWhatToEatBeforeARunRoute: typeof ResourcesWhatToEatBeforeARunRoute
   ResourcesWhatToWearRunningRoute: typeof ResourcesWhatToWearRunningRoute
   RunsNumberRoute: typeof RunsNumberRoute
+  ShopCheckoutRoute: typeof ShopCheckoutRoute
   TimerResultsRoute: typeof TimerResultsRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -1313,11 +1391,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/support': {
+      id: '/support'
+      path: '/support'
+      fullPath: '/support'
+      preLoaderRoute: typeof SupportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/terms': {
       id: '/terms'
       path: '/terms'
       fullPath: '/terms'
       preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/thank-you': {
+      id: '/thank-you'
+      path: '/thank-you'
+      fullPath: '/thank-you'
+      preLoaderRoute: typeof ThankYouRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/timer': {
@@ -1390,6 +1482,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminPartnersRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/payments': {
+      id: '/admin/payments'
+      path: '/admin/payments'
+      fullPath: '/admin/payments'
+      preLoaderRoute: typeof AdminPaymentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/roster': {
       id: '/admin/roster'
       path: '/admin/roster'
@@ -1404,12 +1503,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CheckoutReturnRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/events/$slug': {
+      id: '/events/$slug'
+      path: '/events/$slug'
+      fullPath: '/events/$slug'
+      preLoaderRoute: typeof EventsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/members/$key': {
       id: '/members/$key'
       path: '/$key'
       fullPath: '/members/$key'
       preLoaderRoute: typeof MembersKeyRouteImport
       parentRoute: typeof MembersRoute
+    }
+    '/partners_/pay': {
+      id: '/partners_/pay'
+      path: '/partners/pay'
+      fullPath: '/partners/pay'
+      preLoaderRoute: typeof PartnersPayRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/resources_/articles': {
       id: '/resources_/articles'
@@ -1542,6 +1655,13 @@ declare module '@tanstack/react-router' {
       path: '/runs/$number'
       fullPath: '/runs/$number'
       preLoaderRoute: typeof RunsNumberRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shop_/checkout': {
+      id: '/shop_/checkout'
+      path: '/shop/checkout'
+      fullPath: '/shop/checkout'
+      preLoaderRoute: typeof ShopCheckoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/timer_/results': {
@@ -1791,7 +1911,9 @@ const rootRouteChildren: RootRouteChildren = {
   RunsRoute: RunsRoute,
   ShopRoute: ShopRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  SupportRoute: SupportRoute,
   TermsRoute: TermsRoute,
+  ThankYouRoute: ThankYouRoute,
   TimerRoute: TimerRoute,
   WaiverRoute: WaiverRoute,
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
@@ -1803,8 +1925,11 @@ const rootRouteChildren: RootRouteChildren = {
   AdminMembersRoute: AdminMembersRoute,
   AdminMusicTectonicsRoute: AdminMusicTectonicsRoute,
   AdminPartnersRoute: AdminPartnersRoute,
+  AdminPaymentsRoute: AdminPaymentsRoute,
   AdminRosterRoute: AdminRosterRoute,
   CheckoutReturnRoute: CheckoutReturnRoute,
+  EventsSlugRoute: EventsSlugRoute,
+  PartnersPayRoute: PartnersPayRoute,
   ResourcesArticlesRoute: ResourcesArticlesRoute,
   ResourcesBuildARunningBaseRoute: ResourcesBuildARunningBaseRoute,
   ResourcesConversationsRoute: ResourcesConversationsRoute,
@@ -1828,6 +1953,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResourcesWhatToEatBeforeARunRoute: ResourcesWhatToEatBeforeARunRoute,
   ResourcesWhatToWearRunningRoute: ResourcesWhatToWearRunningRoute,
   RunsNumberRoute: RunsNumberRoute,
+  ShopCheckoutRoute: ShopCheckoutRoute,
   TimerResultsRoute: TimerResultsRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,

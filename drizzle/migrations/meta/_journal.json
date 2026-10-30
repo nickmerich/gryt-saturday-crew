@@ -71,6 +71,13 @@
       "when": 1792606627933,
       "tag": "0009_create_event_rsvps",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1793326286942,
+      "tag": "0010_separate_test_payment_catalog",
+      "breakpoints": true
     }
   ]
 }
