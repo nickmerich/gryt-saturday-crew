@@ -155,8 +155,14 @@ export const manageTestPayments = createServerFn({ method: 'POST' }).middleware(
       if (result.error) throw new Error('Package was not saved.')
       return { link: `/partners/pay?token=${token}` }
     }
-    const { id, ...fields } = data.record
-    const result = data.action === 'product' ? id ? await db.from('gryt_payment_products').update(fields).eq('id', id) : await db.from('gryt_payment_products').insert(fields) : id ? await db.from('gryt_ticket_events').update(fields).eq('id', id) : await db.from('gryt_ticket_events').insert(fields)
+    let result
+    if (data.action === 'product') {
+      const { id, ...fields } = data.record
+      result = id ? await db.from('gryt_payment_products').update(fields).eq('id', id) : await db.from('gryt_payment_products').insert(fields)
+    } else {
+      const { id, ...fields } = data.record
+      result = id ? await db.from('gryt_ticket_events').update(fields).eq('id', id) : await db.from('gryt_ticket_events').insert(fields)
+    }
     if (result.error) throw new Error('Record was not saved. Check the unique SKU or slug.')
     return { link: '' }
   })
