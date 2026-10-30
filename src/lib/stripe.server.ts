@@ -1,4 +1,5 @@
 import Stripe from 'stripe';
+import { timingSafeEqual } from 'node:crypto';
 
 const getEnv = (key: string): string => {
   const value = process.env[key];
@@ -79,7 +80,7 @@ export async function verifyWebhook(req: Request, env: StripeEnv): Promise<{ typ
   if (!timestamp || v1Signatures.length === 0) throw new Error('Invalid signature format');
 
   const age = Math.abs(Date.now() / 1000 - Number(timestamp));
-  if (age > 300) throw new Error('Webhook timestamp too old');
+  if (!Number.isFinite(age) || age > 300) throw new Error('Webhook timestamp too old');
 
   const key = await crypto.subtle.importKey(
     'raw',
@@ -91,7 +92,8 @@ export async function verifyWebhook(req: Request, env: StripeEnv): Promise<{ typ
   const signed = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(`${timestamp}.${body}`));
   const expected = Buffer.from(new Uint8Array(signed)).toString('hex');
 
-  if (!v1Signatures.includes(expected)) throw new Error('Invalid webhook signature');
+  const valid = v1Signatures.some(value => /^[a-f0-9]{64}$/i.test(value) && timingSafeEqual(Buffer.from(value, 'hex'), Buffer.from(expected, 'hex')));
+  if (!valid) throw new Error('Invalid webhook signature');
 
   return JSON.parse(body);
 }

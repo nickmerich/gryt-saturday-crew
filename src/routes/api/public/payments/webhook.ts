@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { type StripeEnv, verifyWebhook } from '@/lib/stripe.server';
+import type Stripe from 'stripe';
 
 export const Route = createFileRoute('/api/public/payments/webhook')({
   server: {
@@ -13,13 +14,16 @@ export const Route = createFileRoute('/api/public/payments/webhook')({
         const env: StripeEnv = rawEnv;
         try {
           const event = await verifyWebhook(request, env);
+          if (env === 'sandbox') {
+            const { recordTestPayment } = await import('@/lib/test-payment-webhook.server');
+            await recordTestPayment(event as Stripe.Event);
+          }
           if (event.type === 'checkout.session.completed') {
             const session: any = event.data.object;
             console.log('[donation] completed', {
               id: session.id,
               amount_total: session.amount_total,
               currency: session.currency,
-              customer_email: session.customer_details?.email ?? session.customer_email,
               env,
             });
           } else {
