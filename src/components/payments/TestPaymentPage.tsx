@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { EmbeddedCheckout, EmbeddedCheckoutProvider } from "@stripe/react-stripe-js";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
@@ -48,6 +48,10 @@ export function TestPaymentForm({
   const [sessionId, setSessionId] = useState<string>();
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+  const [ready, setReady] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+  const submitting = useRef(false);
+  useEffect(() => setReady(true), []);
   const [fulfillment, setFulfillment] = useState<"shipping" | "pickup">("pickup");
   const [quantity, setQuantity] = useState(1);
   const inputClass =
@@ -88,15 +92,22 @@ export function TestPaymentForm({
     );
   return (
     <form
+      ref={formRef}
+      method="post"
+      aria-busy={busy || !ready}
       className="mt-8 max-w-xl space-y-6"
       onSubmit={async (event) => {
         event.preventDefault();
+        if (!ready || submitting.current) return;
+        submitting.current = true;
         setError("");
         setBusy(true);
         const fields = new FormData(event.currentTarget);
         try {
           if (getStripeEnvironment() !== "sandbox")
             throw new Error("These pages accept test payments only. Live checkout is disabled.");
+          const stripe = await getStripe();
+          if (!stripe) throw new Error("Stripe could not load. Please retry.");
           const result = await create({
             data: {
               type,
@@ -118,10 +129,12 @@ export function TestPaymentForm({
         } catch (e) {
           setError(e instanceof Error ? e.message : "Checkout could not start.");
         } finally {
+          submitting.current = false;
           setBusy(false);
         }
       }}
     >
+      <fieldset disabled={!ready || busy} className="space-y-6">
       {type === "support" && (
         <>
           <fieldset>
@@ -225,18 +238,27 @@ export function TestPaymentForm({
           </p>
         </fieldset>
       )}
+      </fieldset>
       {error && (
         <p role="alert" className="border-l-4 border-blue py-3 pl-4 text-blue">
           {error}
         </p>
       )}
-      <Button disabled={busy || remaining === 0} className="min-h-14 w-full text-base uppercase">
-        {busy
+      <Button
+        type="button"
+        disabled={!ready || busy || remaining === 0}
+        onClick={() => formRef.current?.requestSubmit()}
+        className="min-h-14 w-full text-base uppercase"
+      >
+        {!ready
+          ? "Loading payment form..."
+          : busy
           ? "Opening test checkout..."
           : remaining === 0
             ? "Sold out"
             : `${monthly && type === "support" ? "Subscribe" : "Continue"} · ${usd((type === "support" ? cents : amount) * quantity)}${monthly && type === "support" ? " / month" : ""}`}
       </Button>
+      {busy && <p role="status" className="text-sm text-paper/85">Opening secure Stripe test checkout...</p>}
       <p className="text-sm text-paper/70">
         Saturday runs are always free. This payment is separate from RSVP and the waiver.
       </p>

@@ -1,6 +1,7 @@
 # Roadmap
 
 ## Separate test-only payments
+- [ ] Fix pre-hydration submission, verify checkout feedback on all four paths, and complete a $10 support payment with a paid database receipt. Preview only.
 - [x] Add isolated support, hat checkout, inactive ticket event and private partner payment links using the existing managed Stripe sandbox.
 - [x] Add private payment management, signed webhook records and atomic ticket/package reservations without touching Saturday RSVP, waiver or Shopify. Test webhook subscriptions updated only.
 - [x] Verify 375/390/1440px pages without overflow or runtime errors, support/monthly Stripe mounting and cancellation, inactive-event/private-link protection, 7 payment tests and 13 Shopify tests. New-file lint and preview build passed.
