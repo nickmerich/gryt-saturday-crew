@@ -367,6 +367,7 @@ export const manageTestPayments = createServerFn({ method: "POST" })
           }),
         }),
         z.object({ action: z.literal("cancel-monthly"), orderId: z.uuid() }),
+        z.object({ action: z.literal("expire-package"), packageId: z.uuid() }),
       ])
       .parse(input),
   )
@@ -403,6 +404,14 @@ export const manageTestPayments = createServerFn({ method: "POST" })
         orders: orders.data || [],
         link: "",
       };
+    }
+    if (data.action === "expire-package") {
+      const result = await db
+        .from("gryt_partner_packages")
+        .update({ active: false })
+        .eq("id", data.packageId);
+      if (result.error) throw new Error("Private link could not be expired.");
+      return { link: "", message: "Private link expired." };
     }
     if (data.action === "cancel-monthly") {
       try {

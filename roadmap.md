@@ -1,12 +1,14 @@
 # Roadmap
 
 ## Separate test-only payments
-- [ ] Unblock hat test checkout and complete purchase: Stripe sandbox confirms missing head_office; owner must save actual business/ship-from address in test Settings > Tax > Head office address. Added direct setup guidance and corrected repeat-customer shipping address persistence; tax remains enabled.
+- [x] Save supplied registered business address to sandbox tax settings; hat payment paid, shipping $0, automatic_tax complete with $0 calculated tax. Sandbox has no tax registrations; none invented or added.
+- [x] Grant confirmed merichnick@gmail.com organizer access via existing server allowlist; create and pay $15 test-event (capacity 10) and $250 TEST Partner package, then deactivate event and expire private link. UI and database cleanup verified.
+- [x] Unblock hat test checkout and complete purchase after saving registered sandbox head office; all four payment types reached Thank You and paid rows read back in the private payment desk and database. No live account changes or publishing.
 - [x] Protect the shared form from pre-hydration GET submission, verify support/hat loading, visible failures and retries, and inactive-event/private-link gates. Signed-in $10 support card payment reached /thank-you and payments status paid in sandbox. Three browser tests, seven payment-rule tests, thirteen Shopify tests and lint passed; preview build OK. Event/partner checkout creation remains unverified without an active event or private link.
 - [x] Add isolated support, hat checkout, inactive ticket event and private partner payment links using the existing managed Stripe sandbox.
 - [x] Add private payment management, signed webhook records and atomic ticket/package reservations without touching Saturday RSVP, waiver or Shopify. Test webhook subscriptions updated only.
 - [x] Verify 375/390/1440px pages without overflow or runtime errors, support/monthly Stripe mounting and cancellation, inactive-event/private-link protection, 7 payment tests and 13 Shopify tests. New-file lint and preview build passed.
-- [ ] Complete remaining hat/ticket/partner test purchases and admin management verification. Support purchase and webhook receipt verified. Blocked: current signed-in account lacks existing admin permission; hat tax settings need owner's real head-office address; active event/private package link required.
+- [x] Complete hat/ticket/partner/support card test purchases and admin create/cleanup verification. Eleven payment/access tests, thirteen Shopify tests, three checkout browser tests and changed-file lint passed; preview build OK. Monthly support and ACH not retested in this verification.
 - [ ] Confirm Stripe receipt-email settings and set account statement descriptor to GRYT RUN CLUB. Blocked: Stripe rejects account settings updates through the available connection; owner must configure these in Stripe test settings. No live changes or publishing.
 
 ## Executive producer story
