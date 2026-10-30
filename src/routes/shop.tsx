@@ -13,13 +13,13 @@ export const Route = createFileRoute("/shop")({
       {
         name: "description",
         content:
-          "The GRYT Founding Member Cap. In review while the cap, price and stock are confirmed. The Saturday run stays free.",
+          "Shop the GRYT Founding Member Cap with secure Stripe checkout, free US shipping or Saturday pickup. The Saturday run stays free.",
       },
       { property: "og:title", content: "Cap · GRYT Run Club" },
       {
         property: "og:description",
         content:
-          "The GRYT Founding Member Cap. In review. The Saturday run stays free.",
+          "The GRYT Founding Member Cap. Secure Stripe checkout with free US shipping or Saturday pickup. The Saturday run stays free.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
