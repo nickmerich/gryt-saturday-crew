@@ -272,7 +272,7 @@ body.photos-color .photo-hover:hover {
 
 /* Baby-blue surfaces get the dotted-grid texture overlay */
 .bg-blue {
-  background-image: url("/img/texture-blue.webp");
+  background-image: url("./assets/img/texture-blue.webp");
   background-size: 220px 220px;
   background-repeat: repeat;
   background-blend-mode: multiply;

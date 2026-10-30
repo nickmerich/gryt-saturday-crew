@@ -1,3 +1,4 @@
+import grytBearImg from "@/assets/img/gryt-bear.webp";
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
@@ -9,7 +10,7 @@ const STRAVA_CLUB = "https://www.strava.com/clubs/1708552";
 export function MonogramG({ className = "" }: { className?: string }) {
   return (
     <img
-      src="/img/gryt-bear.webp"
+      src={grytBearImg}
       alt="gryt club bear"
       className={className}
       width={124}

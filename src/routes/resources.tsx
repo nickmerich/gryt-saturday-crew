@@ -1,3 +1,4 @@
+import lookbookMerchImg from "@/assets/img/lookbook-merch.webp";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { useServerFn } from "@tanstack/react-start";
@@ -448,7 +449,7 @@ function Merch() {
             <article aria-label={`${item.name}, drops ${item.drop}, ${item.price}`}>
               <div className="relative aspect-[3/4] overflow-hidden bg-vintage border border-paper/25 group-hover:border-blue transition-colors">
                 <img
-                  src="/img/lookbook-merch.webp"
+                  src={lookbookMerchImg}
                   width={900}
                   height={900}
                   decoding="async"
