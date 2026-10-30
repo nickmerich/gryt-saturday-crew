@@ -78,6 +78,13 @@
       "when": 1793326286942,
       "tag": "0010_separate_test_payment_catalog",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1793326672153,
+      "tag": "0011_test_payment_receipt_unique_session",
+      "breakpoints": true
     }
   ]
 }

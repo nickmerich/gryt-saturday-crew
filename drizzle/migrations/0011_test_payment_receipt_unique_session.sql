@@ -1,0 +1,2 @@
+CREATE UNIQUE INDEX gryt_payment_session_upsert ON public.payments(stripe_session_id);
+COMMENT ON INDEX public.gryt_payment_session_once IS 'Redundant partial index retained for backward compatibility; gryt_payment_session_upsert supports idempotent webhook upserts.';
