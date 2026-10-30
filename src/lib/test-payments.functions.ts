@@ -100,6 +100,7 @@ export const createTestCheckout = createServerFn({ method: 'POST' })
         return_url: `${origin}/thank-you?session_id={CHECKOUT_SESSION_ID}`,
         expires_at: Math.floor(Date.now() / 1000) + 1800, metadata,
         payment_method_types: data.type === 'partner' ? partnerMethods(cents) : ['card'],
+        adaptive_pricing: { enabled: false },
         ...(recurring ? { subscription_data: { metadata } } : { payment_intent_data: { description: item, receipt_email: data.email, ...(data.type === 'partner' && cents > 100000 && { statement_descriptor: 'GRYT RUN CLUB' }) } }),
         ...(data.type === 'merch' && { automatic_tax: { enabled: true }, billing_address_collection: 'required', customer_update: { address: 'auto' }, ...(data.fulfillment === 'shipping' && { shipping_address_collection: { allowed_countries: ['US'] }, shipping_options: [{ shipping_rate_data: { display_name: 'Free US shipping', type: 'fixed_amount', fixed_amount: { amount: 0, currency: 'usd' } } }] }) }),
       })
@@ -114,6 +115,23 @@ export const createTestCheckout = createServerFn({ method: 'POST' })
       }
       return { error: getStripeErrorMessage(error) }
     }
+  })
+
+export const cancelTestCheckout = createServerFn({ method: 'POST' })
+  .inputValidator((input: unknown) => z.object({ clientSecret: z.string().regex(/^cs_test_[A-Za-z0-9_]+_secret_[A-Za-z0-9]+$/).max(500) }).parse(input))
+  .handler(async ({ data }) => {
+    try {
+      const stripe = createStripeClient('sandbox')
+      const sessionId = data.clientSecret.split('_secret_')[0]
+      if (!sessionId) throw new Error('Checkout is unavailable.')
+      const session = await stripe.checkout.sessions.retrieve(sessionId)
+      if (session.client_secret !== data.clientSecret || session.livemode || session.status !== 'open') throw new Error('Checkout is already completed or expired.')
+      await stripe.checkout.sessions.expire(session.id)
+      const { supabaseAdmin: db } = await import('@/integrations/supabase/client.server')
+      const result = await db.from('gryt_payment_orders').update({ status: 'expired' }).eq('stripe_session_id', session.id).eq('status', 'reserved')
+      if (result.error) throw new Error('Reservation could not be released.')
+      return { ok: true }
+    } catch (error) { return { error: getStripeErrorMessage(error) } }
   })
 
 export const readTestResult = createServerFn({ method: 'POST' })

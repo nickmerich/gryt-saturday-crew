@@ -5,7 +5,7 @@ export const ticketQuantity = z.number().int().min(1).max(10)
 export const checkoutInput = z.object({
   type: z.enum(['support', 'merch', 'ticket', 'partner']),
   environment: z.literal('sandbox'),
-  amount: supportAmount.default(2500),
+  amount: z.number().int().min(500).max(10000000).default(2500),
   quantity: ticketQuantity.default(1),
   monthly: z.boolean().default(false),
   itemId: z.uuid().optional(),
@@ -13,7 +13,7 @@ export const checkoutInput = z.object({
   email: z.email().max(254),
   name: z.string().trim().min(1).max(120),
   fulfillment: z.enum(['shipping', 'pickup']).default('pickup'),
-})
+}).refine(data => data.type !== 'support' || supportAmount.safeParse(data.amount).success, 'Support must be $5 to $1,000.')
 export function partnerMethods(cents: number): Array<'card' | 'us_bank_account'> {
   return cents > 100000 ? ['card', 'us_bank_account'] : ['card']
 }

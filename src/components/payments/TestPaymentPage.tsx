@@ -4,7 +4,7 @@ import { EmbeddedCheckout, EmbeddedCheckoutProvider } from '@stripe/react-stripe
 import { SiteNav, SiteFooter } from '@/components/site/Chrome'
 import { Button } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
-import { createTestCheckout } from '@/lib/test-payments.functions'
+import { createTestCheckout, cancelTestCheckout } from '@/lib/test-payments.functions'
 import { getStripe, getStripeEnvironment } from '@/lib/stripe'
 import { usd } from '@/lib/test-payment-rules'
 import crew from '@/assets/photos/manifesto/crew-trail.jpg.asset.json'
@@ -14,6 +14,7 @@ export function PaymentFrame({ title, children }: { title: string; children: Rea
 }
 export function TestPaymentForm({ type, itemId, token, amount = 3000, remaining = 10 }: { type: 'support' | 'merch' | 'ticket' | 'partner'; itemId?: string; token?: string; amount?: number; remaining?: number }) {
   const create = useServerFn(createTestCheckout)
+  const cancel = useServerFn(cancelTestCheckout)
   const [cents, setCents] = useState(2500)
   const [monthly, setMonthly] = useState(false)
   const [clientSecret, setClientSecret] = useState<string>()
@@ -22,7 +23,7 @@ export function TestPaymentForm({ type, itemId, token, amount = 3000, remaining 
   const [fulfillment, setFulfillment] = useState<'shipping' | 'pickup'>('pickup')
   const [quantity, setQuantity] = useState(1)
   const inputClass = 'mt-2 min-h-12 w-full border border-paper/40 bg-ink px-3 text-base text-paper focus-visible:outline-2 focus-visible:outline-blue'
-  if (clientSecret) return <section aria-label="Stripe test checkout" className="mt-8"><Button variant="outline" className="mb-5 min-h-12 border-paper/40" onClick={() => { setClientSecret(undefined); setError('Your reserved checkout expires in 30 minutes. Return here afterward to start a new checkout.') }}>Cancel and return</Button><EmbeddedCheckoutProvider stripe={getStripe()} options={{ clientSecret }}><EmbeddedCheckout /></EmbeddedCheckoutProvider></section>
+  if (clientSecret) return <section aria-label="Stripe test checkout" className="mt-8"><Button disabled={busy} variant="outline" className="mb-5 min-h-12 border-paper/40" onClick={async () => { setBusy(true); try { const result = await cancel({ data: { clientSecret } }); if ('error' in result) throw new Error(result.error); setClientSecret(undefined); setError('Checkout cancelled. No payment was made.') } catch (e) { setError(e instanceof Error ? e.message : 'Could not cancel checkout.') } finally { setBusy(false) } }}>Cancel and return</Button>{error && <p role="alert" className="mb-5 text-blue">{error}</p>}<EmbeddedCheckoutProvider stripe={getStripe()} options={{ clientSecret }}><EmbeddedCheckout /></EmbeddedCheckoutProvider></section>
   return <form className="mt-8 max-w-xl space-y-6" onSubmit={async event => {
     event.preventDefault(); setError(''); setBusy(true)
     const fields = new FormData(event.currentTarget)
@@ -35,7 +36,7 @@ export function TestPaymentForm({ type, itemId, token, amount = 3000, remaining 
     } catch (e) { setError(e instanceof Error ? e.message : 'Checkout could not start.') }
     finally { setBusy(false) }
   }}>
-    {type === 'support' && <><fieldset><legend className="font-semibold">Choose your support</legend><div className="mt-3 grid grid-cols-3 gap-3">{[1000,2500,5000].map(value => <Button type="button" key={value} aria-pressed={cents === value} variant={cents === value ? 'default' : 'outline'} className="min-h-14 border-paper/40 text-lg" onClick={() => setCents(value)}>{usd(value)}</Button>)}</div><label className="mt-5 block">Custom amount (USD)<input aria-label="Custom amount (USD)" className={inputClass} type="number" min="5" max="1000" step="0.01" value={cents / 100} onChange={e => setCents(Math.round(Number(e.target.value) * 100))} required /></label><p className="mt-2 text-sm text-paper/70">$5 minimum · $1,000 maximum</p></fieldset><div className="flex min-h-12 items-center gap-4"><Switch id="monthly" checked={monthly} onCheckedChange={setMonthly} /><label htmlFor="monthly">Make it monthly</label></div>{monthly && <p className="text-sm text-paper/75">{usd(cents)} each month. To stop future support, contact nick@gryt.club.</p>}</>}
+    {type === 'support' && <><fieldset><legend className="font-semibold">Choose your support</legend><div className="mt-3 grid grid-cols-3 gap-3">{[1000,2500,5000].map(value => <Button type="button" key={value} aria-pressed={cents === value} variant={cents === value ? 'default' : 'outline'} className="min-h-14 border-paper/40 text-lg" onClick={() => setCents(value)}>{usd(value)}</Button>)}</div><label className="mt-5 block">Custom amount (USD)<input aria-label="Custom amount (USD)" className={inputClass} type="number" min="5" max="1000" step="0.01" value={cents / 100} onChange={e => setCents(Math.round(Number(e.target.value) * 100))} required /></label><p className="mt-2 text-sm text-paper/70">$5 minimum · $1,000 maximum</p></fieldset><div className="flex min-h-12 items-center gap-4"><Switch id="monthly" className="border-paper/60 data-[state=unchecked]:bg-paper/30" checked={monthly} onCheckedChange={setMonthly} /><label htmlFor="monthly">Make it monthly</label></div>{monthly && <p className="text-sm text-paper/75">{usd(cents)} each month. To stop future support, contact nick@gryt.club.</p>}</>}
     <label className="block">{type === 'ticket' ? 'Attendee name' : 'Full name'}<input className={inputClass} name="name" autoComplete="name" maxLength={120} required /></label>
     <label className="block">Email<input className={inputClass} name="email" type="email" autoComplete="email" maxLength={254} required /></label>
     {(type === 'merch' || type === 'ticket') && <label className="block">Quantity<input className={inputClass} aria-label="Quantity" type="number" min={1} max={Math.min(10, remaining)} value={quantity} onChange={e => setQuantity(Number(e.target.value))} required /></label>}
