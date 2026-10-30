@@ -27,7 +27,7 @@ class PaymentCheckoutTests(unittest.IsolatedAsyncioTestCase):
     async def test_checkout_failure_is_visible_and_retryable(self):
         for path in ("/support", "/shop/checkout"):
             with self.subTest(path=path):
-                await self.page.goto("http://localhost:8080" + path, wait_until="networkidle")
+                await self.page.goto("http://localhost:8080" + path, wait_until="domcontentloaded")
                 await self.page.get_by_label("Full name", exact=True).fill("GRYT Regression Test")
                 await self.page.get_by_label("Email", exact=True).fill("checkout-regression@example.com")
                 requests = []
@@ -40,7 +40,7 @@ class PaymentCheckoutTests(unittest.IsolatedAsyncioTestCase):
                     else:
                         await route.continue_()
 
-                await self.page.route("**/*_serverFn*", fail_checkout)
+                await self.page.route("**/_serverFn/**", fail_checkout)
                 button = self.page.get_by_role("button", name="Continue")
                 await button.click()
                 await self.page.get_by_role("status").filter(has_text="Opening secure").wait_for()
@@ -51,13 +51,13 @@ class PaymentCheckoutTests(unittest.IsolatedAsyncioTestCase):
                 await button.click()
                 await self.page.get_by_role("alert").wait_for()
                 self.assertEqual(len(requests), 2)
-                await self.page.unroute("**/*_serverFn*", fail_checkout)
+                await self.page.unroute("**/_serverFn/**", fail_checkout)
 
     async def test_unavailable_events_and_private_packages_stay_closed(self):
-        await self.page.goto("http://localhost:8080/events/inactive-sample", wait_until="networkidle")
+        await self.page.goto("http://localhost:8080/events/inactive-sample", wait_until="domcontentloaded")
         self.assertIn("No active event", await self.page.locator("main").inner_text())
         self.assertEqual(await self.page.get_by_role("button", name="Continue").count(), 0)
-        await self.page.goto("http://localhost:8080/partners/pay", wait_until="networkidle")
+        await self.page.goto("http://localhost:8080/partners/pay", wait_until="domcontentloaded")
         self.assertIn("valid private package link", await self.page.locator("main").inner_text())
         self.assertEqual(await self.page.get_by_role("button", name="Continue").count(), 0)
 
