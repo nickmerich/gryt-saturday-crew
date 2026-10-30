@@ -2,10 +2,21 @@ import { z } from "zod";
 
 export const supportAmount = z.number().int().min(500).max(100000);
 export const ticketQuantity = z.number().int().min(1).max(10);
+export const paymentEnvironment = z.enum(["sandbox", "live"]);
+export function environmentFromToken(token: string | undefined): "sandbox" | "live" {
+  if (token?.startsWith("pk_test_")) return "sandbox";
+  if (token?.startsWith("pk_live_")) return "live";
+  throw new Error("Stripe payments are not configured for this build. Complete Stripe go-live.");
+}
+export function sessionEnvironment(sessionId: string): "sandbox" | "live" {
+  if (/^cs_test_[A-Za-z0-9_]+$/.test(sessionId)) return "sandbox";
+  if (/^cs_live_[A-Za-z0-9_]+$/.test(sessionId)) return "live";
+  throw new Error("Invalid checkout session.");
+}
 export const checkoutInput = z
   .object({
     type: z.enum(["support", "merch", "ticket", "partner"]),
-    environment: z.literal("sandbox"),
+    environment: paymentEnvironment,
     amount: z.number().int().min(500).max(10000000).default(2500),
     quantity: ticketQuantity.default(1),
     monthly: z.boolean().default(false),
