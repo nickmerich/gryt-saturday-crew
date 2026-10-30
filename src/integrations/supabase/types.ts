@@ -185,6 +185,7 @@ export type Database = {
           amount_cents: number
           created_at: string
           description: string
+          environment: string
           id: string
           name: string
           partner_name: string
@@ -195,6 +196,7 @@ export type Database = {
           amount_cents: number
           created_at?: string
           description?: string
+          environment?: string
           id?: string
           name: string
           partner_name: string
@@ -205,6 +207,7 @@ export type Database = {
           amount_cents?: number
           created_at?: string
           description?: string
+          environment?: string
           id?: string
           name?: string
           partner_name?: string
@@ -311,6 +314,7 @@ export type Database = {
           amount_cents: number
           capacity: number
           created_at: string
+          environment: string
           event_date: string
           id: string
           location: string
@@ -322,6 +326,7 @@ export type Database = {
           amount_cents: number
           capacity: number
           created_at?: string
+          environment?: string
           event_date: string
           id?: string
           location: string
@@ -333,6 +338,7 @@ export type Database = {
           amount_cents?: number
           capacity?: number
           created_at?: string
+          environment?: string
           event_date?: string
           id?: string
           location?: string
@@ -822,6 +828,11 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      gryt_payment_catalog: {
+        Args: { event_slug: string; payment_env: string }
+        Returns: Json
+      }
+      gryt_reserve_payment_order: { Args: { payload: Json }; Returns: string }
       gryt_reserve_test_order: { Args: { payload: Json }; Returns: string }
       gryt_test_catalog: { Args: { event_slug?: string }; Returns: Json }
       read_approved_partners: {
