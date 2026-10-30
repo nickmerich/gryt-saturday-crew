@@ -5,16 +5,27 @@ import { toast } from "sonner";
 import { CAP_BINDING } from "@/lib/shopify-cap";
 import { fetchCapVariant } from "@/lib/shopify-storefront";
 import { useCartStore } from "@/stores/cartStore";
-import { CapWaitlist } from "@/components/shop/CapWaitlist";
 import capFront from "@/assets/cap/cap-front.jpg.asset.json";
 import capSide from "@/assets/cap/cap-side.jpg.asset.json";
 import capAngle from "@/assets/cap/cap-angle.jpg.asset.json";
 import capTrail from "@/assets/cap/cap-trail.jpg.asset.json";
 
 const CAP_PHOTOS = [
-  { src: capFront.url, label: "front crest", alt: "Black GRYT cap, embroidered bear crest, blue brim trim" },
-  { src: capAngle.url, label: "three-quarter view", alt: "GRYT cap from above showing crest and perforated panels" },
-  { src: capSide.url, label: "side wordmark", alt: "Side of the GRYT cap with lowercase gryt print" },
+  {
+    src: capFront.url,
+    label: "front crest",
+    alt: "Black GRYT cap, embroidered bear crest, blue brim trim",
+  },
+  {
+    src: capAngle.url,
+    label: "three-quarter view",
+    alt: "GRYT cap from above showing crest and perforated panels",
+  },
+  {
+    src: capSide.url,
+    label: "side wordmark",
+    alt: "Side of the GRYT cap with lowercase gryt print",
+  },
   { src: capTrail.url, label: "on the trail", alt: "Runner wearing the GRYT cap by the trail" },
 ];
 
@@ -88,7 +99,13 @@ export function CapDrop({ onAdded }: { onAdded?: () => void }) {
                 onClick={() => setPhoto(i)}
                 className={`aspect-square overflow-hidden bg-ink ${i === photo ? "outline outline-2 -outline-offset-2 outline-blue" : "opacity-60 hover:opacity-100"}`}
               >
-                <img src={p.src} alt="" className="w-full h-full object-cover" style={{ filter: "none" }} loading="lazy" />
+                <img
+                  src={p.src}
+                  alt=""
+                  className="w-full h-full object-cover"
+                  style={{ filter: "none" }}
+                  loading="lazy"
+                />
               </button>
             ))}
           </div>
@@ -104,8 +121,21 @@ export function CapDrop({ onAdded }: { onAdded?: () => void }) {
             </p>
           ))}
 
+          <div className="space-y-3" aria-label="Stripe cap checkout">
+            <a
+              href="/shop/checkout"
+              className="inline-flex min-h-12 items-center justify-center bg-blue text-ink px-6 py-4 text-xs font-bold uppercase tracking-[0.14em] hover:bg-paper transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue"
+            >
+              Buy with Stripe
+            </a>
+            <p className="text-sm text-paper/70">
+              Choose your quantity and free US shipping or Saturday pickup at checkout. This
+              checkout is separate from your Shopify cart.
+            </p>
+          </div>
+
           {reading ? (
-            <p className="text-sm text-paper/50">Checking the store…</p>
+            <p className="text-sm text-paper/50">Checking Shopify availability…</p>
           ) : listed && data ? (
             <>
               <p className="display-condensed uppercase text-2xl tracking-[0.02em]">
@@ -155,13 +185,15 @@ export function CapDrop({ onAdded }: { onAdded?: () => void }) {
           ) : (
             <div>
               <p className="border border-paper/20 px-4 py-3 text-sm text-paper/60">
-                Online checkout is not available yet. Get notified when the hat is ready to buy here.
+                Shopify checkout is currently unavailable. You can buy the cap with Stripe above.
               </p>
-              <CapWaitlist />
             </div>
           )}
 
-          <a href="/#join" className="eyebrow text-paper/70 hover:text-blue transition-colors self-start">
+          <a
+            href="/#join"
+            className="eyebrow text-paper/70 hover:text-blue transition-colors self-start"
+          >
             RSVP This Saturday →
           </a>
         </div>
