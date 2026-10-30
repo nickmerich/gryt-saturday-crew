@@ -9,16 +9,14 @@ import { getStripeEnvironment } from "@/lib/stripe";
 export const Route = createFileRoute("/admin/payments")({
   ssr: false,
   head: () =>
-    paymentHead(
-      "Private payment desk",
-      "Private organizer management for GRYT payments.",
-    ),
+    paymentHead("Private payment desk", "Private organizer management for GRYT payments."),
   component: Page,
 });
 function Page() {
   const [environment, setEnvironment] = useState<"sandbox" | "live">(getStripeEnvironment);
   const manageFn = useServerFn(manageTestPayments);
-  const manage = (args: { data: Record<string, unknown> }) => manageFn({ data: { ...args.data, environment } } as Parameters<typeof manageFn>[0]);
+  const manage = (args: { data: Record<string, unknown> }) =>
+    manageFn({ data: { ...args.data, environment } } as Parameters<typeof manageFn>[0]);
   const q = useQuery({
     queryKey: ["payment-desk", environment],
     queryFn: () => manage({ data: { action: "list" } }),
@@ -51,12 +49,19 @@ function Page() {
         Back to admin
       </Link>
       <h1 className="mt-7 font-condensed text-4xl uppercase">Payment desk</h1>
-      <p className="mt-3 text-blue">
-        Saturday runs and Shopify are unchanged.
-      </p>
+      <p className="mt-3 text-blue">Saturday runs and Shopify are unchanged.</p>
       <div className="mt-5 flex gap-3" aria-label="Payment environment">
         {(["live", "sandbox"] as const).map((value) => (
-          <Button key={value} variant={environment === value ? "default" : "outline"} aria-pressed={environment === value} onClick={() => { setEnvironment(value); setEditing({}); setMessage(""); }}>
+          <Button
+            key={value}
+            variant={environment === value ? "default" : "outline"}
+            aria-pressed={environment === value}
+            onClick={() => {
+              setEnvironment(value);
+              setEditing({});
+              setMessage("");
+            }}
+          >
             {value === "live" ? "Live" : "Test"}
           </Button>
         ))}
@@ -272,11 +277,7 @@ function Page() {
                               },
                             });
                     if ("error" in result && result.error) throw new Error(result.error);
-                    setMessage(
-                      result.link
-                        ? `${window.location.origin}${result.link}`
-                        : "Saved.",
-                    );
+                    setMessage(result.link ? `${window.location.origin}${result.link}` : "Saved.");
                     await q.refetch();
                   } catch (error) {
                     setMessage(error instanceof Error ? error.message : "Not saved.");
