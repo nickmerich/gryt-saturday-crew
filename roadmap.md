@@ -1,9 +1,11 @@
 # Roadmap
 
 ## Separate test-only payments
-- [ ] Add isolated support, hat checkout, inactive ticket event and private partner payment links using the existing managed Stripe sandbox.
-- [ ] Add private payment management, signed webhook records and capacity-safe reservations without touching Saturday RSVP, waiver or Shopify.
-- [ ] Verify test-only enforcement and all four purchase flows; no publishing or live transactions.
+- [x] Add isolated support, hat checkout, inactive ticket event and private partner payment links using the existing managed Stripe sandbox.
+- [x] Add private payment management, signed webhook records and atomic ticket/package reservations without touching Saturday RSVP, waiver or Shopify. Test webhook subscriptions updated only.
+- [x] Verify 375/390/1440px pages without overflow or runtime errors, support/monthly Stripe mounting and cancellation, inactive-event/private-link protection, 7 payment tests and 13 Shopify tests. New-file lint and preview build passed.
+- [ ] Complete four test purchases and admin management verification. Blocked: current signed-in account lacks existing admin permission; hat tax settings need owner's real head-office address. No completed purchases or webhook receipt verified.
+- [ ] Confirm Stripe receipt-email settings and set account statement descriptor to GRYT RUN CLUB. Blocked: Stripe rejects account settings updates through the available connection; owner must configure these in Stripe test settings. No live changes or publishing.
 
 ## Executive producer story
 - [x] Add approved origin story to About, text-only Music Nerd footer credit and factual llms line; verified 375/390/1440px without overflow or runtime errors, RSVP destination, waiver form and plain-text llms response. Build OK. Preview only; C.Y. quote excluded. No RSVP submitted or auth changes.
