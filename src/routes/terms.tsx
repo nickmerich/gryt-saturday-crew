@@ -6,10 +6,10 @@ export const Route = createFileRoute("/terms")({
       { title: "Terms & Conditions · GRYT Run Club" },
       {
         name: "description",
-        content: "Terms of participation and website use for GRYT Run Club, the free Saturday 7 AM South Hills run club in McMurray, PA: waiver, safety, conduct, photos, and content.",
+        content: "Terms for joining GRYT Run Club's free Saturday 7 AM run in McMurray, PA and using this site: waiver, safety, conduct, photos, and content.",
       },
       { property: "og:title", content: "Terms & Conditions · GRYT Run Club" },
-      { property: "og:description", content: "Terms of participation and website use for GRYT Run Club, the free Saturday 7 AM South Hills run club in McMurray, PA: waiver, safety, conduct, photos, and content." },
+      { property: "og:description", content: "Terms for joining GRYT Run Club's free Saturday 7 AM run in McMurray, PA and using this site: waiver, safety, conduct, photos, and content." },
       { property: "og:url", content: "https://grytrunclub.com/terms" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

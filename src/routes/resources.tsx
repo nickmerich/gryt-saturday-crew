@@ -117,6 +117,7 @@ function Masthead() {
         style={{ fontFamily: "var(--font-condensed)" }}
       >
         Resources
+        <span className="sr-only">: free running resources for Pittsburgh runners</span>
       </h1>
       <div className="mt-8 md:mt-10 flex flex-col md:flex-row md:items-end md:justify-between gap-8">
         <p className="text-[22px] md:text-[28px] font-light leading-[1.3] max-w-[720px] text-paper/95"
@@ -390,12 +391,12 @@ function ArtifactsAndTools() {
                   </span>
                 </div>
                 <div className="pt-4">
-                  <h4
+                  <h3
                     className="font-bold text-[16px] leading-[1.25] tracking-tight"
                     style={{ fontFamily: "var(--font-display)" }}
                   >
                     {g.name}
-                  </h4>
+                  </h3>
                   <p className="mt-1.5 text-[13.5px] text-paper/80 leading-[1.55]">
                     {g.description}
                   </p>
