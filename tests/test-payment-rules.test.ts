@@ -50,7 +50,10 @@ describe("Separate payment rules", () => {
   it("offers free US-only shipping and saves the checkout shipping address", () => {
     const options = hatCheckoutOptions("shipping");
     expect(options.shipping_address_collection?.allowed_countries).toEqual(["US"]);
-    expect(options.shipping_options?.[0].shipping_rate_data.fixed_amount).toEqual({ amount: 0, currency: "usd" });
+    expect(options.shipping_options?.[0].shipping_rate_data.fixed_amount).toEqual({
+      amount: 0,
+      currency: "usd",
+    });
     expect(options.customer_update.shipping).toBe("auto");
   });
   it("keeps Saturday pickup free without collecting a shipping address", () => {

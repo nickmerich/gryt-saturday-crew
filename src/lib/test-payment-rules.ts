@@ -35,13 +35,15 @@ export function hatCheckoutOptions(fulfillment: "shipping" | "pickup") {
     },
     ...(fulfillment === "shipping" && {
       shipping_address_collection: { allowed_countries: ["US" as const] },
-      shipping_options: [{
-        shipping_rate_data: {
-          display_name: "Free US shipping",
-          type: "fixed_amount" as const,
-          fixed_amount: { amount: 0, currency: "usd" },
+      shipping_options: [
+        {
+          shipping_rate_data: {
+            display_name: "Free US shipping",
+            type: "fixed_amount" as const,
+            fixed_amount: { amount: 0, currency: "usd" },
+          },
         },
-      }],
+      ],
     }),
   };
 }
