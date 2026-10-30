@@ -5,10 +5,7 @@ import { paymentHead, usd } from "@/lib/test-payment-rules";
 import cap from "@/assets/cap/cap-front.jpg.asset.json";
 export const Route = createFileRoute("/shop_/checkout")({
   head: () =>
-    paymentHead(
-      "Hat checkout",
-      "Separate checkout for GRYT hats. Shopify remains unchanged.",
-    ),
+    paymentHead("Hat checkout", "Separate checkout for GRYT hats. Shopify remains unchanged."),
   loader: () => getTestCatalog({ data: { slug: "" } }),
   component: Page,
 });
