@@ -1,41 +1,397 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
-import { useQuery } from '@tanstack/react-query'
-import { useServerFn } from '@tanstack/react-start'
-import { useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { manageTestPayments } from '@/lib/test-payments.functions'
-import { paymentHead, usd } from '@/lib/test-payment-rules'
-export const Route = createFileRoute('/admin/payments')({ ssr: false, head: () => paymentHead('Private test payment desk', 'Private organizer management for GRYT test payments.'), component: Page })
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { manageTestPayments } from "@/lib/test-payments.functions";
+import { paymentHead, usd } from "@/lib/test-payment-rules";
+export const Route = createFileRoute("/admin/payments")({
+  ssr: false,
+  head: () =>
+    paymentHead(
+      "Private test payment desk",
+      "Private organizer management for GRYT test payments.",
+    ),
+  component: Page,
+});
 function Page() {
-  const manage = useServerFn(manageTestPayments)
-  const q = useQuery({ queryKey: ['test-payment-desk'], queryFn: () => manage({ data: { action: 'list' } }), retry: false })
-  const [tab, setTab] = useState<'payments' | 'product' | 'event' | 'package'>('payments')
-  const [editing, setEditing] = useState<Record<string, string | number | boolean>>({})
-  const [message, setMessage] = useState('')
-  const [busy, setBusy] = useState(false)
-  const data = q.data && q.data.payments && q.data.products && q.data.events && q.data.packages && q.data.orders ? { payments: q.data.payments, products: q.data.products, events: q.data.events, packages: q.data.packages, orders: q.data.orders } : null
-  const input = 'mt-2 min-h-12 w-full border border-paper/40 bg-ink px-3 focus-visible:outline-2 focus-visible:outline-blue'
-  return <main className="mx-auto min-h-screen max-w-5xl bg-ink px-5 py-12 text-paper"><Link to="/admin/roster" className="text-blue underline">Back to admin</Link><h1 className="mt-7 font-condensed text-4xl uppercase">Test payment desk</h1><p className="mt-3 text-blue">Test only. No real charges. Saturday runs and Shopify are unchanged.</p>{q.isLoading && <p className="mt-6">Loading...</p>}{q.error && <p role="alert" className="mt-6">Admin sign-in required. <Link to="/auth" search={{ next: '/admin/payments' }} className="text-blue underline">Sign in</Link></p>}{data && <><div className="my-8 flex flex-wrap gap-3">{(['payments','product','event','package'] as const).map(value => <Button key={value} variant={tab === value ? 'default' : 'outline'} className="min-h-12 border-paper/40 capitalize" onClick={() => { setTab(value); setEditing({}); setMessage('') }}>{value === 'package' ? 'Partner links' : value === 'product' ? 'Products' : value === 'event' ? 'Events' : 'Payments'}</Button>)}</div>
-    {tab === 'payments' ? <><div className="overflow-x-auto"><table className="w-full text-left text-sm"><thead><tr>{['Date','Type','Item','Amount','Email','Status'].map(v => <th key={v} className="border-b border-paper/30 p-3">{v}</th>)}</tr></thead><tbody>{data.payments.map(row => <tr key={row.id}>{[new Date(row.created_at).toLocaleDateString(),row.type,row.item,usd(row.amount),row.email,row.status].map((v,i) => <td key={i} className="border-b border-paper/15 p-3">{v}</td>)}</tr>)}</tbody></table></div>{data.payments.length === 0 && <p>No test payments recorded yet.</p>}<h2 className="mt-10 font-condensed text-2xl uppercase">Monthly support</h2>{data.orders.map(order => <div key={order.id} className="mt-4 flex flex-wrap items-center gap-4 border-b border-paper/20 pb-4"><span>{order.email} · {order.status}</span><Button disabled={!order.stripe_subscription_id || busy} variant="outline" className="min-h-12 border-paper/40" onClick={async () => { setBusy(true); try { const r = await manage({ data: { action: 'cancel-monthly', orderId: order.id } }); setMessage('error' in r ? r.error || 'Not saved.' : 'Monthly support will stop at period end.') } catch { setMessage('Could not cancel monthly support.') } finally { setBusy(false) } }}>Stop future monthly charges</Button></div>)}</> : <>
-    <div className="mb-8 space-y-3">{(tab === 'product' ? data.products : tab === 'event' ? data.events : data.packages).map(record => <div key={record.id} className="flex flex-wrap items-center justify-between gap-4 border-b border-paper/25 py-3"><span>{record.name} · {usd(record.amount_cents)} · {record.active ? 'Active' : 'Inactive'}</span>{tab !== 'package' && <Button variant="outline" className="min-h-12 border-paper/40" onClick={() => setEditing(record)}>Edit</Button>}</div>)}</div>
-    <h2 className="font-condensed text-2xl uppercase">{editing.id ? 'Edit' : 'Create'} {tab === 'package' ? 'private partner link' : tab}</h2><form key={`${tab}-${editing.id || 'new'}`} className="mt-5 max-w-xl space-y-5" onSubmit={async e => {
-      e.preventDefault(); setBusy(true); setMessage(''); const fields = new FormData(e.currentTarget)
-      const base = { name: String(fields.get('name')), amount_cents: Math.round(Number(fields.get('amount')) * 100) }
-      try {
-        const result = tab === 'product' ? await manage({ data: { action: 'product', record: { ...base, ...(typeof editing.id === 'string' && { id: editing.id }), sku: String(fields.get('sku')), description: String(fields.get('description')), active: fields.get('active') === 'on' } } }) : tab === 'event' ? await manage({ data: { action: 'event', record: { ...base, ...(typeof editing.id === 'string' && { id: editing.id }), slug: String(fields.get('slug')), event_date: new Date(String(fields.get('date'))).toISOString(), location: String(fields.get('location')), capacity: Number(fields.get('capacity')), active: fields.get('active') === 'on' } } }) : await manage({ data: { action: 'package', record: { ...base, partner_name: String(fields.get('partner_name')), description: String(fields.get('description')) } } })
-        if ('error' in result && result.error) throw new Error(result.error)
-        setMessage(result.link ? `${window.location.origin}${result.link}` : 'Saved for test checkout.'); await q.refetch()
-      } catch (error) { setMessage(error instanceof Error ? error.message : 'Not saved.') } finally { setBusy(false) }
-    }}>
-      <label className="block">Name<input name="name" defaultValue={String(editing.name || '')} required maxLength={120} className={input} /></label>
-      {tab === 'package' && <label className="block">Partner name<input name="partner_name" required maxLength={120} className={input} /></label>}
-      <label className="block">Amount (USD)<input name="amount" type="number" min="5" max="100000" step="0.01" defaultValue={Number(editing.amount_cents || 3000) / 100} required className={input} /></label>
-      {tab === 'product' && <label className="block">SKU<input name="sku" defaultValue={String(editing.sku || '')} required className={input} /></label>}
-      {tab === 'event' && <><label className="block">Slug<input name="slug" defaultValue={String(editing.slug || '')} pattern="[a-z0-9-]+" required className={input} /></label><label className="block">Date and time (your local time)<input name="date" type="datetime-local" required className={input} defaultValue={typeof editing.event_date === 'string' ? new Date(new Date(editing.event_date).getTime() - new Date(editing.event_date).getTimezoneOffset() * 60000).toISOString().slice(0,16) : ''} /></label><label className="block">Location<input name="location" defaultValue={String(editing.location || '')} required className={input} /></label><label className="block">Capacity<input name="capacity" type="number" min="1" max="100000" defaultValue={Number(editing.capacity || 20)} required className={input} /></label><p className="text-paper/70">Paid events are separate. Never create tickets for the free Saturday run.</p></>}
-      {tab !== 'event' && <label className="block">Description<textarea name="description" defaultValue={String(editing.description || '')} maxLength={2000} className={`${input} min-h-28 py-3`} /></label>}
-      {tab !== 'package' && <label className="flex min-h-12 items-center gap-3"><input name="active" type="checkbox" defaultChecked={editing.active === true} className="size-5 accent-blue" />Active in test checkout</label>}
-      <Button disabled={busy} className="min-h-12">{busy ? 'Saving...' : tab === 'package' ? 'Create unique link' : 'Save'}</Button>
-    </form></>}
-    {message && <div role="status" className="mt-7 break-all border-l-4 border-blue p-4 text-blue">{message}{message.startsWith('http') && <Button className="mt-3 block min-h-12" onClick={() => navigator.clipboard.writeText(message)}>Copy private link</Button>}</div>}
-  </>}</main>
+  const manage = useServerFn(manageTestPayments);
+  const q = useQuery({
+    queryKey: ["test-payment-desk"],
+    queryFn: () => manage({ data: { action: "list" } }),
+    retry: false,
+  });
+  const [tab, setTab] = useState<"payments" | "product" | "event" | "package">("payments");
+  const [editing, setEditing] = useState<Record<string, string | number | boolean>>({});
+  const [message, setMessage] = useState("");
+  const [busy, setBusy] = useState(false);
+  const data =
+    q.data &&
+    q.data.payments &&
+    q.data.products &&
+    q.data.events &&
+    q.data.packages &&
+    q.data.orders
+      ? {
+          payments: q.data.payments,
+          products: q.data.products,
+          events: q.data.events,
+          packages: q.data.packages,
+          orders: q.data.orders,
+        }
+      : null;
+  const input =
+    "mt-2 min-h-12 w-full border border-paper/40 bg-ink px-3 focus-visible:outline-2 focus-visible:outline-blue";
+  return (
+    <main className="mx-auto min-h-screen max-w-5xl bg-ink px-5 py-12 text-paper">
+      <Link to="/admin/roster" className="text-blue underline">
+        Back to admin
+      </Link>
+      <h1 className="mt-7 font-condensed text-4xl uppercase">Test payment desk</h1>
+      <p className="mt-3 text-blue">
+        Test only. No real charges. Saturday runs and Shopify are unchanged.
+      </p>
+      {q.isLoading && <p className="mt-6">Loading...</p>}
+      {q.error && (
+        <p role="alert" className="mt-6">
+          Admin sign-in required.{" "}
+          <Link to="/auth" search={{ next: "/admin/payments" }} className="text-blue underline">
+            Sign in
+          </Link>
+        </p>
+      )}
+      {data && (
+        <>
+          <div className="my-8 flex flex-wrap gap-3">
+            {(["payments", "product", "event", "package"] as const).map((value) => (
+              <Button
+                key={value}
+                variant={tab === value ? "default" : "outline"}
+                className="min-h-12 border-paper/40 capitalize"
+                onClick={() => {
+                  setTab(value);
+                  setEditing({});
+                  setMessage("");
+                }}
+              >
+                {value === "package"
+                  ? "Partner links"
+                  : value === "product"
+                    ? "Products"
+                    : value === "event"
+                      ? "Events"
+                      : "Payments"}
+              </Button>
+            ))}
+          </div>
+          {tab === "payments" ? (
+            <>
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-sm">
+                  <thead>
+                    <tr>
+                      {["Date", "Type", "Item", "Amount", "Email", "Status"].map((v) => (
+                        <th key={v} className="border-b border-paper/30 p-3">
+                          {v}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {data.payments.map((row) => (
+                      <tr key={row.id}>
+                        {[
+                          new Date(row.created_at).toLocaleDateString(),
+                          row.type,
+                          row.item,
+                          usd(row.amount),
+                          row.email,
+                          row.status,
+                        ].map((v, i) => (
+                          <td key={i} className="border-b border-paper/15 p-3">
+                            {v}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              {data.payments.length === 0 && <p>No test payments recorded yet.</p>}
+              <h2 className="mt-10 font-condensed text-2xl uppercase">Monthly support</h2>
+              {data.orders.map((order) => (
+                <div
+                  key={order.id}
+                  className="mt-4 flex flex-wrap items-center gap-4 border-b border-paper/20 pb-4"
+                >
+                  <span>
+                    {order.email} · {order.status}
+                  </span>
+                  <Button
+                    disabled={!order.stripe_subscription_id || busy}
+                    variant="outline"
+                    className="min-h-12 border-paper/40"
+                    onClick={async () => {
+                      setBusy(true);
+                      try {
+                        const r = await manage({
+                          data: { action: "cancel-monthly", orderId: order.id },
+                        });
+                        setMessage(
+                          "error" in r
+                            ? r.error || "Not saved."
+                            : "Monthly support will stop at period end.",
+                        );
+                      } catch {
+                        setMessage("Could not cancel monthly support.");
+                      } finally {
+                        setBusy(false);
+                      }
+                    }}
+                  >
+                    Stop future monthly charges
+                  </Button>
+                </div>
+              ))}
+            </>
+          ) : (
+            <>
+              <div className="mb-8 space-y-3">
+                {(tab === "product"
+                  ? data.products
+                  : tab === "event"
+                    ? data.events
+                    : data.packages
+                ).map((record) => (
+                  <div
+                    key={record.id}
+                    className="flex flex-wrap items-center justify-between gap-4 border-b border-paper/25 py-3"
+                  >
+                    <span>
+                      {record.name} · {usd(record.amount_cents)} ·{" "}
+                      {record.active ? "Active" : "Inactive"}
+                    </span>
+                    {tab !== "package" && (
+                      <Button
+                        variant="outline"
+                        className="min-h-12 border-paper/40"
+                        onClick={() => setEditing(record)}
+                      >
+                        Edit
+                      </Button>
+                    )}
+                  </div>
+                ))}
+              </div>
+              <h2 className="font-condensed text-2xl uppercase">
+                {editing.id ? "Edit" : "Create"} {tab === "package" ? "private partner link" : tab}
+              </h2>
+              <form
+                key={`${tab}-${editing.id || "new"}`}
+                className="mt-5 max-w-xl space-y-5"
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  setBusy(true);
+                  setMessage("");
+                  const fields = new FormData(e.currentTarget);
+                  const base = {
+                    name: String(fields.get("name")),
+                    amount_cents: Math.round(Number(fields.get("amount")) * 100),
+                  };
+                  try {
+                    const result =
+                      tab === "product"
+                        ? await manage({
+                            data: {
+                              action: "product",
+                              record: {
+                                ...base,
+                                ...(typeof editing.id === "string" && { id: editing.id }),
+                                sku: String(fields.get("sku")),
+                                description: String(fields.get("description")),
+                                active: fields.get("active") === "on",
+                              },
+                            },
+                          })
+                        : tab === "event"
+                          ? await manage({
+                              data: {
+                                action: "event",
+                                record: {
+                                  ...base,
+                                  ...(typeof editing.id === "string" && { id: editing.id }),
+                                  slug: String(fields.get("slug")),
+                                  event_date: new Date(String(fields.get("date"))).toISOString(),
+                                  location: String(fields.get("location")),
+                                  capacity: Number(fields.get("capacity")),
+                                  active: fields.get("active") === "on",
+                                },
+                              },
+                            })
+                          : await manage({
+                              data: {
+                                action: "package",
+                                record: {
+                                  ...base,
+                                  partner_name: String(fields.get("partner_name")),
+                                  description: String(fields.get("description")),
+                                },
+                              },
+                            });
+                    if ("error" in result && result.error) throw new Error(result.error);
+                    setMessage(
+                      result.link
+                        ? `${window.location.origin}${result.link}`
+                        : "Saved for test checkout.",
+                    );
+                    await q.refetch();
+                  } catch (error) {
+                    setMessage(error instanceof Error ? error.message : "Not saved.");
+                  } finally {
+                    setBusy(false);
+                  }
+                }}
+              >
+                <label className="block">
+                  Name
+                  <input
+                    name="name"
+                    defaultValue={String(editing.name || "")}
+                    required
+                    maxLength={120}
+                    className={input}
+                  />
+                </label>
+                {tab === "package" && (
+                  <label className="block">
+                    Partner name
+                    <input name="partner_name" required maxLength={120} className={input} />
+                  </label>
+                )}
+                <label className="block">
+                  Amount (USD)
+                  <input
+                    name="amount"
+                    type="number"
+                    min="5"
+                    max="100000"
+                    step="0.01"
+                    defaultValue={Number(editing.amount_cents || 3000) / 100}
+                    required
+                    className={input}
+                  />
+                </label>
+                {tab === "product" && (
+                  <label className="block">
+                    SKU
+                    <input
+                      name="sku"
+                      defaultValue={String(editing.sku || "")}
+                      required
+                      className={input}
+                    />
+                  </label>
+                )}
+                {tab === "event" && (
+                  <>
+                    <label className="block">
+                      Slug
+                      <input
+                        name="slug"
+                        defaultValue={String(editing.slug || "")}
+                        pattern="[a-z0-9-]+"
+                        required
+                        className={input}
+                      />
+                    </label>
+                    <label className="block">
+                      Date and time (your local time)
+                      <input
+                        name="date"
+                        type="datetime-local"
+                        required
+                        className={input}
+                        defaultValue={
+                          typeof editing.event_date === "string"
+                            ? new Date(
+                                new Date(editing.event_date).getTime() -
+                                  new Date(editing.event_date).getTimezoneOffset() * 60000,
+                              )
+                                .toISOString()
+                                .slice(0, 16)
+                            : ""
+                        }
+                      />
+                    </label>
+                    <label className="block">
+                      Location
+                      <input
+                        name="location"
+                        defaultValue={String(editing.location || "")}
+                        required
+                        className={input}
+                      />
+                    </label>
+                    <label className="block">
+                      Capacity
+                      <input
+                        name="capacity"
+                        type="number"
+                        min="1"
+                        max="100000"
+                        defaultValue={Number(editing.capacity || 20)}
+                        required
+                        className={input}
+                      />
+                    </label>
+                    <p className="text-paper/70">
+                      Paid events are separate. Never create tickets for the free Saturday run.
+                    </p>
+                  </>
+                )}
+                {tab !== "event" && (
+                  <label className="block">
+                    Description
+                    <textarea
+                      name="description"
+                      defaultValue={String(editing.description || "")}
+                      maxLength={2000}
+                      className={`${input} min-h-28 py-3`}
+                    />
+                  </label>
+                )}
+                {tab !== "package" && (
+                  <label className="flex min-h-12 items-center gap-3">
+                    <input
+                      name="active"
+                      type="checkbox"
+                      defaultChecked={editing.active === true}
+                      className="size-5 accent-blue"
+                    />
+                    Active in test checkout
+                  </label>
+                )}
+                <Button disabled={busy} className="min-h-12">
+                  {busy ? "Saving..." : tab === "package" ? "Create unique link" : "Save"}
+                </Button>
+              </form>
+            </>
+          )}
+          {message && (
+            <div role="status" className="mt-7 break-all border-l-4 border-blue p-4 text-blue">
+              {message}
+              {message.startsWith("http") && (
+                <Button
+                  className="mt-3 block min-h-12"
+                  onClick={() => navigator.clipboard.writeText(message)}
+                >
+                  Copy private link
+                </Button>
+              )}
+            </div>
+          )}
+        </>
+      )}
+    </main>
+  );
 }
