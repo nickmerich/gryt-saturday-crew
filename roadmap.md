@@ -1,5 +1,10 @@
 # Roadmap
 
+## Live separate payments
+- [ ] Enable environment-scoped checkout, webhook receipts and admin views; retain inactive test event and expired test package.
+- [ ] Configure live tax head office, managed catalog and webhook events; verify descriptor and receipts or report owner actions.
+- [ ] Run payment/Shopify/browser tests and current preview/security checks, publish, then verify public live checkout without paying.
+
 ## Separate test-only payments
 - [x] Save supplied registered business address to sandbox tax settings; hat payment paid, shipping $0, automatic_tax complete with $0 calculated tax. Sandbox has no tax registrations; none invented or added.
 - [x] Grant confirmed merichnick@gmail.com organizer access via existing server allowlist; create and pay $15 test-event (capacity 10) and $250 TEST Partner package, then deactivate event and expire private link. UI and database cleanup verified.

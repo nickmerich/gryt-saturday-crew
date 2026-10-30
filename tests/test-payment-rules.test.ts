@@ -5,6 +5,8 @@ import {
   partnerMethods,
   ticketQuantity,
   hatCheckoutOptions,
+  environmentFromToken,
+  sessionEnvironment,
 } from "../src/lib/test-payment-rules";
 describe("Separate payment rules", () => {
   it("allows support presets $10 $25 $50", () => {
@@ -18,15 +20,27 @@ describe("Separate payment rules", () => {
     expect(supportAmount.parse(100000)).toBe(100000);
     expect(supportAmount.safeParse(100001).success).toBe(false);
   });
-  it("rejects live payments", () => {
+  it("accepts approved live payments and test payments", () => {
     const input = {
       type: "support",
       environment: "live",
       name: "Test Runner",
       email: "test@example.com",
     };
-    expect(checkoutInput.safeParse(input).success).toBe(false);
+    expect(checkoutInput.safeParse(input).success).toBe(true);
     expect(checkoutInput.safeParse({ ...input, environment: "sandbox" }).success).toBe(true);
+    expect(checkoutInput.safeParse({ ...input, environment: "other" }).success).toBe(false);
+  });
+  it("selects only the environment identified by the managed token", () => {
+    expect(environmentFromToken("pk_live_example")).toBe("live");
+    expect(environmentFromToken("pk_test_example")).toBe("sandbox");
+    expect(() => environmentFromToken(undefined)).toThrow();
+    expect(() => environmentFromToken("invalid")).toThrow();
+  });
+  it("keeps live and test result sessions separate", () => {
+    expect(sessionEnvironment("cs_live_abc123")).toBe("live");
+    expect(sessionEnvironment("cs_test_abc123")).toBe("sandbox");
+    expect(() => sessionEnvironment("cs_abc123")).toThrow();
   });
   it("defaults support to one time", () => {
     expect(
