@@ -1,5 +1,10 @@
 # Roadmap
 
+## Separate test-only payments
+- [ ] Add isolated support, hat checkout, inactive ticket event and private partner payment links using the existing managed Stripe sandbox.
+- [ ] Add private payment management, signed webhook records and capacity-safe reservations without touching Saturday RSVP, waiver or Shopify.
+- [ ] Verify test-only enforcement and all four purchase flows; no publishing or live transactions.
+
 ## Executive producer story
 - [x] Add approved origin story to About, text-only Music Nerd footer credit and factual llms line; verified 375/390/1440px without overflow or runtime errors, RSVP destination, waiver form and plain-text llms response. Build OK. Preview only; C.Y. quote excluded. No RSVP submitted or auth changes.
 
