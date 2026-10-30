@@ -41,22 +41,20 @@ export async function recordTestPayment(event: Stripe.Event) {
       if (saved.error) throw new Error("Payment status was not saved.");
     }
     if (event.type !== "checkout.session.expired") {
-      const payment = await db
-        .from("payments")
-        .upsert(
-          {
-            type: order.type,
-            amount: session.amount_total || 0,
-            email: session.customer_details?.email || order.email,
-            item: order.item,
-            stripe_session_id: session.id,
-            stripe_event_id: event.id,
-            order_id: id,
-            status: order.status === "paid" ? "paid" : status,
-            environment: "sandbox",
-          },
-          { onConflict: "stripe_session_id", ignoreDuplicates: false },
-        );
+      const payment = await db.from("payments").upsert(
+        {
+          type: order.type,
+          amount: session.amount_total || 0,
+          email: session.customer_details?.email || order.email,
+          item: order.item,
+          stripe_session_id: session.id,
+          stripe_event_id: event.id,
+          order_id: id,
+          status: order.status === "paid" ? "paid" : status,
+          environment: "sandbox",
+        },
+        { onConflict: "stripe_session_id", ignoreDuplicates: false },
+      );
       if (payment.error) throw new Error("Payment receipt was not recorded.");
     }
   } else if (event.type === "invoice.paid") {
@@ -72,22 +70,20 @@ export async function recordTestPayment(event: Stripe.Event) {
       .eq("monthly", true)
       .single();
     if (!order.data) throw new Error("Monthly support order not found.");
-    const receipt = await db
-      .from("payments")
-      .upsert(
-        {
-          type: "support",
-          amount: invoice.amount_paid,
-          email: order.data.email,
-          item: order.data.item,
-          stripe_invoice_id: invoice.id,
-          stripe_event_id: event.id,
-          order_id: id,
-          status: "paid",
-          environment: "sandbox",
-        },
-        { onConflict: "stripe_invoice_id", ignoreDuplicates: true },
-      );
+    const receipt = await db.from("payments").upsert(
+      {
+        type: "support",
+        amount: invoice.amount_paid,
+        email: order.data.email,
+        item: order.data.item,
+        stripe_invoice_id: invoice.id,
+        stripe_event_id: event.id,
+        order_id: id,
+        status: "paid",
+        environment: "sandbox",
+      },
+      { onConflict: "stripe_invoice_id", ignoreDuplicates: true },
+    );
     if (receipt.error) throw new Error("Monthly receipt was not recorded.");
   }
 }
