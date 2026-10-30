@@ -1,8 +1,8 @@
 # Roadmap
 
 ## Live separate payments
-- [ ] Enable environment-scoped checkout, webhook receipts and admin views; retain inactive test event and expired test package.
-- [ ] Configure live tax head office, managed catalog and webhook events; verify descriptor and receipts or report owner actions.
+- [x] Enable environment-scoped checkout, webhook receipts and admin views; verified inactive sandbox test event and expired sandbox test package remain absent from live admin.
+- [x] Configure live tax head office and webhook events; managed hat/support prices sync at publishing. Account descriptor and receipt-email updates rejected by Stripe: owner must set these in live Stripe settings.
 - [ ] Run payment/Shopify/browser tests and current preview/security checks, publish, then verify public live checkout without paying.
 
 ## Separate test-only payments
@@ -14,7 +14,7 @@
 - [x] Add private payment management, signed webhook records and atomic ticket/package reservations without touching Saturday RSVP, waiver or Shopify. Test webhook subscriptions updated only.
 - [x] Verify 375/390/1440px pages without overflow or runtime errors, support/monthly Stripe mounting and cancellation, inactive-event/private-link protection, 7 payment tests and 13 Shopify tests. New-file lint and preview build passed.
 - [x] Complete hat/ticket/partner/support card test purchases and admin create/cleanup verification. Eleven payment/access tests, thirteen Shopify tests, three checkout browser tests and changed-file lint passed; preview build OK. Monthly support and ACH not retested in this verification.
-- [ ] Confirm Stripe receipt-email settings and set account statement descriptor to GRYT RUN CLUB. Blocked: Stripe rejects account settings updates through the available connection; owner must configure these in Stripe test settings. No live changes or publishing.
+- [ ] Confirm Stripe receipt-email settings and set account statement descriptor to GRYT RUN CLUB. Blocked: Stripe rejects account settings updates through the available connection; owner must configure these in Stripe live settings. One-time checkout supplies receipt_email; monthly receipt setting remains unverified.
 
 ## Executive producer story
 - [x] Add approved origin story to About, text-only Music Nerd footer credit and factual llms line; verified 375/390/1440px without overflow or runtime errors, RSVP destination, waiver form and plain-text llms response. Build OK. Preview only; C.Y. quote excluded. No RSVP submitted or auth changes.
