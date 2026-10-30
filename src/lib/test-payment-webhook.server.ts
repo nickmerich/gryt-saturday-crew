@@ -1,7 +1,7 @@
 import type Stripe from "stripe";
 
-export async function recordTestPayment(event: Stripe.Event) {
-  if (event.livemode) return;
+export async function recordTestPayment(event: Stripe.Event, environment: "sandbox" | "live") {
+  if (event.livemode !== (environment === "live")) throw new Error("Webhook environment mismatch.");
   const { supabaseAdmin: db } = await import("@/integrations/supabase/client.server");
   if (event.type.startsWith("checkout.session.")) {
     const session = event.data.object as Stripe.Checkout.Session;
@@ -11,7 +11,7 @@ export async function recordTestPayment(event: Stripe.Event) {
       .from("gryt_payment_orders")
       .select("*")
       .eq("id", id)
-      .eq("environment", "sandbox")
+      .eq("environment", environment)
       .single();
     if (result.error || !result.data) throw new Error("Payment order not found.");
     const order = result.data;
@@ -37,7 +37,8 @@ export async function recordTestPayment(event: Stripe.Event) {
           stripe_subscription_id:
             typeof session.subscription === "string" ? session.subscription : null,
         })
-        .eq("id", id);
+        .eq("id", id)
+        .eq("environment", environment);
       if (saved.error) throw new Error("Payment status was not saved.");
     }
     if (event.type !== "checkout.session.expired") {
@@ -51,7 +52,7 @@ export async function recordTestPayment(event: Stripe.Event) {
           stripe_event_id: event.id,
           order_id: id,
           status: order.status === "paid" ? "paid" : status,
-          environment: "sandbox",
+          environment: environment,
         },
         { onConflict: "stripe_session_id", ignoreDuplicates: false },
       );
@@ -67,6 +68,7 @@ export async function recordTestPayment(event: Stripe.Event) {
       .from("gryt_payment_orders")
       .select("*")
       .eq("id", id)
+      .eq("environment", environment)
       .eq("monthly", true)
       .single();
     if (!order.data) throw new Error("Monthly support order not found.");
@@ -80,7 +82,7 @@ export async function recordTestPayment(event: Stripe.Event) {
         stripe_event_id: event.id,
         order_id: id,
         status: "paid",
-        environment: "sandbox",
+        environment: environment,
       },
       { onConflict: "stripe_invoice_id", ignoreDuplicates: true },
     );

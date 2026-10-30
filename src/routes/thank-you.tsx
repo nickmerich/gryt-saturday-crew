@@ -6,10 +6,10 @@ import { Button } from "@/components/ui/button";
 import { readTestResult } from "@/lib/test-payments.functions";
 import { paymentHead } from "@/lib/test-payment-rules";
 export const Route = createFileRoute("/thank-you")({
-  head: () => paymentHead("Test payment result", "Your GRYT test payment status."),
+  head: () => paymentHead("Payment result", "Your GRYT payment status."),
   validateSearch: (search: Record<string, unknown>) => ({
     session_id:
-      typeof search.session_id === "string" && /^cs_test_[A-Za-z0-9_]+$/.test(search.session_id)
+      typeof search.session_id === "string" && /^cs_(test|live)_[A-Za-z0-9_]+$/.test(search.session_id)
         ? search.session_id
         : "",
   }),
@@ -36,18 +36,18 @@ function Page() {
           ? "Thank you."
           : result?.status === "pending"
             ? "Payment pending."
-            : "Test payment status"
+            : "Payment status"
       }
     >
       <div role="status" className="text-lg text-paper/85">
         {!session_id
-          ? "No valid test checkout was provided."
+          ? "No valid checkout was provided."
           : q.isLoading
-            ? "Checking your test payment..."
+            ? "Checking your payment..."
             : q.error || (q.data && "error" in q.data)
               ? "Payment status could not be confirmed. Contact nick@gryt.club."
               : result?.status === "paid"
-                ? `Your test payment is confirmed.${result.recorded ? " Recorded in the payment desk." : " Waiting for the payment record to arrive."}`
+                ? `Your payment is confirmed.${result.recorded ? " Recorded in the payment desk." : " Waiting for the payment record to arrive."}`
                 : result?.status === "pending"
                   ? "Your bank payment was submitted. It is not paid until funds settle."
                   : "Checkout was not completed. You can return and try again."}

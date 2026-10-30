@@ -4,7 +4,7 @@ import { getTestCatalog } from "@/lib/test-payments.functions";
 import { paymentHead, usd } from "@/lib/test-payment-rules";
 export const Route = createFileRoute("/events/$slug")({
   head: () =>
-    paymentHead("Event tickets", "Separate GRYT event test tickets. Saturday runs stay free."),
+    paymentHead("Event tickets", "Separate GRYT event tickets. Saturday runs stay free."),
   loader: ({ params }) => getTestCatalog({ data: { slug: params.slug } }),
   component: Page,
 });

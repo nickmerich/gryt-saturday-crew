@@ -6,8 +6,8 @@ import cap from "@/assets/cap/cap-front.jpg.asset.json";
 export const Route = createFileRoute("/shop_/checkout")({
   head: () =>
     paymentHead(
-      "Hat test checkout",
-      "Separate test-only checkout for GRYT hats. Shopify remains unchanged.",
+      "Hat checkout",
+      "Separate checkout for GRYT hats. Shopify remains unchanged.",
     ),
   loader: () => getTestCatalog({ data: { slug: "" } }),
   component: Page,
@@ -15,10 +15,10 @@ export const Route = createFileRoute("/shop_/checkout")({
 function Page() {
   const { products } = Route.useLoaderData();
   return (
-    <PaymentFrame title="Hat test checkout">
-      <p className="text-paper/75">Separate test checkout. Your Shopify cart is unchanged.</p>
+    <PaymentFrame title="Hat checkout">
+      <p className="text-paper/75">Separate checkout. Your Shopify cart is unchanged.</p>
       {products.length === 0 ? (
-        <p className="mt-8">No test products are available.</p>
+        <p className="mt-8">No products are available.</p>
       ) : (
         products.map((product) => (
           <section key={product.id} className="mt-8 border-t border-paper/25 pt-8">
