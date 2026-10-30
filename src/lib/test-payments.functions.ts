@@ -406,8 +406,10 @@ export const manageTestPayments = createServerFn({ method: "POST" })
       };
     }
     if (data.action === "expire-package") {
-      const result = await db.from("gryt_partner_packages")
-        .update({ active: false }).eq("id", data.packageId);
+      const result = await db
+        .from("gryt_partner_packages")
+        .update({ active: false })
+        .eq("id", data.packageId);
       if (result.error) throw new Error("Private link could not be expired.");
       return { link: "", message: "Private link expired." };
     }
