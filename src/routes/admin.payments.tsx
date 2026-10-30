@@ -5,19 +5,22 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { manageTestPayments } from "@/lib/test-payments.functions";
 import { paymentHead, usd } from "@/lib/test-payment-rules";
+import { getStripeEnvironment } from "@/lib/stripe";
 export const Route = createFileRoute("/admin/payments")({
   ssr: false,
   head: () =>
     paymentHead(
-      "Private test payment desk",
-      "Private organizer management for GRYT test payments.",
+      "Private payment desk",
+      "Private organizer management for GRYT payments.",
     ),
   component: Page,
 });
 function Page() {
-  const manage = useServerFn(manageTestPayments);
+  const [environment, setEnvironment] = useState<"sandbox" | "live">(getStripeEnvironment);
+  const manageFn = useServerFn(manageTestPayments);
+  const manage = (args: { data: Record<string, unknown> }) => manageFn({ data: { ...args.data, environment } } as Parameters<typeof manageFn>[0]);
   const q = useQuery({
-    queryKey: ["test-payment-desk"],
+    queryKey: ["payment-desk", environment],
     queryFn: () => manage({ data: { action: "list" } }),
     retry: false,
   });
@@ -47,10 +50,17 @@ function Page() {
       <Link to="/admin/roster" className="text-blue underline">
         Back to admin
       </Link>
-      <h1 className="mt-7 font-condensed text-4xl uppercase">Test payment desk</h1>
+      <h1 className="mt-7 font-condensed text-4xl uppercase">Payment desk</h1>
       <p className="mt-3 text-blue">
-        Test only. No real charges. Saturday runs and Shopify are unchanged.
+        Saturday runs and Shopify are unchanged.
       </p>
+      <div className="mt-5 flex gap-3" aria-label="Payment environment">
+        {(["live", "sandbox"] as const).map((value) => (
+          <Button key={value} variant={environment === value ? "default" : "outline"} aria-pressed={environment === value} onClick={() => { setEnvironment(value); setEditing({}); setMessage(""); }}>
+            {value === "live" ? "Live" : "Test"}
+          </Button>
+        ))}
+      </div>
       {q.isLoading && <p className="mt-6">Loading...</p>}
       {q.error && (
         <p role="alert" className="mt-6">
@@ -117,7 +127,7 @@ function Page() {
                   </tbody>
                 </table>
               </div>
-              {data.payments.length === 0 && <p>No test payments recorded yet.</p>}
+              {data.payments.length === 0 && <p>No payments recorded in this environment.</p>}
               <h2 className="mt-10 font-condensed text-2xl uppercase">Monthly support</h2>
               {data.orders.map((order) => (
                 <div
@@ -210,7 +220,7 @@ function Page() {
                 {editing.id ? "Edit" : "Create"} {tab === "package" ? "private partner link" : tab}
               </h2>
               <form
-                key={`${tab}-${editing.id || "new"}`}
+                key={`${environment}-${tab}-${editing.id || "new"}`}
                 className="mt-5 max-w-xl space-y-5"
                 onSubmit={async (e) => {
                   e.preventDefault();
@@ -265,7 +275,7 @@ function Page() {
                     setMessage(
                       result.link
                         ? `${window.location.origin}${result.link}`
-                        : "Saved for test checkout.",
+                        : "Saved.",
                     );
                     await q.refetch();
                   } catch (error) {
@@ -391,7 +401,7 @@ function Page() {
                       defaultChecked={editing.active === true}
                       className="size-5 accent-blue"
                     />
-                    Active in test checkout
+                    Active in selected environment
                   </label>
                 )}
                 <Button disabled={busy} className="min-h-12">

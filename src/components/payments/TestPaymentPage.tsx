@@ -13,9 +13,11 @@ export function PaymentFrame({ title, children }: { title: string; children: Rea
   return (
     <div className="min-h-screen bg-ink text-paper">
       <SiteNav />
-      <div className="border-y border-blue bg-blue px-5 py-3 text-center text-sm font-semibold text-ink">
-        TEST PAYMENTS ONLY. No real money is charged.
-      </div>
+      {getStripeEnvironment() === "sandbox" && (
+        <div className="border-y border-blue bg-blue px-5 py-3 text-center text-sm font-semibold text-ink">
+          TEST PAYMENTS ONLY. No real money is charged.
+        </div>
+      )}
       <main className="mx-auto max-w-5xl px-5 py-12 sm:px-8">
         <p className="eyebrow text-blue">GRYT · OPTIONAL PAYMENTS</p>
         <h1 className="my-5 font-condensed text-5xl font-bold uppercase leading-tight sm:text-6xl">
@@ -58,7 +60,7 @@ export function TestPaymentForm({
     "mt-2 min-h-12 w-full border border-paper/40 bg-ink px-3 text-base text-paper focus-visible:outline-2 focus-visible:outline-blue";
   if (clientSecret)
     return (
-      <section aria-label="Stripe test checkout" className="mt-8">
+      <section aria-label="Stripe checkout" className="mt-8">
         <Button
           disabled={busy}
           variant="outline"
@@ -104,14 +106,13 @@ export function TestPaymentForm({
         setBusy(true);
         const fields = new FormData(event.currentTarget);
         try {
-          if (getStripeEnvironment() !== "sandbox")
-            throw new Error("These pages accept test payments only. Live checkout is disabled.");
+          const environment = getStripeEnvironment();
           const stripe = await getStripe();
           if (!stripe) throw new Error("Stripe could not load. Please retry.");
           const result = await create({
             data: {
               type,
-              environment: "sandbox",
+              environment,
               amount: type === "support" ? cents : amount,
               monthly,
               itemId,
@@ -244,21 +245,21 @@ export function TestPaymentForm({
           <p className="break-words">{error}</p>
           {type === "merch" && /head office address/i.test(error) && (
             <div className="mt-3 space-y-2 text-paper">
-              <p>Hat test checkout needs the owner's Stripe tax setup.</p>
+              <p>Hat checkout needs the owner's Stripe tax setup.</p>
               <p>
-                In the connected Stripe sandbox, open Settings → Tax → Head office address. Enter
+                In the connected Stripe account, open Settings → Tax → Head office address. Enter
                 your actual business or ship-from street address, city, state, ZIP code and country,
                 then save and press Continue again.
               </p>
               <a
-                href="https://dashboard.stripe.com/test/settings/tax"
+                href="https://dashboard.stripe.com/settings/tax"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block py-3 text-blue underline focus-visible:outline-2 focus-visible:outline-blue"
               >
-                Open Stripe test tax settings
+                Open Stripe tax settings
               </a>
-              <p className="text-sm text-paper/75">Stay in test mode. No payment was made.</p>
+              <p className="text-sm text-paper/75">No payment was made.</p>
             </div>
           )}
         </div>
@@ -272,14 +273,14 @@ export function TestPaymentForm({
         {!ready
           ? "Loading payment form..."
           : busy
-            ? "Opening test checkout..."
+            ? "Opening checkout..."
             : remaining === 0
               ? "Sold out"
               : `${monthly && type === "support" ? "Subscribe" : "Continue"} · ${usd((type === "support" ? cents : amount) * quantity)}${monthly && type === "support" ? " / month" : ""}`}
       </Button>
       {busy && (
         <p role="status" className="text-sm text-paper/85">
-          Opening secure Stripe test checkout...
+          Opening secure Stripe checkout...
         </p>
       )}
       <p className="text-sm text-paper/70">

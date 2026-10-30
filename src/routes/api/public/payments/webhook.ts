@@ -14,9 +14,9 @@ export const Route = createFileRoute('/api/public/payments/webhook')({
         const env: StripeEnv = rawEnv;
         try {
           const event = await verifyWebhook(request, env);
-          if (env === 'sandbox') {
+          {
             const { recordTestPayment } = await import('@/lib/test-payment-webhook.server');
-            await recordTestPayment(event as Stripe.Event);
+            await recordTestPayment(event as Stripe.Event, env);
           }
           if (event.type === 'checkout.session.completed') {
             const session: any = event.data.object;

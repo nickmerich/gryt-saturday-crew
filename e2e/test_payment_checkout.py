@@ -44,7 +44,7 @@ class PaymentCheckoutTests(unittest.IsolatedAsyncioTestCase):
                 button = self.page.get_by_role("button", name="Continue")
                 await button.click()
                 await self.page.get_by_role("status").filter(has_text="Opening secure").wait_for()
-                self.assertTrue(await self.page.get_by_role("button", name="Opening test checkout").is_disabled())
+                self.assertTrue(await self.page.get_by_role("button", name="Opening checkout").is_disabled())
                 await self.page.get_by_role("alert").wait_for()
                 self.assertTrue((await self.page.get_by_role("alert").inner_text()).strip())
                 self.assertEqual(self.page.url, "http://localhost:8080" + path)
