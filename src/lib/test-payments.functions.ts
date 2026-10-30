@@ -274,7 +274,10 @@ export const cancelTestCheckout = createServerFn({ method: "POST" })
     z
       .object({
         clientSecret: z.string().min(20).max(1000),
-        sessionId: z.string().regex(/^cs_test_[A-Za-z0-9_]+$/).max(240),
+        sessionId: z
+          .string()
+          .regex(/^cs_test_[A-Za-z0-9_]+$/)
+          .max(240),
       })
       .parse(input),
   )
