@@ -21,7 +21,7 @@ Already-registered test webhook:
 Do not add another endpoint. The test endpoint now subscribes to checkout completed/expired, delayed payment success/failure and invoice paid alongside existing events. Live webhook unchanged.
 
 ## Owner setup still required
-1. Stripe test tax settings require the actual business head-office address before hat checkout opens. Taxes were not disabled to bypass this.
+1. Stripe test tax settings require the actual business head-office address before hat checkout opens. Open https://dashboard.stripe.com/test/settings/tax in the connected sandbox, then Settings > Tax > Head office address. Enter the actual business/ship-from address: street line 1, optional line 2, city, state, postal code and country, then save and retry Continue. The sandbox Tax Settings API confirmed `head_office: null`, `status: pending`, `missing_fields: [head_office]`. No address was invented and taxes were not disabled. Hat shipping now saves the entered shipping address to the Stripe Customer so repeat checkout uses the correct tax location.
 2. Stripe rejected the account-settings API update. Set the statement descriptor to `GRYT RUN CLUB` and confirm successful-payment receipt emails in Stripe's test settings. One-time checkout requests already include the receipt email; monthly invoices use the Stripe customer email. Email delivery remains unverified.
 3. The current signed-in account does not match the existing admin allowlist. Use an existing authorized organizer account; no permissions were expanded.
 

@@ -1,6 +1,7 @@
 # Roadmap
 
 ## Separate test-only payments
+- [ ] Unblock hat test checkout and complete purchase: Stripe sandbox confirms missing head_office; owner must save actual business/ship-from address in test Settings > Tax > Head office address. Added direct setup guidance and corrected repeat-customer shipping address persistence; tax remains enabled.
 - [x] Protect the shared form from pre-hydration GET submission, verify support/hat loading, visible failures and retries, and inactive-event/private-link gates. Signed-in $10 support card payment reached /thank-you and payments status paid in sandbox. Three browser tests, seven payment-rule tests, thirteen Shopify tests and lint passed; preview build OK. Event/partner checkout creation remains unverified without an active event or private link.
 - [x] Add isolated support, hat checkout, inactive ticket event and private partner payment links using the existing managed Stripe sandbox.
 - [x] Add private payment management, signed webhook records and atomic ticket/package reservations without touching Saturday RSVP, waiver or Shopify. Test webhook subscriptions updated only.

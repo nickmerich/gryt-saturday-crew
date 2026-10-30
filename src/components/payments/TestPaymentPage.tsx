@@ -240,9 +240,28 @@ export function TestPaymentForm({
         )}
       </fieldset>
       {error && (
-        <p role="alert" className="border-l-4 border-blue py-3 pl-4 text-blue">
-          {error}
-        </p>
+        <div role="alert" className="border-l-4 border-blue py-3 pl-4 text-blue">
+          <p className="break-words">{error}</p>
+          {type === "merch" && /head office address/i.test(error) && (
+            <div className="mt-3 space-y-2 text-paper">
+              <p>Hat test checkout needs the owner's Stripe tax setup.</p>
+              <p>
+                In the connected Stripe sandbox, open Settings → Tax → Head office address.
+                Enter your actual business or ship-from street address, city, state, ZIP code
+                and country, then save and press Continue again.
+              </p>
+              <a
+                href="https://dashboard.stripe.com/test/settings/tax"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block py-3 text-blue underline focus-visible:outline-2 focus-visible:outline-blue"
+              >
+                Open Stripe test tax settings
+              </a>
+              <p className="text-sm text-paper/75">Stay in test mode. No payment was made.</p>
+            </div>
+          )}
+        </div>
       )}
       <Button
         type="button"

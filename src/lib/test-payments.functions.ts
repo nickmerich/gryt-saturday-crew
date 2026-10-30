@@ -3,7 +3,7 @@ import { getRequest } from "@tanstack/react-start/server";
 import { createClient } from "@supabase/supabase-js";
 import { z } from "zod";
 import { createStripeClient, getStripeErrorMessage } from "@/lib/stripe.server";
-import { checkoutInput, partnerMethods } from "@/lib/test-payment-rules";
+import { checkoutInput, hatCheckoutOptions, partnerMethods } from "@/lib/test-payment-rules";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { isAdminEmail } from "@/lib/admin/allowlist";
 
@@ -222,23 +222,7 @@ export const createTestCheckout = createServerFn({ method: "POST" })
                   cents > 100000 && { statement_descriptor: "GRYT RUN CLUB" }),
               },
             }),
-        ...(data.type === "merch" && {
-          automatic_tax: { enabled: true },
-          billing_address_collection: "required",
-          customer_update: { address: "auto" },
-          ...(data.fulfillment === "shipping" && {
-            shipping_address_collection: { allowed_countries: ["US"] },
-            shipping_options: [
-              {
-                shipping_rate_data: {
-                  display_name: "Free US shipping",
-                  type: "fixed_amount",
-                  fixed_amount: { amount: 0, currency: "usd" },
-                },
-              },
-            ],
-          }),
-        }),
+        ...(data.type === "merch" && hatCheckoutOptions(data.fulfillment)),
       });
       if (session.livemode || !session.client_secret)
         throw new Error("Test checkout was not created.");

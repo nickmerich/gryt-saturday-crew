@@ -4,6 +4,7 @@ import {
   checkoutInput,
   partnerMethods,
   ticketQuantity,
+  hatCheckoutOptions,
 } from "../src/lib/test-payment-rules";
 describe("Separate payment rules", () => {
   it("allows support presets $10 $25 $50", () => {
@@ -45,5 +46,20 @@ describe("Separate payment rules", () => {
     expect(ticketQuantity.safeParse(0).success).toBe(false);
     expect(ticketQuantity.parse(10)).toBe(10);
     expect(ticketQuantity.safeParse(11).success).toBe(false);
+  });
+  it("offers free US-only shipping and saves the checkout shipping address", () => {
+    const options = hatCheckoutOptions("shipping");
+    expect(options.shipping_address_collection?.allowed_countries).toEqual(["US"]);
+    expect(options.shipping_options?.[0].shipping_rate_data.fixed_amount).toEqual({ amount: 0, currency: "usd" });
+    expect(options.customer_update.shipping).toBe("auto");
+  });
+  it("keeps Saturday pickup free without collecting a shipping address", () => {
+    const options = hatCheckoutOptions("pickup");
+    expect(options.shipping_address_collection).toBeUndefined();
+    expect(options.shipping_options).toBeUndefined();
+  });
+  it("calculates applicable hat tax for both delivery choices", () => {
+    expect(hatCheckoutOptions("pickup").automatic_tax.enabled).toBe(true);
+    expect(hatCheckoutOptions("shipping").automatic_tax.enabled).toBe(true);
   });
 });
