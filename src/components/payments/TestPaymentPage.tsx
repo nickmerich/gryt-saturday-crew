@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { EmbeddedCheckout, EmbeddedCheckoutProvider } from "@stripe/react-stripe-js";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
@@ -48,6 +48,10 @@ export function TestPaymentForm({
   const [sessionId, setSessionId] = useState<string>();
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+  const [ready, setReady] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+  const submitting = useRef(false);
+  useEffect(() => setReady(true), []);
   const [fulfillment, setFulfillment] = useState<"shipping" | "pickup">("pickup");
   const [quantity, setQuantity] = useState(1);
   const inputClass =
@@ -88,15 +92,22 @@ export function TestPaymentForm({
     );
   return (
     <form
+      ref={formRef}
+      method="post"
+      aria-busy={busy || !ready}
       className="mt-8 max-w-xl space-y-6"
       onSubmit={async (event) => {
         event.preventDefault();
+        if (!ready || submitting.current) return;
+        submitting.current = true;
         setError("");
         setBusy(true);
         const fields = new FormData(event.currentTarget);
         try {
           if (getStripeEnvironment() !== "sandbox")
             throw new Error("These pages accept test payments only. Live checkout is disabled.");
+          const stripe = await getStripe();
+          if (!stripe) throw new Error("Stripe could not load. Please retry.");
           const result = await create({
             data: {
               type,
@@ -118,125 +129,140 @@ export function TestPaymentForm({
         } catch (e) {
           setError(e instanceof Error ? e.message : "Checkout could not start.");
         } finally {
+          submitting.current = false;
           setBusy(false);
         }
       }}
     >
-      {type === "support" && (
-        <>
-          <fieldset>
-            <legend className="font-semibold">Choose your support</legend>
-            <div className="mt-3 grid grid-cols-3 gap-3">
-              {[1000, 2500, 5000].map((value) => (
-                <Button
-                  type="button"
-                  key={value}
-                  aria-pressed={cents === value}
-                  variant={cents === value ? "default" : "outline"}
-                  className="min-h-14 border-paper/40 text-lg"
-                  onClick={() => setCents(value)}
-                >
-                  {usd(value)}
-                </Button>
-              ))}
-            </div>
-            <label className="mt-5 block">
-              Custom amount (USD)
-              <input
-                aria-label="Custom amount (USD)"
-                className={inputClass}
-                type="number"
-                min="5"
-                max="1000"
-                step="0.01"
-                value={cents / 100}
-                onChange={(e) => setCents(Math.round(Number(e.target.value) * 100))}
-                required
+      <fieldset disabled={!ready || busy} className="space-y-6">
+        {type === "support" && (
+          <>
+            <fieldset>
+              <legend className="font-semibold">Choose your support</legend>
+              <div className="mt-3 grid grid-cols-3 gap-3">
+                {[1000, 2500, 5000].map((value) => (
+                  <Button
+                    type="button"
+                    key={value}
+                    aria-pressed={cents === value}
+                    variant={cents === value ? "default" : "outline"}
+                    className="min-h-14 border-paper/40 text-lg"
+                    onClick={() => setCents(value)}
+                  >
+                    {usd(value)}
+                  </Button>
+                ))}
+              </div>
+              <label className="mt-5 block">
+                Custom amount (USD)
+                <input
+                  aria-label="Custom amount (USD)"
+                  className={inputClass}
+                  type="number"
+                  min="5"
+                  max="1000"
+                  step="0.01"
+                  value={cents / 100}
+                  onChange={(e) => setCents(Math.round(Number(e.target.value) * 100))}
+                  required
+                />
+              </label>
+              <p className="mt-2 text-sm text-paper/70">$5 minimum · $1,000 maximum</p>
+            </fieldset>
+            <div className="flex min-h-12 items-center gap-4">
+              <Switch
+                id="monthly"
+                className="border-paper/60 data-[state=unchecked]:bg-paper/30"
+                checked={monthly}
+                onCheckedChange={setMonthly}
               />
-            </label>
-            <p className="mt-2 text-sm text-paper/70">$5 minimum · $1,000 maximum</p>
-          </fieldset>
-          <div className="flex min-h-12 items-center gap-4">
-            <Switch
-              id="monthly"
-              className="border-paper/60 data-[state=unchecked]:bg-paper/30"
-              checked={monthly}
-              onCheckedChange={setMonthly}
-            />
-            <label htmlFor="monthly">Make it monthly</label>
-          </div>
-          {monthly && (
-            <p className="text-sm text-paper/75">
-              {usd(cents)} each month. To stop future support, contact nick@gryt.club.
-            </p>
-          )}
-        </>
-      )}
-      <label className="block">
-        {type === "ticket" ? "Attendee name" : "Full name"}
-        <input className={inputClass} name="name" autoComplete="name" maxLength={120} required />
-      </label>
-      <label className="block">
-        Email
-        <input
-          className={inputClass}
-          name="email"
-          type="email"
-          autoComplete="email"
-          maxLength={254}
-          required
-        />
-      </label>
-      {(type === "merch" || type === "ticket") && (
+              <label htmlFor="monthly">Make it monthly</label>
+            </div>
+            {monthly && (
+              <p className="text-sm text-paper/75">
+                {usd(cents)} each month. To stop future support, contact nick@gryt.club.
+              </p>
+            )}
+          </>
+        )}
         <label className="block">
-          Quantity
+          {type === "ticket" ? "Attendee name" : "Full name"}
+          <input className={inputClass} name="name" autoComplete="name" maxLength={120} required />
+        </label>
+        <label className="block">
+          Email
           <input
             className={inputClass}
-            aria-label="Quantity"
-            type="number"
-            min={1}
-            max={Math.min(10, remaining)}
-            value={quantity}
-            onChange={(e) => setQuantity(Number(e.target.value))}
+            name="email"
+            type="email"
+            autoComplete="email"
+            maxLength={254}
             required
           />
         </label>
-      )}
-      {type === "merch" && (
-        <fieldset>
-          <legend className="font-semibold">Delivery</legend>
-          {(["pickup", "shipping"] as const).map((value) => (
-            <label
-              key={value}
-              className="mt-3 flex min-h-12 items-center gap-3 border border-paper/30 px-4"
-            >
-              <input
-                type="radio"
-                name="fulfillment"
-                checked={fulfillment === value}
-                onChange={() => setFulfillment(value)}
-                className="size-5 accent-blue"
-              />
-              {value === "pickup" ? "Pick up at Saturday run · Free" : "US shipping · Free"}
-            </label>
-          ))}
-          <p className="mt-2 text-sm text-paper/70">
-            Shipping is US only. Applicable tax is calculated in Checkout.
-          </p>
-        </fieldset>
-      )}
+        {(type === "merch" || type === "ticket") && (
+          <label className="block">
+            Quantity
+            <input
+              className={inputClass}
+              aria-label="Quantity"
+              type="number"
+              min={1}
+              max={Math.min(10, remaining)}
+              value={quantity}
+              onChange={(e) => setQuantity(Number(e.target.value))}
+              required
+            />
+          </label>
+        )}
+        {type === "merch" && (
+          <fieldset>
+            <legend className="font-semibold">Delivery</legend>
+            {(["pickup", "shipping"] as const).map((value) => (
+              <label
+                key={value}
+                className="mt-3 flex min-h-12 items-center gap-3 border border-paper/30 px-4"
+              >
+                <input
+                  type="radio"
+                  name="fulfillment"
+                  checked={fulfillment === value}
+                  onChange={() => setFulfillment(value)}
+                  className="size-5 accent-blue"
+                />
+                {value === "pickup" ? "Pick up at Saturday run · Free" : "US shipping · Free"}
+              </label>
+            ))}
+            <p className="mt-2 text-sm text-paper/70">
+              Shipping is US only. Applicable tax is calculated in Checkout.
+            </p>
+          </fieldset>
+        )}
+      </fieldset>
       {error && (
         <p role="alert" className="border-l-4 border-blue py-3 pl-4 text-blue">
           {error}
         </p>
       )}
-      <Button disabled={busy || remaining === 0} className="min-h-14 w-full text-base uppercase">
-        {busy
-          ? "Opening test checkout..."
-          : remaining === 0
-            ? "Sold out"
-            : `${monthly && type === "support" ? "Subscribe" : "Continue"} · ${usd((type === "support" ? cents : amount) * quantity)}${monthly && type === "support" ? " / month" : ""}`}
+      <Button
+        type="button"
+        disabled={!ready || busy || remaining === 0}
+        onClick={() => formRef.current?.requestSubmit()}
+        className="min-h-14 w-full text-base uppercase"
+      >
+        {!ready
+          ? "Loading payment form..."
+          : busy
+            ? "Opening test checkout..."
+            : remaining === 0
+              ? "Sold out"
+              : `${monthly && type === "support" ? "Subscribe" : "Continue"} · ${usd((type === "support" ? cents : amount) * quantity)}${monthly && type === "support" ? " / month" : ""}`}
       </Button>
+      {busy && (
+        <p role="status" className="text-sm text-paper/85">
+          Opening secure Stripe test checkout...
+        </p>
+      )}
       <p className="text-sm text-paper/70">
         Saturday runs are always free. This payment is separate from RSVP and the waiver.
       </p>

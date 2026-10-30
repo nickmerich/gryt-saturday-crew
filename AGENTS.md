@@ -10,6 +10,7 @@
 <!-- LOVABLE:END -->
 
 ## Partners
+- All separate payment types share a hydration-gated form with explicit non-native submission and visible request feedback, so early clicks cannot leak contact details into a GET URL.
 - Separate payment pages use sandbox-only server functions and a service-only catalog/order ledger; atomic database reservations enforce ticket capacity and private package uniqueness without changing Shopify or free Saturday RSVPs.
 - Partner administration reuses verified existing admin-email access at the server boundary; partner tables remain service-only and public reads use a narrowly projected approved-only database function.
 - Partner submissions reuse partner_inquiries with additive source, city and status fields; the new intake sends no messages and applies a database-enforced daily email limit without changing legacy intake.
