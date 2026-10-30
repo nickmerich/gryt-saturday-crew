@@ -45,6 +45,7 @@ export function TestPaymentForm({
   const [cents, setCents] = useState(2500);
   const [monthly, setMonthly] = useState(false);
   const [clientSecret, setClientSecret] = useState<string>();
+  const [sessionId, setSessionId] = useState<string>();
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   const [fulfillment, setFulfillment] = useState<"shipping" | "pickup">("pickup");
@@ -61,7 +62,8 @@ export function TestPaymentForm({
           onClick={async () => {
             setBusy(true);
             try {
-              const result = await cancel({ data: { clientSecret } });
+              if (!sessionId) throw new Error("Checkout is unavailable.");
+              const result = await cancel({ data: { clientSecret, sessionId } });
               if ("error" in result) throw new Error(result.error);
               setClientSecret(undefined);
               setError("Checkout cancelled. No payment was made.");
@@ -112,6 +114,7 @@ export function TestPaymentForm({
           if ("error" in result && result.error) throw new Error(result.error);
           if (!result.clientSecret) throw new Error("Checkout did not return a payment form.");
           setClientSecret(result.clientSecret);
+          setSessionId(result.sessionId);
         } catch (e) {
           setError(e instanceof Error ? e.message : "Checkout could not start.");
         } finally {
