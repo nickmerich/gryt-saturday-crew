@@ -1,3 +1,5 @@
+import grytBearImg from "@/assets/img/gryt-bear.webp";
+import runClub4Img from "@/assets/img/run-club-4.webp";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SITE_TITLE, SITE_DESCRIPTION } from "./__root";
 import { useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } from "react";
@@ -55,7 +57,7 @@ import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 
 const heroImgAsset = photo1;
 // Hero: optimized WebP copy of run-club-4.jpg (294 KB JPG -> WebP). 686x417 intrinsic.
-const heroImg = "/img/run-club-4.webp";
+const heroImg = runClub4Img;
 const circleImg = photo6.url;
 const foundersImg = nickLauraAsset.url;
 
@@ -368,7 +370,7 @@ const STRAVA_EVENT_URL: Record<RsvpDay, string> = {
 function MonogramG({ className = "" }: { className?: string }) {
   return (
     <img
-      src="/img/gryt-bear.webp"
+      src={grytBearImg}
       alt="gryt club bear"
       className={className}
       width={124}

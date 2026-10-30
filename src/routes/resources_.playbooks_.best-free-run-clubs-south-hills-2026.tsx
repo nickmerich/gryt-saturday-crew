@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 import { ShareButtons } from "@/components/site/ShareButtons";
+import southHills760Img from "@/assets/img/south-hills-run-clubs-760.webp";
+import southHillsImg from "@/assets/img/south-hills-run-clubs.webp";
 
 const SITE = "https://grytrunclub.com";
 const URL = `${SITE}/resources/playbooks/best-free-run-clubs-south-hills-2026`;
@@ -234,8 +236,8 @@ function SouthHillsPage() {
 
           <figure className="mt-10 border border-paper/15">
             <img
-              src="/img/south-hills-run-clubs.webp"
-              srcSet="/img/south-hills-run-clubs-760.webp 760w, /img/south-hills-run-clubs.webp 1520w"
+              src={southHillsImg}
+              srcSet={`${southHills760Img} 760w, ${southHillsImg} 1520w`}
               sizes="(max-width: 808px) 100vw, 760px"
               width={1520}
               height={1013}
