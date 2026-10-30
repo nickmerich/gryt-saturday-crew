@@ -180,6 +180,22 @@ function Page() {
                         Edit
                       </Button>
                     )}
+                    {tab === "package" && record.active && (
+                      <Button variant="outline" disabled={busy}
+                        className="min-h-12 border-paper/40"
+                        onClick={async () => {
+                          setBusy(true);
+                          try {
+                            await manage({ data: { action: "expire-package", packageId: record.id } });
+                            setMessage("Private link expired.");
+                            await q.refetch();
+                          } catch (error) {
+                            setMessage(error instanceof Error ? error.message : "Not saved.");
+                          } finally { setBusy(false); }
+                        }}>
+                        Expire link
+                      </Button>
+                    )}
                   </div>
                 ))}
               </div>

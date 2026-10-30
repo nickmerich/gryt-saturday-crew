@@ -4,6 +4,7 @@ export const ADMIN_EMAILS = new Set<string>([
   'nick@grytrunclub.com',
   'laura@grytrunclub.com',
   'nick.merich@gmail.com',
+  'merichnick@gmail.com',
   'laura.merich@gmail.com',
 ])
 
