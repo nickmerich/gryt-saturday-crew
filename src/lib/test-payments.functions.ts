@@ -255,7 +255,7 @@ export const createTestCheckout = createServerFn({ method: "POST" })
         await stripe.checkout.sessions.expire(session.id);
         throw new Error("Checkout was not saved. Please retry.");
       }
-      return { clientSecret: session.client_secret };
+      return { clientSecret: session.client_secret, sessionId: session.id };
     } catch (error) {
       if (orderId) {
         const { supabaseAdmin: db } = await import("@/integrations/supabase/client.server");
@@ -273,19 +273,15 @@ export const cancelTestCheckout = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) =>
     z
       .object({
-        clientSecret: z
-          .string()
-          .regex(/^cs_test_[A-Za-z0-9_]+_secret_[A-Za-z0-9]+$/)
-          .max(500),
+        clientSecret: z.string().min(20).max(1000),
+        sessionId: z.string().regex(/^cs_test_[A-Za-z0-9_]+$/).max(240),
       })
       .parse(input),
   )
   .handler(async ({ data }) => {
     try {
       const stripe = createStripeClient("sandbox");
-      const sessionId = data.clientSecret.split("_secret_")[0];
-      if (!sessionId) throw new Error("Checkout is unavailable.");
-      const session = await stripe.checkout.sessions.retrieve(sessionId);
+      const session = await stripe.checkout.sessions.retrieve(data.sessionId);
       if (
         session.client_secret !== data.clientSecret ||
         session.livemode ||
