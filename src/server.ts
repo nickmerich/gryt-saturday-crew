@@ -132,6 +132,19 @@ async function renderWithEdgeCache(
 
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
+    // SEO: permanent (301) redirect from www to the apex domain. Lovable's own
+    // domain redirect is a 302, so the primary domain is unset in Lovable and
+    // this worker sends the permanent signal instead.
+    const reqUrl = new URL(request.url);
+    if (reqUrl.hostname === "www.grytrunclub.com") {
+      return new Response(null, {
+        status: 301,
+        headers: {
+          location: `https://grytrunclub.com${reqUrl.pathname}${reqUrl.search}`,
+          "cache-control": "public, max-age=86400",
+        },
+      });
+    }
     try {
       const handler = await getServerEntry();
       return await renderWithEdgeCache(request, env, ctx, async () => {
