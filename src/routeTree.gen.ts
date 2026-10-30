@@ -44,6 +44,7 @@ import { Route as AdminInquiriesRouteImport } from './routes/admin.inquiries'
 import { Route as AdminMembersRouteImport } from './routes/admin.members'
 import { Route as AdminMusicTectonicsRouteImport } from './routes/admin.music-tectonics'
 import { Route as AdminPartnersRouteImport } from './routes/admin.partners'
+import { Route as AdminPaymentsRouteImport } from './routes/admin.payments'
 import { Route as AdminRosterRouteImport } from './routes/admin.roster'
 import { Route as CheckoutReturnRouteImport } from './routes/checkout.return'
 import { Route as EventsSlugRouteImport } from './routes/events.$slug'
@@ -275,6 +276,11 @@ const AdminMusicTectonicsRoute = AdminMusicTectonicsRouteImport.update({
 const AdminPartnersRoute = AdminPartnersRouteImport.update({
   id: '/admin/partners',
   path: '/admin/partners',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminPaymentsRoute = AdminPaymentsRouteImport.update({
+  id: '/admin/payments',
+  path: '/admin/payments',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRosterRoute = AdminRosterRouteImport.update({
@@ -610,6 +616,7 @@ export interface FileRoutesByFullPath {
   '/admin/members': typeof AdminMembersRoute
   '/admin/music-tectonics': typeof AdminMusicTectonicsRoute
   '/admin/partners': typeof AdminPartnersRoute
+  '/admin/payments': typeof AdminPaymentsRoute
   '/admin/roster': typeof AdminRosterRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/events/$slug': typeof EventsSlugRoute
@@ -702,6 +709,7 @@ export interface FileRoutesByTo {
   '/admin/members': typeof AdminMembersRoute
   '/admin/music-tectonics': typeof AdminMusicTectonicsRoute
   '/admin/partners': typeof AdminPartnersRoute
+  '/admin/payments': typeof AdminPaymentsRoute
   '/admin/roster': typeof AdminRosterRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/events/$slug': typeof EventsSlugRoute
@@ -795,6 +803,7 @@ export interface FileRoutesById {
   '/admin/members': typeof AdminMembersRoute
   '/admin/music-tectonics': typeof AdminMusicTectonicsRoute
   '/admin/partners': typeof AdminPartnersRoute
+  '/admin/payments': typeof AdminPaymentsRoute
   '/admin/roster': typeof AdminRosterRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/events/$slug': typeof EventsSlugRoute
@@ -889,6 +898,7 @@ export interface FileRouteTypes {
     | '/admin/members'
     | '/admin/music-tectonics'
     | '/admin/partners'
+    | '/admin/payments'
     | '/admin/roster'
     | '/checkout/return'
     | '/events/$slug'
@@ -981,6 +991,7 @@ export interface FileRouteTypes {
     | '/admin/members'
     | '/admin/music-tectonics'
     | '/admin/partners'
+    | '/admin/payments'
     | '/admin/roster'
     | '/checkout/return'
     | '/events/$slug'
@@ -1073,6 +1084,7 @@ export interface FileRouteTypes {
     | '/admin/members'
     | '/admin/music-tectonics'
     | '/admin/partners'
+    | '/admin/payments'
     | '/admin/roster'
     | '/checkout/return'
     | '/events/$slug'
@@ -1166,6 +1178,7 @@ export interface RootRouteChildren {
   AdminMembersRoute: typeof AdminMembersRoute
   AdminMusicTectonicsRoute: typeof AdminMusicTectonicsRoute
   AdminPartnersRoute: typeof AdminPartnersRoute
+  AdminPaymentsRoute: typeof AdminPaymentsRoute
   AdminRosterRoute: typeof AdminRosterRoute
   CheckoutReturnRoute: typeof CheckoutReturnRoute
   EventsSlugRoute: typeof EventsSlugRoute
@@ -1467,6 +1480,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/partners'
       fullPath: '/admin/partners'
       preLoaderRoute: typeof AdminPartnersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/payments': {
+      id: '/admin/payments'
+      path: '/admin/payments'
+      fullPath: '/admin/payments'
+      preLoaderRoute: typeof AdminPaymentsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/roster': {
@@ -1905,6 +1925,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminMembersRoute: AdminMembersRoute,
   AdminMusicTectonicsRoute: AdminMusicTectonicsRoute,
   AdminPartnersRoute: AdminPartnersRoute,
+  AdminPaymentsRoute: AdminPaymentsRoute,
   AdminRosterRoute: AdminRosterRoute,
   CheckoutReturnRoute: CheckoutReturnRoute,
   EventsSlugRoute: EventsSlugRoute,
