@@ -246,9 +246,9 @@ export function TestPaymentForm({
             <div className="mt-3 space-y-2 text-paper">
               <p>Hat test checkout needs the owner's Stripe tax setup.</p>
               <p>
-                In the connected Stripe sandbox, open Settings → Tax → Head office address.
-                Enter your actual business or ship-from street address, city, state, ZIP code
-                and country, then save and press Continue again.
+                In the connected Stripe sandbox, open Settings → Tax → Head office address. Enter
+                your actual business or ship-from street address, city, state, ZIP code and country,
+                then save and press Continue again.
               </p>
               <a
                 href="https://dashboard.stripe.com/test/settings/tax"
