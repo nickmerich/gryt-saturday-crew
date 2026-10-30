@@ -2,8 +2,9 @@
 
 ## Live separate payments
 - [x] Enable environment-scoped checkout, webhook receipts and admin views; verified inactive sandbox test event and expired sandbox test package remain absent from live admin.
-- [x] Configure live tax head office and webhook events; managed hat/support prices sync at publishing. Account descriptor and receipt-email updates rejected by Stripe: owner must set these in live Stripe settings.
-- [ ] Run payment/Shopify/browser tests and current preview/security checks, publish, then verify public live checkout without paying.
+- [x] Configure live tax head office and webhook events; verified all seven managed hat/support prices synced to live, hat tax code correct and no registrations added. Account descriptor and receipt-email updates rejected by Stripe: owner must set these in live Stripe settings.
+- [x] Preview build OK; 16 payment/access/webhook tests, 13 Shopify tests and three browser regressions passed; lint and basic security scan passed. Published and verified support/hat live cs_live checkout opened on grytrunclub.com and cancelled without paying. Event/private-link pages loaded and stayed closed.
+- [ ] Verify live event and partner checkout opening. Blocked: no active live event or live partner package is supplied; sandbox test event remains inactive and TEST Partner package expired. Create genuine live records in payment desk before verifying these flows.
 
 ## Separate test-only payments
 - [x] Save supplied registered business address to sandbox tax settings; hat payment paid, shipping $0, automatic_tax complete with $0 calculated tax. Sandbox has no tax registrations; none invented or added.
