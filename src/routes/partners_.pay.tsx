@@ -4,7 +4,7 @@ import { useServerFn } from '@tanstack/react-start'
 import { PaymentFrame, TestPaymentForm } from '@/components/payments/TestPaymentPage'
 import { getTestPackage } from '@/lib/test-payments.functions'
 import { paymentHead, usd } from '@/lib/test-payment-rules'
-export const Route = createFileRoute('/partners/pay')({ head: () => paymentHead('Private partner payment', 'Private GRYT partner package test payment.'), validateSearch: (search: Record<string, unknown>) => ({ token: typeof search.token === 'string' && /^[a-f0-9]{64}$/.test(search.token) ? search.token : '' }), component: Page })
+export const Route = createFileRoute('/partners_/pay')({ head: () => paymentHead('Private partner payment', 'Private GRYT partner package test payment.'), validateSearch: (search: Record<string, unknown>) => ({ token: typeof search.token === 'string' && /^[a-f0-9]{64}$/.test(search.token) ? search.token : '' }), component: Page })
 function Page() {
   const { token } = Route.useSearch()
   const read = useServerFn(getTestPackage)
