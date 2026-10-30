@@ -7,7 +7,7 @@ const SITE = SITE_ORIGIN;
 const URL = `${SITE}/resources/playbooks`;
 const TITLE = "Playbooks · gryt run club";
 const DESCRIPTION =
-  "Long-form playbooks from Nick on building a run club from zero, the Saturday system, and training for the comeback. Free to read.";
+  "Free run club playbooks for Pittsburgh runners: building a run club from zero, the Saturday system, winter training, and comparing local run clubs.";
 
 export const Route = createFileRoute("/resources_/playbooks")({
   head: () => ({
@@ -268,7 +268,7 @@ function PlaybooksPage() {
           </Link>
           <p className="eyebrow text-blue mt-8 mb-5">LONG-FORM FROM NICK</p>
           <h1 className="display-condensed uppercase text-[clamp(48px,9vw,128px)] leading-[0.9]">
-            Playbooks
+            Run Club Playbooks
           </h1>
           <p className="mt-7 text-paper/75 text-lg md:text-xl max-w-[640px] leading-[1.55]">
             Everything we've learned about building consistency, community, and

@@ -54,7 +54,8 @@ import { LastRunStrip } from "@/components/site/LastRunStrip";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 
 const heroImgAsset = photo1;
-const heroImg = photo4.url;
+// Hero: optimized WebP copy of run-club-4.jpg (294 KB JPG -> WebP). 686x417 intrinsic.
+const heroImg = "/img/run-club-4.webp";
 const circleImg = photo6.url;
 const foundersImg = nickLauraAsset.url;
 
@@ -483,7 +484,7 @@ function Nav() {
 function Hero() {
   return (
     <section id="top" className="relative isolate overflow-hidden bg-ink text-paper px-6 py-16 sm:px-12 md:py-24 lg:px-24">
-      <img src={heroImg} alt="The GRYT crew on the Montour / Peters Trail" className="absolute inset-0 -z-20 h-full w-full object-cover" fetchPriority="high" />
+      <img src={heroImg} width={686} height={417} alt="The GRYT crew on the Montour / Peters Trail" className="absolute inset-0 -z-20 h-full w-full object-cover" fetchPriority="high" decoding="async" />
       <div className="absolute inset-0 -z-10 bg-ink/70" aria-hidden="true" />
       <div className="mx-auto max-w-[1180px]">
         <p className="eyebrow text-blue mb-5">McMurray · Saturdays · 7 AM</p>
@@ -1352,7 +1353,7 @@ function RunnerHighlights() {
                 <p className="mt-3 text-base leading-relaxed text-paper/85">Photo unavailable. Their runner highlights and full stories are below.</p>
               </div>
             ) : (
-              <img src={nickLauraAsset.url} alt="Nick Merich and Laura wearing race medals in front of a Pittsburgh Marathon backdrop" loading="lazy" onError={() => setPhotoFailed(true)} className="aspect-[4/3] w-full object-cover md:aspect-[4/5]" />
+              <img src={nickLauraAsset.url} width={571} height={755} decoding="async" alt="Nick Merich and Laura wearing race medals in front of a Pittsburgh Marathon backdrop" loading="lazy" onError={() => setPhotoFailed(true)} className="aspect-[4/3] w-full object-cover md:aspect-[4/5]" />
             )}
             <figcaption className="mt-3 text-sm text-paper/80">Nick and Laura. More than miles.</figcaption>
           </figure>
@@ -2154,6 +2155,10 @@ function Community() {
         <div className="relative mb-12 overflow-hidden border border-paper/15">
           <img
             src={heroImg}
+            width={686}
+            height={417}
+            loading="lazy"
+            decoding="async"
             alt="The GRYT crew at the trailhead before a Saturday run"
             className="block w-full h-[clamp(280px,42vw,520px)] object-cover"
             style={{ objectPosition: "center 38%" }}
@@ -2207,7 +2212,11 @@ function Community() {
             className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15 photo-hover"
           />
           <img
-            src={photo4.url}
+            src={heroImg}
+            width={686}
+            height={417}
+            loading="lazy"
+            decoding="async"
             alt="Runners rolling out on the Montour Trail at first light"
             className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15 photo-hover"
           />

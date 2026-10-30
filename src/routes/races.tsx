@@ -235,7 +235,7 @@ function RacesPage() {
         <div className="max-w-[1080px] mx-auto">
           <p className="eyebrow text-blue mb-5">RACES · PITTSBURGH · 2026 to 2027</p>
           <h1 className="display-condensed uppercase text-[clamp(44px,8vw,112px)] leading-[0.92]">
-            Upcoming Pittsburgh<br />Races
+            Pittsburgh Races<br />2026-2027
           </h1>
           <p className="mt-7 max-w-[720px] text-paper/75 text-lg md:text-xl leading-[1.55]">
             Pick a goal. Then show up Saturday at 7 AM at Peterswood Park and train for it with people

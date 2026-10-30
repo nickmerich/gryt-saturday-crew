@@ -152,6 +152,7 @@ function FaqPage() {
             </p>
           </div>
 
+          <h2 className="sr-only">Frequently asked questions</h2>
           <Accordion type="single" collapsible className="border-t border-ink/15">
             {FAQS.map((f, i) => (
               <AccordionItem

@@ -7,7 +7,7 @@ export function FeaturedEvent() {
   if (Date.now() > EVENT_END) return null
   return <section aria-label="Next highlighted event" className="border-y border-paper/10 px-5 py-12 sm:px-8 md:px-12 md:py-16">
     <div className="mx-auto grid max-w-[1180px] items-center gap-8 md:grid-cols-[1fr_1.1fr] md:gap-14">
-      <img src={poster.url} alt="GRYT Run Club and UNCOMMON Training poster: Common people. Uncommon GRYT. Saturday, November 7, 2026, 7:00 AM at 212 Valley Brook Road" className="w-full border border-paper/15" loading="lazy" />
+      <img src={poster.url} alt="GRYT Run Club and UNCOMMON Training poster: Common people. Uncommon GRYT. Saturday, November 7, 2026, 7:00 AM at 212 Valley Brook Road" width={1080} height={1350} className="w-full h-auto border border-paper/15" loading="lazy" decoding="async" />
       <div>
         <p className="eyebrow text-blue">Highlighted run · Sat Nov 7</p>
         <h2 className="mt-4 font-condensed text-4xl uppercase leading-[0.95] sm:text-6xl">Common people.<br />Uncommon GRYT.</h2>

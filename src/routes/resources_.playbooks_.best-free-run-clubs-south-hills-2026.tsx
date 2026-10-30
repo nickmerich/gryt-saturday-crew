@@ -7,7 +7,7 @@ const URL = `${SITE}/resources/playbooks/best-free-run-clubs-south-hills-2026`;
 const TITLE =
   "Best Free Run Clubs in Pittsburgh's South Hills (2026) · gryt";
 const DESCRIPTION =
-  "Free run clubs in Pittsburgh's South Hills for 2026: GRYT in McMurray, Yinz, City of Bridges, and Fleet Feet. Cost, schedule, drop policy, and how to stay motivated.";
+  "Free run clubs in Pittsburgh's South Hills for 2026: GRYT in McMurray, City of Bridges, Fleet Feet and more. Cost, schedule, and drop policy compared.";
 const PUBLISHED = "2026-09-01";
 const MODIFIED = "2026-10-29";
 const HERO = `${SITE}/img/south-hills-run-clubs-og.jpg`;

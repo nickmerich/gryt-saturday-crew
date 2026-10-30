@@ -64,6 +64,17 @@ function PrivacyPage() {
         </p>
 
         <div className="flex flex-col gap-8 text-[15px] leading-[1.7] text-paper/80">
+          <section className="border border-blue/50 bg-blue/[0.06] p-5">
+            <h2 className="display-condensed text-paper text-[22px] mb-2">The short version</h2>
+            <ul className="list-disc pl-5 flex flex-col gap-1">
+              <li>We ask for your name, email, and phone when you RSVP or sign the waiver.</li>
+              <li>We use it to send run reminders and safety updates. That's it.</li>
+              <li>We never sell it. Only Laura and Nick can see it.</li>
+              <li>Stripe handles any payments. We never see your card number.</li>
+              <li>Want off the list or want your info deleted? Email us and we'll do it.</li>
+            </ul>
+          </section>
+
           <section>
             <h2 className="display-condensed text-paper text-[22px] mb-2">What we collect</h2>
             <p>
