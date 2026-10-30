@@ -25,6 +25,28 @@ export const checkoutInput = z
 export function partnerMethods(cents: number): Array<"card" | "us_bank_account"> {
   return cents > 100000 ? ["card", "us_bank_account"] : ["card"];
 }
+export function hatCheckoutOptions(fulfillment: "shipping" | "pickup") {
+  return {
+    automatic_tax: { enabled: true },
+    billing_address_collection: "required" as const,
+    customer_update: {
+      address: "auto" as const,
+      ...(fulfillment === "shipping" && { shipping: "auto" as const }),
+    },
+    ...(fulfillment === "shipping" && {
+      shipping_address_collection: { allowed_countries: ["US" as const] },
+      shipping_options: [
+        {
+          shipping_rate_data: {
+            display_name: "Free US shipping",
+            type: "fixed_amount" as const,
+            fixed_amount: { amount: 0, currency: "usd" },
+          },
+        },
+      ],
+    }),
+  };
+}
 export function paymentHead(title: string, description: string) {
   return {
     meta: [
