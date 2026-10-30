@@ -92,6 +92,13 @@
       "when": 1793333450107,
       "tag": "0012_separate_payment_environments",
       "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1793333766661,
+      "tag": "0013_scope_legacy_payment_functions",
+      "breakpoints": true
     }
   ]
 }
