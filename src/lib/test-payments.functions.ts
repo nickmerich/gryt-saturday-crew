@@ -3,7 +3,14 @@ import { getRequest } from "@tanstack/react-start/server";
 import { createClient } from "@supabase/supabase-js";
 import { z } from "zod";
 import { createStripeClient, getStripeErrorMessage } from "@/lib/stripe.server";
-import { checkoutInput, hatCheckoutOptions, partnerMethods, paymentEnvironment, environmentFromToken, sessionEnvironment } from "@/lib/test-payment-rules";
+import {
+  checkoutInput,
+  hatCheckoutOptions,
+  partnerMethods,
+  paymentEnvironment,
+  environmentFromToken,
+  sessionEnvironment,
+} from "@/lib/test-payment-rules";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { isAdminEmail } from "@/lib/admin/allowlist";
 
@@ -34,7 +41,10 @@ export const getTestCatalog = createServerFn({ method: "GET" })
         },
       },
     });
-    const result = await db.rpc("gryt_payment_catalog", { event_slug: data.slug, payment_env: buildEnvironment() });
+    const result = await db.rpc("gryt_payment_catalog", {
+      event_slug: data.slug,
+      payment_env: buildEnvironment(),
+    });
     if (result.error) throw new Error("Payment catalog could not load. Please try again.");
     return result.data as unknown as {
       products: Array<{
@@ -115,11 +125,13 @@ export const createTestCheckout = createServerFn({ method: "POST" })
     try {
       const environment = buildEnvironment();
       const stripe = createStripeClient(environment);
-      if (data.environment !== environment) throw new Error("Checkout environment does not match this build.");
+      if (data.environment !== environment)
+        throw new Error("Checkout environment does not match this build.");
       const { supabaseAdmin: db } = await import("@/integrations/supabase/client.server");
       let item = "Support GRYT",
         cents = data.amount,
         itemId: string | undefined,
+        sku: string | undefined,
         returnPath = "/support";
       const quantity = data.type === "ticket" || data.type === "merch" ? data.quantity : 1;
       if (data.type === "merch") {
@@ -133,6 +145,7 @@ export const createTestCheckout = createServerFn({ method: "POST" })
         item = row.data.name;
         cents = row.data.amount_cents;
         itemId = row.data.id;
+        sku = row.data.sku;
         returnPath = "/shop/checkout";
       } else if (data.type === "ticket") {
         if (!data.name.trim()) throw new Error("Attendee name is required.");
@@ -155,7 +168,7 @@ export const createTestCheckout = createServerFn({ method: "POST" })
           .from("gryt_partner_packages")
           .select("*")
           .eq("environment", buildEnvironment())
-      .eq("token_hash", await hashToken(data.token))
+          .eq("token_hash", await hashToken(data.token))
           .eq("active", true)
           .single();
         if (!row.data) throw new Error("Package is unavailable.");
@@ -200,11 +213,29 @@ export const createTestCheckout = createServerFn({ method: "POST" })
       const recurring = data.type === "support" && data.monthly;
       const metadata = { orderId, type: data.type, ...(userId && { userId }) };
       let catalogPrice: string | undefined;
-      const lookup = data.type === "merch" && cents === 3000 ? "gryt_founding_member_cap_30" : data.type === "support" && [1000,2500,5000].includes(cents) ? `gryt_support_${cents / 100}${recurring ? "_monthly" : ""}` : undefined;
+      const lookup =
+        data.type === "merch" && sku === "GRYT-FM-CAP-01" && cents === 3000
+          ? "gryt_founding_member_cap_30"
+          : data.type === "support" && [1000, 2500, 5000].includes(cents)
+            ? `gryt_support_${cents / 100}${recurring ? "_monthly" : ""}`
+            : undefined;
       if (lookup) {
         const prices = await stripe.prices.list({ lookup_keys: [lookup], active: true, limit: 1 });
         catalogPrice = prices.data[0]?.id;
-        if (!catalogPrice) throw new Error("Payment catalog is not synced yet. Please retry shortly.");
+        if (!catalogPrice)
+          throw new Error("Payment catalog is not synced yet. Please retry shortly.");
+      }
+      let supportProduct: string | undefined;
+      if (data.type === "support" && !catalogPrice) {
+        const prices = await stripe.prices.list({
+          lookup_keys: ["gryt_support_10"],
+          active: true,
+          limit: 1,
+        });
+        const product = prices.data[0]?.product;
+        supportProduct = typeof product === "string" ? product : product?.id;
+        if (!supportProduct)
+          throw new Error("Support product is not synced yet. Please retry shortly.");
       }
       const session = await stripe.checkout.sessions.create({
         ui_mode: "embedded_page",
@@ -212,15 +243,23 @@ export const createTestCheckout = createServerFn({ method: "POST" })
         customer,
         line_items: [
           {
-            ...(catalogPrice ? { price: catalogPrice } : { price_data: {
-              currency: "usd",
-              product_data: {
-                name: item,
-                ...(data.type === "merch" && { tax_code: "txcd_20030000" }),
-              },
-              unit_amount: cents,
-              ...(recurring && { recurring: { interval: "month" } }),
-            } }),
+            ...(catalogPrice
+              ? { price: catalogPrice }
+              : {
+                  price_data: {
+                    currency: "usd",
+                    ...(supportProduct
+                      ? { product: supportProduct }
+                      : {
+                          product_data: {
+                            name: item,
+                            ...(data.type === "merch" && { tax_code: "txcd_20030000" }),
+                          },
+                        }),
+                    unit_amount: cents,
+                    ...(recurring && { recurring: { interval: "month" } }),
+                  },
+                }),
             quantity,
           },
         ],
@@ -321,9 +360,9 @@ export const readTestResult = createServerFn({ method: "POST" })
   )
   .handler(async ({ data }) => {
     try {
-      const session = await createStripeClient(sessionEnvironment(data.sessionId)).checkout.sessions.retrieve(
-        data.sessionId,
-      );
+      const session = await createStripeClient(
+        sessionEnvironment(data.sessionId),
+      ).checkout.sessions.retrieve(data.sessionId);
       const { supabaseAdmin: db } = await import("@/integrations/supabase/client.server");
       const order = await db
         .from("gryt_payment_orders")
@@ -460,9 +499,11 @@ export const manageTestPayments = createServerFn({ method: "POST" })
       const token = Array.from(crypto.getRandomValues(new Uint8Array(32)), (b) =>
         b.toString(16).padStart(2, "0"),
       ).join("");
-      const result = await db
-        .from("gryt_partner_packages")
-        .insert({ ...data.record, environment: data.environment, token_hash: await hashToken(token) });
+      const result = await db.from("gryt_partner_packages").insert({
+        ...data.record,
+        environment: data.environment,
+        token_hash: await hashToken(token),
+      });
       if (result.error) throw new Error("Package was not saved.");
       return { link: `/partners/pay?token=${token}` };
     }
@@ -475,7 +516,11 @@ export const manageTestPayments = createServerFn({ method: "POST" })
     } else {
       const { id, ...fields } = data.record;
       result = id
-        ? await db.from("gryt_ticket_events").update(fields).eq("id", id).eq("environment", data.environment)
+        ? await db
+            .from("gryt_ticket_events")
+            .update(fields)
+            .eq("id", id)
+            .eq("environment", data.environment)
         : await db.from("gryt_ticket_events").insert({ ...fields, environment: data.environment });
     }
     if (result.error) throw new Error("Record was not saved. Check the unique SKU or slug.");

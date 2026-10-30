@@ -9,7 +9,8 @@ export const Route = createFileRoute("/thank-you")({
   head: () => paymentHead("Payment result", "Your GRYT payment status."),
   validateSearch: (search: Record<string, unknown>) => ({
     session_id:
-      typeof search.session_id === "string" && /^cs_(test|live)_[A-Za-z0-9_]+$/.test(search.session_id)
+      typeof search.session_id === "string" &&
+      /^cs_(test|live)_[A-Za-z0-9_]+$/.test(search.session_id)
         ? search.session_id
         : "",
   }),
