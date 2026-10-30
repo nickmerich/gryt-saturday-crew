@@ -131,6 +131,7 @@ export const createTestCheckout = createServerFn({ method: "POST" })
       let item = "Support GRYT",
         cents = data.amount,
         itemId: string | undefined,
+        sku: string | undefined,
         returnPath = "/support";
       const quantity = data.type === "ticket" || data.type === "merch" ? data.quantity : 1;
       if (data.type === "merch") {
@@ -144,6 +145,7 @@ export const createTestCheckout = createServerFn({ method: "POST" })
         item = row.data.name;
         cents = row.data.amount_cents;
         itemId = row.data.id;
+        sku = row.data.sku;
         returnPath = "/shop/checkout";
       } else if (data.type === "ticket") {
         if (!data.name.trim()) throw new Error("Attendee name is required.");
@@ -212,7 +214,7 @@ export const createTestCheckout = createServerFn({ method: "POST" })
       const metadata = { orderId, type: data.type, ...(userId && { userId }) };
       let catalogPrice: string | undefined;
       const lookup =
-        data.type === "merch" && cents === 3000
+        data.type === "merch" && sku === "GRYT-FM-CAP-01" && cents === 3000
           ? "gryt_founding_member_cap_30"
           : data.type === "support" && [1000, 2500, 5000].includes(cents)
             ? `gryt_support_${cents / 100}${recurring ? "_monthly" : ""}`
@@ -222,6 +224,13 @@ export const createTestCheckout = createServerFn({ method: "POST" })
         catalogPrice = prices.data[0]?.id;
         if (!catalogPrice)
           throw new Error("Payment catalog is not synced yet. Please retry shortly.");
+      }
+      let supportProduct: string | undefined;
+      if (data.type === "support" && !catalogPrice) {
+        const prices = await stripe.prices.list({ lookup_keys: ["gryt_support_10"], active: true, limit: 1 });
+        const product = prices.data[0]?.product;
+        supportProduct = typeof product === "string" ? product : product?.id;
+        if (!supportProduct) throw new Error("Support product is not synced yet. Please retry shortly.");
       }
       const session = await stripe.checkout.sessions.create({
         ui_mode: "embedded_page",
@@ -234,10 +243,10 @@ export const createTestCheckout = createServerFn({ method: "POST" })
               : {
                   price_data: {
                     currency: "usd",
-                    product_data: {
+                    ...(supportProduct ? { product: supportProduct } : { product_data: {
                       name: item,
                       ...(data.type === "merch" && { tax_code: "txcd_20030000" }),
-                    },
+                    } }),
                     unit_amount: cents,
                     ...(recurring && { recurring: { interval: "month" } }),
                   },
@@ -481,13 +490,11 @@ export const manageTestPayments = createServerFn({ method: "POST" })
       const token = Array.from(crypto.getRandomValues(new Uint8Array(32)), (b) =>
         b.toString(16).padStart(2, "0"),
       ).join("");
-      const result = await db
-        .from("gryt_partner_packages")
-        .insert({
+      const result = await db.from("gryt_partner_packages").insert({
           ...data.record,
           environment: data.environment,
           token_hash: await hashToken(token),
-        });
+      });
       if (result.error) throw new Error("Package was not saved.");
       return { link: `/partners/pay?token=${token}` };
     }
