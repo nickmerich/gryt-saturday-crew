@@ -483,6 +483,8 @@ export type Database = {
           notion_synced: boolean
           notion_synced_at: string | null
           party_size: number
+          song: string | null
+          song_credit_ok: boolean
           source: string | null
           user_agent: string | null
         }
@@ -502,6 +504,8 @@ export type Database = {
           notion_synced?: boolean
           notion_synced_at?: string | null
           party_size?: number
+          song?: string | null
+          song_credit_ok?: boolean
           source?: string | null
           user_agent?: string | null
         }
@@ -521,6 +525,8 @@ export type Database = {
           notion_synced?: boolean
           notion_synced_at?: string | null
           party_size?: number
+          song?: string | null
+          song_credit_ok?: boolean
           source?: string | null
           user_agent?: string | null
         }
