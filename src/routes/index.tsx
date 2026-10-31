@@ -599,6 +599,8 @@ function RSVP() {
   const [source, setSource] = useState("");
   const [partySize, setPartySize] = useState(1);
   const [firstTimer, setFirstTimer] = useState(false);
+  const [song, setSong] = useState("");
+  const [songCreditOk, setSongCreditOk] = useState(false);
   const [submittedParty, setSubmittedParty] = useState(1);
   const [submittedFirstTimer, setSubmittedFirstTimer] = useState(false);
   const [days, setDays] = useState<Record<RsvpDay, boolean>>({ sat: true });
@@ -711,6 +713,10 @@ function RSVP() {
               heroVariant: heroVariant ?? null,
               partySize,
               firstTimer,
+              // Song only rides along with the Saturday RSVP.
+              ...(d === "sat" && song.trim()
+                ? { song: song.trim(), songCreditOk }
+                : {}),
             }),
           }),
         ),
@@ -736,6 +742,8 @@ function RSVP() {
         day_count: selected.length,
         party_size: partySize,
         first_timer: firstTimer,
+        has_song: Boolean(song.trim()),
+        song_credit_ok: Boolean(song.trim()) && songCreditOk,
         contact_kind: contactIsEmail ? "email" : "phone",
         source: source || "unspecified",
       });
@@ -955,6 +963,46 @@ function RSVP() {
                   First time running with us
                 </span>
               </button>
+              <label htmlFor="rsvp-song" className="block text-[11px] font-bold tracking-[0.14em] uppercase text-ink/70 mb-1.5">
+                One song that gets you out the door?{" "}
+                <span className="normal-case tracking-normal font-semibold text-ink/50">Optional</span>
+              </label>
+              <input
+                id="rsvp-song"
+                value={song}
+                onChange={(e) => setSong(e.target.value)}
+                maxLength={200}
+                autoComplete="off"
+                placeholder="Song and artist, like Dreams - Fleetwood Mac"
+                aria-describedby="rsvp-song-help"
+                className="w-full text-base text-ink bg-white border-[1.5px] border-[#cfcabe] px-3.5 py-3 mb-1.5 outline-none focus:border-ink"
+              />
+              <p id="rsvp-song-help" className="text-xs leading-[1.5] text-ink/60 mb-3">
+                It goes on this week's GRYT Run #{canonicalOccurrence().runNumber} playlist.
+              </p>
+              {song.trim() ? (
+                <button
+                  type="button"
+                  onClick={() => setSongCreditOk((v) => !v)}
+                  aria-pressed={songCreditOk}
+                  className={`w-full flex items-center gap-3 border-[1.5px] px-3.5 py-3 mb-4 text-left transition-colors ${
+                    songCreditOk ? "border-ink bg-white" : "border-[#cfcabe] bg-white hover:border-ink"
+                  }`}
+                >
+                  <span
+                    className={`w-4 h-4 shrink-0 flex items-center justify-center text-[10px] border-[1.5px] border-ink ${
+                      songCreditOk ? "bg-ink text-paper" : "bg-white text-transparent"
+                    }`}
+                  >
+                    ✓
+                  </span>
+                  <span className="text-sm font-semibold text-ink">
+                    Put my first name next to it in the run report
+                  </span>
+                </button>
+              ) : (
+                <div className="mb-1" />
+              )}
               <label htmlFor="rsvp-source" className="block text-[11px] font-bold tracking-[0.14em] uppercase text-ink/70 mb-1.5">
                 How'd you find us?
               </label>

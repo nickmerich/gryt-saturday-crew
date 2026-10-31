@@ -46,6 +46,7 @@ import { Route as AdminMusicTectonicsRouteImport } from './routes/admin.music-te
 import { Route as AdminPartnersRouteImport } from './routes/admin.partners'
 import { Route as AdminPaymentsRouteImport } from './routes/admin.payments'
 import { Route as AdminRosterRouteImport } from './routes/admin.roster'
+import { Route as AdminSoundtrackRouteImport } from './routes/admin.soundtrack'
 import { Route as CheckoutReturnRouteImport } from './routes/checkout.return'
 import { Route as EventsSlugRouteImport } from './routes/events.$slug'
 import { Route as MembersKeyRouteImport } from './routes/members.$key'
@@ -286,6 +287,11 @@ const AdminPaymentsRoute = AdminPaymentsRouteImport.update({
 const AdminRosterRoute = AdminRosterRouteImport.update({
   id: '/admin/roster',
   path: '/admin/roster',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminSoundtrackRoute = AdminSoundtrackRouteImport.update({
+  id: '/admin/soundtrack',
+  path: '/admin/soundtrack',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CheckoutReturnRoute = CheckoutReturnRouteImport.update({
@@ -618,6 +624,7 @@ export interface FileRoutesByFullPath {
   '/admin/partners': typeof AdminPartnersRoute
   '/admin/payments': typeof AdminPaymentsRoute
   '/admin/roster': typeof AdminRosterRoute
+  '/admin/soundtrack': typeof AdminSoundtrackRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/events/$slug': typeof EventsSlugRoute
   '/members/$key': typeof MembersKeyRoute
@@ -711,6 +718,7 @@ export interface FileRoutesByTo {
   '/admin/partners': typeof AdminPartnersRoute
   '/admin/payments': typeof AdminPaymentsRoute
   '/admin/roster': typeof AdminRosterRoute
+  '/admin/soundtrack': typeof AdminSoundtrackRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/events/$slug': typeof EventsSlugRoute
   '/members/$key': typeof MembersKeyRoute
@@ -805,6 +813,7 @@ export interface FileRoutesById {
   '/admin/partners': typeof AdminPartnersRoute
   '/admin/payments': typeof AdminPaymentsRoute
   '/admin/roster': typeof AdminRosterRoute
+  '/admin/soundtrack': typeof AdminSoundtrackRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/events/$slug': typeof EventsSlugRoute
   '/members/$key': typeof MembersKeyRoute
@@ -900,6 +909,7 @@ export interface FileRouteTypes {
     | '/admin/partners'
     | '/admin/payments'
     | '/admin/roster'
+    | '/admin/soundtrack'
     | '/checkout/return'
     | '/events/$slug'
     | '/members/$key'
@@ -993,6 +1003,7 @@ export interface FileRouteTypes {
     | '/admin/partners'
     | '/admin/payments'
     | '/admin/roster'
+    | '/admin/soundtrack'
     | '/checkout/return'
     | '/events/$slug'
     | '/members/$key'
@@ -1086,6 +1097,7 @@ export interface FileRouteTypes {
     | '/admin/partners'
     | '/admin/payments'
     | '/admin/roster'
+    | '/admin/soundtrack'
     | '/checkout/return'
     | '/events/$slug'
     | '/members/$key'
@@ -1180,6 +1192,7 @@ export interface RootRouteChildren {
   AdminPartnersRoute: typeof AdminPartnersRoute
   AdminPaymentsRoute: typeof AdminPaymentsRoute
   AdminRosterRoute: typeof AdminRosterRoute
+  AdminSoundtrackRoute: typeof AdminSoundtrackRoute
   CheckoutReturnRoute: typeof CheckoutReturnRoute
   EventsSlugRoute: typeof EventsSlugRoute
   PartnersPayRoute: typeof PartnersPayRoute
@@ -1494,6 +1507,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/roster'
       fullPath: '/admin/roster'
       preLoaderRoute: typeof AdminRosterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/soundtrack': {
+      id: '/admin/soundtrack'
+      path: '/admin/soundtrack'
+      fullPath: '/admin/soundtrack'
+      preLoaderRoute: typeof AdminSoundtrackRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/checkout/return': {
@@ -1927,6 +1947,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminPartnersRoute: AdminPartnersRoute,
   AdminPaymentsRoute: AdminPaymentsRoute,
   AdminRosterRoute: AdminRosterRoute,
+  AdminSoundtrackRoute: AdminSoundtrackRoute,
   CheckoutReturnRoute: CheckoutReturnRoute,
   EventsSlugRoute: EventsSlugRoute,
   PartnersPayRoute: PartnersPayRoute,
