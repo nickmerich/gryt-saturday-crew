@@ -28,6 +28,11 @@ const RsvpSchema = z.object({
 })
 
 
+function isMissingColumn(err: { code?: string; message?: string }): boolean {
+  if (err.code === 'PGRST204' || err.code === '42703') return true
+  return /song(_credit_ok)? .*(column|schema cache)|column .*song/i.test(err.message ?? '')
+}
+
 function redactEmail(email: string | null | undefined): string {
   if (!email) return '***'
   const [localPart, domain] = email.split('@')
@@ -113,30 +118,39 @@ export const Route = createFileRoute('/api/public/rsvp')({
 
 
         // 1. Persist the RSVP
-        const { data: inserted, error: insertError } = await supabase
+        const baseRow: Record<string, unknown> = {
+          name,
+          contact,
+          source: source ?? null,
+          event_label: eventLabel ?? null,
+          event_id: occurrence.id,
+          hero_variant: heroVariant ?? null,
+          party_size: partySize,
+          first_timer: firstTimer,
+          user_agent: userAgent,
+        }
+        let { data: inserted, error: insertError } = await supabase
           .from('rsvps')
-          .insert({
-            name,
-            contact,
-            source: source ?? null,
-            event_label: eventLabel ?? null,
-            event_id: occurrence.id,
-            hero_variant: heroVariant ?? null,
-            party_size: partySize,
-            first_timer: firstTimer,
-            song,
-            song_credit_ok: songCreditOk,
-            user_agent: userAgent,
-          })
+          .insert(song ? { ...baseRow, song, song_credit_ok: songCreditOk } : baseRow)
           .select('id')
           .single()
+        // If the soundtrack columns are not in this database yet (migration
+        // 0014 pending), never lose the RSVP: save it without the song.
+        if (insertError && song && isMissingColumn(insertError)) {
+          console.error('Song columns missing; saving RSVP without song', { error: insertError })
+          ;({ data: inserted, error: insertError } = await supabase
+            .from('rsvps')
+            .insert(baseRow)
+            .select('id')
+            .single())
+        }
 
         if (insertError) {
           console.error('Failed to insert RSVP', { error: insertError })
           return Response.json({ error: 'Failed to save RSVP' }, { status: 500 })
         }
 
-        const rsvpId = inserted.id as string
+        const rsvpId = inserted!.id as string
         const resolvedEventLabel = eventId
           ? `GRYT Run #${occurrence.runNumber} · Sat, ${new Date(occurrence.startUtc).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: occurrence.timeZone })} · 7 AM`
           : eventLabel?.trim() || nextSaturdayLabel()
