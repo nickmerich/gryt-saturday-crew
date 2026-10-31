@@ -23,6 +23,16 @@ export type RunReportNote = {
   shoutouts?: string[];
   /** Opt-in first names of first-timers who said yes to a public welcome. */
   welcomed?: string[];
+  /**
+   * The Saturday Soundtrack. Build the playlist from /admin/soundtrack, name it
+   * "GRYT Run #N", make it public on Spotify, and paste the share link here.
+   * `name` is only allowed when that runner ticked "credit my first name" on
+   * their RSVP. The admin page's "Copy for run report" button respects this.
+   */
+  soundtrack?: {
+    spotifyUrl: string;
+    credits?: { song: string; name?: string }[];
+  };
 };
 
 export const RUN_REPORT_NOTES: Record<number, RunReportNote> = {
@@ -32,5 +42,9 @@ export const RUN_REPORT_NOTES: Record<number, RunReportNote> = {
   //   story: "…",
   //   shoutouts: ["Laura"],
   //   welcomed: [],
+  //   soundtrack: {
+  //     spotifyUrl: "https://open.spotify.com/playlist/…",
+  //     credits: [{ song: "Dreams - Fleetwood Mac", name: "Laura" }, { song: "…" }],
+  //   },
   // },
 };

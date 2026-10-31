@@ -7,6 +7,7 @@ import { ShareButtons } from "@/components/site/ShareButtons";
 import { getRunReports } from "@/lib/run-reports.functions";
 import { RUN_REPORT_NOTES } from "@/content/run-reports";
 import { MILESTONE_LINES, MILESTONE_NAMES } from "@/lib/run-reports";
+import { playlistName, spotifyEmbedSrc, spotifyOpenUrl, spotifyPlaylistId } from "@/lib/soundtrack";
 import { nyDateKey, occurrenceFor, RUN_LOCATION } from "@/lib/run-schedule";
 import {
   RUN_REPORTS_QUERY_KEY,
@@ -112,6 +113,9 @@ function RunReportPage() {
             <div className="mt-10 border border-paper/20 p-6 md:p-8">
               <p className="font-bold text-[20px]">This run hasn't happened yet.</p>
               <p className="mt-2 text-paper/75">The report posts after Saturday. Be in it.</p>
+              <p className="mt-4 text-paper/75">
+                Add one song when you RSVP and it goes on the {playlistName(n)} playlist in this report.
+              </p>
             </div>
           ) : isPending ? (
             <p className="mt-10 text-paper/60" role="status">
@@ -190,6 +194,8 @@ function RunReportPage() {
             </section>
           ) : null}
 
+          <Soundtrack runNumber={n} soundtrack={note?.soundtrack} />
+
           {note?.welcomed?.length ? (
             <section className="mt-10">
               <h2 className="eyebrow text-paper/60 mb-3">Welcome to the crew</h2>
@@ -228,5 +234,62 @@ function RunReportPage() {
       </article>
       <SiteFooter />
     </main>
+  );
+}
+
+type SoundtrackNote = NonNullable<(typeof RUN_REPORT_NOTES)[number]["soundtrack"]>;
+
+/**
+ * The Saturday Soundtrack: the run's playlist, built from songs runners added
+ * to their RSVP. Renders nothing until an organizer adds a valid Spotify link.
+ */
+function Soundtrack({ runNumber, soundtrack }: { runNumber: number; soundtrack?: SoundtrackNote }) {
+  const id = spotifyPlaylistId(soundtrack?.spotifyUrl);
+  if (!id) return null;
+  const credits = soundtrack?.credits ?? [];
+  const name = playlistName(runNumber);
+  return (
+    <section aria-labelledby="soundtrack" className="mt-10 border border-paper/20 p-6 md:p-8">
+      <h2 id="soundtrack" className="eyebrow text-blue mb-2">
+        The Saturday Soundtrack
+      </h2>
+      <p className="text-[20px] md:text-[24px] font-bold leading-tight">{name}</p>
+      <p className="mt-1 text-paper/75">
+        {credits.length
+          ? `${credits.length === 1 ? "One song" : `${credits.length} songs`} from the people who RSVP'd. One song each, picked to get out the door.`
+          : "Songs from the people who RSVP'd. One song each, picked to get out the door."}
+      </p>
+      <iframe
+        title={`${name} playlist on Spotify`}
+        src={spotifyEmbedSrc(id)}
+        className="mt-5 w-full border-0 rounded-[12px]"
+        height={352}
+        loading="lazy"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      />
+      {credits.length ? (
+        <ul className="mt-5 divide-y divide-paper/15 border-y border-paper/15">
+          {credits.map((c, i) => (
+            <li key={`${c.song}-${i}`} className="flex justify-between gap-4 py-2.5 text-[15px]">
+              <span className="text-paper/90">{c.song}</span>
+              {c.name ? <span className="shrink-0 font-bold">{c.name}</span> : null}
+            </li>
+          ))}
+        </ul>
+      ) : null}
+      <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-[15px]">
+        <a
+          href={spotifyOpenUrl(id)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue underline underline-offset-4 hover:text-paper"
+        >
+          Open in Spotify
+        </a>
+        <a href="/#join" className="text-blue underline underline-offset-4 hover:text-paper">
+          Add yours to next week's playlist
+        </a>
+      </div>
+    </section>
   );
 }

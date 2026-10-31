@@ -7,6 +7,7 @@ import {
   occurrenceCalendarUrl,
   validateEventRef,
 } from '@/lib/run-schedule'
+import { normalizeSong, SONG_MAX } from '@/lib/soundtrack'
 
 const isEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)
 
@@ -21,6 +22,9 @@ const RsvpSchema = z.object({
   heroVariant: z.enum(['a', 'b']).optional().nullable(),
   partySize: z.coerce.number().int().min(1).max(10).optional().default(1),
   firstTimer: z.boolean().optional().default(false),
+  // Saturday Soundtrack: optional song, plus explicit opt-in to be credited.
+  song: z.string().max(SONG_MAX * 2).optional().nullable(),
+  songCreditOk: z.boolean().optional().default(false),
 })
 
 
@@ -81,6 +85,9 @@ export const Route = createFileRoute('/api/public/rsvp')({
           partySize,
           firstTimer,
         } = parsed.data
+        const song = normalizeSong(parsed.data.song)
+        // A credit only means something when there is a song to credit.
+        const songCreditOk = Boolean(song) && parsed.data.songCreditOk === true
 
         // Validate the canonical occurrence server-side. A stale tab that still
         // holds a cancelled or superseded run must not silently sign someone up.
@@ -117,6 +124,8 @@ export const Route = createFileRoute('/api/public/rsvp')({
             hero_variant: heroVariant ?? null,
             party_size: partySize,
             first_timer: firstTimer,
+            song,
+            song_credit_ok: songCreditOk,
             user_agent: userAgent,
           })
           .select('id')
@@ -146,6 +155,7 @@ export const Route = createFileRoute('/api/public/rsvp')({
               submittedAt,
               partySize,
               firstTimer,
+              song: song ?? undefined,
             },
             `rsvp-notify-${rsvpId}`,
           )
