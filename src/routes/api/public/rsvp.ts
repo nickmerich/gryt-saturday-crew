@@ -7,6 +7,7 @@ import {
   occurrenceCalendarUrl,
   validateEventRef,
 } from '@/lib/run-schedule'
+import { isMissingSongColumnError, normalizeSong, SONG_MAX } from '@/lib/soundtrack'
 
 const isEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)
 
@@ -21,6 +22,9 @@ const RsvpSchema = z.object({
   heroVariant: z.enum(['a', 'b']).optional().nullable(),
   partySize: z.coerce.number().int().min(1).max(10).optional().default(1),
   firstTimer: z.boolean().optional().default(false),
+  // Saturday Soundtrack. Optional; blank means no song.
+  song: z.string().max(SONG_MAX * 2).optional().nullable(),
+  songCredit: z.boolean().optional().default(false),
 })
 
 
@@ -80,7 +84,12 @@ export const Route = createFileRoute('/api/public/rsvp')({
           heroVariant,
           partySize,
           firstTimer,
+          song: rawSong,
+          songCredit: rawSongCredit,
         } = parsed.data
+        const song = normalizeSong(rawSong)
+        // Credit is meaningless without a song, so it can never be stored alone.
+        const songCredit = Boolean(song && rawSongCredit)
 
         // Validate the canonical occurrence server-side. A stale tab that still
         // holds a cancelled or superseded run must not silently sign someone up.
@@ -106,28 +115,44 @@ export const Route = createFileRoute('/api/public/rsvp')({
 
 
         // 1. Persist the RSVP
-        const { data: inserted, error: insertError } = await supabase
+        const baseRow: Record<string, unknown> = {
+          name,
+          contact,
+          source: source ?? null,
+          event_label: eventLabel ?? null,
+          event_id: occurrence.id,
+          hero_variant: heroVariant ?? null,
+          party_size: partySize,
+          first_timer: firstTimer,
+          user_agent: userAgent,
+        }
+        // Song columns are only sent when there is a song, so RSVPs without one
+        // write exactly the same row as before this feature existed.
+        let { data: inserted, error: insertError } = await supabase
           .from('rsvps')
-          .insert({
-            name,
-            contact,
-            source: source ?? null,
-            event_label: eventLabel ?? null,
-            event_id: occurrence.id,
-            hero_variant: heroVariant ?? null,
-            party_size: partySize,
-            first_timer: firstTimer,
-            user_agent: userAgent,
-          })
+          .insert(song ? { ...baseRow, song, song_credit: songCredit } : baseRow)
           .select('id')
           .single()
+
+        // If the soundtrack migration hasn't been applied yet, never lose the
+        // RSVP over a song. Save it without the song and keep going.
+        let songSaved = Boolean(song)
+        if (insertError && song && isMissingSongColumnError(insertError)) {
+          console.warn('RSVP song columns missing; saving RSVP without song')
+          songSaved = false
+          ;({ data: inserted, error: insertError } = await supabase
+            .from('rsvps')
+            .insert(baseRow)
+            .select('id')
+            .single())
+        }
 
         if (insertError) {
           console.error('Failed to insert RSVP', { error: insertError })
           return Response.json({ error: 'Failed to save RSVP' }, { status: 500 })
         }
 
-        const rsvpId = inserted.id as string
+        const rsvpId = inserted!.id as string
         const resolvedEventLabel = eventId
           ? `GRYT Run #${occurrence.runNumber} · Sat, ${new Date(occurrence.startUtc).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: occurrence.timeZone })} · 7 AM`
           : eventLabel?.trim() || nextSaturdayLabel()
@@ -146,6 +171,11 @@ export const Route = createFileRoute('/api/public/rsvp')({
               submittedAt,
               partySize,
               firstTimer,
+              // Shown in the owner email even if the column write fell back,
+              // so a song is never silently lost.
+              song: song ?? undefined,
+              songCredit: song ? songCredit : undefined,
+              songSaved: song ? songSaved : undefined,
             },
             `rsvp-notify-${rsvpId}`,
           )

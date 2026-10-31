@@ -23,6 +23,16 @@ export type RunReportNote = {
   shoutouts?: string[];
   /** Opt-in first names of first-timers who said yes to a public welcome. */
   welcomed?: string[];
+  /**
+   * Saturday Soundtrack: the week's playlist, built from songs runners shared
+   * when they RSVP'd. Copy the list from /admin/checkin. `playlist` is a
+   * Spotify playlist link. Only include `from` when the runner ticked
+   * "Put my first name next to it" (the admin list already respects this).
+   */
+  soundtrack?: {
+    playlist?: string;
+    songs?: Array<{ song: string; from?: string }>;
+  };
 };
 
 export const RUN_REPORT_NOTES: Record<number, RunReportNote> = {
@@ -32,5 +42,9 @@ export const RUN_REPORT_NOTES: Record<number, RunReportNote> = {
   //   story: "…",
   //   shoutouts: ["Laura"],
   //   welcomed: [],
+  //   soundtrack: {
+  //     playlist: "https://open.spotify.com/playlist/…",
+  //     songs: [{ song: "Dreams - Fleetwood Mac", from: "Laura" }, { song: "Lose Yourself - Eminem" }],
+  //   },
   // },
 };

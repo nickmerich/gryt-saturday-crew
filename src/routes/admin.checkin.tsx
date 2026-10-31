@@ -392,6 +392,87 @@ function CheckinPage() {
           Walk-ins count as here. They still need to sign the waiver before they run.
         </p>
       </form>
+
+      <SoundtrackPanel />
     </main>
+  )
+}
+
+type SoundtrackResponse = {
+  runNumber: number
+  localDate: string
+  available: boolean
+  songs: Array<{ song: string; creditedTo: string | null }>
+}
+
+async function fetchSoundtrack(): Promise<SoundtrackResponse> {
+  const response = await fetch('/api/admin/soundtrack', { headers: await authHeaders() })
+  const body = await response.json()
+  if (!response.ok) throw new Error(body.error || 'Request failed.')
+  return body
+}
+
+/** This week's RSVP songs, ready to paste into the Spotify search bar. */
+function SoundtrackPanel() {
+  const [copied, setCopied] = useState(false)
+  const { data, error, isLoading } = useQuery({
+    queryKey: ['admin', 'soundtrack'],
+    queryFn: fetchSoundtrack,
+    retry: false,
+    refetchInterval: 60_000,
+  })
+  const songs = data?.songs ?? []
+
+  async function copyAll() {
+    const text = songs.map((s) => (s.creditedTo ? `${s.song} (${s.creditedTo})` : s.song)).join('\n')
+    try {
+      await navigator.clipboard.writeText(text)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch {
+      setCopied(false)
+    }
+  }
+
+  return (
+    <section aria-labelledby="soundtrack-h" className="border-t border-white/10 px-5 sm:px-12 py-6">
+      <p className="eyebrow eyebrow-blue">From this week's RSVPs</p>
+      <h2 id="soundtrack-h" className="display-condensed text-2xl mt-1">
+        Saturday Soundtrack{data ? ` · Run #${data.runNumber}` : ''}
+      </h2>
+      {isLoading ? (
+        <p className="mt-3 text-sm text-muted-foreground">Loading songs…</p>
+      ) : error ? (
+        <p className="mt-3 text-sm text-red-300">{error instanceof Error ? error.message : 'Could not load songs.'}</p>
+      ) : data && !data.available ? (
+        <p className="mt-3 text-sm text-muted-foreground">
+          The song columns aren't in the database yet. Apply migration 0014_rsvp_song, then songs will show here.
+        </p>
+      ) : songs.length === 0 ? (
+        <p className="mt-3 text-sm text-muted-foreground">No songs yet this week.</p>
+      ) : (
+        <>
+          <ol className="mt-3 space-y-1.5 list-decimal pl-5 text-sm">
+            {songs.map((s) => (
+              <li key={s.song}>
+                {s.song}
+                {s.creditedTo ? <span className="text-muted-foreground"> · {s.creditedTo}</span> : null}
+              </li>
+            ))}
+          </ol>
+          <button
+            type="button"
+            onClick={copyAll}
+            className="mt-4 border border-white/20 px-4 py-2 text-xs uppercase tracking-wider hover:border-blue"
+          >
+            {copied ? 'Copied' : 'Copy list'}
+          </button>
+          <p className="mt-2 text-xs text-muted-foreground">
+            Names show only for runners who ticked the credit box. Add the playlist link and these songs to
+            src/content/run-reports.ts after the run.
+          </p>
+        </>
+      )}
+    </section>
   )
 }

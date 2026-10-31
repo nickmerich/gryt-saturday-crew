@@ -20,6 +20,9 @@ interface Props {
   submittedAt?: string
   partySize?: number
   firstTimer?: boolean
+  song?: string
+  songCredit?: boolean
+  songSaved?: boolean
 }
 
 const NOTIFY_TO = 'nick@gryt.club'
@@ -32,6 +35,9 @@ const Email = ({
   submittedAt,
   partySize = 1,
   firstTimer = false,
+  song,
+  songCredit = false,
+  songSaved = true,
 }: Props) => {
   const when = submittedAt
     ? new Date(submittedAt).toLocaleString('en-US', {
@@ -63,6 +69,12 @@ const Email = ({
             <Row label="First time" value={firstTimer ? 'Yes — say hello' : 'No'} />
             <Row label="Source" value={source} />
             <Row label="Event" value={eventLabel} />
+            {song && (
+              <Row
+                label="Saturday Soundtrack"
+                value={`${song} · ${songCredit ? `OK to credit ${name.split(' ')[0]}` : 'Keep anonymous'}${songSaved ? '' : ' · not saved to the database yet, add it by hand'}`}
+              />
+            )}
             {when && <Row label="Submitted" value={when} />}
           </Section>
 
@@ -97,6 +109,9 @@ export const template = {
     submittedAt: new Date().toISOString(),
     partySize: 2,
     firstTimer: true,
+    song: 'Dreams - Fleetwood Mac',
+    songCredit: true,
+    songSaved: true,
   },
 } satisfies TemplateEntry
 

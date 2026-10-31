@@ -414,3 +414,57 @@ export async function selfCheckin(request: Request) {
 
   return json({ ok: true, name, runNumber: occurrence.runNumber })
 }
+
+/**
+ * Saturday Soundtrack songs for one run, for organizers building the
+ * playlist. First names appear only when the runner opted in to a credit.
+ * Kept separate from checkinList so a missing song column can never break
+ * check-in.
+ */
+export async function soundtrackList(request: Request) {
+  const access = await gate(request)
+  if ('error' in access) return access.error
+  const { db } = access
+  const { buildSoundtrack, isMissingSongColumnError } = await import('@/lib/soundtrack')
+
+  const url = new URL(request.url)
+  const occurrence = resolveOccurrence(url.searchParams.get('date'))
+  const label = `Run #${occurrence.runNumber}`
+  const windowStart = new Date(new Date(occurrence.startUtc).getTime() - 9 * 864e5).toISOString()
+
+  const { data, error } = await db
+    .from('rsvps')
+    .select('name,song,song_credit,event_id,event_label,created_at')
+    .not('song', 'is', null)
+    .gte('created_at', new Date(new Date(occurrence.startUtc).getTime() - 30 * 864e5).toISOString())
+    .order('created_at', { ascending: true })
+    .limit(1000)
+
+  if (error) {
+    if (isMissingSongColumnError(error)) {
+      return json({ runNumber: occurrence.runNumber, localDate: occurrence.localDate, available: false, songs: [] })
+    }
+    return json({ error: 'The song list could not be loaded. Please try again.' }, 503)
+  }
+
+  const rows = (data ?? []).filter((row) => {
+    if ((row.event_id as string | null) === occurrence.id) return true
+    const createdAt = row.created_at as string
+    const eventLabel = ((row.event_label as string) ?? '').trim()
+    return (
+      eventLabel.includes(label) ||
+      eventLabel.includes(occurrence.localDate) ||
+      (!row.event_id && createdAt >= windowStart && createdAt <= occurrence.endUtc)
+    )
+  })
+
+  const songs = buildSoundtrack(
+    rows.map((row) => ({
+      song: row.song as string | null,
+      songCredit: row.song_credit as boolean | null,
+      name: row.name as string | null,
+      createdAt: row.created_at as string,
+    })),
+  )
+  return json({ runNumber: occurrence.runNumber, localDate: occurrence.localDate, available: true, songs })
+}

@@ -4,6 +4,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 import { SaturdayInvite } from "@/components/site/GuideShell";
 import { ShareButtons } from "@/components/site/ShareButtons";
+import { SaturdaySoundtrack } from "@/components/site/SaturdaySoundtrack";
 import { getRunReports } from "@/lib/run-reports.functions";
 import { RUN_REPORT_NOTES } from "@/content/run-reports";
 import { MILESTONE_LINES, MILESTONE_NAMES } from "@/lib/run-reports";
@@ -203,6 +204,14 @@ function RunReportPage() {
               <p className="text-[18px] font-bold">{note.shoutouts.join(", ")}</p>
               <p className="mt-1 text-paper/70 text-[15px]">For greeting, buddying, and sweeping so nobody ran alone.</p>
             </section>
+          ) : null}
+
+          {note?.soundtrack && !isFuture ? (
+            <SaturdaySoundtrack
+              runNumber={n}
+              playlist={note.soundtrack.playlist}
+              songs={note.soundtrack.songs}
+            />
           ) : null}
 
           <nav aria-label="Other runs" className="mt-14 flex justify-between gap-4 text-[13px] tracking-[0.18em] uppercase font-mono">

@@ -87,6 +87,11 @@ function PrivacyPage() {
                 contact name and phone you provide.
               </li>
               <li>
+                <strong className="text-paper">Saturday Soundtrack (optional):</strong> a song you share when you RSVP.
+                It can appear on that week's playlist in the public run report. Your first name only appears next to
+                it if you tick the box to be credited. The Spotify player on run reports loads only after you tap play.
+              </li>
+              <li>
                 <strong className="text-paper">Run check-ins:</strong> which Saturdays you attended, used to count
                 milestones (5, 10, 25, 50, and 100 Saturdays) and to publish aggregate weekly run reports. Names only
                 appear publicly with your consent.
