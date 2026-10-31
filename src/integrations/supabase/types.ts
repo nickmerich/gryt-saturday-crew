@@ -484,8 +484,6 @@ export type Database = {
           notion_synced_at: string | null
           party_size: number
           source: string | null
-          song: string | null
-          song_credit_ok: boolean
           user_agent: string | null
         }
         Insert: {
@@ -505,8 +503,6 @@ export type Database = {
           notion_synced_at?: string | null
           party_size?: number
           source?: string | null
-          song?: string | null
-          song_credit_ok?: boolean
           user_agent?: string | null
         }
         Update: {
@@ -526,8 +522,6 @@ export type Database = {
           notion_synced_at?: string | null
           party_size?: number
           source?: string | null
-          song?: string | null
-          song_credit_ok?: boolean
           user_agent?: string | null
         }
         Relationships: []
