@@ -87,6 +87,11 @@ function PrivacyPage() {
                 contact name and phone you provide.
               </li>
               <li>
+                <strong className="text-paper">Saturday Soundtrack (optional):</strong> one song you can add when you
+                RSVP. Songs go on that week's playlist in the public run report. Your first name only appears next to
+                your song if you tick the box to be credited.
+              </li>
+              <li>
                 <strong className="text-paper">Run check-ins:</strong> which Saturdays you attended, used to count
                 milestones (5, 10, 25, 50, and 100 Saturdays) and to publish aggregate weekly run reports. Names only
                 appear publicly with your consent.
@@ -140,6 +145,10 @@ function PrivacyPage() {
               The site uses a small number of cookies and browser storage items to keep forms working, remember
               preferences, and measure page visits. You can clear or block cookies in your browser settings. The site
               will still work for reading guides and RSVPing.
+            </p>
+            <p className="mt-3">
+              Run reports can include a Spotify playlist. The Spotify player only loads after you tap to play it, and
+              Spotify's own privacy policy applies once it does. Until then, nothing from Spotify loads on the page.
             </p>
           </section>
 
