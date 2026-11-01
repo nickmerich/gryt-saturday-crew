@@ -179,8 +179,8 @@ export const ARTICLES: ArticleMeta[] = [
     "title": "Group Fitness Pittsburgh: Free Run Clubs and Outdoor Options",
     "description": "Group fitness in Pittsburgh compared: free run clubs, optional memberships, parkrun, and South Hills options, with schedules, costs, and how to choose one.",
     "topic": "community",
-    "minutes": 6,
-    "updated": "2026-10-29",
+    "minutes": 7,
+    "updated": "2026-11-01",
     "published": "2026-10-29"
   },
   {

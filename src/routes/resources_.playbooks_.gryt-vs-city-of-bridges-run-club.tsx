@@ -14,7 +14,7 @@ const CONFIG: ComparisonConfig = {
   description:
     "GRYT Run Club vs City of Bridges Run Club: schedules, cost, South Hills runs, pace groups, and how to stay motivated with a free Pittsburgh run club.",
   published: "2026-10-29",
-  modified: "2026-10-29",
+  modified: "2026-11-01",
   readTime: "7 MIN READ",
   keywords:
     "GRYT Run Club vs City of Bridges Run Club, City of Bridges Run Club, CBRC Pittsburgh, CBRC South Hills group run, free run club Pittsburgh, South Hills run club, McMurray run club, stay motivated running Pittsburgh",
@@ -36,6 +36,10 @@ const CONFIG: ComparisonConfig = {
     {
       q: "How do you stay motivated running with a free community group in Pittsburgh?",
       a: "Pick one fixed run close to home, tell someone you'll be there, and count showing up instead of pace. A no-drop group keeps a slow day from turning into a solo run. GRYT recognizes 5, 10, 25, 50, and 100 Saturdays, and walking counts.",
+    },
+    {
+      q: "How does Sewickley Run Club compare to CBRC and GRYT for South Hills runners?",
+      a: "Sewickley Run Club (sewickleyrunners.org) is a free Tuesday 6:30 PM run from the corner of Beaver Avenue and Broad Street in Sewickley, with a 5-mile loop or a shorter 5K out-and-back, all paces together, and no one left behind. The first Tuesday of the month is Test Run Tuesday for first-timers, and membership is a free RunSignUp waiver with no RSVP. Sewickley is a borough on the Ohio River northwest of Pittsburgh, on the opposite side of the city from the South Hills, so it's a long drive from McMurray. It's a good fit if you live north or northwest. If you're in the South Hills, CBRC's Thursday 6:30 PM South Hills run and GRYT's Saturday 7 AM run in Peters Township are closer.",
     },
     {
       q: "Can I run with both CBRC and GRYT?",
@@ -112,8 +116,9 @@ function Page() {
       <PH2 id="gryt">What GRYT Run Club Is</PH2>
       <p>
         GRYT Run Club is a free community run club in Pittsburgh's South Hills, founded by Laura and Nick Merich.
-        It does one thing on purpose: every Saturday at 7 AM at 212 Valley Brook Road in McMurray, the crew runs
-        the Montour/Peters Trail, a flat, paved rail trail, roughly four miles out and back.
+        It does one thing on purpose: every Saturday at 7 AM at 212 Valley Brook Road in McMurray (Peters
+        Township, Washington County, next to Upper St. Clair and Bethel Park), the crew runs the Montour/Peters
+        Trail, a flat, paved rail trail, roughly four miles out and back.
       </p>
       <p>
         Walk, jog, or run. GRYT is no-drop, so nobody finishes alone. There's no membership, no fee, and no

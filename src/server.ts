@@ -38,16 +38,82 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
 }
 
 // ---------------------------------------------------------------------------
+// First-paint: TanStack Start emits `<link rel="modulepreload">` for the entry
+// bundle and route chunks (~200 KB gzipped). Chrome fetches those at High
+// priority, so on a slow link they compete with the stylesheet for bandwidth
+// before the first paint even though the LCP element is SSR'd text and the
+// entry `<script type="module" async>` itself would load at Low priority.
+// Adding `fetchpriority="low"` keeps early discovery (hydration still starts
+// from the head) but lets CSS/HTML win the first-paint window. Not exposed as
+// a TanStack option, so the streamed HTML is patched here (chunk-boundary safe).
+// ---------------------------------------------------------------------------
+const MODULEPRELOAD_TAG = '<link rel="modulepreload"';
+const MODULEPRELOAD_LOW = '<link rel="modulepreload" fetchpriority="low"';
+
+function deprioritizeModulePreloads(response: Response): Response {
+  const type = response.headers.get("content-type") ?? "";
+  if (response.status !== 200 || !type.includes("text/html") || !response.body) return response;
+  try {
+    let carry = "";
+    const decoder = new TextDecoder();
+    const encoder = new TextEncoder();
+    const transform = new TransformStream<Uint8Array, Uint8Array>({
+      transform(chunk, controller) {
+        const text = carry + decoder.decode(chunk, { stream: true });
+        // Hold back any trailing partial match of the tag so one split across
+        // two chunks is still rewritten on the next pass.
+        let keep = 0;
+        for (let k = Math.min(text.length, MODULEPRELOAD_TAG.length - 1); k > 0; k--) {
+          if (MODULEPRELOAD_TAG.startsWith(text.slice(text.length - k))) {
+            keep = k;
+            break;
+          }
+        }
+        const emit = text.slice(0, text.length - keep).split(MODULEPRELOAD_TAG).join(MODULEPRELOAD_LOW);
+        carry = keep ? text.slice(text.length - keep) : "";
+        if (emit) controller.enqueue(encoder.encode(emit));
+      },
+      flush(controller) {
+        const tail = carry + decoder.decode();
+        if (tail) controller.enqueue(encoder.encode(tail.split(MODULEPRELOAD_TAG).join(MODULEPRELOAD_LOW)));
+      },
+    });
+    const out = new Response(response.body.pipeThrough(transform), response);
+    out.headers.delete("content-length");
+    return out;
+  } catch {
+    return response;
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Edge HTML cache for static content pages (SEO: server response time / TTFB).
 // Only public, non-personalized pages whose HTML doesn't depend on live data are
 // cached, for a short window, keyed by build so deploys never mix versions.
-// Anything unexpected (no Cache API, errors) falls through to normal SSR.
+//
+// Two tiers:
+//   1. Cache API (`caches.default`) when the runtime exposes it (Cloudflare Workers).
+//   2. In-memory fallback (module-scope Map) when it doesn't. Lovable's runtime
+//      runs this fetch handler but has no Cache API, so this tier is what warms
+//      a long-lived instance after its first render of each page.
+// Every response carries `x-gryt-edge-cache: HIT | MISS | BYPASS` so production
+// behaviour is observable from response headers.
+// Anything unexpected (errors in either tier) falls through to normal SSR.
 // ---------------------------------------------------------------------------
 declare const __GRYT_BUILD_ID__: string;
 const BUILD_ID = typeof __GRYT_BUILD_ID__ === "string" ? __GRYT_BUILD_ID__ : "dev";
 const EDGE_TTL_SECONDS = 600;
+const EDGE_SWR_SECONDS = 86400;
+const MEMORY_CACHE_MAX_ENTRIES = 100;
+// Paths whose SSR HTML is identical for every visitor. Personalization on these
+// pages (RSVP session restore, countdown timer) is client-only, behind useEffect.
+// - "/" reads a public partners list + the public run schedule, no cookies.
+// - "/calendar" renders a month grid from the fixed Saturday schedule + the
+//   server clock (today highlight); a 10-minute window is fine for that.
 const EDGE_CACHE_EXACT = new Set([
+  "/",
   "/about",
+  "/calendar",
   "/faq",
   "/plan",
   "/privacy",
@@ -66,11 +132,15 @@ const EDGE_CACHE_EXCLUDE = [
 ];
 
 type WaitUntilCtx = { waitUntil?: (p: Promise<unknown>) => void };
+type EdgeCacheState = "HIT" | "MISS" | "BYPASS";
 
 function isEdgeCacheable(request: Request): URL | null {
   if (request.method !== "GET") return null;
   const url = new URL(request.url);
   if (url.search) return null;
+  // Cookies are deliberately NOT a bypass: GA sets first-party `_ga` cookies on
+  // most visitors and none of the cached pages read cookies during SSR
+  // (RSVP session restore on "/" happens client-side after hydration).
   if (request.headers.get("authorization")) return null;
   const path = url.pathname.length > 1 ? url.pathname.replace(/\/+$/, "") : url.pathname;
   if (EDGE_CACHE_EXCLUDE.some((p) => path === p || path.startsWith(`${p}/`))) return null;
@@ -79,6 +149,33 @@ function isEdgeCacheable(request: Request): URL | null {
   return null;
 }
 
+/** A rendered response we may store: 200, HTML, and not setting cookies. */
+function isStorable(response: Response): boolean {
+  const type = response.headers.get("content-type") ?? "";
+  return response.status === 200 && type.includes("text/html") && !response.headers.has("set-cookie");
+}
+
+function withEdgeHeaders(response: Response, state: EdgeCacheState, cacheable: boolean): Response {
+  const out = new Response(response.body, response);
+  out.headers.set("x-gryt-edge-cache", state);
+  if (cacheable) {
+    // Browsers always revalidate (max-age=0, must-revalidate) so a deploy never
+    // leaves a user on HTML that points at the previous build's chunk hashes;
+    // shared caches may hold it for the TTL (s-maxage) and, via the targeted
+    // CDN-Cache-Control header, serve stale while they refresh.
+    out.headers.set(
+      "cache-control",
+      `public, max-age=0, must-revalidate, s-maxage=${EDGE_TTL_SECONDS}`,
+    );
+    out.headers.set(
+      "cdn-cache-control",
+      `public, max-age=${EDGE_TTL_SECONDS}, stale-while-revalidate=${EDGE_SWR_SECONDS}`,
+    );
+  }
+  return out;
+}
+
+// ---- Tier 1: Cache API --------------------------------------------------------
 function edgeCache(): Cache | null {
   try {
     const c = (globalThis as unknown as { caches?: { default?: Cache } }).caches;
@@ -88,6 +185,51 @@ function edgeCache(): Cache | null {
   }
 }
 
+function cacheApiKey(url: URL): Request {
+  return new Request(`${url.origin}${url.pathname}?__b=${BUILD_ID}`, { method: "GET" });
+}
+
+// ---- Tier 2: in-memory fallback -----------------------------------------------
+type MemoryEntry = { status: number; headers: [string, string][]; body: string; expires: number };
+const memoryCache = new Map<string, MemoryEntry>();
+
+function memoryKey(url: URL): string {
+  return `${BUILD_ID}:${url.pathname}`;
+}
+
+function memoryGet(key: string): MemoryEntry | null {
+  const entry = memoryCache.get(key);
+  if (!entry) return null;
+  if (entry.expires <= Date.now()) {
+    memoryCache.delete(key);
+    return null;
+  }
+  // Refresh insertion order so eviction drops the least recently used entry.
+  memoryCache.delete(key);
+  memoryCache.set(key, entry);
+  return entry;
+}
+
+function memoryPut(key: string, entry: MemoryEntry): void {
+  memoryCache.delete(key);
+  memoryCache.set(key, entry);
+  while (memoryCache.size > MEMORY_CACHE_MAX_ENTRIES) {
+    const oldest = memoryCache.keys().next().value;
+    if (oldest === undefined) break;
+    memoryCache.delete(oldest);
+  }
+}
+
+function headersToStore(headers: Headers): [string, string][] {
+  const out: [string, string][] = [];
+  headers.forEach((value, name) => {
+    const n = name.toLowerCase();
+    if (n === "set-cookie" || n === "x-gryt-edge-cache" || n === "cache-control" || n === "cdn-cache-control") return;
+    out.push([name, value]);
+  });
+  return out;
+}
+
 async function renderWithEdgeCache(
   request: Request,
   env: unknown,
@@ -95,39 +237,56 @@ async function renderWithEdgeCache(
   render: () => Promise<Response>,
 ): Promise<Response> {
   const url = isEdgeCacheable(request);
-  const cache = url ? edgeCache() : null;
-  if (!url || !cache) return render();
+  if (!url) return withEdgeHeaders(await render(), "BYPASS", false);
 
-  const key = new Request(`${url.origin}${url.pathname}?__b=${BUILD_ID}`, { method: "GET" });
-  try {
-    const hit = await cache.match(key);
-    if (hit) {
-      const res = new Response(hit.body, hit);
-      res.headers.set("x-gryt-edge-cache", "HIT");
-      res.headers.set("cache-control", "public, max-age=0, must-revalidate");
-      return res;
+  const wctx = ctx as WaitUntilCtx | undefined;
+  const cache = edgeCache();
+
+  if (cache) {
+    const key = cacheApiKey(url);
+    try {
+      const hit = await cache.match(key);
+      if (hit) return withEdgeHeaders(hit, "HIT", true);
+    } catch {
+      // fall through to render; treat as a miss
     }
-  } catch {
-    return render();
+    const response = await render();
+    if (!isStorable(response)) return withEdgeHeaders(response, "BYPASS", false);
+    try {
+      const toStore = new Response(response.clone().body, response);
+      toStore.headers.delete("x-gryt-edge-cache");
+      toStore.headers.set("cache-control", `public, s-maxage=${EDGE_TTL_SECONDS}, max-age=${EDGE_TTL_SECONDS}`);
+      const put = cache.put(key, toStore).catch(() => undefined);
+      if (wctx?.waitUntil) wctx.waitUntil(put);
+    } catch {
+      // ignore cache write failures
+    }
+    return withEdgeHeaders(response, "MISS", true);
   }
 
+  // No Cache API: in-memory tier.
+  const key = memoryKey(url);
+  const hit = memoryGet(key);
+  if (hit) {
+    return withEdgeHeaders(new Response(hit.body, { status: hit.status, headers: hit.headers }), "HIT", true);
+  }
   const response = await render();
-  const type = response.headers.get("content-type") ?? "";
-  if (response.status !== 200 || !type.includes("text/html") || response.headers.has("set-cookie")) {
-    return response;
-  }
+  if (!isStorable(response) || !response.body) return withEdgeHeaders(response, "BYPASS", false);
   try {
-    const toStore = new Response(response.clone().body, response);
-    toStore.headers.set("cache-control", `public, s-maxage=${EDGE_TTL_SECONDS}, max-age=${EDGE_TTL_SECONDS}`);
-    const put = cache.put(key, toStore).catch(() => undefined);
-    const wctx = ctx as WaitUntilCtx | undefined;
-    if (wctx?.waitUntil) wctx.waitUntil(put);
+    // Stream to the client while a second branch buffers the HTML for the cache,
+    // so the MISS path keeps TanStack's streaming SSR behaviour.
+    const [toClient, toStore] = response.body.tee();
+    const status = response.status;
+    const headers = headersToStore(response.headers);
+    const store = new Response(toStore)
+      .text()
+      .then((body) => memoryPut(key, { status, headers, body, expires: Date.now() + EDGE_TTL_SECONDS * 1000 }))
+      .catch(() => undefined);
+    if (wctx?.waitUntil) wctx.waitUntil(store);
+    return withEdgeHeaders(new Response(toClient, response), "MISS", true);
   } catch {
-    // ignore cache write failures
+    return withEdgeHeaders(response, "MISS", true);
   }
-  const out = new Response(response.body, response);
-  out.headers.set("x-gryt-edge-cache", "MISS");
-  return out;
 }
 
 export default {
@@ -149,13 +308,13 @@ export default {
       const handler = await getServerEntry();
       return await renderWithEdgeCache(request, env, ctx, async () => {
         const response = await handler.fetch(request, env, ctx);
-        return await normalizeCatastrophicSsrResponse(response);
+        return deprioritizeModulePreloads(await normalizeCatastrophicSsrResponse(response));
       });
     } catch (error) {
       console.error(error);
       return new Response(renderErrorPage(), {
         status: 500,
-        headers: { "content-type": "text/html; charset=utf-8" },
+        headers: { "content-type": "text/html; charset=utf-8", "x-gryt-edge-cache": "BYPASS" },
       });
     }
   },

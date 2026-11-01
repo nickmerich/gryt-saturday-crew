@@ -3,3 +3,9 @@
 
 /favicon.svg
   cache-control: public, max-age=604800
+
+/fonts/*
+  cache-control: public, max-age=31536000, immutable
+
+/fonts.css
+  cache-control: public, max-age=3600, stale-while-revalidate=86400

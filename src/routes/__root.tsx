@@ -13,8 +13,10 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 
 export const SITE_TITLE =
   "Do Hard Things Together · Pittsburgh Running Group · South Hills Run Club · gryt";
-const GOOGLE_FONTS_HREF =
-  "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap";
+
+// Self-hosted web fonts (see public/fonts.css). Attached after the first painted
+// frame so the woff2 downloads never compete with the render-blocking CSS.
+const FONTS_CSS_HREF = "/fonts.css";
 
 export const SITE_DESCRIPTION =
   "Free Pittsburgh run club on the Montour / Peters Trail in McMurray. Saturdays 7 AM, all paces welcome, no one gets dropped.";
@@ -110,11 +112,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "icon", type: "image/png", sizes: "192x192", href: "/icon-192.png" },
       { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
       { rel: "manifest", href: "/site.webmanifest" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      // Fonts are preloaded here and attached as a stylesheet by a tiny inline
-      // script in RootShell, so the Google Fonts CSS never blocks first paint.
-      { rel: "preload", as: "style", href: GOOGLE_FONTS_HREF },
+      // Fonts are self-hosted (public/fonts.css + public/fonts/*.woff2, font-display:
+      // swap) so there is no third-party stylesheet or extra origin to connect to.
+      // The font stylesheet is attached by the inline script in RootShell after the
+      // first painted frame; first paint uses the metric-matched fallbacks in
+      // src/fonts.css, so nothing font-related sits in front of FCP/LCP.
     ],
     scripts: [
       {
@@ -160,11 +162,11 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){var l=document.createElement('link');l.rel='stylesheet';l.href=${JSON.stringify(GOOGLE_FONTS_HREF)};document.head.appendChild(l);})();`,
+            __html: `(function(){function a(){var l=document.createElement('link');l.rel='stylesheet';l.href=${JSON.stringify(FONTS_CSS_HREF)};document.head.appendChild(l)}var r=window.requestAnimationFrame;r?r(function(){r(a)}):a()})();`,
           }}
         />
         <noscript>
-          <link rel="stylesheet" href={GOOGLE_FONTS_HREF} />
+          <link rel="stylesheet" href={FONTS_CSS_HREF} />
         </noscript>
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-P32BTLV84G"></script>
         <script

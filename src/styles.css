@@ -1,6 +1,7 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+@import "./fonts.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -23,9 +24,11 @@
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-ring: var(--ring);
-  --font-display: "Space Grotesk", system-ui, sans-serif;
-  --font-condensed: "Oswald", "Barlow Condensed", system-ui, sans-serif;
-  --font-body: "Inter", system-ui, sans-serif;
+  --font-display: "Space Grotesk", "Space Grotesk Fallback", system-ui, sans-serif;
+  --font-condensed: "Oswald", "Oswald Fallback", "Barlow Condensed", system-ui, sans-serif;
+  /* Alias: several routes reference --font-display-condensed for their H1. */
+  --font-display-condensed: var(--font-condensed);
+  --font-body: "Inter", "Inter Fallback", system-ui, sans-serif;
   --radius-lg: 0px;
   --radius-md: 0px;
   --radius-sm: 0px;

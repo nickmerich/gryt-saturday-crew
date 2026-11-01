@@ -3,7 +3,8 @@ title: "Group Fitness Pittsburgh: Free Run Clubs and Outdoor Options"
 description: "Group fitness in Pittsburgh compared: free run clubs, optional memberships, parkrun, and South Hills options, with schedules, costs, and how to choose one."
 slug: "group-fitness-pittsburgh"
 status: checked
-updated: 2026-10-29
+published: 2026-10-29
+updated: 2026-11-01
 ---
 
 Pittsburgh has more group fitness options than most people realize, and a lot of them cost nothing. If you live in the South Hills and want something consistent, social, and close to home, this guide covers what's available, what it costs, and how to pick.
@@ -20,7 +21,7 @@ Running clubs are the most accessible form of group fitness in Pittsburgh, and s
 
 ### GRYT Run Club (McMurray, South Hills)
 
-[GRYT Run Club](/) meets every Saturday at 7:00 AM at 212 Valley Brook Road in McMurray and runs about 4 miles out and back on the Montour/Peters Trail, a flat, paved rail trail. You can turn around early, and walking, jogging, and running are all welcome.
+[GRYT Run Club](/) meets every Saturday at 7:00 AM at 212 Valley Brook Road in McMurray, in Peters Township (Washington County) next to Upper St. Clair and Bethel Park, and runs about 4 miles out and back on the Montour/Peters Trail, a flat, paved rail trail. You can turn around early, and walking, jogging, and running are all welcome.
 
 The run is no-drop: it ends when the last person finishes, and faster runners loop back. It's free, with no membership, fees, or pace requirement. First-timers RSVP on grytrunclub.com and sign a short liability waiver. There's coffee in the parking lot afterward. GRYT was founded by Laura and Nick Merich, and its Milestone Club recognizes 5, 10, 25, 50, and 100 Saturdays (walking counts).
 
@@ -39,6 +40,10 @@ Fleet Feet Pittsburgh runs a free club. Most of its runs are in the East End, bu
 ### parkrun
 
 The Three Rivers Heritage Trail parkrun is a free, timed 5K every Saturday at 9:00 AM on the North Shore. If you like having a time on the clock, it's a nice option.
+
+### Sewickley Run Club
+
+[Sewickley Run Club](https://sewickleyrunners.org/) is a free club in Sewickley, a borough on the Ohio River northwest of Pittsburgh. It meets every Tuesday at 6:30 PM at the corner of Beaver Avenue and Broad Street, with a choice of a 5-mile loop through town or a shorter 5K out-and-back. All paces run together and no one is left behind. The first Tuesday of each month is "Test Run Tuesday," a no-pressure, no-drop run for first-timers. Membership is free through a RunSignUp waiver, and no RSVP is needed. It's a strong option if you live north or northwest of the city, and a long drive if you're in the South Hills.
 
 ## Clubs with Optional Memberships
 
@@ -60,7 +65,7 @@ For South Hills residents, South Park is the big green space close to home. [All
 
 Before committing to anything, be honest about what you need.
 
-**Consistency.** A group that meets at the same time and place every week is much easier to turn into a habit than one with a changing schedule.
+**Consistency.** A group that meets at the same time and place every week is much easier to turn into a habit than one with a changing schedule. It also does most of the motivation work for you: when the time never changes and people expect you, showing up stops being a decision.
 
 **Location.** If the drive takes longer than the workout, you'll probably stop going, especially for early mornings or evenings.
 
@@ -72,9 +77,9 @@ Before committing to anything, be honest about what you need.
 
 ## Options Close to the South Hills
 
-Most of Pittsburgh's group fitness is in the city, but the South Hills has real options:
+If you live in the South Hills and want closer alternatives to the city clubs, the nearest weekly options are GRYT Run Club on Saturday mornings in Peters Township, Fleet Feet Pittsburgh's Tuesday pub run in Mt. Lebanon, and City of Bridges Run Club's Thursday South Hills run. Most of Pittsburgh's group fitness is in the city, but these are the ones that don't require a drive across a river:
 
-- **Saturday mornings:** GRYT Run Club, 7:00 AM, Montour/Peters Trail in McMurray
+- **Saturday mornings:** GRYT Run Club, 7:00 AM, Montour/Peters Trail at 212 Valley Brook Road in McMurray (Peters Township)
 - **Tuesday evenings:** Fleet Feet Pittsburgh's South Hills Pub Run, 6:30 PM, Mt. Lebanon
 - **Thursday evenings:** City of Bridges Run Club's South Hills run, 6:30 PM, rotating spots
 - **On your own time:** South Park's paved paths and the Montour Trail
@@ -88,6 +93,9 @@ Several running clubs are free, including GRYT Run Club, Yinz Run Club, People W
 
 **Is there a running club in Pittsburgh's South Hills?**
 Yes. GRYT Run Club meets every Saturday at 7:00 AM on the Montour/Peters Trail in McMurray. Fleet Feet Pittsburgh has a Tuesday evening run in Mt. Lebanon, and City of Bridges Run Club has a Thursday evening South Hills run.
+
+**How does Sewickley Run Club compare to the South Hills options?**
+Sewickley Run Club is a free Tuesday 6:30 PM run from Beaver Avenue and Broad Street in Sewickley, with a 5-mile loop or a 5K out-and-back, all paces together, and a monthly Test Run Tuesday for first-timers. Sewickley is on the opposite side of Pittsburgh from the South Hills, so it's a long drive from McMurray or Bethel Park. If you're north or northwest of the city, it's a great pick. If you're in the South Hills, GRYT on Saturday mornings and City of Bridges' Thursday South Hills run are closer.
 
 **What is a no-drop run club?**
 A no-drop run means nobody gets left behind. At GRYT, the run ends when the last person finishes, and faster runners loop back to stay with the group.
