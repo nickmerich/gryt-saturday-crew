@@ -241,46 +241,48 @@ async function renderWithEdgeCache(
 
   const wctx = ctx as WaitUntilCtx | undefined;
   const cache = edgeCache();
-
-  if (cache) {
-    const key = cacheApiKey(url);
-    try {
-      const hit = await cache.match(key);
-      if (hit) return withEdgeHeaders(hit, "HIT", true);
-    } catch {
-      // fall through to render; treat as a miss
-    }
-    const response = await render();
-    if (!isStorable(response)) return withEdgeHeaders(response, "BYPASS", false);
-    try {
-      const toStore = new Response(response.clone().body, response);
-      toStore.headers.delete("x-gryt-edge-cache");
-      toStore.headers.set("cache-control", `public, s-maxage=${EDGE_TTL_SECONDS}, max-age=${EDGE_TTL_SECONDS}`);
-      const put = cache.put(key, toStore).catch(() => undefined);
-      if (wctx?.waitUntil) wctx.waitUntil(put);
-    } catch {
-      // ignore cache write failures
-    }
-    return withEdgeHeaders(response, "MISS", true);
-  }
-
-  // No Cache API: in-memory tier.
   const key = memoryKey(url);
-  const hit = memoryGet(key);
-  if (hit) {
-    return withEdgeHeaders(new Response(hit.body, { status: hit.status, headers: hit.headers }), "HIT", true);
+
+  // Tier 2 first: the in-memory map is always authoritative on a warm instance.
+  // (Some runtimes expose a Cache API that accepts writes but never serves them,
+  // so the memory tier must run regardless of whether `caches.default` exists.)
+  const memHit = memoryGet(key);
+  if (memHit) {
+    return withEdgeHeaders(new Response(memHit.body, { status: memHit.status, headers: memHit.headers }), "HIT", true);
   }
+
+  // Tier 1: Cache API, when it works.
+  if (cache) {
+    try {
+      const hit = await cache.match(cacheApiKey(url));
+      if (hit) {
+        const body = await hit.text();
+        memoryPut(key, { status: hit.status, headers: headersToStore(hit.headers), body, expires: Date.now() + EDGE_TTL_SECONDS * 1000 });
+        return withEdgeHeaders(new Response(body, { status: hit.status, headers: hit.headers }), "HIT", true);
+      }
+    } catch {
+      // treat as a miss
+    }
+  }
+
   const response = await render();
   if (!isStorable(response) || !response.body) return withEdgeHeaders(response, "BYPASS", false);
   try {
-    // Stream to the client while a second branch buffers the HTML for the cache,
+    // Stream to the client while a second branch buffers the HTML for the caches,
     // so the MISS path keeps TanStack's streaming SSR behaviour.
     const [toClient, toStore] = response.body.tee();
     const status = response.status;
     const headers = headersToStore(response.headers);
     const store = new Response(toStore)
       .text()
-      .then((body) => memoryPut(key, { status, headers, body, expires: Date.now() + EDGE_TTL_SECONDS * 1000 }))
+      .then(async (body) => {
+        memoryPut(key, { status, headers, body, expires: Date.now() + EDGE_TTL_SECONDS * 1000 });
+        if (cache) {
+          const h = new Headers(headers);
+          h.set("cache-control", `public, s-maxage=${EDGE_TTL_SECONDS}, max-age=${EDGE_TTL_SECONDS}`);
+          await cache.put(cacheApiKey(url), new Response(body, { status, headers: h })).catch(() => undefined);
+        }
+      })
       .catch(() => undefined);
     if (wctx?.waitUntil) wctx.waitUntil(store);
     return withEdgeHeaders(new Response(toClient, response), "MISS", true);
