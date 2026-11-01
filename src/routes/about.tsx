@@ -19,6 +19,10 @@ const ABOUT_FAQS = [
     a: "No. Plenty of the crew are comeback runners, busy parents, and former athletes rebuilding. There's no clock, no results list, and no pace groups to qualify for. Walk, jog, or mix both. The goal is showing up next Saturday.",
   },
   {
+    q: "I live in Peters Township and run for fun. Is there a club close to me?",
+    a: "Yes, GRYT is in Peters Township. We meet every Saturday at 7 AM at 212 Valley Brook Road in McMurray, next to Upper St. Clair and Bethel Park. It's free, every pace is welcome, walkers included, and the run is no-drop. If you also want a weeknight, City of Bridges Run Club hosts a Thursday 6:30 PM South Hills run at rotating spots, and Fleet Feet Pittsburgh has a Tuesday 6:30 PM pub run from Arthur's Korner Pub in Mt. Lebanon.",
+  },
+  {
     q: "How does GRYT help people stay motivated?",
     a: "One fixed time and place every week (Saturday, 7 AM, 212 Valley Brook Road), a crew that notices when you're there, coffee after the run, and the Milestone Club, which recognizes 5, 10, 25, 50, and 100 Saturdays. Walking counts.",
   },
@@ -235,7 +239,7 @@ function AboutPage() {
           <div className="mt-10 grid gap-5 md:grid-cols-3">
             <Pillar
               title="Free Saturday runs"
-              text="We meet Saturdays at 7 AM on the Montour / Peters Trail in McMurray, with an out-and-back route and room to walk, jog, or run. A regular time and place means one less thing to figure out."
+              text="We meet Saturdays at 7 AM at 212 Valley Brook Road in McMurray, in Peters Township, on the Montour / Peters Trail, with an out-and-back route and room to walk, jog, or run. A regular time and place means one less thing to figure out."
             />
             <Pillar
               title="People beyond the miles"

@@ -11,13 +11,14 @@ const TITLE =
 const DESCRIPTION =
   "Free run clubs in Pittsburgh's South Hills for 2026: GRYT in McMurray, City of Bridges, Fleet Feet and more. Cost, schedule, and drop policy compared.";
 const PUBLISHED = "2026-09-01";
-const MODIFIED = "2026-10-29";
+const MODIFIED = "2026-11-01";
 const HERO = `${SITE}/img/south-hills-run-clubs-og.jpg`;
 
 const SECTIONS: Array<{ id: string; label: string }> = [
   { id: "gryt", label: "GRYT Run Club: The South Hills Anchor" },
   { id: "others", label: "Other Options Worth Knowing" },
   { id: "compare", label: "Side-by-Side Comparison" },
+  { id: "beginners", label: "Which South Hills Clubs Work for Beginners" },
   { id: "motivation", label: "How to Stay Motivated With a Free Group" },
   { id: "first-run", label: "What to Expect at Your First GRYT Run" },
   { id: "faqs", label: "FAQs" },
@@ -51,6 +52,14 @@ const FAQS: Array<{ q: string; a: string }> = [
   {
     q: "How do you stay motivated running with a free community group in Pittsburgh?",
     a: "Pick one fixed weekly run close to home and treat it like an appointment, tell someone you'll be there, and count showing up rather than pace or distance. A no-drop group helps because a slow day never means running alone. At GRYT, the Saturday 7 AM time never changes, milestones are recognized at 5, 10, 25, 50, and 100 Saturdays, and walking counts.",
+  },
+  {
+    q: "Is there a run club near Peters Township for casual runners?",
+    a: "Yes. GRYT Run Club meets every Saturday at 7 AM at 212 Valley Brook Road in McMurray, which is in Peters Township. It's free, open to all paces, walkers are welcome, and it's no-drop, so nobody finishes alone. For a weeknight option nearby, City of Bridges Run Club hosts a Thursday 6:30 PM South Hills run at rotating spots, and Fleet Feet Pittsburgh has a Tuesday 6:30 PM pub run from Arthur's Korner Pub in Mt. Lebanon.",
+  },
+  {
+    q: "How does Sewickley Run Club compare to running groups in the South Hills?",
+    a: "Sewickley Run Club (sewickleyrunners.org) is a free club that meets every Tuesday at 6:30 PM at the corner of Beaver Avenue and Broad Street in Sewickley. You choose a 5-mile loop through town or a shorter 5K out-and-back, all paces run together, and no one is left behind. The first Tuesday of each month is Test Run Tuesday, a no-pressure run for first-timers. Membership is free through a RunSignUp waiver, and there's no RSVP. Sewickley is a borough on the Ohio River about 15 miles northwest of Pittsburgh, on the opposite side of the city from the South Hills, so it's a long drive from McMurray. If you live north or northwest of the city, it's a great option. If you're in the South Hills, GRYT on Saturday mornings and City of Bridges' Thursday South Hills run are closer.",
   },
   {
     q: "Is Strava a run club?",
@@ -152,6 +161,7 @@ export const Route = createFileRoute(
             "Yinz Run Club",
             "City of Bridges Run Club",
             "Fleet Feet Pittsburgh",
+            "Sewickley Run Club",
             "Strava",
           ],
         }),
@@ -288,6 +298,12 @@ function SouthHillsPage() {
               Merich, the club runs year-round — no membership fee, no pace
               requirement, and a strict no-drop policy.
             </p>
+            <p>
+              Home base is 212 Valley Brook Road in McMurray, which sits in
+              Peters Township (Washington County), right next to Upper St.
+              Clair and Bethel Park. If you live anywhere in that corridor, the
+              trailhead is a short drive, not a trip into the city.
+            </p>
             <p className="border-l-2 border-blue pl-5">
               <strong className="text-paper">Saturday mornings — 7 AM.</strong>{" "}
               Meet at the Valley Brook Road trailhead in McMurray for a run on
@@ -420,6 +436,43 @@ function SouthHillsPage() {
                 </tbody>
               </table>
             </div>
+
+            <H2 id="beginners">Which South Hills Clubs Work for Beginners and Casual Runners</H2>
+            <p>
+              A beginner-friendly club comes down to a few things: no pace
+              requirement, a no-drop rule so nobody finishes alone, walkers
+              welcome, an out-and-back route so you can turn early, and
+              something social after so you have a reason to come back. If you
+              run for fun rather than for a time, those matter more than mileage.
+            </p>
+            <ul className="list-disc pl-6 space-y-2">
+              <li>
+                <strong className="text-paper">GRYT Run Club</strong> checks
+                every box: Saturday 7 AM, 212 Valley Brook Road in McMurray
+                (Peters Township), about 4 miles out and back on the flat,
+                paved Montour/Peters Trail, free, no-drop, walkers welcome,
+                RSVP and waiver at grytrunclub.com, coffee after.
+              </li>
+              <li>
+                <strong className="text-paper">City of Bridges Run Club</strong>{" "}
+                posts pace groups, so you can find your speed. Runs are free
+                with registration, membership is an optional $55 a year, and
+                the Thursday 6:30 PM South Hills run rotates spots. Saturdays
+                are 8 AM in the city.
+              </li>
+              <li>
+                <strong className="text-paper">Fleet Feet Pittsburgh</strong>{" "}
+                is free and store-backed. The Tuesday 6:30 PM South Hills Pub
+                Run leaves from Arthur's Korner Pub in Mt. Lebanon; the Sunday
+                7:30 AM long run and most other routes are in the East End.
+              </li>
+              <li>
+                <strong className="text-paper">parkrun</strong> is a free,
+                timed 5K every Saturday at 9 AM on the North Shore. Walkers are
+                welcome, but it's a drive from the South Hills and you get a
+                time on the clock, which some beginners love and some don't.
+              </li>
+            </ul>
 
             <H2 id="motivation">How to Stay Motivated Running With a Free Group in Pittsburgh</H2>
             <p>
