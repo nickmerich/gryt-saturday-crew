@@ -12,7 +12,7 @@ const TITLE =
 const DESCRIPTION =
   "Pittsburgh's free running clubs in 2026: Yinz, Fleet Feet, City of Bridges, parkrun, Steel City, Kool, Pharaoh Hounds, and GRYT. Who each fits and when they meet.";
 const PUBLISHED = "2026-01-20";
-const MODIFIED = "2026-10-29";
+const MODIFIED = "2026-11-01";
 
 const FAQS: Array<{ q: string; a: string }> = [
   {
@@ -34,6 +34,14 @@ const FAQS: Array<{ q: string; a: string }> = [
   {
     q: "What are the best free running groups in the Pittsburgh suburbs for people who aren't fast?",
     a: "Look for a no-drop policy and a walk-friendly route. GRYT Run Club in McMurray is no-drop, welcomes walkers, and runs a flat out-and-back on the Montour/Peters Trail every Saturday at 7 AM. Three Rivers Heritage Trail parkrun is a free timed 5K every Saturday at 9 AM where walkers are welcome. City of Bridges Run Club posts pace groups down to run/walk.",
+  },
+  {
+    q: "Which run club is closest to Peters Township if I'm a casual runner?",
+    a: "GRYT Run Club. Its trailhead at 212 Valley Brook Road in McMurray is in Peters Township, next to Upper St. Clair and Bethel Park. It meets Saturdays at 7 AM, it's free, every pace is welcome including walkers, and it's no-drop. Nearby weeknight options are City of Bridges Run Club's Thursday 6:30 PM South Hills run at rotating spots and Fleet Feet Pittsburgh's Tuesday 6:30 PM pub run from Arthur's Korner Pub in Mt. Lebanon.",
+  },
+  {
+    q: "How does Sewickley Run Club compare to the South Hills groups?",
+    a: "Sewickley Run Club is a free Tuesday 6:30 PM run from the corner of Beaver Avenue and Broad Street in Sewickley, with a 5-mile loop or a shorter 5K out-and-back, all paces together, and no one left behind. The first Tuesday of each month is Test Run Tuesday for first-timers, membership is a free RunSignUp waiver, and no RSVP is needed. Sewickley is a borough on the Ohio River northwest of Pittsburgh, on the opposite side of the city from the South Hills, so it's a long drive from McMurray. It's a strong pick if you live north or northwest. In the South Hills, GRYT on Saturday mornings and City of Bridges' Thursday South Hills run are closer.",
   },
   {
     q: "What time does GRYT Run Club meet?",
@@ -106,6 +114,7 @@ export const Route = createFileRoute(
             "Steel City Road Runners",
             "Kool Run Club",
             "Pittsburgh Pharaoh Hounds",
+            "Sewickley Run Club",
             "GRYT Run Club",
           ],
         }),
@@ -236,11 +245,20 @@ function ArticlePage() {
             <p><strong>Cost:</strong> Free.</p>
             <p><strong>Limitation:</strong> Tuesday evenings are hard for a lot of parents and people with demanding schedules. And like most Pittsburgh clubs, the Pharaoh Hounds don't have a South Hills or Washington County presence.</p>
 
+            <h2 className="text-2xl md:text-3xl font-bold mt-12 mb-2">Sewickley Run Club (North / Northwest)</h2>
+            <p>Sewickley Run Club is a free community run club in Sewickley, a borough along the Ohio River that the club describes as about 15 miles northwest of Pittsburgh. It meets every Tuesday at 6:30 PM at the corner of Beaver Avenue and Broad Street. You choose a 5-mile loop through town or a shorter 5K out-and-back, all paces run together, and no one gets left behind. The first Tuesday of each month is Test Run Tuesday, a no-pressure, no-drop run built for first-timers. Membership is free through a RunSignUp waiver, and there's no RSVP.</p>
+            <p><strong>Best for:</strong> Runners in Sewickley and the nearby Ohio River towns, or anyone north or northwest of the city who wants a friendly Tuesday evening run close to home. Details at{" "}
+              <a href="https://sewickleyrunners.org/" target="_blank" rel="noopener noreferrer" className="text-blue underline underline-offset-4">sewickleyrunners.org</a>
+              .
+            </p>
+            <p><strong>Cost:</strong> Free.</p>
+            <p><strong>Limitation:</strong> Sewickley is on the opposite side of the city from the South Hills, so it's a long drive from McMurray, Peters Township, or Bethel Park. If you're south of the city, GRYT on Saturday mornings and City of Bridges' Thursday South Hills run are closer.</p>
+
             <h2 className="text-2xl md:text-3xl font-bold mt-12 mb-2">GRYT Run Club — McMurray / South Hills</h2>
             <p>Here's the honest gap in Pittsburgh's running scene: almost nothing consistently serves the South Hills suburbs on a Saturday morning.</p>
             <p>McMurray, Peters Township, Upper St. Clair, Bethel Park — these neighborhoods are full of former athletes, busy parents, and people who used to run and want to again. They don't need another Wednesday evening option that requires driving into the city first. They need something close, early, and free.</p>
             <p>That's what GRYT Run Club is.</p>
-            <p>GRYT meets every Saturday at 7 AM on the Montour / Peters Trail in McMurray. The route is an out-and-back covering roughly four miles on a flat, beginner-friendly trail. Walkers, joggers, and runners all show up. No one gets dropped. No one has ever been dropped.</p>
+            <p>GRYT meets every Saturday at 7 AM at 212 Valley Brook Road in McMurray, which is in Peters Township (Washington County), next to Upper St. Clair and Bethel Park. The route on the Montour / Peters Trail is an out-and-back covering roughly four miles on a flat, beginner-friendly trail. Walkers, joggers, and runners all show up. No one gets dropped. No one has ever been dropped.</p>
             <p>After the run, people hang out in the parking lot with coffee. No agenda. No pitch. Just the natural end of a Saturday morning well spent.</p>
 
             <h3 className="text-xl md:text-2xl font-bold mt-10 mb-1">Who Started It</h3>
@@ -272,6 +290,7 @@ function ArticlePage() {
               <li><strong>Steel City Road Runners</strong> · $20/yr donation · Occasional · City · Varies.</li>
               <li><strong>Kool Run Club</strong> · Free · Varies · City · Social.</li>
               <li><strong>Pittsburgh Pharaoh Hounds</strong> · Free · Tuesday evenings · City · Social.</li>
+              <li><strong>Sewickley Run Club</strong> · Free · Tuesday 6:30 PM · Sewickley (northwest) · 5-mile loop or 5K.</li>
               <li><strong>GRYT Run Club</strong> · Free · Saturday 7 AM · McMurray / South Hills · Coffee.</li>
             </ul>
             <p>If you're in the city and free on a Wednesday evening, Yinz Run Club is a strong choice. If you're in the South Hills and Saturday mornings are your window, GRYT is the consistent free Saturday option on the Montour / Peters Trail corridor.</p>

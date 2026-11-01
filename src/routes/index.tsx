@@ -102,6 +102,7 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
   { q: "Can I bring a friend?", a: "Yes. Bring someone who needs this." },
   { q: "Can I bring a stroller or dog?", a: "Yes. The trail is flat, wide, and friendly for both." },
   { q: "Is this free?", a: "Yes. GRYT is free." },
+  { q: "Is GRYT close to Peters Township?", a: "Yes. 212 Valley Brook Road in McMurray is in Peters Township, Washington County, next to Upper St. Clair and Bethel Park. If you run for fun and want something close to home, Saturday at 7 AM is it. Free, all paces, walkers welcome, no-drop." },
   { q: "What is the after like?", a: "We hang in the parking lot after the run with coffee, water, and sometimes fruit. Stay for 10 minutes or stay for an hour. Either way, you are invited." },
 ];
 
@@ -2433,6 +2434,10 @@ function FAQ() {
     },
     { q: "Is this free?", a: "Yes. GRYT is free." },
     {
+      q: "Is GRYT close to Peters Township?",
+      a: "Yes. 212 Valley Brook Road in McMurray is in Peters Township, Washington County, next to Upper St. Clair and Bethel Park. If you run for fun and want something close to home, Saturday at 7 AM is it. Free, all paces, walkers welcome, no-drop.",
+    },
+    {
       q: "What is the after like?",
       a: "We hang in the parking lot after the run with coffee, water, and sometimes fruit. Stay for 10 minutes or stay for an hour. Either way, you are invited.",
     },
@@ -3867,9 +3872,10 @@ function AboutGrytText() {
           <div className="space-y-4">
             <p>
               GRYT Run Club is a free community running group in Pittsburgh's South Hills. We meet every
-              Saturday at 7 AM at 212 Valley Brook Road in McMurray, PA, and run the Montour/Peters Trail, a
-              flat, paved rail trail. The route is roughly four miles out and back, so you can turn around
-              whenever you want and still finish with the group.
+              Saturday at 7 AM at 212 Valley Brook Road in McMurray, PA, in Peters Township (Washington
+              County), next to Upper St. Clair and Bethel Park, and run the Montour/Peters Trail, a flat, paved
+              rail trail. The route is roughly four miles out and back, so you can turn around whenever you
+              want and still finish with the group.
             </p>
             <p>
               GRYT is no-drop. Walkers, joggers, comeback runners, and people training for races all start
@@ -3881,6 +3887,16 @@ function AboutGrytText() {
               The club was founded by Laura and Nick Merich for former athletes, busy parents, and anyone who
               misses having a team. It's built to be close to home for runners in McMurray, Peters Township,
               Upper St. Clair, Bethel Park, and across Washington County.
+            </p>
+            <h3 className="text-paper font-bold text-[18px]">What makes a run club beginner-friendly?</h3>
+            <p>
+              No pace requirement, a no-drop rule, walkers welcome, an out-and-back route so you can turn
+              early, and coffee after so there's a reason to stay. GRYT offers all five every Saturday. In the
+              South Hills, City of Bridges Run Club's Thursday 6:30 PM run (free with registration, pace groups)
+              and Fleet Feet Pittsburgh's Tuesday 6:30 PM pub run from Arthur's Korner Pub in Mt. Lebanon are
+              good weeknight options for casual runners too. Staying motivated gets easier when the time never
+              changes and someone expects you, which is why the Saturday 7 AM start is fixed and the Milestone
+              Club counts walking.
             </p>
           </div>
           <div className="space-y-4">
