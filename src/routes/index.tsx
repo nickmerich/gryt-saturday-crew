@@ -19,7 +19,8 @@ import {
   getGoogleReviews,
   type GoogleReviewsPayload,
 } from "@/lib/google-reviews.functions";
-import { captureAttribution, getSignupAttribution } from "@/lib/attribution";
+import { captureAttribution, clearReferralCode, getReferralCode, getSignupAttribution } from "@/lib/attribution";
+import { getWhosGoing, whosGoingSentence, type WhosGoing } from "@/lib/going.functions";
 import { useHeroVariant } from "@/lib/ab-hero";
 import { track } from "@/lib/analytics";
 import {
@@ -602,6 +603,9 @@ function RSVP() {
   const [firstTimer, setFirstTimer] = useState(false);
   const [song, setSong] = useState("");
   const [songCreditOk, setSongCreditOk] = useState(false);
+  const [goingListOk, setGoingListOk] = useState(false);
+  const [inviteCode, setInviteCode] = useState<string | null>(null);
+  const [going, setGoing] = useState<WhosGoing | null>(null);
   const [submittedParty, setSubmittedParty] = useState(1);
   const [submittedFirstTimer, setSubmittedFirstTimer] = useState(false);
   const [days, setDays] = useState<Record<RsvpDay, boolean>>({ sat: true });
@@ -650,6 +654,7 @@ function RSVP() {
         setName(session.name ?? "");
         setContact(session.contact ?? "");
         setWaiverOnFile(Boolean(session.waiver));
+        setInviteCode(session.inviteCode ?? null);
         // Only show the confirmation when the stored RSVP is for the run that
         // is actually coming up. Otherwise prefill the form so a returning
         // runner can RSVP for this week.
@@ -666,6 +671,21 @@ function RSVP() {
     };
   }, []);
 
+
+  // Aggregate "who's going" for this run: a count plus opted-in first names.
+  useEffect(() => {
+    let cancelled = false;
+    getWhosGoing()
+      .then((g) => {
+        if (!cancelled) setGoing(g);
+      })
+      .catch(() => {
+        /* stays hidden */
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [submitted]);
 
   const submit = async () => {
     if (!name.trim() || !contact.trim()) {
@@ -688,6 +708,7 @@ function RSVP() {
     setError(null);
     setSubmitting(true);
     const contactIsEmail = /@/.test(contact.trim());
+    const referredBy = getReferralCode();
     track("rsvp_submit_attempt", {
       hero_variant: heroVariant ?? "unknown",
       days: selected.join(","),
@@ -718,6 +739,7 @@ function RSVP() {
               ...(d === "sat" && song.trim()
                 ? { song: song.trim(), songCreditOk }
                 : {}),
+              ...(d === "sat" ? { goingListOk, referredBy } : {}),
             }),
           }),
         ),
@@ -733,6 +755,16 @@ function RSVP() {
         });
         return;
       }
+      // Keep the personal invite code so the confirmation can show their link.
+      try {
+        const satIndex = selected.indexOf("sat");
+        const body = satIndex >= 0 ? await results[satIndex]!.clone().json() : null;
+        if (body && typeof body.inviteCode === "string") setInviteCode(body.inviteCode);
+      } catch {
+        /* link falls back to the generic invite */
+      }
+      // The referral has been attached to this RSVP; do not carry it further.
+      if (referredBy) clearReferralCode();
       setSubmittedDays(selected);
       setSubmittedParty(partySize);
       setSubmittedFirstTimer(firstTimer);
@@ -745,6 +777,8 @@ function RSVP() {
         first_timer: firstTimer,
         has_song: Boolean(song.trim()),
         song_credit_ok: Boolean(song.trim()) && songCreditOk,
+        going_list_ok: goingListOk,
+        referred: Boolean(referredBy),
         contact_kind: contactIsEmail ? "email" : "phone",
         source: source || "unspecified",
       });
@@ -836,6 +870,19 @@ function RSVP() {
             That's it. No spam, no funnel — just a standing invite to the trailhead.
           </p>
           <RunCountdown className="mb-6 max-w-[440px]" />
+          {going && whosGoingSentence(going) ? (
+            <p
+              className="mb-6 max-w-[440px] border-l-2 border-blue pl-3 text-[15px] leading-[1.5] text-paper/85"
+              aria-live="polite"
+            >
+              <span className="font-semibold text-paper">{whosGoingSentence(going)}</span>
+              {going.names.length === 0 ? (
+                <span className="block text-[13px] text-paper/60 mt-0.5">
+                  Tick the box on the form and your first name shows up here.
+                </span>
+              ) : null}
+            </p>
+          ) : null}
           <div id="details" className="scroll-mt-24 border-t-2 border-paper/70 max-w-[440px]">
             {([
               ["When", <>Every Saturday · 7:00 AM<span className="block text-[13px] font-normal text-paper/60 mt-0.5">Next: Saturday, {new Date(canonicalOccurrence().startUtc).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "America/New_York" })}</span></>],
@@ -964,6 +1011,25 @@ function RSVP() {
                   First time running with us
                 </span>
               </button>
+              <button
+                type="button"
+                onClick={() => setGoingListOk((v) => !v)}
+                aria-pressed={goingListOk}
+                className={`w-full flex items-center gap-3 border-[1.5px] px-3.5 py-3 mb-4 text-left transition-colors ${
+                  goingListOk ? "border-ink bg-white" : "border-[#cfcabe] bg-white hover:border-ink"
+                }`}
+              >
+                <span
+                  className={`w-4 h-4 shrink-0 flex items-center justify-center text-[10px] border-[1.5px] border-ink ${
+                    goingListOk ? "bg-ink text-paper" : "bg-white text-transparent"
+                  }`}
+                >
+                  ✓
+                </span>
+                <span className="text-sm font-semibold text-ink">
+                  Show my first name on this week's going list
+                </span>
+              </button>
               <label htmlFor="rsvp-song" className="block text-[11px] font-bold tracking-[0.14em] uppercase text-ink/70 mb-1.5">
                 One song that gets you out the door?{" "}
                 <span className="normal-case tracking-normal font-semibold text-ink/50">Optional</span>
@@ -1053,6 +1119,7 @@ function RSVP() {
               waiverOnFile={waiverOnFile}
               partySize={submittedParty}
               firstTimer={submittedFirstTimer}
+              inviteCode={inviteCode}
               onReset={() => {
                 void clearSignupSession().catch(() => {});
                 setWaiverOnFile(false);
@@ -1063,8 +1130,8 @@ function RSVP() {
                 setSource("");
                 setPartySize(1);
                 setFirstTimer(false);
-
-
+                setGoingListOk(false);
+                setInviteCode(null);
               }}
             />
           )}
@@ -1096,6 +1163,7 @@ function RSVPConfirmation({
   waiverOnFile = false,
   partySize = 1,
   firstTimer = false,
+  inviteCode = null,
   onReset,
 }: {
   name: string;
@@ -1105,6 +1173,7 @@ function RSVPConfirmation({
   waiverOnFile?: boolean;
   partySize?: number;
   firstTimer?: boolean;
+  inviteCode?: string | null;
   onReset: () => void;
 }) {
   const [waiverSigned, setWaiverSigned] = useState(waiverOnFile);
@@ -1219,6 +1288,7 @@ function RSVPConfirmation({
       <RSVPWaiverBlock prefill={prefill} onStatusChange={setWaiverSigned} />
 
       <BringAFriend
+        inviteCode={inviteCode}
         dateLabel={new Date(canonicalOccurrence().startUtc).toLocaleDateString("en-US", {
           month: "short",
           day: "numeric",

@@ -21,6 +21,8 @@ interface Props {
   partySize?: number
   firstTimer?: boolean
   song?: string
+  /** Invite code of the person whose link brought this RSVP. */
+  referredBy?: string
 }
 
 const NOTIFY_TO = 'nick@gryt.club'
@@ -34,6 +36,7 @@ const Email = ({
   partySize = 1,
   firstTimer = false,
   song,
+  referredBy,
 }: Props) => {
   const when = submittedAt
     ? new Date(submittedAt).toLocaleString('en-US', {
@@ -64,6 +67,7 @@ const Email = ({
             />
             <Row label="First time" value={firstTimer ? 'Yes — say hello' : 'No'} />
             {song && <Row label="Song" value={song} />}
+            {referredBy && <Row label="Brought by" value={referredBy} />}
             <Row label="Source" value={source} />
             <Row label="Event" value={eventLabel} />
             {when && <Row label="Submitted" value={when} />}

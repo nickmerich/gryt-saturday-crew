@@ -11,6 +11,8 @@ interface Props {
   address?: string
   mapsUrl?: string
   calendarUrl?: string
+  /** Personal invite link for this runner. */
+  inviteUrl?: string
 }
 
 const Email = ({
@@ -22,6 +24,7 @@ const Email = ({
   address = '212 Valley Brook Rd, McMurray, PA 15317',
   mapsUrl = 'https://maps.google.com/?q=212+Valley+Brook+Rd,+McMurray,+PA+15317',
   calendarUrl,
+  inviteUrl,
 }: Props) => {
   const first = (name ?? '').trim().split(' ')[0]
   return (
@@ -46,6 +49,13 @@ const Email = ({
             )}
           </Section>
           <Text style={small}>About 4 miles out and back. All paces. Nobody gets dropped. Coffee in the lot after.</Text>
+          {inviteUrl && (
+            <Section style={inviteCard}>
+              <Text style={cardEyebrow}>KNOW SOMEONE WHO SHOULD BE THERE?</Text>
+              <Text style={small}>Send them your link tonight. One text is usually all it takes.</Text>
+              <Text style={inviteLinkText}><Link href={inviteUrl} style={inviteLink}>{inviteUrl}</Link></Text>
+            </Section>
+          )}
           <Hr style={hr} />
           <Text style={tagline}>DO HARD THINGS TOGETHER.</Text>
           <Text style={footer}>Laura and Nick</Text>
@@ -68,6 +78,7 @@ export const template = {
     address: '212 Valley Brook Rd, McMurray, PA 15317',
     mapsUrl: 'https://maps.google.com/?q=212+Valley+Brook+Rd,+McMurray,+PA+15317',
     calendarUrl: 'https://calendar.google.com/calendar/render',
+    inviteUrl: 'https://grytrunclub.com/?ref=jamie-4f2a1',
   },
 } satisfies TemplateEntry
 
@@ -80,6 +91,9 @@ const cardEyebrow = { fontSize: '11px', letterSpacing: '0.16em', fontWeight: 700
 const big = { fontSize: '18px', fontWeight: 700, color: '#0a0a0a', margin: '0 0 8px' }
 const small = { fontSize: '14px', lineHeight: 1.55, color: '#3a3a3a', margin: '12px 0 0' }
 const cta = { margin: '8px 0' }
+const inviteCard = { border: '1.5px solid #0a0a0a', background: '#ffffff', padding: '16px 20px', marginTop: '20px' }
+const inviteLinkText = { fontSize: '14px', lineHeight: 1.5, margin: '10px 0 0', wordBreak: 'break-all' as const }
+const inviteLink = { color: '#0a0a0a', fontWeight: 700, textDecoration: 'underline' }
 const ctaLink = { display: 'inline-block', backgroundColor: '#0a0a0a', color: '#ffffff', textDecoration: 'none', padding: '14px 22px', fontSize: '13px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' as const }
 const ctaLinkAlt = { display: 'inline-block', border: '1.5px solid #0a0a0a', color: '#0a0a0a', textDecoration: 'none', padding: '12.5px 22px', fontSize: '13px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' as const }
 const hr = { borderColor: '#e0ddd4', margin: '32px 0 16px' }

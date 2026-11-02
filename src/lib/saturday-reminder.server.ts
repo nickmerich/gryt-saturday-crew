@@ -7,6 +7,8 @@ import {
   occurrenceDateLong,
   occurrenceTime,
 } from '@/lib/run-schedule'
+import { inviteUrl } from '@/lib/invite'
+import { inviteCodeFor } from '@/lib/invite.server'
 
 const isEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)
 const TEMPLATE = 'saturday-reminder'
@@ -67,7 +69,7 @@ export async function runSaturdayReminders(now: Date = new Date()) {
     const r = await sendInternalTransactionalEmail({
       templateName: TEMPLATE,
       recipientEmail: email,
-      templateData: { ...data, name },
+      templateData: { ...data, name, inviteUrl: inviteUrl(inviteCodeFor(name, email)) },
       idempotencyKey: `${TEMPLATE}-${occ.id}-${email}`,
     })
     if (r.ok) sent++

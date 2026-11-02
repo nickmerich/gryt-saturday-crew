@@ -10,6 +10,8 @@ export type SignupSessionSummary = {
   eventLabel: string | null;
   rsvpAt: string | null;
   waiver: { signedOn: string | null } | null;
+  /** This runner's personal invite code, derived from their name and contact. */
+  inviteCode: string | null;
 };
 
 function mask(contact: string | null): string | null {
@@ -38,6 +40,11 @@ export const loadSignupSession = createServerFn({ method: "GET" }).handler(
     if (!row) return null;
 
     const contact = row.contact;
+    let inviteCode: string | null = null;
+    if (row.name && contact) {
+      const { inviteCodeFor } = await import("@/lib/invite.server");
+      inviteCode = inviteCodeFor(row.name, contact);
+    }
     return {
       name: row.name,
       contact,
@@ -46,6 +53,7 @@ export const loadSignupSession = createServerFn({ method: "GET" }).handler(
       eventLabel: row.event_label,
       rsvpAt: row.rsvp_id ? row.created_at : null,
       waiver: row.waiver_id ? { signedOn: row.waiver_signed_on } : null,
+      inviteCode,
     };
   },
 );

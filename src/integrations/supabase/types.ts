@@ -473,8 +473,10 @@ export type Database = {
           event_id: string | null
           event_label: string | null
           first_timer: boolean
+          going_list_ok: boolean
           hero_variant: string | null
           id: string
+          invite_code: string | null
           ip_hash: string | null
           name: string
           notion_attendance_page_id: string | null
@@ -483,6 +485,7 @@ export type Database = {
           notion_synced: boolean
           notion_synced_at: string | null
           party_size: number
+          referred_by: string | null
           song: string | null
           song_credit_ok: boolean
           source: string | null
@@ -494,8 +497,10 @@ export type Database = {
           event_id?: string | null
           event_label?: string | null
           first_timer?: boolean
+          going_list_ok?: boolean
           hero_variant?: string | null
           id?: string
+          invite_code?: string | null
           ip_hash?: string | null
           name: string
           notion_attendance_page_id?: string | null
@@ -504,6 +509,7 @@ export type Database = {
           notion_synced?: boolean
           notion_synced_at?: string | null
           party_size?: number
+          referred_by?: string | null
           song?: string | null
           song_credit_ok?: boolean
           source?: string | null
@@ -515,8 +521,10 @@ export type Database = {
           event_id?: string | null
           event_label?: string | null
           first_timer?: boolean
+          going_list_ok?: boolean
           hero_variant?: string | null
           id?: string
+          invite_code?: string | null
           ip_hash?: string | null
           name?: string
           notion_attendance_page_id?: string | null
@@ -525,6 +533,7 @@ export type Database = {
           notion_synced?: boolean
           notion_synced_at?: string | null
           party_size?: number
+          referred_by?: string | null
           song?: string | null
           song_credit_ok?: boolean
           source?: string | null

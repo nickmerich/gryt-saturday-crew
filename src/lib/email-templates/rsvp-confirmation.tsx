@@ -18,6 +18,8 @@ interface Props {
   eventLabel?: string
   calendarUrl?: string
   stravaUrl?: string
+  /** Personal invite link; a friend who RSVPs through it is recorded as brought by this runner. */
+  inviteUrl?: string
 }
 
 const Email = ({
@@ -25,6 +27,7 @@ const Email = ({
   eventLabel = 'GRYT Saturday Run · 7:00 AM',
   calendarUrl,
   stravaUrl = 'https://www.strava.com/clubs/1708552',
+  inviteUrl,
 }: Props) => {
   const first = (name ?? '').trim().split(' ')[0]
   return (
@@ -73,6 +76,19 @@ const Email = ({
             </Text>
           </Section>
 
+          {inviteUrl && (
+            <Section style={inviteCard}>
+              <Text style={cardEyebrow}>BRING ONE PERSON</Text>
+              <Text style={bullet}>
+                Saturday is better with someone you know. This link is yours; when a friend
+                RSVPs with it, we know you brought them.
+              </Text>
+              <Text style={inviteLinkText}>
+                <Link href={inviteUrl} style={inviteLink}>{inviteUrl}</Link>
+              </Text>
+            </Section>
+          )}
+
           <Hr style={hr} />
           <Text style={tagline}>DO HARD THINGS TOGETHER.</Text>
           <Text style={footer}>
@@ -93,6 +109,7 @@ export const template = {
     eventLabel: 'GRYT Saturday Run · 7:00 AM',
     calendarUrl: 'https://calendar.google.com/calendar/render',
     stravaUrl: 'https://www.strava.com/clubs/1708552',
+    inviteUrl: 'https://grytrunclub.com/?ref=jamie-4f2a1',
   },
 } satisfies TemplateEntry
 
@@ -134,6 +151,9 @@ const cardEyebrow = {
   margin: '0 0 10px',
 }
 const bullet = { fontSize: '14px', lineHeight: 1.55, color: '#3a3a3a', margin: '4px 0' }
+const inviteCard = { border: '1.5px solid #0a0a0a', background: '#ffffff', padding: '18px 22px', marginTop: '20px' }
+const inviteLinkText = { fontSize: '14px', lineHeight: 1.5, margin: '10px 0 0', wordBreak: 'break-all' as const }
+const inviteLink = { color: '#0a0a0a', fontWeight: 700, textDecoration: 'underline' }
 const cta = { margin: '8px 0' }
 const ctaLink = {
   display: 'inline-block',
