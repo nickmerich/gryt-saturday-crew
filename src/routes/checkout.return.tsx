@@ -77,7 +77,7 @@ function CheckoutReturn() {
         )}
         <Link
           to="/"
-          className="inline-block bg-background text-foreground px-6 py-3 text-sm tracking-[0.14em] uppercase hover:bg-baby-blue hover:text-ink transition"
+          className="inline-block bg-blue text-ink px-6 py-3 text-sm tracking-[0.14em] uppercase hover:bg-baby-blue hover:text-ink transition"
         >
           Back to home
         </Link>

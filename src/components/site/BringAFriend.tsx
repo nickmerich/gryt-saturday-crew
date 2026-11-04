@@ -53,7 +53,7 @@ export function BringAFriend({ dateLabel }: { dateLabel?: string }) {
         <button
           type="button"
           onClick={share}
-          className="text-[12px] font-bold tracking-[0.1em] uppercase py-3 bg-background text-foreground hover:bg-blue hover:text-ink transition-colors"
+          className="text-[12px] font-bold tracking-[0.1em] uppercase py-3 bg-blue text-ink hover:bg-blue hover:text-ink transition-colors"
         >
           Send invite
         </button>

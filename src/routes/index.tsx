@@ -1032,7 +1032,7 @@ function RSVP() {
               <button
                 onClick={submit}
                 disabled={submitting}
-                className="w-full text-sm font-bold tracking-[0.1em] uppercase py-4 bg-background text-foreground hover:bg-[#3a7ca5] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                className="w-full text-sm font-bold tracking-[0.1em] uppercase py-4 bg-blue text-ink hover:bg-ink hover:text-white transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                 style={{ fontFamily: "var(--font-body)" }}
               >
                 {submitting ? "Sending…" : "Lock it in →"}
@@ -3002,7 +3002,7 @@ function WeeklyRhythm() {
               <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-[auto_auto_auto] sm:gap-3 sm:justify-start">
                 <a
                   href="#join-sat"
-                  className="inline-flex items-center justify-center h-11 px-5 text-[12px] font-bold uppercase tracking-[0.12em] bg-background text-foreground hover:bg-[#3a7ca5] transition-colors"
+                  className="inline-flex items-center justify-center h-11 px-5 text-[12px] font-bold uppercase tracking-[0.12em] bg-blue text-ink hover:bg-ink hover:text-white transition-colors"
                 >
                   RSVP This Saturday →
                 </a>
