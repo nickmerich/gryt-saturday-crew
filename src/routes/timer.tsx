@@ -220,7 +220,7 @@ function TimerPage() {
               <button
                 onClick={startEvent}
                 disabled={participants.length === 0}
-                className="px-6 py-3 bg-blue text-ink font-condensed uppercase tracking-widest text-sm disabled:opacity-40 disabled:cursor-not-allowed hover:bg-white transition-colors"
+                className="px-6 py-3 bg-blue text-ink font-condensed uppercase tracking-widest text-sm disabled:opacity-40 disabled:cursor-not-allowed hover:bg-foreground hover:text-background transition-colors"
               >
                 Start Event
               </button>
@@ -301,7 +301,7 @@ function TimerPage() {
                 <button
                   onClick={() => captureFinish(p.id)}
                   disabled={startAt === null}
-                  className="px-3 py-1.5 bg-blue text-ink font-condensed uppercase tracking-widest text-[11px] disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white transition-colors"
+                  className="px-3 py-1.5 bg-blue text-ink font-condensed uppercase tracking-widest text-[11px] disabled:opacity-30 disabled:cursor-not-allowed hover:bg-foreground hover:text-background transition-colors"
                 >
                   Finish
                 </button>

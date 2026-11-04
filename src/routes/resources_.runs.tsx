@@ -227,7 +227,7 @@ function RunsPage() {
               type="button"
               onClick={connect}
               disabled={state === "connecting"}
-              className="h-12 bg-[#89CFF0] px-6 text-[12px] font-bold uppercase tracking-[0.18em] text-black transition-colors hover:bg-white disabled:opacity-60"
+              className="h-12 bg-[#89CFF0] px-6 text-[12px] font-bold uppercase tracking-[0.18em] text-black transition-colors hover:bg-foreground hover:text-background disabled:opacity-60"
             >
               {state === "connecting" ? "Connecting…" : "Connect Strava"}
             </button>

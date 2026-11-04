@@ -938,7 +938,7 @@ function RSVP() {
                     aria-pressed={partySize === n}
                     className={`flex-1 border-[1.5px] py-3 text-sm font-bold transition-colors ${
                       partySize === n
-                        ? "border-ink bg-background text-foreground"
+                        ? "border-ink bg-blue text-ink"
                         : "border-[#cfcabe] bg-white text-ink hover:border-ink"
                     }`}
                   >
@@ -956,7 +956,7 @@ function RSVP() {
               >
                 <span
                   className={`w-4 h-4 shrink-0 flex items-center justify-center text-[10px] border-[1.5px] border-ink ${
-                    firstTimer ? "bg-background text-foreground" : "bg-white text-transparent"
+                    firstTimer ? "bg-ink text-white" : "bg-white text-transparent"
                   }`}
                 >
                   ✓
@@ -993,7 +993,7 @@ function RSVP() {
                 >
                   <span
                     className={`w-4 h-4 shrink-0 flex items-center justify-center text-[10px] border-[1.5px] border-ink ${
-                      songCreditOk ? "bg-background text-foreground" : "bg-white text-transparent"
+                      songCreditOk ? "bg-ink text-white" : "bg-white text-transparent"
                     }`}
                   >
                     ✓
@@ -1686,7 +1686,7 @@ function InlineWaiver({
                 if (n < step) setStep(n as 1 | 2 | 3);
               }}
               className={`flex-1 px-4 py-4 text-left border-r border-foreground/15 last:border-r-0 transition-colors ${
-                active ? "bg-blue text-ink" : past ? "bg-background text-foreground" : "bg-background text-foreground/70"
+                active ? "bg-blue text-ink" : past ? "bg-ink text-white" : "bg-background text-foreground/70"
               }`}
             >
               <div className="text-[11px] font-bold tracking-[0.14em] uppercase opacity-80">
