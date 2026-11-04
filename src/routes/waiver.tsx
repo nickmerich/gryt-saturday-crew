@@ -1,4 +1,4 @@
-import grytBearImg from "@/assets/img/gryt-bear.webp";
+import { GrytBrand } from "@/components/site/BrandMarks";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useMemo, useState, type FormEvent, type ReactNode } from "react";
@@ -661,14 +661,8 @@ function SignedView({ record }: { record: SignedRecord }) {
 function PageHeader() {
   return (
     <header className="px-6 sm:px-12 lg:px-24 py-6 border-b border-foreground/15">
-      <Link to="/" className="inline-flex items-center gap-2 group">
-        <img src={grytBearImg} alt="" className="h-9 w-9" />
-        <span
-          className="wordmark uppercase text-[18px] leading-none text-foreground"
-          style={{ textShadow: "2px 2px 0 var(--blue)" }}
-        >
-          Run Club
-        </span>
+      <Link to="/" aria-label="GRYT Run Club home" className="inline-flex items-center gap-2 group">
+        <GrytBrand />
       </Link>
     </header>
   );
