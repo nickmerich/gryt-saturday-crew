@@ -11,6 +11,7 @@ import { MontourRouteMap } from "@/components/site/MontourRouteMap";
 import { ClubStats } from "@/components/site/ClubStats";
 import { useRegularsLabel } from "@/hooks/useRegularsLabel";
 import { PartnersStrip, homePartnersQuery } from "@/components/site/PartnersStrip";
+import { RunnerReviews } from "@/components/site/RunnerReviews";
 import { FeaturedEvent } from "@/components/site/FeaturedEvent";
 import { Button } from "@/components/ui/button";
 
@@ -2668,6 +2669,7 @@ function Footer() {
                 Privacy
               </Link>
               <Link to="/partners" className="eyebrow text-paper/75 hover:text-blue transition-colors">Partners</Link>
+              <Link to="/review" className="eyebrow text-paper/75 hover:text-blue transition-colors">Leave a review</Link>
               <Link
                 to="/terms"
                 className="eyebrow text-paper/75 hover:text-blue transition-colors"
@@ -3955,6 +3957,7 @@ function Landing() {
     <main className="bg-ink text-paper">
       <Nav />
       <Hero />
+      <RunnerReviews />
       <PartnersStrip />
       <FeaturedEvent />
       <RSVP />
@@ -3973,6 +3976,7 @@ function Landing() {
           <Link to="/milestones" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Milestone Club →</Link>
           <Link to="/press" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Press & conversations →</Link>
           <Link to="/shop" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Shop →</Link>
+          <Link to="/review" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Leave a review →</Link>
           <a href={STRAVA_CLUB} target="_blank" rel="noopener noreferrer" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Strava club →</a>
         </div>
       </section>

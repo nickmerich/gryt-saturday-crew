@@ -28,6 +28,7 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RacesRouteImport } from './routes/races'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as ResourcesRouteImport } from './routes/resources'
+import { Route as ReviewRouteImport } from './routes/review'
 import { Route as RunsRouteImport } from './routes/runs'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
@@ -45,6 +46,7 @@ import { Route as AdminMembersRouteImport } from './routes/admin.members'
 import { Route as AdminMusicTectonicsRouteImport } from './routes/admin.music-tectonics'
 import { Route as AdminPartnersRouteImport } from './routes/admin.partners'
 import { Route as AdminPaymentsRouteImport } from './routes/admin.payments'
+import { Route as AdminReviewsRouteImport } from './routes/admin.reviews'
 import { Route as AdminRosterRouteImport } from './routes/admin.roster'
 import { Route as AdminSoundtrackRouteImport } from './routes/admin.soundtrack'
 import { Route as CheckoutReturnRouteImport } from './routes/checkout.return'
@@ -197,6 +199,11 @@ const ResourcesRoute = ResourcesRouteImport.update({
   path: '/resources',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReviewRoute = ReviewRouteImport.update({
+  id: '/review',
+  path: '/review',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RunsRoute = RunsRouteImport.update({
   id: '/runs',
   path: '/runs',
@@ -282,6 +289,11 @@ const AdminPartnersRoute = AdminPartnersRouteImport.update({
 const AdminPaymentsRoute = AdminPaymentsRouteImport.update({
   id: '/admin/payments',
   path: '/admin/payments',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminReviewsRoute = AdminReviewsRouteImport.update({
+  id: '/admin/reviews',
+  path: '/admin/reviews',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRosterRoute = AdminRosterRouteImport.update({
@@ -606,6 +618,7 @@ export interface FileRoutesByFullPath {
   '/races': typeof RacesRoute
   '/register': typeof RegisterRoute
   '/resources': typeof ResourcesRoute
+  '/review': typeof ReviewRoute
   '/runs': typeof RunsRoute
   '/shop': typeof ShopRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -623,6 +636,7 @@ export interface FileRoutesByFullPath {
   '/admin/music-tectonics': typeof AdminMusicTectonicsRoute
   '/admin/partners': typeof AdminPartnersRoute
   '/admin/payments': typeof AdminPaymentsRoute
+  '/admin/reviews': typeof AdminReviewsRoute
   '/admin/roster': typeof AdminRosterRoute
   '/admin/soundtrack': typeof AdminSoundtrackRoute
   '/checkout/return': typeof CheckoutReturnRoute
@@ -700,6 +714,7 @@ export interface FileRoutesByTo {
   '/races': typeof RacesRoute
   '/register': typeof RegisterRoute
   '/resources': typeof ResourcesRoute
+  '/review': typeof ReviewRoute
   '/runs': typeof RunsRoute
   '/shop': typeof ShopRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -717,6 +732,7 @@ export interface FileRoutesByTo {
   '/admin/music-tectonics': typeof AdminMusicTectonicsRoute
   '/admin/partners': typeof AdminPartnersRoute
   '/admin/payments': typeof AdminPaymentsRoute
+  '/admin/reviews': typeof AdminReviewsRoute
   '/admin/roster': typeof AdminRosterRoute
   '/admin/soundtrack': typeof AdminSoundtrackRoute
   '/checkout/return': typeof CheckoutReturnRoute
@@ -795,6 +811,7 @@ export interface FileRoutesById {
   '/races': typeof RacesRoute
   '/register': typeof RegisterRoute
   '/resources': typeof ResourcesRoute
+  '/review': typeof ReviewRoute
   '/runs': typeof RunsRoute
   '/shop': typeof ShopRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -812,6 +829,7 @@ export interface FileRoutesById {
   '/admin/music-tectonics': typeof AdminMusicTectonicsRoute
   '/admin/partners': typeof AdminPartnersRoute
   '/admin/payments': typeof AdminPaymentsRoute
+  '/admin/reviews': typeof AdminReviewsRoute
   '/admin/roster': typeof AdminRosterRoute
   '/admin/soundtrack': typeof AdminSoundtrackRoute
   '/checkout/return': typeof CheckoutReturnRoute
@@ -891,6 +909,7 @@ export interface FileRouteTypes {
     | '/races'
     | '/register'
     | '/resources'
+    | '/review'
     | '/runs'
     | '/shop'
     | '/sitemap.xml'
@@ -908,6 +927,7 @@ export interface FileRouteTypes {
     | '/admin/music-tectonics'
     | '/admin/partners'
     | '/admin/payments'
+    | '/admin/reviews'
     | '/admin/roster'
     | '/admin/soundtrack'
     | '/checkout/return'
@@ -985,6 +1005,7 @@ export interface FileRouteTypes {
     | '/races'
     | '/register'
     | '/resources'
+    | '/review'
     | '/runs'
     | '/shop'
     | '/sitemap.xml'
@@ -1002,6 +1023,7 @@ export interface FileRouteTypes {
     | '/admin/music-tectonics'
     | '/admin/partners'
     | '/admin/payments'
+    | '/admin/reviews'
     | '/admin/roster'
     | '/admin/soundtrack'
     | '/checkout/return'
@@ -1079,6 +1101,7 @@ export interface FileRouteTypes {
     | '/races'
     | '/register'
     | '/resources'
+    | '/review'
     | '/runs'
     | '/shop'
     | '/sitemap.xml'
@@ -1096,6 +1119,7 @@ export interface FileRouteTypes {
     | '/admin/music-tectonics'
     | '/admin/partners'
     | '/admin/payments'
+    | '/admin/reviews'
     | '/admin/roster'
     | '/admin/soundtrack'
     | '/checkout/return'
@@ -1174,6 +1198,7 @@ export interface RootRouteChildren {
   RacesRoute: typeof RacesRoute
   RegisterRoute: typeof RegisterRoute
   ResourcesRoute: typeof ResourcesRoute
+  ReviewRoute: typeof ReviewRoute
   RunsRoute: typeof RunsRoute
   ShopRoute: typeof ShopRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -1191,6 +1216,7 @@ export interface RootRouteChildren {
   AdminMusicTectonicsRoute: typeof AdminMusicTectonicsRoute
   AdminPartnersRoute: typeof AdminPartnersRoute
   AdminPaymentsRoute: typeof AdminPaymentsRoute
+  AdminReviewsRoute: typeof AdminReviewsRoute
   AdminRosterRoute: typeof AdminRosterRoute
   AdminSoundtrackRoute: typeof AdminSoundtrackRoute
   CheckoutReturnRoute: typeof CheckoutReturnRoute
@@ -1383,6 +1409,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResourcesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/review': {
+      id: '/review'
+      path: '/review'
+      fullPath: '/review'
+      preLoaderRoute: typeof ReviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/runs': {
       id: '/runs'
       path: '/runs'
@@ -1500,6 +1533,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/payments'
       fullPath: '/admin/payments'
       preLoaderRoute: typeof AdminPaymentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/reviews': {
+      id: '/admin/reviews'
+      path: '/admin/reviews'
+      fullPath: '/admin/reviews'
+      preLoaderRoute: typeof AdminReviewsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/roster': {
@@ -1928,6 +1968,7 @@ const rootRouteChildren: RootRouteChildren = {
   RacesRoute: RacesRoute,
   RegisterRoute: RegisterRoute,
   ResourcesRoute: ResourcesRoute,
+  ReviewRoute: ReviewRoute,
   RunsRoute: RunsRoute,
   ShopRoute: ShopRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
@@ -1946,6 +1987,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminMusicTectonicsRoute: AdminMusicTectonicsRoute,
   AdminPartnersRoute: AdminPartnersRoute,
   AdminPaymentsRoute: AdminPaymentsRoute,
+  AdminReviewsRoute: AdminReviewsRoute,
   AdminRosterRoute: AdminRosterRoute,
   AdminSoundtrackRoute: AdminSoundtrackRoute,
   CheckoutReturnRoute: CheckoutReturnRoute,
