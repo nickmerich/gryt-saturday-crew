@@ -256,30 +256,30 @@ const PLAYBOOKS: Playbook[] = [
 
 function PlaybooksPage() {
   return (
-    <main className="bg-ink text-paper">
+    <main className="bg-background text-foreground">
       <SiteNav />
-      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
+      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-foreground/15">
         <div className="max-w-[900px] mx-auto">
           <Link
             to="/resources"
-            className="eyebrow text-blue hover:text-paper transition-colors"
+            className="eyebrow text-foreground hover:text-foreground transition-colors"
           >
             ← All resources
           </Link>
-          <p className="eyebrow text-blue mt-8 mb-5">LONG-FORM FROM NICK</p>
+          <p className="eyebrow text-foreground mt-8 mb-5">LONG-FORM FROM NICK</p>
           <h1 className="display-condensed uppercase text-[clamp(48px,9vw,128px)] leading-[0.9]">
             Run Club Playbooks
           </h1>
-          <p className="mt-7 text-paper/75 text-lg md:text-xl max-w-[640px] leading-[1.55]">
+          <p className="mt-7 text-foreground/75 text-lg md:text-xl max-w-[640px] leading-[1.55]">
             Everything we've learned about building consistency, community, and
             a sustainable running life — written down, shared freely.
           </p>
         </div>
       </section>
 
-      <section className="px-6 sm:px-12 lg:px-24 pt-16 pb-8 border-b border-paper/15">
+      <section className="px-6 sm:px-12 lg:px-24 pt-16 pb-8 border-b border-foreground/15">
         <div className="max-w-[900px] mx-auto">
-          <p className="eyebrow text-paper/55 mb-5">Jump to a playbook</p>
+          <p className="eyebrow text-foreground/70 mb-5">Jump to a playbook</p>
           <nav aria-label="Playbook table of contents">
             <ul className="flex flex-col gap-3">
               {PLAYBOOKS.filter((p) => !p.comingSoon).map((p) => {
@@ -288,9 +288,9 @@ function PlaybooksPage() {
                     {p.href ? (
                       <Link
                         to={p.href}
-                        className="group flex items-center gap-3 text-paper/80 hover:text-blue transition-colors"
+                        className="group flex items-center gap-3 text-foreground/80 hover:text-foreground/70 transition-colors"
                       >
-                        <span className="w-2 h-2 bg-paper/40 group-hover:bg-blue transition-colors" />
+                        <span className="w-2 h-2 bg-foreground/40 group-hover:bg-blue transition-colors" />
                         <span className="text-[16px] md:text-[17px] leading-[1.5]">
                           {p.title}
                         </span>
@@ -298,9 +298,9 @@ function PlaybooksPage() {
                     ) : (
                       <a
                         href={`#${p.slug}`}
-                        className="group flex items-center gap-3 text-paper/80 hover:text-blue transition-colors"
+                        className="group flex items-center gap-3 text-foreground/80 hover:text-foreground/70 transition-colors"
                       >
-                        <span className="w-2 h-2 bg-paper/40 group-hover:bg-blue transition-colors" />
+                        <span className="w-2 h-2 bg-foreground/40 group-hover:bg-blue transition-colors" />
                         <span className="text-[16px] md:text-[17px] leading-[1.5]">
                           {p.title}
                         </span>
@@ -315,13 +315,13 @@ function PlaybooksPage() {
         </div>
       </section>
 
-      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
+      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-foreground/15">
         <div className="max-w-[900px] mx-auto flex flex-col gap-16 md:gap-20">
           {PLAYBOOKS.map((p) => (
             <article
               key={p.slug}
               id={p.slug}
-              className={`border-t border-paper/15 pt-12 ${
+              className={`border-t border-foreground/15 pt-12 ${
                 p.comingSoon ? "opacity-60" : ""
               }`}
             >
@@ -329,12 +329,12 @@ function PlaybooksPage() {
                 <span className="inline-flex items-center px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.16em] bg-blue text-ink">
                   {p.category}
                 </span>
-                <span className="eyebrow text-paper/55">{p.readTime}</span>
+                <span className="eyebrow text-foreground/70">{p.readTime}</span>
               </div>
               <h2 className="text-[28px] md:text-[40px] font-bold leading-[1.1] tracking-tight">
                 {p.title}
               </h2>
-              <p className="mt-5 text-paper/70 text-[16px] md:text-[17px] leading-[1.6]">
+              <p className="mt-5 text-foreground/70 text-[16px] md:text-[17px] leading-[1.6]">
                 {p.description}
               </p>
               {p.body.length > 0 && (
@@ -342,7 +342,7 @@ function PlaybooksPage() {
                   {p.body.map((para, i) => (
                     <p
                       key={i}
-                      className="text-paper/85 text-[16px] md:text-[17px] leading-[1.7]"
+                      className="text-foreground/85 text-[16px] md:text-[17px] leading-[1.7]"
                     >
                       {para}
                     </p>
@@ -352,13 +352,13 @@ function PlaybooksPage() {
               {p.href && (
                 <Link
                   to={p.href}
-                  className="mt-8 inline-flex items-center gap-2 text-blue hover:text-paper transition-colors text-sm font-bold uppercase tracking-[0.12em]"
+                  className="mt-8 inline-flex items-center gap-2 text-foreground hover:text-foreground transition-colors text-sm font-bold uppercase tracking-[0.12em]"
                 >
                   Read the full article →
                 </Link>
               )}
               {p.comingSoon && (
-                <p className="mt-6 eyebrow text-paper/40">Coming Soon</p>
+                <p className="mt-6 eyebrow text-foreground/70">Coming Soon</p>
               )}
             </article>
           ))}
@@ -373,13 +373,13 @@ function PlaybooksPage() {
 
 function CTA() {
   return (
-    <section className="bg-black px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
+    <section className="bg-background px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-foreground/15">
       <div className="max-w-[900px] mx-auto text-center">
-        <p className="eyebrow text-blue mb-5">SATURDAY 7:00 AM</p>
+        <p className="eyebrow text-foreground mb-5">SATURDAY 7:00 AM</p>
         <h2 className="display-condensed uppercase text-[clamp(36px,6vw,80px)] leading-[0.92]">
           Stop reading. Start showing up.
         </h2>
-        <p className="mt-6 text-paper/75 text-[16px] md:text-[17px] leading-[1.6] max-w-[560px] mx-auto">
+        <p className="mt-6 text-foreground/75 text-[16px] md:text-[17px] leading-[1.6] max-w-[560px] mx-auto">
           The playbooks only work if you run them. Come find us this Saturday.
         </p>
         <div className="mt-10 flex flex-wrap gap-4 justify-center">
@@ -388,7 +388,7 @@ function CTA() {
           </Link>
           <Link
             to="/resources"
-            className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors"
+            className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-foreground/40 text-foreground hover:border-blue hover:text-foreground/70 transition-colors"
           >
             Back to Resources
           </Link>

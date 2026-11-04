@@ -53,14 +53,14 @@ export function BringAFriend({ dateLabel }: { dateLabel?: string }) {
         <button
           type="button"
           onClick={share}
-          className="text-[12px] font-bold tracking-[0.1em] uppercase py-3 bg-ink text-paper hover:bg-blue hover:text-ink transition-colors"
+          className="text-[12px] font-bold tracking-[0.1em] uppercase py-3 bg-background text-foreground hover:bg-blue hover:text-ink transition-colors"
         >
           Send invite
         </button>
         <a
           href={`sms:?&body=${encodeURIComponent(message)}`}
           onClick={() => track("friend_invite_click", { method: "sms" })}
-          className="text-[12px] font-bold tracking-[0.1em] uppercase py-3 border-[1.5px] border-ink text-ink text-center hover:bg-ink hover:text-paper transition-colors"
+          className="text-[12px] font-bold tracking-[0.1em] uppercase py-3 border-[1.5px] border-ink text-ink text-center hover:bg-background hover:text-foreground transition-colors"
         >
           Text it
         </a>

@@ -150,28 +150,28 @@ export const Route = createFileRoute(
 
 function ArticlePage() {
   return (
-    <main className="bg-ink text-paper">
+    <main className="bg-background text-foreground">
       <SiteNav />
-      <article className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
+      <article className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-foreground/15">
         <div className="max-w-[760px] mx-auto">
           <Link
             to="/resources/playbooks"
-            className="eyebrow text-blue hover:text-paper transition-colors"
+            className="eyebrow text-foreground hover:text-foreground transition-colors"
           >
             ← All playbooks
           </Link>
-          <p className="eyebrow text-blue mt-8 mb-5">COMMUNITY · 9 MIN READ</p>
+          <p className="eyebrow text-foreground mt-8 mb-5">COMMUNITY · 9 MIN READ</p>
           <h1 className="display-condensed uppercase text-[clamp(40px,7vw,96px)] leading-[0.95]">
             The Best Free Running Clubs in Pittsburgh (2026)
           </h1>
-          <p className="mt-7 text-paper/75 text-lg md:text-xl leading-[1.55]">
+          <p className="mt-7 text-foreground/75 text-lg md:text-xl leading-[1.55]">
             {DESCRIPTION}
           </p>
 
           <ShareBar className="mt-8" />
 
 
-          <div className="mt-12 space-y-5 text-paper/85 text-[16px] md:text-[17px] leading-[1.7]">
+          <div className="mt-12 space-y-5 text-foreground/85 text-[16px] md:text-[17px] leading-[1.7]">
             <p>You used to have a team. Then life got complicated — kids, commutes, a schedule that treats anything non-urgent as optional. But the part of you that needs to move, that needs people to move with, doesn't really disappear. It just waits.</p>
             <p>Pittsburgh has a real running community. It's spread across neighborhoods and suburbs, split between early risers and evening runners, trail people and road people. Some clubs cost money. Most are city-centric. A few are genuinely free and genuinely welcoming.</p>
             <p>Here's what's actually out there in 2026 — who each club is for, when and where they meet, and what makes each one worth considering.</p>
@@ -192,7 +192,7 @@ function ArticlePage() {
               Comparing a store club to an independent one? Read{" "}
               <Link
                 to="/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs"
-                className="text-blue underline underline-offset-4"
+                className="text-foreground underline underline-offset-4"
               >
                 GRYT Run Club vs Fleet Feet Pittsburgh
               </Link>
@@ -206,7 +206,7 @@ function ArticlePage() {
             <p><strong>Limitation:</strong> Locations rotate, so you plan each week. Saturdays are usually in the city. See{" "}
               <Link
                 to="/resources/playbooks/gryt-vs-city-of-bridges-run-club"
-                className="text-blue underline underline-offset-4"
+                className="text-foreground underline underline-offset-4"
               >
                 GRYT vs City of Bridges Run Club
               </Link>
@@ -220,7 +220,7 @@ function ArticlePage() {
             <p><strong>Limitation:</strong> It's a timed event rather than a run club, and it's on the North Shore. See{" "}
               <Link
                 to="/resources/playbooks/gryt-vs-parkrun-pittsburgh"
-                className="text-blue underline underline-offset-4"
+                className="text-foreground underline underline-offset-4"
               >
                 GRYT vs parkrun
               </Link>
@@ -248,7 +248,7 @@ function ArticlePage() {
             <h2 className="text-2xl md:text-3xl font-bold mt-12 mb-2">Sewickley Run Club (North / Northwest)</h2>
             <p>Sewickley Run Club is a free community run club in Sewickley, a borough along the Ohio River that the club describes as about 15 miles northwest of Pittsburgh. It meets every Tuesday at 6:30 PM at the corner of Beaver Avenue and Broad Street. You choose a 5-mile loop through town or a shorter 5K out-and-back, all paces run together, and no one gets left behind. The first Tuesday of each month is Test Run Tuesday, a no-pressure, no-drop run built for first-timers. Membership is free through a RunSignUp waiver, and there's no RSVP.</p>
             <p><strong>Best for:</strong> Runners in Sewickley and the nearby Ohio River towns, or anyone north or northwest of the city who wants a friendly Tuesday evening run close to home. Details at{" "}
-              <a href="https://sewickleyrunners.org/" target="_blank" rel="noopener noreferrer" className="text-blue underline underline-offset-4">sewickleyrunners.org</a>
+              <a href="https://sewickleyrunners.org/" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-4">sewickleyrunners.org</a>
               .
             </p>
             <p><strong>Cost:</strong> Free.</p>
@@ -301,7 +301,7 @@ function ArticlePage() {
             <p>If you've been waiting for a reason to start again, Saturday is a good one.</p>
             <p>
               RSVP for this Saturday at{" "}
-              <Link to="/" className="text-blue underline underline-offset-4">
+              <Link to="/" className="text-foreground underline underline-offset-4">
                 grytrunclub.com
               </Link>
               .
@@ -311,8 +311,8 @@ function ArticlePage() {
             <div className="space-y-6">
               {FAQS.map((f) => (
                 <div key={f.q}>
-                  <p className="font-bold text-paper">{f.q}</p>
-                  <p className="mt-2 text-paper/80">{f.a}</p>
+                  <p className="font-bold text-foreground">{f.q}</p>
+                  <p className="mt-2 text-foreground/80">{f.a}</p>
                 </div>
               ))}
             </div>
@@ -326,7 +326,7 @@ function ArticlePage() {
             </Link>
             <Link
               to="/resources/playbooks"
-              className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors"
+              className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-foreground/40 text-foreground hover:border-blue hover:text-foreground/70 transition-colors"
             >
               Back to Playbooks
             </Link>
@@ -381,11 +381,11 @@ function ShareBar({
   }
 
   const btn =
-    "inline-flex items-center gap-2 px-3.5 py-2 text-[12px] font-bold uppercase tracking-[0.12em] border border-paper/30 text-paper hover:border-blue hover:text-blue transition-colors";
+    "inline-flex items-center gap-2 px-3.5 py-2 text-[12px] font-bold uppercase tracking-[0.12em] border border-foreground/30 text-foreground hover:border-blue hover:text-foreground/70 transition-colors";
 
   return (
     <div className={className} aria-label={label}>
-      <p className="eyebrow text-paper/55 mb-3">{label}</p>
+      <p className="eyebrow text-foreground/70 mb-3">{label}</p>
       <div className="flex flex-wrap gap-2.5">
         <button type="button" onClick={onCopy} className={btn} aria-live="polite">
           {copied ? (

@@ -13,12 +13,12 @@ export const Route = createFileRoute('/admin/strava/connect')({
   }),
   component: StravaConnectPage,
   errorComponent: ({ error }) => (
-    <div className="min-h-screen bg-ink text-paper p-12">
+    <div className="min-h-screen bg-background text-foreground p-12">
       <h1 className="display-condensed text-3xl">Strava connect error</h1>
       <p className="mt-2 text-sm text-muted-foreground">{error instanceof Error ? error.message : String(error)}</p>
     </div>
   ),
-  notFoundComponent: () => <div className="p-12 text-paper">Not found.</div>,
+  notFoundComponent: () => <div className="p-12 text-foreground">Not found.</div>,
 })
 
 const SCOPE = 'read,activity:read'
@@ -76,7 +76,7 @@ function SignIn() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="you@grytrunclub.com"
-          className="w-full bg-vintage border border-white/10 px-3 py-3 text-base text-paper placeholder:text-muted-foreground focus:outline-none focus:border-blue"
+          className="w-full bg-background border border-foreground/10 px-3 py-3 text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-blue"
         />
         <button
           type="submit"
@@ -85,7 +85,7 @@ function SignIn() {
         >
           {status === 'sending' ? 'Sending…' : 'Send magic link'}
         </button>
-        {status === 'sent' && <p className="text-xs text-blue">Check your inbox.</p>}
+        {status === 'sent' && <p className="text-xs text-foreground">Check your inbox.</p>}
         {status === 'error' && <p className="text-xs text-red-400">{msg}</p>}
       </form>
     </div>
@@ -94,12 +94,12 @@ function SignIn() {
 
 function Step({ n, title, children }: { n: number; title: string; children: React.ReactNode }) {
   return (
-    <li className="border border-white/15 bg-vintage p-4 sm:p-5">
+    <li className="border border-foreground/15 bg-background p-4 sm:p-5">
       <div className="flex items-baseline gap-3">
-        <span className="display-condensed text-blue text-[22px] leading-none">{n}</span>
+        <span className="display-condensed text-foreground text-[22px] leading-none">{n}</span>
         <span className="display-condensed text-[19px] leading-none">{title}</span>
       </div>
-      <div className="mt-3 text-sm leading-relaxed text-paper/75">{children}</div>
+      <div className="mt-3 text-sm leading-relaxed text-foreground/75">{children}</div>
     </li>
   )
 }
@@ -182,18 +182,18 @@ function StravaConnectPage() {
   }, [allowed, code, exchange.state])
 
   if (email === undefined) {
-    return <div className="min-h-screen bg-ink text-paper p-12 text-sm">Loading…</div>
+    return <div className="min-h-screen bg-background text-foreground p-12 text-sm">Loading…</div>
   }
   if (!email) {
     return (
-      <div className="min-h-screen bg-ink text-paper">
+      <div className="min-h-screen bg-background text-foreground">
         <SignIn />
       </div>
     )
   }
   if (!allowed) {
     return (
-      <div className="min-h-screen bg-ink text-paper p-12">
+      <div className="min-h-screen bg-background text-foreground p-12">
         <h1 className="display-condensed text-3xl">Not an admin account</h1>
         <p className="mt-2 text-sm text-muted-foreground">
           {email} is not on the GRYT admin list.
@@ -212,19 +212,19 @@ function StravaConnectPage() {
       : null
 
   return (
-    <div className="min-h-screen bg-ink text-paper px-5 sm:px-12 py-12">
+    <div className="min-h-screen bg-background text-foreground px-5 sm:px-12 py-12">
       <div className="max-w-[760px] mx-auto">
         <p className="eyebrow eyebrow-blue">Admin</p>
         <h1 className="display-condensed text-[clamp(30px,7vw,52px)] leading-[0.95] mt-2">
           CONNECT STRAVA
         </h1>
-        <p className="mt-3 text-sm leading-relaxed text-paper/70 max-w-[58ch]">
+        <p className="mt-3 text-sm leading-relaxed text-foreground/70 max-w-[58ch]">
           One approval from a Strava account that has joined the GRYT club. After that the homepage
           shows the real member count and club mileage instead of the sample set.
         </p>
 
         {config?.refreshTokenConfigured && exchange.state !== 'done' ? (
-          <p className="mt-6 border border-blue/60 px-4 py-3 text-[12px] tracking-[0.14em] uppercase text-blue">
+          <p className="mt-6 border border-blue/60 px-4 py-3 text-[12px] tracking-[0.14em] uppercase text-foreground">
             Already connected · the homepage is reading live
           </p>
         ) : null}
@@ -237,9 +237,9 @@ function StravaConnectPage() {
         ) : null}
 
         {exchange.state === 'done' ? (
-          <div className="mt-8 border-2 border-blue bg-vintage p-5">
+          <div className="mt-8 border-2 border-blue bg-background p-5">
             <div className="display-condensed text-[22px]">Strava approved</div>
-            <p className="mt-2 text-sm text-paper/75">
+            <p className="mt-2 text-sm text-foreground/75">
               {exchange.athleteName ? `${exchange.athleteName}, ` : ''}
               {exchange.clubName ? `verified against ${exchange.clubName}.` : 'club access verified.'}{' '}
               Copy the key below and send it to Lovable in chat, saying it is the Strava club key.
@@ -251,7 +251,7 @@ function StravaConnectPage() {
               value={exchange.refreshToken}
               rows={2}
               onFocus={(e) => e.currentTarget.select()}
-              className="mt-4 w-full bg-ink border border-blue/50 px-3 py-3 text-[13px] font-mono text-paper break-all"
+              className="mt-4 w-full bg-background border border-blue/50 px-3 py-3 text-[13px] font-mono text-foreground break-all"
             />
             <button
               type="button"
@@ -263,14 +263,14 @@ function StravaConnectPage() {
             >
               {copied ? 'Copied' : 'Copy the key'}
             </button>
-            <p className="mt-3 text-[12px] text-paper/50">
+            <p className="mt-3 text-[12px] text-foreground/70">
               This is shown once. If you lose it, run the approval again.
             </p>
           </div>
         ) : null}
 
         {exchange.state === 'working' ? (
-          <p className="mt-8 text-sm text-blue">Checking with Strava…</p>
+          <p className="mt-8 text-sm text-foreground">Checking with Strava…</p>
         ) : null}
 
         {exchange.state === 'error' ? (
@@ -284,7 +284,7 @@ function StravaConnectPage() {
             <Step n={1} title="Check the callback address">
               In your Strava API application settings, the Authorization Callback Domain must cover
               this address:
-              <code className="mt-2 block bg-ink border border-white/15 px-3 py-2 text-[12px] font-mono break-all">
+              <code className="mt-2 block bg-background border border-foreground/15 px-3 py-2 text-[12px] font-mono break-all">
                 {redirectUri || '…'}
               </code>
               Strava only wants the domain part, without https or the path.
@@ -302,7 +302,7 @@ function StravaConnectPage() {
                   Authorize with Strava
                 </a>
               ) : (
-                <span className="text-paper/50">Waiting on the Strava application ID…</span>
+                <span className="text-foreground/70">Waiting on the Strava application ID…</span>
               )}
             </Step>
             <Step n={4} title="Send the key back">
@@ -312,7 +312,7 @@ function StravaConnectPage() {
           </ol>
         ) : null}
 
-        <p className="mt-10 text-[12px] leading-relaxed text-paper/45 max-w-[62ch]">
+        <p className="mt-10 text-[12px] leading-relaxed text-foreground/70 max-w-[62ch]">
           Attendance streaks are not part of Strava's club data and never will be. Those come from
           Saturday sign-ups and check-ins. Strava's club feed also carries no dates, so club miles
           are a running total rather than a weekly figure.

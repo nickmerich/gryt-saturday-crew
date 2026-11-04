@@ -8,8 +8,8 @@ const BASE =
 export function StravaClubEmbed({ variant = "summary" }: { variant?: "summary" | "activity" }) {
   const activity = variant === "activity";
   return (
-    <div className="border border-paper/20 bg-ink/50">
-      <div className="border-b border-paper/15 px-4 sm:px-5 py-3 text-[10px] tracking-[0.22em] uppercase text-blue">
+    <div className="border border-foreground/20 bg-background/50">
+      <div className="border-b border-foreground/15 px-4 sm:px-5 py-3 text-[10px] tracking-[0.22em] uppercase text-foreground">
         {activity ? "Latest runs on Strava" : "This week on Strava"}
       </div>
       <div className="p-3 sm:p-4">

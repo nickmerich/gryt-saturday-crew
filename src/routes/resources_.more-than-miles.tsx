@@ -86,36 +86,36 @@ export const Route = createFileRoute("/resources_/more-than-miles")({
 
 function StoryPage() {
   return (
-    <main className="bg-ink text-paper">
+    <main className="bg-background text-foreground">
       <SiteNav />
-      <article className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
+      <article className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-foreground/15">
         <div className="max-w-[760px] mx-auto">
           <Link
             to="/resources"
-            className="eyebrow text-blue hover:text-paper transition-colors"
+            className="eyebrow text-foreground hover:text-foreground transition-colors"
           >
             ← All resources
           </Link>
-          <p className="eyebrow text-blue mt-8 mb-5">COMMUNITY · 6 MIN READ</p>
+          <p className="eyebrow text-foreground mt-8 mb-5">COMMUNITY · 6 MIN READ</p>
           <h1 className="display-condensed uppercase text-[clamp(40px,7vw,96px)] leading-[0.95]">
             More Than Miles: 5 Things You Wouldn't Guess From the Parking Lot
           </h1>
-          <p className="mt-7 text-paper/75 text-lg md:text-xl leading-[1.55]">
+          <p className="mt-7 text-foreground/75 text-lg md:text-xl leading-[1.55]">
             Every Saturday at 7 AM, a group of us meets at the Valley Brook Road
             trailhead in McMurray. From the parking lot, it looks simple.
           </p>
 
           <nav
             aria-label="Table of contents"
-            className="mt-10 border border-paper/15 p-5"
+            className="mt-10 border border-foreground/15 p-5"
           >
-            <p className="eyebrow text-paper/55 mb-3">In this story</p>
+            <p className="eyebrow text-foreground/70 mb-3">In this story</p>
             <ul className="flex flex-col gap-2">
               {SECTIONS.map((s) => (
                 <li key={s.id}>
                   <a
                     href={`#${s.id}`}
-                    className="text-paper/80 hover:text-blue transition-colors text-[15px]"
+                    className="text-foreground/80 hover:text-foreground/70 transition-colors text-[15px]"
                   >
                     → {s.label}
                   </a>
@@ -124,7 +124,7 @@ function StoryPage() {
             </ul>
           </nav>
 
-          <div className="mt-12 space-y-5 text-paper/85 text-[16px] md:text-[17px] leading-[1.7]">
+          <div className="mt-12 space-y-5 text-foreground/85 text-[16px] md:text-[17px] leading-[1.7]">
             <p>Every Saturday at 7 AM, a group of us meets at the Valley Brook Road trailhead in McMurray.</p>
             <p>From the parking lot, it looks simple. Neighbors. Miles. Coffee after.</p>
             <p>That's on purpose. Most running groups are either too intimidating or too casual. We built GRYT for the people in the middle — former athletes, busy parents, comeback runners. People who want to train seriously without losing the reason it's fun.</p>
@@ -138,7 +138,7 @@ function StoryPage() {
             <p>Her PR is 3:25:24 at Mountains 2 Beach — already inside the Boston-qualifying standard for her age group. She's run New York. She's run CIM.</p>
             <p>She could chase splits every Saturday. Instead she runs at the pace of whoever showed up.</p>
             <p>Jenn Cicchini is the same way. She's an official Pittsburgh Marathon pace-team leader, and her whole philosophy is our unofficial north star: races are meant to be enjoyed, and running with people makes it mean something.</p>
-            <p className="border-l-2 border-blue pl-5 italic text-paper/90">
+            <p className="border-l-2 border-blue pl-5 italic text-foreground/90">
               The fastest people in our club are the most patient ones. That's not an accident.
             </p>
 
@@ -182,7 +182,7 @@ function StoryPage() {
             <p>A Hall of Fame athlete and a comeback runner, sharing the same trail. A 64-minute PR celebrated over parking-lot coffee.</p>
             <p>That's what we mean by doing hard things together.</p>
             <p>Laura will be at the trailhead Saturday at 7. So will Jenn. So will I.</p>
-            <p className="text-paper text-lg md:text-xl font-bold">
+            <p className="text-foreground text-lg md:text-xl font-bold">
               Come find out what your comeback looks like.
             </p>
           </div>
@@ -193,7 +193,7 @@ function StoryPage() {
             </Link>
             <Link
               to="/resources"
-              className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors"
+              className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-foreground/40 text-foreground hover:border-blue hover:text-foreground/70 transition-colors"
             >
               Back to Resources
             </Link>

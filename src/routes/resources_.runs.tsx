@@ -207,7 +207,7 @@ function RunsPage() {
   );
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-background text-foreground">
       <SiteNav />
       <main className="mx-auto w-full max-w-5xl px-5 pb-24 pt-10 sm:px-8">
         <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#89CFF0]">
@@ -216,7 +216,7 @@ function RunsPage() {
         <h1 className="mt-3 font-[Oswald,'Arial_Narrow',sans-serif] text-[clamp(2.2rem,7vw,4rem)] font-bold uppercase leading-[0.95]">
           Every mile, broken down.
         </h1>
-        <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/70">
+        <p className="mt-4 max-w-xl text-sm leading-relaxed text-foreground/70">
           Connect Strava to see your recent runs with pace, elevation gain, and mile-by-mile splits —
           then turn any of them into a shareable recap graphic.
         </p>
@@ -238,28 +238,28 @@ function RunsPage() {
           )}
           <Link
             to="/resources/recap"
-            className="inline-flex h-12 items-center border border-white/25 px-5 text-[12px] font-bold uppercase tracking-[0.18em] text-white transition-colors hover:border-[#89CFF0] hover:text-[#89CFF0]"
+            className="inline-flex h-12 items-center border border-foreground/25 px-5 text-[12px] font-bold uppercase tracking-[0.18em] text-foreground transition-colors hover:border-[#89CFF0] hover:text-[#89CFF0]"
           >
             Make a recap graphic
           </Link>
         </div>
 
         {error && (
-          <p className="mt-5 border-l-2 border-[#89CFF0] bg-white/5 p-4 text-sm text-white/80">
+          <p className="mt-5 border-l-2 border-[#89CFF0] bg-foreground/5 p-4 text-sm text-foreground/80">
             {error}
           </p>
         )}
 
-        {state === "loading" && <p className="mt-8 text-sm text-white/60">Loading your runs…</p>}
+        {state === "loading" && <p className="mt-8 text-sm text-foreground/75">Loading your runs…</p>}
 
         {totals && activities && activities.length > 0 && (
-          <div className="mt-10 grid grid-cols-3 gap-px border border-white/10 bg-white/10">
+          <div className="mt-10 grid grid-cols-3 gap-px border border-foreground/10 bg-foreground/10">
             {[
               { label: "Runs", value: String(activities.length) },
               { label: "Miles", value: miles(totals.distance).toFixed(1) },
               { label: "Elev ft", value: Math.round(totals.elev * FT).toLocaleString() },
             ].map((s) => (
-              <div key={s.label} className="bg-black px-4 py-5 text-center">
+              <div key={s.label} className="bg-background px-4 py-5 text-center">
                 <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#89CFF0]">
                   {s.label}
                 </p>
@@ -277,7 +277,7 @@ function RunsPage() {
               const open = openId === a.id;
               const d = details[a.id];
               return (
-                <li key={a.id} className="border border-white/12 bg-white/[0.03]">
+                <li key={a.id} className="border border-foreground/12 bg-foreground/[0.03]">
                   <button
                     type="button"
                     onClick={() => toggle(a)}
@@ -285,7 +285,7 @@ function RunsPage() {
                     className="flex w-full flex-col gap-3 p-4 text-left sm:flex-row sm:items-center sm:justify-between"
                   >
                     <div className="min-w-0">
-                      <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-white/50">
+                      <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-foreground/70">
                         {shortDate(a.start_date_local)}
                         {a.location_city ? ` · ${a.location_city}` : ""}
                       </p>
@@ -309,12 +309,12 @@ function RunsPage() {
                   </button>
 
                   {open && (
-                    <div className="border-t border-white/10 px-4 pb-5 pt-4">
+                    <div className="border-t border-foreground/10 px-4 pb-5 pt-4">
                       {detailLoading === a.id && (
-                        <p className="text-sm text-white/60">Loading splits…</p>
+                        <p className="text-sm text-foreground/75">Loading splits…</p>
                       )}
                       {d && d.splits.length === 0 && (
-                        <p className="text-sm text-white/60">No mile splits recorded for this run.</p>
+                        <p className="text-sm text-foreground/75">No mile splits recorded for this run.</p>
                       )}
                       {d && d.splits.length > 0 && (
                         <SplitTable splits={d.splits} />
@@ -327,7 +327,7 @@ function RunsPage() {
           </ul>
         )}
 
-        <section className="mt-16 border-t border-white/12 pt-10">
+        <section className="mt-16 border-t border-foreground/12 pt-10">
           <h2 className="font-[Oswald,'Arial_Narrow',sans-serif] text-2xl font-bold uppercase">
             Run them better
           </h2>
@@ -336,7 +336,7 @@ function RunsPage() {
               <Link
                 key={g.to}
                 to={g.to}
-                className="group block border border-white/12 bg-white/[0.03] p-5 transition-colors hover:border-[#89CFF0]"
+                className="group block border border-foreground/12 bg-foreground/[0.03] p-5 transition-colors hover:border-[#89CFF0]"
               >
                 <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#89CFF0]">
                   {g.kicker}
@@ -344,7 +344,7 @@ function RunsPage() {
                 <p className="mt-2 font-[Oswald,'Arial_Narrow',sans-serif] text-lg font-bold uppercase group-hover:text-[#89CFF0]">
                   {g.title}
                 </p>
-                <p className="mt-1 text-sm text-white/65">{g.blurb}</p>
+                <p className="mt-1 text-sm text-foreground/75">{g.blurb}</p>
               </Link>
             ))}
           </div>
@@ -358,8 +358,8 @@ function RunsPage() {
 function Stat({ label, value }: { label: string; value: string }) {
   return (
     <span className="flex flex-col">
-      <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-white/45">{label}</span>
-      <span className="mt-0.5 text-white">{value}</span>
+      <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-foreground/70">{label}</span>
+      <span className="mt-0.5 text-foreground">{value}</span>
     </span>
   );
 }
@@ -371,7 +371,7 @@ function SplitTable({ splits }: { splits: Detail["splits"] }) {
   return (
     <table className="w-full font-mono text-sm">
       <thead>
-        <tr className="text-[9px] uppercase tracking-[0.2em] text-white/45">
+        <tr className="text-[9px] uppercase tracking-[0.2em] text-foreground/70">
           <th className="py-1 text-left font-bold">MI</th>
           <th className="py-1 text-left font-bold">Pace</th>
           <th className="py-1 text-left font-bold">Elev</th>
@@ -385,14 +385,14 @@ function SplitTable({ splits }: { splits: Detail["splits"] }) {
           const pct = pace > 0 ? Math.round(((slowest - pace) / span) * 100) : 0;
           const elev = s.elevationDifference != null ? Math.round(s.elevationDifference * FT) : null;
           return (
-            <tr key={s.split} className="border-t border-white/8">
-              <td className="py-2 text-white/70">{pad2(s.split)}</td>
-              <td className="py-2 text-white">{pace > 0 ? formatPace(pace) : "—"}</td>
-              <td className="py-2 text-white/70">
+            <tr key={s.split} className="border-t border-foreground/8">
+              <td className="py-2 text-foreground/70">{pad2(s.split)}</td>
+              <td className="py-2 text-foreground">{pace > 0 ? formatPace(pace) : "—"}</td>
+              <td className="py-2 text-foreground/70">
                 {elev == null ? "—" : `${elev > 0 ? "+" : ""}${elev}′`}
               </td>
               <td className="py-2">
-                <span className="ml-auto block h-2 w-full max-w-[160px] bg-white/10">
+                <span className="ml-auto block h-2 w-full max-w-[160px] bg-foreground/10">
                   <span
                     className="block h-full bg-[#89CFF0]"
                     style={{ width: `${Math.max(6, pct)}%` }}

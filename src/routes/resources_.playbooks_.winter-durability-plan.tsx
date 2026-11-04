@@ -86,16 +86,16 @@ function H2({ id, children }: { id?: string; children: ReactNode }) {
 function DownloadBlock({ id }: { id?: string }) {
   return (
     <section id={id} aria-label="Download the plan" className="mt-14 border border-blue bg-blue/[0.07] p-6 md:p-8 scroll-mt-24">
-      <p className="eyebrow text-blue mb-3">Free download · No signup</p>
+      <p className="eyebrow text-foreground mb-3">Free download · No signup</p>
       <p className="text-[18px] md:text-[20px] font-bold leading-[1.35]">The GRYT 12-Week Durability Plan</p>
-      <p className="mt-2 text-paper/75 text-[15px]">
+      <p className="mt-2 text-foreground/75 text-[15px]">
         The full workbook: weekly plan, 84-day log, progression rules, missed-session logic, dashboard and load targets. Opens in Excel or Google Sheets.
       </p>
       <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-4">
         <a href={XLSX_HREF} download={XLSX_NAME} className="btn-primary inline-flex">
           Download the workbook (.xlsx)
         </a>
-        <a href={CSV_HREF} download={CSV_NAME} type="text/csv" className="text-blue underline underline-offset-4 hover:text-paper transition-colors text-[15px]">
+        <a href={CSV_HREF} download={CSV_NAME} type="text/csv" className="text-foreground underline underline-offset-4 hover:text-foreground transition-colors text-[15px]">
           Quick reference (CSV)
         </a>
       </div>
@@ -114,38 +114,38 @@ const WORKBOOK_TABS = [
 
 function WinterPlanPage() {
   return (
-    <main className="bg-ink text-paper">
+    <main className="bg-background text-foreground">
       <SiteNav />
-      <article className="border-b border-paper/15">
+      <article className="border-b border-foreground/15">
         <header className="relative overflow-hidden">
           <img
             src={crewTrail.url}
             alt="GRYT runners heading down the trail together"
             className="absolute inset-0 h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-ink/75" aria-hidden="true" />
+          <div className="absolute inset-0 bg-background/75" aria-hidden="true" />
           <div className="relative px-6 sm:px-12 lg:px-24 py-14 md:py-24">
             <div className="max-w-[820px] mx-auto">
-              <Link to="/resources/playbooks" className="eyebrow text-blue hover:text-paper transition-colors">
+              <Link to="/resources/playbooks" className="eyebrow text-foreground hover:text-foreground transition-colors">
                 ← Playbooks
               </Link>
-              <p className="eyebrow text-blue mt-8 mb-5">Training · Winter</p>
+              <p className="eyebrow text-foreground mt-8 mb-5">Training · Winter</p>
               <h1 className="display-condensed uppercase text-[clamp(38px,7vw,88px)] leading-[0.95]">{H1}</h1>
-              <p className="mt-6 text-paper/85 text-lg md:text-xl leading-[1.55] max-w-[640px]">
+              <p className="mt-6 text-foreground/85 text-lg md:text-xl leading-[1.55] max-w-[640px]">
                 Winter doesn't have to be the season you lose your fitness. It can be the season you get harder to break.
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
                 <a href={XLSX_HREF} download={XLSX_NAME} className="btn-primary">
                   Download the workbook
                 </a>
-                <a href={CSV_HREF} download={CSV_NAME} type="text/csv" className="text-blue underline underline-offset-4 hover:text-paper transition-colors text-[15px]">
+                <a href={CSV_HREF} download={CSV_NAME} type="text/csv" className="text-foreground underline underline-offset-4 hover:text-foreground transition-colors text-[15px]">
                   Quick reference (CSV)
                 </a>
-                <Link to="/" hash="join" className="text-blue underline underline-offset-4 hover:text-paper transition-colors text-[15px]">
+                <Link to="/" hash="join" className="text-foreground underline underline-offset-4 hover:text-foreground transition-colors text-[15px]">
                   First time running with us? RSVP Saturday
                 </Link>
               </div>
-              <p className="mt-3 text-[12px] tracking-[0.14em] uppercase text-paper/60 font-mono">
+              <p className="mt-3 text-[12px] tracking-[0.14em] uppercase text-foreground/75 font-mono">
                 .xlsx · Opens in Excel or Google Sheets
               </p>
             </div>
@@ -153,7 +153,7 @@ function WinterPlanPage() {
         </header>
 
         <div className="px-6 sm:px-12 lg:px-24 py-12 md:py-16">
-          <div className="max-w-[820px] mx-auto text-paper/85 text-[16px] md:text-[17px] leading-[1.7] space-y-5">
+          <div className="max-w-[820px] mx-auto text-foreground/85 text-[16px] md:text-[17px] leading-[1.7] space-y-5">
             <p>
               If you started running this year, winter can feel like the end of the road. It's dark at 5 PM. The trails are muddy, then frozen. The motivation that got you out the door in June gets a lot quieter in January.
             </p>
@@ -181,20 +181,20 @@ function WinterPlanPage() {
               {BLOCKS.map((b, i) => (
                 <li key={i} className="relative">
                   <span className="absolute -left-[33px] top-1.5 h-3 w-3 bg-blue" aria-hidden="true" />
-                  <p className="font-mono text-[12px] tracking-[0.14em] uppercase text-blue">{b.weeks}</p>
-                  <h3 className="display-condensed uppercase text-[24px] leading-[1.1] text-paper mt-1">{b.name}</h3>
+                  <p className="font-mono text-[12px] tracking-[0.14em] uppercase text-foreground">{b.weeks}</p>
+                  <h3 className="display-condensed uppercase text-[24px] leading-[1.1] text-foreground mt-1">{b.name}</h3>
                   <p className="mt-1">{b.body}</p>
                 </li>
               ))}
             </ol>
-            <p className="font-bold text-paper">The deload weeks are not optional. They're where the work actually sticks.</p>
+            <p className="font-bold text-foreground">The deload weeks are not optional. They're where the work actually sticks.</p>
 
             <H2>The five things you'll train</H2>
-            <ul className="grid gap-px bg-paper/15 border border-paper/15 sm:grid-cols-2 lg:grid-cols-3">
+            <ul className="grid gap-px bg-foreground/15 border border-foreground/15 sm:grid-cols-2 lg:grid-cols-3">
               {MODALITIES.map((m) => (
-                <li key={m.name} className="bg-ink p-5">
-                  <h3 className="font-bold text-paper text-[17px] leading-[1.3]">{m.name}</h3>
-                  <p className="mt-2 text-[15px] text-paper/80">{m.body}</p>
+                <li key={m.name} className="bg-background p-5">
+                  <h3 className="font-bold text-foreground text-[17px] leading-[1.3]">{m.name}</h3>
+                  <p className="mt-2 text-[15px] text-foreground/80">{m.body}</p>
                 </li>
               ))}
             </ul>
@@ -220,11 +220,11 @@ function WinterPlanPage() {
             </ul>
 
             <H2>What's in the workbook</H2>
-            <ul className="grid gap-px bg-paper/15 border border-paper/15 sm:grid-cols-2">
+            <ul className="grid gap-px bg-foreground/15 border border-foreground/15 sm:grid-cols-2">
               {WORKBOOK_TABS.map((t) => (
-                <li key={t.name} className="bg-ink p-5">
-                  <h3 className="font-bold text-paper text-[17px] leading-[1.3]">{t.name}</h3>
-                  <p className="mt-2 text-[15px] text-paper/80">{t.body}</p>
+                <li key={t.name} className="bg-background p-5">
+                  <h3 className="font-bold text-foreground text-[17px] leading-[1.3]">{t.name}</h3>
+                  <p className="mt-2 text-[15px] text-foreground/80">{t.body}</p>
                 </li>
               ))}
             </ul>
@@ -232,11 +232,11 @@ function WinterPlanPage() {
             <H2>How to use it on your phone</H2>
             <ol className="space-y-4">
               {PHONE_STEPS.map((s, i) => (
-                <li key={i} className="flex gap-4 border border-paper/15 p-5">
-                  <span className="display-condensed text-blue text-[32px] leading-none w-8 shrink-0" aria-hidden="true">{i + 1}</span>
+                <li key={i} className="flex gap-4 border border-foreground/15 p-5">
+                  <span className="display-condensed text-foreground text-[32px] leading-none w-8 shrink-0" aria-hidden="true">{i + 1}</span>
                   <div>
-                    <h3 className="font-bold text-paper leading-[1.35]"><span className="sr-only">Step {i + 1}: </span>{s.t}</h3>
-                    <p className="mt-1 text-[15px] text-paper/80">{s.b}</p>
+                    <h3 className="font-bold text-foreground leading-[1.35]"><span className="sr-only">Step {i + 1}: </span>{s.t}</h3>
+                    <p className="mt-1 text-[15px] text-foreground/80">{s.b}</p>
                   </div>
                 </li>
               ))}
@@ -244,13 +244,13 @@ function WinterPlanPage() {
 
             <DownloadBlock id="download" />
 
-            <p className="mt-10 text-[13.5px] text-paper/60 leading-[1.6]">
+            <p className="mt-10 text-[13.5px] text-foreground/75 leading-[1.6]">
               This plan is shared for general fitness and is not medical advice. If you're new to exercise, coming back from an injury, or have a health condition, check with a doctor or physical therapist first. Scale loads to what you can move with good form, and stop if something hurts.
             </p>
 
-            <aside className="mt-14 border border-paper/20 p-6 md:p-8">
+            <aside className="mt-14 border border-foreground/20 p-6 md:p-8">
               <h2 className="display-condensed uppercase text-[clamp(28px,5vw,44px)] leading-[1]">Don't do winter alone.</h2>
-              <p className="mt-3 text-paper/80">
+              <p className="mt-3 text-foreground/80">
                 Bring the plan, bring a friend, and come run with us. All paces welcome. No membership required.
               </p>
               <Link to="/" hash="join" className="btn-primary mt-5 inline-flex">RSVP Saturday</Link>

@@ -193,7 +193,7 @@ function EmailStatusPage() {
           </p>
 
           <div
-            className="mt-8 border border-ink/15 bg-ink/[0.02] p-5 sm:p-6"
+            className="mt-8 border border-ink/15 bg-background/[0.02] p-5 sm:p-6"
             style={{ fontFamily: "var(--font-body)" }}
           >
             <div className="eyebrow text-ink/60 mb-2">NEXT FRIDAY DROP</div>
@@ -222,7 +222,7 @@ function EmailStatusPage() {
             <button
               type="submit"
               disabled={loading || !email.trim()}
-              className="bg-ink text-paper uppercase tracking-wide px-6 py-3 disabled:opacity-50"
+              className="bg-background text-foreground uppercase tracking-wide px-6 py-3 disabled:opacity-50"
               style={{ fontFamily: "var(--font-body)" }}
             >
               {loading ? "Checking…" : "Check status"}
@@ -319,7 +319,7 @@ function EmailStatusPage() {
                     <button
                       onClick={resend}
                       disabled={loading}
-                      className="mt-4 bg-ink text-paper px-4 py-2 uppercase tracking-wide text-sm disabled:opacity-50"
+                      className="mt-4 bg-background text-foreground px-4 py-2 uppercase tracking-wide text-sm disabled:opacity-50"
                       style={{ fontFamily: "var(--font-body)" }}
                     >
                       Subscribe

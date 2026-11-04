@@ -13,7 +13,7 @@ export const Route = createFileRoute('/admin/partners')({
   component: PartnerDesk,
 })
 const blank: Partner = { name: '', slug: '', category: 'local', role: '', description: '', city: '', website_url: '', logo: '', is_affiliate: false, approved_to_show: false, featured_on_home: false, sort_order: 0 }
-const field = 'mt-2 w-full min-w-0 border border-paper/25 bg-ink px-3 py-3 focus:outline-none focus:ring-2 focus:ring-blue'
+const field = 'mt-2 w-full min-w-0 border border-foreground/25 bg-background px-3 py-3 focus:outline-none focus:ring-2 focus:ring-blue'
 
 async function pngFile(file: File) {
   if (!['image/png','image/svg+xml'].includes(file.type) || file.size > 2097152) throw new Error('Choose an SVG or PNG under 2 MB.')
@@ -63,20 +63,20 @@ function PartnerDesk() {
     const csv = [columns.map(csvCell).join(','),...visible.map(r => columns.map(k => csvCell(r[k])).join(','))].join('\r\n')
     const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' })); const a = document.createElement('a'); a.href=url; a.download='gryt-partner-inquiries.csv'; a.click(); URL.revokeObjectURL(url)
   }
-  return <main className="min-h-screen bg-ink text-paper px-5 py-8 sm:px-10"><div className="mx-auto max-w-6xl">
-    <header className="flex flex-wrap justify-between items-center gap-4 border-b border-paper/20 pb-6"><Link to="/" className="inline-flex items-center gap-2 text-sm text-blue"><ArrowLeft size={16}/>GRYT Run Club</Link><Link to="/partners" className="text-sm underline">View partners page</Link></header>
-    <p className="eyebrow text-blue mt-8">Organizer desk</p><h1 className="font-condensed text-4xl uppercase mt-3">Partners</h1>
+  return <main className="min-h-screen bg-background text-foreground px-5 py-8 sm:px-10"><div className="mx-auto max-w-6xl">
+    <header className="flex flex-wrap justify-between items-center gap-4 border-b border-foreground/20 pb-6"><Link to="/" className="inline-flex items-center gap-2 text-sm text-foreground"><ArrowLeft size={16}/>GRYT Run Club</Link><Link to="/partners" className="text-sm underline">View partners page</Link></header>
+    <p className="eyebrow text-foreground mt-8">Organizer desk</p><h1 className="font-condensed text-4xl uppercase mt-3">Partners</h1>
     {query.isPending && <p role="status" className="mt-6">Checking access...</p>}
-    {query.error && <div role="alert" className="mt-6 border border-paper/25 p-6"><p>Sign in with an existing GRYT admin account to manage partners.</p><Link to="/auth" search={{ next: '/admin/partners' }} className="text-blue underline inline-block mt-4">Continue to sign in</Link></div>}
+    {query.error && <div role="alert" className="mt-6 border border-foreground/25 p-6"><p>Sign in with an existing GRYT admin account to manage partners.</p><Link to="/auth" search={{ next: '/admin/partners' }} className="text-foreground underline inline-block mt-4">Continue to sign in</Link></div>}
     {query.data && <>
-      <div className="flex flex-wrap items-center justify-between gap-4 mt-8 mb-5"><p className="text-paper/65">{partners.filter(p => p.approved_to_show).length} approved / {partners.length} total</p><Button onClick={() => { setSelected({...blank}); setError('') }}><Plus/>Add partner</Button></div>
-      <div className="divide-y divide-paper/15 border-y border-paper/15">{partners.map(p => <article key={p.id} className="py-5 grid md:grid-cols-[1fr_1fr_auto] items-center gap-4">
-        <div><h2 className="font-semibold">{p.name}</h2><p className="text-sm text-paper/60 mt-1">{p.role} · {p.category}</p></div>
+      <div className="flex flex-wrap items-center justify-between gap-4 mt-8 mb-5"><p className="text-foreground/75">{partners.filter(p => p.approved_to_show).length} approved / {partners.length} total</p><Button onClick={() => { setSelected({...blank}); setError('') }}><Plus/>Add partner</Button></div>
+      <div className="divide-y divide-foreground/15 border-y border-foreground/15">{partners.map(p => <article key={p.id} className="py-5 grid md:grid-cols-[1fr_1fr_auto] items-center gap-4">
+        <div><h2 className="font-semibold">{p.name}</h2><p className="text-sm text-foreground/75 mt-1">{p.role} · {p.category}</p></div>
         <div className="space-y-3"><label className="flex items-center gap-3 text-sm"><input type="checkbox" checked={p.approved_to_show} disabled={busy} onChange={e => {
           const approved = e.target.checked
           if (approved && /[\[\]]/.test(p.description) && !window.confirm('This description contains brackets and will be hidden. Has the partner approved being named?')) return
           void act({ action: 'save', partner: {...p, approved_to_show: approved} })
-        }} className="size-4 accent-primary"/>Approved to show</label><p className="text-xs text-paper/55">Only turn on after the partner says yes to being named.</p>
+        }} className="size-4 accent-primary"/>Approved to show</label><p className="text-xs text-foreground/70">Only turn on after the partner says yes to being named.</p>
         <label className="flex items-center gap-3 text-sm"><input type="checkbox" checked={p.featured_on_home} disabled={busy} onChange={e => void act({ action: 'save', partner: {...p, featured_on_home: e.target.checked} })} className="size-4 accent-primary"/>Featured on home</label></div>
         <Button variant="outline" onClick={() => { setSelected({...p}); setError(''); setMessage('') }}>Edit</Button>
       </article>)}</div>
@@ -98,18 +98,18 @@ function PartnerDesk() {
             }
             catch(e) { setError(e instanceof Error ? e.message : 'Could not upload logo.') }
           }}/></label>
-          {logoPreview && selected.logo && <div className="mt-3 flex h-20 w-40 items-center justify-center border border-paper/15 bg-vintage p-3"><img src={logoPreview} alt="Logo preview" className="max-h-full max-w-full [object-fit:contain]" /></div>}
-          <p className="text-xs text-paper/55 mt-2">{selected.logo ? (selected.id ? 'Logo saved. It shows on the homepage tile once this partner is approved.' : 'Logo uploaded. Save the partner to attach it.') : 'No logo attached.'}</p>{selected.logo && <Button type="button" variant="link" onClick={() => { setSelected({...selected,logo:''}); setLogoPreview('') }}>Remove logo</Button>}</div>
+          {logoPreview && selected.logo && <div className="mt-3 flex h-20 w-40 items-center justify-center border border-foreground/15 bg-background p-3"><img src={logoPreview} alt="Logo preview" className="max-h-full max-w-full [object-fit:contain]" /></div>}
+          <p className="text-xs text-foreground/70 mt-2">{selected.logo ? (selected.id ? 'Logo saved. It shows on the homepage tile once this partner is approved.' : 'Logo uploaded. Save the partner to attach it.') : 'No logo attached.'}</p>{selected.logo && <Button type="button" variant="link" onClick={() => { setSelected({...selected,logo:''}); setLogoPreview('') }}>Remove logo</Button>}</div>
           <div className="flex flex-wrap gap-3 sm:col-span-2"><Button disabled={busy} type="submit"><Save/>Save partner</Button><Button type="button" variant="outline" onClick={() => setSelected(null)}>Cancel</Button>{selected.id && <Button type="button" variant="outline" disabled={busy} onClick={async () => { if (selected.id && window.confirm(`Delete ${selected.name}?`)) { if (await act({ action: 'delete', id:selected.id })) setSelected(null) } }}><Trash2/>Delete</Button>}</div>
         </form>
       </section>}
-      <section className="border-t border-paper/20 mt-12 pt-8"><div className="flex flex-wrap justify-between gap-4"><h2 className="font-condensed text-3xl uppercase">Partner inquiries</h2><Button variant="outline" disabled={!visible.length} onClick={exportCsv}><Download/>Export CSV</Button></div>
+      <section className="border-t border-foreground/20 mt-12 pt-8"><div className="flex flex-wrap justify-between gap-4"><h2 className="font-condensed text-3xl uppercase">Partner inquiries</h2><Button variant="outline" disabled={!visible.length} onClick={exportCsv}><Download/>Export CSV</Button></div>
         <div className="grid sm:grid-cols-2 gap-4 mt-6"><label className="text-sm">Search<input className={field} value={search} onChange={e => setSearch(e.target.value)}/></label><label className="text-sm">Status<select className={field} value={status} onChange={e => setStatus(e.target.value)}><option value="">All statuses</option>{partnerStatuses.map(s => <option key={s}>{s}</option>)}</select></label></div>
-        {!visible.length && <p className="py-8 text-paper/65">No partner inquiries.</p>}
-        {visible.map(r => <article key={r.id} className="py-6 border-b border-paper/15 grid md:grid-cols-[1fr_1fr_auto] gap-5"><div><h3 className="font-semibold">{r.organization || r.name}</h3><p className="text-sm mt-2">{r.name}</p><a href={`mailto:${r.email}`} className="text-sm text-blue break-all">{r.email}</a><p className="text-xs text-paper/50 mt-2">{new Date(r.created_at).toLocaleDateString()} · {r.city}</p></div><div><p className="text-sm text-paper/65">{r.involvement}</p><p className="text-sm whitespace-pre-wrap break-words mt-2">{r.message}</p></div><label className="text-sm">Status<select className={field} disabled={busy} value={r.status} onChange={e => void act({ action:'status',id:r.id,status:e.target.value as PartnerInquiry['status'] })}>{partnerStatuses.map(s => <option key={s}>{s}</option>)}</select></label></article>)}
-        {inquiries.length === 1000 && <p className="mt-3 text-sm text-paper/65">Showing the latest 1,000 inquiries. CSV exports the filtered records shown.</p>}
+        {!visible.length && <p className="py-8 text-foreground/75">No partner inquiries.</p>}
+        {visible.map(r => <article key={r.id} className="py-6 border-b border-foreground/15 grid md:grid-cols-[1fr_1fr_auto] gap-5"><div><h3 className="font-semibold">{r.organization || r.name}</h3><p className="text-sm mt-2">{r.name}</p><a href={`mailto:${r.email}`} className="text-sm text-foreground break-all">{r.email}</a><p className="text-xs text-foreground/70 mt-2">{new Date(r.created_at).toLocaleDateString()} · {r.city}</p></div><div><p className="text-sm text-foreground/75">{r.involvement}</p><p className="text-sm whitespace-pre-wrap break-words mt-2">{r.message}</p></div><label className="text-sm">Status<select className={field} disabled={busy} value={r.status} onChange={e => void act({ action:'status',id:r.id,status:e.target.value as PartnerInquiry['status'] })}>{partnerStatuses.map(s => <option key={s}>{s}</option>)}</select></label></article>)}
+        {inquiries.length === 1000 && <p className="mt-3 text-sm text-foreground/75">Showing the latest 1,000 inquiries. CSV exports the filtered records shown.</p>}
       </section>
     </>}
-    {error && <p role="alert" className="mt-5 text-blue">{error}</p>}{message && <p role="status" className="mt-5 text-blue">{message}</p>}
+    {error && <p role="alert" className="mt-5 text-foreground">{error}</p>}{message && <p role="status" className="mt-5 text-foreground">{message}</p>}
   </div></main>
 }

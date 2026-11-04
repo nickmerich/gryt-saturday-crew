@@ -133,39 +133,39 @@ function CalendarPage() {
     <>
       <SiteNav />
       <main id="main-content">
-      <section className="bg-ink text-paper">
+      <section className="bg-background text-foreground">
         <div className="mx-auto max-w-5xl px-5 sm:px-8 py-16 sm:py-24">
-          <div className="eyebrow text-blue mb-4">EVERY WEEK · ALL PACES · FREE</div>
+          <div className="eyebrow text-foreground mb-4">EVERY WEEK · ALL PACES · FREE</div>
           <h1
             className="text-5xl sm:text-6xl lg:text-7xl uppercase leading-[0.92] tracking-tight"
             style={{ fontFamily: "var(--font-display-condensed)" }}
           >
             Run Calendar
           </h1>
-          <p className="mt-5 max-w-xl text-paper/70 leading-relaxed">
+          <p className="mt-5 max-w-xl text-foreground/70 leading-relaxed">
             One run a week, same spot, no signup. Saturday mornings we go long.
             Show up once and you're one of us.
           </p>
 
           <div className="mt-8">
             <div className="border border-blue/50 p-5">
-              <div className="eyebrow text-blue mb-2">{SAT.short}</div>
+              <div className="eyebrow text-foreground mb-2">{SAT.short}</div>
               <div
                 className="text-2xl uppercase"
                 style={{ fontFamily: "var(--font-display-condensed)" }}
               >
                 {SAT.label}
               </div>
-              <p className="mt-2 text-sm text-paper/65">
+              <p className="mt-2 text-sm text-foreground/75">
                 212 Valley Brook Rd, McMurray · Montour / Peters Trail · coffee in the lot after.
               </p>
             </div>
           </div>
 
-          <div className="mt-12 flex items-center justify-between gap-4 border-b border-paper/15 pb-4">
+          <div className="mt-12 flex items-center justify-between gap-4 border-b border-foreground/15 pb-4">
             <button
               onClick={() => shift(-1)}
-              className="eyebrow border border-paper/25 px-4 py-2 hover:bg-blue hover:text-ink hover:border-blue transition-colors"
+              className="eyebrow border border-foreground/25 px-4 py-2 hover:bg-blue hover:text-ink hover:border-blue transition-colors"
             >
               ← Prev
             </button>
@@ -177,17 +177,17 @@ function CalendarPage() {
             </div>
             <button
               onClick={() => shift(1)}
-              className="eyebrow border border-paper/25 px-4 py-2 hover:bg-blue hover:text-ink hover:border-blue transition-colors"
+              className="eyebrow border border-foreground/25 px-4 py-2 hover:bg-blue hover:text-ink hover:border-blue transition-colors"
             >
               Next →
             </button>
           </div>
 
-          <div className="mt-6 grid grid-cols-7 gap-px bg-paper/15 border border-paper/15">
+          <div className="mt-6 grid grid-cols-7 gap-px bg-foreground/15 border border-foreground/15">
             {DOW.map((d, i) => (
               <div
                 key={i}
-                className="bg-ink py-2 text-center eyebrow text-paper/45"
+                className="bg-background py-2 text-center eyebrow text-foreground/70"
               >
                 {d}
               </div>
@@ -195,7 +195,7 @@ function CalendarPage() {
             {cells.map((cell, i) => (
               <div
                 key={i}
-                className={`bg-ink min-h-[86px] sm:min-h-[104px] p-2 ${
+                className={`bg-background min-h-[86px] sm:min-h-[104px] p-2 ${
                   cell?.run ? "" : "opacity-70"
                 }`}
               >
@@ -205,7 +205,7 @@ function CalendarPage() {
                       className={`text-sm ${
                         cell.isToday
                           ? "inline-flex h-6 w-6 items-center justify-center bg-blue text-ink font-bold"
-                          : "text-paper/55"
+                          : "text-foreground/70"
                       }`}
                     >
                       {cell.d}
@@ -215,7 +215,7 @@ function CalendarPage() {
                         className={`mt-2 px-1.5 py-1 text-[11px] uppercase tracking-[0.08em] leading-tight ${
                           cell.run === SAT
                             ? "bg-blue text-ink font-bold"
-                            : "border border-paper/35 text-paper/85"
+                            : "border border-foreground/35 text-foreground/85"
                         }`}
                         style={{ fontFamily: "var(--font-body)" }}
                       >
@@ -233,14 +233,14 @@ function CalendarPage() {
             <a
               href={icsForMonth(cursor.y, cursor.m)}
               download={`gryt-${cursor.y}-${pad(cursor.m + 1)}.ics`}
-              className="bg-blue text-ink px-5 py-3 text-xs font-bold uppercase tracking-[0.1em] hover:bg-paper transition-colors"
+              className="bg-blue text-ink px-5 py-3 text-xs font-bold uppercase tracking-[0.1em] hover:bg-foreground hover:text-background transition-colors"
               style={{ fontFamily: "var(--font-body)" }}
             >
               Add {MONTHS[cursor.m]} to your calendar
             </a>
             <Link
               to="/faq"
-              className="border border-paper/30 px-5 py-3 text-xs font-bold uppercase tracking-[0.1em] hover:bg-paper hover:text-ink transition-colors"
+              className="border border-foreground/30 px-5 py-3 text-xs font-bold uppercase tracking-[0.1em] hover:bg-foreground hover:text-background hover:text-ink transition-colors"
               style={{ fontFamily: "var(--font-body)" }}
             >
               First time? Read this

@@ -133,7 +133,7 @@ function H2({ id, children }: { id: string; children: React.ReactNode }) {
 
 function H3({ children }: { children: React.ReactNode }) {
   return (
-    <h3 className="text-paper font-bold text-[18px] md:text-[20px] mt-8 mb-1.5">
+    <h3 className="text-foreground font-bold text-[18px] md:text-[20px] mt-8 mb-1.5">
       {children}
     </h3>
   );
@@ -141,23 +141,23 @@ function H3({ children }: { children: React.ReactNode }) {
 
 function RunningBasePage() {
   return (
-    <main className="bg-ink text-paper">
+    <main className="bg-background text-foreground">
       <SiteNav />
-      <article className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
+      <article className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-foreground/15">
         <div className="max-w-[760px] mx-auto">
-          <Link to="/resources" className="eyebrow text-blue hover:text-paper transition-colors">
+          <Link to="/resources" className="eyebrow text-foreground hover:text-foreground transition-colors">
             ← All resources
           </Link>
-          <p className="eyebrow text-blue mt-8 mb-5">TRAINING · 8 MIN READ</p>
+          <p className="eyebrow text-foreground mt-8 mb-5">TRAINING · 8 MIN READ</p>
           <h1 className="display-condensed uppercase text-[clamp(40px,7vw,96px)] leading-[0.95]">
             How to Build a Running Base Before Your First Race
           </h1>
-          <p className="mt-7 text-paper/75 text-lg md:text-xl leading-[1.55]">
+          <p className="mt-7 text-foreground/75 text-lg md:text-xl leading-[1.55]">
             The unglamorous weeks that decide whether race day feels good or
             feels like survival.
           </p>
 
-          <figure className="mt-10 border border-paper/15">
+          <figure className="mt-10 border border-foreground/15">
             <img
               src={heroAsset.url}
               alt="Runner on a Pittsburgh road at dawn with the city skyline behind and a blue arrow climbing ahead"
@@ -169,14 +169,14 @@ function RunningBasePage() {
             />
           </figure>
 
-          <nav aria-label="Table of contents" className="mt-10 border border-paper/15 p-5">
-            <p className="eyebrow text-paper/55 mb-3">In this guide</p>
+          <nav aria-label="Table of contents" className="mt-10 border border-foreground/15 p-5">
+            <p className="eyebrow text-foreground/70 mb-3">In this guide</p>
             <ul className="flex flex-col gap-2">
               {SECTIONS.map((s) => (
                 <li key={s.id}>
                   <a
                     href={`#${s.id}`}
-                    className="text-paper/80 hover:text-blue transition-colors text-[15px]"
+                    className="text-foreground/80 hover:text-foreground/70 transition-colors text-[15px]"
                   >
                     → {s.label}
                   </a>
@@ -185,7 +185,7 @@ function RunningBasePage() {
             </ul>
           </nav>
 
-          <div className="mt-12 space-y-5 text-paper/85 text-[16px] md:text-[17px] leading-[1.7]">
+          <div className="mt-12 space-y-5 text-foreground/85 text-[16px] md:text-[17px] leading-[1.7]">
             <p>
               Most people who sign up for their first race make the same
               mistake: they skip straight to race-specific training and wonder
@@ -228,17 +228,17 @@ function RunningBasePage() {
             <p>A proper base phase does three things:</p>
             <ul className="list-disc pl-6 space-y-2">
               <li>
-                <span className="text-paper font-bold">Builds aerobic capacity.</span>{" "}
+                <span className="text-foreground font-bold">Builds aerobic capacity.</span>{" "}
                 Easy miles teach your body to use oxygen efficiently, which
                 makes every harder workout later feel more manageable.
               </li>
               <li>
-                <span className="text-paper font-bold">Strengthens connective tissue.</span>{" "}
+                <span className="text-foreground font-bold">Strengthens connective tissue.</span>{" "}
                 Tendons and ligaments adapt slowly. Consistent low-intensity
                 mileage over weeks is the only way to prepare them.
               </li>
               <li>
-                <span className="text-paper font-bold">Creates the habit.</span>{" "}
+                <span className="text-foreground font-bold">Creates the habit.</span>{" "}
                 Running three times a week starts to feel normal before race
                 training adds a fourth day or ramps up intensity.
               </li>
@@ -247,7 +247,7 @@ function RunningBasePage() {
             <H2 id="how-long">How long should your base phase be?</H2>
             <p>It depends on where you're starting.</p>
             <p>
-              <span className="text-paper font-bold">
+              <span className="text-foreground font-bold">
                 New to running or returning after a long break:
               </span>{" "}
               Give yourself 8 to 12 weeks of base building before starting a
@@ -255,14 +255,14 @@ function RunningBasePage() {
               dramatically reduces injury risk.
             </p>
             <p>
-              <span className="text-paper font-bold">
+              <span className="text-foreground font-bold">
                 Running occasionally — once or twice a week:
               </span>{" "}
               Four to six weeks of consistent three-day weeks is usually enough
               to establish the base you need.
             </p>
             <p>
-              <span className="text-paper font-bold">
+              <span className="text-foreground font-bold">
                 Already running three or more days a week:
               </span>{" "}
               You may already have a base. The real question is whether your
@@ -330,7 +330,7 @@ function RunningBasePage() {
               sentences, no pausing to breathe. If you're running with someone
               and responding in short bursts, you're probably a little too fast.
             </p>
-            <p className="border-l-2 border-blue pl-5 italic text-paper/90">
+            <p className="border-l-2 border-blue pl-5 italic text-foreground/90">
               On a 1-to-10 effort scale, easy runs should feel like a 4 or 5.
               You're moving, you're working, but you're not pushing.
             </p>
@@ -338,22 +338,22 @@ function RunningBasePage() {
             <H2 id="mistakes">Common mistakes to avoid</H2>
             <ul className="list-disc pl-6 space-y-2">
               <li>
-                <span className="text-paper font-bold">Running too fast every day.</span>{" "}
+                <span className="text-foreground font-bold">Running too fast every day.</span>{" "}
                 Treating every run like a hard run is a fast path to burnout and
                 injury. Easy days need to be genuinely easy.
               </li>
               <li>
-                <span className="text-paper font-bold">Skipping rest days.</span>{" "}
+                <span className="text-foreground font-bold">Skipping rest days.</span>{" "}
                 Rest is when your body actually adapts. Taking two days off
                 after a long run isn't laziness — it's part of the training.
               </li>
               <li>
-                <span className="text-paper font-bold">Jumping into a race plan too soon.</span>{" "}
+                <span className="text-foreground font-bold">Jumping into a race plan too soon.</span>{" "}
                 A 5K plan that opens with four days of running will break you if
                 you haven't built up to it. Be honest about where you are.
               </li>
               <li>
-                <span className="text-paper font-bold">Ignoring pain signals.</span>{" "}
+                <span className="text-foreground font-bold">Ignoring pain signals.</span>{" "}
                 Muscle fatigue is normal. Sharp pain in a joint or bone is not.
                 If something hurts in a way that changes your gait, rest it.
               </li>
@@ -379,7 +379,7 @@ function RunningBasePage() {
               what goes on top of it. If you're picking a first target,{" "}
               <Link
                 to="/resources/eqt-pittsburgh-10-miler-2026"
-                className="text-blue underline underline-offset-4 hover:text-paper transition-colors"
+                className="text-foreground underline underline-offset-4 hover:text-foreground transition-colors"
               >
                 the EQT Pittsburgh 10 Miler guide
               </Link>{" "}
@@ -414,7 +414,7 @@ function RunningBasePage() {
               More on why that works:{" "}
               <Link
                 to="/resources/running-with-a-group"
-                className="text-blue underline underline-offset-4 hover:text-paper transition-colors"
+                className="text-foreground underline underline-offset-4 hover:text-foreground transition-colors"
               >
                 Running With a Group
               </Link>
@@ -425,7 +425,7 @@ function RunningBasePage() {
             <div className="space-y-6">
               {FAQS.map((f) => (
                 <div key={f.q}>
-                  <h3 className="text-paper font-bold text-[17px] md:text-[18px] mb-1.5">
+                  <h3 className="text-foreground font-bold text-[17px] md:text-[18px] mb-1.5">
                     {f.q}
                   </h3>
                   <p>{f.a}</p>
@@ -433,7 +433,7 @@ function RunningBasePage() {
               ))}
             </div>
 
-            <p className="text-paper text-lg md:text-xl font-bold mt-12">
+            <p className="text-foreground text-lg md:text-xl font-bold mt-12">
               Base building is unglamorous work. No finish line, no medal, no
               one cheering at the end. But it's the reason some runners make it
               to race day feeling strong while others spend the final two weeks
@@ -449,7 +449,7 @@ function RunningBasePage() {
             </Link>
             <Link
               to="/resources"
-              className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors"
+              className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-foreground/40 text-foreground hover:border-blue hover:text-foreground/70 transition-colors"
             >
               Back to Resources
             </Link>

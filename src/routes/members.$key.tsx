@@ -15,16 +15,16 @@ export const Route = createFileRoute('/members/$key')({
   }),
   component: MemberDetailPage,
   errorComponent: () => (
-    <div className="min-h-screen bg-ink text-paper p-12">
+    <div className="min-h-screen bg-background text-foreground p-12">
       <h1 className="display-condensed text-3xl">Couldn't load member</h1>
       <p className="mt-2 text-sm text-muted-foreground">Something went wrong. Please try again later.</p>
-      <Link to="/members" className="mt-6 inline-block underline text-blue">Back to members</Link>
+      <Link to="/members" className="mt-6 inline-block underline text-foreground">Back to members</Link>
     </div>
   ),
   notFoundComponent: () => (
-    <div className="min-h-screen bg-ink text-paper p-12">
+    <div className="min-h-screen bg-background text-foreground p-12">
       <h1 className="display-condensed text-3xl">Member not found</h1>
-      <Link to="/members" className="mt-6 inline-block underline text-blue">Back to members</Link>
+      <Link to="/members" className="mt-6 inline-block underline text-foreground">Back to members</Link>
     </div>
   ),
 })
@@ -34,7 +34,7 @@ function Field({ label, value, mono = false }: { label: string; value: React.Rea
   return (
     <div>
       <div className="eyebrow text-[10px]">{label}</div>
-      <div className={`mt-1 text-sm ${mono ? 'font-mono' : ''} ${empty ? 'text-muted-foreground italic' : 'text-paper'}`}>
+      <div className={`mt-1 text-sm ${mono ? 'font-mono' : ''} ${empty ? 'text-muted-foreground italic' : 'text-foreground'}`}>
         {empty ? 'Not on file' : value}
       </div>
     </div>
@@ -49,24 +49,24 @@ function MemberDetailPage() {
     queryFn: () => fetchMember({ data: { key } }),
   })
 
-  if (isLoading) return <div className="min-h-screen bg-ink text-muted-foreground p-12">Loading…</div>
+  if (isLoading) return <div className="min-h-screen bg-background text-muted-foreground p-12">Loading…</div>
   if (error) throw error
   if (!member) throw notFound()
 
   const initials = member.full_name.split(/\s+/).slice(0, 2).map((n) => n[0]?.toUpperCase() ?? '').join('') || '?'
 
   return (
-    <main className="min-h-screen bg-ink text-paper">
-      <div className="border-b border-white/10 px-6 sm:px-12 py-6 flex items-center justify-between">
-        <Link to="/members" className="text-xs text-muted-foreground hover:text-paper">← All members</Link>
+    <main className="min-h-screen bg-background text-foreground">
+      <div className="border-b border-foreground/10 px-6 sm:px-12 py-6 flex items-center justify-between">
+        <Link to="/members" className="text-xs text-muted-foreground hover:text-foreground">← All members</Link>
         <span className="font-mono text-xs text-muted-foreground">{member.canonical_member_key}</span>
       </div>
 
-      <header className="px-6 sm:px-12 py-10 flex items-start gap-6 border-b border-white/10">
+      <header className="px-6 sm:px-12 py-10 flex items-start gap-6 border-b border-foreground/10">
         {member.profile_photo ? (
-          <img src={member.profile_photo} alt={member.full_name} className="w-24 h-24 object-cover bg-vintage" />
+          <img src={member.profile_photo} alt={member.full_name} className="w-24 h-24 object-cover bg-background" />
         ) : (
-          <div className="w-24 h-24 bg-vintage border border-white/10 flex items-center justify-center text-3xl font-medium">
+          <div className="w-24 h-24 bg-background border border-foreground/10 flex items-center justify-center text-3xl font-medium">
             {initials}
           </div>
         )}
@@ -90,7 +90,7 @@ function MemberDetailPage() {
         </div>
       </header>
 
-      <section className="px-6 sm:px-12 py-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 border-b border-white/10">
+      <section className="px-6 sm:px-12 py-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 border-b border-foreground/10">
         <Field label="First name" value={member.first_name} />
         <Field label="Last name" value={member.last_name} />
         <Field label="Email" value={member.email} />
@@ -101,7 +101,7 @@ function MemberDetailPage() {
         <Field label="Last contacted" value={member.last_contacted_at} />
       </section>
 
-      <section className="px-6 sm:px-12 py-8 border-b border-white/10">
+      <section className="px-6 sm:px-12 py-8 border-b border-foreground/10">
         <p className="eyebrow eyebrow-blue">Strava</p>
         <div className="mt-4 grid sm:grid-cols-3 gap-6">
           <Field label="Strava username" value={member.strava_username} mono />
@@ -118,7 +118,7 @@ function MemberDetailPage() {
       {member.notes && (
         <section className="px-6 sm:px-12 py-8">
           <p className="eyebrow">Notes</p>
-          <p className="mt-2 text-sm whitespace-pre-wrap text-paper/90">{member.notes}</p>
+          <p className="mt-2 text-sm whitespace-pre-wrap text-foreground/90">{member.notes}</p>
         </section>
       )}
     </main>

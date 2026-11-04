@@ -71,18 +71,18 @@ function PhotoColorToggle() {
   return (
     <div className="flex items-center gap-3 mb-5">
       <span className="eyebrow">Photos</span>
-      <div className="inline-flex border border-paper/20">
+      <div className="inline-flex border border-foreground/20">
         <button
           type="button"
           onClick={() => setColor(false)}
-          className={`px-3 py-1.5 text-[11px] font-bold tracking-[0.16em] uppercase transition-colors ${!color ? "bg-blue text-ink" : "text-paper/70 hover:text-paper"}`}
+          className={`px-3 py-1.5 text-[11px] font-bold tracking-[0.16em] uppercase transition-colors ${!color ? "bg-blue text-ink" : "text-foreground/70 hover:text-foreground"}`}
         >
           B&W
         </button>
         <button
           type="button"
           onClick={() => setColor(true)}
-          className={`px-3 py-1.5 text-[11px] font-bold tracking-[0.16em] uppercase transition-colors ${color ? "bg-blue text-ink" : "text-paper/70 hover:text-paper"}`}
+          className={`px-3 py-1.5 text-[11px] font-bold tracking-[0.16em] uppercase transition-colors ${color ? "bg-blue text-ink" : "text-foreground/70 hover:text-foreground"}`}
         >
           Color
         </button>
@@ -317,7 +317,7 @@ function RunCountdown({ className = "" }: { className?: string }) {
 
   return (
     <div
-      className={`border border-paper/15 bg-paper/[0.03] px-5 py-4 ${className}`}
+      className={`border border-foreground/15 bg-foreground/[0.03] px-5 py-4 ${className}`}
       role="timer"
       aria-live="off"
       aria-label={
@@ -328,12 +328,12 @@ function RunCountdown({ className = "" }: { className?: string }) {
     >
       <div className="eyebrow eyebrow-blue mb-2">{label}</div>
       {live ? (
-        <div className="display-condensed text-paper text-[clamp(28px,5vw,44px)] leading-none tracking-[0.01em]">
+        <div className="display-condensed text-foreground text-[clamp(28px,5vw,44px)] leading-none tracking-[0.01em]">
           Live now · trailhead
         </div>
       ) : (
         <div
-          className="flex items-end gap-4 sm:gap-6 tabular-nums text-paper"
+          className="flex items-end gap-4 sm:gap-6 tabular-nums text-foreground"
           style={{ fontFamily: "var(--font-mono, ui-monospace, monospace)" }}
         >
           {[
@@ -346,7 +346,7 @@ function RunCountdown({ className = "" }: { className?: string }) {
               <span className="text-[clamp(28px,5vw,44px)] leading-none font-bold">
                 {pad(n as number)}
               </span>
-              <span className="text-[10px] tracking-[0.18em] text-paper/50 mt-1">
+              <span className="text-[10px] tracking-[0.18em] text-foreground/70 mt-1">
                 {u}
               </span>
             </div>
@@ -428,7 +428,7 @@ function Nav() {
     ["/faq", "FAQ"],
   ];
   return (
-    <nav className="sticky top-0 z-50 bg-ink border-b border-paper/15">
+    <nav className="sticky top-0 z-50 bg-background border-b border-foreground/15">
       <div className="flex items-center justify-between px-5 sm:px-8 md:px-12 h-[68px]">
         <a href="#top" className="flex items-center gap-2" onClick={() => setOpen(false)}>
           <MonogramG className="h-11 w-11" />
@@ -438,7 +438,7 @@ function Nav() {
         </a>
         <div className="hidden lg:flex items-center gap-7">
           {links.map(([href, label]) => (
-            <a key={href} href={href} className="eyebrow text-paper/80 hover:text-blue transition-colors">
+            <a key={href} href={href} className="eyebrow text-foreground/80 hover:text-foreground/70 transition-colors">
               {label}
             </a>
           ))}
@@ -446,7 +446,7 @@ function Nav() {
         <div className="flex items-center gap-2">
           <a
             href="#join"
-            className="bg-blue text-ink px-4 sm:px-5 py-3 text-xs font-bold uppercase tracking-[0.1em] hover:bg-paper transition-colors"
+            className="bg-blue text-ink px-4 sm:px-5 py-3 text-xs font-bold uppercase tracking-[0.1em] hover:bg-foreground hover:text-background transition-colors"
             style={{ fontFamily: "var(--font-body)" }}
           >
             RSVP Saturday
@@ -457,7 +457,7 @@ function Nav() {
             aria-expanded={open}
             aria-controls="mobile-nav"
             onClick={() => setOpen((v) => !v)}
-            className="lg:hidden inline-flex flex-col justify-center items-center w-11 h-11 border border-paper/25 text-paper hover:border-blue hover:text-blue transition-colors"
+            className="lg:hidden inline-flex flex-col justify-center items-center w-11 h-11 border border-foreground/25 text-foreground hover:border-blue hover:text-foreground/70 transition-colors"
           >
             <span className={`block h-[2px] w-5 bg-current transition-transform ${open ? "translate-y-[5px] rotate-45" : ""}`} />
             <span className={`block h-[2px] w-5 bg-current mt-1 transition-opacity ${open ? "opacity-0" : ""}`} />
@@ -466,14 +466,14 @@ function Nav() {
         </div>
       </div>
       {open && (
-        <div id="mobile-nav" className="lg:hidden border-t border-paper/15 bg-ink">
+        <div id="mobile-nav" className="lg:hidden border-t border-foreground/15 bg-background">
           <div className="flex flex-col px-5 py-3">
             {links.map(([href, label]) => (
               <a
                 key={href}
                 href={href}
                 onClick={() => setOpen(false)}
-                className="eyebrow text-paper/85 hover:text-blue transition-colors py-3 border-b border-paper/10 last:border-b-0"
+                className="eyebrow text-foreground/85 hover:text-foreground/70 transition-colors py-3 border-b border-foreground/10 last:border-b-0"
               >
                 {label}
               </a>
@@ -487,19 +487,19 @@ function Nav() {
 
 function Hero() {
   return (
-    <section id="top" className="relative isolate overflow-hidden bg-ink text-paper px-6 py-16 sm:px-12 md:py-24 lg:px-24">
+    <section id="top" className="relative isolate overflow-hidden bg-background text-foreground px-6 py-16 sm:px-12 md:py-24 lg:px-24">
       <img src={heroImg} width={686} height={417} alt="The GRYT crew on the Montour / Peters Trail" className="absolute inset-0 -z-20 h-full w-full object-cover" fetchPriority="high" decoding="async" />
-      <div className="absolute inset-0 -z-10 bg-ink/70" aria-hidden="true" />
+      <div className="absolute inset-0 -z-10 bg-background/70" aria-hidden="true" />
       <div className="mx-auto max-w-[1180px]">
-        <p className="eyebrow text-blue mb-5">McMurray · Saturdays · 7 AM</p>
+        <p className="eyebrow text-foreground mb-5">McMurray · Saturdays · 7 AM</p>
         <h1 className="display-condensed text-[56px] leading-[0.95] sm:text-[80px] md:text-[104px]">GRYT Run Club</h1>
         <p className="display-condensed mt-5 text-[28px] leading-[1.1] md:text-[40px]">Do hard things together.</p>
-        <p className="mt-5 max-w-[460px] text-base leading-relaxed text-paper/90">Free Saturday miles on the Montour / Peters Trail. Walk, jog, or run. Come as you are.</p>
+        <p className="mt-5 max-w-[460px] text-base leading-relaxed text-foreground/90">Free Saturday miles on the Montour / Peters Trail. Walk, jog, or run. Come as you are.</p>
         <div className="mt-7 flex flex-wrap items-center gap-5">
           <a href="#join" className="btn-primary">RSVP This Saturday →</a>
-          <a href="#first" className="text-sm text-paper underline underline-offset-4 decoration-blue hover:text-blue">First time?</a>
+          <a href="#first" className="text-sm text-foreground underline underline-offset-4 decoration-blue hover:text-foreground/70">First time?</a>
         </div>
-        <p className="mt-5 text-sm text-paper/80">Next: {nextSaturdayLabelLong()}</p>
+        <p className="mt-5 text-sm text-foreground/80">Next: {nextSaturdayLabelLong()}</p>
       </div>
     </section>
   );
@@ -541,8 +541,8 @@ function Marquee() {
           <Row ariaHidden />
         </div>
       </div>
-      <div className="bg-ink text-center py-3.5 px-6 border-b border-paper/10">
-        <span className="eyebrow text-paper/55">Built by Laura & Nick Merich</span>
+      <div className="bg-background text-center py-3.5 px-6 border-b border-foreground/10">
+        <span className="eyebrow text-foreground/70">Built by Laura & Nick Merich</span>
       </div>
     </>
   );
@@ -575,17 +575,17 @@ function MemberNamesMarquee() {
     <span className="flex" aria-hidden={ariaHidden}>
       {names.map((n) => (
         <span key={n} className="flex items-center shrink-0">
-          <span className="display-condensed text-paper px-5 text-[clamp(18px,2.2vw,24px)] tracking-[0.05em] whitespace-nowrap">
+          <span className="display-condensed text-foreground px-5 text-[clamp(18px,2.2vw,24px)] tracking-[0.05em] whitespace-nowrap">
             {n}
           </span>
-          <span className="text-blue">/</span>
+          <span className="text-foreground">/</span>
         </span>
       ))}
     </span>
   );
 
   return (
-    <div className="bg-ink border-t border-b border-paper/15 overflow-hidden py-4">
+    <div className="bg-background border-t border-b border-foreground/15 overflow-hidden py-4">
       <div className="member-marquee-track">
         <Row />
         <Row ariaHidden />
@@ -806,7 +806,7 @@ function RSVP() {
   return (
     <section
       id="join"
-      className="relative overflow-hidden bg-ink text-paper py-14 md:py-20 px-6 sm:px-12 lg:px-24 border-b border-paper/10"
+      className="relative overflow-hidden bg-background text-foreground py-14 md:py-20 px-6 sm:px-12 lg:px-24 border-b border-foreground/10"
     >
       <div
         className="absolute inset-0 pointer-events-none"
@@ -822,25 +822,25 @@ function RSVP() {
         <div className="flex-1 min-w-[300px] basis-[380px]">
           <div className="eyebrow eyebrow-blue mb-4">Save your spot</div>
           {skippedThisWeek() ? (
-            <div className="mb-5 border border-brand/60 bg-brand/10 px-4 py-3 text-[15px] leading-[1.5] text-paper">
+            <div className="mb-5 border border-brand/60 bg-brand/10 px-4 py-3 text-[15px] leading-[1.5] text-foreground">
               <span className="eyebrow eyebrow-blue block mb-1">Run cancelled</span>
               {skippedThisWeek()!.note ?? "This Saturday's run is off."} Next run:{" "}
               {canonicalOccurrence().localDate}, 7:00 AM.
             </div>
           ) : null}
 
-          <h2 className="display-condensed text-paper text-[clamp(38px,5vw,68px)] mb-5">
+          <h2 className="display-condensed text-foreground text-[clamp(38px,5vw,68px)] mb-5">
             RSVP for this Saturday.
           </h2>
-          <p className="text-[17px] leading-[1.6] text-paper/80 max-w-[440px] mb-6">
+          <p className="text-[17px] leading-[1.6] text-foreground/80 max-w-[440px] mb-6">
             Tell us you're coming and we'll send one nudge Friday and a wave Saturday morning.
             That's it. No spam, no funnel — just a standing invite to the trailhead.
           </p>
           <RunCountdown className="mb-6 max-w-[440px]" />
-          <div id="details" className="scroll-mt-24 border-t-2 border-paper/70 max-w-[440px]">
+          <div id="details" className="scroll-mt-24 border-t-2 border-foreground/70 max-w-[440px]">
             {([
-              ["When", <>Every Saturday · 7:00 AM<span className="block text-[13px] font-normal text-paper/60 mt-0.5">Next: Saturday, {new Date(canonicalOccurrence().startUtc).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "America/New_York" })}</span></>],
-              ["Where", <>212 Valley Brook Road, McMurray · <a href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Road%2C%20McMurray%2C%20PA" target="_blank" rel="noopener noreferrer" className="text-blue hover:underline">Get directions</a></>],
+              ["When", <>Every Saturday · 7:00 AM<span className="block text-[13px] font-normal text-foreground/75 mt-0.5">Next: Saturday, {new Date(canonicalOccurrence().startUtc).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "America/New_York" })}</span></>],
+              ["Where", <>212 Valley Brook Road, McMurray · <a href="https://www.google.com/maps/dir/?api=1&destination=212%20Valley%20Brook%20Road%2C%20McMurray%2C%20PA" target="_blank" rel="noopener noreferrer" className="text-foreground hover:underline">Get directions</a></>],
               ["Route", "Montour / Peters Trail · Peters Township & Upper St. Clair"],
               ["Distance", "About 4 miles · out and back"],
               ["Pace", "Walk, jog, run · all welcome"],
@@ -851,13 +851,13 @@ function RSVP() {
               <div
                 key={k}
                 className={`flex justify-between gap-5 py-3.5 ${
-                  i !== arr.length - 1 ? "border-b border-paper/15" : ""
+                  i !== arr.length - 1 ? "border-b border-foreground/15" : ""
                 }`}
               >
                 <span className="text-[11px] font-bold tracking-[0.16em] uppercase text-blue/80 shrink-0 basis-[78px] pt-1">
                   {k}
                 </span>
-                <span className="text-[15px] md:text-[16px] font-semibold text-right text-paper/90">
+                <span className="text-[15px] md:text-[16px] font-semibold text-right text-foreground/90">
                   {v}
                 </span>
               </div>
@@ -867,7 +867,7 @@ function RSVP() {
             <a
               href={nextSaturdayIcsDataUrl()}
               download={nextSaturdayIcsFilename()}
-              className="inline-flex items-center gap-2 border border-paper/30 hover:border-blue hover:text-blue text-paper text-[12px] font-bold tracking-[0.14em] uppercase px-4 py-2.5 transition-colors"
+              className="inline-flex items-center gap-2 border border-foreground/30 hover:border-blue hover:text-foreground/70 text-foreground text-[12px] font-bold tracking-[0.14em] uppercase px-4 py-2.5 transition-colors"
             >
               ↓ Add to calendar (.ics)
             </a>
@@ -875,7 +875,7 @@ function RSVP() {
               href={SAT_CAL_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 border border-paper/15 hover:border-paper/40 text-paper/70 hover:text-paper text-[12px] font-bold tracking-[0.14em] uppercase px-4 py-2.5 transition-colors"
+              className="inline-flex items-center gap-2 border border-foreground/15 hover:border-foreground/40 text-foreground/70 hover:text-foreground text-[12px] font-bold tracking-[0.14em] uppercase px-4 py-2.5 transition-colors"
             >
               Google Calendar →
             </a>
@@ -893,7 +893,7 @@ function RSVP() {
               </label>
               <div className="flex flex-col gap-2 mb-4">
                 <div className="flex items-center gap-3 border-[1.5px] border-ink bg-white px-3.5 py-3">
-                  <span className="w-4 h-4 flex items-center justify-center bg-ink text-paper text-[10px]">✓</span>
+                  <span className="w-4 h-4 flex items-center justify-center bg-background text-foreground text-[10px]">✓</span>
                   <span className="text-sm font-semibold text-ink">Saturday · GRYT Run</span>
                   <span className="text-xs text-ink/55 ml-auto">7:00 AM</span>
                 </div>
@@ -938,7 +938,7 @@ function RSVP() {
                     aria-pressed={partySize === n}
                     className={`flex-1 border-[1.5px] py-3 text-sm font-bold transition-colors ${
                       partySize === n
-                        ? "border-ink bg-ink text-paper"
+                        ? "border-ink bg-background text-foreground"
                         : "border-[#cfcabe] bg-white text-ink hover:border-ink"
                     }`}
                   >
@@ -956,7 +956,7 @@ function RSVP() {
               >
                 <span
                   className={`w-4 h-4 shrink-0 flex items-center justify-center text-[10px] border-[1.5px] border-ink ${
-                    firstTimer ? "bg-ink text-paper" : "bg-white text-transparent"
+                    firstTimer ? "bg-background text-foreground" : "bg-white text-transparent"
                   }`}
                 >
                   ✓
@@ -993,7 +993,7 @@ function RSVP() {
                 >
                   <span
                     className={`w-4 h-4 shrink-0 flex items-center justify-center text-[10px] border-[1.5px] border-ink ${
-                      songCreditOk ? "bg-ink text-paper" : "bg-white text-transparent"
+                      songCreditOk ? "bg-background text-foreground" : "bg-white text-transparent"
                     }`}
                   >
                     ✓
@@ -1028,7 +1028,7 @@ function RSVP() {
               <button
                 onClick={submit}
                 disabled={submitting}
-                className="w-full text-sm font-bold tracking-[0.1em] uppercase py-4 bg-ink text-paper hover:bg-[#3a7ca5] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                className="w-full text-sm font-bold tracking-[0.1em] uppercase py-4 bg-background text-foreground hover:bg-[#3a7ca5] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                 style={{ fontFamily: "var(--font-body)" }}
               >
                 {submitting ? "Sending…" : "Lock it in →"}
@@ -1158,7 +1158,7 @@ function RSVPConfirmation({
       </div>
 
       <div className="border-[1.5px] border-ink mb-5">
-        <div className="text-[11px] font-bold tracking-[0.14em] uppercase text-paper bg-ink px-3.5 py-2">
+        <div className="text-[11px] font-bold tracking-[0.14em] uppercase text-foreground bg-background px-3.5 py-2">
           Your confirmation
         </div>
         <dl className="divide-y divide-[#d8d4cb]">
@@ -1184,7 +1184,7 @@ function RSVPConfirmation({
               href={DAY_CAL[d]}
               target="_blank"
               rel="noopener"
-              className="flex items-center justify-between gap-3 border-[1.5px] border-ink px-3.5 py-2.5 text-sm font-semibold text-ink hover:bg-ink hover:text-paper transition-colors"
+              className="flex items-center justify-between gap-3 border-[1.5px] border-ink px-3.5 py-2.5 text-sm font-semibold text-ink hover:bg-background hover:text-foreground transition-colors"
             >
               <span>Add {DAY_LABEL[d]}</span>
               <span className="text-xs tracking-[0.1em] uppercase opacity-70">7:00 AM</span>
@@ -1231,7 +1231,7 @@ function RSVPConfirmation({
         href={STRAVA_CLUB}
         target="_blank"
         rel="noopener"
-        className="text-[13px] font-bold tracking-[0.1em] uppercase py-4 bg-transparent text-ink border-[1.5px] border-ink text-center hover:bg-ink hover:text-paper transition-colors block mt-4"
+        className="text-[13px] font-bold tracking-[0.1em] uppercase py-4 bg-transparent text-ink border-[1.5px] border-ink text-center hover:bg-background hover:text-foreground transition-colors block mt-4"
       >
         Join the Strava club
       </a>
@@ -1279,7 +1279,7 @@ function CorePromise() {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-ink text-paper py-14 md:py-20">
+    <section className="relative overflow-hidden bg-background text-foreground py-14 md:py-20">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -1291,25 +1291,25 @@ function CorePromise() {
       />
       <div className="relative max-w-[1180px] mx-auto px-6 sm:px-12 lg:px-24">
         <div className="eyebrow eyebrow-blue mb-6">The data behind the feeling</div>
-        <h2 className="display-condensed text-paper text-[clamp(34px,5.4vw,78px)] leading-[0.95] max-w-[980px] mb-6">
+        <h2 className="display-condensed text-foreground text-[clamp(34px,5.4vw,78px)] leading-[0.95] max-w-[980px] mb-6">
           Loneliness is not a you problem. It is what adult life looks like when everything gets{" "}
-          <span className="text-blue">fragmented.</span>
+          <span className="text-foreground">fragmented.</span>
         </h2>
-        <p className="text-[17px] leading-[1.6] text-paper/75 max-w-[720px]">
+        <p className="text-[17px] leading-[1.6] text-foreground/75 max-w-[720px]">
           Most adults are not failing at connection — they are living in a system that makes real
           connection harder to keep. That is why IRL clubs like GRYT matter.
         </p>
 
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 border-t-2 border-l-2 border-paper/20">
+        <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 border-t-2 border-l-2 border-foreground/20">
           {stats.map((c) => (
             <article
               key={c.stat}
-              className="border-r-2 border-b-2 border-paper/20 p-6 md:p-8 flex flex-col"
+              className="border-r-2 border-b-2 border-foreground/20 p-6 md:p-8 flex flex-col"
             >
-              <div className="display-condensed text-blue text-[clamp(40px,5vw,64px)] leading-[0.92] mb-4">
+              <div className="display-condensed text-foreground text-[clamp(40px,5vw,64px)] leading-[0.92] mb-4">
                 {c.stat}
               </div>
-              <h3 className="display-condensed text-paper text-[18px] md:text-[21px] leading-[1.15] uppercase mb-5">
+              <h3 className="display-condensed text-foreground text-[18px] md:text-[21px] leading-[1.15] uppercase mb-5">
                 {c.headline}
               </h3>
               <a
@@ -1318,7 +1318,7 @@ function CorePromise() {
                 rel="noopener noreferrer"
                 title={c.sourceDetail}
                 aria-label={`Source: ${c.source}. ${c.sourceDetail} Opens in a new tab.`}
-                className="mt-auto inline-flex items-center gap-1.5 self-start eyebrow text-paper/50 border-b border-paper/20 pb-0.5 hover:text-blue hover:border-blue transition-colors"
+                className="mt-auto inline-flex items-center gap-1.5 self-start eyebrow text-foreground/70 border-b border-foreground/20 pb-0.5 hover:text-foreground/70 hover:border-blue transition-colors"
               >
                 <span>Source · {c.source}</span>
                 <span aria-hidden="true">↗</span>
@@ -1393,40 +1393,40 @@ function RunnerHighlights() {
     { name: "Nick Merich", label: "Consistency pays off", headline: "64 minutes faster. One season together.", detail: "Nick went from 5:18:15 at Pittsburgh to 4:13:33 at Columbus in 23 weeks. His story is about coming back to running and no longer training alone.", stat: "23 weeks", statLabel: "Pittsburgh to Columbus", anchor: "sixty-four" },
   ];
   return (
-    <section id="first" aria-labelledby="runner-highlights-title" className="border-y border-paper/15 bg-ink text-paper px-6 py-12 sm:px-12 md:py-16 lg:px-24">
+    <section id="first" aria-labelledby="runner-highlights-title" className="border-y border-foreground/15 bg-background text-foreground px-6 py-12 sm:px-12 md:py-16 lg:px-24">
       <div className="mx-auto max-w-[1180px]">
-        <p className="eyebrow text-blue mb-4">Runner highlights</p>
+        <p className="eyebrow text-foreground mb-4">Runner highlights</p>
         <h2 id="runner-highlights-title" className="display-condensed text-6xl leading-none tracking-normal md:text-8xl">GRYT 100</h2>
         <div className="mt-8 grid gap-8 md:grid-cols-[0.9fr_1.1fr] md:gap-12">
           <figure className="min-w-0">
             {photoFailed ? (
-              <div role="status" className="flex aspect-[4/3] flex-col justify-center border border-paper/20 bg-ink p-6 text-paper md:aspect-[4/5]">
+              <div role="status" className="flex aspect-[4/3] flex-col justify-center border border-foreground/20 bg-background p-6 text-foreground md:aspect-[4/5]">
                 <p className="font-condensed text-3xl font-bold uppercase">Nick and Laura</p>
-                <p className="mt-3 text-base leading-relaxed text-paper/85">Photo unavailable. Their runner highlights and full stories are below.</p>
+                <p className="mt-3 text-base leading-relaxed text-foreground/85">Photo unavailable. Their runner highlights and full stories are below.</p>
               </div>
             ) : (
               <img src={nickLauraAsset.url} width={571} height={755} decoding="async" alt="Nick Merich and Laura wearing race medals in front of a Pittsburgh Marathon backdrop" loading="lazy" onError={() => setPhotoFailed(true)} className="aspect-[4/3] w-full object-cover md:aspect-[4/5]" />
             )}
-            <figcaption className="mt-3 text-sm text-paper/80">Nick and Laura. More than miles.</figcaption>
+            <figcaption className="mt-3 text-sm text-foreground/80">Nick and Laura. More than miles.</figcaption>
           </figure>
-          <div className="min-w-0 divide-y divide-paper/20 border-t border-paper/20">
+          <div className="min-w-0 divide-y divide-foreground/20 border-t border-foreground/20">
             {runners.map(runner => <article key={runner.name} className="py-7 first:pt-6 last:pb-0">
-              <p className="eyebrow text-blue tracking-normal">{runner.label}</p>
+              <p className="eyebrow text-foreground tracking-normal">{runner.label}</p>
               <h3 className="mt-3 font-condensed text-4xl font-bold uppercase leading-tight tracking-normal">{runner.name}</h3>
               <dl className="mt-4 grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-3 sm:flex sm:flex-wrap">
-                <dt className="order-2 text-sm text-paper/80">{runner.statLabel}</dt>
-                <dd className="order-1 min-w-0 font-mono text-3xl text-blue">{runner.stat}</dd>
+                <dt className="order-2 text-sm text-foreground/80">{runner.statLabel}</dt>
+                <dd className="order-1 min-w-0 font-mono text-3xl text-foreground">{runner.stat}</dd>
               </dl>
               <p className="mt-3 text-lg font-semibold leading-snug">{runner.headline}</p>
-              <p className="mt-3 max-w-prose text-base leading-relaxed text-paper/85">{runner.detail}</p>
+              <p className="mt-3 max-w-prose text-base leading-relaxed text-foreground/85">{runner.detail}</p>
               <Button asChild variant="link" className="mt-4 min-h-11 px-0 py-3 text-base underline underline-offset-4 focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-4 focus-visible:ring-offset-ink focus-visible:bg-blue focus-visible:text-ink">
                 <Link to="/resources/more-than-miles" hash={runner.anchor}>Read {runner.name === "Laura" ? "Laura’s" : "Nick’s"} story <span aria-hidden="true">→</span></Link>
               </Button>
             </article>)}
           </div>
         </div>
-        <div className="mt-8 border-t border-paper/20 pt-6 md:mt-10">
-          <Button asChild variant="link" className="min-h-12 max-w-full px-0 py-3 text-xl font-semibold text-blue underline underline-offset-4 focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-4 focus-visible:ring-offset-ink focus-visible:bg-blue focus-visible:text-ink">
+        <div className="mt-8 border-t border-foreground/20 pt-6 md:mt-10">
+          <Button asChild variant="link" className="min-h-12 max-w-full px-0 py-3 text-xl font-semibold text-foreground underline underline-offset-4 focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-4 focus-visible:ring-offset-ink focus-visible:bg-blue focus-visible:text-ink">
             <Link to="/resources/more-than-miles">Meet all runners <span aria-hidden="true">→</span></Link>
           </Button>
         </div>
@@ -1476,7 +1476,7 @@ function RSVPWaiverBlock({
 
   if (waiver) {
     return (
-      <div className="border border-ink p-4 flex items-center gap-3 bg-ink/5">
+      <div className="border border-ink p-4 flex items-center gap-3 bg-background/5">
         <span className="w-7 h-7 bg-blue flex items-center justify-center text-ink text-[12px] font-bold shrink-0">✓</span>
         <div>
           <p className="text-[13px] font-semibold text-ink">Waiver completed</p>
@@ -1639,7 +1639,7 @@ function InlineWaiver({
   if (done) {
     return (
       <div className={compact ? "" : "mt-6"} role="status" aria-live="polite">
-        <div className="inline-flex items-center gap-2.5 bg-ink text-paper px-4 py-3 border border-paper/20">
+        <div className="inline-flex items-center gap-2.5 bg-background text-foreground px-4 py-3 border border-foreground/20">
           <span className="w-6 h-6 bg-blue flex items-center justify-center text-ink text-[13px] font-bold">✓</span>
           <span className="text-[13px] font-semibold tracking-[0.04em]">
             Waiver completed — covered through Dec 31, 2026
@@ -1658,7 +1658,7 @@ function InlineWaiver({
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="inline-block text-sm font-bold tracking-[0.1em] uppercase px-7 py-4 border-2 border-ink text-ink hover:bg-ink hover:text-paper transition-colors"
+          className="inline-block text-sm font-bold tracking-[0.1em] uppercase px-7 py-4 border-2 border-ink text-ink hover:bg-background hover:text-foreground transition-colors"
           style={{ fontFamily: "var(--font-body)" }}
         >
           Sign the 2026 waiver →
@@ -1671,9 +1671,9 @@ function InlineWaiver({
   }
 
   return (
-    <div className={`border-2 border-ink bg-ink text-paper ${compact ? "" : "mt-10"}`}>
+    <div className={`border-2 border-ink bg-background text-foreground ${compact ? "" : "mt-10"}`}>
       {/* Step header */}
-      <div className="flex items-stretch border-b border-paper/15">
+      <div className="flex items-stretch border-b border-foreground/15">
         {[1, 2, 3].map((n) => {
           const labels = ["Read", "Your info", "Sign"];
           const active = step === n;
@@ -1685,8 +1685,8 @@ function InlineWaiver({
               onClick={() => {
                 if (n < step) setStep(n as 1 | 2 | 3);
               }}
-              className={`flex-1 px-4 py-4 text-left border-r border-paper/15 last:border-r-0 transition-colors ${
-                active ? "bg-blue text-ink" : past ? "bg-ink text-paper" : "bg-ink text-paper/50"
+              className={`flex-1 px-4 py-4 text-left border-r border-foreground/15 last:border-r-0 transition-colors ${
+                active ? "bg-blue text-ink" : past ? "bg-background text-foreground" : "bg-background text-foreground/70"
               }`}
             >
               <div className="text-[11px] font-bold tracking-[0.14em] uppercase opacity-80">
@@ -1701,13 +1701,13 @@ function InlineWaiver({
       <div className={compact ? "p-5" : "p-7 md:p-10"}>
         {step === 1 && (
           <div>
-            <h3 className="display-condensed text-paper text-[26px] mb-2">
+            <h3 className="display-condensed text-foreground text-[26px] mb-2">
               Release of liability · 2026 season
             </h3>
-            <p className="text-[12px] tracking-[0.14em] uppercase text-paper/50 mb-5">
+            <p className="text-[12px] tracking-[0.14em] uppercase text-foreground/70 mb-5">
               gryt run club · v1
             </p>
-            <div className="max-h-[320px] overflow-y-auto pr-4 border border-paper/15 p-5 bg-ink/40 flex flex-col gap-4 text-[14px] leading-[1.65] text-paper/85">
+            <div className="max-h-[320px] overflow-y-auto pr-4 border border-foreground/15 p-5 bg-background/40 flex flex-col gap-4 text-[14px] leading-[1.65] text-foreground/85">
               <p>
                 In consideration of being permitted to participate in any activity organized by{" "}
                 <strong>gryt run club</strong>, I acknowledge that running and related activity
@@ -1734,7 +1734,7 @@ function InlineWaiver({
                 This agreement is effective from signing through <strong>December 31, 2026</strong>{" "}
                 and is governed by the laws of the Commonwealth of Pennsylvania.
               </p>
-              <p className="italic text-paper/70">
+              <p className="italic text-foreground/70">
                 By typing my name as a signature in step 3, I confirm I have read, understood, and
                 agreed to this waiver, and that my electronic signature has the same legal effect
                 as a handwritten signature.
@@ -1744,14 +1744,14 @@ function InlineWaiver({
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="text-[12px] font-bold tracking-[0.14em] uppercase text-paper/60 hover:text-paper"
+                className="text-[12px] font-bold tracking-[0.14em] uppercase text-foreground/75 hover:text-foreground"
               >
                 ← Cancel
               </button>
               <button
                 type="button"
                 onClick={() => setStep(2)}
-                className="text-sm font-bold tracking-[0.1em] uppercase px-6 py-3 bg-blue text-ink hover:bg-paper transition-colors"
+                className="text-sm font-bold tracking-[0.1em] uppercase px-6 py-3 bg-blue text-ink hover:bg-foreground hover:text-background transition-colors"
                 style={{ fontFamily: "var(--font-body)" }}
               >
                 I've read it → Your info
@@ -1762,8 +1762,8 @@ function InlineWaiver({
 
         {step === 2 && (
           <div>
-            <h3 className="display-condensed text-paper text-[26px] mb-1">Your info</h3>
-            <p className="text-[14px] text-paper/70 mb-6">
+            <h3 className="display-condensed text-foreground text-[26px] mb-1">Your info</h3>
+            <p className="text-[14px] text-foreground/70 mb-6">
               We use this for the waiver record and to reach you if there's a schedule change.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -1806,7 +1806,7 @@ function InlineWaiver({
                   className={inlineInputCls}
                 />
                 {isMinor && (
-                  <p className="mt-1.5 text-[13px] text-blue font-semibold">
+                  <p className="mt-1.5 text-[13px] text-foreground font-semibold">
                     Under 18. A parent or legal guardian signs for them on the{" "}
                     <a href="/waiver" className="underline">
                       full waiver page
@@ -1838,7 +1838,7 @@ function InlineWaiver({
               <button
                 type="button"
                 onClick={() => setStep(1)}
-                className="text-[12px] font-bold tracking-[0.14em] uppercase text-paper/60 hover:text-paper"
+                className="text-[12px] font-bold tracking-[0.14em] uppercase text-foreground/75 hover:text-foreground"
               >
                 ← Back
               </button>
@@ -1846,7 +1846,7 @@ function InlineWaiver({
                 type="button"
                 disabled={!step2Valid}
                 onClick={() => setStep(3)}
-                className="text-sm font-bold tracking-[0.1em] uppercase px-6 py-3 bg-blue text-ink hover:bg-paper transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                className="text-sm font-bold tracking-[0.1em] uppercase px-6 py-3 bg-blue text-ink hover:bg-foreground hover:text-background transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                 style={{ fontFamily: "var(--font-body)" }}
               >
                 Continue → Sign
@@ -1857,8 +1857,8 @@ function InlineWaiver({
 
         {step === 3 && (
           <form onSubmit={onSubmit}>
-            <h3 className="display-condensed text-paper text-[26px] mb-1">Sign</h3>
-            <p className="text-[14px] text-paper/70 mb-6">
+            <h3 className="display-condensed text-foreground text-[26px] mb-1">Sign</h3>
+            <p className="text-[14px] text-foreground/70 mb-6">
               Confirm the three statements and type your full legal name to sign.
             </p>
             <div className="flex flex-col gap-3 mb-6">
@@ -1889,16 +1889,16 @@ function InlineWaiver({
                 autoComplete="off"
               />
               {form.signature_text.length > 0 && !sigMatches && (
-                <p className="mt-1.5 text-[13px] text-blue font-semibold">
+                <p className="mt-1.5 text-[13px] text-foreground font-semibold">
                   Signature must match your full legal name exactly.
                 </p>
               )}
             </InlineField>
-            <div className="text-[13px] text-paper/60 mt-4">
-              Signing date: <span className="text-paper">{TODAY_ISO()}</span>
+            <div className="text-[13px] text-foreground/75 mt-4">
+              Signing date: <span className="text-foreground">{TODAY_ISO()}</span>
             </div>
             {error && (
-              <div className="mt-4 border border-blue bg-blue/10 px-4 py-3 text-[14px] text-paper">
+              <div className="mt-4 border border-blue bg-blue/10 px-4 py-3 text-[14px] text-foreground">
                 {error}
               </div>
             )}
@@ -1906,7 +1906,7 @@ function InlineWaiver({
               <button
                 type="button"
                 onClick={() => setStep(2)}
-                className="text-[12px] font-bold tracking-[0.14em] uppercase text-paper/60 hover:text-paper"
+                className="text-[12px] font-bold tracking-[0.14em] uppercase text-foreground/75 hover:text-foreground"
               >
                 ← Back
               </button>
@@ -1919,7 +1919,7 @@ function InlineWaiver({
                   !form.agree_fitness ||
                   !form.agree_adult
                 }
-                className="text-sm font-bold tracking-[0.1em] uppercase px-7 py-4 bg-blue text-ink hover:bg-paper transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                className="text-sm font-bold tracking-[0.1em] uppercase px-7 py-4 bg-blue text-ink hover:bg-foreground hover:text-background transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                 style={{ fontFamily: "var(--font-body)" }}
               >
                 {submitting ? "Signing…" : "Sign the 2026 waiver"}
@@ -1933,7 +1933,7 @@ function InlineWaiver({
 }
 
 const inlineInputCls =
-  "w-full bg-ink border border-paper/25 px-3.5 py-2.5 text-paper text-[15px] focus:outline-none focus:border-blue";
+  "w-full bg-background border border-foreground/25 px-3.5 py-2.5 text-foreground text-[15px] focus:outline-none focus:border-blue";
 
 function InlineField({
   label,
@@ -1946,9 +1946,9 @@ function InlineField({
 }) {
   return (
     <label className="flex flex-col gap-1.5">
-      <span className="text-[11px] font-bold tracking-[0.14em] uppercase text-paper/70">
+      <span className="text-[11px] font-bold tracking-[0.14em] uppercase text-foreground/70">
         {label}
-        {required && <span className="text-blue"> *</span>}
+        {required && <span className="text-foreground"> *</span>}
       </span>
       {children}
     </label>
@@ -1972,7 +1972,7 @@ function InlineCheck({
         onChange={(e) => onChange(e.target.checked)}
         className="mt-1 h-4 w-4 accent-blue cursor-pointer"
       />
-      <span className="text-[14px] leading-[1.5] text-paper/85 group-hover:text-paper">
+      <span className="text-[14px] leading-[1.5] text-foreground/85 group-hover:text-foreground">
         {label}
       </span>
     </label>
@@ -1983,7 +1983,7 @@ function TheRun() {
   return (
     <section
       id="run"
-      className="bg-ink text-paper py-14 md:py-20 px-6 sm:px-12 lg:px-24"
+      className="bg-background text-foreground py-14 md:py-20 px-6 sm:px-12 lg:px-24"
     >
       <div className="max-w-[1180px] mx-auto flex flex-wrap gap-10 lg:gap-16 items-center">
         <div className="relative flex-1 min-w-[280px] basis-[380px]">
@@ -1991,21 +1991,21 @@ function TheRun() {
           <img
             src={circleImg}
             alt="On the trail with GRYT"
-            className="relative block w-full h-[440px] object-cover border border-paper/10"
+            className="relative block w-full h-[440px] object-cover border border-foreground/10"
           />
         </div>
         <div className="flex-1 min-w-[280px] basis-[380px]">
           <div className="eyebrow eyebrow-blue mb-4">The run</div>
-          <h2 className="display-condensed text-paper text-[clamp(34px,4.4vw,62px)] mb-6">
+          <h2 className="display-condensed text-foreground text-[clamp(34px,4.4vw,62px)] mb-6">
             THE ROUTE IS EASY. WAKING UP AND SHOWING UP IS THE HARD PART.
           </h2>
           <div className="flex flex-col gap-4 max-w-[480px]">
-            <p className="text-[17px] leading-[1.6] text-paper/80">
+            <p className="text-[17px] leading-[1.6] text-foreground/80">
               We run the Montour / Peters Trail because it is flat, wide, simple, and friendly for
               every pace. The usual route is about four miles out and back — but you can turn around
               whenever you need.
             </p>
-            <p className="text-[17px] leading-[1.6] text-paper/80">
+            <p className="text-[17px] leading-[1.6] text-foreground/80">
               You can bring a friend, a stroller, a dog, or just yourself. Most people come alone
               the first time.
             </p>
@@ -2014,7 +2014,7 @@ function TheRun() {
             {["Flat, simple, out and back", "Walkers, joggers, runners"].map((t) => (
               <span
                 key={t}
-                className="text-xs font-semibold tracking-[0.08em] uppercase text-paper border border-paper/30 px-3.5 py-2"
+                className="text-xs font-semibold tracking-[0.08em] uppercase text-foreground border border-foreground/30 px-3.5 py-2"
               >
                 {t}
               </span>
@@ -2082,7 +2082,7 @@ function AffiliationList({ name, items }: { name: string; items: string[] }) {
                 type="button"
                 onClick={() => setExpanded((v) => !v)}
                 aria-expanded={expanded}
-                className="border border-ink/40 px-2 py-1 text-[10px] sm:text-[11px] leading-tight uppercase tracking-[0.08em] text-ink hover:bg-ink hover:text-paper transition-colors"
+                className="border border-ink/40 px-2 py-1 text-[10px] sm:text-[11px] leading-tight uppercase tracking-[0.08em] text-ink hover:bg-background hover:text-foreground transition-colors"
                 style={{ fontFamily: "var(--font-body)" }}
               >
                 {expanded ? "Show less" : `+${items.length - COLLAPSED} more`}
@@ -2158,7 +2158,7 @@ function Founders() {
 
           </div>
         </div>
-        <div className="flex-[0_1_320px] min-w-[240px] bg-ink text-paper flex flex-col">
+        <div className="flex-[0_1_320px] min-w-[240px] bg-background text-foreground flex flex-col">
           <div className="relative">
             <img
               src={foundersImg}
@@ -2166,16 +2166,16 @@ function Founders() {
               className="block w-full h-[420px] object-cover"
               style={{ objectPosition: "center 20%" }}
             />
-            <div className="absolute left-0 right-0 bottom-0 px-4 py-4 bg-gradient-to-t from-black/85 to-transparent flex items-center justify-between gap-2">
-              <span className="display-condensed text-paper text-[20px]">Laura & Nick</span>
+            <div className="absolute left-0 right-0 bottom-0 px-4 py-4 bg-gradient-to-t from-background/85 to-transparent flex items-center justify-between gap-2">
+              <span className="display-condensed text-foreground text-[20px]">Laura & Nick</span>
               <MonogramG className="h-7 w-7" />
             </div>
           </div>
           <div className="px-8">
             {stats.map(([n, l]) => (
-              <div key={l} className="border-t border-paper/15 py-4">
-                <div className="display-condensed text-blue text-[44px] leading-[0.9]">{n}</div>
-                <div className="text-[13px] text-paper/75 mt-1">{l}</div>
+              <div key={l} className="border-t border-foreground/15 py-4">
+                <div className="display-condensed text-foreground text-[44px] leading-[0.9]">{n}</div>
+                <div className="text-[13px] text-foreground/75 mt-1">{l}</div>
               </div>
             ))}
           </div>
@@ -2187,24 +2187,24 @@ function Founders() {
 
 function Community() {
   return (
-    <section id="community" className="bg-ink text-paper py-14 md:py-20 px-6 sm:px-12 lg:px-24">
+    <section id="community" className="bg-background text-foreground py-14 md:py-20 px-6 sm:px-12 lg:px-24">
       <div className="max-w-[1100px] mx-auto">
         <div className="eyebrow eyebrow-blue mb-4">The community</div>
-        <h2 className="display-condensed text-paper text-[clamp(38px,5.2vw,76px)] max-w-[760px] mb-6">
+        <h2 className="display-condensed text-foreground text-[clamp(38px,5.2vw,76px)] max-w-[760px] mb-6">
           This is not about one run.
         </h2>
         <div className="flex flex-col gap-4 max-w-[640px] mb-12">
-          <p className="text-lg leading-[1.6] text-paper/80">
+          <p className="text-lg leading-[1.6] text-foreground/80">
             The run is the entry point. The community is the reason people come back.
           </p>
-          <p className="text-lg leading-[1.6] text-paper/80">
+          <p className="text-lg leading-[1.6] text-foreground/80">
             We use Strava for weekly events and the Strava Group Message for the group chat. You do
             not need the app to show up the first time. But once you come once, you will probably
             want to join in.
           </p>
         </div>
 
-        <div className="relative mb-12 overflow-hidden border border-paper/15">
+        <div className="relative mb-12 overflow-hidden border border-foreground/15">
           <img
             src={heroImg}
             width={686}
@@ -2215,8 +2215,8 @@ function Community() {
             className="block w-full h-[clamp(280px,42vw,520px)] object-cover"
             style={{ objectPosition: "center 38%" }}
           />
-          <div className="absolute left-0 right-0 bottom-0 px-6 py-6 bg-gradient-to-t from-black/85 to-transparent flex items-end justify-between gap-4 flex-wrap">
-            <span className="display-condensed text-paper text-[clamp(22px,3vw,38px)]">
+          <div className="absolute left-0 right-0 bottom-0 px-6 py-6 bg-gradient-to-t from-background/85 to-transparent flex items-end justify-between gap-4 flex-wrap">
+            <span className="display-condensed text-foreground text-[clamp(22px,3vw,38px)]">
               This is the crew.
             </span>
             <span className="text-[11px] font-bold tracking-[0.16em] uppercase text-ink bg-blue px-3 py-1.5 whitespace-nowrap">
@@ -2231,37 +2231,37 @@ function Community() {
           <img
             src={photo2.url}
             alt="Sunny morning crew before heading out"
-            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15 photo-hover"
+            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-foreground/15 photo-hover"
           />
           <img
             src={photo3.url}
             alt="Cooling down on the trail after a Saturday run"
-            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15 photo-hover"
+            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-foreground/15 photo-hover"
           />
           <img
             src={photoBridge.url}
             alt="The crew running over the bridge on the Montour Trail"
-            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15 photo-hover"
+            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-foreground/15 photo-hover"
           />
           <img
             src={photo5.url}
             alt="Three runners heading down the trail at sunrise"
-            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15 photo-hover"
+            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-foreground/15 photo-hover"
           />
           <img
             src={photo7.url}
             alt="Crew in the lot before a Saturday run"
-            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15 photo-hover"
+            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-foreground/15 photo-hover"
           />
           <img
             src={photo8.url}
             alt="Big crew huddled up after a Saturday run"
-            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15 photo-hover"
+            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-foreground/15 photo-hover"
           />
           <img
             src={photo1.url}
             alt="Crew posted up at the trailhead before the Saturday run"
-            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15 photo-hover"
+            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-foreground/15 photo-hover"
           />
           <img
             src={heroImg}
@@ -2270,12 +2270,12 @@ function Community() {
             loading="lazy"
             decoding="async"
             alt="Runners rolling out on the Montour Trail at first light"
-            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15 photo-hover"
+            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-foreground/15 photo-hover"
           />
           <img
             src={photo6.url}
             alt="Post-run coffee and hangs in the lot"
-            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-paper/15 photo-hover"
+            className="block w-full h-[clamp(160px,22vw,260px)] object-cover border border-foreground/15 photo-hover"
           />
         </div>
 
@@ -2284,16 +2284,16 @@ function Community() {
 
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="border border-paper/15 p-7 flex flex-col">
-            <div className="display-condensed text-paper text-[26px] mb-2.5">Strava</div>
-            <p className="text-[15px] leading-[1.6] text-paper/75 mb-5 flex-1">
+          <div className="border border-foreground/15 p-7 flex flex-col">
+            <div className="display-condensed text-foreground text-[26px] mb-2.5">Strava</div>
+            <p className="text-[15px] leading-[1.6] text-foreground/75 mb-5 flex-1">
               See the run, RSVP, and track the activity. Strava is where the weekly event lives.
             </p>
-            <div className="flex items-center gap-2.5 mb-6 border-t border-paper/15 pt-4">
+            <div className="flex items-center gap-2.5 mb-6 border-t border-foreground/15 pt-4">
               <span className="text-[10px] font-bold tracking-[0.16em] uppercase text-ink bg-blue px-2 py-1 whitespace-nowrap">
                 Next up
               </span>
-              <span className="text-sm font-semibold text-paper">
+              <span className="text-sm font-semibold text-foreground">
                 {nextSaturdayLabel()}
               </span>
             </div>
@@ -2301,14 +2301,14 @@ function Community() {
               href={STRAVA_EVENT}
               target="_blank"
               rel="noopener"
-              className="text-[13px] font-bold tracking-[0.1em] uppercase text-blue hover:text-paper transition-colors"
+              className="text-[13px] font-bold tracking-[0.1em] uppercase text-foreground hover:text-foreground transition-colors"
             >
               View this week's run →
             </a>
           </div>
-          <div className="border border-paper/15 p-7 flex flex-col">
-            <div className="display-condensed text-paper text-[26px] mb-2.5">Group Message</div>
-            <p className="text-[15px] leading-[1.6] text-paper/75 mb-6 flex-1">
+          <div className="border border-foreground/15 p-7 flex flex-col">
+            <div className="display-condensed text-foreground text-[26px] mb-2.5">Group Message</div>
+            <p className="text-[15px] leading-[1.6] text-foreground/75 mb-6 flex-1">
               The Strava Group Message is where people coordinate, ask questions, share photos, and
               stay connected between Saturdays.
             </p>
@@ -2316,14 +2316,14 @@ function Community() {
               href={STRAVA_CLUB}
               target="_blank"
               rel="noopener"
-              className="text-[13px] font-bold tracking-[0.1em] uppercase text-blue hover:text-paper transition-colors"
+              className="text-[13px] font-bold tracking-[0.1em] uppercase text-foreground hover:text-foreground transition-colors"
             >
               Join the group chat →
             </a>
           </div>
         </div>
 
-        <div className="mt-5 border border-paper/15 p-5 md:p-7">
+        <div className="mt-5 border border-foreground/15 p-5 md:p-7">
           <div className="eyebrow eyebrow-blue mb-4">Live from the club · Strava</div>
           <iframe
             frameBorder={0}
@@ -2356,7 +2356,7 @@ function Beliefs() {
     "Growth is the goal.",
     "We show up no matter what.",
     <>
-      Progress <span className="text-blue">{">"}</span> perfection.
+      Progress <span className="text-foreground">{">"}</span> perfection.
     </>,
     "Hard is the point.",
     "Earn daily.",
@@ -2378,7 +2378,7 @@ function Beliefs() {
             >
               <span
                 aria-hidden="true"
-                className="display-condensed shrink-0 inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-ink text-white text-[18px] sm:text-[22px] leading-none"
+                className="display-condensed shrink-0 inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-background text-foreground text-[18px] sm:text-[22px] leading-none"
                 style={{ boxShadow: "3px 3px 0 var(--blue)" }}
               >
                 {String(i + 1).padStart(2, "0")}
@@ -2496,7 +2496,7 @@ function FinalCTA() {
   return (
     <section
       id="ready"
-      className="relative overflow-hidden bg-ink text-paper py-16 md:py-24 px-6 sm:px-12 lg:px-24"
+      className="relative overflow-hidden bg-background text-foreground py-16 md:py-24 px-6 sm:px-12 lg:px-24"
     >
       <div
         className="absolute inset-0"
@@ -2513,16 +2513,16 @@ function FinalCTA() {
         }}
       />
       <div className="relative max-w-[920px] mx-auto text-center">
-        <h2 className="display-condensed text-paper text-[clamp(44px,7vw,104px)] leading-[0.9] mb-6">
+        <h2 className="display-condensed text-foreground text-[clamp(44px,7vw,104px)] leading-[0.9] mb-6">
           STOP WAITING TO FEEL READY. START NOW.
         </h2>
-        <p className="text-lg leading-[1.6] text-paper/80 max-w-[580px] mx-auto mb-3.5">
+        <p className="text-lg leading-[1.6] text-foreground/80 max-w-[580px] mx-auto mb-3.5">
           You do not need to get in better shape first.&nbsp;<br />
           You do not need to know someone.&nbsp;<br />
           You do not need the perfect Saturday.&nbsp;<br />
           You just need to show up.
         </p>
-        <p className="display-condensed text-blue text-[clamp(26px,3.6vw,44px)] mb-9">
+        <p className="display-condensed text-foreground text-[clamp(26px,3.6vw,44px)] mb-9">
           Saturday. 7 AM. McMurray.
         </p>
         <div className="flex gap-3.5 justify-center flex-wrap">
@@ -2533,7 +2533,7 @@ function FinalCTA() {
             Join the Strava club
           </a>
         </div>
-        <p className="mt-8 text-[13px] text-paper/55">We'll be by the trailhead.</p>
+        <p className="mt-8 text-[13px] text-foreground/70">We'll be by the trailhead.</p>
       </div>
     </section>
   );
@@ -2572,23 +2572,23 @@ function RecommendationsBar() {
 
   if (done) {
     return (
-      <div className="border-t border-paper/15 pt-10 pb-2">
-        <p className="eyebrow text-blue">THANKS — WE GOT IT.</p>
-        <p className="text-sm text-paper/70 mt-2">Nick and Laura read every suggestion.</p>
+      <div className="border-t border-foreground/15 pt-10 pb-2">
+        <p className="eyebrow text-foreground">THANKS — WE GOT IT.</p>
+        <p className="text-sm text-foreground/70 mt-2">Nick and Laura read every suggestion.</p>
       </div>
     );
   }
 
   return (
-    <div className="border-t border-paper/15 pt-10 pb-2">
-      <p className="eyebrow text-paper/55 mb-4">WHAT SHOULD WE DO NEXT?</p>
+    <div className="border-t border-foreground/15 pt-10 pb-2">
+      <p className="eyebrow text-foreground/70 mb-4">WHAT SHOULD WE DO NEXT?</p>
       <div className="flex flex-wrap gap-2.5 mb-4">
         {pills.map((p) => (
           <button
             key={p.label}
             disabled={submitting}
             onClick={() => send(p.category, p.label)}
-            className="inline-flex items-center px-3.5 py-2 text-sm font-medium uppercase tracking-wide border border-paper/25 text-paper/90 hover:bg-blue hover:text-ink hover:border-blue transition-colors disabled:opacity-40"
+            className="inline-flex items-center px-3.5 py-2 text-sm font-medium uppercase tracking-wide border border-foreground/25 text-foreground/90 hover:bg-blue hover:text-ink hover:border-blue transition-colors disabled:opacity-40"
           >
             {p.label}
           </button>
@@ -2604,7 +2604,7 @@ function RecommendationsBar() {
         className="flex gap-3 flex-wrap items-end"
       >
         <div className="flex-1 min-w-[240px]">
-          <label htmlFor="rec-custom" className="eyebrow text-paper/40 block mb-1.5">
+          <label htmlFor="rec-custom" className="eyebrow text-foreground/70 block mb-1.5">
             OR WRITE YOUR OWN
           </label>
           <input
@@ -2614,7 +2614,7 @@ function RecommendationsBar() {
             value={custom}
             onChange={(e) => setCustom(e.target.value)}
             placeholder="I wish we had..."
-            className="w-full bg-transparent border-0 border-b-2 border-paper/20 text-paper placeholder:text-paper/30 pb-2 pt-1 text-base focus:outline-none focus:border-blue transition-colors"
+            className="w-full bg-transparent border-0 border-b-2 border-foreground/20 text-foreground placeholder:text-foreground/55 pb-2 pt-1 text-base focus:outline-none focus:border-blue transition-colors"
           />
         </div>
         <button
@@ -2632,17 +2632,17 @@ function RecommendationsBar() {
 
 function Footer() {
   return (
-    <footer className="bg-black text-paper py-14 md:py-20 px-6 sm:px-12 lg:px-24">
+    <footer className="bg-background text-foreground py-14 md:py-20 px-6 sm:px-12 lg:px-24">
       <div className="max-w-[1180px] mx-auto">
-        <div className="flex justify-between gap-10 flex-wrap items-start pb-12 border-b border-paper/15">
+        <div className="flex justify-between gap-10 flex-wrap items-start pb-12 border-b border-foreground/15">
           <div>
-            <MissionStamp size="md" align="left" className="text-paper" />
+            <MissionStamp size="md" align="left" className="text-foreground" />
             <div className="flex flex-wrap gap-x-6 gap-y-2 mt-6">
               <a
                 href={STRAVA_CLUB}
                 target="_blank"
                 rel="noopener"
-                className="eyebrow text-paper/75 hover:text-blue transition-colors"
+                className="eyebrow text-foreground/75 hover:text-foreground/70 transition-colors"
               >
                 Strava
               </a>
@@ -2650,7 +2650,7 @@ function Footer() {
                 href={STRAVA_CLUB}
                 target="_blank"
                 rel="noopener"
-                className="eyebrow text-paper/75 hover:text-blue transition-colors"
+                className="eyebrow text-foreground/75 hover:text-foreground/70 transition-colors"
               >
                 Group Message
               </a>
@@ -2658,27 +2658,27 @@ function Footer() {
                 href="https://www.instagram.com/grytrunclub/"
                 target="_blank"
                 rel="noopener"
-                className="eyebrow text-paper/75 hover:text-blue transition-colors"
+                className="eyebrow text-foreground/75 hover:text-foreground/70 transition-colors"
               >
                 Instagram
               </a>
               <Link
                 to="/privacy"
-                className="eyebrow text-paper/75 hover:text-blue transition-colors"
+                className="eyebrow text-foreground/75 hover:text-foreground/70 transition-colors"
               >
                 Privacy
               </Link>
-              <Link to="/partners" className="eyebrow text-paper/75 hover:text-blue transition-colors">Partners</Link>
-              <Link to="/review" className="eyebrow text-paper/75 hover:text-blue transition-colors">Leave a review</Link>
+              <Link to="/partners" className="eyebrow text-foreground/75 hover:text-foreground/70 transition-colors">Partners</Link>
+              <Link to="/review" className="eyebrow text-foreground/75 hover:text-foreground/70 transition-colors">Leave a review</Link>
               <Link
                 to="/terms"
-                className="eyebrow text-paper/75 hover:text-blue transition-colors"
+                className="eyebrow text-foreground/75 hover:text-foreground/70 transition-colors"
               >
                 Terms
               </Link>
               <a
                 href="/faq"
-                className="eyebrow text-paper/75 hover:text-blue transition-colors"
+                className="eyebrow text-foreground/75 hover:text-foreground/70 transition-colors"
               >
                 FAQ
               </a>
@@ -2686,7 +2686,7 @@ function Footer() {
                 href={insuranceAsset.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="eyebrow text-paper/75 hover:text-blue transition-colors"
+                className="eyebrow text-foreground/75 hover:text-foreground/70 transition-colors"
               >
                 Proof of Insurance
               </a>
@@ -2700,27 +2700,27 @@ function Footer() {
                 Run Club
               </span>
             </div>
-            <p className="text-sm leading-[1.6] text-paper/70 max-w-[340px]">
+            <p className="text-sm leading-[1.6] text-foreground/70 max-w-[340px]">
               Pittsburgh, PA · Saturdays · 7 AM · Montour / Peters Trail.
             </p>
-            <p className="text-sm leading-[1.6] text-paper/70 max-w-[340px] mt-3">
+            <p className="text-sm leading-[1.6] text-foreground/70 max-w-[340px] mt-3">
               Built for Pittsburgh runners, South Hills parents, former athletes, and anyone trying to get consistent again.
             </p>
           </div>
         </div>
-        <div className="border-t border-paper/15 pt-10 pb-2" />
+        <div className="border-t border-foreground/15 pt-10 pb-2" />
 
-        <div className="flex justify-between gap-4 pt-8 flex-wrap eyebrow text-paper/40">
+        <div className="flex justify-between gap-4 pt-8 flex-wrap eyebrow text-foreground/70">
           <span>© 2026 GRYT Run Club. All rights reserved.</span>
           <span>{"\n"}</span>
         </div>
-        <div className="pt-3 eyebrow text-paper/60">
+        <div className="pt-3 eyebrow text-foreground/75">
           Designed, written, and shipped by{" "}
           <a
             href="https://nick.pop.site"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-paper/60 hover:text-blue underline underline-offset-2 decoration-paper/20 hover:decoration-blue transition-colors"
+            className="text-foreground/75 hover:text-foreground/70 underline underline-offset-2 decoration-foreground/20 hover:decoration-blue transition-colors"
           >
             NICK & LAURA MERICH
           </a>
@@ -2792,7 +2792,7 @@ function Testimonial() {
   }, [paused, testimonials.length]);
 
   return (
-    <section className="bg-ink text-paper py-14 md:py-16 px-6 sm:px-12 lg:px-24 border-t border-paper/10">
+    <section className="bg-background text-foreground py-14 md:py-16 px-6 sm:px-12 lg:px-24 border-t border-foreground/10">
       <div
         className="max-w-[780px] mx-auto text-center"
         onMouseEnter={() => setPaused(true)}
@@ -2807,7 +2807,7 @@ function Testimonial() {
             type="button"
             onClick={prev}
             aria-label="Previous testimonial"
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-10 text-paper/40 hover:text-blue transition-colors hidden sm:block"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-10 text-foreground/70 hover:text-foreground/70 transition-colors hidden sm:block"
           >
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
           </button>
@@ -2820,12 +2820,12 @@ function Testimonial() {
           >
             <div className="relative mb-6 animate-fade-in">
               <span
-                className="display-condensed text-blue text-[clamp(56px,7vw,84px)] leading-none absolute -top-3 left-0 md:-left-4 opacity-25 select-none"
+                className="display-condensed text-foreground text-[clamp(56px,7vw,84px)] leading-none absolute -top-3 left-0 md:-left-4 opacity-25 select-none"
                 aria-hidden="true"
               >
                 &ldquo;
               </span>
-              <blockquote className="text-[clamp(20px,2.4vw,28px)] leading-[1.5] font-light text-paper/95 italic">
+              <blockquote className="text-[clamp(20px,2.4vw,28px)] leading-[1.5] font-light text-foreground/95 italic">
                 {active.quote}
               </blockquote>
             </div>
@@ -2835,20 +2835,20 @@ function Testimonial() {
                 <img
                   src={active.photo}
                   alt={active.name}
-                  className="w-16 h-16 rounded-full object-cover grayscale border border-paper/20"
+                  className="w-16 h-16 rounded-full object-cover grayscale border border-foreground/20"
                   loading="lazy"
                 />
               ) : (
                 <div
                   aria-hidden="true"
-                  className="w-16 h-16 rounded-full bg-blue text-ink flex items-center justify-center display-condensed text-[22px] tracking-normal border border-paper/10"
+                  className="w-16 h-16 rounded-full bg-blue text-ink flex items-center justify-center display-condensed text-[22px] tracking-normal border border-foreground/10"
                 >
                   {initials(active.name)}
                 </div>
               )}
               <div className="slash mx-auto" />
-              <span className="display-condensed text-paper text-[22px]">{active.name}</span>
-              <span className="text-[13px] text-paper/60 max-w-[420px] leading-[1.5]">
+              <span className="display-condensed text-foreground text-[22px]">{active.name}</span>
+              <span className="text-[13px] text-foreground/75 max-w-[420px] leading-[1.5]">
                 {active.title}
               </span>
             </div>
@@ -2858,7 +2858,7 @@ function Testimonial() {
             type="button"
             onClick={next}
             aria-label="Next testimonial"
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-10 text-paper/40 hover:text-blue transition-colors hidden sm:block"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-10 text-foreground/70 hover:text-foreground/70 transition-colors hidden sm:block"
           >
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
           </button>
@@ -2873,7 +2873,7 @@ function Testimonial() {
               aria-label={`Go to testimonial ${i + 1}`}
               aria-current={i === index}
               className={`w-2.5 h-2.5 rounded-full transition-colors ${
-                i === index ? "bg-blue" : "bg-paper/30 hover:bg-paper/50"
+                i === index ? "bg-blue" : "bg-foreground/30 hover:bg-foreground/50"
               }`}
             />
           ))}
@@ -2889,16 +2889,16 @@ function WeeklyRhythm() {
   const satCal = SAT_CAL_URL;
 
   return (
-    <section id="rhythm" className="bg-ink text-paper py-14 md:py-20 px-6 sm:px-12 lg:px-24 border-t border-paper/10">
+    <section id="rhythm" className="bg-background text-foreground py-14 md:py-20 px-6 sm:px-12 lg:px-24 border-t border-foreground/10">
       <div className="max-w-[1180px] mx-auto">
         <div className="eyebrow eyebrow-blue mb-4">One run · one crew · one cadence</div>
-        <h2 className="display-condensed text-paper text-[clamp(40px,6vw,80px)] leading-[0.95] max-w-[900px]">
-          Do hard things. <span className="text-blue">Together.</span>
+        <h2 className="display-condensed text-foreground text-[clamp(40px,6vw,80px)] leading-[0.95] max-w-[900px]">
+          Do hard things. <span className="text-foreground">Together.</span>
           <br />
           Every Saturday.
         </h2>
 
-        <p className="mt-6 max-w-[760px] text-paper/80 text-lg md:text-xl leading-relaxed">
+        <p className="mt-6 max-w-[760px] text-foreground/80 text-lg md:text-xl leading-relaxed">
           One crew. One rhythm. Same standing appointment, every week. Same people. Same promise. Show up once and you're halfway. Show up every week and you're in.
         </p>
 
@@ -2945,7 +2945,7 @@ function WeeklyRhythm() {
                 </div>
                 <div className="relative">
                   <div aria-hidden className="absolute left-2 top-2 -right-2 -bottom-2 bg-blue" />
-                  <div className="relative overflow-hidden border border-ink/30 aspect-[4/3] sm:aspect-[16/10] bg-ink/5">
+                  <div className="relative overflow-hidden border border-ink/30 aspect-[4/3] sm:aspect-[16/10] bg-background/5">
                     <iframe
                       src="https://maps.google.com/maps?q=212+Valley+Brook+Rd,+McMurray,+PA+15317&z=15&ie=UTF8&iwloc=&output=embed"
                       title="Saturday GRYT Run meetup — 212 Valley Brook Rd, McMurray"
@@ -2953,8 +2953,8 @@ function WeeklyRhythm() {
                       referrerPolicy="no-referrer-when-downgrade"
                       className="absolute inset-0 h-full w-full grayscale contrast-110"
                     />
-                    <div className="pointer-events-none absolute left-0 right-0 bottom-0 flex flex-wrap items-center justify-between gap-2 px-3 py-2 bg-gradient-to-t from-black/85 to-transparent">
-                      <span className="display-condensed text-paper text-[13px] sm:text-[15px] leading-none">
+                    <div className="pointer-events-none absolute left-0 right-0 bottom-0 flex flex-wrap items-center justify-between gap-2 px-3 py-2 bg-gradient-to-t from-background/85 to-transparent">
+                      <span className="display-condensed text-foreground text-[13px] sm:text-[15px] leading-none">
                         Montour / Peters Trailhead
                       </span>
                       <span className="text-[10px] font-bold tracking-[0.16em] uppercase text-ink bg-blue px-2 py-1 whitespace-nowrap">
@@ -2998,7 +2998,7 @@ function WeeklyRhythm() {
               <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-[auto_auto_auto] sm:gap-3 sm:justify-start">
                 <a
                   href="#join-sat"
-                  className="inline-flex items-center justify-center h-11 px-5 text-[12px] font-bold uppercase tracking-[0.12em] bg-ink text-paper hover:bg-[#3a7ca5] transition-colors"
+                  className="inline-flex items-center justify-center h-11 px-5 text-[12px] font-bold uppercase tracking-[0.12em] bg-background text-foreground hover:bg-[#3a7ca5] transition-colors"
                 >
                   RSVP This Saturday →
                 </a>
@@ -3006,7 +3006,7 @@ function WeeklyRhythm() {
                   href={satCal}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center h-11 px-5 text-[12px] font-bold uppercase tracking-[0.12em] border border-ink/50 text-ink hover:bg-ink hover:text-paper transition-colors"
+                  className="inline-flex items-center justify-center h-11 px-5 text-[12px] font-bold uppercase tracking-[0.12em] border border-ink/50 text-ink hover:bg-background hover:text-foreground transition-colors"
                 >
                   Add to Calendar
                 </a>
@@ -3014,7 +3014,7 @@ function WeeklyRhythm() {
                   href={STRAVA_EVENT_URL.sat}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center h-11 px-5 text-[12px] font-bold uppercase tracking-[0.12em] border border-ink/50 text-ink hover:bg-ink hover:text-paper transition-colors"
+                  className="inline-flex items-center justify-center h-11 px-5 text-[12px] font-bold uppercase tracking-[0.12em] border border-ink/50 text-ink hover:bg-background hover:text-foreground transition-colors"
                 >
                   Strava event →
                 </a>
@@ -3384,7 +3384,7 @@ function NewsletterBar() {
         <div className="flex items-center gap-3 shrink-0 basis-full sm:basis-auto">
           <span
             aria-hidden
-            className="hidden sm:inline-block h-[3px] w-8 bg-ink"
+            className="hidden sm:inline-block h-[3px] w-8 bg-background"
             style={{ transform: "skewX(-20deg)" }}
           />
           <div className="flex flex-col leading-tight">
@@ -3411,7 +3411,7 @@ function NewsletterBar() {
           >
             <span
               aria-hidden
-              className="flex h-9 w-9 shrink-0 items-center justify-center bg-ink text-blue"
+              className="flex h-9 w-9 shrink-0 items-center justify-center bg-background text-foreground"
             >
               <svg
                 viewBox="0 0 24 24"
@@ -3489,7 +3489,7 @@ function NewsletterBar() {
               href="https://www.strava.com/clubs/1708552"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:inline-flex shrink-0 items-center justify-center bg-ink text-blue px-4 text-[12px] font-bold uppercase tracking-[0.14em] hover:bg-blue hover:text-ink hover:shadow-[inset_0_0_0_2px_var(--ink)] transition-all"
+              className="hidden sm:inline-flex shrink-0 items-center justify-center bg-background text-foreground px-4 text-[12px] font-bold uppercase tracking-[0.14em] hover:bg-blue hover:text-ink hover:shadow-[inset_0_0_0_2px_var(--ink)] transition-all"
               style={{ fontFamily: "var(--font-condensed)" }}
             >
               Join Strava →
@@ -3531,7 +3531,7 @@ function NewsletterBar() {
               aria-disabled={disableSubmit}
               aria-busy={status === "loading"}
               aria-describedby="nl-status"
-              className="bg-ink text-blue px-4 sm:px-5 text-xs sm:text-[13px] font-bold uppercase tracking-[0.14em] hover:bg-blue hover:text-ink hover:shadow-[inset_0_0_0_2px_var(--ink)] transition-all disabled:opacity-40 disabled:cursor-not-allowed inline-flex items-center gap-2 shrink-0"
+              className="bg-background text-foreground px-4 sm:px-5 text-xs sm:text-[13px] font-bold uppercase tracking-[0.14em] hover:bg-blue hover:text-ink hover:shadow-[inset_0_0_0_2px_var(--ink)] transition-all disabled:opacity-40 disabled:cursor-not-allowed inline-flex items-center gap-2 shrink-0"
               style={{ fontFamily: "var(--font-condensed)" }}
             >
               {status === "loading" && (
@@ -3674,7 +3674,7 @@ function ResourcesBlock() {
   return (
     <section
       id="resources"
-      className="grit-panel relative overflow-hidden text-paper py-14 md:py-20 px-6 sm:px-12 lg:px-24"
+      className="grit-panel relative overflow-hidden text-foreground py-14 md:py-20 px-6 sm:px-12 lg:px-24"
     >
       <span
         aria-hidden="true"
@@ -3688,7 +3688,7 @@ function ResourcesBlock() {
         <h2 className="display-condensed uppercase text-[clamp(34px,6vw,76px)] leading-[0.94] max-w-[16ch]">
           MAKE RUNNING FUN.
         </h2>
-        <p className="mt-6 max-w-[54ch] text-[15px] sm:text-[17px] leading-[1.65] text-paper/75">
+        <p className="mt-6 max-w-[54ch] text-[15px] sm:text-[17px] leading-[1.65] text-foreground/75">
           Free tools for the crew. Turn any run into a branded recap graphic in
           under a minute, then post it and pull someone else off the couch.
         </p>
@@ -3696,7 +3696,7 @@ function ResourcesBlock() {
         <div className="mt-10 grid gap-4 sm:grid-cols-2 max-w-[860px]">
           <Link
             to="/resources/recap"
-            className="group relative block border-2 border-blue bg-blue text-ink p-6 sm:p-7 hover:bg-paper hover:border-paper transition-colors"
+            className="group relative block border-2 border-blue bg-blue text-ink p-6 sm:p-7 hover:bg-foreground hover:text-background hover:border-foreground transition-colors"
           >
             <div
               className="text-[11px] tracking-[0.22em] uppercase mb-3"
@@ -3717,10 +3717,10 @@ function ResourcesBlock() {
 
           <Link
             to="/resources"
-            className="group relative block border border-paper/25 bg-ink/60 backdrop-blur-[2px] p-6 sm:p-7 hover:border-blue transition-colors"
+            className="group relative block border border-foreground/25 bg-background/60 backdrop-blur-[2px] p-6 sm:p-7 hover:border-blue transition-colors"
           >
             <div
-              className="text-[11px] tracking-[0.22em] uppercase mb-3 text-blue"
+              className="text-[11px] tracking-[0.22em] uppercase mb-3 text-foreground"
               style={{ fontFamily: "var(--font-mono, ui-monospace, monospace)" }}
             >
               More
@@ -3728,10 +3728,10 @@ function ResourcesBlock() {
             <div className="display-condensed uppercase text-[clamp(26px,3.6vw,40px)] leading-[0.98]">
               All resources
             </div>
-            <div className="mt-3 text-[14px] leading-[1.6] text-paper/70">
+            <div className="mt-3 text-[14px] leading-[1.6] text-foreground/70">
               Route notes, first-timer guides, and crew stories.
             </div>
-            <div className="mt-6 text-[12px] tracking-[0.22em] uppercase font-bold text-blue">
+            <div className="mt-6 text-[12px] tracking-[0.22em] uppercase font-bold text-foreground">
               Browse →
             </div>
           </Link>
@@ -3748,9 +3748,9 @@ function ResourcesBlock() {
 function Stars({ rating }: { rating: number }) {
   const rounded = Math.round(rating);
   return (
-    <span aria-label={`${rating.toFixed(1)} out of 5`} className="text-blue tracking-[0.14em]">
+    <span aria-label={`${rating.toFixed(1)} out of 5`} className="text-foreground tracking-[0.14em]">
       {"★★★★★".slice(0, rounded)}
-      <span className="text-paper/25">{"★★★★★".slice(rounded)}</span>
+      <span className="text-foreground/25">{"★★★★★".slice(rounded)}</span>
     </span>
   );
 }
@@ -3776,19 +3776,19 @@ function GoogleReviewsBlock() {
   if (!data || !data.configured || data.reviews.length === 0) return null;
 
   return (
-    <section className="bg-ink text-paper border-t border-paper/10">
+    <section className="bg-background text-foreground border-t border-foreground/10">
       <div className="mx-auto max-w-6xl px-6 sm:px-8 py-14 md:py-20">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
           <div>
-            <div className="eyebrow text-blue">Run reviews · Google</div>
+            <div className="eyebrow text-foreground">Run reviews · Google</div>
             <h2 className="display-condensed text-[clamp(32px,7vw,64px)] leading-[0.95] mt-2">
               WHAT RUNNERS SAY
             </h2>
           </div>
           {data.rating !== null && (
-            <div className="flex items-center gap-3 text-[13px] tracking-[0.14em] uppercase text-paper/70">
+            <div className="flex items-center gap-3 text-[13px] tracking-[0.14em] uppercase text-foreground/70">
               <Stars rating={data.rating} />
-              <span className="font-bold text-paper">{data.rating.toFixed(1)}</span>
+              <span className="font-bold text-foreground">{data.rating.toFixed(1)}</span>
               <span>· {data.total} reviews</span>
             </div>
           )}
@@ -3798,13 +3798,13 @@ function GoogleReviewsBlock() {
           {data.reviews.slice(0, 6).map((review, i) => (
             <figure
               key={`${review.author}-${i}`}
-              className="border border-paper/15 bg-paper/[0.03] p-6 flex flex-col gap-4"
+              className="border border-foreground/15 bg-foreground/[0.03] p-6 flex flex-col gap-4"
             >
               <Stars rating={review.rating} />
-              <blockquote className="text-[15px] leading-[1.65] text-paper/85">
+              <blockquote className="text-[15px] leading-[1.65] text-foreground/85">
                 “{review.text}”
               </blockquote>
-              <figcaption className="mt-auto pt-3 border-t border-paper/10 text-[12px] tracking-[0.14em] uppercase text-paper/60">
+              <figcaption className="mt-auto pt-3 border-t border-foreground/10 text-[12px] tracking-[0.14em] uppercase text-foreground/75">
                 {review.author}
                 {review.relativeTime ? ` · ${review.relativeTime}` : ""}
               </figcaption>
@@ -3818,7 +3818,7 @@ function GoogleReviewsBlock() {
               href={data.mapsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center h-13 px-7 py-4 border-2 border-blue text-blue text-[12px] tracking-[0.2em] uppercase font-bold hover:bg-blue hover:text-ink transition"
+              className="inline-flex items-center justify-center h-13 px-7 py-4 border-2 border-blue text-foreground text-[12px] tracking-[0.2em] uppercase font-bold hover:bg-blue hover:text-ink transition"
             >
               Read / leave a review on Google
             </a>
@@ -3831,7 +3831,7 @@ function GoogleReviewsBlock() {
 
 function RegionBand() {
   return (
-    <section className="relative border-y border-paper/15 bg-ink">
+    <section className="relative border-y border-foreground/15 bg-background">
       <figure className="relative m-0">
         <img
           src={pittsburghBridge.url}
@@ -3839,13 +3839,13 @@ function RegionBand() {
           loading="lazy"
           className="h-[38vw] max-h-[420px] min-h-[220px] w-full object-cover"
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/25 to-transparent" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-background/25 to-transparent" />
         <figcaption className="absolute inset-x-0 bottom-0 p-5 sm:p-8">
           <div className="mx-auto flex max-w-6xl flex-col gap-2">
-            <span className="text-[11px] uppercase tracking-[0.28em] text-blue">
+            <span className="text-[11px] uppercase tracking-[0.28em] text-foreground">
               South Hills · Pittsburgh, PA
             </span>
-            <p className="max-w-xl font-condensed text-2xl uppercase leading-[0.95] text-paper sm:text-4xl">
+            <p className="max-w-xl font-condensed text-2xl uppercase leading-[0.95] text-foreground sm:text-4xl">
               Built on Pittsburgh roads, hills, and bridges.
             </p>
           </div>
@@ -3860,17 +3860,17 @@ function AboutGrytText() {
     <section
       id="about-gryt"
       aria-labelledby="about-gryt-title"
-      className="border-t border-paper/15 bg-ink text-paper px-6 py-14 sm:px-12 md:py-20 lg:px-24"
+      className="border-t border-foreground/15 bg-background text-foreground px-6 py-14 sm:px-12 md:py-20 lg:px-24"
     >
       <div className="mx-auto max-w-[1080px]">
-        <p className="eyebrow text-blue mb-4">Free run club · Pittsburgh South Hills</p>
+        <p className="eyebrow text-foreground mb-4">Free run club · Pittsburgh South Hills</p>
         <h2
           id="about-gryt-title"
           className="display-condensed uppercase text-[clamp(34px,5vw,64px)] leading-[0.95]"
         >
           A free Pittsburgh run club for people who aren't fast
         </h2>
-        <div className="mt-8 grid gap-8 md:grid-cols-2 text-paper/80 text-[16px] leading-[1.7]">
+        <div className="mt-8 grid gap-8 md:grid-cols-2 text-foreground/80 text-[16px] leading-[1.7]">
           <div className="space-y-4">
             <p>
               GRYT Run Club is a free community running group in Pittsburgh's South Hills. We meet every
@@ -3890,7 +3890,7 @@ function AboutGrytText() {
               misses having a team. It's built to be close to home for runners in McMurray, Peters Township,
               Upper St. Clair, Bethel Park, and across Washington County.
             </p>
-            <h3 className="text-paper font-bold text-[18px]">What makes a run club beginner-friendly?</h3>
+            <h3 className="text-foreground font-bold text-[18px]">What makes a run club beginner-friendly?</h3>
             <p>
               No pace requirement, a no-drop rule, walkers welcome, an out-and-back route so you can turn
               early, and coffee after so there's a reason to stay. GRYT offers all five every Saturday. In the
@@ -3902,45 +3902,45 @@ function AboutGrytText() {
             </p>
           </div>
           <div className="space-y-4">
-            <h3 className="text-paper font-bold text-[18px]">Comparing free run clubs in Pittsburgh?</h3>
+            <h3 className="text-foreground font-bold text-[18px]">Comparing free run clubs in Pittsburgh?</h3>
             <p>
               Pittsburgh has good free options, and the right one is the one you'll keep showing up to. These
               honest guides compare schedules, cost, and who each club fits:
             </p>
             <ul className="space-y-2">
               <li>
-                <Link to="/resources/playbooks/best-free-running-clubs-pittsburgh-2026" className="text-blue underline underline-offset-4 hover:text-paper">
+                <Link to="/resources/playbooks/best-free-running-clubs-pittsburgh-2026" className="text-foreground underline underline-offset-4 hover:text-foreground">
                   Best free running clubs in Pittsburgh (2026)
                 </Link>
               </li>
               <li>
-                <Link to="/resources/playbooks/best-free-run-clubs-south-hills-2026" className="text-blue underline underline-offset-4 hover:text-paper">
+                <Link to="/resources/playbooks/best-free-run-clubs-south-hills-2026" className="text-foreground underline underline-offset-4 hover:text-foreground">
                   Best free run clubs in the South Hills
                 </Link>
               </li>
               <li>
-                <Link to="/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs" className="text-blue underline underline-offset-4 hover:text-paper">
+                <Link to="/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs" className="text-foreground underline underline-offset-4 hover:text-foreground">
                   GRYT Run Club vs Fleet Feet Pittsburgh
                 </Link>
               </li>
               <li>
-                <Link to="/resources/playbooks/gryt-vs-parkrun-pittsburgh" className="text-blue underline underline-offset-4 hover:text-paper">
+                <Link to="/resources/playbooks/gryt-vs-parkrun-pittsburgh" className="text-foreground underline underline-offset-4 hover:text-foreground">
                   GRYT Run Club vs parkrun Pittsburgh
                 </Link>
               </li>
               <li>
-                <Link to="/resources/playbooks/gryt-vs-city-of-bridges-run-club" className="text-blue underline underline-offset-4 hover:text-paper">
+                <Link to="/resources/playbooks/gryt-vs-city-of-bridges-run-club" className="text-foreground underline underline-offset-4 hover:text-foreground">
                   GRYT Run Club vs City of Bridges Run Club
                 </Link>
               </li>
             </ul>
             <p>
               Coming back after a long break? Start with{" "}
-              <Link to="/resources/should-you-join-a-running-club" className="text-blue underline underline-offset-4 hover:text-paper">
+              <Link to="/resources/should-you-join-a-running-club" className="text-foreground underline underline-offset-4 hover:text-foreground">
                 should you join a running club
               </Link>{" "}
               and{" "}
-              <Link to="/resources/playbooks/saturday-runs-what-to-expect" className="text-blue underline underline-offset-4 hover:text-paper">
+              <Link to="/resources/playbooks/saturday-runs-what-to-expect" className="text-foreground underline underline-offset-4 hover:text-foreground">
                 what to expect on a Saturday run
               </Link>
               .
@@ -3954,7 +3954,7 @@ function AboutGrytText() {
 
 function Landing() {
   return (
-    <main className="bg-ink text-paper">
+    <main className="bg-background text-foreground">
       <Nav />
       <Hero />
       <RunnerReviews />
@@ -3967,17 +3967,17 @@ function Landing() {
       <MontourRouteMap />
       <LearnDoorway />
       <AboutGrytText />
-      <section className="border-t border-paper/15 px-6 py-10 sm:px-12 lg:px-24" aria-label="More from GRYT">
+      <section className="border-t border-foreground/15 px-6 py-10 sm:px-12 lg:px-24" aria-label="More from GRYT">
         <div className="mx-auto flex max-w-[1180px] flex-wrap gap-x-8 gap-y-4">
-          <Link to="/about" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Meet Laura & Nick →</Link>
-          <Link to="/faq" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Run questions →</Link>
-          <Link to="/resources" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Running guides →</Link>
-          <Link to="/runs" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Run reports →</Link>
-          <Link to="/milestones" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Milestone Club →</Link>
-          <Link to="/press" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Press & conversations →</Link>
-          <Link to="/shop" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Shop →</Link>
-          <Link to="/review" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Leave a review →</Link>
-          <a href={STRAVA_CLUB} target="_blank" rel="noopener noreferrer" className="text-sm text-blue underline underline-offset-4 hover:text-paper">Strava club →</a>
+          <Link to="/about" className="text-sm text-foreground underline underline-offset-4 hover:text-foreground">Meet Laura & Nick →</Link>
+          <Link to="/faq" className="text-sm text-foreground underline underline-offset-4 hover:text-foreground">Run questions →</Link>
+          <Link to="/resources" className="text-sm text-foreground underline underline-offset-4 hover:text-foreground">Running guides →</Link>
+          <Link to="/runs" className="text-sm text-foreground underline underline-offset-4 hover:text-foreground">Run reports →</Link>
+          <Link to="/milestones" className="text-sm text-foreground underline underline-offset-4 hover:text-foreground">Milestone Club →</Link>
+          <Link to="/press" className="text-sm text-foreground underline underline-offset-4 hover:text-foreground">Press & conversations →</Link>
+          <Link to="/shop" className="text-sm text-foreground underline underline-offset-4 hover:text-foreground">Shop →</Link>
+          <Link to="/review" className="text-sm text-foreground underline underline-offset-4 hover:text-foreground">Leave a review →</Link>
+          <a href={STRAVA_CLUB} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground underline underline-offset-4 hover:text-foreground">Strava club →</a>
         </div>
       </section>
       <Footer />

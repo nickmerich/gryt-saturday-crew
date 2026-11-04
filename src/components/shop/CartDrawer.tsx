@@ -45,7 +45,7 @@ export function CartDrawer({
         <button
           type="button"
           aria-label={`Cart, ${count} item${count === 1 ? "" : "s"}`}
-          className="relative inline-flex items-center gap-2 border border-paper/25 px-4 py-3 text-xs uppercase tracking-[0.14em] hover:border-blue hover:text-blue transition-colors"
+          className="relative inline-flex items-center gap-2 border border-foreground/25 px-4 py-3 text-xs uppercase tracking-[0.14em] hover:border-blue hover:text-foreground/70 transition-colors"
         >
           <ShoppingBag className="h-4 w-4" strokeWidth={1.75} />
           Cart
@@ -54,29 +54,29 @@ export function CartDrawer({
           )}
         </button>
       </SheetTrigger>
-      <SheetContent className="w-full sm:max-w-md flex flex-col h-full bg-ink text-paper border-paper/15">
+      <SheetContent className="w-full sm:max-w-md flex flex-col h-full bg-background text-foreground border-foreground/15">
         <SheetHeader>
-          <SheetTitle className="display-condensed uppercase text-3xl text-paper">Cart</SheetTitle>
-          <SheetDescription className="text-paper/60">
+          <SheetTitle className="display-condensed uppercase text-3xl text-foreground">Cart</SheetTitle>
+          <SheetDescription className="text-foreground/75">
             {count === 0 ? "Nothing in here yet." : `${count} item${count === 1 ? "" : "s"}`}
           </SheetDescription>
         </SheetHeader>
 
         {items.length === 0 ? (
-          <div className="flex-1 grid place-items-center text-paper/50 text-sm">Your cart is empty.</div>
+          <div className="flex-1 grid place-items-center text-foreground/70 text-sm">Your cart is empty.</div>
         ) : (
           <>
             <div className="flex-1 overflow-y-auto min-h-0 space-y-4 pt-4">
               {items.map((item) => (
-                <div key={item.variantId} className="flex gap-4 border-b border-paper/10 pb-4">
-                  <div className="w-16 h-16 bg-paper/5 overflow-hidden shrink-0">
+                <div key={item.variantId} className="flex gap-4 border-b border-foreground/10 pb-4">
+                  <div className="w-16 h-16 bg-foreground/5 overflow-hidden shrink-0">
                     {item.imageUrl && (
                       <img src={item.imageUrl} alt={item.title} className="w-full h-full object-cover" />
                     )}
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="font-medium truncate">{item.title}</p>
-                    <p className="text-sm text-paper/60">
+                    <p className="text-sm text-foreground/75">
                       {money(parseFloat(item.price.amount), item.price.currencyCode)}
                     </p>
                     <div className="mt-2 flex items-center gap-1">
@@ -84,7 +84,7 @@ export function CartDrawer({
                         type="button"
                         aria-label="One fewer"
                         onClick={() => updateQuantity(item.variantId, item.quantity - 1)}
-                        className="h-8 w-8 grid place-items-center border border-paper/20"
+                        className="h-8 w-8 grid place-items-center border border-foreground/20"
                       >
                         <Minus className="h-3 w-3" />
                       </button>
@@ -93,7 +93,7 @@ export function CartDrawer({
                         type="button"
                         aria-label="One more"
                         onClick={() => updateQuantity(item.variantId, item.quantity + 1)}
-                        className="h-8 w-8 grid place-items-center border border-paper/20"
+                        className="h-8 w-8 grid place-items-center border border-foreground/20"
                       >
                         <Plus className="h-3 w-3" />
                       </button>
@@ -103,25 +103,25 @@ export function CartDrawer({
                     type="button"
                     aria-label="Remove"
                     onClick={() => removeItem(item.variantId)}
-                    className="self-start p-1 text-paper/50 hover:text-paper"
+                    className="self-start p-1 text-foreground/70 hover:text-foreground"
                   >
                     <Trash2 className="h-4 w-4" />
                   </button>
                 </div>
               ))}
             </div>
-            <div className="pt-4 border-t border-paper/15 space-y-3">
+            <div className="pt-4 border-t border-foreground/15 space-y-3">
               <div className="flex justify-between items-baseline">
                 <span className="eyebrow">Subtotal</span>
                 <span className="display-condensed text-2xl">{money(total, currency)}</span>
               </div>
-              <p className="text-xs text-paper/50">Shipping and tax are added at checkout.</p>
+              <p className="text-xs text-foreground/70">Shipping and tax are added at checkout.</p>
               {error && <p className="text-xs text-red-400">{error}</p>}
               <button
                 type="button"
                 onClick={checkout}
                 disabled={!checkoutUrl || isLoading || isSyncing}
-                className="w-full bg-blue text-ink px-6 py-4 text-xs font-bold uppercase tracking-[0.14em] hover:bg-paper transition-colors disabled:opacity-50 flex items-center justify-center"
+                className="w-full bg-blue text-ink px-6 py-4 text-xs font-bold uppercase tracking-[0.14em] hover:bg-foreground hover:text-background transition-colors disabled:opacity-50 flex items-center justify-center"
               >
                 {isLoading || isSyncing ? <Loader2 className="h-4 w-4 animate-spin" /> : "Check out"}
               </button>

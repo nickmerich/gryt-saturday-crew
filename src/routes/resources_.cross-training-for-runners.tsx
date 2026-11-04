@@ -132,7 +132,7 @@ function H2({ id, children }: { id: string; children: React.ReactNode }) {
 
 function H3({ children }: { children: React.ReactNode }) {
   return (
-    <h3 className="text-paper font-bold text-[18px] md:text-[20px] mt-8 mb-1.5">
+    <h3 className="text-foreground font-bold text-[18px] md:text-[20px] mt-8 mb-1.5">
       {children}
     </h3>
   );
@@ -160,15 +160,15 @@ const WEEK_THREE = [
 
 function WeekTable({ title, rows }: { title: string; rows: string[][] }) {
   return (
-    <div className="border border-paper/15">
-      <p className="eyebrow text-blue px-5 py-3 border-b border-paper/15">{title}</p>
-      <ul className="divide-y divide-paper/10">
+    <div className="border border-foreground/15">
+      <p className="eyebrow text-foreground px-5 py-3 border-b border-foreground/15">{title}</p>
+      <ul className="divide-y divide-foreground/10">
         {rows.map(([day, work]) => (
           <li key={day} className="flex gap-4 px-5 py-3 text-[15px]">
-            <span className="w-[92px] shrink-0 text-paper font-bold uppercase tracking-[0.1em] text-[12px] pt-[3px]">
+            <span className="w-[92px] shrink-0 text-foreground font-bold uppercase tracking-[0.1em] text-[12px] pt-[3px]">
               {day}
             </span>
-            <span className="text-paper/80">{work}</span>
+            <span className="text-foreground/80">{work}</span>
           </li>
         ))}
       </ul>
@@ -178,23 +178,23 @@ function WeekTable({ title, rows }: { title: string; rows: string[][] }) {
 
 function CrossTrainingPage() {
   return (
-    <main className="bg-ink text-paper">
+    <main className="bg-background text-foreground">
       <SiteNav />
-      <article className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
+      <article className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-foreground/15">
         <div className="max-w-[760px] mx-auto">
-          <Link to="/resources" className="eyebrow text-blue hover:text-paper transition-colors">
+          <Link to="/resources" className="eyebrow text-foreground hover:text-foreground transition-colors">
             ← All resources
           </Link>
-          <p className="eyebrow text-blue mt-8 mb-5">TRAINING · 9 MIN READ</p>
+          <p className="eyebrow text-foreground mt-8 mb-5">TRAINING · 9 MIN READ</p>
           <h1 className="display-condensed uppercase text-[clamp(38px,6.4vw,88px)] leading-[0.95]">
             Cross-Training for Runners: The Best Low-Impact Options Between Run Days
           </h1>
-          <p className="mt-7 text-paper/75 text-lg md:text-xl leading-[1.55]">
+          <p className="mt-7 text-foreground/75 text-lg md:text-xl leading-[1.55]">
             Movement that keeps your aerobic engine running without hammering
             the same joints running already punishes.
           </p>
 
-          <figure className="mt-10 border border-paper/15">
+          <figure className="mt-10 border border-foreground/15">
             <img
               src={heroAsset.url}
               alt="Composite of a runner, cyclist, swimmer, rower, and lifter training at night with the Pittsburgh skyline behind them"
@@ -206,14 +206,14 @@ function CrossTrainingPage() {
             />
           </figure>
 
-          <nav aria-label="Table of contents" className="mt-10 border border-paper/15 p-5">
-            <p className="eyebrow text-paper/55 mb-3">In this guide</p>
+          <nav aria-label="Table of contents" className="mt-10 border border-foreground/15 p-5">
+            <p className="eyebrow text-foreground/70 mb-3">In this guide</p>
             <ul className="flex flex-col gap-2">
               {SECTIONS.map((s) => (
                 <li key={s.id}>
                   <a
                     href={`#${s.id}`}
-                    className="text-paper/80 hover:text-blue transition-colors text-[15px]"
+                    className="text-foreground/80 hover:text-foreground/70 transition-colors text-[15px]"
                   >
                     → {s.label}
                   </a>
@@ -222,7 +222,7 @@ function CrossTrainingPage() {
             </ul>
           </nav>
 
-          <div className="mt-12 space-y-5 text-paper/85 text-[16px] md:text-[17px] leading-[1.7]">
+          <div className="mt-12 space-y-5 text-foreground/85 text-[16px] md:text-[17px] leading-[1.7]">
             <p>
               Cross-training for runners sounds optional until it isn't. You're
               four weeks out from a race, your legs feel like wet concrete, and
@@ -444,7 +444,7 @@ function CrossTrainingPage() {
               running group actually looks like,{" "}
               <Link
                 to="/resources/more-than-miles"
-                className="text-blue underline underline-offset-4 hover:text-paper transition-colors"
+                className="text-foreground underline underline-offset-4 hover:text-foreground transition-colors"
               >
                 this piece on what happens after the run
               </Link>{" "}
@@ -497,7 +497,7 @@ function CrossTrainingPage() {
             <div className="space-y-6">
               {FAQS.map((f) => (
                 <div key={f.q}>
-                  <h3 className="text-paper font-bold text-[17px] md:text-[18px] mb-1.5">
+                  <h3 className="text-foreground font-bold text-[17px] md:text-[18px] mb-1.5">
                     {f.q}
                   </h3>
                   <p>{f.a}</p>
@@ -505,7 +505,7 @@ function CrossTrainingPage() {
               ))}
             </div>
 
-            <p className="text-paper text-lg md:text-xl font-bold mt-12">
+            <p className="text-foreground text-lg md:text-xl font-bold mt-12">
               The work between runs is where a lot of races are actually
               decided. Not dramatically. Just in the quiet accumulation of
               sessions that kept you healthy, kept your aerobic base intact, and
@@ -519,7 +519,7 @@ function CrossTrainingPage() {
             </Link>
             <Link
               to="/resources"
-              className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors"
+              className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-foreground/40 text-foreground hover:border-blue hover:text-foreground/70 transition-colors"
             >
               Back to Resources
             </Link>

@@ -40,7 +40,7 @@ function Page() {
             : "Payment status"
       }
     >
-      <div role="status" className="text-lg text-paper/85">
+      <div role="status" className="text-lg text-foreground/85">
         {!session_id
           ? "No valid checkout was provided."
           : q.isLoading

@@ -78,10 +78,10 @@ export function CapDrop({ onAdded }: { onAdded?: () => void }) {
   }
 
   return (
-    <section className="border border-paper/15 bg-ink text-paper">
+    <section className="border border-foreground/15 bg-background text-foreground">
       <div className="grid md:grid-cols-2">
-        <div className="border-b md:border-b-0 md:border-r border-paper/15">
-          <div className="aspect-[4/5] overflow-hidden bg-ink">
+        <div className="border-b md:border-b-0 md:border-r border-foreground/15">
+          <div className="aspect-[4/5] overflow-hidden bg-background">
             <img
               src={CAP_PHOTOS[photo].src}
               alt={CAP_PHOTOS[photo].alt}
@@ -89,7 +89,7 @@ export function CapDrop({ onAdded }: { onAdded?: () => void }) {
               style={{ filter: "none" }}
             />
           </div>
-          <div className="grid grid-cols-4 gap-px bg-paper/15 border-t border-paper/15">
+          <div className="grid grid-cols-4 gap-px bg-foreground/15 border-t border-foreground/15">
             {CAP_PHOTOS.map((p, i) => (
               <button
                 key={p.src}
@@ -97,7 +97,7 @@ export function CapDrop({ onAdded }: { onAdded?: () => void }) {
                 aria-label={`Show ${p.label}`}
                 aria-pressed={i === photo}
                 onClick={() => setPhoto(i)}
-                className={`aspect-square overflow-hidden bg-ink ${i === photo ? "outline outline-2 -outline-offset-2 outline-blue" : "opacity-60 hover:opacity-100"}`}
+                className={`aspect-square overflow-hidden bg-background ${i === photo ? "outline outline-2 -outline-offset-2 outline-blue" : "opacity-60 hover:opacity-100"}`}
               >
                 <img
                   src={p.src}
@@ -111,12 +111,12 @@ export function CapDrop({ onAdded }: { onAdded?: () => void }) {
           </div>
         </div>
         <div className="p-6 sm:p-10 flex flex-col justify-center gap-5">
-          <p className="eyebrow text-blue">GRYT · CAP</p>
+          <p className="eyebrow text-foreground">GRYT · CAP</p>
           <h2 className="display-condensed uppercase text-[clamp(30px,4.4vw,56px)] leading-[0.94]">
             {data?.productTitle ?? REVIEW_TITLE}
           </h2>
           {REVIEW_COPY.map((line) => (
-            <p key={line} className="text-paper/70 leading-[1.65]">
+            <p key={line} className="text-foreground/70 leading-[1.65]">
               {line}
             </p>
           ))}
@@ -124,31 +124,31 @@ export function CapDrop({ onAdded }: { onAdded?: () => void }) {
           <div className="space-y-3" aria-label="Stripe cap checkout">
             <a
               href="/shop/checkout"
-              className="inline-flex min-h-12 items-center justify-center bg-blue text-ink px-6 py-4 text-xs font-bold uppercase tracking-[0.14em] hover:bg-paper transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue"
+              className="inline-flex min-h-12 items-center justify-center bg-blue text-ink px-6 py-4 text-xs font-bold uppercase tracking-[0.14em] hover:bg-foreground hover:text-background transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue"
             >
               Buy with Stripe
             </a>
-            <p className="text-sm text-paper/70">
+            <p className="text-sm text-foreground/70">
               Choose your quantity and free US shipping or Saturday pickup at checkout. This
               checkout is separate from your Shopify cart.
             </p>
           </div>
 
           {reading ? (
-            <p className="text-sm text-paper/50">Checking Shopify availability…</p>
+            <p className="text-sm text-foreground/70">Checking Shopify availability…</p>
           ) : listed && data ? (
             <>
               <p className="display-condensed uppercase text-2xl tracking-[0.02em]">
                 {money(data.price.amount, data.price.currencyCode)}
               </p>
               {data.quantityAvailable !== null && (
-                <p className="font-mono text-base text-blue" aria-live="polite">
+                <p className="font-mono text-base text-foreground" aria-live="polite">
                   {data.quantityAvailable}/{CAP_BINDING.editionSize} hats left
                 </p>
               )}
               {buyable ? (
                 <div className="flex flex-wrap items-center gap-3">
-                  <div className="flex items-center border border-paper/25">
+                  <div className="flex items-center border border-foreground/25">
                     <button
                       type="button"
                       aria-label="One fewer"
@@ -173,18 +173,18 @@ export function CapDrop({ onAdded }: { onAdded?: () => void }) {
                     type="button"
                     onClick={add}
                     disabled={adding}
-                    className="bg-blue text-ink px-6 py-4 text-xs font-bold uppercase tracking-[0.14em] hover:bg-paper transition-colors disabled:opacity-50 flex items-center gap-2"
+                    className="bg-blue text-ink px-6 py-4 text-xs font-bold uppercase tracking-[0.14em] hover:bg-foreground hover:text-background transition-colors disabled:opacity-50 flex items-center gap-2"
                   >
                     {adding ? <Loader2 className="h-4 w-4 animate-spin" /> : "Add to cart"}
                   </button>
                 </div>
               ) : (
-                <p className="border border-paper/20 px-4 py-3 text-sm text-paper/60">Sold out.</p>
+                <p className="border border-foreground/20 px-4 py-3 text-sm text-foreground/75">Sold out.</p>
               )}
             </>
           ) : (
             <div>
-              <p className="border border-paper/20 px-4 py-3 text-sm text-paper/60">
+              <p className="border border-foreground/20 px-4 py-3 text-sm text-foreground/75">
                 Shopify checkout is currently unavailable. You can buy the cap with Stripe above.
               </p>
             </div>
@@ -192,7 +192,7 @@ export function CapDrop({ onAdded }: { onAdded?: () => void }) {
 
           <a
             href="/#join"
-            className="eyebrow text-paper/70 hover:text-blue transition-colors self-start"
+            className="eyebrow text-foreground/70 hover:text-foreground/70 transition-colors self-start"
           >
             RSVP This Saturday →
           </a>

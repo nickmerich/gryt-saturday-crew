@@ -156,21 +156,21 @@ export const Route = createFileRoute(
 
 function ArticlePage() {
   return (
-    <main className="bg-ink text-paper">
+    <main className="bg-background text-foreground">
       <SiteNav />
-      <article className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
+      <article className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-foreground/15">
         <div className="max-w-[760px] mx-auto">
           <Link
             to="/resources/playbooks"
-            className="eyebrow text-blue hover:text-paper transition-colors"
+            className="eyebrow text-foreground hover:text-foreground transition-colors"
           >
             ← All playbooks
           </Link>
-          <p className="eyebrow text-blue mt-8 mb-5">COMMUNITY · 9 MIN READ</p>
+          <p className="eyebrow text-foreground mt-8 mb-5">COMMUNITY · 9 MIN READ</p>
           <h1 className="display-condensed uppercase text-[clamp(40px,7vw,96px)] leading-[0.95]">
             GRYT Run Club vs Fleet Feet Pittsburgh: Which Free Run Club Fits You?
           </h1>
-          <p className="mt-7 text-paper/75 text-lg md:text-xl leading-[1.55]">
+          <p className="mt-7 text-foreground/75 text-lg md:text-xl leading-[1.55]">
             {DESCRIPTION}
           </p>
 
@@ -178,15 +178,15 @@ function ArticlePage() {
 
           <nav
             aria-label="Table of contents"
-            className="mt-10 border border-paper/15 p-5"
+            className="mt-10 border border-foreground/15 p-5"
           >
-            <p className="eyebrow text-paper/55 mb-3">In this playbook</p>
+            <p className="eyebrow text-foreground/70 mb-3">In this playbook</p>
             <ul className="flex flex-col gap-2">
               {SECTIONS.map((s) => (
                 <li key={s.id}>
                   <a
                     href={`#${s.id}`}
-                    className="text-paper/80 hover:text-blue transition-colors text-[15px]"
+                    className="text-foreground/80 hover:text-foreground/70 transition-colors text-[15px]"
                   >
                     → {s.label}
                   </a>
@@ -195,13 +195,13 @@ function ArticlePage() {
             </ul>
           </nav>
 
-          <div className="mt-12 space-y-5 text-paper/85 text-[16px] md:text-[17px] leading-[1.7]">
+          <div className="mt-12 space-y-5 text-foreground/85 text-[16px] md:text-[17px] leading-[1.7]">
             <p>You're standing in a parking lot at 6:58 AM, coffee still at home, wondering if you picked the right group. It's a fair question. Pittsburgh has options now — retail-backed clubs, free independents, city runs, trail runs. And if you're in the South Hills, most of those options are 45 minutes away before you've even tied your shoes.</p>
             <p>Here's a straight breakdown of what Fleet Feet Pittsburgh's running group offers, what independent clubs offer, and where GRYT Run Club fits if you're a South Hills or Washington County runner who wants community without the commute.</p>
             <div className="border-l-2 border-blue pl-5">
-              <p className="font-bold text-paper">Quick answer: GRYT Run Club vs Fleet Feet Pittsburgh</p>
+              <p className="font-bold text-foreground">Quick answer: GRYT Run Club vs Fleet Feet Pittsburgh</p>
               <p className="mt-2">Both are free to run with. Fleet Feet Pittsburgh is a store-backed club with weeknight runs, a Sunday 7:30 AM long run from rotating spots, a Tuesday pub run in Mt. Lebanon, and optional paid training programs. GRYT Run Club is independent, meets one time every week (Saturday at 7 AM on the Montour/Peters Trail in McMurray), welcomes walkers, and never drops anyone. If you live near the east end and want several runs a week, start with Fleet Feet. If you want a Saturday morning ritual in the South Hills, start with GRYT. Plenty of people do both.</p>
-              <p className="mt-2 text-paper/60 text-[14px]">Updated October 29, 2026. Fleet Feet details come from Fleet Feet Pittsburgh's published run pages; confirm times on their calendar before you go.</p>
+              <p className="mt-2 text-foreground/75 text-[14px]">Updated October 29, 2026. Fleet Feet details come from Fleet Feet Pittsburgh's published run pages; confirm times on their calendar before you go.</p>
             </div>
 
             <h2 id="fleet-feet-offers" className="text-2xl md:text-3xl font-bold mt-12 mb-2 scroll-mt-24">What Fleet Feet Pittsburgh's Running Group Offers</h2>
@@ -268,13 +268,13 @@ function ArticlePage() {
             <div className="overflow-x-auto -mx-2">
               <table className="w-full text-[14px] md:text-[15px] border-collapse">
                 <thead>
-                  <tr className="border-b border-paper/25">
+                  <tr className="border-b border-foreground/25">
                     <th className="text-left py-2 px-2 font-bold"> </th>
                     <th className="text-left py-2 px-2 font-bold">Fleet Feet Pittsburgh</th>
                     <th className="text-left py-2 px-2 font-bold">GRYT Run Club</th>
                   </tr>
                 </thead>
-                <tbody className="text-paper/85">
+                <tbody className="text-foreground/85">
                   {[
                     ["Cost", "Free (club runs) / $75–$150 (training)", "Always free"],
                     ["Schedule", "Weeknights + Sunday long run", "Every Saturday"],
@@ -285,8 +285,8 @@ function ArticlePage() {
                     ["Coaching", "Paid programs available", "No — peer-led"],
                     ["South Hills presence", "N. Highland Rd store + Tuesday pub run in Mt. Lebanon", "Home base: McMurray / Peters Township"],
                   ].map(([k, a, b]) => (
-                    <tr key={k} className="border-b border-paper/10 align-top">
-                      <td className="py-2 px-2 font-semibold text-paper">{k}</td>
+                    <tr key={k} className="border-b border-foreground/10 align-top">
+                      <td className="py-2 px-2 font-semibold text-foreground">{k}</td>
                       <td className="py-2 px-2">{a}</td>
                       <td className="py-2 px-2">{b}</td>
                     </tr>
@@ -304,8 +304,8 @@ function ArticlePage() {
             <div className="space-y-6">
               {FAQS.map((f) => (
                 <div key={f.q}>
-                  <p className="font-bold text-paper">{f.q}</p>
-                  <p className="mt-2 text-paper/80">{f.a}</p>
+                  <p className="font-bold text-foreground">{f.q}</p>
+                  <p className="mt-2 text-foreground/80">{f.a}</p>
                 </div>
               ))}
             </div>
@@ -313,7 +313,7 @@ function ArticlePage() {
             <p className="mt-10">Saturday at 7 AM, the parking lot at the Montour/Peters Trail is quiet for about three minutes. Then shoes hit gravel and the run starts. By mile two, nobody's thinking about which club they picked. They're just running.</p>
             <p>
               If you're in the South Hills and you've been looking for a reason to show up, this is it. RSVP for this Saturday at{" "}
-              <Link to="/" className="text-blue underline underline-offset-4">
+              <Link to="/" className="text-foreground underline underline-offset-4">
                 grytrunclub.com
               </Link>
               .
@@ -328,7 +328,7 @@ function ArticlePage() {
             </Link>
             <Link
               to="/resources/playbooks"
-              className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors"
+              className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-foreground/40 text-foreground hover:border-blue hover:text-foreground/70 transition-colors"
             >
               Back to Playbooks
             </Link>
@@ -401,11 +401,11 @@ function ShareBar({
   }
 
   const btn =
-    "inline-flex items-center gap-2 px-3.5 py-2 text-[12px] font-bold uppercase tracking-[0.12em] border border-paper/30 text-paper hover:border-blue hover:text-blue transition-colors";
+    "inline-flex items-center gap-2 px-3.5 py-2 text-[12px] font-bold uppercase tracking-[0.12em] border border-foreground/30 text-foreground hover:border-blue hover:text-foreground/70 transition-colors";
 
   return (
     <div className={className} aria-label={label}>
-      <p className="eyebrow text-paper/55 mb-3">{label}</p>
+      <p className="eyebrow text-foreground/70 mb-3">{label}</p>
       <div className="flex flex-wrap gap-2.5">
         <button type="button" onClick={onCopy} className={btn} aria-live="polite">
           {copied ? (

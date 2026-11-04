@@ -22,7 +22,7 @@ function Page() {
         Eastern
       </p>
       <p className="mt-2">{event.location}</p>
-      <p className="mt-4 text-xl text-blue">
+      <p className="mt-4 text-xl text-foreground">
         {usd(event.amount_cents)} per ticket · {event.remaining} remaining
       </p>
       <TestPaymentForm
