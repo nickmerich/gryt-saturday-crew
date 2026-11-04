@@ -74,7 +74,7 @@ function ReviewPage() {
                   <div className="mt-2 flex gap-2">
                     {[1, 2, 3, 4, 5].map(n => (
                       <button key={n} type="button" role="radio" aria-checked={rating === n} aria-label={`${n} out of 5`} onClick={() => setRating(n)}
-                        className={`h-12 w-12 border text-xl focus-visible:outline-2 focus-visible:outline-blue ${n <= rating ? 'border-blue text-foreground' : 'border-foreground/25 text-foreground/35'}`}>★</button>
+                        className={`h-12 w-12 border text-xl focus-visible:outline-2 focus-visible:outline-blue ${n <= rating ? 'border-blue text-foreground' : 'border-foreground/30 text-foreground/60'}`}>★</button>
                     ))}
                   </div>
                 </div>
