@@ -971,7 +971,7 @@ function RSVP() {
               </button>
               <label htmlFor="rsvp-song" className="block text-[11px] font-bold tracking-[0.14em] uppercase text-ink/70 mb-1.5">
                 One song that gets you out the door?{" "}
-                <span className="normal-case tracking-normal font-semibold text-ink/50">Optional</span>
+                <span className="normal-case tracking-normal font-semibold text-ink/70">Optional</span>
               </label>
               <input
                 id="rsvp-song"
