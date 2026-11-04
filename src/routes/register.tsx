@@ -18,7 +18,7 @@ export const Route = createFileRoute('/register')({
         content:
           'GRYT Run Club Saturday runs are free. There is no entry fee and no paid registration. RSVP on the homepage and show up at the trailhead.',
       },
-      { name: 'robots', content: 'noindex, follow' },
+      { name: 'robots', content: 'index, follow' },
       { property: 'og:title', content: 'GRYT runs are free — no registration fee' },
       {
         property: 'og:description',
