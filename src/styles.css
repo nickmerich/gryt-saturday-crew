@@ -73,8 +73,8 @@
   a.underline, a .underline { text-decoration-color: var(--blue); text-decoration-thickness: 2px; }
   h1, h2, h3 { text-wrap: balance; }
   p { text-wrap: pretty; }
-  body:not(.photos-color) img.object-cover,
-  body:not(.photos-color) img.object-contain { filter: grayscale(100%); }
+  body:not(.photos-color) img.object-cover:not(.gryt-brand-mark),
+  body:not(.photos-color) img.object-contain:not(.gryt-brand-mark) { filter: grayscale(100%); }
 }
 
 @utility bone-panel {
