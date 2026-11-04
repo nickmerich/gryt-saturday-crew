@@ -47,7 +47,7 @@ export function MissionStamp({
       <span className="relative inline-block">
         together.
         <span
-          className="absolute left-[-2px] right-[-2px] bottom-[0.1em] h-[0.12em] bg-blue"
+          className="absolute left-[-2px] right-[-2px] -bottom-[0.14em] h-[0.1em] bg-blue"
           style={{ transform: "skewX(-8deg)" }}
           aria-hidden
         />
