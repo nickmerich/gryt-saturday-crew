@@ -1,9 +1,11 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 import { SaturdayInvite } from "@/components/site/GuideShell";
 import { ShareButtons } from "@/components/site/ShareButtons";
+import { track } from "@/lib/analytics";
 import { getRunReports } from "@/lib/run-reports.functions";
 import { RUN_REPORT_NOTES } from "@/content/run-reports";
 import { MILESTONE_LINES, MILESTONE_NAMES } from "@/lib/run-reports";
@@ -242,8 +244,11 @@ type SoundtrackNote = NonNullable<(typeof RUN_REPORT_NOTES)[number]["soundtrack"
 /**
  * The Saturday Soundtrack: the run's playlist, built from songs runners added
  * to their RSVP. Renders nothing until an organizer adds a valid Spotify link.
+ * The Spotify player only loads after a tap, so no Spotify script or cookie
+ * touches the page until someone asks for it.
  */
 function Soundtrack({ runNumber, soundtrack }: { runNumber: number; soundtrack?: SoundtrackNote }) {
+  const [playerOn, setPlayerOn] = useState(false);
   const id = spotifyPlaylistId(soundtrack?.spotifyUrl);
   if (!id) return null;
   const credits = soundtrack?.credits ?? [];
@@ -259,14 +264,29 @@ function Soundtrack({ runNumber, soundtrack }: { runNumber: number; soundtrack?:
           ? `${credits.length === 1 ? "One song" : `${credits.length} songs`} from the people who RSVP'd. One song each, picked to get out the door.`
           : "Songs from the people who RSVP'd. One song each, picked to get out the door."}
       </p>
-      <iframe
-        title={`${name} playlist on Spotify`}
-        src={spotifyEmbedSrc(id)}
-        className="mt-5 w-full border-0 rounded-[12px]"
-        height={352}
-        loading="lazy"
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-      />
+      {playerOn ? (
+        <iframe
+          title={`${name} playlist on Spotify`}
+          src={spotifyEmbedSrc(id)}
+          className="mt-5 w-full border-0 rounded-[12px]"
+          height={352}
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        />
+      ) : (
+        <div className="mt-5">
+          <button
+            type="button"
+            onClick={() => {
+              setPlayerOn(true);
+              track("soundtrack_player_load", { run_number: runNumber });
+            }}
+            className="bg-blue text-ink px-5 py-3 text-[12px] font-bold tracking-[0.14em] uppercase hover:bg-paper transition-colors"
+          >
+            Play it here
+          </button>
+          <p className="mt-2 text-[13px] text-paper/55">The Spotify player loads when you tap play.</p>
+        </div>
+      )}
       {credits.length ? (
         <ul className="mt-5 divide-y divide-paper/15 border-y border-paper/15">
           {credits.map((c, i) => (
