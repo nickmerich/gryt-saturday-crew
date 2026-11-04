@@ -487,19 +487,23 @@ function Nav() {
 
 function Hero() {
   return (
-    <section id="top" className="relative isolate overflow-hidden bg-background text-foreground px-6 py-16 sm:px-12 md:py-24 lg:px-24">
-      <img src={heroImg} width={686} height={417} alt="The GRYT crew on the Montour / Peters Trail" className="absolute inset-0 -z-20 h-full w-full object-cover" fetchPriority="high" decoding="async" />
-      <div className="absolute inset-0 -z-10 bg-background/70" aria-hidden="true" />
-      <div className="mx-auto max-w-[1180px]">
-        <p className="eyebrow text-foreground mb-5">McMurray · Saturdays · 7 AM</p>
-        <h1 className="display-condensed text-[56px] leading-[0.95] sm:text-[80px] md:text-[104px]">GRYT Run Club</h1>
-        <p className="display-condensed mt-5 text-[28px] leading-[1.1] md:text-[40px]">Do hard things together.</p>
-        <p className="mt-5 max-w-[460px] text-base leading-relaxed text-foreground/90">Free Saturday miles on the Montour / Peters Trail. Walk, jog, or run. Come as you are.</p>
-        <div className="mt-7 flex flex-wrap items-center gap-5">
-          <a href="#join" className="btn-primary">RSVP This Saturday →</a>
-          <a href="#first" className="text-sm text-foreground underline underline-offset-4 decoration-blue hover:text-foreground/70">First time?</a>
+    <section id="top" className="bg-background text-foreground px-6 pt-10 pb-14 sm:px-12 md:pt-16 md:pb-20 lg:px-24">
+      <div className="mx-auto grid max-w-[1180px] items-center gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-14">
+        <div className="min-w-0">
+          <p className="eyebrow text-foreground mb-5">McMurray · Saturdays · 7 AM</p>
+          <h1 className="display-condensed text-[56px] leading-[0.92] sm:text-[80px] lg:text-[96px]">GRYT Run Club</h1>
+          <p className="display-condensed mt-4 text-[28px] leading-[1.05] md:text-[40px]"><span className="hl">Do hard things together.</span></p>
+          <p className="mt-6 max-w-[440px] text-[17px] leading-relaxed text-foreground/85">Free Saturday miles on the Montour / Peters Trail. Walk, jog, or run. Come as you are.</p>
+          <div className="mt-8 flex flex-wrap items-center gap-5">
+            <a href="#join" className="btn-primary">RSVP This Saturday →</a>
+            <a href="#first" className="text-sm font-medium text-foreground underline underline-offset-4 decoration-blue decoration-2 hover:text-foreground/70">First time?</a>
+          </div>
+          <p className="mt-6 text-sm text-foreground/75">Next: {nextSaturdayLabelLong()}</p>
         </div>
-        <p className="mt-5 text-sm text-foreground/80">Next: {nextSaturdayLabelLong()}</p>
+        <figure className="relative min-w-0">
+          <div aria-hidden="true" className="absolute -right-3 -bottom-3 h-full w-full bg-blue" />
+          <img src={heroImg} width={686} height={417} alt="The GRYT crew on the Montour / Peters Trail" className="relative block aspect-[686/417] w-full object-cover" fetchPriority="high" decoding="async" />
+        </figure>
       </div>
     </section>
   );
