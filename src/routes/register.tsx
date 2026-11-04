@@ -27,7 +27,7 @@ export const Route = createFileRoute('/register')({
       { property: 'og:type', content: 'website' },
       { name: 'twitter:card', content: 'summary' },
     ],
-    links: [{ rel: 'canonical', href: siteUrl('/') }],
+    links: [{ rel: 'canonical', href: siteUrl('/register') }],
   }),
   component: RegisterRetiredPage,
 });
