@@ -100,7 +100,7 @@ const PROSE =
   "[&_h2]:text-foreground [&_h2]:text-2xl md:[&_h2]:text-3xl [&_h2]:font-bold [&_h2]:mt-12 [&_h2]:mb-3 [&_h2]:leading-tight [&_h2]:scroll-mt-24 " +
   "[&_h3]:text-foreground [&_h3]:font-bold [&_h3]:text-[18px] md:[&_h3]:text-[20px] [&_h3]:mt-8 [&_h3]:mb-2 [&_h3]:scroll-mt-24 " +
   "[&_ul]:my-5 [&_ul]:pl-6 [&_ul]:list-disc [&_ol]:my-5 [&_ol]:pl-6 [&_ol]:list-decimal [&_li]:my-1.5 [&_li]:pl-1 " +
-  "[&_a]:text-blue [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-foreground " +
+  "[&_a]:text-foreground [&_a]:decoration-blue [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-foreground " +
   "[&_strong]:text-foreground [&_strong]:font-bold " +
   "[&_code]:bg-foreground/10 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-[0.9em] " +
   "[&_blockquote]:border-l-2 [&_blockquote]:border-blue [&_blockquote]:pl-5 [&_blockquote]:text-foreground/75 " +

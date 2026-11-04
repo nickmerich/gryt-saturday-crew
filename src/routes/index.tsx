@@ -886,7 +886,7 @@ function RSVP() {
           </div>
         </div>
 
-        <div className="flex-1 min-w-[300px] basis-[360px] bg-[#f4f2ed] text-ink p-7 md:p-9">
+        <div className="flex-1 min-w-[300px] basis-[360px] bg-blue-tint border border-foreground/15 text-ink p-7 md:p-9">
           {!submitted ? (
             <div>
               <div className="display-condensed text-ink text-[26px] mb-5">
