@@ -9,6 +9,29 @@ const TITLE = "Playbooks · gryt run club";
 const DESCRIPTION =
   "Free run club playbooks for Pittsburgh runners: building a run club from zero, the Saturday system, winter training, and comparing local run clubs.";
 
+const ORG_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "GRYT Run Club",
+  "url": "https://grytrunclub.com",
+  "logo": "https://grytrunclub.com/logo.png",
+  "description": "Free community run club based in Pittsburgh's South Hills, founded by Nick. Offering free weekly runs, training playbooks, and community events.",
+  "founder": {
+    "@type": "Person",
+    "name": "Nick",
+  },
+  "areaServed": "Pittsburgh, PA",
+  "sameAs": [
+    "https://www.instagram.com/grytrunclub",
+    "https://www.strava.com/clubs/grytrunclub",
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer support",
+    "url": "https://grytrunclub.com/contact",
+  },
+};
+
 export const Route = createFileRoute("/resources_/playbooks")({
   head: () => ({
     meta: [
@@ -27,6 +50,12 @@ export const Route = createFileRoute("/resources_/playbooks")({
       { name: "twitter:image", content: `${SITE}${ogImage}` },
     ],
     links: [{ rel: "canonical", href: URL }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(ORG_SCHEMA),
+      },
+    ],
   }),
   component: PlaybooksPage,
 });
