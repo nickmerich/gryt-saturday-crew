@@ -7,7 +7,7 @@ export const reviewSchema = z.object({
   email: z.string().trim().max(255).transform(v => v.toLowerCase()).pipe(z.union([z.literal(''), z.string().email('Check your email.')])).default(''),
   rating: z.coerce.number().int().min(1, 'Pick a rating.').max(5),
   body: z.string().trim().min(10, 'Tell us a bit more (10+ characters).').max(600, 'Keep it under 600 characters.'),
-  consent: z.literal(true, { errorMap: () => ({ message: 'Check the box so we can show your review.' }) }),
+  consent: z.literal(true, { message: 'Check the box so we can show your review.' }),
   website_check: z.literal('').default(''),
 })
 
