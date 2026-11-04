@@ -76,17 +76,17 @@ function SoundtrackAdminPage() {
           <>
             <section className="mt-8 grid gap-px bg-foreground/20 border border-foreground/20 sm:grid-cols-3">
               <div className="bg-background p-5">
-                <p className="text-[11px] font-bold tracking-[0.16em] uppercase text-blue/80">RSVPs with a song</p>
+                <p className="text-[11px] font-bold tracking-[0.16em] uppercase text-foreground/80">RSVPs with a song</p>
                 <p className="mt-2 text-3xl font-bold">{pct(data.summary.totals.share)}</p>
                 <p className="text-sm text-foreground/75">{data.summary.totals.withSong} of {data.summary.totals.rsvps} RSVPs</p>
               </div>
               <div className="bg-background p-5">
-                <p className="text-[11px] font-bold tracking-[0.16em] uppercase text-blue/80">Came back, added a song</p>
+                <p className="text-[11px] font-bold tracking-[0.16em] uppercase text-foreground/80">Came back, added a song</p>
                 <p className="mt-2 text-3xl font-bold">{pct(data.summary.returnWithSong.rate)}</p>
                 <p className="text-sm text-foreground/75">{data.summary.returnWithSong.cameBack} of {data.summary.returnWithSong.runners} runners</p>
               </div>
               <div className="bg-background p-5">
-                <p className="text-[11px] font-bold tracking-[0.16em] uppercase text-blue/80">Came back, no song</p>
+                <p className="text-[11px] font-bold tracking-[0.16em] uppercase text-foreground/80">Came back, no song</p>
                 <p className="mt-2 text-3xl font-bold">{pct(data.summary.returnWithoutSong.rate)}</p>
                 <p className="text-sm text-foreground/75">{data.summary.returnWithoutSong.cameBack} of {data.summary.returnWithoutSong.runners} runners</p>
               </div>

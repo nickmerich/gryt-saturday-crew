@@ -858,7 +858,7 @@ function RSVP() {
                   i !== arr.length - 1 ? "border-b border-foreground/15" : ""
                 }`}
               >
-                <span className="text-[11px] font-bold tracking-[0.16em] uppercase text-blue/80 shrink-0 basis-[78px] pt-1">
+                <span className="text-[11px] font-bold tracking-[0.16em] uppercase text-foreground/80 shrink-0 basis-[78px] pt-1">
                   {k}
                 </span>
                 <span className="text-[15px] md:text-[16px] font-semibold text-right text-foreground/90">

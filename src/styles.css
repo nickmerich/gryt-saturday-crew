@@ -141,7 +141,7 @@ body.photos-color .photo-hover:hover {
     font-size: 0.75rem;
     color: var(--muted-foreground);
   }
-  .eyebrow-blue { color: var(--blue); }
+  .eyebrow-blue { color: var(--ink); }
 
   .display-condensed {
     font-family: var(--font-condensed);

@@ -210,7 +210,7 @@ function RunsPage() {
     <div className="min-h-screen bg-background text-foreground">
       <SiteNav />
       <main className="mx-auto w-full max-w-5xl px-5 pb-24 pt-10 sm:px-8">
-        <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#89CFF0]">
+        <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-foreground">
           GRYT · YOUR RUNS
         </p>
         <h1 className="mt-3 font-[Oswald,'Arial_Narrow',sans-serif] text-[clamp(2.2rem,7vw,4rem)] font-bold uppercase leading-[0.95]">
@@ -232,13 +232,13 @@ function RunsPage() {
               {state === "connecting" ? "Connecting…" : "Connect Strava"}
             </button>
           ) : (
-            <span className="inline-flex h-12 items-center border border-[#89CFF0]/50 px-5 text-[12px] font-bold uppercase tracking-[0.18em] text-[#89CFF0]">
+            <span className="inline-flex h-12 items-center border border-[#89CFF0]/50 px-5 text-[12px] font-bold uppercase tracking-[0.18em] text-foreground">
               Connected{athlete?.firstName ? ` · ${athlete.firstName}` : ""}
             </span>
           )}
           <Link
             to="/resources/recap"
-            className="inline-flex h-12 items-center border border-foreground/25 px-5 text-[12px] font-bold uppercase tracking-[0.18em] text-foreground transition-colors hover:border-[#89CFF0] hover:text-[#89CFF0]"
+            className="inline-flex h-12 items-center border border-foreground/25 px-5 text-[12px] font-bold uppercase tracking-[0.18em] text-foreground transition-colors hover:border-[#89CFF0] hover:text-foreground"
           >
             Make a recap graphic
           </Link>
@@ -260,7 +260,7 @@ function RunsPage() {
               { label: "Elev ft", value: Math.round(totals.elev * FT).toLocaleString() },
             ].map((s) => (
               <div key={s.label} className="bg-background px-4 py-5 text-center">
-                <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#89CFF0]">
+                <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-foreground">
                   {s.label}
                 </p>
                 <p className="mt-2 font-[Oswald,'Arial_Narrow',sans-serif] text-3xl font-bold">
@@ -338,10 +338,10 @@ function RunsPage() {
                 to={g.to}
                 className="group block border border-foreground/12 bg-foreground/[0.03] p-5 transition-colors hover:border-[#89CFF0]"
               >
-                <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#89CFF0]">
+                <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-foreground">
                   {g.kicker}
                 </p>
-                <p className="mt-2 font-[Oswald,'Arial_Narrow',sans-serif] text-lg font-bold uppercase group-hover:text-[#89CFF0]">
+                <p className="mt-2 font-[Oswald,'Arial_Narrow',sans-serif] text-lg font-bold uppercase group-hover:text-foreground">
                   {g.title}
                 </p>
                 <p className="mt-1 text-sm text-foreground/75">{g.blurb}</p>
