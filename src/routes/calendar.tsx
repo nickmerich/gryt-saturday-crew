@@ -69,6 +69,29 @@ function icsForMonth(year: number, month: number) {
   return "data:text/calendar;charset=utf-8," + encodeURIComponent(lines.join("\r\n"));
 }
 
+const CALENDAR_FAQ_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Is GRYT Run Club free?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes, GRYT Run Club is completely free with no registration required.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "When does GRYT Run Club meet?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Every Saturday at 7 AM in McMurray, PA.",
+      },
+    },
+  ],
+};
+
 export const Route = createFileRoute("/calendar")({
   head: () => ({
     meta: [
@@ -92,6 +115,12 @@ export const Route = createFileRoute("/calendar")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "https://grytrunclub.com/calendar" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(CALENDAR_FAQ_JSON_LD),
+      },
+    ],
   }),
   component: CalendarPage,
 });
@@ -143,8 +172,10 @@ function CalendarPage() {
             Run Calendar
           </h1>
           <p className="mt-5 max-w-xl text-paper/70 leading-relaxed">
-            One run a week, same spot, no signup. Saturday mornings we go long.
-            Show up once and you're one of us.
+            GRYT Run Club meets every Saturday at 7 AM in McMurray, PA — rain or shine.
+            Our runs are completely free, open to all paces, and designed for community
+            first. Whether you're training for your first 5K or your tenth marathon,
+            you'll find your people here. No registration required — just show up.
           </p>
 
           <div className="mt-8">
@@ -245,6 +276,67 @@ function CalendarPage() {
             >
               First time? Read this
             </Link>
+          </div>
+
+          <div className="mt-16 border-t border-paper/15 pt-12">
+            <h2
+              className="text-3xl sm:text-4xl uppercase leading-tight tracking-tight mb-6"
+              style={{ fontFamily: "var(--font-display-condensed)" }}
+            >
+              What to Expect at a GRYT Saturday Run
+            </h2>
+            <p className="max-w-2xl text-paper/70 leading-relaxed">
+              Most Saturday runs cover 4–10 miles on the Montour Trail and surrounding paths,
+              starting and ending at 212 Valley Brook Rd in McMurray, PA. All pace groups are
+              welcome — faster runners loop back for those still going. After the run, the
+              group hangs in the parking lot with coffee. There are no coaches, no fees, and
+              no pressure. Just consistent people showing up and putting in miles together,
+              week after week.
+            </p>
+          </div>
+
+          <div className="mt-12 border-t border-paper/15 pt-12">
+            <h2
+              className="text-3xl sm:text-4xl uppercase leading-tight tracking-tight mb-8"
+              style={{ fontFamily: "var(--font-display-condensed)" }}
+            >
+              Frequently Asked Questions
+            </h2>
+            <div className="space-y-8 max-w-2xl">
+              <div>
+                <h3
+                  className="text-lg uppercase tracking-wide mb-2"
+                  style={{ fontFamily: "var(--font-display-condensed)" }}
+                >
+                  Is there a cost to join GRYT Run Club?
+                </h3>
+                <p className="text-paper/70 leading-relaxed">
+                  No. GRYT Run Club is 100% free to attend. There are no membership fees or registration requirements.
+                </p>
+              </div>
+              <div>
+                <h3
+                  className="text-lg uppercase tracking-wide mb-2"
+                  style={{ fontFamily: "var(--font-display-condensed)" }}
+                >
+                  What time do Saturday runs start?
+                </h3>
+                <p className="text-paper/70 leading-relaxed">
+                  Runs begin at 7:00 AM every Saturday. Arrive 5–10 minutes early to meet the group.
+                </p>
+              </div>
+              <div>
+                <h3
+                  className="text-lg uppercase tracking-wide mb-2"
+                  style={{ fontFamily: "var(--font-display-condensed)" }}
+                >
+                  What pace groups are available?
+                </h3>
+                <p className="text-paper/70 leading-relaxed">
+                  All paces are welcome. GRYT Run Club is a community-first club — no runner is left behind.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
