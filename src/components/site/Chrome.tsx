@@ -1,4 +1,4 @@
-import grytBearImg from "@/assets/img/gryt-bear.webp";
+import { GrytBear, GrytBrand } from "./BrandMarks";
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
@@ -8,16 +8,7 @@ import insuranceAsset from "@/assets/certificate-of-insurance.pdf.asset.json";
 const STRAVA_CLUB = "https://www.strava.com/clubs/1708552";
 
 export function MonogramG({ className = "" }: { className?: string }) {
-  return (
-    <img
-      src={grytBearImg}
-      alt="gryt club bear"
-      className={className}
-      width={124}
-      height={124}
-      loading="lazy"
-    />
-  );
+  return <GrytBear className={className} />;
 }
 
 export function MissionStamp({
@@ -77,10 +68,7 @@ export function SiteNav() {
     <nav aria-label="Main" className="sticky top-0 z-50 bg-background border-b border-foreground/15">
       <div className="grid grid-cols-[minmax(0,1fr)_auto] lg:flex items-center justify-between gap-2 sm:gap-4 px-4 sm:px-8 md:px-12 h-[68px]">
         <a href="/" className="flex min-w-0 items-center gap-2" aria-label="GRYT Run Club home">
-          <MonogramG className="h-11 w-11" />
-          <span className="wordmark uppercase truncate text-[17px] min-[400px]:text-[20px] leading-none [text-shadow:2px_2px_0_var(--blue)]">
-            Run Club
-          </span>
+          <GrytBrand />
         </a>
         <div className="hidden lg:flex items-center gap-7">
           {NAV_LINKS.map((l) => (
@@ -330,10 +318,7 @@ export function SiteFooter() {
           </div>
           <div className="flex-1 min-w-[260px] basis-[320px]">
             <div className="flex items-center gap-2.5 mb-4">
-              <MonogramG className="h-14 w-14" />
-              <span className="wordmark uppercase text-[26px] leading-none [text-shadow:3px_3px_0_var(--blue)]">
-                Run Club
-              </span>
+              <GrytBrand size="footer" />
             </div>
             <p className="text-sm leading-[1.6] text-foreground/70 max-w-[340px]">
               Pittsburgh, PA · Saturdays · 7 AM · Montour / Peters Trail.

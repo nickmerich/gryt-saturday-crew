@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import grytBearImg from "@/assets/img/gryt-bear.webp";
+import { GrytBrand } from "@/components/site/BrandMarks";
 
 export const Route = createFileRoute("/privacy")({
   head: () => ({
@@ -30,18 +30,8 @@ function PrivacyPage() {
     <div className="min-h-screen bg-background text-foreground">
       <nav className="sticky top-0 z-50 bg-background border-b border-foreground/15">
         <div className="flex items-center justify-between px-5 sm:px-8 md:px-12 h-[68px]">
-          <Link to="/" className="flex items-center gap-2">
-            <img
-              src={grytBearImg}
-              alt="gryt club bear"
-              className="h-11 w-11"
-              width={44}
-              height={44}
-              loading="lazy"
-            />
-            <span className="wordmark uppercase text-[20px] leading-none [text-shadow:2px_2px_0_var(--blue)]">
-              Run Club
-            </span>
+          <Link to="/" aria-label="GRYT Run Club home" className="flex items-center gap-2">
+            <GrytBrand />
           </Link>
           <Link
             to="/"
