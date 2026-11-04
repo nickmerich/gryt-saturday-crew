@@ -89,6 +89,37 @@ const FAQ_JSON_LD = {
   })),
 };
 
+const SPORTS_CLUB_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "SportsClub",
+  name: "GRYT Run Club Pittsburgh",
+  url: "https://grytrunclub.com",
+  logo: "https://grytrunclub.com/logo.png",
+  description:
+    "A free, inclusive run club based in Pittsburgh, PA welcoming runners of all paces every Saturday morning.",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Pittsburgh",
+    addressRegion: "PA",
+    addressCountry: "US",
+  },
+  sameAs: [
+    "https://www.instagram.com/grytrunclub",
+    "https://www.facebook.com/grytrunclub",
+    "https://x.com/grytrunclub",
+  ],
+  event: {
+    "@type": "Event",
+    name: "GRYT Saturday Morning Run",
+    startDate: "2025-01-04",
+    eventSchedule: {
+      "@type": "Schedule",
+      repeatFrequency: "P1W",
+      byDay: "https://schema.org/Saturday",
+    },
+  },
+};
+
 export const Route = createFileRoute("/faq")({
   head: () => ({
     meta: [
@@ -114,6 +145,10 @@ export const Route = createFileRoute("/faq")({
       {
         type: "application/ld+json",
         children: JSON.stringify(FAQ_JSON_LD),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(SPORTS_CLUB_JSON_LD),
       },
     ],
   }),
