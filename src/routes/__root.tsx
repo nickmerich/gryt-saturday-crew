@@ -82,7 +82,7 @@ function ErrorComponent({ error, reset }: { error: unknown; reset: () => void })
   );
 }
 
-export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({ 
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -123,7 +123,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "SportsOrganization",
+          "@type": ["Organization", "SportsClub"],
           "@id": "https://grytrunclub.com/#organization",
           name: "GRYT Run Club",
           url: "https://grytrunclub.com",
