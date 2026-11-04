@@ -53,12 +53,12 @@ function ResourcesPage() {
     <>
       <a
         href="#resources-main"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue focus:text-ink focus:text-[12px] focus:tracking-[0.2em] focus:uppercase focus:outline-none focus-visible:ring-2 focus-visible:ring-paper"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue focus:text-ink focus:text-[12px] focus:tracking-[0.2em] focus:uppercase focus:outline-none focus-visible:ring-2 focus-visible:ring-foreground"
         style={mono}
       >
         Skip to content
       </a>
-      <main id="resources-main" className="bg-ink text-paper">
+      <main id="resources-main" className="bg-background text-foreground">
         <SiteNav />
         <div className="mx-auto max-w-[1240px] px-6 lg:px-10 pt-16 md:pt-24 pb-24">
           <Masthead />
@@ -88,7 +88,7 @@ function SectionRule({ number, title }: { number: string; title: string }) {
   return (
     <div className="flex items-baseline gap-5 mb-10 md:mb-14">
       <span
-        className="text-blue font-mono text-[12px] tracking-[0.22em] uppercase shrink-0"
+        className="text-foreground font-mono text-[12px] tracking-[0.22em] uppercase shrink-0"
         style={{ fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace" }}
       >
         {number}
@@ -99,7 +99,7 @@ function SectionRule({ number, title }: { number: string; title: string }) {
       >
         {title}
       </h2>
-      <div className="h-px flex-1 bg-paper/35 mb-3" aria-hidden="true" />
+      <div className="h-px flex-1 bg-foreground/35 mb-3" aria-hidden="true" />
     </div>
   );
 }
@@ -112,7 +112,7 @@ const mono = {
 
 function Masthead() {
   return (
-    <header className="border-b-2 border-paper pb-10 md:pb-14 mb-20 md:mb-28">
+    <header className="border-b-2 border-foreground pb-10 md:pb-14 mb-20 md:mb-28">
       <h1
         className="uppercase leading-[0.82] tracking-tight text-[clamp(64px,13vw,200px)]"
         style={{ fontFamily: "var(--font-condensed)" }}
@@ -121,18 +121,18 @@ function Masthead() {
         <span className="sr-only">: free running resources for Pittsburgh runners</span>
       </h1>
       <div className="mt-8 md:mt-10 flex flex-col md:flex-row md:items-end md:justify-between gap-8">
-        <p className="text-[22px] md:text-[28px] font-light leading-[1.3] max-w-[720px] text-paper/95"
+        <p className="text-[22px] md:text-[28px] font-light leading-[1.3] max-w-[720px] text-foreground/95"
           style={{ fontFamily: "var(--font-display)" }}
         >
           Some people come here for Saturday. Some come to learn.{" "}
-          <span className="text-blue">Both are welcome.</span> Everything we've
+          <span className="text-foreground">Both are welcome.</span> Everything we've
           learned from showing up every week, shared freely.
         </p>
-        <p className="text-[12px] tracking-[0.24em] uppercase text-paper/70 shrink-0" style={mono}>
+        <p className="text-[12px] tracking-[0.24em] uppercase text-foreground/70 shrink-0" style={mono}>
           An open field manual<br className="hidden md:block" /> · Pittsburgh, PA
         </p>
       </div>
-      <div className="mt-10 grid md:grid-cols-2 gap-6 md:gap-10 max-w-[1040px] text-paper/80 text-[16px] leading-[1.7]">
+      <div className="mt-10 grid md:grid-cols-2 gap-6 md:gap-10 max-w-[1040px] text-foreground/80 text-[16px] leading-[1.7]">
         <p>
           This is the free runner library from GRYT Run Club, a no-drop community run club in Pittsburgh's
           South Hills that meets every Saturday at 7 AM on the Montour/Peters Trail in McMurray. The guides cover
@@ -190,7 +190,7 @@ function Conversations() {
       <div className="flex flex-col md:flex-row gap-12 md:gap-20">
         <aside className="md:w-1/4 shrink-0">
           <div className="md:sticky md:top-24">
-            <span className="text-blue text-[12px] tracking-[0.22em] uppercase mb-4 block" style={mono}>
+            <span className="text-foreground text-[12px] tracking-[0.22em] uppercase mb-4 block" style={mono}>
               § 02
             </span>
             <h2
@@ -199,13 +199,13 @@ function Conversations() {
             >
               Conversations
             </h2>
-            <p className="mt-5 text-paper/80 text-[15px] leading-[1.65] max-w-[280px]">
+            <p className="mt-5 text-foreground/80 text-[15px] leading-[1.65] max-w-[280px]">
               Unfiltered dialogue with the founders and the crew — on
               community, consistency, and doing hard things together.
             </p>
             <Link
               to="/resources/conversations"
-              className={`mt-6 inline-block text-[12px] tracking-[0.22em] uppercase text-blue underline underline-offset-4 decoration-blue/40 hover:decoration-blue hover:text-paper transition-colors ${focusRing}`}
+              className={`mt-6 inline-block text-[12px] tracking-[0.22em] uppercase text-foreground underline underline-offset-4 decoration-blue/40 hover:decoration-blue hover:text-foreground transition-colors ${focusRing}`}
               style={mono}
             >
               Read all →
@@ -218,21 +218,21 @@ function Conversations() {
             <article
               key={c.n}
               className={`group ${
-                i < CONVERSATIONS.length - 1 ? "border-b border-paper/20 pb-16 md:pb-20" : ""
+                i < CONVERSATIONS.length - 1 ? "border-b border-foreground/20 pb-16 md:pb-20" : ""
               } ${c.comingSoon ? "opacity-80" : ""}`}
             >
               <div className="flex items-center gap-4 mb-6">
-                <span className="text-blue text-[12px] tracking-[0.24em] uppercase" style={mono}>
+                <span className="text-foreground text-[12px] tracking-[0.24em] uppercase" style={mono}>
                   Transcript {c.n}
                 </span>
                 {c.comingSoon && (
-                  <span className="text-[11px] tracking-[0.22em] uppercase text-paper/80 border border-paper/40 px-2 py-1" style={mono}>
+                  <span className="text-[11px] tracking-[0.22em] uppercase text-foreground/80 border border-foreground/40 px-2 py-1" style={mono}>
                     Coming Soon
                   </span>
                 )}
               </div>
               <blockquote
-                className="text-[clamp(22px,3.4vw,44px)] font-light leading-[1.25] tracking-tight max-w-[22ch] group-hover:text-blue transition-colors"
+                className="text-[clamp(22px,3.4vw,44px)] font-light leading-[1.25] tracking-tight max-w-[22ch] group-hover:text-foreground/70 transition-colors"
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 &ldquo;{c.quote}&rdquo;
@@ -242,7 +242,7 @@ function Conversations() {
                 style={{ fontFamily: "var(--font-condensed)" }}
               >
                 — {c.guest}
-                <span className="text-paper/75"> · {c.role}</span>
+                <span className="text-foreground/75"> · {c.role}</span>
               </cite>
             </article>
           ))}
@@ -259,27 +259,27 @@ function ManifestoCallout() {
     <section className="mb-24 md:mb-32">
       <Link
         to="/resources/manifesto"
-        className={`group block border border-paper/25 bg-vintage p-8 md:p-14 hover:border-blue transition-colors ${focusRing}`}
+        className={`group block border border-foreground/25 bg-background p-8 md:p-14 hover:border-blue transition-colors ${focusRing}`}
       >
         <div className="grid md:grid-cols-12 gap-8 md:gap-12 items-end">
           <div className="md:col-span-8">
-            <span className="text-blue text-[12px] tracking-[0.22em] uppercase mb-4 block" style={mono}>
+            <span className="text-foreground text-[12px] tracking-[0.22em] uppercase mb-4 block" style={mono}>
               § 02.5 · Self-reflection · Audit manifesto · From Nick
             </span>
             <h2
-              className="uppercase text-[clamp(36px,5.6vw,80px)] leading-[0.9] tracking-tight group-hover:text-blue transition-colors"
+              className="uppercase text-[clamp(36px,5.6vw,80px)] leading-[0.9] tracking-tight group-hover:text-foreground/70 transition-colors"
               style={{ fontFamily: "var(--font-condensed)" }}
             >
               July 2026 Audit:<br />The Human Layer<br />Comes First
             </h2>
-            <p className="mt-6 text-paper/85 text-[16px] md:text-[17px] leading-[1.65] max-w-[560px]">
+            <p className="mt-6 text-foreground/85 text-[16px] md:text-[17px] leading-[1.65] max-w-[560px]">
               What the GRYT audit revealed: we built the tech stack before the
               ritual. Here is what we missed, and what we are building next.
             </p>
           </div>
           <div className="md:col-span-4 flex md:justify-end">
             <span
-              className="inline-flex items-center gap-3 text-[12px] tracking-[0.22em] uppercase text-blue group-hover:text-paper transition-colors"
+              className="inline-flex items-center gap-3 text-[12px] tracking-[0.22em] uppercase text-foreground group-hover:text-foreground transition-colors"
               style={mono}
             >
               Read the manifesto
@@ -344,9 +344,9 @@ function ArtifactsAndTools() {
 
   return (
     <section className="mb-24 md:mb-32">
-      <div className="bg-vintage p-8 md:p-14 border border-paper/25">
+      <div className="bg-background p-8 md:p-14 border border-foreground/25">
         <div className="mb-12 md:mb-16">
-          <span className="text-blue text-[12px] tracking-[0.22em] uppercase mb-4 block" style={mono}>
+          <span className="text-foreground text-[12px] tracking-[0.22em] uppercase mb-4 block" style={mono}>
             § 03 · Free to use & share
           </span>
           <h2
@@ -372,7 +372,7 @@ function ArtifactsAndTools() {
                 }`}
                 {...(g.comingSoon ? { "aria-disabled": true } : {})}
               >
-                <div className="relative aspect-[4/5] bg-ink border border-paper/25 group-hover:border-blue transition-colors overflow-hidden">
+                <div className="relative aspect-[4/5] bg-background border border-foreground/25 group-hover:border-blue transition-colors overflow-hidden">
                   <div
                     className="absolute inset-0 opacity-[0.07]"
                     style={{
@@ -385,7 +385,7 @@ function ArtifactsAndTools() {
                     <MonogramG className="h-20 w-20" />
                   </div>
                   <span
-                    className="absolute top-3 left-3 text-[11px] tracking-[0.22em] uppercase text-paper/85"
+                    className="absolute top-3 left-3 text-[11px] tracking-[0.22em] uppercase text-foreground/85"
                     style={mono}
                   >
                     {g.format}
@@ -398,10 +398,10 @@ function ArtifactsAndTools() {
                   >
                     {g.name}
                   </h3>
-                  <p className="mt-1.5 text-[13.5px] text-paper/80 leading-[1.55]">
+                  <p className="mt-1.5 text-[13.5px] text-foreground/80 leading-[1.55]">
                     {g.description}
                   </p>
-                  <p className="mt-3 text-[11px] tracking-[0.22em] uppercase text-blue group-hover:text-paper transition-colors" style={mono}>
+                  <p className="mt-3 text-[11px] tracking-[0.22em] uppercase text-foreground group-hover:text-foreground transition-colors" style={mono}>
                     {g.comingSoon ? "Soon" : "Download →"}
                   </p>
                 </div>
@@ -426,9 +426,9 @@ const MERCH_ITEMS = [
 function Merch() {
   return (
     <section id="merch" className="mb-24 md:mb-32">
-      <div className="flex items-baseline justify-between gap-6 mb-10 md:mb-14 border-b border-paper/30 pb-5">
+      <div className="flex items-baseline justify-between gap-6 mb-10 md:mb-14 border-b border-foreground/30 pb-5">
         <div className="flex items-baseline gap-5">
-          <span className="text-blue text-[12px] tracking-[0.22em] uppercase" style={mono}>
+          <span className="text-foreground text-[12px] tracking-[0.22em] uppercase" style={mono}>
             § 04
           </span>
           <h2
@@ -438,7 +438,7 @@ function Merch() {
             The Drop
           </h2>
         </div>
-        <span className="text-[11px] tracking-[0.24em] uppercase text-paper/75 hidden sm:block" style={mono}>
+        <span className="text-[11px] tracking-[0.24em] uppercase text-foreground/75 hidden sm:block" style={mono}>
           Collection 01 · Notify me
         </span>
       </div>
@@ -447,7 +447,7 @@ function Merch() {
         {MERCH_ITEMS.map((item, i) => (
           <li key={item.name} className="group">
             <article aria-label={`${item.name}, drops ${item.drop}, ${item.price}`}>
-              <div className="relative aspect-[3/4] overflow-hidden bg-vintage border border-paper/25 group-hover:border-blue transition-colors">
+              <div className="relative aspect-[3/4] overflow-hidden bg-background border border-foreground/25 group-hover:border-blue transition-colors">
                 <img
                   src={lookbookMerchImg}
                   width={900}
@@ -458,9 +458,9 @@ function Merch() {
                   style={{ objectPosition: item.position }}
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-ink/25 group-hover:bg-ink/10 transition-colors" aria-hidden="true" />
+                <div className="absolute inset-0 bg-background/25 group-hover:bg-background/10 transition-colors" aria-hidden="true" />
                 <span
-                  className="absolute top-3 left-3 text-[11px] tracking-[0.22em] uppercase text-paper bg-ink/85 px-2 py-1"
+                  className="absolute top-3 left-3 text-[11px] tracking-[0.22em] uppercase text-foreground bg-background/85 px-2 py-1"
                   style={mono}
                 >
                   0{i + 1} / SS26
@@ -473,18 +473,18 @@ function Merch() {
                 >
                   {item.name}
                 </h5>
-                <span className="text-blue text-[12px] tracking-[0.14em] uppercase shrink-0" style={mono}>
+                <span className="text-foreground text-[12px] tracking-[0.14em] uppercase shrink-0" style={mono}>
                   {item.drop}
                 </span>
               </div>
-              <p className="mt-1 text-[12px] uppercase tracking-[0.18em] text-paper/75" style={mono}>
+              <p className="mt-1 text-[12px] uppercase tracking-[0.18em] text-foreground/75" style={mono}>
                 {item.price}
               </p>
             </article>
           </li>
         ))}
       </ul>
-      <p className="mt-8 text-paper/75 text-[14px] leading-[1.65] max-w-[560px]">
+      <p className="mt-8 text-foreground/75 text-[14px] leading-[1.65] max-w-[560px]">
         Ships from Pittsburgh. 100% of proceeds support trail events and club gear.
       </p>
     </section>
@@ -495,7 +495,7 @@ function Merch() {
 
 function NextIssueAndPartner() {
   return (
-    <section className="mb-24 md:mb-32 grid md:grid-cols-2 gap-px bg-paper/20 border border-paper/20">
+    <section className="mb-24 md:mb-32 grid md:grid-cols-2 gap-px bg-foreground/20 border border-foreground/20">
       <NextIssue />
       <PartnerSplit />
     </section>
@@ -537,8 +537,8 @@ function NextIssue() {
   }
 
   return (
-    <div className="bg-ink p-10 md:p-14">
-      <span className="text-blue text-[12px] tracking-[0.22em] uppercase mb-4 block" style={mono}>
+    <div className="bg-background p-10 md:p-14">
+      <span className="text-foreground text-[12px] tracking-[0.22em] uppercase mb-4 block" style={mono}>
         § 05 · Next Issue
       </span>
       <h2
@@ -547,17 +547,17 @@ function NextIssue() {
       >
         Want the next playbook?
       </h2>
-      <p className="text-[15px] leading-[1.65] text-paper/85 mb-8 max-w-[380px]">
+      <p className="text-[15px] leading-[1.65] text-foreground/85 mb-8 max-w-[380px]">
         We send new GRYT resources when they're ready. No spam. No noise.
       </p>
 
       {done ? (
         <div role="status" aria-live="polite" className="border border-blue p-5">
-          <p className="text-blue text-[12px] tracking-[0.22em] uppercase mb-2" style={mono}>
+          <p className="text-foreground text-[12px] tracking-[0.22em] uppercase mb-2" style={mono}>
             You're on the list
           </p>
-          <p className="text-paper/90 text-[14px] leading-[1.55]">
-            We'll email <span className="text-paper">{email}</span> when the next one drops.
+          <p className="text-foreground/90 text-[14px] leading-[1.55]">
+            We'll email <span className="text-foreground">{email}</span> when the next one drops.
           </p>
         </div>
       ) : (
@@ -574,7 +574,7 @@ function NextIssue() {
                 onChange={(e) => setFirstName(e.target.value)}
                 placeholder="FIRST NAME"
                 autoComplete="given-name"
-                className={`w-full bg-transparent border-b border-paper/50 pb-2 text-[14px] tracking-[0.14em] uppercase placeholder:text-paper/60 focus:outline-none focus:border-blue focus-visible:border-blue transition-colors ${focusRing}`}
+                className={`w-full bg-transparent border-b border-foreground/50 pb-2 text-[14px] tracking-[0.14em] uppercase placeholder:text-foreground/55 focus:outline-none focus:border-blue focus-visible:border-blue transition-colors ${focusRing}`}
                 style={mono}
               />
             </div>
@@ -589,7 +589,7 @@ function NextIssue() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="EMAIL"
                 autoComplete="email"
-                className={`w-full bg-transparent border-b border-paper/50 pb-2 text-[14px] tracking-[0.14em] uppercase placeholder:text-paper/60 focus:outline-none focus:border-blue focus-visible:border-blue transition-colors ${focusRing}`}
+                className={`w-full bg-transparent border-b border-foreground/50 pb-2 text-[14px] tracking-[0.14em] uppercase placeholder:text-foreground/55 focus:outline-none focus:border-blue focus-visible:border-blue transition-colors ${focusRing}`}
                 style={mono}
               />
             </div>
@@ -597,7 +597,7 @@ function NextIssue() {
           <button
             type="submit"
             disabled={submitting}
-            className={`mt-2 self-start px-6 py-3 min-h-[44px] border border-paper text-[12px] tracking-[0.22em] uppercase hover:bg-paper hover:text-ink transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${focusRing}`}
+            className={`mt-2 self-start px-6 py-3 min-h-[44px] border border-foreground text-[12px] tracking-[0.22em] uppercase hover:bg-foreground hover:text-background hover:text-ink transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${focusRing}`}
             style={{ fontFamily: "var(--font-condensed)" }}
           >
             {submitting ? "Sending…" : "Notify Me →"}
@@ -629,7 +629,7 @@ function PartnerSplit() {
       </div>
       <a
         href="#get-involved"
-        className={`mt-10 self-start px-7 py-4 min-h-[44px] bg-ink text-paper text-[12px] tracking-[0.22em] uppercase hover:bg-paper hover:text-ink transition-colors ${focusRingLight}`}
+        className={`mt-10 self-start px-7 py-4 min-h-[44px] bg-background text-foreground text-[12px] tracking-[0.22em] uppercase hover:bg-foreground hover:text-background hover:text-ink transition-colors ${focusRingLight}`}
         style={{ fontFamily: "var(--font-condensed)" }}
       >
         Start the conversation →
@@ -651,7 +651,7 @@ const PARTNER_PILLS = [
 
 function GetInvolved() {
   return (
-    <section id="get-involved" className="pt-16 md:pt-20 border-t border-paper/20">
+    <section id="get-involved" className="pt-16 md:pt-20 border-t border-foreground/20">
       <SectionRule number="§ 07" title="Get Involved" />
 
       <div className="grid md:grid-cols-3 gap-12 md:gap-16">
@@ -662,7 +662,7 @@ function GetInvolved() {
           >
             We're building something real in Pittsburgh.
           </h3>
-          <p className="mt-6 text-paper/85 text-[15px] leading-[1.65]">
+          <p className="mt-6 text-foreground/85 text-[15px] leading-[1.65]">
             Local business, brand, coach, or creator who believes in
             community-driven fitness? There's a place for you here. Simple,
             genuine partnerships that add value to the crew.
@@ -671,7 +671,7 @@ function GetInvolved() {
             {PARTNER_PILLS.map((label) => (
               <li
                 key={label}
-                className="inline-flex items-center px-3 py-1.5 border border-paper/45 text-[11px] tracking-[0.2em] uppercase text-paper/90"
+                className="inline-flex items-center px-3 py-1.5 border border-foreground/45 text-[11px] tracking-[0.2em] uppercase text-foreground/90"
                 style={mono}
               >
                 {label}
@@ -691,9 +691,9 @@ function GetInvolved() {
 /* ─────────────────────  PARTNER FORM  ────────────────────── */
 
 const swissInput =
-  `w-full bg-vintage border border-paper/40 px-4 py-3.5 text-[15px] text-paper placeholder:text-paper/55 focus:outline-none focus:border-blue transition-colors ${focusRing}`;
+  `w-full bg-background border border-foreground/40 px-4 py-3.5 text-[15px] text-foreground placeholder:text-foreground/55 focus:outline-none focus:border-blue transition-colors ${focusRing}`;
 const swissLabel =
-  "block text-[11px] tracking-[0.22em] uppercase text-paper/85 mb-2";
+  "block text-[11px] tracking-[0.22em] uppercase text-foreground/85 mb-2";
 
 function PartnerForm() {
   const submit = useServerFn(submitPartnerInquiry);
@@ -734,8 +734,8 @@ function PartnerForm() {
 
   if (done) {
     return (
-      <div role="status" aria-live="polite" className="p-8 border border-blue bg-vintage">
-        <p className="text-blue text-[12px] tracking-[0.22em] uppercase mb-3" style={mono}>
+      <div role="status" aria-live="polite" className="p-8 border border-blue bg-background">
+        <p className="text-foreground text-[12px] tracking-[0.22em] uppercase mb-3" style={mono}>
           Message received
         </p>
         <h3
@@ -744,7 +744,7 @@ function PartnerForm() {
         >
           We'll be in touch.
         </h3>
-        <p className="text-paper/90 text-[15px] leading-[1.65]">
+        <p className="text-foreground/90 text-[15px] leading-[1.65]">
           Nick reads every partner inquiry personally. Expect a reply within a
           few days.
         </p>
@@ -794,16 +794,16 @@ function PartnerForm() {
             backgroundRepeat: "no-repeat",
           }}
         >
-          <option className="bg-ink text-paper">Post-Run Sponsor</option>
-          <option className="bg-ink text-paper">Gear Partner</option>
-          <option className="bg-ink text-paper">Content Feature</option>
-          <option className="bg-ink text-paper">Location Partner</option>
-          <option className="bg-ink text-paper">Other</option>
+          <option className="bg-background text-foreground">Post-Run Sponsor</option>
+          <option className="bg-background text-foreground">Gear Partner</option>
+          <option className="bg-background text-foreground">Content Feature</option>
+          <option className="bg-background text-foreground">Location Partner</option>
+          <option className="bg-background text-foreground">Other</option>
         </select>
       </div>
       <div className="sm:col-span-2">
         <label htmlFor="p-msg" className={swissLabel} style={mono}>
-          Message <span className="text-paper/70 normal-case tracking-normal">(optional)</span>
+          Message <span className="text-foreground/70 normal-case tracking-normal">(optional)</span>
         </label>
         <textarea
           id="p-msg" rows={5} maxLength={1500}
@@ -814,13 +814,13 @@ function PartnerForm() {
       </div>
       {error && <p role="alert" className="sm:col-span-2 text-[14px] text-red-300">{error}</p>}
       <div className="sm:col-span-2 flex items-center justify-between gap-4 pt-2">
-        <p className="text-[12px] tracking-[0.2em] uppercase text-paper/75" style={mono}>
+        <p className="text-[12px] tracking-[0.2em] uppercase text-foreground/75" style={mono}>
           Nick reads every note.
         </p>
         <button
           type="submit"
           disabled={submitting}
-          className={`px-7 py-4 min-h-[44px] border border-paper text-[12px] tracking-[0.22em] uppercase hover:bg-blue hover:border-blue hover:text-ink transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${focusRing}`}
+          className={`px-7 py-4 min-h-[44px] border border-foreground text-[12px] tracking-[0.22em] uppercase hover:bg-blue hover:border-blue hover:text-ink transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${focusRing}`}
           style={{ fontFamily: "var(--font-condensed)" }}
         >
           {submitting ? "Sending…" : "Submit Inquiry →"}
@@ -885,20 +885,20 @@ function ShareYourStory() {
           >
             Got a story worth telling?
           </h3>
-          <p className="mt-6 text-paper/85 text-[15px] leading-[1.65] max-w-[440px]">
+          <p className="mt-6 text-foreground/85 text-[15px] leading-[1.65] max-w-[440px]">
             Comeback runners. First-timers. People who built community out of
             nothing. If running changed something for you and you think your
             story could help someone else show up — tell us about it. Nick
             reads every submission.
           </p>
-          <ul className="mt-8 space-y-3 text-paper/85 text-[14.5px] leading-[1.6] max-w-[440px]">
+          <ul className="mt-8 space-y-3 text-foreground/85 text-[14.5px] leading-[1.6] max-w-[440px]">
             {[
               "You don't have to be fast, experienced, or a \"real\" runner.",
               "The best interviews come from people doing hard things on ordinary days.",
               "Features can run as written Q&A, podcast, or short video.",
             ].map((line) => (
               <li key={line} className="flex gap-3">
-                <span className="text-blue shrink-0" style={mono} aria-hidden="true">→</span>
+                <span className="text-foreground shrink-0" style={mono} aria-hidden="true">→</span>
                 <span>{line}</span>
               </li>
             ))}
@@ -907,16 +907,16 @@ function ShareYourStory() {
 
         <div className="md:col-span-3">
           {done ? (
-            <div role="status" aria-live="polite" className="p-8 border border-blue bg-vintage">
-              <p className="text-blue text-[12px] tracking-[0.22em] uppercase mb-3" style={mono}>
+            <div role="status" aria-live="polite" className="p-8 border border-blue bg-background">
+              <p className="text-foreground text-[12px] tracking-[0.22em] uppercase mb-3" style={mono}>
                 Story received
               </p>
               <h3 className="text-2xl font-bold leading-tight mb-3" style={{ fontFamily: "var(--font-display)" }}>
                 Thanks for sharing.
               </h3>
-              <p className="text-paper/90 text-[15px] leading-[1.65]">
+              <p className="text-foreground/90 text-[15px] leading-[1.65]">
                 Nick reads every story personally. If it's a fit, we'll reach out
-                to <span className="text-paper">{email}</span> about an interview.
+                to <span className="text-foreground">{email}</span> about an interview.
               </p>
             </div>
           ) : (
@@ -935,7 +935,7 @@ function ShareYourStory() {
               </div>
               <div className="sm:col-span-2">
                 <label htmlFor="s-loc" className={swissLabel} style={mono}>
-                  Location <span className="text-paper/70 normal-case tracking-normal">(optional)</span>
+                  Location <span className="text-foreground/70 normal-case tracking-normal">(optional)</span>
                 </label>
                 <input id="s-loc" type="text" maxLength={160} autoComplete="address-level2"
                   value={location} onChange={(e) => setLocation(e.target.value)}
@@ -947,7 +947,7 @@ function ShareYourStory() {
                   value={story} onChange={(e) => setStory(e.target.value)}
                   className={`${swissInput} resize-none`}
                   placeholder="Where you started, what changed, where you are now." />
-                <p className="mt-1.5 text-[12px] text-paper/75" style={mono} aria-live="polite">{story.length}/4000</p>
+                <p className="mt-1.5 text-[12px] text-foreground/75" style={mono} aria-live="polite">{story.length}/4000</p>
               </div>
               <div className="sm:col-span-2">
                 <label htmlFor="s-why" className={swissLabel} style={mono}>Why should we interview you?</label>
@@ -955,18 +955,18 @@ function ShareYourStory() {
                   value={whyInterview} onChange={(e) => setWhyInterview(e.target.value)}
                   className={`${swissInput} resize-none`}
                   placeholder="What would other runners get out of hearing it?" />
-                <p className="mt-1.5 text-[12px] text-paper/75" style={mono} aria-live="polite">{whyInterview.length}/2000</p>
+                <p className="mt-1.5 text-[12px] text-foreground/75" style={mono} aria-live="polite">{whyInterview.length}/2000</p>
               </div>
               <div className="sm:col-span-2">
                 <label htmlFor="s-links" className={swissLabel} style={mono}>
-                  Links <span className="text-paper/70 normal-case tracking-normal">(optional)</span>
+                  Links <span className="text-foreground/70 normal-case tracking-normal">(optional)</span>
                 </label>
                 <input id="s-links" type="url" maxLength={600} autoComplete="url"
                   value={links} onChange={(e) => setLinks(e.target.value)}
                   className={swissInput}
                   placeholder="Strava, Instagram, blog — anything that adds context" />
               </div>
-              <label className="sm:col-span-2 flex items-start gap-3 text-[14.5px] text-paper/90 leading-[1.5] cursor-pointer">
+              <label className="sm:col-span-2 flex items-start gap-3 text-[14.5px] text-foreground/90 leading-[1.5] cursor-pointer">
                 <input type="checkbox" checked={consentContact}
                   onChange={(e) => setConsentContact(e.target.checked)}
                   className={`mt-1 h-4 w-4 accent-[var(--blue)] ${focusRing}`} />
@@ -975,7 +975,7 @@ function ShareYourStory() {
               {error && <p role="alert" className="sm:col-span-2 text-[14px] text-red-300">{error}</p>}
               <div className="sm:col-span-2">
                 <button type="submit" disabled={submitting}
-                  className={`px-7 py-4 min-h-[44px] border border-paper text-[12px] tracking-[0.22em] uppercase hover:bg-blue hover:border-blue hover:text-ink transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${focusRing}`}
+                  className={`px-7 py-4 min-h-[44px] border border-foreground text-[12px] tracking-[0.22em] uppercase hover:bg-blue hover:border-blue hover:text-ink transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${focusRing}`}
                   style={{ fontFamily: "var(--font-condensed)" }}>
                   {submitting ? "Sending…" : "Submit My Story →"}
                 </button>

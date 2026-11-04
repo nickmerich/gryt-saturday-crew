@@ -131,35 +131,35 @@ export const Route = createFileRoute("/resources_/running-with-a-group")({
 
 function GroupRunningPage() {
   return (
-    <main className="bg-ink text-paper">
+    <main className="bg-background text-foreground">
       <SiteNav />
-      <article className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
+      <article className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-foreground/15">
         <div className="max-w-[760px] mx-auto">
           <Link
             to="/resources"
-            className="eyebrow text-blue hover:text-paper transition-colors"
+            className="eyebrow text-foreground hover:text-foreground transition-colors"
           >
             ← All resources
           </Link>
-          <p className="eyebrow text-blue mt-8 mb-5">COMMUNITY · 6 MIN READ</p>
+          <p className="eyebrow text-foreground mt-8 mb-5">COMMUNITY · 6 MIN READ</p>
           <h1 className="display-condensed uppercase text-[clamp(40px,7vw,96px)] leading-[0.95]">
             Running With a Group: Why It Makes You Faster and Less Likely to Quit
           </h1>
-          <p className="mt-7 text-paper/75 text-lg md:text-xl leading-[1.55]">
+          <p className="mt-7 text-foreground/75 text-lg md:text-xl leading-[1.55]">
             Solo running has a ceiling. You hit it faster than you think.
           </p>
 
           <nav
             aria-label="Table of contents"
-            className="mt-10 border border-paper/15 p-5"
+            className="mt-10 border border-foreground/15 p-5"
           >
-            <p className="eyebrow text-paper/55 mb-3">In this story</p>
+            <p className="eyebrow text-foreground/70 mb-3">In this story</p>
             <ul className="flex flex-col gap-2">
               {SECTIONS.map((s) => (
                 <li key={s.id}>
                   <a
                     href={`#${s.id}`}
-                    className="text-paper/80 hover:text-blue transition-colors text-[15px]"
+                    className="text-foreground/80 hover:text-foreground/70 transition-colors text-[15px]"
                   >
                     → {s.label}
                   </a>
@@ -168,7 +168,7 @@ function GroupRunningPage() {
             </ul>
           </nav>
 
-          <div className="mt-12 space-y-5 text-paper/85 text-[16px] md:text-[17px] leading-[1.7]">
+          <div className="mt-12 space-y-5 text-foreground/85 text-[16px] md:text-[17px] leading-[1.7]">
             <p>
               Not a physical ceiling — your legs can keep going. The ceiling is
               mental. It's the Saturday morning when the alarm goes off and you
@@ -221,7 +221,7 @@ function GroupRunningPage() {
               letting them down. Because you've already decided you're the kind
               of person who shows up.
             </p>
-            <p className="border-l-2 border-blue pl-5 italic text-paper/90">
+            <p className="border-l-2 border-blue pl-5 italic text-foreground/90">
               Identity beats motivation. You don't have to want to run on
               Saturday. You just have to be the kind of person who runs on
               Saturday.
@@ -309,7 +309,7 @@ function GroupRunningPage() {
               For what that actually looks like week to week,{" "}
               <Link
                 to="/resources/more-than-miles"
-                className="text-blue underline underline-offset-4 hover:text-paper transition-colors"
+                className="text-foreground underline underline-offset-4 hover:text-foreground transition-colors"
               >
                 More Than Miles: 5 Things You Wouldn't Guess From the Parking
                 Lot
@@ -344,7 +344,7 @@ function GroupRunningPage() {
               Pittsburgh area actually look like in practice,{" "}
               <Link
                 to="/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs"
-                className="text-blue underline underline-offset-4 hover:text-paper transition-colors"
+                className="text-foreground underline underline-offset-4 hover:text-foreground transition-colors"
               >
                 Fleet Feet Pittsburgh Running Group vs Independent Run Clubs
               </Link>{" "}
@@ -375,7 +375,7 @@ function GroupRunningPage() {
             <div className="space-y-6">
               {FAQS.map((f) => (
                 <div key={f.q}>
-                  <h3 className="text-paper font-bold text-[17px] md:text-[18px] mb-1.5">
+                  <h3 className="text-foreground font-bold text-[17px] md:text-[18px] mb-1.5">
                     {f.q}
                   </h3>
                   <p>{f.a}</p>
@@ -383,7 +383,7 @@ function GroupRunningPage() {
               ))}
             </div>
 
-            <p className="text-paper text-lg md:text-xl font-bold mt-12">
+            <p className="text-foreground text-lg md:text-xl font-bold mt-12">
               Consistency compounds. Especially when people are expecting you at
               7 AM.
             </p>
@@ -395,7 +395,7 @@ function GroupRunningPage() {
             </Link>
             <Link
               to="/resources"
-              className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors"
+              className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-foreground/40 text-foreground hover:border-blue hover:text-foreground/70 transition-colors"
             >
               Back to Resources
             </Link>

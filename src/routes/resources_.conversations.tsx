@@ -99,34 +99,34 @@ const CONVERSATIONS: Conversation[] = [
 
 function ConversationsPage() {
   return (
-    <main className="bg-ink text-paper">
+    <main className="bg-background text-foreground">
       <SiteNav />
-      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
+      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-foreground/15">
         <div className="max-w-[900px] mx-auto">
           <Link
             to="/resources"
-            className="eyebrow text-blue hover:text-paper transition-colors"
+            className="eyebrow text-foreground hover:text-foreground transition-colors"
           >
             ← All resources
           </Link>
-          <p className="eyebrow text-blue mt-8 mb-5">INTERVIEWS & FEATURES</p>
+          <p className="eyebrow text-foreground mt-8 mb-5">INTERVIEWS & FEATURES</p>
           <h1 className="display-condensed uppercase text-[clamp(48px,9vw,128px)] leading-[0.9]">
             Conversations
           </h1>
-          <p className="mt-7 text-paper/75 text-lg md:text-xl max-w-[640px] leading-[1.55]">
+          <p className="mt-7 text-foreground/75 text-lg md:text-xl max-w-[640px] leading-[1.55]">
             The people behind the miles. Founders, members, and partners on
             what it actually takes to keep showing up.
           </p>
         </div>
       </section>
 
-      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
+      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-foreground/15">
         <div className="max-w-[900px] mx-auto flex flex-col gap-20">
           {CONVERSATIONS.map((c) => (
             <article
               key={c.slug}
               id={c.slug}
-              className={`border-t border-paper/15 pt-12 ${
+              className={`border-t border-foreground/15 pt-12 ${
                 c.comingSoon ? "opacity-60" : ""
               }`}
             >
@@ -134,20 +134,20 @@ function ConversationsPage() {
                 <span className="inline-flex items-center px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.16em] bg-blue text-ink">
                   {c.tag}
                 </span>
-                <span className="eyebrow text-paper/55">{c.role}</span>
+                <span className="eyebrow text-foreground/70">{c.role}</span>
               </div>
               <h2 className="text-[28px] md:text-[40px] font-bold leading-[1.1] tracking-tight">
                 {c.guest}
               </h2>
-              <blockquote className="mt-6 text-paper/80 text-[17px] md:text-[19px] leading-[1.55] border-l-2 border-blue pl-5 italic">
+              <blockquote className="mt-6 text-foreground/80 text-[17px] md:text-[19px] leading-[1.55] border-l-2 border-blue pl-5 italic">
                 "{c.hook}"
               </blockquote>
               {c.qa.length > 0 && (
                 <div className="mt-10 space-y-8">
                   {c.qa.map((item, i) => (
                     <div key={i}>
-                      <p className="eyebrow text-blue mb-3">Q · {item.q}</p>
-                      <p className="text-paper/85 text-[16px] md:text-[17px] leading-[1.7]">
+                      <p className="eyebrow text-foreground mb-3">Q · {item.q}</p>
+                      <p className="text-foreground/85 text-[16px] md:text-[17px] leading-[1.7]">
                         {item.a}
                       </p>
                     </div>
@@ -155,7 +155,7 @@ function ConversationsPage() {
                 </div>
               )}
               {c.comingSoon && (
-                <p className="mt-6 eyebrow text-paper/40">Coming Soon</p>
+                <p className="mt-6 eyebrow text-foreground/70">Coming Soon</p>
               )}
               <ShareButtons url={URL} title={TITLE} />
             </article>
@@ -171,13 +171,13 @@ function ConversationsPage() {
 
 function CTA() {
   return (
-    <section className="bg-black px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
+    <section className="bg-background px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-foreground/15">
       <div className="max-w-[900px] mx-auto text-center">
-        <p className="eyebrow text-blue mb-5">WANT TO BE FEATURED?</p>
+        <p className="eyebrow text-foreground mb-5">WANT TO BE FEATURED?</p>
         <h2 className="display-condensed uppercase text-[clamp(36px,6vw,80px)] leading-[0.92]">
           Got a story worth telling?
         </h2>
-        <p className="mt-6 text-paper/75 text-[16px] md:text-[17px] leading-[1.6] max-w-[560px] mx-auto">
+        <p className="mt-6 text-foreground/75 text-[16px] md:text-[17px] leading-[1.6] max-w-[560px] mx-auto">
           We feature runners, coaches, and partners doing real work in
           community-driven fitness.
         </p>
@@ -191,7 +191,7 @@ function CTA() {
           </Link>
           <Link
             to="/resources"
-            className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors"
+            className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-foreground/40 text-foreground hover:border-blue hover:text-foreground/70 transition-colors"
           >
             Back to Resources
           </Link>

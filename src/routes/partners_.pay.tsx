@@ -31,12 +31,12 @@ function Page() {
         <p>A valid private package link is required. Contact nick@gryt.club.</p>
       ) : (
         <>
-          <p className="text-blue">{q.data.partner_name}</p>
+          <p className="text-foreground">{q.data.partner_name}</p>
           <h2 className="mt-4 font-condensed text-3xl uppercase">{q.data.name}</h2>
-          <p className="mt-3 whitespace-pre-wrap text-paper/80">{q.data.description}</p>
-          <p className="mt-5 text-3xl text-blue">{usd(q.data.amount_cents)}</p>
+          <p className="mt-3 whitespace-pre-wrap text-foreground/80">{q.data.description}</p>
+          <p className="mt-5 text-3xl text-foreground">{usd(q.data.amount_cents)}</p>
           {q.data.amount_cents > 100000 && (
-            <p className="mt-3 text-paper/75">
+            <p className="mt-3 text-foreground/75">
               Card or US bank payment. Bank payments stay pending until funds settle.
             </p>
           )}

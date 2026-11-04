@@ -439,24 +439,24 @@ function RecapGeneratorPage() {
   const stravaConnected = stravaState === "ready" || stravaState === "loading";
 
   return (
-    <main className="bg-ink text-paper">
+    <main className="bg-background text-foreground">
       <SiteNav />
 
-      <section className="px-5 sm:px-10 lg:px-20 pt-10 pb-8 border-b border-paper/12">
+      <section className="px-5 sm:px-10 lg:px-20 pt-10 pb-8 border-b border-foreground/12">
         <div className="max-w-[1240px] mx-auto">
-          <p className="eyebrow text-blue mb-3">
-            <Link to="/resources" className="hover:text-paper focus-visible:outline-2 focus-visible:outline-blue focus-visible:outline-offset-4">
+          <p className="eyebrow text-foreground mb-3">
+            <Link to="/resources" className="hover:text-foreground focus-visible:outline-2 focus-visible:outline-blue focus-visible:outline-offset-4">
               ← Resources
             </Link>
           </p>
           <h1 className="display-condensed uppercase text-4xl sm:text-6xl lg:text-7xl leading-none tracking-normal">
             Create your run recap
           </h1>
-          <p className="mt-3 text-paper/85 text-base sm:text-lg max-w-[560px] leading-[1.5]">
+          <p className="mt-3 text-foreground/85 text-base sm:text-lg max-w-[560px] leading-[1.5]">
             Turn today's run into a graphic worth sharing.
           </p>
           <p className="mt-3 text-sm">
-            <Link to="/resources/runs" className="text-blue underline underline-offset-4 hover:text-paper">
+            <Link to="/resources/runs" className="text-foreground underline underline-offset-4 hover:text-foreground">
               Or browse your Strava runs with pace, elevation, and splits →
             </Link>
           </p>
@@ -504,7 +504,7 @@ function RecapGeneratorPage() {
               <Button variant="ghost"
                 type="button"
                 onClick={() => setShowFileImport((v) => !v)}
-                className="mt-3 text-xs font-bold uppercase tracking-[0.14em] text-paper/80 hover:text-blue underline underline-offset-4"
+                className="mt-3 text-xs font-bold uppercase tracking-[0.14em] text-foreground/80 hover:text-foreground/70 underline underline-offset-4"
               >
                 <Upload aria-hidden="true" />Import activity file
               </Button>
@@ -527,7 +527,7 @@ function RecapGeneratorPage() {
 
             {/* Step 2 */}
             <StepBlock n={2} title="Make it yours">
-              <p className="mb-3 text-sm font-medium text-paper/85">Graphic style</p>
+              <p className="mb-3 text-sm font-medium text-foreground/85">Graphic style</p>
               <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap" role="group" aria-label="Styles">
                 {THEMES.map((t) => {
                   const active = theme === t.id;
@@ -540,7 +540,7 @@ function RecapGeneratorPage() {
                       className={`min-h-12 rounded-none px-3.5 py-3 text-sm font-bold uppercase tracking-normal border transition-colors ${
                         active
                           ? "border-blue bg-blue text-ink"
-                          : "border-paper/25 text-paper/85 hover:border-blue hover:text-blue"
+                          : "border-foreground/25 text-foreground/85 hover:border-blue hover:text-foreground/70"
                       }`}
                     >
                       {t.label}
@@ -630,9 +630,9 @@ function RecapGeneratorPage() {
                   onChange={(e) => setAcceptedTerms(e.target.checked)}
                   className="mt-1 h-6 w-6 shrink-0 accent-blue cursor-pointer focus-visible:outline-2 focus-visible:outline-blue focus-visible:outline-offset-2"
                 />
-                <span className="text-sm leading-[1.55] text-paper/75 group-hover:text-paper transition-colors">
+                <span className="text-sm leading-[1.55] text-foreground/75 group-hover:text-foreground transition-colors">
                   I have the right to use this photo and agree to the{" "}
-                  <Link to="/terms" target="_blank" className="text-blue underline">
+                  <Link to="/terms" target="_blank" className="text-foreground underline">
                     terms
                   </Link>
                   .
@@ -644,7 +644,7 @@ function RecapGeneratorPage() {
                   type="button"
                   onClick={download}
                   disabled={!acceptedTerms || status === "saving"}
-                  className="min-h-12 rounded-none bg-blue px-5 text-ink hover:bg-paper hover:text-ink disabled:opacity-60 disabled:cursor-not-allowed"
+                  className="min-h-12 rounded-none bg-blue px-5 text-ink hover:bg-foreground hover:text-background hover:text-ink disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   <Download aria-hidden="true" />{status === "saving" ? "Saving…" : "Download PNG"}
                 </Button>
@@ -666,13 +666,13 @@ function RecapGeneratorPage() {
                     readOnly
                     value={shareUrl}
                     onFocus={(e) => e.currentTarget.select()}
-                    className="flex-1 min-w-0 bg-ink/60 border border-paper/20 text-paper text-xs px-2.5 py-2 font-mono truncate focus:outline-none focus:border-blue"
+                    className="flex-1 min-w-0 bg-background/60 border border-foreground/20 text-foreground text-xs px-2.5 py-2 font-mono truncate focus:outline-none focus:border-blue"
                   />
                   <a
                     href={shareUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-3 py-2 text-xs font-bold uppercase tracking-[0.12em] border border-paper/30 text-paper/85 hover:border-blue hover:text-blue text-center"
+                    className="px-3 py-2 text-xs font-bold uppercase tracking-[0.12em] border border-foreground/30 text-foreground/85 hover:border-blue hover:text-foreground/70 text-center"
                   >
                     Open
                   </a>
@@ -680,13 +680,13 @@ function RecapGeneratorPage() {
               )}
 
               {shareState === "error" && (
-                <p className="mt-3 text-sm text-paper">Couldn't create a link. Try again.</p>
+                <p className="mt-3 text-sm text-foreground">Couldn't create a link. Try again.</p>
               )}
 
-              <div className="mt-6 border-t border-paper/20 pt-4">
-                <p className="eyebrow text-blue mb-1.5">Keep it going</p>
-                <p className="text-sm text-paper/80 leading-[1.55]">
-                  Tag <span className="text-paper font-bold">@grytrunclub</span> when you post, then
+              <div className="mt-6 border-t border-foreground/20 pt-4">
+                <p className="eyebrow text-foreground mb-1.5">Keep it going</p>
+                <p className="text-sm text-foreground/80 leading-[1.55]">
+                  Tag <span className="text-foreground font-bold">@grytrunclub</span> when you post, then
                   challenge your crew to post theirs.
                 </p>
               </div>
@@ -695,8 +695,8 @@ function RecapGeneratorPage() {
 
           {/* ── Preview ── */}
           <div className="order-1 lg:order-2 min-w-0 w-full max-w-[280px] sm:max-w-[360px] lg:max-w-none mx-auto lg:sticky lg:top-24">
-            <div className="mb-3 flex items-baseline justify-between gap-3"><p className="eyebrow text-paper/80">Your recap</p><span className="font-mono text-xs text-blue">1080 × 1920</span></div>
-            <div className="relative bg-ink border border-paper/25 overflow-hidden">
+            <div className="mb-3 flex items-baseline justify-between gap-3"><p className="eyebrow text-foreground/80">Your recap</p><span className="font-mono text-xs text-foreground">1080 × 1920</span></div>
+            <div className="relative bg-background border border-foreground/25 overflow-hidden">
               <canvas
                 ref={canvasRef}
                 width={CANVAS_W}
@@ -733,7 +733,7 @@ function StepBlock({
 }) {
   return (
     <section>
-      <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3 mb-5 border-t border-paper/20 pt-5">
+      <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3 mb-5 border-t border-foreground/20 pt-5">
         <span className="inline-flex h-9 w-9 items-center justify-center bg-blue text-ink text-xs font-bold">
           {n}
         </span>
@@ -765,14 +765,14 @@ function SourceCard({
       onClick={onClick}
       aria-pressed={active}
       className={`h-auto min-h-24 flex-col items-start justify-start whitespace-normal rounded-none text-left p-4 border transition-colors ${
-        active ? "border-blue bg-blue/10" : "border-paper/18 bg-paper/[0.03] hover:border-paper/40"
+        active ? "border-blue bg-blue/10" : "border-foreground/18 bg-foreground/[0.03] hover:border-foreground/40"
       }`}
     >
       <span className="block h-1 w-8 mb-3 bg-blue" aria-hidden />
-      <span className="block text-sm font-bold uppercase tracking-[0.1em] text-paper">
+      <span className="block text-sm font-bold uppercase tracking-[0.1em] text-foreground">
         {busy ? "Connecting…" : label}
       </span>
-      <span className="block text-xs text-paper/80 mt-1">{hint}</span>
+      <span className="block text-xs text-foreground/80 mt-1">{hint}</span>
     </Button>
   );
 }
@@ -791,7 +791,7 @@ function SecondaryBtn({
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className="min-h-12 rounded-none px-4 py-3 text-xs font-bold uppercase tracking-[0.12em] border border-blue text-blue hover:bg-blue hover:text-ink transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+      className="min-h-12 rounded-none px-4 py-3 text-xs font-bold uppercase tracking-[0.12em] border border-blue text-foreground hover:bg-blue hover:text-ink transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
     >
       {children}
     </Button>
@@ -803,7 +803,7 @@ function GhostBtn({ children, onClick }: { children: React.ReactNode; onClick: (
     <Button variant="ghost"
       type="button"
       onClick={onClick}
-      className="min-h-12 rounded-none px-4 py-3 text-xs font-bold uppercase tracking-[0.12em] border border-paper/25 text-paper/75 hover:border-blue hover:text-blue transition-colors"
+      className="min-h-12 rounded-none px-4 py-3 text-xs font-bold uppercase tracking-[0.12em] border border-foreground/25 text-foreground/75 hover:border-blue hover:text-foreground/70 transition-colors"
     >
       {children}
     </Button>
@@ -827,7 +827,7 @@ function Field({
 }) {
   return (
     <label className="block min-w-0">
-      <span className="block mb-2 text-sm font-medium text-paper/85">{label}</span>
+      <span className="block mb-2 text-sm font-medium text-foreground/85">{label}</span>
       <input
         type="text"
         value={value}
@@ -835,7 +835,7 @@ function Field({
         inputMode={inputMode}
         placeholder={placeholder}
         onChange={(e) => onChange(e.target.value)}
-        className="min-h-12 w-full rounded-none bg-vintage border border-paper/30 text-paper placeholder:text-muted-foreground px-3 py-3 text-base focus:outline-none focus:border-blue focus-visible:ring-2 focus-visible:ring-blue transition-colors"
+        className="min-h-12 w-full rounded-none bg-background border border-foreground/30 text-foreground placeholder:text-muted-foreground px-3 py-3 text-base focus:outline-none focus:border-blue focus-visible:ring-2 focus-visible:ring-blue transition-colors"
       />
     </label>
   );
@@ -855,12 +855,12 @@ function PhotoPicker({
   const inputRef = useRef<HTMLInputElement>(null);
   return (
     <div>
-      <span className="eyebrow text-paper/80 block mb-1.5">Cover photo</span>
+      <span className="eyebrow text-foreground/80 block mb-1.5">Cover photo</span>
       <div className="flex flex-wrap items-center gap-3">
         <Button variant="ghost"
           type="button"
           onClick={() => inputRef.current?.click()}
-          className="min-h-12 inline-flex items-center rounded-none px-4 py-3 text-sm font-bold border border-paper/30 text-paper/85 hover:border-blue hover:text-blue transition-colors"
+          className="min-h-12 inline-flex items-center rounded-none px-4 py-3 text-sm font-bold border border-foreground/30 text-foreground/85 hover:border-blue hover:text-foreground/70 transition-colors"
         >
           <Camera aria-hidden="true" />{hasPhoto ? "Replace photo" : "Add photo"}
         </Button>
@@ -884,14 +884,14 @@ function PhotoPicker({
             <Button variant="ghost"
               type="button"
               onClick={onAdjust}
-              className="min-h-12 rounded-none text-sm text-paper/85 hover:text-blue underline underline-offset-4"
+              className="min-h-12 rounded-none text-sm text-foreground/85 hover:text-foreground/70 underline underline-offset-4"
             >
               Adjust photo
             </Button>
             <Button variant="ghost"
               type="button"
               onClick={onClear}
-              className="min-h-12 rounded-none text-sm text-paper/85 hover:text-paper underline underline-offset-4"
+              className="min-h-12 rounded-none text-sm text-foreground/85 hover:text-foreground underline underline-offset-4"
             >
               Remove photo
             </Button>
@@ -912,13 +912,13 @@ function PhotoControls({
   onReset: () => void;
 }) {
   return (
-    <div className="border border-paper/15 p-4 flex flex-col gap-3">
+    <div className="border border-foreground/15 p-4 flex flex-col gap-3">
       <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2">
-        <p className="eyebrow text-paper/80">Adjust photo</p>
+        <p className="eyebrow text-foreground/80">Adjust photo</p>
         <Button variant="ghost"
           type="button"
           onClick={onReset}
-          className="min-h-12 rounded-none text-sm font-bold text-paper/85 hover:text-blue"
+          className="min-h-12 rounded-none text-sm font-bold text-foreground/85 hover:text-foreground/70"
         >
           Reset photo
         </Button>
@@ -983,10 +983,10 @@ function RangeControl({
   return (
     <label className="block min-w-0">
       <span className="flex items-baseline justify-between mb-1.5">
-        <span className="text-sm font-medium text-paper/85">
+        <span className="text-sm font-medium text-foreground/85">
           {label}
         </span>
-        <span className="text-sm font-mono text-blue">{format(value)}</span>
+        <span className="text-sm font-mono text-foreground">{format(value)}</span>
       </span>
       <input
         type="range"
@@ -1023,8 +1023,8 @@ function StravaRuns({
   return (
     <div className="mt-4">
       {state === "error" && error && (
-        <div role="alert" className="border border-paper/40 bg-vintage p-3 text-xs text-paper/85">
-          <p className="text-paper font-medium">{error}</p>
+        <div role="alert" className="border border-foreground/40 bg-background p-3 text-xs text-foreground/85">
+          <p className="text-foreground font-medium">{error}</p>
           <Button variant="ghost"
             type="button"
             onClick={onConnect}
@@ -1035,30 +1035,30 @@ function StravaRuns({
         </div>
       )}
 
-      {state === "loading" && <p className="text-xs text-paper/80">Loading your runs…</p>}
+      {state === "loading" && <p className="text-xs text-foreground/80">Loading your runs…</p>}
 
       {state === "ready" && activities && activities.length > 0 && (
         <>
           <div className="flex items-center justify-between mb-2">
-            <span className="eyebrow text-paper/80">Your runs</span>
+            <span className="eyebrow text-foreground/80">Your runs</span>
             <div className="flex gap-4">
               <Button variant="ghost"
                 type="button"
                 onClick={onRefresh}
-                className="text-[11px] font-bold uppercase tracking-[0.12em] text-paper/80 hover:text-blue"
+                className="text-[11px] font-bold uppercase tracking-[0.12em] text-foreground/80 hover:text-foreground/70"
               >
                 Refresh
               </Button>
               <Button variant="ghost"
                 type="button"
                 onClick={onDisconnect}
-                className="text-[11px] font-bold uppercase tracking-[0.12em] text-paper/80 hover:text-paper"
+                className="text-[11px] font-bold uppercase tracking-[0.12em] text-foreground/80 hover:text-foreground"
               >
                 Disconnect
               </Button>
             </div>
           </div>
-          <ul className="max-h-72 overflow-y-auto divide-y divide-paper/10 border border-paper/12">
+          <ul className="max-h-72 overflow-y-auto divide-y divide-foreground/10 border border-foreground/12">
             {activities.map((a) => {
               const miles = a.distance / 1609.344;
               const paceSec = miles > 0 ? a.moving_time / miles : 0;
@@ -1070,18 +1070,18 @@ function StravaRuns({
                     onClick={() => onPick(a)}
                     aria-pressed={active}
                     className={`w-full text-left px-3 py-2.5 flex items-center justify-between gap-3 transition-colors ${
-                      active ? "bg-blue/15" : "hover:bg-paper/[0.04]"
+                      active ? "bg-blue/15" : "hover:bg-foreground/[0.04]"
                     }`}
                   >
                     <div className="min-w-0">
-                      <p className="text-sm text-paper truncate">{a.name}</p>
-                      <p className="text-[11px] uppercase tracking-[0.1em] text-paper/80 mt-0.5">
+                      <p className="text-sm text-foreground truncate">{a.name}</p>
+                      <p className="text-[11px] uppercase tracking-[0.1em] text-foreground/80 mt-0.5">
                         {formatDate(new Date(a.start_date_local))} · {miles.toFixed(miles >= 10 ? 1 : 2)} mi
                       </p>
                     </div>
                     <div className="text-right shrink-0">
-                      <p className="text-sm text-paper tabular-nums">{formatDuration(a.moving_time)}</p>
-                      <p className="text-[11px] text-paper/80 mt-0.5 tabular-nums">
+                      <p className="text-sm text-foreground tabular-nums">{formatDuration(a.moving_time)}</p>
+                      <p className="text-[11px] text-foreground/80 mt-0.5 tabular-nums">
                         {paceSec > 0 ? `${formatPace(paceSec)}/mi` : "—"}
                       </p>
                     </div>
@@ -1094,7 +1094,7 @@ function StravaRuns({
       )}
 
       {state === "ready" && activities && activities.length === 0 && (
-        <p className="text-xs text-paper/80">No runs yet. Log one, then refresh.</p>
+        <p className="text-xs text-foreground/80">No runs yet. Log one, then refresh.</p>
       )}
     </div>
   );
@@ -1124,7 +1124,7 @@ function GarminFilePanel({ onParsed }: { onParsed: (a: ParsedActivity) => void }
   }
 
   return (
-    <div className="mt-3 border border-paper/15 bg-paper/[0.03] p-4">
+    <div className="mt-3 border border-foreground/15 bg-foreground/[0.03] p-4">
       <input
         ref={inputRef}
         type="file"
@@ -1136,19 +1136,19 @@ function GarminFilePanel({ onParsed }: { onParsed: (a: ParsedActivity) => void }
         type="button"
         onClick={() => inputRef.current?.click()}
         disabled={state === "parsing"}
-        className="px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] border border-paper/30 text-paper/85 hover:border-blue hover:text-blue transition-colors disabled:opacity-60"
+        className="px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] border border-foreground/30 text-foreground/85 hover:border-blue hover:text-foreground/70 transition-colors disabled:opacity-60"
       >
         {state === "parsing" ? "Reading…" : "Choose a file"}
       </Button>
       {state === "error" && error && (
-        <div role="alert" className="mt-3 text-xs text-paper/85">
-          <p className="text-paper">{error}</p>
-          <p className="mt-1.5 text-paper/80">
+        <div role="alert" className="mt-3 text-xs text-foreground/85">
+          <p className="text-foreground">{error}</p>
+          <p className="mt-1.5 text-foreground/80">
             In Garmin Connect: open the activity → … → Export Original (.fit) or GPX / TCX.
           </p>
         </div>
       )}
-      {state === "done" && <p className="mt-3 text-xs text-paper/80">Loaded.</p>}
+      {state === "done" && <p className="mt-3 text-xs text-foreground/80">Loaded.</p>}
     </div>
   );
 }

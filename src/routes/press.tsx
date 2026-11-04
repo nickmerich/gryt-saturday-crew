@@ -27,9 +27,9 @@ const condensed = { fontFamily: "var(--font-condensed)" };
 const body = { fontFamily: "var(--font-body)" };
 
 function MaybeLink({ href, children }: { href: string | null; children: React.ReactNode }) {
-  if (!href) return <span className="eyebrow text-paper/50">{children}</span>;
+  if (!href) return <span className="eyebrow text-foreground/70">{children}</span>;
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" className="eyebrow text-blue hover:text-paper transition-colors">
+    <a href={href} target="_blank" rel="noopener noreferrer" className="eyebrow text-foreground hover:text-foreground transition-colors">
       {children} →
     </a>
   );
@@ -38,7 +38,7 @@ function MaybeLink({ href, children }: { href: string | null; children: React.Re
 function Item({ outlet, kind, date, links }: { outlet: string; kind: string; date: string; links: { label: string; href: string | null }[] }) {
   return (
     <article className="border-t-2 border-blue pt-6">
-      <div className="eyebrow text-paper/60 mb-3" style={body}>{kind} · {date}</div>
+      <div className="eyebrow text-foreground/75 mb-3" style={body}>{kind} · {date}</div>
       <h3 className="text-3xl sm:text-4xl uppercase leading-none mb-5" style={condensed}>{outlet}</h3>
       <div className="flex flex-col gap-2">
         {links.map((l) => <MaybeLink key={l.label} href={l.href}>{l.label}</MaybeLink>)}
@@ -58,17 +58,17 @@ function PressPage() {
   return (
     <>
       <SiteNav />
-      <main className="bg-ink text-paper">
+      <main className="bg-background text-foreground">
         <section className="mx-auto max-w-5xl px-6 py-16 sm:py-24">
-          <div className="eyebrow text-blue mb-4" style={body}>Press · GRYT Run Club</div>
+          <div className="eyebrow text-foreground mb-4" style={body}>Press · GRYT Run Club</div>
           <h1 className="text-5xl sm:text-6xl lg:text-7xl uppercase leading-[0.92]" style={condensed}>
             <span className="block">Press &amp;</span>
             <span className="block">conversations</span>
           </h1>
-          <p className="mt-6 text-lg text-paper/80 max-w-2xl" style={body}>
+          <p className="mt-6 text-lg text-foreground/80 max-w-2xl" style={body}>
             A few places GRYT has shown up. Stories, briefs, and one long conversation about why we started.
           </p>
-          <p className="mt-4 text-paper/70 max-w-2xl" style={body}>
+          <p className="mt-4 text-foreground/70 max-w-2xl" style={body}>
             The best coverage is still the Saturday run. Free, 7 AM, all paces.
           </p>
         </section>
@@ -91,9 +91,9 @@ function PressPage() {
 
         <section className="mx-auto max-w-5xl px-6 pb-16">
           <h2 className="text-3xl sm:text-4xl font-semibold mb-8" style={{ fontFamily: "var(--font-display)" }}>Helping people find the starting line</h2>
-          <ul className="border-t border-paper/15">
+          <ul className="border-t border-foreground/15">
             {LISTINGS.map((l) => (
-              <li key={l.name} className="flex flex-wrap items-center justify-between gap-3 border-b border-paper/15 py-4">
+              <li key={l.name} className="flex flex-wrap items-center justify-between gap-3 border-b border-foreground/15 py-4">
                 <span className="text-lg" style={body}>{l.name}</span>
                 <MaybeLink href={l.href}>Event listing</MaybeLink>
               </li>

@@ -83,7 +83,7 @@ export function SupportBlock() {
                   onClick={() => { setSelected(amt); setError(null); }}
                   className={`h-14 text-lg font-display tracking-tight border transition ${
                     active
-                      ? 'bg-ink text-paper border-ink'
+                      ? 'bg-background text-foreground border-ink'
                       : 'bg-white text-ink border-ink/20 hover:border-ink'
                   }`}
                 >
@@ -96,7 +96,7 @@ export function SupportBlock() {
               onClick={() => { setSelected('custom'); setError(null); }}
               className={`h-14 text-xs tracking-[0.14em] uppercase border transition ${
                 selected === 'custom'
-                  ? 'bg-ink text-paper border-ink'
+                  ? 'bg-background text-foreground border-ink'
                   : 'bg-white text-ink border-ink/20 hover:border-ink'
               }`}
             >
@@ -146,7 +146,7 @@ export function SupportBlock() {
           <button
             type="button"
             onClick={startCheckout}
-            className="w-full h-14 bg-baby-blue text-ink text-sm tracking-[0.2em] uppercase font-display border border-ink hover:bg-ink hover:text-paper transition"
+            className="w-full h-14 bg-baby-blue text-ink text-sm tracking-[0.2em] uppercase font-display border border-ink hover:bg-background hover:text-foreground transition"
           >
             Chip in
           </button>

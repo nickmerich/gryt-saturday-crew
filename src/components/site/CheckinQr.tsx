@@ -63,12 +63,12 @@ export function CheckinQr() {
   }, [open])
 
   return (
-    <div className="px-5 sm:px-12 py-5 border-b border-white/10">
+    <div className="px-5 sm:px-12 py-5 border-b border-foreground/10">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
         className={`px-4 py-3 text-xs uppercase tracking-wider border ${
-          open ? 'bg-blue text-ink border-blue' : 'border-white/20 text-paper'
+          open ? 'bg-blue text-ink border-blue' : 'border-foreground/20 text-foreground'
         }`}
       >
         {open ? 'Hide scan code' : 'Show scan code'}

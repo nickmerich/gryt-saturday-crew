@@ -266,15 +266,15 @@ function WhatToWearPage() {
       sources={SOURCES}
       related={["night-running", "pace-calculator", "saturday-what-to-expect"]}
     >
-      <section aria-label="What to wear tool" className="border border-paper/20 bg-vintage p-5 md:p-8">
+      <section aria-label="What to wear tool" className="border border-foreground/20 bg-background p-5 md:p-8">
         <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:justify-between">
-          <p className="eyebrow text-blue">Conditions</p>
+          <p className="eyebrow text-foreground">Conditions</p>
           <button type="button" onClick={loadSaturday} disabled={loading} className="btn-primary disabled:opacity-60">
             {loading ? "Loading forecast…" : "Use this Saturday's 7 AM forecast"}
           </button>
         </div>
         {forecastNote ? (
-          <p className="mt-3 text-[14px] text-paper/80" role="status">
+          <p className="mt-3 text-[14px] text-foreground/80" role="status">
             {forecastNote}
           </p>
         ) : null}
@@ -291,7 +291,7 @@ function WhatToWearPage() {
                 setDark(p.dark);
                 setForecastNote(null);
               }}
-              className="px-3 py-1.5 text-[12.5px] border border-paper/30 text-paper/80 hover:border-blue hover:text-paper transition-colors"
+              className="px-3 py-1.5 text-[12.5px] border border-foreground/30 text-foreground/80 hover:border-blue hover:text-foreground transition-colors"
             >
               {p.label} · {p.temp}°
             </button>
@@ -334,16 +334,16 @@ function WhatToWearPage() {
           />
         </div>
 
-        <div className="mt-8 border-t border-paper/20 pt-6" aria-live="polite">
-          <p className="text-[13px] text-paper/70">
+        <div className="mt-8 border-t border-foreground/20 pt-6" aria-live="polite">
+          <p className="text-[13px] text-foreground/70">
             {feels !== temp ? (
               <>
-                Feels like <strong className="text-paper">{feels}°F</strong> with the wind.{" "}
+                Feels like <strong className="text-foreground">{feels}°F</strong> with the wind.{" "}
               </>
             ) : null}
-            Dress like it's <strong className="text-paper">{dressFor}°F</strong>.
+            Dress like it's <strong className="text-foreground">{dressFor}°F</strong>.
           </p>
-          <dl className="mt-5 grid gap-px bg-paper/15 border border-paper/15 sm:grid-cols-2">
+          <dl className="mt-5 grid gap-px bg-foreground/15 border border-foreground/15 sm:grid-cols-2">
             <KitRow k="Head" v={kit.head} />
             <KitRow k="Top" v={kit.top} />
             <KitRow k="Bottom" v={kit.bottom} />
@@ -352,14 +352,14 @@ function WhatToWearPage() {
             <KitRow k="Pocket" v="Phone, ID, and a key. A gel if you're out longer than an hour." />
           </dl>
           {extras.length ? (
-            <ul className="mt-5 space-y-1.5 text-[15px] text-paper/85 list-disc pl-5">
+            <ul className="mt-5 space-y-1.5 text-[15px] text-foreground/85 list-disc pl-5">
               {extras.map((x) => (
                 <li key={x}>{x}</li>
               ))}
             </ul>
           ) : null}
           {cautions.map((c) => (
-            <p key={c} className="mt-4 border-l-4 border-blue bg-ink p-4 text-[15px] text-paper">
+            <p key={c} className="mt-4 border-l-4 border-blue bg-background p-4 text-[15px] text-foreground">
               {c}
             </p>
           ))}
@@ -424,7 +424,7 @@ function WhatToWearPage() {
       <div className="space-y-6">
         {FAQS.map((f) => (
           <div key={f.q}>
-            <p className="font-bold text-paper">{f.q}</p>
+            <p className="font-bold text-foreground">{f.q}</p>
             <p className="mt-1.5">{f.a}</p>
           </div>
         ))}
@@ -452,12 +452,12 @@ function Slider({
   return (
     <div>
       <div className="flex items-baseline justify-between">
-        <label htmlFor={id} className="text-[11px] tracking-[0.2em] uppercase text-paper/60 font-mono">
+        <label htmlFor={id} className="text-[11px] tracking-[0.2em] uppercase text-foreground/75 font-mono">
           {label}
         </label>
         <span className="text-[30px] font-bold tabular-nums leading-none">
           {value}
-          <span className="text-[15px] text-paper/60 ml-1">{unit}</span>
+          <span className="text-[15px] text-foreground/75 ml-1">{unit}</span>
         </span>
       </div>
       <input
@@ -486,8 +486,8 @@ function Toggle({
 }) {
   return (
     <div>
-      <p className="text-[11px] tracking-[0.2em] uppercase text-paper/60 font-mono mb-2">{label}</p>
-      <div className="flex flex-wrap border border-paper/30 w-fit" role="radiogroup" aria-label={label}>
+      <p className="text-[11px] tracking-[0.2em] uppercase text-foreground/75 font-mono mb-2">{label}</p>
+      <div className="flex flex-wrap border border-foreground/30 w-fit" role="radiogroup" aria-label={label}>
         {options.map(([v, l]) => (
           <button
             key={v}
@@ -495,7 +495,7 @@ function Toggle({
             role="radio"
             aria-checked={value === v}
             onClick={() => onChange(v)}
-            className={`px-3.5 py-2.5 text-[13.5px] ${value === v ? "bg-blue text-ink font-bold" : "text-paper/80 hover:text-paper"}`}
+            className={`px-3.5 py-2.5 text-[13.5px] ${value === v ? "bg-blue text-ink font-bold" : "text-foreground/80 hover:text-foreground"}`}
           >
             {l}
           </button>
@@ -507,9 +507,9 @@ function Toggle({
 
 function KitRow({ k, v }: { k: string; v: string }) {
   return (
-    <div className="bg-ink p-4">
-      <dt className="text-[11px] tracking-[0.2em] uppercase text-blue font-mono">{k}</dt>
-      <dd className="mt-1 text-[15.5px] text-paper leading-[1.45]">{v}</dd>
+    <div className="bg-background p-4">
+      <dt className="text-[11px] tracking-[0.2em] uppercase text-foreground font-mono">{k}</dt>
+      <dd className="mt-1 text-[15.5px] text-foreground leading-[1.45]">{v}</dd>
     </div>
   );
 }

@@ -98,38 +98,38 @@ const GRAPHICS: Graphic[] = [
 
 function GraphicsPage() {
   return (
-    <main className="bg-ink text-paper">
+    <main className="bg-background text-foreground">
       <SiteNav />
-      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
+      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-foreground/15">
         <div className="max-w-[1100px] mx-auto">
           <Link
             to="/resources"
-            className="eyebrow text-blue hover:text-paper transition-colors"
+            className="eyebrow text-foreground hover:text-foreground transition-colors"
           >
             ← All resources
           </Link>
-          <p className="eyebrow text-blue mt-8 mb-5">FREE TO USE & SHARE</p>
+          <p className="eyebrow text-foreground mt-8 mb-5">FREE TO USE & SHARE</p>
           <h1 className="display-condensed uppercase text-[clamp(48px,9vw,128px)] leading-[0.9]">
             Graphics
           </h1>
-          <p className="mt-7 text-paper/75 text-lg md:text-xl max-w-[640px] leading-[1.55]">
+          <p className="mt-7 text-foreground/75 text-lg md:text-xl max-w-[640px] leading-[1.55]">
             Brand assets, printable posters, and pace cards. All free.
             Attribution appreciated, not required.
           </p>
         </div>
       </section>
 
-      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
+      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-foreground/15">
         <div className="max-w-[1100px] mx-auto flex flex-col gap-10">
           {GRAPHICS.map((g) => (
             <article
               key={g.slug}
               id={g.slug}
-              className={`grid grid-cols-1 md:grid-cols-[280px_1fr] gap-8 md:gap-10 border border-paper/15 bg-black/40 p-6 md:p-8 hover:border-blue transition-colors ${
+              className={`grid grid-cols-1 md:grid-cols-[280px_1fr] gap-8 md:gap-10 border border-foreground/15 bg-background/40 p-6 md:p-8 hover:border-blue transition-colors ${
                 g.comingSoon ? "opacity-60" : ""
               }`}
             >
-              <div className="relative aspect-[4/3] md:aspect-auto bg-black flex items-center justify-center overflow-hidden border border-paper/15">
+              <div className="relative aspect-[4/3] md:aspect-auto bg-background flex items-center justify-center overflow-hidden border border-foreground/15">
                 <div
                   className="absolute inset-0 opacity-[0.06]"
                   style={{
@@ -142,14 +142,14 @@ function GraphicsPage() {
               </div>
               <div className="flex flex-col gap-4">
                 <div className="flex items-center gap-3 flex-wrap">
-                  <span className="inline-flex items-center px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.16em] border border-paper/40 text-paper/80">
+                  <span className="inline-flex items-center px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.16em] border border-foreground/40 text-foreground/80">
                     {g.format}
                   </span>
                   {g.fileSize && (
-                    <span className="eyebrow text-paper/55">{g.fileSize}</span>
+                    <span className="eyebrow text-foreground/70">{g.fileSize}</span>
                   )}
                   {g.comingSoon && (
-                    <span className="inline-flex items-center px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.16em] border border-paper/25 text-paper/55">
+                    <span className="inline-flex items-center px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.16em] border border-foreground/25 text-foreground/70">
                       Coming Soon
                     </span>
                   )}
@@ -157,14 +157,14 @@ function GraphicsPage() {
                 <h2 className="text-[24px] md:text-[28px] font-bold leading-[1.15] tracking-tight">
                   {g.name}
                 </h2>
-                <p className="text-paper/70 text-[15px] md:text-[16px] leading-[1.6]">
+                <p className="text-foreground/70 text-[15px] md:text-[16px] leading-[1.6]">
                   {g.description}
                 </p>
                 <ul className="mt-1 space-y-2">
                   {g.details.map((d, i) => (
                     <li
                       key={i}
-                      className="text-paper/75 text-[14px] md:text-[15px] leading-[1.55] pl-5 relative"
+                      className="text-foreground/75 text-[14px] md:text-[15px] leading-[1.55] pl-5 relative"
                     >
                       <span
                         className="absolute left-0 top-[0.55em] w-2 h-px bg-blue"
@@ -176,11 +176,11 @@ function GraphicsPage() {
                 </ul>
                 <div className="pt-3 mt-auto">
                   {g.comingSoon ? (
-                    <span className="inline-flex items-center px-5 py-2.5 text-xs font-bold uppercase tracking-[0.12em] border border-paper/25 text-paper/55">
+                    <span className="inline-flex items-center px-5 py-2.5 text-xs font-bold uppercase tracking-[0.12em] border border-foreground/25 text-foreground/70">
                       Notify Me
                     </span>
                   ) : (
-                    <span className="inline-flex items-center px-5 py-2.5 text-xs font-bold uppercase tracking-[0.12em] border border-paper/25 text-paper/55">
+                    <span className="inline-flex items-center px-5 py-2.5 text-xs font-bold uppercase tracking-[0.12em] border border-foreground/25 text-foreground/70">
                       Coming soon
                     </span>
                   )}
@@ -199,13 +199,13 @@ function GraphicsPage() {
 
 function CTA() {
   return (
-    <section className="bg-black px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
+    <section className="bg-background px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-foreground/15">
       <div className="max-w-[900px] mx-auto text-center">
-        <p className="eyebrow text-blue mb-5">USING OUR GRAPHICS?</p>
+        <p className="eyebrow text-foreground mb-5">USING OUR GRAPHICS?</p>
         <h2 className="display-condensed uppercase text-[clamp(36px,6vw,80px)] leading-[0.92]">
           Tag us. We'll repost.
         </h2>
-        <p className="mt-6 text-paper/75 text-[16px] md:text-[17px] leading-[1.6] max-w-[560px] mx-auto">
+        <p className="mt-6 text-foreground/75 text-[16px] md:text-[17px] leading-[1.6] max-w-[560px] mx-auto">
           Print the poster, share the kit, hand out pace cards on race morning.
           Just tag @grytrunclub so we can see it out in the wild.
         </p>
@@ -215,7 +215,7 @@ function CTA() {
           </Link>
           <Link
             to="/resources"
-            className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors"
+            className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-foreground/40 text-foreground hover:border-blue hover:text-foreground/70 transition-colors"
           >
             Back to Resources
           </Link>

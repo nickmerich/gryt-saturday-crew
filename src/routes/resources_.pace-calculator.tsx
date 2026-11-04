@@ -125,7 +125,7 @@ function NumField({
 }) {
   return (
     <label className="flex flex-col gap-1.5">
-      <span className="text-[11px] tracking-[0.2em] uppercase text-paper/60 font-mono">{label}</span>
+      <span className="text-[11px] tracking-[0.2em] uppercase text-foreground/75 font-mono">{label}</span>
       <input
         inputMode="numeric"
         pattern="[0-9]*"
@@ -135,7 +135,7 @@ function NumField({
           if (max !== undefined && Number(v) > max) return;
           onChange(v);
         }}
-        className="w-full bg-ink border border-paper/30 px-3 py-3 text-[22px] font-bold tabular-nums focus:outline-none focus:border-blue"
+        className="w-full bg-background border border-foreground/30 px-3 py-3 text-[22px] font-bold tabular-nums focus:outline-none focus:border-blue"
         aria-label={label}
       />
     </label>
@@ -175,9 +175,9 @@ function PaceCalculatorPage() {
     >
       <section
         aria-label="Pace calculator"
-        className="border border-paper/20 bg-vintage p-5 md:p-8 not-prose"
+        className="border border-foreground/20 bg-background p-5 md:p-8 not-prose"
       >
-        <p className="eyebrow text-blue mb-4">1 · Distance</p>
+        <p className="eyebrow text-foreground mb-4">1 · Distance</p>
         <div className="flex flex-wrap gap-2" role="radiogroup" aria-label="Distance">
           {[...PRESETS, { id: "custom", label: "Custom", miles: 0 }].map((p) => (
             <button
@@ -189,7 +189,7 @@ function PaceCalculatorPage() {
               className={`px-3.5 py-2 text-[13px] border transition-colors ${
                 preset === p.id
                   ? "bg-blue text-ink border-blue font-bold"
-                  : "border-paper/30 text-paper/85 hover:border-blue"
+                  : "border-foreground/30 text-foreground/85 hover:border-blue"
               }`}
             >
               {p.label}
@@ -199,15 +199,15 @@ function PaceCalculatorPage() {
         {preset === "custom" && (
           <div className="mt-4 flex items-end gap-3 max-w-[340px]">
             <label className="flex-1 flex flex-col gap-1.5">
-              <span className="text-[11px] tracking-[0.2em] uppercase text-paper/60 font-mono">Distance</span>
+              <span className="text-[11px] tracking-[0.2em] uppercase text-foreground/75 font-mono">Distance</span>
               <input
                 inputMode="decimal"
                 value={custom}
                 onChange={(e) => setCustom(e.target.value.replace(/[^0-9.]/g, "").slice(0, 6))}
-                className="w-full bg-ink border border-paper/30 px-3 py-3 text-[22px] font-bold tabular-nums focus:outline-none focus:border-blue"
+                className="w-full bg-background border border-foreground/30 px-3 py-3 text-[22px] font-bold tabular-nums focus:outline-none focus:border-blue"
               />
             </label>
-            <div className="flex border border-paper/30" role="radiogroup" aria-label="Unit">
+            <div className="flex border border-foreground/30" role="radiogroup" aria-label="Unit">
               {(["mi", "km"] as const).map((u) => (
                 <button
                   key={u}
@@ -215,7 +215,7 @@ function PaceCalculatorPage() {
                   role="radio"
                   aria-checked={unit === u}
                   onClick={() => setUnit(u)}
-                  className={`px-4 py-3.5 text-[14px] ${unit === u ? "bg-blue text-ink font-bold" : "text-paper/80"}`}
+                  className={`px-4 py-3.5 text-[14px] ${unit === u ? "bg-blue text-ink font-bold" : "text-foreground/80"}`}
                 >
                   {u}
                 </button>
@@ -224,24 +224,24 @@ function PaceCalculatorPage() {
           </div>
         )}
 
-        <p className="eyebrow text-blue mt-8 mb-4">2 · Your time</p>
+        <p className="eyebrow text-foreground mt-8 mb-4">2 · Your time</p>
         <div className="grid grid-cols-3 gap-3 max-w-[420px]">
           <NumField label="Hours" value={h} onChange={setH} max={99} />
           <NumField label="Minutes" value={m} onChange={setM} max={59} />
           <NumField label="Seconds" value={s} onChange={setS} max={59} />
         </div>
 
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-px bg-paper/20 border border-paper/20" aria-live="polite">
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-px bg-foreground/20 border border-foreground/20" aria-live="polite">
           <Stat label="Pace per mile" value={valid ? `${fmtClock(perMile)}` : "–"} />
           <Stat label="Pace per km" value={valid ? `${fmtClock(perKm)}` : "–"} />
           <Stat label="Speed" value={valid ? `${mph.toFixed(1)} mph` : "–"} />
         </div>
 
-        <p className="eyebrow text-blue mt-8 mb-3">3 · Predicted race times</p>
+        <p className="eyebrow text-foreground mt-8 mb-3">3 · Predicted race times</p>
         <div className="overflow-x-auto">
           <table className="w-full text-left text-[15px] tabular-nums">
             <thead>
-              <tr className="text-[11px] tracking-[0.2em] uppercase text-paper/55 font-mono">
+              <tr className="text-[11px] tracking-[0.2em] uppercase text-foreground/70 font-mono">
                 <th className="py-2 pr-4 font-normal">Race</th>
                 <th className="py-2 pr-4 font-normal">Finish</th>
                 <th className="py-2 font-normal">Pace / mi</th>
@@ -251,7 +251,7 @@ function PaceCalculatorPage() {
               {PREDICT.map((p) => {
                 const t = valid ? seconds * Math.pow(p.miles / miles, 1.06) : NaN;
                 return (
-                  <tr key={p.id} className="border-t border-paper/15">
+                  <tr key={p.id} className="border-t border-foreground/15">
                     <td className="py-2.5 pr-4 font-bold">{p.label}</td>
                     <td className="py-2.5 pr-4">{fmtClock(t)}</td>
                     <td className="py-2.5">{fmtClock(t / p.miles)}</td>
@@ -261,7 +261,7 @@ function PaceCalculatorPage() {
             </tbody>
           </table>
         </div>
-        <p className="mt-4 text-[13.5px] text-paper/60 leading-[1.6]">
+        <p className="mt-4 text-[13.5px] text-foreground/75 leading-[1.6]">
           Predictions use Riegel's formula and assume you have trained for the longer distance.
           Expect hilly courses like the EQT Pittsburgh 10 Miler to run a little slower.
         </p>
@@ -273,7 +273,7 @@ function PaceCalculatorPage() {
         run too fast. Pace changes with hills, heat, sleep, and stress. Effort does not lie, which
         is why the talk test works better than a watch for most runs.
       </p>
-      <div className="mt-6 grid gap-px bg-paper/15 border border-paper/15 sm:grid-cols-3">
+      <div className="mt-6 grid gap-px bg-foreground/15 border border-foreground/15 sm:grid-cols-3">
         <EffortCard
           zone="Easy"
           scale="Up to 6 of 10"
@@ -334,7 +334,7 @@ function PaceCalculatorPage() {
       <div className="space-y-6">
         {FAQS.map((f) => (
           <div key={f.q}>
-            <p className="font-bold text-paper">{f.q}</p>
+            <p className="font-bold text-foreground">{f.q}</p>
             <p className="mt-1.5">{f.a}</p>
           </div>
         ))}
@@ -345,8 +345,8 @@ function PaceCalculatorPage() {
 
 function Stat({ label, value }: { label: string; value: string }) {
   return (
-    <div className="bg-ink p-4 md:p-5">
-      <p className="text-[11px] tracking-[0.2em] uppercase text-paper/55 font-mono">{label}</p>
+    <div className="bg-background p-4 md:p-5">
+      <p className="text-[11px] tracking-[0.2em] uppercase text-foreground/70 font-mono">{label}</p>
       <p className="mt-1.5 text-[30px] md:text-[34px] font-bold tabular-nums leading-none">{value}</p>
     </div>
   );
@@ -354,11 +354,11 @@ function Stat({ label, value }: { label: string; value: string }) {
 
 function EffortCard({ zone, scale, test, when }: { zone: string; scale: string; test: string; when: string }) {
   return (
-    <div className="bg-ink p-5">
+    <div className="bg-background p-5">
       <p className="text-[20px] font-bold">{zone}</p>
-      <p className="text-[11px] tracking-[0.2em] uppercase text-blue font-mono mt-1">{scale}</p>
-      <p className="mt-3 text-[15px] text-paper/85 leading-[1.55]">{test}</p>
-      <p className="mt-2 text-[13.5px] text-paper/60 leading-[1.5]">{when}</p>
+      <p className="text-[11px] tracking-[0.2em] uppercase text-foreground font-mono mt-1">{scale}</p>
+      <p className="mt-3 text-[15px] text-foreground/85 leading-[1.55]">{test}</p>
+      <p className="mt-2 text-[13.5px] text-foreground/75 leading-[1.5]">{when}</p>
     </div>
   );
 }

@@ -20,9 +20,9 @@ export const Route = createFileRoute('/music-tectonics')({
 })
 
 const btn = 'inline-flex min-h-11 items-center justify-center px-5 py-3 font-condensed uppercase tracking-wide focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue'
-const primary = `${btn} bg-blue text-ink hover:bg-paper`
-const ghost = `${btn} border border-paper/40 text-paper hover:border-blue hover:text-blue`
-const field = 'mt-2 w-full min-h-11 border border-paper/30 bg-ink p-3 text-paper focus-visible:outline-2 focus-visible:outline-blue'
+const primary = `${btn} bg-blue text-ink hover:bg-foreground hover:text-background`
+const ghost = `${btn} border border-foreground/40 text-foreground hover:border-blue hover:text-foreground/70`
+const field = 'mt-2 w-full min-h-11 border border-foreground/30 bg-background p-3 text-foreground focus-visible:outline-2 focus-visible:outline-blue'
 
 function downloadIcs() {
   const a = document.createElement('a')
@@ -32,43 +32,43 @@ function downloadIcs() {
 
 function Page() {
   const [done, setDone] = useState<null | { badge: string; updated: boolean; name: string }>(null)
-  return <main className="min-h-screen bg-ink text-paper">
+  return <main className="min-h-screen bg-background text-foreground">
     {(E.STATUS === 'changed' || E.STATUS === 'cancelled') && <div role="alert" className="bg-blue px-6 py-3 text-center font-bold text-ink">{E.STATUS === 'cancelled' ? 'This run is cancelled.' : 'Details changed. Check the time and meetup spot below.'}</div>}
     <section className="mx-auto max-w-3xl px-5 pt-6 pb-10">
-      <div className="flex items-center gap-3"><img src={grytBearImg} alt="GRYT crest" className="h-10 w-auto" /><span className="eyebrow text-xs uppercase tracking-[0.14em] text-blue">GRYT x Music Tectonics</span></div>
+      <div className="flex items-center gap-3"><img src={grytBearImg} alt="GRYT crest" className="h-10 w-auto" /><span className="eyebrow text-xs uppercase tracking-[0.14em] text-foreground">GRYT x Music Tectonics</span></div>
       <h1 className="mt-4 font-condensed text-5xl uppercase leading-[0.92] sm:text-7xl">Run or walk Day 3 with us.</h1>
-      <p className="mt-3 text-paper/80">An easy oceanfront morning before the conference picks back up. Every pace welcome. Nobody gets left behind.</p>
+      <p className="mt-3 text-foreground/80">An easy oceanfront morning before the conference picks back up. Every pace welcome. Nobody gets left behind.</p>
       <dl className="mt-4 grid gap-1 border-l-2 border-blue pl-3 text-sm">
         <div><dt className="sr-only">Date</dt><dd className="font-bold">{E.DATE}</dd></div>
         <div><dt className="sr-only">Meet</dt><dd>Meet {E.MEET_TIME} · {E.MEET_SPOT}</dd></div>
       </dl>
-      {E.STATUS === 'proposed' && <p className="mt-2 text-xs text-paper/60">Final time and meetup spot confirmed by October 26.</p>}
+      {E.STATUS === 'proposed' && <p className="mt-2 text-xs text-foreground/75">Final time and meetup spot confirmed by October 26.</p>}
       <a href="#rsvp" className={`${primary} mt-5`}>RSVP</a>
     </section>
 
-    <section className="mx-auto max-w-3xl px-5 py-8 border-t border-paper/15">
+    <section className="mx-auto max-w-3xl px-5 py-8 border-t border-foreground/15">
       <h2 className="font-condensed text-3xl uppercase">The morning, at a glance</h2>
       <Timeline />
-      <p className="mt-4 text-sm text-paper/70">{E.ROUTE}</p>
+      <p className="mt-4 text-sm text-foreground/70">{E.ROUTE}</p>
       <a href={E.MAP_URL} target="_blank" rel="noreferrer" className={`${ghost} mt-4`}>Open in Maps</a>
     </section>
 
-    <section className="mx-auto max-w-3xl px-5 py-8 border-t border-paper/15">
+    <section className="mx-auto max-w-3xl px-5 py-8 border-t border-foreground/15">
       <h2 className="font-condensed text-3xl uppercase">Pick your group</h2>
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
-        <div className="border border-paper/25 p-5"><h3 className="font-condensed text-2xl uppercase">Run, led by {E.RUN_LEAD.split(' ')[0]}</h3><p className="mt-2 text-paper/75">Easy conversational pace, out and back.</p></div>
-        <div className="border border-paper/25 p-5"><h3 className="font-condensed text-2xl uppercase">Walk, led by {E.WALK_LEADS.join(' and ')}</h3><p className="mt-2 text-paper/75">Same route, same views, no running required.</p></div>
+        <div className="border border-foreground/25 p-5"><h3 className="font-condensed text-2xl uppercase">Run, led by {E.RUN_LEAD.split(' ')[0]}</h3><p className="mt-2 text-foreground/75">Easy conversational pace, out and back.</p></div>
+        <div className="border border-foreground/25 p-5"><h3 className="font-condensed text-2xl uppercase">Walk, led by {E.WALK_LEADS.join(' and ')}</h3><p className="mt-2 text-foreground/75">Same route, same views, no running required.</p></div>
       </div>
-      <p className="mt-3 text-sm text-paper/70">Same route, same finish. Pick whatever feels right that morning.</p>
+      <p className="mt-3 text-sm text-foreground/70">Same route, same finish. Pick whatever feels right that morning.</p>
     </section>
 
-    <section id="rsvp" className="mx-auto max-w-3xl px-5 py-8 border-t border-paper/15 scroll-mt-4">
+    <section id="rsvp" className="mx-auto max-w-3xl px-5 py-8 border-t border-foreground/15 scroll-mt-4">
       {done ? <Success {...done} /> : <RsvpForm onDone={setDone} />}
     </section>
 
-    {!done && <section className="mx-auto max-w-3xl px-5 py-8 border-t border-paper/15"><BadgeBlock /></section>}
+    {!done && <section className="mx-auto max-w-3xl px-5 py-8 border-t border-foreground/15"><BadgeBlock /></section>}
 
-    <section className="mx-auto max-w-3xl px-5 py-8 border-t border-paper/15">
+    <section className="mx-auto max-w-3xl px-5 py-8 border-t border-foreground/15">
       <h2 className="font-condensed text-3xl uppercase">What to expect</h2>
       <dl className="mt-4 space-y-4">
         {[
@@ -76,8 +76,8 @@ function Page() {
           ['Where do I shower?', `At your hotel. We wrap at ${E.WRAP_TIME} so there's time before the 12:45 PM start at Annenberg.`],
           ['What should I bring?', "Running shoes, water, and whatever you're wearing to meet people."],
           ['Is it free?', 'Yes. The run and walk are free.'],
-        ].map(([q, a]) => <div key={q}><dt className="font-bold">{q}</dt><dd className="text-paper/75">{a}</dd></div>)}
-        <div><dt className="font-bold">What is GRYT?</dt><dd className="text-paper/75">A free community run crew from Pittsburgh built around one idea: do hard things together. <Link to="/" className="text-blue underline">Meet the crew</Link>.</dd></div>
+        ].map(([q, a]) => <div key={q}><dt className="font-bold">{q}</dt><dd className="text-foreground/75">{a}</dd></div>)}
+        <div><dt className="font-bold">What is GRYT?</dt><dd className="text-foreground/75">A free community run crew from Pittsburgh built around one idea: do hard things together. <Link to="/" className="text-foreground underline">Meet the crew</Link>.</dd></div>
       </dl>
     </section>
   </main>
@@ -90,17 +90,17 @@ function Timeline() {
     [E.FINISH_TIME, 'Back at the pier, quick hang'],
     [E.WRAP_TIME, `Wrap. Two hours to shower at your hotel and get to the ${E.VENUE_DEADLINE}.`],
   ]
-  return <ol className="mt-4 space-y-3 border-l border-blue pl-4">{items.map(([t, l]) => <li key={t}><span className="font-condensed text-blue">{t}</span> <span>{l}</span></li>)}</ol>
+  return <ol className="mt-4 space-y-3 border-l border-blue pl-4">{items.map(([t, l]) => <li key={t}><span className="font-condensed text-foreground">{t}</span> <span>{l}</span></li>)}</ol>
 }
 
 function BadgeBlock({ lead }: { lead?: boolean }) {
   const [copied, setCopied] = useState(false)
   return <div className={lead ? 'border-2 border-blue p-5' : ''}>
     <h2 className="font-condensed text-2xl uppercase">Need a badge? Use code {E.COUPON_CODE} for {E.COUPON_VALUE}.</h2>
-    {E.PRICE_LINE && <p className="mt-2 text-paper/75">{E.PRICE_LINE}</p>}
+    {E.PRICE_LINE && <p className="mt-2 text-foreground/75">{E.PRICE_LINE}</p>}
     <div className="mt-4 flex flex-wrap gap-3">
       <a href={E.BADGE_URL} target="_blank" rel="noreferrer" className={ghost}>Get a badge</a>
-      <button type="button" onClick={() => { navigator.clipboard?.writeText(E.COUPON_CODE); setCopied(true) }} className={`${btn} border border-dashed border-blue text-blue`} aria-label={`Copy code ${E.COUPON_CODE}`}>{E.COUPON_CODE} · {copied ? 'Copied' : 'Tap to copy'}</button>
+      <button type="button" onClick={() => { navigator.clipboard?.writeText(E.COUPON_CODE); setCopied(true) }} className={`${btn} border border-dashed border-blue text-foreground`} aria-label={`Copy code ${E.COUPON_CODE}`}>{E.COUPON_CODE} · {copied ? 'Copied' : 'Tap to copy'}</button>
       <span aria-live="polite" className="sr-only">{copied ? 'Code copied' : ''}</span>
     </div>
   </div>
@@ -112,7 +112,7 @@ function Success({ badge, updated, name }: { badge: string; updated: boolean; na
   const needsBadge = badge === 'getting' || badge === 'guest'
   return <div role="status" aria-live="polite" aria-atomic="true">
     <h2 ref={ref} tabIndex={-1} className="font-condensed text-4xl uppercase focus:outline-2 focus:outline-blue">You're in{name ? `, ${name.split(' ')[0]}` : ''}.</h2>
-    <p className="mt-2 text-paper/80">{updated ? 'We updated your RSVP.' : 'Your RSVP is saved.'} {needsBadge && `Come run with the people building the future of music, then grab your badge with code ${E.COUPON_CODE} for ${E.COUPON_VALUE}.`}</p>
+    <p className="mt-2 text-foreground/80">{updated ? 'We updated your RSVP.' : 'Your RSVP is saved.'} {needsBadge && `Come run with the people building the future of music, then grab your badge with code ${E.COUPON_CODE} for ${E.COUPON_VALUE}.`}</p>
     {needsBadge && <div className="mt-5"><BadgeBlock lead /></div>}
     <dl className="mt-6 space-y-1 text-sm">
       <div><dt className="inline font-bold">When: </dt><dd className="inline">{E.DATE}, meet {E.MEET_TIME}, wrap {E.WRAP_TIME} (Pacific)</dd></div>
@@ -162,8 +162,8 @@ function RsvpForm({ onDone }: { onDone: (d: { badge: string; updated: boolean; n
     <div hidden aria-hidden="true"><label>Leave blank<input name="website_check" tabIndex={-1} autoComplete="off" /></label></div>
     <label className="flex items-start gap-3"><input type="checkbox" name="consent" required className="mt-1" /><span>{CONSENT_TEXT}</span></label>
     <label className="flex items-start gap-3"><input type="checkbox" name="marketing" className="mt-1" /><span>Send me future GRYT run invites.</span></label>
-    <p className="text-sm text-paper/70">Everyone runs under the GRYT waiver. <Link to="/waiver" className="text-blue underline">Sign it here</Link> if you haven't this season.</p>
-    {error && <p role="alert" className="font-bold text-blue">{error}</p>}
+    <p className="text-sm text-foreground/70">Everyone runs under the GRYT waiver. <Link to="/waiver" className="text-foreground underline">Sign it here</Link> if you haven't this season.</p>
+    {error && <p role="alert" className="font-bold text-foreground">{error}</p>}
     <button disabled={busy || E.STATUS === 'cancelled'} className={`${primary} w-full sm:w-auto disabled:opacity-50`}>{busy ? 'Saving...' : 'RSVP'}</button>
   </form>
 }

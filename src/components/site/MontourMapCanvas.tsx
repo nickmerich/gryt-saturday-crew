@@ -81,5 +81,5 @@ export default function MontourMapCanvas({ option }: { option: RouteOption }) {
     map.fitBounds(L.latLngBounds(coords), { padding: [48, 48] });
   }, [option]);
 
-  return <div ref={ref} className="h-[280px] sm:h-[420px] w-full bg-ink" />;
+  return <div ref={ref} className="h-[280px] sm:h-[420px] w-full bg-background" />;
 }

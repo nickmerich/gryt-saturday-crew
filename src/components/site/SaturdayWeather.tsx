@@ -18,16 +18,16 @@ function Stat({
 }) {
   return (
     <div
-      className={`border p-3 sm:p-5 min-w-0 ${hot ? "border-blue bg-blue/10" : "border-paper/20 bg-ink/50"}`}
+      className={`border p-3 sm:p-5 min-w-0 ${hot ? "border-blue bg-blue/10" : "border-foreground/20 bg-background/50"}`}
     >
-      <div className="flex items-center gap-2 text-blue [&>svg]:hidden sm:[&>svg]:block">
+      <div className="flex items-center gap-2 text-foreground [&>svg]:hidden sm:[&>svg]:block">
         {icon}
         <span className="text-[9px] sm:text-[11px] tracking-[0.16em] sm:tracking-[0.2em] uppercase leading-tight">{label}</span>
       </div>
       <div className="display-condensed mt-2 text-[clamp(28px,8vw,48px)] leading-[0.95]">
         {value}
       </div>
-      {sub ? <div className="mt-1 text-[12px] text-paper/60">{sub}</div> : null}
+      {sub ? <div className="mt-1 text-[12px] text-foreground/75">{sub}</div> : null}
     </div>
   );
 }
@@ -53,22 +53,22 @@ export function SaturdayWeather() {
   return (
     <section
       id="weather"
-      className="relative overflow-hidden concrete grain border-t-2 border-blue text-paper py-14 md:py-20 px-6 sm:px-12 lg:px-24"
+      className="relative overflow-hidden concrete grain border-t-2 border-blue text-foreground py-14 md:py-20 px-6 sm:px-12 lg:px-24"
     >
       <div className="relative max-w-[1180px] mx-auto">
         <div className="eyebrow eyebrow-blue mb-3">Saturday conditions</div>
         <h2 className="display-condensed text-[clamp(30px,7vw,64px)] leading-[0.94]">
           SATURDAY 7:00 AM
         </h2>
-        <p className="mt-3 text-[14px] sm:text-[15px] text-paper/70">
+        <p className="mt-3 text-[14px] sm:text-[15px] text-foreground/70">
           Valley Brook Road lot{data?.dateLabel ? ` · ${data.dateLabel}` : ""}. Forecast pulled
           from the National Weather Service.
         </p>
 
         {isPending ? (
-          <div className="mt-8 h-[120px] border border-paper/15 bg-ink/40 animate-pulse" />
+          <div className="mt-8 h-[120px] border border-foreground/15 bg-background/40 animate-pulse" />
         ) : isError || !data?.available ? (
-          <div className="mt-8 border border-paper/20 bg-ink/50 p-5 text-[14px] text-paper/70">
+          <div className="mt-8 border border-foreground/20 bg-background/50 p-5 text-[14px] text-foreground/70">
             Forecast isn't out for that Saturday yet. Check back midweek. The run goes either
             way.
           </div>
@@ -118,7 +118,7 @@ export function SaturdayWeather() {
             </div>
             <a
               href="/resources/what-to-wear-running?saturday=1"
-              className="mt-5 inline-block text-[14px] font-bold text-blue underline underline-offset-4 hover:text-paper"
+              className="mt-5 inline-block text-[14px] font-bold text-foreground underline underline-offset-4 hover:text-foreground"
             >
               What should I wear for this? Build your outfit →
             </a>

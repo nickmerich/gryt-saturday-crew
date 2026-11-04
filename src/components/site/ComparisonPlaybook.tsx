@@ -110,10 +110,10 @@ export function CompareTable({
   rows: Array<[string, string, string]>;
 }) {
   return (
-    <div className="overflow-x-auto border border-paper/15">
+    <div className="overflow-x-auto border border-foreground/15">
       <table className="w-full text-left text-[14px] md:text-[15px] min-w-[560px]">
         <thead>
-          <tr className="border-b border-paper/15 text-paper">
+          <tr className="border-b border-foreground/15 text-foreground">
             <th className="p-3 font-bold uppercase tracking-[0.1em] text-[11px]"> </th>
             <th className="p-3 font-bold uppercase tracking-[0.1em] text-[11px]">{left}</th>
             <th className="p-3 font-bold uppercase tracking-[0.1em] text-[11px]">{right}</th>
@@ -121,8 +121,8 @@ export function CompareTable({
         </thead>
         <tbody>
           {rows.map(([k, a, b]) => (
-            <tr key={k} className="border-b border-paper/10 align-top">
-              <td className="p-3 text-paper font-bold">{k}</td>
+            <tr key={k} className="border-b border-foreground/10 align-top">
+              <td className="p-3 text-foreground font-bold">{k}</td>
               <td className="p-3">{a}</td>
               <td className="p-3">{b}</td>
             </tr>
@@ -154,59 +154,59 @@ export function ComparisonPlaybook({
     timeZone: "UTC",
   });
   return (
-    <main className="bg-ink text-paper">
+    <main className="bg-background text-foreground">
       <SiteNav />
-      <article className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
+      <article className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-foreground/15">
         <div className="max-w-[760px] mx-auto">
-          <Link to="/resources/playbooks" className="eyebrow text-blue hover:text-paper transition-colors">
+          <Link to="/resources/playbooks" className="eyebrow text-foreground hover:text-foreground transition-colors">
             ← All playbooks
           </Link>
-          <p className="eyebrow text-blue mt-8 mb-5">
+          <p className="eyebrow text-foreground mt-8 mb-5">
             COMMUNITY · {config.readTime} · BY NICK MERICH
           </p>
           <h1 className="display-condensed uppercase text-[clamp(38px,6.4vw,88px)] leading-[0.95]">
             {config.headline}
           </h1>
-          <p className="mt-7 text-paper/75 text-lg md:text-xl leading-[1.55]">{config.description}</p>
-          <p className="mt-4 text-paper/55 text-[14px]">Updated {updated}</p>
+          <p className="mt-7 text-foreground/75 text-lg md:text-xl leading-[1.55]">{config.description}</p>
+          <p className="mt-4 text-foreground/70 text-[14px]">Updated {updated}</p>
 
-          <div className="mt-10 border-l-2 border-blue pl-5 text-paper/85 text-[16px] md:text-[17px] leading-[1.7]">
-            <p className="font-bold text-paper">Quick answer</p>
+          <div className="mt-10 border-l-2 border-blue pl-5 text-foreground/85 text-[16px] md:text-[17px] leading-[1.7]">
+            <p className="font-bold text-foreground">Quick answer</p>
             <div className="mt-2 space-y-3">{quickAnswer}</div>
           </div>
 
-          <nav aria-label="Table of contents" className="mt-10 border border-paper/15 p-5">
-            <p className="eyebrow text-paper/55 mb-3">In this guide</p>
+          <nav aria-label="Table of contents" className="mt-10 border border-foreground/15 p-5">
+            <p className="eyebrow text-foreground/70 mb-3">In this guide</p>
             <ul className="flex flex-col gap-2">
               {sections.map((s) => (
                 <li key={s.id}>
-                  <a href={`#${s.id}`} className="text-paper/80 hover:text-blue transition-colors text-[15px]">
+                  <a href={`#${s.id}`} className="text-foreground/80 hover:text-foreground/70 transition-colors text-[15px]">
                     → {s.label}
                   </a>
                 </li>
               ))}
               <li>
-                <a href="#faqs" className="text-paper/80 hover:text-blue transition-colors text-[15px]">
+                <a href="#faqs" className="text-foreground/80 hover:text-foreground/70 transition-colors text-[15px]">
                   → FAQs
                 </a>
               </li>
             </ul>
           </nav>
 
-          <div className="mt-12 space-y-5 text-paper/85 text-[16px] md:text-[17px] leading-[1.7]">
+          <div className="mt-12 space-y-5 text-foreground/85 text-[16px] md:text-[17px] leading-[1.7]">
             {children}
 
             <PH2 id="faqs">FAQs</PH2>
             <div className="space-y-6">
               {config.faqs.map((f) => (
                 <div key={f.q}>
-                  <h3 className="text-paper font-bold text-[17px] md:text-[18px] mb-1.5">{f.q}</h3>
+                  <h3 className="text-foreground font-bold text-[17px] md:text-[18px] mb-1.5">{f.q}</h3>
                   <p>{f.a}</p>
                 </div>
               ))}
             </div>
 
-            <p className="text-paper/55 text-[14px] mt-10">{sourcesNote}</p>
+            <p className="text-foreground/70 text-[14px] mt-10">{sourcesNote}</p>
           </div>
 
           <div className="mt-14 flex flex-wrap gap-4">
@@ -215,7 +215,7 @@ export function ComparisonPlaybook({
             </Link>
             <Link
               to="/resources/playbooks"
-              className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors"
+              className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-foreground/40 text-foreground hover:border-blue hover:text-foreground/70 transition-colors"
             >
               Back to Playbooks
             </Link>

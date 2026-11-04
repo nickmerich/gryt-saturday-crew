@@ -29,7 +29,7 @@ function StravaRouteEmbed() {
   }, []);
 
   return (
-    <div className="bg-ink min-h-[280px] sm:min-h-[420px]">
+    <div className="bg-background min-h-[280px] sm:min-h-[420px]">
       <div
         className="strava-embed-placeholder"
         data-embed-type="route"
@@ -47,20 +47,20 @@ export function MontourRouteMap() {
   return (
     <section
       id="route"
-      className="relative overflow-hidden bg-ink text-paper border-t-2 border-blue py-14 md:py-20 px-6 sm:px-12 lg:px-24"
+      className="relative overflow-hidden bg-background text-foreground border-t-2 border-blue py-14 md:py-20 px-6 sm:px-12 lg:px-24"
     >
       <div className="relative max-w-[1180px] mx-auto">
         <div className="eyebrow eyebrow-blue mb-3">The route</div>
         <h2 className="display-condensed text-[clamp(30px,7vw,64px)] leading-[0.94]">
           MONTOUR TRAIL · OUT AND BACK
         </h2>
-        <p className="mt-3 max-w-[56ch] text-[14px] sm:text-[15px] leading-[1.65] text-paper/70">
+        <p className="mt-3 max-w-[56ch] text-[14px] sm:text-[15px] leading-[1.65] text-foreground/70">
           The Saturday route, straight from Strava. Run out, turn around, finish together.
         </p>
 
         <div className="mt-6 grid gap-4 lg:grid-cols-[1.35fr_1fr]">
           <div>
-            <div className="border-2 border-blue bg-ink">
+            <div className="border-2 border-blue bg-background">
               <div className="flex items-center justify-between gap-3 bg-blue text-ink px-4 py-2.5">
                 <span className="display-condensed text-[18px] sm:text-[22px] leading-none">
                   SATURDAY ROUTE
@@ -69,7 +69,7 @@ export function MontourRouteMap() {
                   4.2 MI · 81 FT
                 </span>
               </div>
-              <div className="p-2 sm:p-3 bg-vintage">
+              <div className="p-2 sm:p-3 bg-background">
                 <StravaRouteEmbed />
               </div>
             </div>
@@ -77,7 +77,7 @@ export function MontourRouteMap() {
               href={ROUTE_URL}
               target="_blank"
               rel="noreferrer"
-              className="mt-3 inline-flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase font-bold text-paper hover:text-blue transition-colors"
+              className="mt-3 inline-flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase font-bold text-foreground hover:text-foreground/70 transition-colors"
             >
               <ExternalLink size={14} strokeWidth={2.25} />
               Open the route in Strava
@@ -97,7 +97,7 @@ export function MontourRouteMap() {
               href={MEET_MAPS_URL}
               target="_blank"
               rel="noreferrer"
-              className="mt-4 inline-flex items-center gap-2 border-2 border-ink px-4 py-2 text-[12px] tracking-[0.18em] uppercase font-bold hover:bg-ink hover:text-blue transition-colors"
+              className="mt-4 inline-flex items-center gap-2 border-2 border-ink px-4 py-2 text-[12px] tracking-[0.18em] uppercase font-bold hover:bg-background hover:text-foreground/70 transition-colors"
             >
               <Navigation size={14} strokeWidth={2.5} />
               Directions

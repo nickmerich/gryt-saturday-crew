@@ -19,25 +19,25 @@ const LEADERS: { title: string; rows: [string, string][] }[] = [
 
 function Leaderboard() {
   return (
-    <div className="mt-6 border border-paper/20 bg-ink/50">
-      <div className="flex items-baseline justify-between gap-4 border-b border-paper/15 px-4 sm:px-5 py-3">
-        <span className="text-[10px] tracking-[0.22em] uppercase text-blue">Last week's leaders</span>
-        <span className="text-[10px] tracking-[0.14em] uppercase text-paper/50">{LEADERS_WEEK}</span>
+    <div className="mt-6 border border-foreground/20 bg-background/50">
+      <div className="flex items-baseline justify-between gap-4 border-b border-foreground/15 px-4 sm:px-5 py-3">
+        <span className="text-[10px] tracking-[0.22em] uppercase text-foreground">Last week's leaders</span>
+        <span className="text-[10px] tracking-[0.14em] uppercase text-foreground/70">{LEADERS_WEEK}</span>
       </div>
       <div className="grid sm:grid-cols-3">
         {LEADERS.map((cat) => (
-          <div key={cat.title} className="border-b sm:border-b-0 sm:border-r last:border-0 border-paper/10">
-            <div className="px-4 sm:px-5 pt-3 pb-1 text-[11px] tracking-[0.14em] uppercase text-paper/60">
+          <div key={cat.title} className="border-b sm:border-b-0 sm:border-r last:border-0 border-foreground/10">
+            <div className="px-4 sm:px-5 pt-3 pb-1 text-[11px] tracking-[0.14em] uppercase text-foreground/75">
               {cat.title}
             </div>
             <ol>
               {cat.rows.map(([name, value], i) => (
                 <li key={name + i} className="flex items-baseline justify-between gap-3 px-4 sm:px-5 py-2">
                   <span className="flex items-baseline gap-3 min-w-0">
-                    <span className="display-condensed text-blue text-[18px] w-4">{i + 1}</span>
+                    <span className="display-condensed text-foreground text-[18px] w-4">{i + 1}</span>
                     <span className="display-condensed text-[18px] truncate">{name}</span>
                   </span>
-                  <span className="text-[13px] text-paper/80 shrink-0">{value}</span>
+                  <span className="text-[13px] text-foreground/80 shrink-0">{value}</span>
                 </li>
               ))}
             </ol>
@@ -50,11 +50,11 @@ function Leaderboard() {
 
 function Figure({ value, label }: { value: string; label: string }) {
   return (
-    <div className="border border-paper/20 bg-ink/50 p-4 sm:p-5">
-      <div className="display-condensed text-[clamp(32px,8vw,56px)] leading-[0.92] text-blue">
+    <div className="border border-foreground/20 bg-background/50 p-4 sm:p-5">
+      <div className="display-condensed text-[clamp(32px,8vw,56px)] leading-[0.92] text-foreground">
         {value}
       </div>
-      <div className="mt-1 text-[10px] sm:text-[11px] tracking-[0.2em] uppercase text-paper/60">
+      <div className="mt-1 text-[10px] sm:text-[11px] tracking-[0.2em] uppercase text-foreground/75">
         {label}
       </div>
     </div>
@@ -80,7 +80,7 @@ export function ClubStats() {
   return (
     <section
       id="club-stats"
-      className="relative overflow-hidden text-paper py-14 md:py-20 px-6 sm:px-12 lg:px-24"
+      className="relative overflow-hidden text-foreground py-14 md:py-20 px-6 sm:px-12 lg:px-24"
     >
       <div
         aria-hidden
@@ -128,21 +128,21 @@ export function ClubStats() {
         ) : null}
 
         {!stats.isSample && stats.recentRuns.length > 0 ? (
-          <div className="mt-6 border border-paper/20 bg-ink/50">
-            <div className="border-b border-paper/15 px-4 sm:px-5 py-3 text-[10px] tracking-[0.22em] uppercase text-blue">
+          <div className="mt-6 border border-foreground/20 bg-background/50">
+            <div className="border-b border-foreground/15 px-4 sm:px-5 py-3 text-[10px] tracking-[0.22em] uppercase text-foreground">
               Recent group runs
             </div>
             <ul>
               {stats.recentRuns.map((run) => (
                 <li
                   key={run.id}
-                  className="flex items-baseline justify-between gap-4 border-b border-paper/10 last:border-b-0 px-4 sm:px-5 py-3"
+                  className="flex items-baseline justify-between gap-4 border-b border-foreground/10 last:border-b-0 px-4 sm:px-5 py-3"
                 >
                   <div className="min-w-0">
                     <div className="display-condensed text-[17px] sm:text-[20px] truncate">
                       {run.name}
                     </div>
-                    <div className="text-[12px] text-paper/55">
+                    <div className="text-[12px] text-foreground/70">
                       {run.date
                         ? new Date(`${run.date}T12:00:00`).toLocaleDateString("en-US", {
                             month: "short",
@@ -152,7 +152,7 @@ export function ClubStats() {
                       {run.runners > 1 ? ` · ${run.runners} runners` : ""}
                     </div>
                   </div>
-                  <div className="display-condensed shrink-0 text-blue text-[18px] sm:text-[22px]">
+                  <div className="display-condensed shrink-0 text-foreground text-[18px] sm:text-[22px]">
                     {run.distanceMi} mi
                   </div>
                 </li>

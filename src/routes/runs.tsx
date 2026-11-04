@@ -48,21 +48,21 @@ function RunsIndex() {
   const hasData = !!data?.ok && reports.length > 0;
 
   return (
-    <main className="bg-ink text-paper">
+    <main className="bg-background text-foreground">
       <SiteNav />
-      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
+      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-foreground/15">
         <div className="max-w-[1080px] mx-auto">
-          <p className="eyebrow text-blue mb-5">Every Saturday, counted</p>
+          <p className="eyebrow text-foreground mb-5">Every Saturday, counted</p>
           <h1 className="display-condensed uppercase text-[clamp(44px,8vw,112px)] leading-[0.92]">
             Run Reports
           </h1>
-          <p className="mt-7 max-w-[680px] text-paper/80 text-lg md:text-xl leading-[1.55]">
+          <p className="mt-7 max-w-[680px] text-foreground/80 text-lg md:text-xl leading-[1.55]">
             Who showed up, who was new, who came back, and who hit a milestone. Numbers come straight
             from Saturday check-ins. Names only appear when someone says yes.
           </p>
 
           {hasData && totals ? (
-            <div className="mt-10 grid gap-px bg-paper/20 border border-paper/20 sm:grid-cols-3">
+            <div className="mt-10 grid gap-px bg-foreground/20 border border-foreground/20 sm:grid-cols-3">
               <StatTile label="Saturdays reported" value={String(totals.runsTracked)} sub={`Since ${longDate(totals.trackedSince!)}`} />
               <StatTile label="People who showed up" value={String(totals.peopleTracked)} />
               <StatTile label="Check-ins" value={String(totals.totalCheckins)} sub="Every walk, run, and sweep" />
@@ -75,7 +75,7 @@ function RunsIndex() {
             </Link>
             <Link
               to="/milestones"
-              className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors"
+              className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-foreground/40 text-foreground hover:border-blue hover:text-foreground/70 transition-colors"
             >
               The Milestone Club
             </Link>
@@ -83,40 +83,40 @@ function RunsIndex() {
         </div>
       </section>
 
-      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
+      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-foreground/15">
         <div className="max-w-[1080px] mx-auto">
           {isPending ? (
-            <p className="text-paper/60" role="status">
+            <p className="text-foreground/75" role="status">
               Loading reports…
             </p>
           ) : hasData ? (
-            <ol className="grid gap-px bg-paper/20 border border-paper/20">
+            <ol className="grid gap-px bg-foreground/20 border border-foreground/20">
               {reports.map((r) => {
                 const note = RUN_REPORT_NOTES[r.runNumber];
                 const lines = milestoneLines(r);
                 return (
-                  <li key={r.date} className="bg-ink">
+                  <li key={r.date} className="bg-background">
                     <Link
                       to="/runs/$number"
                       params={{ number: String(r.runNumber) }}
-                      className="group grid gap-4 p-6 md:p-7 md:grid-cols-[180px_1fr_auto] md:items-center hover:bg-vintage transition-colors"
+                      className="group grid gap-4 p-6 md:p-7 md:grid-cols-[180px_1fr_auto] md:items-center hover:bg-background transition-colors"
                     >
                       <div>
                         <p className="display-condensed text-[40px] leading-none">#{r.runNumber}</p>
-                        <p className="mt-1 text-[12px] tracking-[0.16em] uppercase text-paper/60 font-mono">
+                        <p className="mt-1 text-[12px] tracking-[0.16em] uppercase text-foreground/75 font-mono">
                           {longDate(r.date)}
                         </p>
                       </div>
                       <div>
                         {note?.headline ? <p className="font-bold text-[18px] leading-snug">{note.headline}</p> : null}
-                        <p className={`${note?.headline ? "mt-1 " : ""}text-paper/80`}>
+                        <p className={`${note?.headline ? "mt-1 " : ""}text-foreground/80`}>
                           {plural(r.runners, "runner", "runners")}
                           {r.firstTimers != null && r.firstTimers > 0 ? ` · ${plural(r.firstTimers, "first-timer", "first-timers")}` : ""}
                           {r.returning != null && r.returning > 0 ? ` · ${r.returning} came back` : ""}
                         </p>
-                        {lines.length ? <p className="mt-1 text-blue text-[14px]">{lines.join(" · ")}</p> : null}
+                        {lines.length ? <p className="mt-1 text-foreground text-[14px]">{lines.join(" · ")}</p> : null}
                       </div>
-                      <span className="text-[12px] tracking-[0.22em] uppercase text-blue group-hover:text-paper font-mono">
+                      <span className="text-[12px] tracking-[0.22em] uppercase text-foreground group-hover:text-foreground font-mono">
                         Read report →
                       </span>
                     </Link>
@@ -125,9 +125,9 @@ function RunsIndex() {
               })}
             </ol>
           ) : (
-            <div className="border border-paper/20 p-6 md:p-8 max-w-[720px]">
+            <div className="border border-foreground/20 p-6 md:p-8 max-w-[720px]">
               <p className="font-bold text-[18px]">The first report posts after the next checked-in Saturday.</p>
-              <p className="mt-2 text-paper/75">
+              <p className="mt-2 text-foreground/75">
                 Reports are built from Saturday check-ins, so they start with the first run we check people
                 in at. Come be part of it.
               </p>

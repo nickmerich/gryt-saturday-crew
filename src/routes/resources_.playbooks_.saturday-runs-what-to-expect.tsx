@@ -107,25 +107,25 @@ const H3 = "text-xl md:text-2xl font-bold mt-8 mb-1 scroll-mt-24";
 
 function ArticlePage() {
   return (
-    <main className="bg-ink text-paper">
+    <main className="bg-background text-foreground">
       <SiteNav />
-      <article className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
+      <article className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-foreground/15">
         <div className="max-w-[760px] mx-auto">
-          <Link to="/resources/playbooks" className="eyebrow text-blue hover:text-paper transition-colors">
+          <Link to="/resources/playbooks" className="eyebrow text-foreground hover:text-foreground transition-colors">
             ← All playbooks
           </Link>
-          <p className="eyebrow text-blue mt-8 mb-5">COMMUNITY · 7 MIN READ</p>
+          <p className="eyebrow text-foreground mt-8 mb-5">COMMUNITY · 7 MIN READ</p>
           <h1 className="display-condensed uppercase text-[clamp(40px,7vw,96px)] leading-[0.95]">
             {HEADLINE}
           </h1>
-          <p className="mt-7 text-paper/75 text-lg md:text-xl leading-[1.55]">{DESCRIPTION}</p>
+          <p className="mt-7 text-foreground/75 text-lg md:text-xl leading-[1.55]">{DESCRIPTION}</p>
 
-          <nav aria-label="Table of contents" className="mt-10 border border-paper/15 p-5">
-            <p className="eyebrow text-paper/55 mb-3">In this playbook</p>
+          <nav aria-label="Table of contents" className="mt-10 border border-foreground/15 p-5">
+            <p className="eyebrow text-foreground/70 mb-3">In this playbook</p>
             <ul className="flex flex-col gap-2">
               {SECTIONS.map((s) => (
                 <li key={s.id}>
-                  <a href={`#${s.id}`} className="text-paper/80 hover:text-blue transition-colors text-[15px]">
+                  <a href={`#${s.id}`} className="text-foreground/80 hover:text-foreground/70 transition-colors text-[15px]">
                     → {s.label}
                   </a>
                 </li>
@@ -133,7 +133,7 @@ function ArticlePage() {
             </ul>
           </nav>
 
-          <div className="mt-12 space-y-5 text-paper/85 text-[16px] md:text-[17px] leading-[1.7]">
+          <div className="mt-12 space-y-5 text-foreground/85 text-[16px] md:text-[17px] leading-[1.7]">
             <p>If you've been looking for a Pittsburgh run club that doesn't involve driving into the city, sorting yourself into a pace bracket, or paying a membership fee, Saturday mornings on the Montour and Peters Trails are worth a look.</p>
             <p>GRYT Run Club meets every Saturday at 7 AM on the Montour / Peters Trail in McMurray, PA. Here's what the run actually looks like, who shows up, and what happens after.</p>
 
@@ -189,8 +189,8 @@ function ArticlePage() {
             <div className="space-y-6">
               {FAQS.map((f) => (
                 <div key={f.q}>
-                  <p className="font-bold text-paper">{f.q}</p>
-                  <p className="mt-2 text-paper/80">{f.a}</p>
+                  <p className="font-bold text-foreground">{f.q}</p>
+                  <p className="mt-2 text-foreground/80">{f.a}</p>
                 </div>
               ))}
             </div>
@@ -202,7 +202,7 @@ function ArticlePage() {
             <Link to="/" hash="join" className="btn-primary">RSVP This Saturday →</Link>
             <Link
               to="/resources/playbooks"
-              className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors"
+              className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-foreground/40 text-foreground hover:border-blue hover:text-foreground/70 transition-colors"
             >
               Back to Playbooks
             </Link>

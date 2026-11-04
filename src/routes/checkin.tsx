@@ -37,7 +37,7 @@ export const Route = createFileRoute('/checkin')({
 
 function Shell({ children }: { children: React.ReactNode }) {
   return (
-    <main className="min-h-screen bg-ink text-paper px-6 py-14">
+    <main className="min-h-screen bg-background text-foreground px-6 py-14">
       <div className="mx-auto w-full max-w-sm">
         <p className="eyebrow eyebrow-blue">GRYT Run Club</p>
         <h1 className="display-condensed text-4xl mt-2 leading-none">CHECK IN</h1>
@@ -112,8 +112,8 @@ function SelfCheckin() {
     return (
       <Shell>
         <div className="border border-blue/60 bg-blue/10 px-4 py-6">
-          <p className="display-condensed text-3xl text-blue leading-none">YOU'RE IN</p>
-          <p className="mt-3 text-sm text-paper">
+          <p className="display-condensed text-3xl text-foreground leading-none">YOU'RE IN</p>
+          <p className="mt-3 text-sm text-foreground">
             Thanks {name.split(' ')[0]}. You're counted for this morning. Go find the crew by the
             trail map board.
           </p>
@@ -138,7 +138,7 @@ function SelfCheckin() {
             autoComplete="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full bg-vintage border border-white/15 px-3 py-4 text-base text-paper focus:outline-none focus:border-blue"
+            className="w-full bg-background border border-foreground/15 px-3 py-4 text-base text-foreground focus:outline-none focus:border-blue"
           />
         </div>
         <div>
@@ -154,7 +154,7 @@ function SelfCheckin() {
             value={contact}
             onChange={(e) => setContact(e.target.value)}
             placeholder="you@email.com"
-            className="w-full bg-vintage border border-white/15 px-3 py-4 text-base text-paper placeholder:text-muted-foreground focus:outline-none focus:border-blue"
+            className="w-full bg-background border border-foreground/15 px-3 py-4 text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-blue"
           />
           <p className="mt-1 text-[11px] text-muted-foreground">
             Used to match you to your sign-up and waiver. Never shown publicly.

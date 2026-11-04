@@ -75,7 +75,7 @@ function OperatorQueue() {
     const url = URL.createObjectURL(new Blob([JSON.stringify({ exported_at: new Date().toISOString(), page: page + 1, records: visible }, null, 2)], { type: 'application/json' }))
     const a = document.createElement('a'); a.href = url; a.download = `gryt-inquiries-page-${page + 1}.json`; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000)
   }
-  return <main className={`min-h-screen p-5 md:p-10 ${light ? 'bg-paper text-ink' : 'bg-ink text-paper'}`}>
+  return <main className={`min-h-screen p-5 md:p-10 ${light ? 'bg-paper text-ink' : 'bg-background text-foreground'}`}>
     <div className="max-w-7xl mx-auto">
       <header className="flex flex-wrap justify-between gap-4 border-b border-current/20 pb-6"><a href="/" className="font-bold">GRYT / FIELD DESK</a><nav className="flex flex-wrap gap-5 text-sm"><a href="/admin/members">Members</a><a href="/inquire">Inquiry pages</a><button onClick={() => setLight(!light)}>{light ? 'Dark mode' : 'Light mode'}</button></nav></header>
       <p className="eyebrow mt-8">ATTENDEES / VENDORS / BRANDS</p><h1 className="text-xl font-bold mt-2">Operator queue</h1>
@@ -107,7 +107,7 @@ function OperatorQueue() {
         </article>)}</div>
         <div className="flex gap-3 mt-5"><button disabled={page === 0 || query.isFetching} onClick={() => setPage(page - 1)} className={button}>Previous page</button><button disabled={!query.data || (page + 1) * 100 >= query.data.total || query.isFetching} onClick={() => setPage(page + 1)} className={button}>Next page</button></div>
       </>}
-      <dialog ref={dialog} onClose={() => setSelected(null)} className={`fixed inset-0 m-auto w-[calc(100%-2rem)] max-w-2xl max-h-[90dvh] overflow-y-auto p-6 border border-current/25 backdrop:bg-black/65 ${light ? 'bg-paper text-ink' : 'bg-ink text-paper'}`}>
+      <dialog ref={dialog} onClose={() => setSelected(null)} className={`fixed inset-0 m-auto w-[calc(100%-2rem)] max-w-2xl max-h-[90dvh] overflow-y-auto p-6 border border-current/25 backdrop:bg-background/65 ${light ? 'bg-paper text-ink' : 'bg-background text-foreground'}`}>
         {selected && <><header className="flex justify-between gap-4"><div><p className="text-sm capitalize">{selected.kind} inquiry</p><h2 className="text-xl font-bold">{selected.payload.organization || selected.payload.name}</h2></div><button className={button} onClick={() => dialog.current?.close()}>Close</button></header>
           <p className="my-4 text-xs break-all">{selected.id} · Version {selected.version}</p>
           <h3 className="font-bold">Original inquiry (read-only)</h3>

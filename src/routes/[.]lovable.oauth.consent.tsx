@@ -48,7 +48,7 @@ export const Route = createFileRoute('/.lovable/oauth/consent')({
   },
   component: Consent,
   errorComponent: ({ error }) => (
-    <main className="min-h-screen bg-ink text-paper p-12">
+    <main className="min-h-screen bg-background text-foreground p-12">
       <h1 className="display-condensed text-3xl">Authorization error</h1>
       <p className="mt-2 text-sm text-muted-foreground">
         {String((error as Error)?.message ?? error)}
@@ -88,7 +88,7 @@ function Consent() {
   }
 
   return (
-    <main className="min-h-screen bg-ink text-paper flex items-center justify-center p-6">
+    <main className="min-h-screen bg-background text-foreground flex items-center justify-center p-6">
       <div className="w-full max-w-md">
         <p className="eyebrow eyebrow-blue">Authorize</p>
         <h1 className="display-condensed text-3xl mt-2">
@@ -129,7 +129,7 @@ function Consent() {
             type="button"
             disabled={busy}
             onClick={() => decide(false)}
-            className="flex-1 border border-white/20 text-paper px-4 py-2.5 text-sm font-medium uppercase tracking-wider disabled:opacity-50"
+            className="flex-1 border border-foreground/20 text-foreground px-4 py-2.5 text-sm font-medium uppercase tracking-wider disabled:opacity-50"
           >
             Cancel
           </button>

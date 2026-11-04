@@ -42,14 +42,14 @@ function Page() {
         }
       : null;
   const input =
-    "mt-2 min-h-12 w-full border border-paper/40 bg-ink px-3 focus-visible:outline-2 focus-visible:outline-blue";
+    "mt-2 min-h-12 w-full border border-foreground/40 bg-background px-3 focus-visible:outline-2 focus-visible:outline-blue";
   return (
-    <main className="mx-auto min-h-screen max-w-5xl bg-ink px-5 py-12 text-paper">
-      <Link to="/admin/roster" className="text-blue underline">
+    <main className="mx-auto min-h-screen max-w-5xl bg-background px-5 py-12 text-foreground">
+      <Link to="/admin/roster" className="text-foreground underline">
         Back to admin
       </Link>
       <h1 className="mt-7 font-condensed text-4xl uppercase">Payment desk</h1>
-      <p className="mt-3 text-blue">Saturday runs and Shopify are unchanged.</p>
+      <p className="mt-3 text-foreground">Saturday runs and Shopify are unchanged.</p>
       <div className="mt-5 flex gap-3" aria-label="Payment environment">
         {(["live", "sandbox"] as const).map((value) => (
           <Button
@@ -70,7 +70,7 @@ function Page() {
       {q.error && (
         <p role="alert" className="mt-6">
           Admin sign-in required.{" "}
-          <Link to="/auth" search={{ next: "/admin/payments" }} className="text-blue underline">
+          <Link to="/auth" search={{ next: "/admin/payments" }} className="text-foreground underline">
             Sign in
           </Link>
         </p>
@@ -82,7 +82,7 @@ function Page() {
               <Button
                 key={value}
                 variant={tab === value ? "default" : "outline"}
-                className="min-h-12 border-paper/40 capitalize"
+                className="min-h-12 border-foreground/40 capitalize"
                 onClick={() => {
                   setTab(value);
                   setEditing({});
@@ -106,7 +106,7 @@ function Page() {
                   <thead>
                     <tr>
                       {["Date", "Type", "Item", "Amount", "Email", "Status"].map((v) => (
-                        <th key={v} className="border-b border-paper/30 p-3">
+                        <th key={v} className="border-b border-foreground/30 p-3">
                           {v}
                         </th>
                       ))}
@@ -123,7 +123,7 @@ function Page() {
                           row.email,
                           row.status,
                         ].map((v, i) => (
-                          <td key={i} className="border-b border-paper/15 p-3">
+                          <td key={i} className="border-b border-foreground/15 p-3">
                             {v}
                           </td>
                         ))}
@@ -137,7 +137,7 @@ function Page() {
               {data.orders.map((order) => (
                 <div
                   key={order.id}
-                  className="mt-4 flex flex-wrap items-center gap-4 border-b border-paper/20 pb-4"
+                  className="mt-4 flex flex-wrap items-center gap-4 border-b border-foreground/20 pb-4"
                 >
                   <span>
                     {order.email} · {order.status}
@@ -145,7 +145,7 @@ function Page() {
                   <Button
                     disabled={!order.stripe_subscription_id || busy}
                     variant="outline"
-                    className="min-h-12 border-paper/40"
+                    className="min-h-12 border-foreground/40"
                     onClick={async () => {
                       setBusy(true);
                       try {
@@ -180,7 +180,7 @@ function Page() {
                 ).map((record) => (
                   <div
                     key={record.id}
-                    className="flex flex-wrap items-center justify-between gap-4 border-b border-paper/25 py-3"
+                    className="flex flex-wrap items-center justify-between gap-4 border-b border-foreground/25 py-3"
                   >
                     <span>
                       {record.name} · {usd(record.amount_cents)} ·{" "}
@@ -189,7 +189,7 @@ function Page() {
                     {tab !== "package" && (
                       <Button
                         variant="outline"
-                        className="min-h-12 border-paper/40"
+                        className="min-h-12 border-foreground/40"
                         onClick={() => setEditing(record)}
                       >
                         Edit
@@ -199,7 +199,7 @@ function Page() {
                       <Button
                         variant="outline"
                         disabled={busy}
-                        className="min-h-12 border-paper/40"
+                        className="min-h-12 border-foreground/40"
                         onClick={async () => {
                           setBusy(true);
                           try {
@@ -378,7 +378,7 @@ function Page() {
                         className={input}
                       />
                     </label>
-                    <p className="text-paper/70">
+                    <p className="text-foreground/70">
                       Paid events are separate. Never create tickets for the free Saturday run.
                     </p>
                   </>
@@ -412,7 +412,7 @@ function Page() {
             </>
           )}
           {message && (
-            <div role="status" className="mt-7 break-all border-l-4 border-blue p-4 text-blue">
+            <div role="status" className="mt-7 break-all border-l-4 border-blue p-4 text-foreground">
               {message}
               {message.startsWith("http") && (
                 <Button

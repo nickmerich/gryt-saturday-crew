@@ -188,7 +188,7 @@ function PlanPage() {
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="bg-ink px-8 py-4 uppercase tracking-[0.14em] text-paper transition-colors hover:bg-ink/85 disabled:opacity-60"
+                className="bg-background px-8 py-4 uppercase tracking-[0.14em] text-foreground transition-colors hover:bg-background/85 disabled:opacity-60"
               >
                 {status === "loading" ? "Building your plan…" : "Build my plan"}
               </button>

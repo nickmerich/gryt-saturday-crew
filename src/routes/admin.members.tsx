@@ -16,12 +16,12 @@ export const Route = createFileRoute('/admin/members')({
   }),
   component: AdminMembersPage,
   errorComponent: ({ error }) => (
-    <div className="min-h-screen bg-ink text-paper p-12">
+    <div className="min-h-screen bg-background text-foreground p-12">
       <h1 className="display-condensed text-3xl">Admin error</h1>
       <p className="mt-2 text-sm text-muted-foreground">{error instanceof Error ? error.message : String(error)}</p>
     </div>
   ),
-  notFoundComponent: () => <div className="p-12 text-paper">Not found.</div>,
+  notFoundComponent: () => <div className="p-12 text-foreground">Not found.</div>,
 })
 
 function SignInForm({ onSent }: { onSent: () => void }) {
@@ -60,7 +60,7 @@ function SignInForm({ onSent }: { onSent: () => void }) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="you@grytrunclub.com"
-          className="w-full bg-vintage border border-white/10 px-3 py-2 text-sm text-paper placeholder:text-muted-foreground focus:outline-none focus:border-blue"
+          className="w-full bg-background border border-foreground/10 px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-blue"
         />
         <button
           type="submit"
@@ -69,14 +69,14 @@ function SignInForm({ onSent }: { onSent: () => void }) {
         >
           {status === 'sending' ? 'Sending…' : 'Send magic link'}
         </button>
-        {status === 'sent' && <p className="text-xs text-blue">Check your inbox.</p>}
+        {status === 'sent' && <p className="text-xs text-foreground">Check your inbox.</p>}
         {status === 'error' && <p className="text-xs text-red-400">{msg}</p>}
       </form>
 
       <div className="mt-6 flex items-center gap-3">
-        <div className="h-px flex-1 bg-white/10" />
+        <div className="h-px flex-1 bg-foreground/10" />
         <span className="text-[10px] uppercase tracking-wider text-muted-foreground">or</span>
-        <div className="h-px flex-1 bg-white/10" />
+        <div className="h-px flex-1 bg-foreground/10" />
       </div>
 
       <button
@@ -91,7 +91,7 @@ function SignInForm({ onSent }: { onSent: () => void }) {
             setMsg(result.error.message ?? 'Google sign-in failed')
           }
         }}
-        className="mt-4 w-full flex items-center justify-center gap-2 bg-white text-black px-4 py-2.5 text-sm font-medium hover:bg-white/90"
+        className="mt-4 w-full flex items-center justify-center gap-2 bg-white text-black px-4 py-2.5 text-sm font-medium hover:bg-foreground/90"
       >
         <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
           <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -113,7 +113,7 @@ function SignInForm({ onSent }: { onSent: () => void }) {
             setMsg(result.error.message ?? 'Apple sign-in failed')
           }
         }}
-        className="mt-2 w-full flex items-center justify-center gap-2 bg-white text-black px-4 py-2.5 text-sm font-medium hover:bg-white/90"
+        className="mt-2 w-full flex items-center justify-center gap-2 bg-white text-black px-4 py-2.5 text-sm font-medium hover:bg-foreground/90"
       >
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
@@ -159,7 +159,7 @@ function MemberRow({ m }: { m: CanonicalMember }) {
   if (sync?.review_needed) issues.push('Review')
 
   return (
-    <tr className={`border-b border-white/5 ${issues.length > 0 ? 'bg-yellow-500/5' : ''}`}>
+    <tr className={`border-b border-foreground/5 ${issues.length > 0 ? 'bg-yellow-500/5' : ''}`}>
       <td className="py-3 px-3 align-top">
         <div className="font-medium">{m.full_name || '(no name)'}</div>
         <div className="text-[11px] font-mono text-muted-foreground">{m.canonical_member_key}</div>
@@ -221,12 +221,12 @@ function AdminMembersPage() {
   const unauthorized = error instanceof Error && /Unauthorized/i.test(error.message)
 
   if (!authChecked) {
-    return <div className="min-h-screen bg-ink text-muted-foreground p-12">Checking session…</div>
+    return <div className="min-h-screen bg-background text-muted-foreground p-12">Checking session…</div>
   }
 
   if (!signedIn || unauthorized) {
     return (
-      <main className="min-h-screen bg-ink text-paper p-12">
+      <main className="min-h-screen bg-background text-foreground p-12">
         <SignInForm onSent={() => refetch()} />
       </main>
     )
@@ -234,7 +234,7 @@ function AdminMembersPage() {
 
   if (forbidden) {
     return (
-      <main className="min-h-screen bg-ink text-paper p-12">
+      <main className="min-h-screen bg-background text-foreground p-12">
         <p className="eyebrow eyebrow-blue">Access denied</p>
         <h1 className="display-condensed text-3xl mt-2">Not on the admin allowlist</h1>
         <p className="mt-2 text-sm text-muted-foreground">
@@ -242,7 +242,7 @@ function AdminMembersPage() {
         </p>
         <button
           onClick={() => supabase.auth.signOut()}
-          className="mt-6 border border-white/20 px-4 py-2 text-sm uppercase tracking-wider hover:bg-white/5"
+          className="mt-6 border border-foreground/20 px-4 py-2 text-sm uppercase tracking-wider hover:bg-foreground/5"
         >
           Sign out
         </button>
@@ -253,14 +253,14 @@ function AdminMembersPage() {
   const flagged = (data ?? []).filter((m) => !m.email && !m.instagram_handle).length
 
   return (
-    <main className="min-h-screen bg-ink text-paper">
-      <div className="border-b border-white/10 px-6 sm:px-12 py-8 flex items-end justify-between flex-wrap gap-4">
+    <main className="min-h-screen bg-background text-foreground">
+      <div className="border-b border-foreground/10 px-6 sm:px-12 py-8 flex items-end justify-between flex-wrap gap-4">
         <div>
           <p className="eyebrow eyebrow-blue">Admin · sync status</p>
           <h1 className="display-condensed text-4xl mt-2">Member Review</h1>
           <div className="mt-3 flex flex-wrap gap-4">
-            <a href="/admin/inquiries" className="text-sm text-blue underline">Open operator inquiry queue</a>
-            <a href="/admin/roster" className="text-sm text-blue underline">Open runner roster (RSVPs + waivers)</a>
+            <a href="/admin/inquiries" className="text-sm text-foreground underline">Open operator inquiry queue</a>
+            <a href="/admin/roster" className="text-sm text-foreground underline">Open runner roster (RSVPs + waivers)</a>
           </div>
           <p className="mt-2 text-sm text-muted-foreground">
             {data?.length ?? '—'} members · {flagged} missing contact info
@@ -268,7 +268,7 @@ function AdminMembersPage() {
         </div>
         <button
           onClick={() => supabase.auth.signOut()}
-          className="text-xs uppercase tracking-wider text-muted-foreground hover:text-paper"
+          className="text-xs uppercase tracking-wider text-muted-foreground hover:text-foreground"
         >
           Sign out
         </button>
@@ -283,7 +283,7 @@ function AdminMembersPage() {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-left text-[10px] uppercase tracking-wider text-muted-foreground border-b border-white/10">
+              <tr className="text-left text-[10px] uppercase tracking-wider text-muted-foreground border-b border-foreground/10">
                 <th className="py-3 px-3">Member</th>
                 <th className="py-3 px-3">Contact</th>
                 <th className="py-3 px-3">Status</th>

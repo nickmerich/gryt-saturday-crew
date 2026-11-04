@@ -11,7 +11,7 @@ import crew from "@/assets/photos/manifesto/crew-trail.jpg.asset.json";
 
 export function PaymentFrame({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <div className="min-h-screen bg-ink text-paper">
+    <div className="min-h-screen bg-background text-foreground">
       <SiteNav />
       {getStripeEnvironment() === "sandbox" && (
         <div className="border-y border-blue bg-blue px-5 py-3 text-center text-sm font-semibold text-ink">
@@ -19,7 +19,7 @@ export function PaymentFrame({ title, children }: { title: string; children: Rea
         </div>
       )}
       <main className="mx-auto max-w-5xl px-5 py-12 sm:px-8">
-        <p className="eyebrow text-blue">GRYT · OPTIONAL PAYMENTS</p>
+        <p className="eyebrow text-foreground">GRYT · OPTIONAL PAYMENTS</p>
         <h1 className="my-5 font-condensed text-5xl font-bold uppercase leading-tight sm:text-6xl">
           {title}
         </h1>
@@ -57,14 +57,14 @@ export function TestPaymentForm({
   const [fulfillment, setFulfillment] = useState<"shipping" | "pickup">("pickup");
   const [quantity, setQuantity] = useState(1);
   const inputClass =
-    "mt-2 min-h-12 w-full border border-paper/40 bg-ink px-3 text-base text-paper focus-visible:outline-2 focus-visible:outline-blue";
+    "mt-2 min-h-12 w-full border border-foreground/40 bg-background px-3 text-base text-foreground focus-visible:outline-2 focus-visible:outline-blue";
   if (clientSecret)
     return (
       <section aria-label="Stripe checkout" className="mt-8">
         <Button
           disabled={busy}
           variant="outline"
-          className="mb-5 min-h-12 border-paper/40"
+          className="mb-5 min-h-12 border-foreground/40"
           onClick={async () => {
             setBusy(true);
             try {
@@ -83,7 +83,7 @@ export function TestPaymentForm({
           Cancel and return
         </Button>
         {error && (
-          <p role="alert" className="mb-5 text-blue">
+          <p role="alert" className="mb-5 text-foreground">
             {error}
           </p>
         )}
@@ -147,7 +147,7 @@ export function TestPaymentForm({
                     key={value}
                     aria-pressed={cents === value}
                     variant={cents === value ? "default" : "outline"}
-                    className="min-h-14 border-paper/40 text-lg"
+                    className="min-h-14 border-foreground/40 text-lg"
                     onClick={() => setCents(value)}
                   >
                     {usd(value)}
@@ -168,19 +168,19 @@ export function TestPaymentForm({
                   required
                 />
               </label>
-              <p className="mt-2 text-sm text-paper/70">$5 minimum · $1,000 maximum</p>
+              <p className="mt-2 text-sm text-foreground/70">$5 minimum · $1,000 maximum</p>
             </fieldset>
             <div className="flex min-h-12 items-center gap-4">
               <Switch
                 id="monthly"
-                className="border-paper/60 data-[state=unchecked]:bg-paper/30"
+                className="border-foreground/60 data-[state=unchecked]:bg-foreground/30"
                 checked={monthly}
                 onCheckedChange={setMonthly}
               />
               <label htmlFor="monthly">Make it monthly</label>
             </div>
             {monthly && (
-              <p className="text-sm text-paper/75">
+              <p className="text-sm text-foreground/75">
                 {usd(cents)} each month. To stop future support, contact nick@gryt.club.
               </p>
             )}
@@ -222,7 +222,7 @@ export function TestPaymentForm({
             {(["pickup", "shipping"] as const).map((value) => (
               <label
                 key={value}
-                className="mt-3 flex min-h-12 items-center gap-3 border border-paper/30 px-4"
+                className="mt-3 flex min-h-12 items-center gap-3 border border-foreground/30 px-4"
               >
                 <input
                   type="radio"
@@ -234,17 +234,17 @@ export function TestPaymentForm({
                 {value === "pickup" ? "Pick up at Saturday run · Free" : "US shipping · Free"}
               </label>
             ))}
-            <p className="mt-2 text-sm text-paper/70">
+            <p className="mt-2 text-sm text-foreground/70">
               Shipping is US only. Applicable tax is calculated in Checkout.
             </p>
           </fieldset>
         )}
       </fieldset>
       {error && (
-        <div role="alert" className="border-l-4 border-blue py-3 pl-4 text-blue">
+        <div role="alert" className="border-l-4 border-blue py-3 pl-4 text-foreground">
           <p className="break-words">{error}</p>
           {type === "merch" && /head office address/i.test(error) && (
-            <div className="mt-3 space-y-2 text-paper">
+            <div className="mt-3 space-y-2 text-foreground">
               <p>Hat checkout needs the owner's Stripe tax setup.</p>
               <p>
                 In the connected Stripe account, open Settings → Tax → Head office address. Enter
@@ -255,11 +255,11 @@ export function TestPaymentForm({
                 href="https://dashboard.stripe.com/settings/tax"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block py-3 text-blue underline focus-visible:outline-2 focus-visible:outline-blue"
+                className="inline-block py-3 text-foreground underline focus-visible:outline-2 focus-visible:outline-blue"
               >
                 Open Stripe tax settings
               </a>
-              <p className="text-sm text-paper/75">No payment was made.</p>
+              <p className="text-sm text-foreground/75">No payment was made.</p>
             </div>
           )}
         </div>
@@ -279,11 +279,11 @@ export function TestPaymentForm({
               : `${monthly && type === "support" ? "Subscribe" : "Continue"} · ${usd((type === "support" ? cents : amount) * quantity)}${monthly && type === "support" ? " / month" : ""}`}
       </Button>
       {busy && (
-        <p role="status" className="text-sm text-paper/85">
+        <p role="status" className="text-sm text-foreground/85">
           Opening secure Stripe checkout...
         </p>
       )}
-      <p className="text-sm text-paper/70">
+      <p className="text-sm text-foreground/70">
         Saturday runs are always free. This payment is separate from RSVP and the waiver.
       </p>
     </form>
@@ -292,7 +292,7 @@ export function TestPaymentForm({
 export function SupportPage() {
   return (
     <PaymentFrame title="Support GRYT">
-      <p className="max-w-xl text-lg text-paper/85">
+      <p className="max-w-xl text-lg text-foreground/85">
         Runs are always free. Optional support helps cover permits, insurance, water and coffee.
       </p>
       <img
