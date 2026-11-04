@@ -610,6 +610,45 @@ export type Database = {
         }
         Relationships: []
       }
+      runner_reviews: {
+        Row: {
+          body: string
+          consent_at: string
+          consent_version: string
+          created_at: string
+          email: string | null
+          first_name: string
+          id: string
+          rating: number
+          reviewed_at: string | null
+          status: string
+        }
+        Insert: {
+          body: string
+          consent_at: string
+          consent_version?: string
+          created_at?: string
+          email?: string | null
+          first_name: string
+          id?: string
+          rating: number
+          reviewed_at?: string | null
+          status?: string
+        }
+        Update: {
+          body?: string
+          consent_at?: string
+          consent_version?: string
+          created_at?: string
+          email?: string | null
+          first_name?: string
+          id?: string
+          rating?: number
+          reviewed_at?: string | null
+          status?: string
+        }
+        Relationships: []
+      }
       signup_sessions: {
         Row: {
           contact: string | null
