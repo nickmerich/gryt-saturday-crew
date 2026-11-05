@@ -25,7 +25,7 @@ export function PartnersStrip() {
   const { data } = useSuspenseQuery(homePartnersQuery)
   if (!data.length) return null
   const t = HOME_TESTIMONIAL
-  return <section aria-label="Trusted by" className="relative mt-6 md:mt-10 border-y border-foreground/10 bg-background pt-12 md:pt-16">
+  return <section aria-label="Trusted by" className="relative mt-6 md:mt-10 border-y border-foreground/10 bg-blue pt-12 md:pt-16">
     {t && <figure className="mx-auto max-w-[900px] px-5 pb-10 md:pb-14 text-center">
       <blockquote className="display-condensed uppercase text-3xl md:text-5xl leading-[1] text-foreground">"{t.quote}"</blockquote>
       <figcaption className="eyebrow mt-5 text-foreground">{t.name}{t.org ? ` · ${t.org}` : ''}</figcaption>
