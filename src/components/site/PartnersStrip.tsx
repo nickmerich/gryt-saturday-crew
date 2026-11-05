@@ -25,7 +25,7 @@ export function PartnersStrip() {
   const { data } = useSuspenseQuery(homePartnersQuery)
   if (!data.length) return null
   const t = HOME_TESTIMONIAL
-  return <section aria-label="Trusted by" className="relative mt-6 md:mt-10 border-y border-foreground/10 bg-blue pt-12 md:pt-16">
+  return <section aria-label="Trusted by" className="relative mt-6 md:mt-10 border-y border-foreground/10 bg-background pt-12 md:pt-16">
     {t && <figure className="mx-auto max-w-[900px] px-5 pb-10 md:pb-14 text-center">
       <blockquote className="display-condensed uppercase text-3xl md:text-5xl leading-[1] text-foreground">"{t.quote}"</blockquote>
       <figcaption className="eyebrow mt-5 text-foreground">{t.name}{t.org ? ` · ${t.org}` : ''}</figcaption>
@@ -34,7 +34,7 @@ export function PartnersStrip() {
       <div className="flex items-center gap-3"><span className="slash" aria-hidden="true" /><h2 className="display-condensed uppercase text-2xl md:text-3xl tracking-[0.04em] text-foreground whitespace-nowrap">Trusted by</h2></div>
       <Link to="/partners" className="eyebrow text-foreground/70 transition-colors hover:text-foreground/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue">See all partners →</Link>
     </div>
-    <div className="overflow-hidden border-t border-foreground/10 py-6 md:py-8 [mask-image:linear-gradient(90deg,transparent,black_6%,black_94%,transparent)]">
+    <div className="overflow-hidden border-t border-foreground/10 bg-blue py-6 md:py-8 [mask-image:linear-gradient(90deg,transparent,black_6%,black_94%,transparent)]">
       <ul className="marquee-track hover:[animation-play-state:paused] motion-reduce:!w-auto motion-reduce:flex-wrap motion-reduce:justify-center motion-reduce:gap-y-6 motion-reduce:[animation:none]">
         {data.map(p => <Item key={p.name} p={p as P} />)}
         {/* Second run makes the loop seamless; hidden from screen readers. */}
