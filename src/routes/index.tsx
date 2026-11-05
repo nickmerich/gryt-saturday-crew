@@ -1011,6 +1011,10 @@ function RSVP() {
                 <option value="Instagram">Instagram</option>
                 <option value="Strava">Strava</option>
                 <option value="Google">Google</option>
+                <option value="AI assistant">ChatGPT, Perplexity or another AI</option>
+                <option value="Press or podcast">A news story or podcast</option>
+                <option value="Store">Fleet Feet or another running store</option>
+                <option value="Partner">A GRYT partner or sponsor</option>
                 <option value="Trail">Saw you on the trail</option>
                 <option value="Other">Other</option>
               </select>
