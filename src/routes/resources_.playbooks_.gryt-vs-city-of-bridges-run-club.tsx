@@ -148,37 +148,37 @@ function Page() {
       </p>
       <ul className="list-disc pl-6 space-y-2">
         <li>
-          <strong className="text-paper">Protect one run.</strong> More options can mean more decisions. Pick the
+          <strong className="text-foreground">Protect one run.</strong> More options can mean more decisions. Pick the
           one run you'll never skip. For a lot of South Hills families, that's Saturday at 7 AM.
         </li>
         <li>
-          <strong className="text-paper">Make it the same place.</strong> A fixed trailhead removes the "where is
+          <strong className="text-foreground">Make it the same place.</strong> A fixed trailhead removes the "where is
           it this week?" step. That small friction is where habits break.
         </li>
         <li>
-          <strong className="text-paper">Count Saturdays, not splits.</strong> GRYT's{" "}
-          <Link to="/milestones" className="underline hover:text-blue">
+          <strong className="text-foreground">Count Saturdays, not splits.</strong> GRYT's{" "}
+          <Link to="/milestones" className="underline hover:text-foreground/70">
             Milestone Club
           </Link>{" "}
           marks 5, 10, 25, 50, and 100 Saturdays. Walking counts.
         </li>
         <li>
-          <strong className="text-paper">Run no-drop.</strong> If a bad day means finishing alone, you'll stop
+          <strong className="text-foreground">Run no-drop.</strong> If a bad day means finishing alone, you'll stop
           coming. No-drop fixes that.
         </li>
         <li>
-          <strong className="text-paper">Add a second run with a different club.</strong> A weeknight group like
+          <strong className="text-foreground">Add a second run with a different club.</strong> A weeknight group like
           CBRC's Thursday South Hills run gives you a midweek reason to lace up.
         </li>
       </ul>
 
       <PH2 id="who">Who Each Club Fits</PH2>
       <p>
-        <strong className="text-paper">Choose CBRC if</strong> you want several group runs a week, track workouts,
+        <strong className="text-foreground">Choose CBRC if</strong> you want several group runs a week, track workouts,
         pace groups, or access to certified coaches, and you don't mind checking where each run starts.
       </p>
       <p>
-        <strong className="text-paper">Choose GRYT if</strong> you're in McMurray, Peters Township, Canonsburg,
+        <strong className="text-foreground">Choose GRYT if</strong> you're in McMurray, Peters Township, Canonsburg,
         Upper St. Clair, Bethel Park, or Washington County, Saturday morning is your window, and you want the same
         place, same time, same people every week, with no one getting dropped.
       </p>
@@ -187,22 +187,22 @@ function Page() {
       <p>
         The schedules fit together. Thursday evening with CBRC in the South Hills and Saturday morning with GRYT
         is a two-run week with community on both ends. If you're building toward a race, the{" "}
-        <Link to="/plan" className="underline hover:text-blue">
+        <Link to="/plan" className="underline hover:text-foreground/70">
           GRYT run plan builder
         </Link>{" "}
         fills in the rest of the week, and the{" "}
-        <Link to="/races" className="underline hover:text-blue">
+        <Link to="/races" className="underline hover:text-foreground/70">
           races page
         </Link>{" "}
         keeps verified dates for upcoming Pittsburgh races.
       </p>
       <p>
         Comparing more options? Read{" "}
-        <Link to="/resources/playbooks/best-free-run-clubs-south-hills-2026" className="underline hover:text-blue">
+        <Link to="/resources/playbooks/best-free-run-clubs-south-hills-2026" className="underline hover:text-foreground/70">
           the South Hills run club guide
         </Link>{" "}
         and{" "}
-        <Link to="/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs" className="underline hover:text-blue">
+        <Link to="/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs" className="underline hover:text-foreground/70">
           GRYT vs Fleet Feet Pittsburgh
         </Link>
         .

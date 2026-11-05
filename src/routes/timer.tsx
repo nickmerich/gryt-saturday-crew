@@ -176,34 +176,34 @@ function TimerPage() {
   };
 
   return (
-    <main className="min-h-screen bg-ink text-paper font-body">
+    <main className="min-h-screen bg-background text-foreground font-body">
       {/* Header */}
-      <header className="border-b border-white/10 px-6 sm:px-10 py-6 flex items-center justify-between">
+      <header className="border-b border-foreground/10 px-6 sm:px-10 py-6 flex items-center justify-between">
         <div>
-          <h1 className="text-[11px] tracking-[0.22em] uppercase text-white/50 font-body font-normal">
+          <h1 className="text-[11px] tracking-[0.22em] uppercase text-foreground/70 font-body font-normal">
             GRYT · Event Timer
           </h1>
           <input
             value={eventTitle}
             onChange={(e) => setEventTitle(e.target.value)}
             aria-label="Event title"
-            className="font-condensed uppercase text-3xl sm:text-4xl mt-1 bg-transparent border-b border-transparent hover:border-white/20 focus:border-blue focus:outline-none w-full max-w-md"
+            className="font-condensed uppercase text-3xl sm:text-4xl mt-1 bg-transparent border-b border-transparent hover:border-foreground/20 focus:border-blue focus:outline-none w-full max-w-md"
             style={{ letterSpacing: "0.01em" }}
           />
 
         </div>
         <a
           href="/"
-          className="text-[11px] tracking-[0.22em] uppercase text-white/60 hover:text-blue"
+          className="text-[11px] tracking-[0.22em] uppercase text-foreground/75 hover:text-foreground/70"
         >
           ← Back
         </a>
       </header>
 
       {/* Clock */}
-      <section className="px-6 sm:px-10 py-10 border-b border-white/10">
+      <section className="px-6 sm:px-10 py-10 border-b border-foreground/10">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="text-[10px] tracking-[0.3em] uppercase text-white/50 mb-3">
+          <div className="text-[10px] tracking-[0.3em] uppercase text-foreground/70 mb-3">
             Event Clock
           </div>
           <div
@@ -220,27 +220,27 @@ function TimerPage() {
               <button
                 onClick={startEvent}
                 disabled={participants.length === 0}
-                className="px-6 py-3 bg-blue text-ink font-condensed uppercase tracking-widest text-sm disabled:opacity-40 disabled:cursor-not-allowed hover:bg-white transition-colors"
+                className="px-6 py-3 bg-blue text-ink font-condensed uppercase tracking-widest text-sm disabled:opacity-40 disabled:cursor-not-allowed hover:bg-foreground hover:text-background transition-colors"
               >
                 Start Event
               </button>
             ) : (
               <button
                 onClick={resetEvent}
-                className="px-6 py-3 border border-white/30 text-paper font-condensed uppercase tracking-widest text-sm hover:border-blue hover:text-blue transition-colors"
+                className="px-6 py-3 border border-foreground/30 text-foreground font-condensed uppercase tracking-widest text-sm hover:border-blue hover:text-foreground/70 transition-colors"
               >
                 Reset Clock
               </button>
             )}
             <button
               onClick={clearAll}
-              className="px-6 py-3 border border-white/10 text-white/50 font-condensed uppercase tracking-widest text-sm hover:text-paper hover:border-white/30 transition-colors"
+              className="px-6 py-3 border border-foreground/10 text-foreground/70 font-condensed uppercase tracking-widest text-sm hover:text-foreground hover:border-foreground/30 transition-colors"
             >
               Clear All
             </button>
           </div>
           {startAt !== null && (
-            <div className="mt-4 text-[10px] tracking-[0.25em] uppercase text-white/40">
+            <div className="mt-4 text-[10px] tracking-[0.25em] uppercase text-foreground/70">
               Started {new Date(startAt).toLocaleTimeString()}
             </div>
           )}
@@ -266,14 +266,14 @@ function TimerPage() {
               value={bib}
               onChange={(e) => setBib(e.target.value)}
               placeholder="Bib"
-              className="bg-vintage border border-white/10 px-3 py-2 text-sm focus:outline-none focus:border-blue placeholder:text-white/30"
+              className="bg-background border border-foreground/10 px-3 py-2 text-sm focus:outline-none focus:border-blue placeholder:text-foreground/55"
               inputMode="numeric"
             />
             <input
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Runner name"
-              className="bg-vintage border border-white/10 px-3 py-2 text-sm focus:outline-none focus:border-blue placeholder:text-white/30"
+              className="bg-background border border-foreground/10 px-3 py-2 text-sm focus:outline-none focus:border-blue placeholder:text-foreground/55"
             />
             <button
               type="submit"
@@ -283,9 +283,9 @@ function TimerPage() {
             </button>
           </form>
 
-          <ul className="mt-6 divide-y divide-white/10 border-y border-white/10">
+          <ul className="mt-6 divide-y divide-foreground/10 border-y border-foreground/10">
             {pending.length === 0 && participants.length === 0 && (
-              <li className="py-8 text-center text-white/40 text-sm">
+              <li className="py-8 text-center text-foreground/70 text-sm">
                 Add runners to begin.
               </li>
             )}
@@ -294,28 +294,28 @@ function TimerPage() {
                 key={p.id}
                 className="py-3 flex items-center gap-3"
               >
-                <span className="w-10 font-condensed text-white/50 tabular-nums text-sm">
+                <span className="w-10 font-condensed text-foreground/70 tabular-nums text-sm">
                   {p.bib ?? "—"}
                 </span>
                 <span className="flex-1 truncate">{p.name}</span>
                 <button
                   onClick={() => captureFinish(p.id)}
                   disabled={startAt === null}
-                  className="px-3 py-1.5 bg-blue text-ink font-condensed uppercase tracking-widest text-[11px] disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white transition-colors"
+                  className="px-3 py-1.5 bg-blue text-ink font-condensed uppercase tracking-widest text-[11px] disabled:opacity-30 disabled:cursor-not-allowed hover:bg-foreground hover:text-background transition-colors"
                 >
                   Finish
                 </button>
                 <button
                   onClick={() => removeParticipant(p.id)}
                   aria-label={`Remove ${p.name}`}
-                  className="text-white/30 hover:text-paper text-lg leading-none px-2"
+                  className="text-foreground/60 hover:text-foreground text-lg leading-none px-2"
                 >
                   ×
                 </button>
               </li>
             ))}
             {pending.length === 0 && participants.length > 0 && (
-              <li className="py-6 text-center text-white/40 text-xs uppercase tracking-[0.2em]">
+              <li className="py-6 text-center text-foreground/70 text-xs uppercase tracking-[0.2em]">
                 All runners finished
               </li>
             )}
@@ -334,14 +334,14 @@ function TimerPage() {
                 <button
                   onClick={shareResults}
                   disabled={results.length === 0}
-                  className="text-[11px] tracking-[0.22em] uppercase text-white/60 hover:text-blue disabled:opacity-30 disabled:cursor-not-allowed"
+                  className="text-[11px] tracking-[0.22em] uppercase text-foreground/75 hover:text-foreground/70 disabled:opacity-30 disabled:cursor-not-allowed"
                 >
                   {shareStatus === "copied" ? "Link Copied ✓" : "Share Link"}
                 </button>
                 <button
                   onClick={exportCsv}
                   disabled={results.length === 0}
-                  className="text-[11px] tracking-[0.22em] uppercase text-white/60 hover:text-blue disabled:opacity-30 disabled:cursor-not-allowed"
+                  className="text-[11px] tracking-[0.22em] uppercase text-foreground/75 hover:text-foreground/70 disabled:opacity-30 disabled:cursor-not-allowed"
                 >
                   Export CSV
                 </button>
@@ -350,16 +350,16 @@ function TimerPage() {
           </div>
 
 
-          <div className="mt-6 border border-white/10">
-            <div className="grid grid-cols-[48px_64px_1fr_120px] gap-2 px-4 py-2 bg-vintage text-[10px] tracking-[0.22em] uppercase text-white/50">
+          <div className="mt-6 border border-foreground/10">
+            <div className="grid grid-cols-[48px_64px_1fr_120px] gap-2 px-4 py-2 bg-background text-[10px] tracking-[0.22em] uppercase text-foreground/70">
               <span>Pl</span>
               <span>Bib</span>
               <span>Name</span>
               <span className="text-right">Time</span>
             </div>
-            <ul className="divide-y divide-white/10">
+            <ul className="divide-y divide-foreground/10">
               {results.length === 0 && (
-                <li className="py-10 text-center text-white/40 text-sm">
+                <li className="py-10 text-center text-foreground/70 text-sm">
                   No finishers yet.
                 </li>
               )}
@@ -368,10 +368,10 @@ function TimerPage() {
                   key={p.id}
                   className="grid grid-cols-[48px_64px_1fr_120px] gap-2 items-center px-4 py-3"
                 >
-                  <span className="font-condensed text-lg text-blue tabular-nums">
+                  <span className="font-condensed text-lg text-foreground tabular-nums">
                     {i + 1}
                   </span>
-                  <span className="text-white/60 tabular-nums text-sm">
+                  <span className="text-foreground/75 tabular-nums text-sm">
                     {p.bib ?? "—"}
                   </span>
                   <span className="truncate">{p.name}</span>
@@ -379,7 +379,7 @@ function TimerPage() {
                     {formatDuration(p.finishMs)}
                     <button
                       onClick={() => undoFinish(p.id)}
-                      className="text-white/30 hover:text-paper text-xs uppercase tracking-widest"
+                      className="text-foreground/60 hover:text-foreground text-xs uppercase tracking-widest"
                       title="Undo finish"
                     >
                       ↺
@@ -390,7 +390,7 @@ function TimerPage() {
             </ul>
           </div>
 
-          <p className="mt-4 text-[11px] text-white/40 leading-relaxed">
+          <p className="mt-4 text-[11px] text-foreground/70 leading-relaxed">
             Local session only — data lives in this browser tab. Export the CSV
             before closing.
           </p>
@@ -403,7 +403,7 @@ function TimerPage() {
 function SectionHeader({ eyebrow, title }: { eyebrow: string; title: string }) {
   return (
     <div>
-      <div className="text-[10px] tracking-[0.28em] uppercase text-white/50">
+      <div className="text-[10px] tracking-[0.28em] uppercase text-foreground/70">
         {eyebrow}
       </div>
       <h2

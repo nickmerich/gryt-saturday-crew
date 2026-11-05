@@ -99,39 +99,39 @@ function H2({ id, children }: { id: string; children: React.ReactNode }) {
   return <h2 id={id} className="text-2xl md:text-3xl font-bold mt-12 mb-2 scroll-mt-24">{children}</h2>;
 }
 function H3({ children }: { children: React.ReactNode }) {
-  return <h3 className="text-paper font-bold text-[18px] md:text-[20px] mt-8 mb-1.5">{children}</h3>;
+  return <h3 className="text-foreground font-bold text-[18px] md:text-[20px] mt-8 mb-1.5">{children}</h3>;
 }
-const link = "text-blue underline underline-offset-4 hover:text-paper transition-colors";
+const link = "text-foreground underline underline-offset-4 hover:text-foreground transition-colors";
 
 function NightRunPage() {
   return (
-    <main className="bg-ink text-paper">
+    <main className="bg-background text-foreground">
       <SiteNav />
-      <article className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
+      <article className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-foreground/15">
         <div className="max-w-[760px] mx-auto">
-          <Link to="/resources" className="eyebrow text-blue hover:text-paper transition-colors">← All resources</Link>
-          <p className="eyebrow text-blue mt-8 mb-5">SAFETY · 8 MIN READ</p>
+          <Link to="/resources" className="eyebrow text-foreground hover:text-foreground transition-colors">← All resources</Link>
+          <p className="eyebrow text-foreground mt-8 mb-5">SAFETY · 8 MIN READ</p>
           <h1 className="display-condensed uppercase text-[clamp(40px,7vw,96px)] leading-[0.95]">
             Running at Night: How to Stay Safe on Evening Runs in Pittsburgh
           </h1>
-          <p className="mt-7 text-paper/75 text-lg md:text-xl leading-[1.55]">
+          <p className="mt-7 text-foreground/75 text-lg md:text-xl leading-[1.55]">
             Gear up. Know the route. Tell someone where you're going.
           </p>
 
-          <figure className="mt-10 border border-paper/15">
+          <figure className="mt-10 border border-foreground/15">
             <img src={heroAsset.url} alt="Runner on a dark path at night" loading="eager" className="w-full h-auto" />
           </figure>
 
-          <nav aria-label="Table of contents" className="mt-10 border border-paper/15 p-5">
-            <p className="eyebrow text-paper/55 mb-3">In this guide</p>
+          <nav aria-label="Table of contents" className="mt-10 border border-foreground/15 p-5">
+            <p className="eyebrow text-foreground/70 mb-3">In this guide</p>
             <ul className="flex flex-col gap-2">
               {SECTIONS.map((s) => (
-                <li key={s.id}><a href={`#${s.id}`} className="text-paper/80 hover:text-blue transition-colors text-[15px]">→ {s.label}</a></li>
+                <li key={s.id}><a href={`#${s.id}`} className="text-foreground/80 hover:text-foreground/70 transition-colors text-[15px]">→ {s.label}</a></li>
               ))}
             </ul>
           </nav>
 
-          <div className="mt-12 space-y-5 text-paper/85 text-[16px] md:text-[17px] leading-[1.7]">
+          <div className="mt-12 space-y-5 text-foreground/85 text-[16px] md:text-[17px] leading-[1.7]">
             <p>Running at night in Pittsburgh is its own thing. The hills are steeper than they look on a map. The neighborhoods shift fast. And if you're on a trail south of the city, darkness comes early and comes hard. Night running safety isn't a checklist you print once and forget. It's a set of habits you build until they're automatic.</p>
             <p>This guide covers what actually matters for evening runs in Pittsburgh: gear, route selection, and the specific conditions South Hills runners deal with.</p>
 
@@ -204,26 +204,26 @@ function NightRunPage() {
               <li>Weather checked (fog, rain, temperature)</li>
               <li>Trail conditions noted (wet leaves, ice risk)</li>
             </ul>
-            <p className="border-l-2 border-blue pl-5 italic text-paper/90">Eight items. Two minutes. Every time.</p>
+            <p className="border-l-2 border-blue pl-5 italic text-foreground/90">Eight items. Two minutes. Every time.</p>
 
             <H2 id="faqs">Frequently asked questions</H2>
             <div className="space-y-6">
               {FAQS.map((f) => (
                 <div key={f.q}>
-                  <h3 className="text-paper font-bold text-[17px] md:text-[18px] mb-1.5">{f.q}</h3>
+                  <h3 className="text-foreground font-bold text-[17px] md:text-[18px] mb-1.5">{f.q}</h3>
                   <p>{f.a}</p>
                 </div>
               ))}
             </div>
 
-            <p className="text-paper text-lg md:text-xl font-bold mt-12">
+            <p className="text-foreground text-lg md:text-xl font-bold mt-12">
               Gear up. Know the route. Tell someone where you're going. Show up with people when you can. That's it. Everything else is just running.
             </p>
           </div>
 
           <div className="mt-14 flex flex-wrap gap-4">
             <Link to="/" hash="join" className="btn-primary">See Saturday's run →</Link>
-            <Link to="/resources" className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors">Back to Resources</Link>
+            <Link to="/resources" className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-foreground/40 text-foreground hover:border-blue hover:text-foreground/70 transition-colors">Back to Resources</Link>
           </div>
         </div>
         <ShareButtons url={URL} title={TITLE} />

@@ -77,15 +77,15 @@ function MilestonesPage() {
   const trackedSince = data?.ok ? data.totals.trackedSince : null;
 
   return (
-    <main className="bg-ink text-paper">
+    <main className="bg-background text-foreground">
       <SiteNav />
-      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
+      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-foreground/15">
         <div className="max-w-[1080px] mx-auto">
-          <p className="eyebrow text-blue mb-5">Persistence over pace</p>
+          <p className="eyebrow text-foreground mb-5">Persistence over pace</p>
           <h1 className="display-condensed uppercase text-[clamp(44px,8vw,112px)] leading-[0.92]">
             The Milestone Club
           </h1>
-          <p className="mt-7 max-w-[700px] text-paper/80 text-lg md:text-xl leading-[1.55]">
+          <p className="mt-7 max-w-[700px] text-foreground/80 text-lg md:text-xl leading-[1.55]">
             At GRYT we celebrate showing up, not speed. Every Saturday you're checked in at the lot
             counts toward your next milestone, whether you walked, ran, buddied a first-timer, or swept
             the back.
@@ -93,52 +93,52 @@ function MilestonesPage() {
         </div>
       </section>
 
-      <section aria-labelledby="tiers" className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
+      <section aria-labelledby="tiers" className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-foreground/15">
         <div className="max-w-[1080px] mx-auto">
           <h2 id="tiers" className="sr-only">
             Milestones
           </h2>
-          <ol className="grid gap-px bg-paper/20 border border-paper/20 sm:grid-cols-2 lg:grid-cols-5">
+          <ol className="grid gap-px bg-foreground/20 border border-foreground/20 sm:grid-cols-2 lg:grid-cols-5">
             {MILESTONES.map((m) => {
               const members = counts.get(m) ?? 0;
               return (
-                <li key={m} className="bg-ink p-6">
+                <li key={m} className="bg-background p-6">
                   <p className="display-condensed text-[72px] leading-none">{m}</p>
                   <p className="mt-2 font-bold">{MILESTONE_NAMES[m]}</p>
-                  <p className="mt-2 text-[14px] text-paper/70 leading-[1.5]">{MILESTONE_LINES[m]}</p>
+                  <p className="mt-2 text-[14px] text-foreground/70 leading-[1.5]">{MILESTONE_LINES[m]}</p>
                   {members > 0 ? (
-                    <p className="mt-4 text-[12px] tracking-[0.16em] uppercase text-blue font-mono">
+                    <p className="mt-4 text-[12px] tracking-[0.16em] uppercase text-foreground font-mono">
                       {plural(members, "member", "members")}
                     </p>
                   ) : (
-                    <p className="mt-4 text-[12px] tracking-[0.16em] uppercase text-paper/50 font-mono">Be the first</p>
+                    <p className="mt-4 text-[12px] tracking-[0.16em] uppercase text-foreground/70 font-mono">Be the first</p>
                   )}
                 </li>
               );
             })}
           </ol>
           {trackedSince ? (
-            <p className="mt-4 text-[13px] text-paper/55">Counted from check-ins since {longDate(trackedSince)}.</p>
+            <p className="mt-4 text-[13px] text-foreground/70">Counted from check-ins since {longDate(trackedSince)}.</p>
           ) : null}
         </div>
       </section>
 
-      <section aria-labelledby="lookup-title" className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
+      <section aria-labelledby="lookup-title" className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-foreground/15">
         <div className="max-w-[820px] mx-auto">
           <Lookup />
 
           <h2 className="text-2xl md:text-3xl font-bold mt-16 mb-6">Questions</h2>
-          <div className="space-y-6 text-paper/85 text-[16px] leading-[1.7]">
+          <div className="space-y-6 text-foreground/85 text-[16px] leading-[1.7]">
             {FAQS.map((f) => (
               <div key={f.q}>
-                <p className="font-bold text-paper">{f.q}</p>
+                <p className="font-bold text-foreground">{f.q}</p>
                 <p className="mt-1.5">{f.a}</p>
               </div>
             ))}
           </div>
 
           <p className="mt-10">
-            <Link to="/runs" className="text-blue underline underline-offset-4 hover:text-paper">
+            <Link to="/runs" className="text-foreground underline underline-offset-4 hover:text-foreground">
               See this season's run reports →
             </Link>
           </p>
@@ -188,19 +188,19 @@ function Lookup() {
   }
 
   const field =
-    "w-full bg-ink border border-paper/30 px-4 py-3.5 text-[16px] placeholder:text-paper/40 focus:outline-none focus:border-blue";
+    "w-full bg-background border border-foreground/30 px-4 py-3.5 text-[16px] placeholder:text-foreground/55 focus:outline-none focus:border-blue";
 
   return (
-    <div className="border border-paper/20 bg-vintage p-6 md:p-8">
+    <div className="border border-foreground/20 bg-background p-6 md:p-8">
       <h2 id="lookup-title" className="text-2xl md:text-3xl font-bold">
         Check your Saturdays
       </h2>
-      <p className="mt-2 text-paper/75">
+      <p className="mt-2 text-foreground/75">
         Use the first name and email or phone you check in with. Only you see the result.
       </p>
       <form onSubmit={submit} className="mt-6 grid gap-4 sm:grid-cols-[1fr_1.4fr_auto] sm:items-end">
         <label className="block">
-          <span className="block text-[11px] tracking-[0.2em] uppercase text-paper/60 font-mono mb-1.5">First name</span>
+          <span className="block text-[11px] tracking-[0.2em] uppercase text-foreground/75 font-mono mb-1.5">First name</span>
           <input
             className={field}
             value={firstName}
@@ -211,7 +211,7 @@ function Lookup() {
           />
         </label>
         <label className="block">
-          <span className="block text-[11px] tracking-[0.2em] uppercase text-paper/60 font-mono mb-1.5">Email or phone</span>
+          <span className="block text-[11px] tracking-[0.2em] uppercase text-foreground/75 font-mono mb-1.5">Email or phone</span>
           <input
             className={field}
             value={contact}
@@ -229,7 +229,7 @@ function Lookup() {
 
       <div aria-live="polite">
         {result && !result.found ? (
-          <p className="mt-6 border-l-4 border-blue bg-ink p-4 text-[15px]">
+          <p className="mt-6 border-l-4 border-blue bg-background p-4 text-[15px]">
             {result.reason === "bad-contact"
               ? "Enter the email or phone number you use at check-in."
               : result.reason === "unavailable"
@@ -241,7 +241,7 @@ function Lookup() {
         {result?.found ? (
           <div className="mt-8">
             <p className="display-condensed text-[88px] leading-none tabular-nums">{result.saturdays}</p>
-            <p className="eyebrow text-paper/60 mt-1">
+            <p className="eyebrow text-foreground/75 mt-1">
               {result.saturdays === 1 ? "Saturday" : "Saturdays"}
               {result.firstSaturday ? ` since ${longDate(result.firstSaturday)}` : ""}
             </p>
@@ -251,7 +251,7 @@ function Lookup() {
                 return (
                   <span
                     key={m}
-                    className={`px-3 py-1.5 text-[13px] border ${earned ? "bg-blue text-ink border-blue font-bold" : "border-paper/25 text-paper/50"}`}
+                    className={`px-3 py-1.5 text-[13px] border ${earned ? "bg-blue text-ink border-blue font-bold" : "border-foreground/25 text-foreground/70"}`}
                   >
                     {m}
                   </span>
@@ -268,11 +268,11 @@ function Lookup() {
             </button>
             {graphic ? (
               <div className="mt-6">
-                <img src={graphic} alt="Your GRYT milestone graphic" className="w-full max-w-[360px] border border-paper/20" />
+                <img src={graphic} alt="Your GRYT milestone graphic" className="w-full max-w-[360px] border border-foreground/20" />
                 <a
                   href={graphic}
                   download={`gryt-milestone-${result.saturdays}.png`}
-                  className="mt-3 inline-block text-blue underline underline-offset-4 hover:text-paper"
+                  className="mt-3 inline-block text-foreground underline underline-offset-4 hover:text-foreground"
                 >
                   Download PNG (1080 × 1350, Instagram-ready)
                 </a>

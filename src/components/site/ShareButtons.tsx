@@ -34,7 +34,7 @@ export function ShareButtons({ url, title, className = "" }: Props) {
   ];
 
   const btn =
-    "inline-flex items-center h-10 px-4 text-[11px] font-bold uppercase tracking-[0.14em] border border-paper/25 text-paper/80 hover:border-blue hover:text-blue transition-colors";
+    "inline-flex items-center h-10 px-4 text-[11px] font-bold uppercase tracking-[0.14em] border border-foreground/25 text-foreground/80 hover:border-blue hover:text-foreground/70 transition-colors";
 
   const copyLink = async () => {
     try {
@@ -54,8 +54,8 @@ export function ShareButtons({ url, title, className = "" }: Props) {
   };
 
   return (
-    <div className={`mt-14 border-t border-paper/15 pt-6 ${className}`}>
-      <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-paper/45 mb-3">
+    <div className={`mt-14 border-t border-foreground/15 pt-6 ${className}`}>
+      <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-foreground/70 mb-3">
         Share this
       </p>
       <div className="flex flex-wrap gap-2">

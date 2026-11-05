@@ -27,24 +27,24 @@ function SharedResultsPage() {
 
   if (payload === "loading") {
     return (
-      <main className="min-h-screen bg-ink text-paper font-body flex items-center justify-center">
-        <div className="text-white/50 text-sm tracking-[0.2em] uppercase">Loading…</div>
+      <main className="min-h-screen bg-background text-foreground font-body flex items-center justify-center">
+        <div className="text-foreground/70 text-sm tracking-[0.2em] uppercase">Loading…</div>
       </main>
     );
   }
 
   if (!payload) {
     return (
-      <main className="min-h-screen bg-ink text-paper font-body flex items-center justify-center px-6 text-center">
+      <main className="min-h-screen bg-background text-foreground font-body flex items-center justify-center px-6 text-center">
         <div>
-          <div className="text-[10px] tracking-[0.3em] uppercase text-white/50">GRYT · Timer</div>
+          <div className="text-[10px] tracking-[0.3em] uppercase text-foreground/70">GRYT · Timer</div>
           <h1 className="font-condensed uppercase text-4xl mt-2">No results found</h1>
-          <p className="mt-4 text-white/60 max-w-md">
+          <p className="mt-4 text-foreground/75 max-w-md">
             This link is missing or invalid. Ask the timer to re-share the event link.
           </p>
           <Link
             to="/timer"
-            className="mt-8 inline-block px-6 py-3 border border-white/30 font-condensed uppercase tracking-widest text-sm hover:border-blue hover:text-blue transition-colors"
+            className="mt-8 inline-block px-6 py-3 border border-foreground/30 font-condensed uppercase tracking-widest text-sm hover:border-blue hover:text-foreground/70 transition-colors"
           >
             Open Timer
           </Link>
@@ -65,10 +65,10 @@ function SharedResultsPage() {
     : "—";
 
   return (
-    <main className="min-h-screen bg-ink text-paper font-body">
-      <header className="border-b border-white/10 px-6 sm:px-10 py-6 flex items-center justify-between">
+    <main className="min-h-screen bg-background text-foreground font-body">
+      <header className="border-b border-foreground/10 px-6 sm:px-10 py-6 flex items-center justify-between">
         <div>
-          <div className="text-[11px] tracking-[0.22em] uppercase text-white/50">
+          <div className="text-[11px] tracking-[0.22em] uppercase text-foreground/70">
             GRYT · Results
           </div>
           <h1
@@ -77,13 +77,13 @@ function SharedResultsPage() {
           >
             {payload.title || "Saturday Run"}
           </h1>
-          <div className="text-[11px] tracking-[0.18em] uppercase text-white/40 mt-1">
+          <div className="text-[11px] tracking-[0.18em] uppercase text-foreground/70 mt-1">
             {dateStr}
           </div>
         </div>
         <Link
           to="/"
-          className="text-[11px] tracking-[0.22em] uppercase text-white/60 hover:text-blue"
+          className="text-[11px] tracking-[0.22em] uppercase text-foreground/75 hover:text-foreground/70"
         >
           ← gryt.club
         </Link>
@@ -92,28 +92,28 @@ function SharedResultsPage() {
       <section className="max-w-3xl mx-auto px-6 sm:px-10 py-10">
         <div className="flex items-baseline justify-between mb-6">
           <div>
-            <div className="text-[10px] tracking-[0.28em] uppercase text-white/50">
+            <div className="text-[10px] tracking-[0.28em] uppercase text-foreground/70">
               Finishers
             </div>
             <div className="font-condensed uppercase text-2xl mt-1">
               {payload.finishers.length} runners
             </div>
           </div>
-          <div className="text-[11px] tracking-[0.22em] uppercase text-white/40">
+          <div className="text-[11px] tracking-[0.22em] uppercase text-foreground/70">
             Read-only
           </div>
         </div>
 
-        <div className="border border-white/10">
-          <div className="grid grid-cols-[48px_64px_1fr_120px] gap-2 px-4 py-2 bg-vintage text-[10px] tracking-[0.22em] uppercase text-white/50">
+        <div className="border border-foreground/10">
+          <div className="grid grid-cols-[48px_64px_1fr_120px] gap-2 px-4 py-2 bg-background text-[10px] tracking-[0.22em] uppercase text-foreground/70">
             <span>Pl</span>
             <span>Bib</span>
             <span>Name</span>
             <span className="text-right">Time</span>
           </div>
-          <ul className="divide-y divide-white/10">
+          <ul className="divide-y divide-foreground/10">
             {payload.finishers.length === 0 && (
-              <li className="py-10 text-center text-white/40 text-sm">
+              <li className="py-10 text-center text-foreground/70 text-sm">
                 No finishers recorded.
               </li>
             )}
@@ -122,10 +122,10 @@ function SharedResultsPage() {
                 key={i}
                 className="grid grid-cols-[48px_64px_1fr_120px] gap-2 items-center px-4 py-3"
               >
-                <span className="font-condensed text-lg text-blue tabular-nums">
+                <span className="font-condensed text-lg text-foreground tabular-nums">
                   {i + 1}
                 </span>
-                <span className="text-white/60 tabular-nums text-sm">
+                <span className="text-foreground/75 tabular-nums text-sm">
                   {f.b || "—"}
                 </span>
                 <span className="truncate">{f.n}</span>
@@ -137,7 +137,7 @@ function SharedResultsPage() {
           </ul>
         </div>
 
-        <p className="mt-6 text-[11px] text-white/40 leading-relaxed">
+        <p className="mt-6 text-[11px] text-foreground/70 leading-relaxed">
           Results snapshot shared from the GRYT event timer. Times were captured
           manually at the finish line.
         </p>

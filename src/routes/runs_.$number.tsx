@@ -94,14 +94,14 @@ function RunReportPage() {
   const url = `${SITE}/runs/${n}`;
 
   return (
-    <main className="bg-ink text-paper">
+    <main className="bg-background text-foreground">
       <SiteNav />
-      <article className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
+      <article className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-foreground/15">
         <div className="max-w-[900px] mx-auto">
-          <Link to="/runs" className="eyebrow text-blue hover:text-paper transition-colors">
+          <Link to="/runs" className="eyebrow text-foreground hover:text-foreground transition-colors">
             ← All run reports
           </Link>
-          <p className="eyebrow text-blue mt-8 mb-4">{longDate(date)} · 7 AM · Peterswood Park</p>
+          <p className="eyebrow text-foreground mt-8 mb-4">{longDate(date)} · 7 AM · Peterswood Park</p>
           <h1 className="display-condensed uppercase text-[clamp(52px,10vw,132px)] leading-[0.9]">
             Run #{n}
           </h1>
@@ -110,21 +110,21 @@ function RunReportPage() {
           ) : null}
 
           {isFuture ? (
-            <div className="mt-10 border border-paper/20 p-6 md:p-8">
+            <div className="mt-10 border border-foreground/20 p-6 md:p-8">
               <p className="font-bold text-[20px]">This run hasn't happened yet.</p>
-              <p className="mt-2 text-paper/75">The report posts after Saturday. Be in it.</p>
-              <p className="mt-4 text-paper/75">
+              <p className="mt-2 text-foreground/75">The report posts after Saturday. Be in it.</p>
+              <p className="mt-4 text-foreground/75">
                 Add one song when you RSVP and it goes on the {playlistName(n)} playlist in this report.
               </p>
             </div>
           ) : isPending ? (
-            <p className="mt-10 text-paper/60" role="status">
+            <p className="mt-10 text-foreground/75" role="status">
               Loading the report…
             </p>
           ) : report ? (
             <>
               <div
-                className={`mt-10 grid gap-px bg-paper/20 border border-paper/20 grid-cols-1 ${report.firstTimers != null ? "sm:grid-cols-3" : ""}`}
+                className={`mt-10 grid gap-px bg-foreground/20 border border-foreground/20 grid-cols-1 ${report.firstTimers != null ? "sm:grid-cols-3" : ""}`}
               >
                 <StatTile label="Showed up" value={String(report.runners)} sub="Checked in at the lot" />
                 {report.firstTimers != null ? (
@@ -139,14 +139,14 @@ function RunReportPage() {
                 ) : null}
               </div>
               {report.firstTimers == null ? (
-                <p className="mt-3 text-[14px] text-paper/60">
+                <p className="mt-3 text-[14px] text-foreground/75">
                   This was the first Saturday we checked people in, so first-timer and came-back counts start next week.
                 </p>
               ) : null}
 
               {report.milestones.length ? (
                 <section aria-labelledby="ms" className="mt-10 border border-blue bg-blue/[0.07] p-6 md:p-8">
-                  <h2 id="ms" className="eyebrow text-blue mb-4">
+                  <h2 id="ms" className="eyebrow text-foreground mb-4">
                     Milestone Club
                   </h2>
                   <ul className="space-y-4">
@@ -155,20 +155,20 @@ function RunReportPage() {
                         <p className="text-[20px] md:text-[24px] font-bold leading-tight">
                           {plural(m.count, "runner", "runners")} joined {MILESTONE_NAMES[m.milestone]}
                         </p>
-                        <p className="mt-1 text-paper/75">{MILESTONE_LINES[m.milestone]}</p>
+                        <p className="mt-1 text-foreground/75">{MILESTONE_LINES[m.milestone]}</p>
                       </li>
                     ))}
                   </ul>
-                  <Link to="/milestones" className="mt-5 inline-block text-blue underline underline-offset-4 hover:text-paper">
+                  <Link to="/milestones" className="mt-5 inline-block text-foreground underline underline-offset-4 hover:text-foreground">
                     Check your own Saturdays →
                   </Link>
                 </section>
               ) : null}
             </>
           ) : (
-            <div className="mt-10 border border-paper/20 p-6 md:p-8">
+            <div className="mt-10 border border-foreground/20 p-6 md:p-8">
               <p className="font-bold text-[20px]">No check-ins on file for this run.</p>
-              <p className="mt-2 text-paper/75">
+              <p className="mt-2 text-foreground/75">
                 {trackedSince && date < trackedSince
                   ? `Check-ins started ${longDate(trackedSince)}, so earlier runs don't have reports. They still happened. They just weren't counted.`
                   : "Either the run was called off, or check-ins haven't been entered yet. Check back soon."}
@@ -178,15 +178,15 @@ function RunReportPage() {
 
           {note?.photo ? (
             <figure className="mt-10">
-              <img src={note.photo} alt={note.photoAlt ?? `GRYT Run #${n}`} className="w-full h-auto border border-paper/15" loading="lazy" />
+              <img src={note.photo} alt={note.photoAlt ?? `GRYT Run #${n}`} className="w-full h-auto border border-foreground/15" loading="lazy" />
             </figure>
           ) : null}
 
           {note?.weather || note?.story ? (
-            <section className="mt-10 text-paper/85 text-[17px] leading-[1.7] space-y-4">
+            <section className="mt-10 text-foreground/85 text-[17px] leading-[1.7] space-y-4">
               {note.weather ? (
                 <p>
-                  <span className="eyebrow text-paper/60 mr-2">Conditions</span>
+                  <span className="eyebrow text-foreground/75 mr-2">Conditions</span>
                   {note.weather}
                 </p>
               ) : null}
@@ -198,29 +198,29 @@ function RunReportPage() {
 
           {note?.welcomed?.length ? (
             <section className="mt-10">
-              <h2 className="eyebrow text-paper/60 mb-3">Welcome to the crew</h2>
+              <h2 className="eyebrow text-foreground/75 mb-3">Welcome to the crew</h2>
               <p className="text-[18px] font-bold">{note.welcomed.join(", ")}</p>
             </section>
           ) : null}
 
           {note?.shoutouts?.length ? (
             <section className="mt-8">
-              <h2 className="eyebrow text-paper/60 mb-3">Thank you</h2>
+              <h2 className="eyebrow text-foreground/75 mb-3">Thank you</h2>
               <p className="text-[18px] font-bold">{note.shoutouts.join(", ")}</p>
-              <p className="mt-1 text-paper/70 text-[15px]">For greeting, buddying, and sweeping so nobody ran alone.</p>
+              <p className="mt-1 text-foreground/70 text-[15px]">For greeting, buddying, and sweeping so nobody ran alone.</p>
             </section>
           ) : null}
 
           <nav aria-label="Other runs" className="mt-14 flex justify-between gap-4 text-[13px] tracking-[0.18em] uppercase font-mono">
             {n > 1 ? (
-              <Link to="/runs/$number" params={{ number: String(n - 1) }} className="text-blue hover:text-paper">
+              <Link to="/runs/$number" params={{ number: String(n - 1) }} className="text-foreground hover:text-foreground">
                 ← Run #{n - 1}
               </Link>
             ) : (
               <span />
             )}
             {!isFuture ? (
-              <Link to="/runs/$number" params={{ number: String(n + 1) }} className="text-blue hover:text-paper">
+              <Link to="/runs/$number" params={{ number: String(n + 1) }} className="text-foreground hover:text-foreground">
                 Run #{n + 1} →
               </Link>
             ) : null}
@@ -249,12 +249,12 @@ function Soundtrack({ runNumber, soundtrack }: { runNumber: number; soundtrack?:
   const credits = soundtrack?.credits ?? [];
   const name = playlistName(runNumber);
   return (
-    <section aria-labelledby="soundtrack" className="mt-10 border border-paper/20 p-6 md:p-8">
-      <h2 id="soundtrack" className="eyebrow text-blue mb-2">
+    <section aria-labelledby="soundtrack" className="mt-10 border border-foreground/20 p-6 md:p-8">
+      <h2 id="soundtrack" className="eyebrow text-foreground mb-2">
         The Saturday Soundtrack
       </h2>
       <p className="text-[20px] md:text-[24px] font-bold leading-tight">{name}</p>
-      <p className="mt-1 text-paper/75">
+      <p className="mt-1 text-foreground/75">
         {credits.length
           ? `${credits.length === 1 ? "One song" : `${credits.length} songs`} from the people who RSVP'd. One song each, picked to get out the door.`
           : "Songs from the people who RSVP'd. One song each, picked to get out the door."}
@@ -268,10 +268,10 @@ function Soundtrack({ runNumber, soundtrack }: { runNumber: number; soundtrack?:
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
       />
       {credits.length ? (
-        <ul className="mt-5 divide-y divide-paper/15 border-y border-paper/15">
+        <ul className="mt-5 divide-y divide-foreground/15 border-y border-foreground/15">
           {credits.map((c, i) => (
             <li key={`${c.song}-${i}`} className="flex justify-between gap-4 py-2.5 text-[15px]">
-              <span className="text-paper/90">{c.song}</span>
+              <span className="text-foreground/90">{c.song}</span>
               {c.name ? <span className="shrink-0 font-bold">{c.name}</span> : null}
             </li>
           ))}
@@ -282,11 +282,11 @@ function Soundtrack({ runNumber, soundtrack }: { runNumber: number; soundtrack?:
           href={spotifyOpenUrl(id)}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue underline underline-offset-4 hover:text-paper"
+          className="text-foreground underline underline-offset-4 hover:text-foreground"
         >
           Open in Spotify
         </a>
-        <a href="/#join" className="text-blue underline underline-offset-4 hover:text-paper">
+        <a href="/#join" className="text-foreground underline underline-offset-4 hover:text-foreground">
           Add yours to next week's playlist
         </a>
       </div>

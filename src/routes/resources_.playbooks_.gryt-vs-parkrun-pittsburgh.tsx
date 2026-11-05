@@ -119,7 +119,7 @@ function Page() {
       </p>
       <p>
         GRYT tracks something different from finish times: showing up. The{" "}
-        <Link to="/milestones" className="underline hover:text-blue">
+        <Link to="/milestones" className="underline hover:text-foreground/70">
           GRYT Milestone Club
         </Link>{" "}
         recognizes 5, 10, 25, 50, and 100 Saturdays, and walking counts.
@@ -164,22 +164,22 @@ function Page() {
         They don't compete. Some runners use GRYT as the weekly anchor and hit parkrun on a week they want a time
         check. Others race parkrun most weeks and join GRYT when they want an easy, social run. If you're training
         for something specific, the{" "}
-        <Link to="/plan" className="underline hover:text-blue">
+        <Link to="/plan" className="underline hover:text-foreground/70">
           GRYT run plan builder
         </Link>{" "}
         fits your week around the Saturday run, and the{" "}
-        <Link to="/resources/pace-calculator" className="underline hover:text-blue">
+        <Link to="/resources/pace-calculator" className="underline hover:text-foreground/70">
           pace calculator
         </Link>{" "}
         turns a parkrun 5K into predicted times for longer races.
       </p>
       <p>
         Looking at other options too? Read{" "}
-        <Link to="/resources/playbooks/best-free-running-clubs-pittsburgh-2026" className="underline hover:text-blue">
+        <Link to="/resources/playbooks/best-free-running-clubs-pittsburgh-2026" className="underline hover:text-foreground/70">
           the best free running clubs in Pittsburgh
         </Link>{" "}
         and{" "}
-        <Link to="/resources/playbooks/best-free-run-clubs-south-hills-2026" className="underline hover:text-blue">
+        <Link to="/resources/playbooks/best-free-run-clubs-south-hills-2026" className="underline hover:text-foreground/70">
           the South Hills guide
         </Link>
         .

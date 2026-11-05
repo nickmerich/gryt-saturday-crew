@@ -103,42 +103,42 @@ function H2({ id, children }: { id: string; children: React.ReactNode }) {
   return <h2 id={id} className="text-2xl md:text-3xl font-bold mt-12 mb-2 scroll-mt-24">{children}</h2>;
 }
 function H3({ children }: { children: React.ReactNode }) {
-  return <h3 className="text-paper font-bold text-[18px] md:text-[20px] mt-8 mb-1.5">{children}</h3>;
+  return <h3 className="text-foreground font-bold text-[18px] md:text-[20px] mt-8 mb-1.5">{children}</h3>;
 }
 function B({ children }: { children: React.ReactNode }) {
-  return <span className="text-paper font-bold">{children}</span>;
+  return <span className="text-foreground font-bold">{children}</span>;
 }
-const link = "text-blue underline underline-offset-4 hover:text-paper transition-colors";
+const link = "text-foreground underline underline-offset-4 hover:text-foreground transition-colors";
 
 function MileagePage() {
   return (
-    <main className="bg-ink text-paper">
+    <main className="bg-background text-foreground">
       <SiteNav />
-      <article className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
+      <article className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-foreground/15">
         <div className="max-w-[760px] mx-auto">
-          <Link to="/resources" className="eyebrow text-blue hover:text-paper transition-colors">← All resources</Link>
-          <p className="eyebrow text-blue mt-8 mb-5">TRAINING · 10 MIN READ</p>
+          <Link to="/resources" className="eyebrow text-foreground hover:text-foreground transition-colors">← All resources</Link>
+          <p className="eyebrow text-foreground mt-8 mb-5">TRAINING · 10 MIN READ</p>
           <h1 className="display-condensed uppercase text-[clamp(40px,7vw,96px)] leading-[0.95]">
             How to Increase Running Mileage Without Getting Injured
           </h1>
-          <p className="mt-7 text-paper/75 text-lg md:text-xl leading-[1.55]">
+          <p className="mt-7 text-foreground/75 text-lg md:text-xl leading-[1.55]">
             More miles, fewer setbacks. Structure beats willpower.
           </p>
 
-          <figure className="mt-10 border border-paper/15">
+          <figure className="mt-10 border border-foreground/15">
             <img src={heroAsset.url} alt="Runner on a Pittsburgh riverfront path at night with the skyline behind and blue bars climbing toward a rising arrow" width={1536} height={1024} loading="eager" style={{ filter: "none" }} className="w-full h-auto" />
           </figure>
 
-          <nav aria-label="Table of contents" className="mt-10 border border-paper/15 p-5">
-            <p className="eyebrow text-paper/55 mb-3">In this guide</p>
+          <nav aria-label="Table of contents" className="mt-10 border border-foreground/15 p-5">
+            <p className="eyebrow text-foreground/70 mb-3">In this guide</p>
             <ul className="flex flex-col gap-2">
               {SECTIONS.map((s) => (
-                <li key={s.id}><a href={`#${s.id}`} className="text-paper/80 hover:text-blue transition-colors text-[15px]">→ {s.label}</a></li>
+                <li key={s.id}><a href={`#${s.id}`} className="text-foreground/80 hover:text-foreground/70 transition-colors text-[15px]">→ {s.label}</a></li>
               ))}
             </ul>
           </nav>
 
-          <div className="mt-12 space-y-5 text-paper/85 text-[16px] md:text-[17px] leading-[1.7]">
+          <div className="mt-12 space-y-5 text-foreground/85 text-[16px] md:text-[17px] leading-[1.7]">
             <p>Most running injuries aren't bad luck. They're the result of doing too much, too soon, with too little recovery built in. If you want to build mileage without breaking down, the answer isn't more willpower. It's a smarter structure.</p>
             <p>This guide covers the principles that actually work: how to add miles gradually, when to hold back, what your body is telling you, and how showing up consistently with other people makes all of it easier to sustain.</p>
 
@@ -154,7 +154,7 @@ function MileagePage() {
 
             <H2 id="easy">What "easy" actually means</H2>
             <p>Easy isn't slow for the sake of slow. Easy means you could hold a conversation without pausing to breathe. It keeps your effort low enough that you recover in time for the next run. Most runners run their easy days too hard, which means they arrive at their hard days already depleted.</p>
-            <p className="border-l-2 border-blue pl-5 italic text-paper/90">If your easy runs feel embarrassingly slow, you're probably doing them right.</p>
+            <p className="border-l-2 border-blue pl-5 italic text-foreground/90">If your easy runs feel embarrassingly slow, you're probably doing them right.</p>
 
             <H2 id="structure">How to structure a mileage build</H2>
             <p>Here's a practical framework for increasing mileage over 12 weeks without overloading your body.</p>
@@ -241,20 +241,20 @@ function MileagePage() {
             <div className="space-y-6">
               {FAQS.map((f) => (
                 <div key={f.q}>
-                  <h3 className="text-paper font-bold text-[17px] md:text-[18px] mb-1.5">{f.q}</h3>
+                  <h3 className="text-foreground font-bold text-[17px] md:text-[18px] mb-1.5">{f.q}</h3>
                   <p>{f.a}</p>
                 </div>
               ))}
             </div>
 
-            <p className="text-paper text-lg md:text-xl font-bold mt-12">
+            <p className="text-foreground text-lg md:text-xl font-bold mt-12">
               Consistency compounds. Show up the same day, the same place, with the same crew, and the miles take care of themselves. That's the work.
             </p>
           </div>
 
           <div className="mt-14 flex flex-wrap gap-4">
             <Link to="/" hash="join" className="btn-primary">See Saturday's run →</Link>
-            <Link to="/resources" className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors">Back to Resources</Link>
+            <Link to="/resources" className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-foreground/40 text-foreground hover:border-blue hover:text-foreground/70 transition-colors">Back to Resources</Link>
           </div>
         </div>
         <ShareButtons url={URL} title={TITLE} />

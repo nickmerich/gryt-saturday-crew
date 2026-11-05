@@ -17,28 +17,28 @@ export const Route = createFileRoute('/members')({
   }),
   component: MembersPage,
   errorComponent: () => (
-    <div className="min-h-screen bg-ink text-paper p-12">
+    <div className="min-h-screen bg-background text-foreground p-12">
       <h1 className="display-condensed text-3xl">Members didn't load</h1>
       <p className="mt-2 text-sm text-muted-foreground">Something went wrong. Please try again later.</p>
     </div>
   ),
-  notFoundComponent: () => <div className="p-12 text-paper">Not found.</div>,
+  notFoundComponent: () => <div className="p-12 text-foreground">Not found.</div>,
 })
 
 const STATUS_COLORS: Record<string, string> = {
-  Prospect: 'bg-white/10 text-paper',
+  Prospect: 'bg-foreground/10 text-foreground',
   'First-Timer': 'bg-blue text-ink',
   Regular: 'bg-green-500/20 text-green-300',
   Bringer: 'bg-purple-500/20 text-purple-300',
   Anchor: 'bg-orange-500/20 text-orange-300',
   Drifter: 'bg-yellow-500/20 text-yellow-300',
   Paused: 'bg-amber-900/30 text-amber-200',
-  Archived: 'bg-white/5 text-muted-foreground',
+  Archived: 'bg-foreground/5 text-muted-foreground',
 }
 
 function StatusBadge({ status }: { status: string | null }) {
   const label = status ?? 'Unknown'
-  const cls = STATUS_COLORS[label] ?? 'bg-white/10 text-paper'
+  const cls = STATUS_COLORS[label] ?? 'bg-foreground/10 text-foreground'
   return (
     <span className={`inline-flex items-center px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider ${cls}`}>
       {label}
@@ -49,10 +49,10 @@ function StatusBadge({ status }: { status: string | null }) {
 function Avatar({ photo, name }: { photo: string | null; name: string }) {
   const initials = name.split(/\s+/).slice(0, 2).map((n) => n[0]?.toUpperCase() ?? '').join('') || '?'
   if (photo) {
-    return <img src={photo} alt={name} className="w-10 h-10 object-cover bg-vintage" />
+    return <img src={photo} alt={name} className="w-10 h-10 object-cover bg-background" />
   }
   return (
-    <div className="w-10 h-10 bg-vintage border border-white/10 flex items-center justify-center text-paper text-xs font-medium">
+    <div className="w-10 h-10 bg-background border border-foreground/10 flex items-center justify-center text-foreground text-xs font-medium">
       {initials}
     </div>
   )
@@ -90,8 +90,8 @@ function MembersPage() {
   }, [data])
 
   return (
-    <main className="min-h-screen bg-ink text-paper">
-      <div className="border-b border-white/10 px-6 sm:px-12 py-8">
+    <main className="min-h-screen bg-background text-foreground">
+      <div className="border-b border-foreground/10 px-6 sm:px-12 py-8">
         <p className="eyebrow eyebrow-blue">Canonical roster</p>
         <h1 className="display-condensed text-4xl sm:text-5xl mt-2">GRYT Members</h1>
         <p className="mt-2 text-sm text-muted-foreground max-w-xl">
@@ -99,17 +99,17 @@ function MembersPage() {
         </p>
       </div>
 
-      <div className="px-6 sm:px-12 py-6 flex flex-wrap items-center gap-3 border-b border-white/10">
+      <div className="px-6 sm:px-12 py-6 flex flex-wrap items-center gap-3 border-b border-foreground/10">
         <input
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder="Search by name, email, IG, Strava…"
-          className="bg-vintage border border-white/10 px-3 py-2 text-sm text-paper placeholder:text-muted-foreground focus:outline-none focus:border-blue min-w-[260px] flex-1"
+          className="bg-background border border-foreground/10 px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-blue min-w-[260px] flex-1"
         />
         <select
           value={status}
           onChange={(e) => setStatus(e.target.value)}
-          className="bg-vintage border border-white/10 px-3 py-2 text-sm text-paper focus:outline-none focus:border-blue"
+          className="bg-background border border-foreground/10 px-3 py-2 text-sm text-foreground focus:outline-none focus:border-blue"
         >
           {statuses.map((s) => (<option key={s} value={s}>{s}</option>))}
         </select>
@@ -119,13 +119,13 @@ function MembersPage() {
       {error && <div className="px-6 sm:px-12 py-12 text-red-400">Couldn't load members. Please try again later.</div>}
 
       {data && (
-        <div className="divide-y divide-white/5">
+        <div className="divide-y divide-foreground/5">
           {filtered.map((m) => (
             <Link
               key={m.id}
               to="/members/$key"
               params={{ key: m.canonical_member_key }}
-              className="flex items-center gap-4 px-6 sm:px-12 py-4 hover:bg-vintage transition-colors"
+              className="flex items-center gap-4 px-6 sm:px-12 py-4 hover:bg-background transition-colors"
             >
               <Avatar photo={m.profile_photo} name={m.full_name || '?'} />
               <div className="flex-1 min-w-0">

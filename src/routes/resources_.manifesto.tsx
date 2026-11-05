@@ -304,10 +304,10 @@ function ShareBar({ variant = "dark" }: { variant?: "dark" | "vintage" }) {
     }
   }
 
-  const borderCls = variant === "vintage" ? "border-ink/25" : "border-paper/25";
-  const hoverCls = "hover:border-blue hover:text-blue";
-  const textCls = variant === "vintage" ? "text-ink/80" : "text-paper/80";
-  const labelCls = variant === "vintage" ? "text-ink/60" : "text-paper/60";
+  const borderCls = variant === "vintage" ? "border-ink/25" : "border-foreground/25";
+  const hoverCls = "hover:border-blue hover:text-foreground/70";
+  const textCls = variant === "vintage" ? "text-ink/80" : "text-foreground/80";
+  const labelCls = variant === "vintage" ? "text-ink/60" : "text-foreground/75";
 
   return (
     <div className={`flex flex-wrap items-center gap-3 ${textCls}`}>
@@ -347,20 +347,20 @@ function ShareBar({ variant = "dark" }: { variant?: "dark" | "vintage" }) {
 
 function ManifestoPage() {
   return (
-    <main className="bg-ink text-paper">
+    <main className="bg-background text-foreground">
       <SiteNav />
 
       {/* HERO */}
-      <section className="px-6 sm:px-12 lg:px-24 pt-20 md:pt-28 pb-16 md:pb-24 border-b border-paper/15">
+      <section className="px-6 sm:px-12 lg:px-24 pt-20 md:pt-28 pb-16 md:pb-24 border-b border-foreground/15">
         <div className="max-w-[900px] mx-auto">
           <Link
             to="/resources"
-            className="eyebrow text-blue hover:text-paper transition-colors"
+            className="eyebrow text-foreground hover:text-foreground transition-colors"
             style={mono}
           >
             ← All resources
           </Link>
-          <p className="eyebrow text-blue mt-8 mb-5" style={mono}>
+          <p className="eyebrow text-foreground mt-8 mb-5" style={mono}>
             SELF-REFLECTION · AUDIT MANIFESTO · FROM NICK
           </p>
           <h1
@@ -369,11 +369,11 @@ function ManifestoPage() {
           >
             July 2026 Audit:<br />The Human Layer<br />Comes First
           </h1>
-          <p className="mt-8 text-paper/85 text-[18px] md:text-[22px] leading-[1.5] max-w-[720px]">
+          <p className="mt-8 text-foreground/85 text-[18px] md:text-[22px] leading-[1.5] max-w-[720px]">
             A GRYT Club audit manifesto on what we learned, what we missed,
             and what we are building next.
           </p>
-          <div className="mt-8 flex items-center gap-3 text-[11px] tracking-[0.22em] uppercase text-paper/60" style={mono}>
+          <div className="mt-8 flex items-center gap-3 text-[11px] tracking-[0.22em] uppercase text-foreground/75" style={mono}>
             <span>By Nick Merich</span>
             <span aria-hidden>·</span>
             <span>Founder, GRYT Run Club</span>
@@ -385,15 +385,15 @@ function ManifestoPage() {
       </section>
 
       {/* INTRO */}
-      <section className="px-6 sm:px-12 lg:px-24 py-12 md:py-16 border-b border-paper/15">
+      <section className="px-6 sm:px-12 lg:px-24 py-12 md:py-16 border-b border-foreground/15">
         <div className="max-w-[720px] mx-auto flex flex-col gap-6">
           {INTRO.map((p, i) => (
             <p
               key={i}
               className={
                 i === 0
-                  ? "text-paper text-[22px] md:text-[26px] font-light leading-[1.4]"
-                  : "text-paper/85 text-[17px] leading-[1.7]"
+                  ? "text-foreground text-[22px] md:text-[26px] font-light leading-[1.4]"
+                  : "text-foreground/85 text-[17px] leading-[1.7]"
               }
               style={i === 0 ? { fontFamily: "var(--font-display)" } : undefined}
             >
@@ -404,12 +404,12 @@ function ManifestoPage() {
       </section>
 
       {/* PULL QUOTES */}
-      <section className="px-6 sm:px-12 lg:px-24 py-12 md:py-16 border-b border-paper/15 bg-vintage">
+      <section className="px-6 sm:px-12 lg:px-24 py-12 md:py-16 border-b border-foreground/15 bg-background">
         <div className="max-w-[900px] mx-auto grid md:grid-cols-3 gap-8 md:gap-12">
           {PULL_QUOTES.map((q, i) => (
             <blockquote
               key={i}
-              className="border-l-2 border-blue pl-5 text-paper/90 text-[17px] leading-[1.5]"
+              className="border-l-2 border-blue pl-5 text-foreground/90 text-[17px] leading-[1.5]"
               style={{ fontFamily: "var(--font-display)" }}
             >
               {q}
@@ -419,10 +419,10 @@ function ManifestoPage() {
       </section>
 
       {/* HUMAN LAYER — PHOTOS */}
-      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
+      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-foreground/15">
         <div className="max-w-[1180px] mx-auto">
           <div className="max-w-[720px] mb-14">
-            <p className="eyebrow text-blue mb-5" style={mono}>
+            <p className="eyebrow text-foreground mb-5" style={mono}>
               The human layer
             </p>
             <h2
@@ -431,7 +431,7 @@ function ManifestoPage() {
             >
               People. Family. Love.
             </h2>
-            <p className="mt-6 text-paper/80 text-[17px] leading-[1.7]">
+            <p className="mt-6 text-foreground/80 text-[17px] leading-[1.7]">
               The dashboards do not remember anyone. The photos do. This is
               what the system is built to protect.
             </p>
@@ -441,7 +441,7 @@ function ManifestoPage() {
             {HUMAN_LAYER_PHOTOS.map((p) => (
               <figure
                 key={p.src}
-                className={`${p.span} group relative overflow-hidden bg-black border border-paper/10`}
+                className={`${p.span} group relative overflow-hidden bg-background border border-foreground/10`}
               >
                 <div className={`${p.ratio} w-full overflow-hidden`}>
                   <img
@@ -451,14 +451,14 @@ function ManifestoPage() {
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                   />
                 </div>
-                <figcaption className="p-5 md:p-6 border-t border-paper/10">
+                <figcaption className="p-5 md:p-6 border-t border-foreground/10">
                   <p
-                    className="text-[10px] tracking-[0.24em] uppercase text-blue mb-2"
+                    className="text-[10px] tracking-[0.24em] uppercase text-foreground mb-2"
                     style={mono}
                   >
                     {p.eyebrow}
                   </p>
-                  <p className="text-paper/90 text-[15px] md:text-[16px] leading-[1.5]">
+                  <p className="text-foreground/90 text-[15px] md:text-[16px] leading-[1.5]">
                     {p.caption}
                   </p>
                 </figcaption>
@@ -469,12 +469,12 @@ function ManifestoPage() {
       </section>
 
       {/* SECTIONS */}
-      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
+      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-foreground/15">
         <div className="max-w-[820px] mx-auto flex flex-col gap-20">
           {SECTIONS.map((s) => (
-            <article key={s.id} id={s.id} className="border-t border-paper/20 pt-12">
+            <article key={s.id} id={s.id} className="border-t border-foreground/20 pt-12">
               {s.eyebrow && (
-                <p className="eyebrow text-blue mb-5" style={mono}>
+                <p className="eyebrow text-foreground mb-5" style={mono}>
                   {s.eyebrow}
                 </p>
               )}
@@ -494,7 +494,7 @@ function ManifestoPage() {
                       {p.map((item, j) => (
                         <li
                           key={j}
-                          className="text-paper/85 text-[16px] md:text-[17px] leading-[1.65]"
+                          className="text-foreground/85 text-[16px] md:text-[17px] leading-[1.65]"
                         >
                           {item}
                         </li>
@@ -503,7 +503,7 @@ function ManifestoPage() {
                   ) : (
                     <p
                       key={i}
-                      className="text-paper/85 text-[16px] md:text-[17px] leading-[1.7]"
+                      className="text-foreground/85 text-[16px] md:text-[17px] leading-[1.7]"
                     >
                       {p}
                     </p>
@@ -517,9 +517,9 @@ function ManifestoPage() {
       </section>
 
       {/* THE MANIFESTO — closing */}
-      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15 bg-black">
+      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-foreground/15 bg-background">
         <div className="max-w-[820px] mx-auto">
-          <p className="eyebrow text-blue mb-6" style={mono}>
+          <p className="eyebrow text-foreground mb-6" style={mono}>
             The manifesto
           </p>
           <h2
@@ -528,7 +528,7 @@ function ManifestoPage() {
           >
             Simple. Human. Operational. Built to grow.
           </h2>
-          <div className="mt-10 flex flex-col gap-5 text-paper/85 text-[17px] leading-[1.7]">
+          <div className="mt-10 flex flex-col gap-5 text-foreground/85 text-[17px] leading-[1.7]">
             <p>
               We are not building a running content brand. We are building a
               ritual people trust.
@@ -545,7 +545,7 @@ function ManifestoPage() {
               drifter gets checked on, and the founder does not have to be the
               only person holding the whole thing together.
             </p>
-            <p className="text-paper text-[20px] md:text-[24px] leading-[1.4] pt-4" style={{ fontFamily: "var(--font-display)" }}>
+            <p className="text-foreground text-[20px] md:text-[24px] leading-[1.4] pt-4" style={{ fontFamily: "var(--font-display)" }}>
               The tech stack stays. The human layer leads. And once the human
               layer is real, the whole system can finally compound.
             </p>
@@ -561,7 +561,7 @@ function ManifestoPage() {
             </Link>
             <Link
               to="/resources/conversations"
-              className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors"
+              className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-foreground/40 text-foreground hover:border-blue hover:text-foreground/70 transition-colors"
             >
               Read Conversations
             </Link>

@@ -1,4 +1,4 @@
-import grytBearImg from "@/assets/img/gryt-bear.webp";
+import { GrytBrand } from "@/components/site/BrandMarks";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useMemo, useState, type FormEvent, type ReactNode } from "react";
@@ -221,16 +221,16 @@ function WaiverPage() {
   if (done) return <SignedView record={done} />;
 
   return (
-    <main className="min-h-screen bg-ink text-paper">
+    <main className="min-h-screen bg-background text-foreground">
       <PageHeader />
 
       <section className="px-6 sm:px-12 lg:px-24 pt-14 md:pt-20 pb-8">
         <div className="max-w-[1100px] mx-auto">
           <div className="eyebrow eyebrow-blue mb-4">2026 season</div>
-          <h1 className="display-condensed text-paper text-[clamp(46px,7vw,104px)] leading-[0.9] mb-4">
+          <h1 className="display-condensed text-foreground text-[clamp(46px,7vw,104px)] leading-[0.9] mb-4">
             Run club waiver.
           </h1>
-          <p className="text-lg text-paper/80 max-w-[620px]">
+          <p className="text-lg text-foreground/80 max-w-[620px]">
             Three quick steps. About a minute. You're good through Dec 31, 2026.
           </p>
         </div>
@@ -433,7 +433,7 @@ function WaiverPage() {
                   )}
                 </Field>
 
-                <label className="flex items-start gap-2.5 cursor-pointer text-[13px] text-paper/75 select-none">
+                <label className="flex items-start gap-2.5 cursor-pointer text-[13px] text-foreground/75 select-none">
                   <input
                     type="checkbox"
                     checked={remember}
@@ -446,14 +446,14 @@ function WaiverPage() {
                   </span>
                 </label>
 
-                <div className="text-[13px] text-paper/60">
+                <div className="text-[13px] text-foreground/75">
                   Signing date:{" "}
-                  <span className="text-paper">{TODAY_ISO()}</span>
+                  <span className="text-foreground">{TODAY_ISO()}</span>
                 </div>
 
                 {error && (
                   <div
-                    className="border border-blue bg-blue/10 px-4 py-3 text-[14px] text-paper"
+                    className="border border-blue bg-blue/10 px-4 py-3 text-[14px] text-foreground"
                     role="alert"
                     aria-live="polite"
                   >
@@ -463,12 +463,12 @@ function WaiverPage() {
               </StepBlock>
             )}
 
-            <div className="flex items-center justify-between gap-3 pt-2 border-t border-paper/15">
+            <div className="flex items-center justify-between gap-3 pt-2 border-t border-foreground/15">
               <button
                 type="button"
                 onClick={() => setStep((s) => (s > 0 ? ((s - 1) as 0 | 1 | 2) : s))}
                 disabled={step === 0}
-                className="text-[13px] font-bold tracking-[0.1em] uppercase px-4 py-3 border border-paper/30 text-paper hover:bg-paper hover:text-ink transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                className="text-[13px] font-bold tracking-[0.1em] uppercase px-4 py-3 border border-foreground/30 text-foreground hover:bg-foreground hover:text-background hover:text-ink transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
               >
                 Back
               </button>
@@ -480,7 +480,7 @@ function WaiverPage() {
                     setStep((s) => ((s + 1) as 0 | 1 | 2))
                   }
                   disabled={step === 0 ? !step1Valid : !step2Valid}
-                  className="text-[13px] font-bold tracking-[0.1em] uppercase px-6 py-3 bg-blue text-ink hover:bg-paper transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="text-[13px] font-bold tracking-[0.1em] uppercase px-6 py-3 bg-blue text-ink hover:bg-foreground hover:text-background transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                   style={{ fontFamily: "var(--font-body)" }}
                 >
                   Next →
@@ -489,7 +489,7 @@ function WaiverPage() {
                 <button
                   type="submit"
                   disabled={!canSubmit}
-                  className="text-[13px] font-bold tracking-[0.1em] uppercase px-6 py-3 bg-blue text-ink hover:bg-paper transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="text-[13px] font-bold tracking-[0.1em] uppercase px-6 py-3 bg-blue text-ink hover:bg-foreground hover:text-background transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                   style={{ fontFamily: "var(--font-body)" }}
                 >
                   {submitting ? "Signing…" : "Sign the 2026 waiver"}
@@ -589,49 +589,49 @@ function SignedView({ record }: { record: SignedRecord }) {
   };
 
   return (
-    <main className="min-h-screen bg-ink text-paper">
+    <main className="min-h-screen bg-background text-foreground">
       <PageHeader />
       <section className="px-6 sm:px-12 lg:px-24 py-20 md:py-28">
         <div className="max-w-[760px] mx-auto">
           <div className="eyebrow eyebrow-blue mb-4">Signed · 2026 season</div>
           <h1
-            className="display-condensed text-paper text-[clamp(44px,6vw,92px)] leading-[0.92] mb-6"
+            className="display-condensed text-foreground text-[clamp(44px,6vw,92px)] leading-[0.92] mb-6"
             aria-live="polite"
           >
             Waiver signed —<br />
-            <span className="text-blue">
+            <span className="text-foreground">
               you're covered through Dec 31, 2026.
             </span>
           </h1>
-          <p className="text-lg text-paper/80 mb-10 max-w-[560px]">
+          <p className="text-lg text-foreground/80 mb-10 max-w-[560px]">
             Nice work, {record.name.split(" ")[0]}. One signature covers you
             for the whole 2026 season. We just emailed your confirmation —
             check your inbox (and spam, just in case).
           </p>
-          <div className="border border-paper/20 p-6 md:p-8 bg-ink/40 mb-10 text-[14px] font-mono text-paper/70 flex flex-col gap-1.5">
+          <div className="border border-foreground/20 p-6 md:p-8 bg-background/40 mb-10 text-[14px] font-mono text-foreground/70 flex flex-col gap-1.5">
             <div>
-              <span className="text-paper/40">Runner:</span> {record.name}
+              <span className="text-foreground/70">Runner:</span> {record.name}
             </div>
             {record.guardian && (
               <div>
-                <span className="text-paper/40">Signed by guardian:</span>{" "}
+                <span className="text-foreground/70">Signed by guardian:</span>{" "}
                 {record.guardian}
               </div>
             )}
             <div>
-              <span className="text-paper/40">Signed on:</span> {record.signed_on}
+              <span className="text-foreground/70">Signed on:</span> {record.signed_on}
             </div>
             <div>
-              <span className="text-paper/40">Confirmation:</span> {record.id}
+              <span className="text-foreground/70">Confirmation:</span> {record.id}
             </div>
             <div>
-              <span className="text-paper/40">Version:</span> gryt-run-club-2026-v1
+              <span className="text-foreground/70">Version:</span> gryt-run-club-2026-v1
             </div>
           </div>
           <div className="flex flex-wrap gap-3">
             <Link
               to="/"
-              className="inline-block text-sm font-bold tracking-[0.1em] uppercase px-7 py-4 bg-blue text-ink hover:bg-paper transition-colors"
+              className="inline-block text-sm font-bold tracking-[0.1em] uppercase px-7 py-4 bg-blue text-ink hover:bg-foreground hover:text-background transition-colors"
               style={{ fontFamily: "var(--font-body)" }}
             >
               Back to the run
@@ -639,14 +639,14 @@ function SignedView({ record }: { record: SignedRecord }) {
             <button
               onClick={downloadPdf}
               disabled={downloading}
-              className="inline-block text-sm font-bold tracking-[0.1em] uppercase px-7 py-4 border border-paper/30 text-paper hover:bg-paper hover:text-ink transition-colors disabled:opacity-50"
+              className="inline-block text-sm font-bold tracking-[0.1em] uppercase px-7 py-4 border border-foreground/30 text-foreground hover:bg-foreground hover:text-background hover:text-ink transition-colors disabled:opacity-50"
               style={{ fontFamily: "var(--font-body)" }}
             >
               {downloading ? "Preparing…" : "Download PDF copy"}
             </button>
             <button
               onClick={() => window.print()}
-              className="inline-block text-sm font-bold tracking-[0.1em] uppercase px-7 py-4 border border-paper/20 text-paper/70 hover:bg-paper hover:text-ink transition-colors"
+              className="inline-block text-sm font-bold tracking-[0.1em] uppercase px-7 py-4 border border-foreground/20 text-foreground/70 hover:bg-foreground hover:text-background hover:text-ink transition-colors"
               style={{ fontFamily: "var(--font-body)" }}
             >
               Print
@@ -660,15 +660,9 @@ function SignedView({ record }: { record: SignedRecord }) {
 
 function PageHeader() {
   return (
-    <header className="px-6 sm:px-12 lg:px-24 py-6 border-b border-paper/15">
-      <Link to="/" className="inline-flex items-center gap-2 group">
-        <img src={grytBearImg} alt="" className="h-9 w-9" />
-        <span
-          className="wordmark uppercase text-[18px] leading-none text-paper"
-          style={{ textShadow: "2px 2px 0 var(--blue)" }}
-        >
-          Run Club
-        </span>
+    <header className="px-6 sm:px-12 lg:px-24 py-6 border-b border-foreground/15">
+      <Link to="/" aria-label="GRYT Run Club home" className="inline-flex items-center gap-2 group">
+        <GrytBrand />
       </Link>
     </header>
   );
@@ -679,20 +673,20 @@ function Stepper({ step }: { step: 0 | 1 | 2 }) {
   return (
     <div>
       <div className="flex items-center justify-between mb-2 text-[11px] tracking-[0.14em] uppercase font-bold">
-        <span className="text-paper/60">
+        <span className="text-foreground/75">
           Step {step + 1} of {STEPS.length}
         </span>
-        <span className="text-blue">{STEPS[step]}</span>
+        <span className="text-foreground">{STEPS[step]}</span>
       </div>
-      <div className="h-1.5 bg-paper/15 relative overflow-hidden">
+      <div className="h-1.5 bg-foreground/15 relative overflow-hidden">
         <div
           className="absolute inset-y-0 left-0 bg-blue transition-all duration-300"
           style={{ width: `${pct}%` }}
         />
       </div>
-      <div className="flex justify-between mt-2 text-[10px] tracking-[0.12em] uppercase text-paper/40">
+      <div className="flex justify-between mt-2 text-[10px] tracking-[0.12em] uppercase text-foreground/70">
         {STEPS.map((s, i) => (
-          <span key={s} className={i <= step ? "text-paper/80" : ""}>
+          <span key={s} className={i <= step ? "text-foreground/80" : ""}>
             {String(i + 1).padStart(2, "0")} · {s}
           </span>
         ))}
@@ -713,10 +707,10 @@ function StepBlock({
   return (
     <div className="flex flex-col gap-4">
       <div>
-        <h2 className="display-condensed text-paper text-[24px] leading-tight">
+        <h2 className="display-condensed text-foreground text-[24px] leading-tight">
           {title}
         </h2>
-        <p className="text-[13px] text-paper/65 mt-1">{subtitle}</p>
+        <p className="text-[13px] text-foreground/75 mt-1">{subtitle}</p>
       </div>
       {children}
     </div>
@@ -725,11 +719,11 @@ function StepBlock({
 
 function WaiverText() {
   return (
-    <article className="border border-paper/15 p-6 md:p-9 bg-ink/40 text-paper/85">
-      <h2 className="display-condensed text-paper text-[26px] mb-2">
+    <article className="border border-foreground/15 p-6 md:p-9 bg-background/40 text-foreground/85">
+      <h2 className="display-condensed text-foreground text-[26px] mb-2">
         Release of liability, assumption of risk, and indemnity agreement
       </h2>
-      <p className="text-[12px] tracking-[0.14em] uppercase text-paper/50 mb-6">
+      <p className="text-[12px] tracking-[0.14em] uppercase text-foreground/70 mb-6">
         gryt run club · 2026 season · v1
       </p>
       <div className="flex flex-col gap-5 text-[15px] leading-[1.7]">
@@ -802,7 +796,7 @@ function WaiverText() {
           the Commonwealth of Pennsylvania. If any provision is held
           unenforceable, the remainder shall remain in full force.
         </Clause>
-        <p className="text-paper/70 italic">
+        <p className="text-foreground/70 italic">
           By typing my name as a signature, I confirm that I have read,
           understood, and agree to this waiver, and that my electronic
           signature has the same legal effect as a handwritten signature.
@@ -815,14 +809,14 @@ function WaiverText() {
 function Clause({ n, children }: { n: string; children: ReactNode }) {
   return (
     <div>
-      <h3 className="display-condensed text-paper text-[18px] mb-1.5">{n}</h3>
+      <h3 className="display-condensed text-foreground text-[18px] mb-1.5">{n}</h3>
       <p>{children}</p>
     </div>
   );
 }
 
 const inputCls =
-  "w-full bg-ink border border-paper/25 px-3.5 py-2.5 text-paper text-[15px] focus:outline-none focus:border-blue focus:bg-ink";
+  "w-full bg-background border border-foreground/25 px-3.5 py-2.5 text-foreground text-[15px] focus:outline-none focus:border-blue focus:bg-background";
 
 function Field({
   label,
@@ -835,9 +829,9 @@ function Field({
 }) {
   return (
     <label className="flex flex-col gap-1.5">
-      <span className="text-[11px] font-bold tracking-[0.14em] uppercase text-paper/70">
+      <span className="text-[11px] font-bold tracking-[0.14em] uppercase text-foreground/70">
         {label}
-        {required && <span className="text-blue"> *</span>}
+        {required && <span className="text-foreground"> *</span>}
       </span>
       {children}
     </label>
@@ -846,7 +840,7 @@ function Field({
 
 function Hint({ children }: { children: ReactNode }) {
   return (
-    <p className="mt-1.5 text-[13px] text-blue font-semibold">{children}</p>
+    <p className="mt-1.5 text-[13px] text-foreground font-semibold">{children}</p>
   );
 }
 
@@ -867,7 +861,7 @@ function Check({
         onChange={(e) => onChange(e.target.checked)}
         className="mt-1 h-4 w-4 accent-blue cursor-pointer"
       />
-      <span className="text-[14px] leading-[1.5] text-paper/85 group-hover:text-paper">
+      <span className="text-[14px] leading-[1.5] text-foreground/85 group-hover:text-foreground">
         {label}
       </span>
     </label>

@@ -70,10 +70,10 @@ function ArticlesIndex() {
   }, [topic, q]);
 
   return (
-    <main className="bg-ink text-paper">
+    <main className="bg-background text-foreground">
       <SiteNav />
       <div className="mx-auto max-w-[1240px] px-6 lg:px-10 pt-16 md:pt-24 pb-24">
-        <Link to="/resources" className="eyebrow text-blue hover:text-paper transition-colors">
+        <Link to="/resources" className="eyebrow text-foreground hover:text-foreground transition-colors">
           ← All resources
         </Link>
         <h1
@@ -82,7 +82,7 @@ function ArticlesIndex() {
         >
           Running articles
         </h1>
-        <p className="mt-6 max-w-[640px] text-paper/80 text-[17px] leading-[1.65]">
+        <p className="mt-6 max-w-[640px] text-foreground/80 text-[17px] leading-[1.65]">
           Plain-language guides on training, pacing, gear, apps, racing, and finding your people. Written for everyday
           runners, fact-checked, and updated as things change.
         </p>
@@ -101,10 +101,10 @@ function ArticlesIndex() {
                   aria-selected={active}
                   onClick={() => setTopic(t.id)}
                   className={`px-3.5 py-2 text-[13px] border transition-colors ${
-                    active ? "bg-blue text-ink border-blue font-bold" : "border-paper/30 text-paper/85 hover:border-blue"
+                    active ? "bg-blue text-ink border-blue font-bold" : "border-foreground/30 text-foreground/85 hover:border-blue"
                   }`}
                 >
-                  {t.label} <span className={active ? "text-ink/60" : "text-paper/45"}>{count}</span>
+                  {t.label} <span className={active ? "text-ink/60" : "text-foreground/70"}>{count}</span>
                 </button>
               );
             })}
@@ -116,24 +116,24 @@ function ArticlesIndex() {
               value={q}
               onChange={(e) => setQ(e.target.value)}
               placeholder="Search: pace, shoes, 5K…"
-              className="w-full bg-ink border border-paper/30 px-4 py-2.5 text-[14px] placeholder:text-paper/40 focus:outline-none focus:border-blue"
+              className="w-full bg-background border border-foreground/30 px-4 py-2.5 text-[14px] placeholder:text-foreground/55 focus:outline-none focus:border-blue"
             />
           </label>
         </div>
 
-        <ul className="grid gap-px bg-paper/20 border border-paper/20 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="grid gap-px bg-foreground/20 border border-foreground/20 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((a) => (
-            <li key={a.slug} className="bg-ink">
+            <li key={a.slug} className="bg-background">
               <Link
                 to="/resources/articles/$slug"
                 params={{ slug: a.slug }}
                 className="group flex flex-col h-full p-6 md:p-7 hover:bg-blue hover:text-ink transition-colors"
               >
                 <span className="flex items-center justify-between gap-3">
-                  <span className="text-[11px] tracking-[0.2em] uppercase text-blue group-hover:text-ink" style={mono}>
+                  <span className="text-[11px] tracking-[0.2em] uppercase text-foreground group-hover:text-ink" style={mono}>
                     {a.minutes} min read
                   </span>
-                  <span className="text-[11px] tracking-[0.16em] uppercase text-paper/45 group-hover:text-ink/60" style={mono}>
+                  <span className="text-[11px] tracking-[0.16em] uppercase text-foreground/70 group-hover:text-ink/60" style={mono}>
                     {TOPICS.find((t) => t.id === a.topic)?.label}
                   </span>
                 </span>
@@ -143,7 +143,7 @@ function ArticlesIndex() {
                 >
                   {a.title}
                 </span>
-                <span className="mt-3 block text-[14.5px] leading-[1.6] text-paper/75 group-hover:text-ink/80 flex-1">
+                <span className="mt-3 block text-[14.5px] leading-[1.6] text-foreground/75 group-hover:text-ink/80 flex-1">
                   {a.description}
                 </span>
                 <span className="mt-5 text-[12px] tracking-[0.22em] uppercase" style={mono}>
@@ -153,7 +153,7 @@ function ArticlesIndex() {
             </li>
           ))}
         </ul>
-        {items.length === 0 ? <p className="mt-6 text-paper/70">Nothing matches that yet.</p> : null}
+        {items.length === 0 ? <p className="mt-6 text-foreground/70">Nothing matches that yet.</p> : null}
       </div>
       <SiteFooter />
     </main>

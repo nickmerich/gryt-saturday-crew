@@ -42,10 +42,10 @@ export function milestoneLines(r: RunReportSummary): string[] {
 
 export function StatTile({ label, value, sub }: { label: string; value: string; sub?: string }) {
   return (
-    <div className="bg-ink p-5 md:p-6">
-      <p className="text-[11px] tracking-[0.2em] uppercase text-paper/60 font-mono">{label}</p>
+    <div className="bg-background p-5 md:p-6">
+      <p className="text-[11px] tracking-[0.2em] uppercase text-foreground/75 font-mono">{label}</p>
       <p className="mt-2 display-condensed text-[48px] md:text-[60px] leading-none tabular-nums">{value}</p>
-      {sub ? <p className="mt-2 text-[13px] text-paper/60">{sub}</p> : null}
+      {sub ? <p className="mt-2 text-[13px] text-foreground/75">{sub}</p> : null}
     </div>
   );
 }

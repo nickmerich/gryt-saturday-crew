@@ -225,34 +225,34 @@ function RacesPage() {
   const past = RACES.filter((r) => isPast(r.iso, today));
   const next = upcoming[0];
   const btnGhost =
-    "inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors";
+    "inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-foreground/40 text-foreground hover:border-blue hover:text-foreground/70 transition-colors";
 
   return (
-    <main className="bg-ink text-paper">
+    <main className="bg-background text-foreground">
       <SiteNav />
 
-      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
+      <section className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-foreground/15">
         <div className="max-w-[1080px] mx-auto">
-          <p className="eyebrow text-blue mb-5">RACES · PITTSBURGH · 2026 to 2027</p>
+          <p className="eyebrow text-foreground mb-5">RACES · PITTSBURGH · 2026 to 2027</p>
           <h1 className="display-condensed uppercase text-[clamp(44px,8vw,112px)] leading-[0.92]">
             Pittsburgh Races<br />2026-2027
           </h1>
-          <p className="mt-7 max-w-[720px] text-paper/75 text-lg md:text-xl leading-[1.55]">
+          <p className="mt-7 max-w-[720px] text-foreground/75 text-lg md:text-xl leading-[1.55]">
             Pick a goal. Then show up Saturday at 7 AM at Peterswood Park and train for it with people
             who'll notice if you don't come back.
           </p>
-          <p className="mt-4 text-[12px] tracking-[0.2em] uppercase text-paper/50 font-mono">
+          <p className="mt-4 text-[12px] tracking-[0.2em] uppercase text-foreground/70 font-mono">
             Every date checked against the official race site · {VERIFIED}
           </p>
 
           {next ? (
             <div className="mt-10 border border-blue bg-blue/[0.07] p-6 md:p-8 grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
               <div>
-                <p className="eyebrow text-blue mb-2">Next up</p>
+                <p className="eyebrow text-foreground mb-2">Next up</p>
                 <p className="text-[24px] md:text-[30px] font-bold leading-tight">{next.name}</p>
-                <p className="mt-1 text-paper/70">{next.date} · {next.distance}</p>
+                <p className="mt-1 text-foreground/70">{next.date} · {next.distance}</p>
                 {today ? (
-                  <p className="mt-3 text-paper/85">{phase(weeksUntil(next.iso, today))}</p>
+                  <p className="mt-3 text-foreground/85">{phase(weeksUntil(next.iso, today))}</p>
                 ) : null}
               </div>
               {today ? (
@@ -260,7 +260,7 @@ function RacesPage() {
                   <p className="display-condensed text-[64px] md:text-[80px] leading-none tabular-nums">
                     {Math.max(0, weeksUntil(next.iso, today))}
                   </p>
-                  <p className="eyebrow text-paper/60">weeks out</p>
+                  <p className="eyebrow text-foreground/75">weeks out</p>
                 </div>
               ) : null}
             </div>
@@ -281,9 +281,9 @@ function RacesPage() {
         const list = upcoming.filter((r) => r.tier === g.tier);
         if (!list.length) return null;
         return (
-          <section key={g.tier} className="px-6 sm:px-12 lg:px-24 py-16 md:py-20 border-b border-paper/15">
+          <section key={g.tier} className="px-6 sm:px-12 lg:px-24 py-16 md:py-20 border-b border-foreground/15">
             <div className="max-w-[1080px] mx-auto">
-              <p className="eyebrow text-blue mb-3">{g.sub}</p>
+              <p className="eyebrow text-foreground mb-3">{g.sub}</p>
               <h2 className="display-condensed uppercase text-[clamp(28px,4.5vw,56px)] leading-[0.95] mb-10">
                 {g.title}
               </h2>
@@ -291,33 +291,33 @@ function RacesPage() {
                 {list.map((r) => {
                   const w = today ? weeksUntil(r.iso, today) : null;
                   return (
-                    <article key={r.name} className="flex flex-col border border-paper/20 p-6 md:p-7 hover:border-blue transition-colors">
+                    <article key={r.name} className="flex flex-col border border-foreground/20 p-6 md:p-7 hover:border-blue transition-colors">
                       <div className="flex items-start justify-between gap-4">
-                        <p className="eyebrow text-blue mb-2">{r.date}</p>
+                        <p className="eyebrow text-foreground mb-2">{r.date}</p>
                         {w != null ? (
-                          <p className="shrink-0 text-[11px] tracking-[0.18em] uppercase font-mono bg-paper/10 px-2 py-1">
+                          <p className="shrink-0 text-[11px] tracking-[0.18em] uppercase font-mono bg-foreground/10 px-2 py-1">
                             {w <= 0 ? "This week" : `${w} wk${w === 1 ? "" : "s"} out`}
                           </p>
                         ) : null}
                       </div>
                       <h3 className="text-xl md:text-2xl font-bold leading-tight">{r.name}</h3>
-                      <p className="mt-2 text-paper/60 text-sm">
+                      <p className="mt-2 text-foreground/75 text-sm">
                         {r.distance} · {r.location}
                       </p>
-                      <p className="mt-4 text-paper/80 text-[15px] leading-[1.6] flex-1">{r.blurb}</p>
+                      <p className="mt-4 text-foreground/80 text-[15px] leading-[1.6] flex-1">{r.blurb}</p>
                       <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2">
                         <a
                           href={r.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-blue text-sm font-bold uppercase tracking-[0.12em] hover:text-paper transition-colors"
+                          className="text-foreground text-sm font-bold uppercase tracking-[0.12em] hover:text-foreground transition-colors"
                         >
                           Race site ↗
                         </a>
                         {r.guide ? (
                           <Link
                             to={r.guide as any}
-                            className="text-blue text-sm font-bold uppercase tracking-[0.12em] hover:text-paper transition-colors"
+                            className="text-foreground text-sm font-bold uppercase tracking-[0.12em] hover:text-foreground transition-colors"
                           >
                             Our race guide →
                           </Link>
@@ -333,10 +333,10 @@ function RacesPage() {
       })}
 
       {past.length ? (
-        <section className="px-6 sm:px-12 lg:px-24 py-10 border-b border-paper/15">
+        <section className="px-6 sm:px-12 lg:px-24 py-10 border-b border-foreground/15">
           <div className="max-w-[1080px] mx-auto">
-            <p className="eyebrow text-paper/55 mb-3">Recently run</p>
-            <ul className="flex flex-wrap gap-x-8 gap-y-2 text-paper/70 text-[15px]">
+            <p className="eyebrow text-foreground/70 mb-3">Recently run</p>
+            <ul className="flex flex-wrap gap-x-8 gap-y-2 text-foreground/70 text-[15px]">
               {past.map((r) => (
                 <li key={r.name}>
                   {r.name} · {r.date}
@@ -347,12 +347,12 @@ function RacesPage() {
         </section>
       ) : null}
 
-      <section className="px-6 sm:px-12 lg:px-24 py-20 border-b border-paper/15">
+      <section className="px-6 sm:px-12 lg:px-24 py-20 border-b border-foreground/15">
         <div className="max-w-[820px] mx-auto">
           <h2 className="display-condensed uppercase text-[clamp(28px,4.5vw,56px)] leading-[0.95] mb-10">
             Peters Township & South Hills Running
           </h2>
-          <div className="space-y-5 text-paper/85 text-[16px] md:text-[17px] leading-[1.7]">
+          <div className="space-y-5 text-foreground/85 text-[16px] md:text-[17px] leading-[1.7]">
             <p>
               Most Pittsburgh race guides forget the South Hills exist. Peters Township, McMurray, Upper
               St. Clair, and Bethel Park are runner-heavy neighborhoods with almost no dedicated race
@@ -375,8 +375,8 @@ function RacesPage() {
           <div className="space-y-6">
             {FAQS.map((f) => (
               <div key={f.q}>
-                <p className="font-bold text-paper">{f.q}</p>
-                <p className="mt-2 text-paper/80">{f.a}</p>
+                <p className="font-bold text-foreground">{f.q}</p>
+                <p className="mt-2 text-foreground/80">{f.a}</p>
               </div>
             ))}
           </div>
@@ -389,7 +389,7 @@ function RacesPage() {
               Runner library
             </Link>
           </div>
-          <p className="mt-8 text-paper/50 text-sm">
+          <p className="mt-8 text-foreground/70 text-sm">
             Dates last checked {VERIFIED}. Race organizers can change details, so confirm on the
             official race site before you register.
           </p>

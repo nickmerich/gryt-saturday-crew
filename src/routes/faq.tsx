@@ -189,7 +189,7 @@ function FaqPage() {
             ))}
           </Accordion>
 
-          <div className="mt-14 border border-ink/15 p-6 sm:p-8 bg-ink/[0.02]">
+          <div className="mt-14 border border-ink/15 p-6 sm:p-8 bg-background/[0.02]">
             <div
               className="eyebrow text-ink/60 mb-3"
               style={{ fontFamily: "var(--font-body)" }}

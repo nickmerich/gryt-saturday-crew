@@ -84,12 +84,12 @@ function H2({ lines }: { lines: string[] }) {
 function Founder({ role, name, paras, linkedin, first }: { role: string; name: string; paras: string[]; linkedin: string; first: string }) {
   return (
     <article className="border-t-2 border-blue pt-6">
-      <Eyebrow className="text-paper/60">{role}</Eyebrow>
+      <Eyebrow className="text-foreground/75">{role}</Eyebrow>
       <h3 className="text-3xl sm:text-4xl uppercase leading-none mb-5" style={condensed}>
         {name}
       </h3>
       {paras.map((p, i) => (
-        <p key={i} className="text-paper/80 leading-relaxed mb-4" style={body}>
+        <p key={i} className="text-foreground/80 leading-relaxed mb-4" style={body}>
           {p}
         </p>
       ))}
@@ -97,7 +97,7 @@ function Founder({ role, name, paras, linkedin, first }: { role: string; name: s
         href={linkedin}
         target="_blank"
         rel="noopener noreferrer"
-        className="eyebrow text-blue hover:text-paper transition-colors"
+        className="eyebrow text-foreground hover:text-foreground transition-colors"
       >
         Meet {first} on LinkedIn
       </a>
@@ -123,15 +123,15 @@ function AboutPage() {
     <>
       <SiteNav />
 
-      <section className="bg-ink text-paper">
+      <section className="bg-background text-foreground">
         <div className="mx-auto max-w-5xl px-6 py-16 sm:py-24 grid gap-10 md:grid-cols-2 items-center">
           <div>
-            <Eyebrow className="text-blue">About GRYT Run Club / Pittsburgh, PA</Eyebrow>
+            <Eyebrow className="text-foreground">About GRYT Run Club / Pittsburgh, PA</Eyebrow>
             <h1 className="text-5xl sm:text-6xl lg:text-7xl uppercase leading-[0.92]" style={condensed}>
               <span className="block">A team to</span>
               <span className="block">come back to.</span>
             </h1>
-            <p className="mt-6 text-lg text-paper/80 max-w-xl" style={body}>
+            <p className="mt-6 text-lg text-foreground/80 max-w-xl" style={body}>
               GRYT Run Club is a free Pittsburgh-area running community for former athletes, busy
               parents, and comeback runners who miss having a team. We meet on Saturday mornings in
               the South Hills to walk, jog, run, and do hard things together.
@@ -139,10 +139,10 @@ function AboutPage() {
             <a href="/#join" className="btn-primary inline-block mt-8 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue">
               RSVP Saturday
             </a>
-            <p className="mt-4 eyebrow text-paper/70" style={body}>
+            <p className="mt-4 eyebrow text-foreground/70" style={body}>
               Saturdays, 7 AM · Montour / Peters Trail
             </p>
-            <p className="mt-1 text-sm text-paper/60" style={body}>
+            <p className="mt-1 text-sm text-foreground/75" style={body}>
               Free runs. All paces. No membership required.
             </p>
           </div>
@@ -191,11 +191,11 @@ function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-ink text-paper">
+      <section className="bg-background text-foreground">
         <div className="mx-auto max-w-5xl px-6 py-16 sm:py-24">
-          <Eyebrow className="text-blue">The team behind GRYT</Eyebrow>
+          <Eyebrow className="text-foreground">The team behind GRYT</Eyebrow>
           <H2 lines={["Nick. Laura.", "And the crew."]} />
-          <p className="mt-5 text-paper/75 max-w-xl" style={body}>
+          <p className="mt-5 text-foreground/75 max-w-xl" style={body}>
             Two different backgrounds. One shared belief: effort is better together.
           </p>
           <img
@@ -226,7 +226,7 @@ function AboutPage() {
               ]}
             />
           </div>
-          <p className="mt-12 text-xl text-paper/85" style={body}>
+          <p className="mt-12 text-xl text-foreground/85" style={body}>
             The founders start the circle. The people who keep showing up make it a club.
           </p>
         </div>
@@ -253,11 +253,11 @@ function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-ink text-paper">
+      <section className="bg-background text-foreground">
         <div className="mx-auto max-w-5xl px-6 py-16 sm:py-24">
-          <Eyebrow className="text-blue">What makes GRYT different</Eyebrow>
+          <Eyebrow className="text-foreground">What makes GRYT different</Eyebrow>
           <H2 lines={["Hard things.", "Open door."]} />
-          <p className="mt-5 text-paper/75 max-w-xl" style={body}>
+          <p className="mt-5 text-foreground/75 max-w-xl" style={body}>
             Take the effort seriously. You don't have to take yourself so seriously.
           </p>
           <div className="mt-10 grid gap-10 md:grid-cols-3">
@@ -279,14 +279,14 @@ function AboutPage() {
                 <h3 className="text-2xl uppercase leading-tight mb-3" style={condensed}>
                   {t}
                 </h3>
-                <p className="text-paper/80 leading-relaxed" style={body}>
+                <p className="text-foreground/80 leading-relaxed" style={body}>
                   {d}
                 </p>
               </div>
             ))}
           </div>
           <div className="mt-16 flex flex-wrap items-end justify-between gap-8">
-            <MissionStamp size="lg" className="text-paper" />
+            <MissionStamp size="lg" className="text-foreground" />
             <a href="/#join" className="btn-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue">
               RSVP Saturday
             </a>

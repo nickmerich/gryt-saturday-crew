@@ -75,7 +75,7 @@ function AuthPage() {
   }
 
   return (
-    <main className="min-h-screen bg-ink text-paper flex items-center justify-center p-6">
+    <main className="min-h-screen bg-background text-foreground flex items-center justify-center p-6">
       <div className="w-full max-w-md">
         <p className="eyebrow eyebrow-blue">Sign in</p>
         <h1 className="display-condensed text-4xl mt-2">GRYT MEMBER SIGN-IN</h1>
@@ -90,7 +90,7 @@ function AuthPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@example.com"
-            className="w-full bg-vintage border border-white/10 px-3 py-2 text-sm text-paper placeholder:text-muted-foreground focus:outline-none focus:border-blue"
+            className="w-full bg-background border border-foreground/10 px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-blue"
           />
           <button
             type="submit"
@@ -99,20 +99,20 @@ function AuthPage() {
           >
             {status === 'sending' ? 'Sending…' : 'Send magic link'}
           </button>
-          {status === 'sent' && <p className="text-xs text-blue">Check your inbox.</p>}
+          {status === 'sent' && <p className="text-xs text-foreground">Check your inbox.</p>}
           {status === 'error' && <p className="text-xs text-red-400">{msg}</p>}
         </form>
 
         <div className="mt-6 flex items-center gap-3">
-          <div className="h-px flex-1 bg-white/10" />
+          <div className="h-px flex-1 bg-foreground/10" />
           <span className="text-[10px] uppercase tracking-wider text-muted-foreground">or</span>
-          <div className="h-px flex-1 bg-white/10" />
+          <div className="h-px flex-1 bg-foreground/10" />
         </div>
 
         <button
           type="button"
           onClick={google}
-          className="mt-4 w-full flex items-center justify-center gap-2 bg-white text-black px-4 py-2.5 text-sm font-medium hover:bg-white/90"
+          className="mt-4 w-full flex items-center justify-center gap-2 bg-white text-black px-4 py-2.5 text-sm font-medium hover:bg-foreground/90"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
             <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />

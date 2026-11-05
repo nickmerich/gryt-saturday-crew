@@ -17,7 +17,7 @@ const copy = {
 }
 function InquiryPage() {
   const { type } = Route.useSearch()
-  return <main className="min-h-screen bg-paper text-ink dark:bg-ink dark:text-paper">
+  return <main className="min-h-screen bg-paper text-ink dark:bg-background dark:text-foreground">
     <header className="max-w-5xl mx-auto px-6 py-6 flex justify-between gap-4 border-b border-current/20"><a href="/" className="font-bold">GRYT / COMMUNITY EXPERIENCES</a><a href="/admin/inquiries" className="underline text-sm">Operator queue</a></header>
     <section className="max-w-5xl mx-auto p-6 md:p-12">
       <p className="eyebrow">RUN TAKOMA WITH LOVE 2 · PLANNING</p>

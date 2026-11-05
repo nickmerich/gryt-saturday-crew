@@ -15,12 +15,12 @@ export const Route = createFileRoute('/admin/roster')({
   }),
   component: AdminRosterPage,
   errorComponent: ({ error }) => (
-    <div className="min-h-screen bg-ink text-paper p-12">
+    <div className="min-h-screen bg-background text-foreground p-12">
       <h1 className="display-condensed text-3xl">Roster error</h1>
       <p className="mt-2 text-sm text-muted-foreground">{error instanceof Error ? error.message : String(error)}</p>
     </div>
   ),
-  notFoundComponent: () => <div className="p-12 text-paper">Not found.</div>,
+  notFoundComponent: () => <div className="p-12 text-foreground">Not found.</div>,
 })
 
 const dateFmt = new Intl.DateTimeFormat('en-US', {
@@ -90,7 +90,7 @@ function SignIn() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="you@grytrunclub.com"
-          className="w-full bg-vintage border border-white/10 px-3 py-2 text-sm text-paper placeholder:text-muted-foreground focus:outline-none focus:border-blue"
+          className="w-full bg-background border border-foreground/10 px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-blue"
         />
         <button
           type="submit"
@@ -99,7 +99,7 @@ function SignIn() {
         >
           {status === 'sending' ? 'Sending…' : 'Send magic link'}
         </button>
-        {status === 'sent' && <p className="text-xs text-blue">Check your inbox.</p>}
+        {status === 'sent' && <p className="text-xs text-foreground">Check your inbox.</p>}
         {status === 'error' && <p className="text-xs text-red-400">{msg}</p>}
       </form>
     </div>
@@ -146,18 +146,18 @@ function AdminRosterPage() {
   }, [data, q, waiverFilter])
 
   if (access === 'loading') {
-    return <main className="min-h-screen bg-ink text-paper px-6 sm:px-12 py-16 text-sm text-muted-foreground">Checking access…</main>
+    return <main className="min-h-screen bg-background text-foreground px-6 sm:px-12 py-16 text-sm text-muted-foreground">Checking access…</main>
   }
   if (access === 'out') {
     return (
-      <main className="min-h-screen bg-ink text-paper">
+      <main className="min-h-screen bg-background text-foreground">
         <SignIn />
       </main>
     )
   }
   if (access === 'denied') {
     return (
-      <main className="min-h-screen bg-ink text-paper px-6 sm:px-12 py-16">
+      <main className="min-h-screen bg-background text-foreground px-6 sm:px-12 py-16">
         <h1 className="display-condensed text-3xl">No access</h1>
         <p className="mt-2 text-sm text-muted-foreground">
           That account is not on the GRYT admin list. Sign in with an admin email.
@@ -165,7 +165,7 @@ function AdminRosterPage() {
         <button
           type="button"
           onClick={() => supabase.auth.signOut()}
-          className="mt-6 border border-white/20 px-4 py-2 text-sm uppercase tracking-wider"
+          className="mt-6 border border-foreground/20 px-4 py-2 text-sm uppercase tracking-wider"
         >
           Sign out
         </button>
@@ -174,8 +174,8 @@ function AdminRosterPage() {
   }
 
   return (
-    <main className="min-h-screen bg-ink text-paper">
-      <div className="border-b border-white/10 px-6 sm:px-12 py-8">
+    <main className="min-h-screen bg-background text-foreground">
+      <div className="border-b border-foreground/10 px-6 sm:px-12 py-8">
         <p className="eyebrow eyebrow-blue">Private · admin only</p>
         <h1 className="display-condensed text-4xl sm:text-5xl mt-2">Runner Roster</h1>
         <p className="mt-2 text-sm text-muted-foreground max-w-xl">
@@ -189,7 +189,7 @@ function AdminRosterPage() {
         )}
       </div>
 
-      <div className="px-6 sm:px-12 py-6 flex flex-wrap items-center gap-3 border-b border-white/10">
+      <div className="px-6 sm:px-12 py-6 flex flex-wrap items-center gap-3 border-b border-foreground/10">
         <label htmlFor="roster-search" className="sr-only">
           Search runners
         </label>
@@ -198,7 +198,7 @@ function AdminRosterPage() {
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder="Search by name or contact…"
-          className="bg-vintage border border-white/10 px-3 py-2 text-sm text-paper placeholder:text-muted-foreground focus:outline-none focus:border-blue min-w-[240px] flex-1"
+          className="bg-background border border-foreground/10 px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-blue min-w-[240px] flex-1"
         />
         <label htmlFor="roster-waiver" className="sr-only">
           Filter by waiver status
@@ -207,7 +207,7 @@ function AdminRosterPage() {
           id="roster-waiver"
           value={waiverFilter}
           onChange={(e) => setWaiverFilter(e.target.value as typeof waiverFilter)}
-          className="bg-vintage border border-white/10 px-3 py-2 text-sm text-paper focus:outline-none focus:border-blue"
+          className="bg-background border border-foreground/10 px-3 py-2 text-sm text-foreground focus:outline-none focus:border-blue"
         >
           <option value="all">All runners</option>
           <option value="signed">Waiver signed</option>
@@ -223,7 +223,7 @@ function AdminRosterPage() {
       )}
 
       {data && (
-        <div className="divide-y divide-white/5">
+        <div className="divide-y divide-foreground/5">
           {filtered.map((row) => (
             <div key={row.key} className="px-6 sm:px-12 py-4 flex flex-wrap items-start gap-x-6 gap-y-2">
               <div className="flex-1 min-w-[200px]">

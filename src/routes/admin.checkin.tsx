@@ -16,12 +16,12 @@ export const Route = createFileRoute('/admin/checkin')({
   }),
   component: CheckinPage,
   errorComponent: ({ error }) => (
-    <div className="min-h-screen bg-ink text-paper p-12">
+    <div className="min-h-screen bg-background text-foreground p-12">
       <h1 className="display-condensed text-3xl">Check-in error</h1>
       <p className="mt-2 text-sm text-muted-foreground">{error instanceof Error ? error.message : String(error)}</p>
     </div>
   ),
-  notFoundComponent: () => <div className="p-12 text-paper">Not found.</div>,
+  notFoundComponent: () => <div className="p-12 text-foreground">Not found.</div>,
 })
 
 const dayFmt = new Intl.DateTimeFormat('en-US', {
@@ -100,7 +100,7 @@ function SignIn() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="you@grytrunclub.com"
-          className="w-full bg-vintage border border-white/10 px-3 py-3 text-base text-paper placeholder:text-muted-foreground focus:outline-none focus:border-blue"
+          className="w-full bg-background border border-foreground/10 px-3 py-3 text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-blue"
         />
         <button
           type="submit"
@@ -109,7 +109,7 @@ function SignIn() {
         >
           {status === 'sending' ? 'Sending…' : 'Send magic link'}
         </button>
-        {status === 'sent' && <p className="text-xs text-blue">Check your inbox.</p>}
+        {status === 'sent' && <p className="text-xs text-foreground">Check your inbox.</p>}
         {status === 'error' && <p className="text-xs text-red-400">{msg}</p>}
       </form>
     </div>
@@ -118,8 +118,8 @@ function SignIn() {
 
 function Count({ value, label }: { value: number | string; label: string }) {
   return (
-    <div className="border border-white/15 bg-vintage px-3 py-3 text-center">
-      <div className="display-condensed text-[34px] leading-none text-blue">{value}</div>
+    <div className="border border-foreground/15 bg-background px-3 py-3 text-center">
+      <div className="display-condensed text-[34px] leading-none text-foreground">{value}</div>
       <div className="mt-1 text-[10px] uppercase tracking-[0.18em] text-muted-foreground">{label}</div>
     </div>
   )
@@ -174,21 +174,21 @@ function CheckinPage() {
 
   if (access === 'loading') {
     return (
-      <main className="min-h-screen bg-ink text-paper px-6 py-16 text-sm text-muted-foreground">
+      <main className="min-h-screen bg-background text-foreground px-6 py-16 text-sm text-muted-foreground">
         Checking access…
       </main>
     )
   }
   if (access === 'out') {
     return (
-      <main className="min-h-screen bg-ink text-paper">
+      <main className="min-h-screen bg-background text-foreground">
         <SignIn />
       </main>
     )
   }
   if (access === 'denied') {
     return (
-      <main className="min-h-screen bg-ink text-paper px-6 py-16">
+      <main className="min-h-screen bg-background text-foreground px-6 py-16">
         <h1 className="display-condensed text-3xl">No access</h1>
         <p className="mt-2 text-sm text-muted-foreground">
           That account is not on the GRYT admin list.
@@ -196,7 +196,7 @@ function CheckinPage() {
         <button
           type="button"
           onClick={() => supabase.auth.signOut()}
-          className="mt-6 border border-white/20 px-4 py-2 text-sm uppercase tracking-wider"
+          className="mt-6 border border-foreground/20 px-4 py-2 text-sm uppercase tracking-wider"
         >
           Sign out
         </button>
@@ -207,8 +207,8 @@ function CheckinPage() {
   const event = data?.event
 
   return (
-    <main className="min-h-screen bg-ink text-paper pb-24">
-      <div className="border-b border-white/10 px-5 sm:px-12 py-6">
+    <main className="min-h-screen bg-background text-foreground pb-24">
+      <div className="border-b border-foreground/10 px-5 sm:px-12 py-6">
         <p className="eyebrow eyebrow-blue">Private · admin only</p>
         <h1 className="display-condensed text-3xl sm:text-4xl mt-2">Saturday check-in</h1>
         {event && (
@@ -218,7 +218,7 @@ function CheckinPage() {
             {event.status !== 'scheduled' ? ` · ${event.status}` : ''}
           </p>
         )}
-        <Link to="/admin/roster" className="mt-3 inline-block text-xs uppercase tracking-wider text-blue">
+        <Link to="/admin/roster" className="mt-3 inline-block text-xs uppercase tracking-wider text-foreground">
           Full roster
         </Link>
       </div>
@@ -226,7 +226,7 @@ function CheckinPage() {
       <CheckinQr />
 
       {data && (
-        <div className="px-5 sm:px-12 py-5 grid grid-cols-2 sm:grid-cols-4 gap-3 border-b border-white/10">
+        <div className="px-5 sm:px-12 py-5 grid grid-cols-2 sm:grid-cols-4 gap-3 border-b border-foreground/10">
           <Count value={data.totals.present} label="Here now" />
           <Count value={data.totals.notYetIn} label="Not in yet" />
           <Count value={data.totals.walkIns} label="Walk-ins" />
@@ -234,7 +234,7 @@ function CheckinPage() {
         </div>
       )}
 
-      <div className="px-5 sm:px-12 py-4 flex flex-wrap items-center gap-3 border-b border-white/10">
+      <div className="px-5 sm:px-12 py-4 flex flex-wrap items-center gap-3 border-b border-foreground/10">
         <label htmlFor="checkin-search" className="sr-only">
           Search runners
         </label>
@@ -243,13 +243,13 @@ function CheckinPage() {
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder="Search name or contact…"
-          className="bg-vintage border border-white/10 px-3 py-3 text-base text-paper placeholder:text-muted-foreground focus:outline-none focus:border-blue min-w-[200px] flex-1"
+          className="bg-background border border-foreground/10 px-3 py-3 text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-blue min-w-[200px] flex-1"
         />
         <button
           type="button"
           onClick={() => setOnlyMissing((v) => !v)}
           className={`px-3 py-3 text-xs uppercase tracking-wider border ${
-            onlyMissing ? 'bg-blue text-ink border-blue' : 'border-white/20 text-paper'
+            onlyMissing ? 'bg-blue text-ink border-blue' : 'border-foreground/20 text-foreground'
           }`}
         >
           Not in yet
@@ -270,7 +270,7 @@ function CheckinPage() {
       )}
 
       {data && (
-        <div className="divide-y divide-white/5">
+        <div className="divide-y divide-foreground/5">
           {filtered.map((row) => (
             <div key={row.key} className="px-5 sm:px-12 py-3 flex items-center gap-3">
               <div className="flex-1 min-w-0">
@@ -282,17 +282,17 @@ function CheckinPage() {
                     </span>
                   )}
                   {row.source === 'walk-in' && (
-                    <span className="px-1.5 py-0.5 text-[10px] uppercase tracking-wider bg-white/10">
+                    <span className="px-1.5 py-0.5 text-[10px] uppercase tracking-wider bg-foreground/10">
                       Walk-in
                     </span>
                   )}
                   {row.source === 'self' && (
-                    <span className="px-1.5 py-0.5 text-[10px] uppercase tracking-wider bg-white/10">
+                    <span className="px-1.5 py-0.5 text-[10px] uppercase tracking-wider bg-foreground/10">
                       Scanned in
                     </span>
                   )}
                   {row.streakCurrent > 1 && (
-                    <span className="px-1.5 py-0.5 text-[10px] uppercase tracking-wider border border-blue/50 text-blue">
+                    <span className="px-1.5 py-0.5 text-[10px] uppercase tracking-wider border border-blue/50 text-foreground">
                       {row.streakCurrent} in a row
                     </span>
                   )}
@@ -355,7 +355,7 @@ function CheckinPage() {
             },
           )
         }}
-        className="mt-8 border-t border-white/10 px-5 sm:px-12 py-6"
+        className="mt-8 border-t border-foreground/10 px-5 sm:px-12 py-6"
       >
         <p className="eyebrow eyebrow-blue">Someone showed up unannounced</p>
         <h2 className="display-condensed text-2xl mt-1">Add a walk-in</h2>
@@ -368,7 +368,7 @@ function CheckinPage() {
             value={walkInName}
             onChange={(e) => setWalkInName(e.target.value)}
             placeholder="Name"
-            className="bg-vintage border border-white/10 px-3 py-3 text-base text-paper placeholder:text-muted-foreground focus:outline-none focus:border-blue min-w-[160px] flex-1"
+            className="bg-background border border-foreground/10 px-3 py-3 text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-blue min-w-[160px] flex-1"
           />
           <label htmlFor="walkin-contact" className="sr-only">
             Walk-in email or phone
@@ -378,7 +378,7 @@ function CheckinPage() {
             value={walkInContact}
             onChange={(e) => setWalkInContact(e.target.value)}
             placeholder="Email or phone (optional)"
-            className="bg-vintage border border-white/10 px-3 py-3 text-base text-paper placeholder:text-muted-foreground focus:outline-none focus:border-blue min-w-[160px] flex-1"
+            className="bg-background border border-foreground/10 px-3 py-3 text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-blue min-w-[160px] flex-1"
           />
           <button
             type="submit"

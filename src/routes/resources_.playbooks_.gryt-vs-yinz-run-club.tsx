@@ -140,21 +140,21 @@ export const Route = createFileRoute(
 
 function ArticlePage() {
   return (
-    <main className="bg-ink text-paper">
+    <main className="bg-background text-foreground">
       <SiteNav />
-      <article className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
+      <article className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-foreground/15">
         <div className="max-w-[760px] mx-auto">
           <Link
             to="/resources/playbooks"
-            className="eyebrow text-blue hover:text-paper transition-colors"
+            className="eyebrow text-foreground hover:text-foreground transition-colors"
           >
             ← All playbooks
           </Link>
-          <p className="eyebrow text-blue mt-8 mb-5">COMMUNITY · 8 MIN READ</p>
+          <p className="eyebrow text-foreground mt-8 mb-5">COMMUNITY · 8 MIN READ</p>
           <h1 className="display-condensed uppercase text-[clamp(40px,7vw,96px)] leading-[0.95]">
             GRYT vs Yinz Run Club: Which Pittsburgh Run Club Is Right for You?
           </h1>
-          <p className="mt-7 text-paper/75 text-lg md:text-xl leading-[1.55]">
+          <p className="mt-7 text-foreground/75 text-lg md:text-xl leading-[1.55]">
             {DESCRIPTION}
           </p>
 
@@ -162,15 +162,15 @@ function ArticlePage() {
 
           <nav
             aria-label="Table of contents"
-            className="mt-10 border border-paper/15 p-5"
+            className="mt-10 border border-foreground/15 p-5"
           >
-            <p className="eyebrow text-paper/55 mb-3">In this playbook</p>
+            <p className="eyebrow text-foreground/70 mb-3">In this playbook</p>
             <ul className="flex flex-col gap-2">
               {SECTIONS.map((s) => (
                 <li key={s.id}>
                   <a
                     href={`#${s.id}`}
-                    className="text-paper/80 hover:text-blue transition-colors text-[15px]"
+                    className="text-foreground/80 hover:text-foreground/70 transition-colors text-[15px]"
                   >
                     → {s.label}
                   </a>
@@ -179,7 +179,7 @@ function ArticlePage() {
             </ul>
           </nav>
 
-          <div className="mt-12 space-y-5 text-paper/85 text-[16px] md:text-[17px] leading-[1.7]">
+          <div className="mt-12 space-y-5 text-foreground/85 text-[16px] md:text-[17px] leading-[1.7]">
             <p>You've heard of Yinz Run Club. Maybe you've shown up to a Wednesday evening run downtown, or you've scrolled past their Instagram and thought, that looks fun. But Wednesday evenings are complicated. The South Hills are far from the city at 6:30 PM. And honestly, you're better at mornings than you are at after-work anything.</p>
             <p>That's a real situation. It's also exactly why this comparison exists.</p>
             <p>Both clubs are free. Both are genuinely welcoming. But they serve different people, at different times, in different parts of Pittsburgh. Here's an honest look at each so you can figure out which one actually fits your life right now.</p>
@@ -231,8 +231,8 @@ function ArticlePage() {
             <div className="space-y-6">
               {FAQS.map((f) => (
                 <div key={f.q}>
-                  <p className="font-bold text-paper">{f.q}</p>
-                  <p className="mt-2 text-paper/80">{f.a}</p>
+                  <p className="font-bold text-foreground">{f.q}</p>
+                  <p className="mt-2 text-foreground/80">{f.a}</p>
                 </div>
               ))}
             </div>
@@ -241,7 +241,7 @@ function ArticlePage() {
             <p>We'll be at the Montour / Peters Trail next Saturday at 7. Most people come alone the first time. That's fine. So did everyone else.</p>
             <p>
               RSVP for this Saturday at{" "}
-              <Link to="/" className="text-blue underline underline-offset-4">
+              <Link to="/" className="text-foreground underline underline-offset-4">
                 grytrunclub.com
               </Link>
               .
@@ -256,7 +256,7 @@ function ArticlePage() {
             </Link>
             <Link
               to="/resources/playbooks"
-              className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors"
+              className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-foreground/40 text-foreground hover:border-blue hover:text-foreground/70 transition-colors"
             >
               Back to Playbooks
             </Link>
@@ -309,11 +309,11 @@ function ShareBar({
   }
 
   const btn =
-    "inline-flex items-center gap-2 px-3.5 py-2 text-[12px] font-bold uppercase tracking-[0.12em] border border-paper/30 text-paper hover:border-blue hover:text-blue transition-colors";
+    "inline-flex items-center gap-2 px-3.5 py-2 text-[12px] font-bold uppercase tracking-[0.12em] border border-foreground/30 text-foreground hover:border-blue hover:text-foreground/70 transition-colors";
 
   return (
     <div className={className} aria-label={label}>
-      <p className="eyebrow text-paper/55 mb-3">{label}</p>
+      <p className="eyebrow text-foreground/70 mb-3">{label}</p>
       <div className="flex flex-wrap gap-2.5">
         <button type="button" onClick={onCopy} className={btn} aria-live="polite">
           {copied ? (

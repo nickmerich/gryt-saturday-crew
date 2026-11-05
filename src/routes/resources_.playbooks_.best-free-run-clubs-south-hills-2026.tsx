@@ -223,28 +223,28 @@ function H2({ id, children }: { id: string; children: React.ReactNode }) {
 
 function SouthHillsPage() {
   return (
-    <main className="bg-ink text-paper">
+    <main className="bg-background text-foreground">
       <SiteNav />
-      <article className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
+      <article className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-foreground/15">
         <div className="max-w-[760px] mx-auto">
           <Link
             to="/resources/playbooks"
-            className="eyebrow text-blue hover:text-paper transition-colors"
+            className="eyebrow text-foreground hover:text-foreground transition-colors"
           >
             ← All playbooks
           </Link>
-          <p className="eyebrow text-blue mt-8 mb-5">
+          <p className="eyebrow text-foreground mt-8 mb-5">
             COMMUNITY · 8 MIN READ · BY NICK MERICH
           </p>
           <h1 className="display-condensed uppercase text-[clamp(38px,6.4vw,88px)] leading-[0.95]">
             Best Free Run Clubs in Pittsburgh's South Hills (2026 Guide)
           </h1>
-          <p className="mt-7 text-paper/75 text-lg md:text-xl leading-[1.55]">
+          <p className="mt-7 text-foreground/75 text-lg md:text-xl leading-[1.55]">
             Which clubs exist, what they cost, and which one fits where you live
             and how you run.
           </p>
 
-          <figure className="mt-10 border border-paper/15">
+          <figure className="mt-10 border border-foreground/15">
             <img
               src={southHillsImg}
               srcSet={`${southHills760Img} 760w, ${southHillsImg} 1520w`}
@@ -261,15 +261,15 @@ function SouthHillsPage() {
 
           <nav
             aria-label="Table of contents"
-            className="mt-10 border border-paper/15 p-5"
+            className="mt-10 border border-foreground/15 p-5"
           >
-            <p className="eyebrow text-paper/55 mb-3">In this guide</p>
+            <p className="eyebrow text-foreground/70 mb-3">In this guide</p>
             <ul className="flex flex-col gap-2">
               {SECTIONS.map((s) => (
                 <li key={s.id}>
                   <a
                     href={`#${s.id}`}
-                    className="text-paper/80 hover:text-blue transition-colors text-[15px]"
+                    className="text-foreground/80 hover:text-foreground/70 transition-colors text-[15px]"
                   >
                     → {s.label}
                   </a>
@@ -278,7 +278,7 @@ function SouthHillsPage() {
             </ul>
           </nav>
 
-          <div className="mt-12 space-y-5 text-paper/85 text-[16px] md:text-[17px] leading-[1.7]">
+          <div className="mt-12 space-y-5 text-foreground/85 text-[16px] md:text-[17px] leading-[1.7]">
             <p>
               If you've searched for free run clubs in Pittsburgh's South Hills
               and ended up on a Strava page or a generic city-wide list, you're
@@ -305,7 +305,7 @@ function SouthHillsPage() {
               trailhead is a short drive, not a trip into the city.
             </p>
             <p className="border-l-2 border-blue pl-5">
-              <strong className="text-paper">Saturday mornings — 7 AM.</strong>{" "}
+              <strong className="text-foreground">Saturday mornings — 7 AM.</strong>{" "}
               Meet at the Valley Brook Road trailhead in McMurray for a run on
               the Montour/Peters Trail. Distance is flexible. The time is not.
               Show up at 7 AM and you'll find people.
@@ -321,7 +321,7 @@ function SouthHillsPage() {
               Looking for a target? The EQT Pittsburgh 10 Miler is November 8,
               2026, the Thanksgiving 5Ks follow on November 26, and the 2027
               Pittsburgh Marathon is May 2, 2027. The{" "}
-              <Link to="/races" className="underline hover:text-blue">
+              <Link to="/races" className="underline hover:text-foreground/70">
                 GRYT races page
               </Link>{" "}
               keeps the verified dates. Saturday mornings on the Montour Trail
@@ -366,7 +366,7 @@ function SouthHillsPage() {
               big multi-day schedule, CBRC is a great option. See our{" "}
               <Link
                 to="/resources/playbooks/gryt-vs-city-of-bridges-run-club"
-                className="underline hover:text-blue"
+                className="underline hover:text-foreground/70"
               >
                 GRYT vs City of Bridges comparison
               </Link>
@@ -383,7 +383,7 @@ function SouthHillsPage() {
               club runs based at Bakery Square. Read the full{" "}
               <Link
                 to="/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs"
-                className="underline hover:text-blue"
+                className="underline hover:text-foreground/70"
               >
                 GRYT vs Fleet Feet Pittsburgh comparison
               </Link>
@@ -402,10 +402,10 @@ function SouthHillsPage() {
             </p>
 
             <H2 id="compare">Side-by-Side Comparison</H2>
-            <div className="overflow-x-auto border border-paper/15">
+            <div className="overflow-x-auto border border-foreground/15">
               <table className="w-full text-left text-[14px] md:text-[15px] min-w-[640px]">
                 <thead>
-                  <tr className="border-b border-paper/15 text-paper">
+                  <tr className="border-b border-foreground/15 text-foreground">
                     <th className="p-3 font-bold uppercase tracking-[0.1em] text-[11px]">
                       Club
                     </th>
@@ -425,8 +425,8 @@ function SouthHillsPage() {
                 </thead>
                 <tbody>
                   {COMPARISON.map((r) => (
-                    <tr key={r.club} className="border-b border-paper/10">
-                      <td className="p-3 text-paper font-bold">{r.club}</td>
+                    <tr key={r.club} className="border-b border-foreground/10">
+                      <td className="p-3 text-foreground font-bold">{r.club}</td>
                       <td className="p-3">{r.proximity}</td>
                       <td className="p-3">{r.cost}</td>
                       <td className="p-3">{r.schedule}</td>
@@ -447,27 +447,27 @@ function SouthHillsPage() {
             </p>
             <ul className="list-disc pl-6 space-y-2">
               <li>
-                <strong className="text-paper">GRYT Run Club</strong> checks
+                <strong className="text-foreground">GRYT Run Club</strong> checks
                 every box: Saturday 7 AM, 212 Valley Brook Road in McMurray
                 (Peters Township), about 4 miles out and back on the flat,
                 paved Montour/Peters Trail, free, no-drop, walkers welcome,
                 RSVP and waiver at grytrunclub.com, coffee after.
               </li>
               <li>
-                <strong className="text-paper">City of Bridges Run Club</strong>{" "}
+                <strong className="text-foreground">City of Bridges Run Club</strong>{" "}
                 posts pace groups, so you can find your speed. Runs are free
                 with registration, membership is an optional $55 a year, and
                 the Thursday 6:30 PM South Hills run rotates spots. Saturdays
                 are 8 AM in the city.
               </li>
               <li>
-                <strong className="text-paper">Fleet Feet Pittsburgh</strong>{" "}
+                <strong className="text-foreground">Fleet Feet Pittsburgh</strong>{" "}
                 is free and store-backed. The Tuesday 6:30 PM South Hills Pub
                 Run leaves from Arthur's Korner Pub in Mt. Lebanon; the Sunday
                 7:30 AM long run and most other routes are in the East End.
               </li>
               <li>
-                <strong className="text-paper">parkrun</strong> is a free,
+                <strong className="text-foreground">parkrun</strong> is a free,
                 timed 5K every Saturday at 9 AM on the North Shore. Walkers are
                 welcome, but it's a drive from the South Hills and you get a
                 time on the clock, which some beginners love and some don't.
@@ -483,40 +483,40 @@ function SouthHillsPage() {
             </p>
             <ul className="list-disc pl-6 space-y-2">
               <li>
-                <strong className="text-paper">One fixed time, close to home.</strong>{" "}
+                <strong className="text-foreground">One fixed time, close to home.</strong>{" "}
                 A run you have to plan around every week is a run you'll skip.
                 GRYT is always Saturday at 7 AM, always at Valley Brook Road, so
                 there's no weekly decision to make.
               </li>
               <li>
-                <strong className="text-paper">Count showing up, not pace.</strong>{" "}
+                <strong className="text-foreground">Count showing up, not pace.</strong>{" "}
                 Pick a streak goal (four Saturdays in a row) instead of a speed
                 goal. The{" "}
-                <Link to="/milestones" className="underline hover:text-blue">
+                <Link to="/milestones" className="underline hover:text-foreground/70">
                   GRYT Milestone Club
                 </Link>{" "}
                 recognizes 5, 10, 25, 50, and 100 Saturdays, and walking counts.
               </li>
               <li>
-                <strong className="text-paper">Run no-drop.</strong> The fastest
+                <strong className="text-foreground">Run no-drop.</strong> The fastest
                 way to quit a group is getting left behind on a bad day. In a
                 no-drop group, someone loops back. You never finish alone.
               </li>
               <li>
-                <strong className="text-paper">Tell one person you're coming.</strong>{" "}
+                <strong className="text-foreground">Tell one person you're coming.</strong>{" "}
                 RSVP, text a friend, or post in the Strava club. A name
                 expecting you at 7 AM beats any alarm.
               </li>
               <li>
-                <strong className="text-paper">Stay for coffee.</strong> The
+                <strong className="text-foreground">Stay for coffee.</strong> The
                 conversation after the run is the part people come back for.
                 Friends are better accountability than a training plan.
               </li>
               <li>
-                <strong className="text-paper">Put a race on the calendar.</strong>{" "}
+                <strong className="text-foreground">Put a race on the calendar.</strong>{" "}
                 A Thanksgiving 5K or a spring half gives the Saturdays a point.
                 Our{" "}
-                <Link to="/plan" className="underline hover:text-blue">
+                <Link to="/plan" className="underline hover:text-foreground/70">
                   free run plan builder
                 </Link>{" "}
                 fits the rest of your week around the group run.
@@ -545,7 +545,7 @@ function SouthHillsPage() {
             <div className="space-y-6">
               {FAQS.map((f) => (
                 <div key={f.q}>
-                  <h3 className="text-paper font-bold text-[17px] md:text-[18px] mb-1.5">
+                  <h3 className="text-foreground font-bold text-[17px] md:text-[18px] mb-1.5">
                     {f.q}
                   </h3>
                   <p>{f.a}</p>
@@ -553,11 +553,11 @@ function SouthHillsPage() {
               ))}
             </div>
 
-            <p className="text-paper text-lg md:text-xl font-bold mt-12">
+            <p className="text-foreground text-lg md:text-xl font-bold mt-12">
               If you've been waiting for a reason to start showing up, this
               Saturday is a good one.
             </p>
-            <p className="text-paper/70">
+            <p className="text-foreground/70">
               Show up Saturday. 7 AM. Valley Brook Road trailhead.
             </p>
           </div>
@@ -568,7 +568,7 @@ function SouthHillsPage() {
             </Link>
             <Link
               to="/resources/playbooks"
-              className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors"
+              className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-foreground/40 text-foreground hover:border-blue hover:text-foreground/70 transition-colors"
             >
               Back to Playbooks
             </Link>

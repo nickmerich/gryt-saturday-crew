@@ -151,23 +151,23 @@ function Bullets({ items }: { items: string[] }) {
 
 function ShouldYouJoinPage() {
   return (
-    <main className="bg-ink text-paper">
+    <main className="bg-background text-foreground">
       <SiteNav />
-      <article className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-paper/15">
+      <article className="px-6 sm:px-12 lg:px-24 py-14 md:py-20 border-b border-foreground/15">
         <div className="max-w-[760px] mx-auto">
           <Link
             to="/resources"
-            className="eyebrow text-blue hover:text-paper transition-colors"
+            className="eyebrow text-foreground hover:text-foreground transition-colors"
           >
             ← All resources
           </Link>
-          <p className="eyebrow text-blue mt-8 mb-5">
+          <p className="eyebrow text-foreground mt-8 mb-5">
             COMMUNITY · 6 MIN READ · BY NICK MERICH
           </p>
           <h1 className="display-condensed uppercase text-[clamp(38px,6.4vw,88px)] leading-[0.95]">
             Should You Join a Running Club? An Honest Answer
           </h1>
-          <p className="mt-7 text-paper/75 text-lg md:text-xl leading-[1.55]">
+          <p className="mt-7 text-foreground/75 text-lg md:text-xl leading-[1.55]">
             Nobody hesitates because they don't know where the trailhead is.
             They hesitate because they think they'll be the slowest person
             there.
@@ -175,15 +175,15 @@ function ShouldYouJoinPage() {
 
           <nav
             aria-label="Table of contents"
-            className="mt-10 border border-paper/15 p-5"
+            className="mt-10 border border-foreground/15 p-5"
           >
-            <p className="eyebrow text-paper/55 mb-3">In this post</p>
+            <p className="eyebrow text-foreground/70 mb-3">In this post</p>
             <ul className="flex flex-col gap-2">
               {SECTIONS.map((s) => (
                 <li key={s.id}>
                   <a
                     href={`#${s.id}`}
-                    className="text-paper/80 hover:text-blue transition-colors text-[15px]"
+                    className="text-foreground/80 hover:text-foreground/70 transition-colors text-[15px]"
                   >
                     → {s.label}
                   </a>
@@ -192,7 +192,7 @@ function ShouldYouJoinPage() {
             </ul>
           </nav>
 
-          <div className="mt-12 space-y-5 text-paper/85 text-[16px] md:text-[17px] leading-[1.7]">
+          <div className="mt-12 space-y-5 text-foreground/85 text-[16px] md:text-[17px] leading-[1.7]">
             <p>
               We've watched a lot of people stand in the parking lot at 6:52 AM
               deciding whether to get out of the car. Almost none of them were
@@ -206,7 +206,7 @@ function ShouldYouJoinPage() {
               answer depends entirely on one thing: whether the club is
               no-drop.
             </p>
-            <p className="border-l-2 border-blue pl-5 italic text-paper/90">
+            <p className="border-l-2 border-blue pl-5 italic text-foreground/90">
               No-drop means the group's pace is set by the back of the pack, not
               the front. Nobody finishes alone.
             </p>
@@ -259,7 +259,7 @@ function ShouldYouJoinPage() {
               slightly faster and considerably longer in company than alone. But
               that's not the main thing.
             </p>
-            <p className="text-paper font-bold">The main thing is this:</p>
+            <p className="text-foreground font-bold">The main thing is this:</p>
             <Bullets
               items={[
                 "Expectation beats motivation. Motivation is gone by week three. Six people expecting you at 7 AM is not.",
@@ -312,7 +312,7 @@ function ShouldYouJoinPage() {
             <div className="space-y-6">
               {FAQS.map((f) => (
                 <div key={f.q}>
-                  <h3 className="text-paper font-bold text-[17px] md:text-[18px] mb-1.5">
+                  <h3 className="text-foreground font-bold text-[17px] md:text-[18px] mb-1.5">
                     {f.q}
                   </h3>
                   <p>{f.a}</p>
@@ -320,11 +320,11 @@ function ShouldYouJoinPage() {
               ))}
             </div>
 
-            <p className="text-paper text-lg md:text-xl font-bold mt-12">
+            <p className="text-foreground text-lg md:text-xl font-bold mt-12">
               If you're still deciding, the decision is smaller than it feels.
               It's one Saturday morning.
             </p>
-            <p className="text-paper/70">— Nick Merich</p>
+            <p className="text-foreground/70">— Nick Merich</p>
           </div>
 
           <div className="mt-14 flex flex-wrap gap-4">
@@ -333,7 +333,7 @@ function ShouldYouJoinPage() {
             </Link>
             <Link
               to="/resources"
-              className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-paper/40 text-paper hover:border-blue hover:text-blue transition-colors"
+              className="inline-flex items-center px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] border border-foreground/40 text-foreground hover:border-blue hover:text-foreground/70 transition-colors"
             >
               Back to Resources
             </Link>
