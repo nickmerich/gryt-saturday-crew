@@ -8,6 +8,8 @@ import {
   validateEventRef,
 } from '@/lib/run-schedule'
 import { normalizeSong, SONG_MAX } from '@/lib/soundtrack'
+import { INVITE_CODE_MAX, inviteUrl, normalizeInviteCode } from '@/lib/invite'
+import { inviteCodeFor } from '@/lib/invite.server'
 
 const isEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)
 
@@ -25,12 +27,18 @@ const RsvpSchema = z.object({
   // Saturday Soundtrack: optional song, plus explicit opt-in to be credited.
   song: z.string().max(SONG_MAX * 2).optional().nullable(),
   songCreditOk: z.boolean().optional().default(false),
+  // Personal invites: the code of the person whose link brought this RSVP,
+  // plus an explicit opt-in to show a first name on the public going list.
+  referredBy: z.string().max(INVITE_CODE_MAX * 2).optional().nullable(),
+  goingListOk: z.boolean().optional().default(false),
 })
 
 
 function isMissingColumn(err: { code?: string; message?: string }): boolean {
   if (err.code === 'PGRST204' || err.code === '42703') return true
-  return /song(_credit_ok)? .*(column|schema cache)|column .*song/i.test(err.message ?? '')
+  return /(song|song_credit_ok|invite_code|referred_by|going_list_ok) .*(column|schema cache)|column .*(song|invite_code|referred_by|going_list_ok)/i.test(
+    err.message ?? '',
+  )
 }
 
 function redactEmail(email: string | null | undefined): string {
@@ -93,6 +101,11 @@ export const Route = createFileRoute('/api/public/rsvp')({
         const song = normalizeSong(parsed.data.song)
         // A credit only means something when there is a song to credit.
         const songCreditOk = Boolean(song) && parsed.data.songCreditOk === true
+        const goingListOk = parsed.data.goingListOk === true
+        // Stable per-person code; a friend's link cannot credit the same person.
+        const inviteCode = inviteCodeFor(name, contact)
+        const referredByRaw = normalizeInviteCode(parsed.data.referredBy)
+        const referredBy = referredByRaw && referredByRaw !== inviteCode ? referredByRaw : null
 
         // Validate the canonical occurrence server-side. A stale tab that still
         // holds a cancelled or superseded run must not silently sign someone up.
@@ -129,13 +142,24 @@ export const Route = createFileRoute('/api/public/rsvp')({
           first_timer: firstTimer,
           user_agent: userAgent,
         }
+        const songRow = song ? { song, song_credit_ok: songCreditOk } : {}
+        const inviteRow = { invite_code: inviteCode, referred_by: referredBy, going_list_ok: goingListOk }
         let { data: inserted, error: insertError } = await supabase
           .from('rsvps')
-          .insert(song ? { ...baseRow, song, song_credit_ok: songCreditOk } : baseRow)
+          .insert({ ...baseRow, ...songRow, ...inviteRow })
           .select('id')
           .single()
-        // If the soundtrack columns are not in this database yet (migration
-        // 0014 pending), never lose the RSVP: save it without the song.
+        // If newer columns are not in this database yet (migration pending),
+        // never lose the RSVP: retry without the invite fields, then without
+        // the song too.
+        if (insertError && isMissingColumn(insertError)) {
+          console.error('Invite columns missing; saving RSVP without invite fields', { error: insertError })
+          ;({ data: inserted, error: insertError } = await supabase
+            .from('rsvps')
+            .insert({ ...baseRow, ...songRow })
+            .select('id')
+            .single())
+        }
         if (insertError && song && isMissingColumn(insertError)) {
           console.error('Song columns missing; saving RSVP without song', { error: insertError })
           ;({ data: inserted, error: insertError } = await supabase
@@ -170,6 +194,7 @@ export const Route = createFileRoute('/api/public/rsvp')({
               partySize,
               firstTimer,
               song: song ?? undefined,
+              referredBy: referredBy ?? undefined,
             },
             `rsvp-notify-${rsvpId}`,
           )
@@ -191,6 +216,7 @@ export const Route = createFileRoute('/api/public/rsvp')({
                 eventLabel: resolvedEventLabel,
                 calendarUrl: calHref,
                 stravaUrl: 'https://www.strava.com/clubs/1708552',
+                inviteUrl: inviteUrl(inviteCode),
               },
               `rsvp-confirm-${rsvpId}`,
             )
@@ -252,7 +278,10 @@ export const Route = createFileRoute('/api/public/rsvp')({
           console.error('Signup session store failed', { rsvpId, error: err })
         }
 
-        return Response.json({ success: true, confirmationSent: contactIsEmail }, { headers })
+        return Response.json(
+          { success: true, confirmationSent: contactIsEmail, inviteCode },
+          { headers },
+        )
 
       },
     },
