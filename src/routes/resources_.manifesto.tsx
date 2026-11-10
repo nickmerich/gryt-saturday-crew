@@ -3,14 +3,17 @@ import { useState } from "react";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 import { ShareButtons } from "@/components/site/ShareButtons";
 import { track } from "@/lib/analytics";
-import crewTrail from "@/assets/photos/manifesto/crew-trail.jpg.asset.json";
-import marathonStreet from "@/assets/photos/manifesto/marathon-street.jpg.asset.json";
-import fourFriends from "@/assets/photos/manifesto/brotherhood-crew.jpg.asset.json";
-
-import dadsAndKids from "@/assets/photos/manifesto/dads-and-kids.jpg.asset.json";
+import crewTrail800Img from "@/assets/img/crew-trail-800.webp";
+import crewTrailImg from "@/assets/img/crew-trail.webp";
+import marathonStreetImg from "@/assets/img/marathon-street.webp";
+import fourFriends720Img from "@/assets/img/brotherhood-crew-720.webp";
+import fourFriendsImg from "@/assets/img/brotherhood-crew.webp";
+import dadsAndKidsImg from "@/assets/img/dads-and-kids.webp";
 
 const HUMAN_LAYER_PHOTOS: {
   src: string;
+  srcSet?: string;
+  sizes?: string;
   alt: string;
   caption: string;
   eyebrow: string;
@@ -18,7 +21,9 @@ const HUMAN_LAYER_PHOTOS: {
   ratio: string;
 }[] = [
   {
-    src: crewTrail.url,
+    src: crewTrailImg,
+    srcSet: `${crewTrail800Img} 800w, ${crewTrailImg} 1594w`,
+    sizes: "(min-width: 768px) 66vw, 100vw",
     alt: "GRYT crew gathered on the trail before a Saturday run",
     caption: "The crew before the run. Names remembered. Nobody invisible.",
     eyebrow: "The people",
@@ -26,7 +31,7 @@ const HUMAN_LAYER_PHOTOS: {
     ratio: "aspect-[16/9]",
   },
   {
-    src: dadsAndKids.url,
+    src: dadsAndKidsImg,
     alt: "Two GRYT dads at the ballpark holding their kids",
     caption: "Why we protect the ritual. The people we run home to.",
     eyebrow: "The family",
@@ -34,7 +39,7 @@ const HUMAN_LAYER_PHOTOS: {
     ratio: "aspect-[4/5]",
   },
   {
-    src: marathonStreet.url,
+    src: marathonStreetImg,
     alt: "Two runners crossing the city together mid-race",
     caption: "Do hard things together. Side by side, every mile.",
     eyebrow: "The love",
@@ -42,7 +47,9 @@ const HUMAN_LAYER_PHOTOS: {
     ratio: "aspect-[4/5]",
   },
   {
-    src: fourFriends.url,
+    src: fourFriendsImg,
+    srcSet: `${fourFriends720Img} 720w, ${fourFriendsImg} 1404w`,
+    sizes: "(min-width: 768px) 58vw, 100vw",
     alt: "GRYT crew smiling together on the trail after a Saturday run",
     caption: "Belonging with responsibility attached. This is the crew.",
     eyebrow: "The brotherhood",
@@ -446,6 +453,8 @@ function ManifestoPage() {
                 <div className={`${p.ratio} w-full overflow-hidden`}>
                   <img
                     src={p.src}
+                    srcSet={p.srcSet}
+                    sizes={p.sizes}
                     alt={p.alt}
                     loading="lazy"
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"

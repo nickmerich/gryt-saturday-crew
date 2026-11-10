@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 import { ShareButtons } from "@/components/site/ShareButtons";
 import heroAsset from "@/assets/hero-night-run.png.asset.json";
+import hero760Img from "@/assets/img/hero-night-run-760.webp";
+import heroImg from "@/assets/img/hero-night-run.webp";
 
 const SITE = "https://grytrunclub.com";
 const URL = `${SITE}/resources/running-at-night-safety-pittsburgh`;
@@ -119,7 +121,7 @@ function NightRunPage() {
           </p>
 
           <figure className="mt-10 border border-foreground/15">
-            <img src={heroAsset.url} alt="Runner on a dark path at night" loading="eager" className="w-full h-auto" />
+            <img src={heroImg} srcSet={`${hero760Img} 760w, ${heroImg} 1160w`} sizes="(max-width: 808px) 100vw, 760px" alt="Runner on a dark path at night" width={1160} height={580} loading="eager" className="w-full h-auto" />
           </figure>
 
           <nav aria-label="Table of contents" className="mt-10 border border-foreground/15 p-5">

@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 import { ShareButtons } from "@/components/site/ShareButtons";
 import heroAsset from "@/assets/pittsburgh-10-miler.png.asset.json";
+import hero768Img from "@/assets/img/pittsburgh-10-miler-768.webp";
+import heroImg from "@/assets/img/pittsburgh-10-miler.webp";
 
 const SITE = "https://grytrunclub.com";
 const URL = `${SITE}/resources/eqt-pittsburgh-10-miler-2026`;
@@ -153,7 +155,9 @@ function TenMilerPage() {
           </p>
 
           <img
-            src={heroAsset.url}
+            src={heroImg}
+            srcSet={`${hero768Img} 768w, ${heroImg} 1536w`}
+            sizes="(max-width: 808px) 100vw, 760px"
             alt="Runner heading toward the Pittsburgh skyline and river bridges"
             width={1536}
             height={1024}

@@ -1,8 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteNav, SiteFooter, MissionStamp } from "@/components/site/Chrome";
-import mountainAsset from "@/assets/photos/founders-mountain.jpg.asset.json";
-import surfCityAsset from "@/assets/photos/founders-surf-city.jpg.asset.json";
-import bostonAsset from "@/assets/photos/founders-boston.jpg.asset.json";
+import mountain650Img from "@/assets/img/founders-mountain-650.webp";
+import mountainImg from "@/assets/img/founders-mountain.webp";
+import surfCity700Img from "@/assets/img/founders-surf-city-700.webp";
+import surfCityImg from "@/assets/img/founders-surf-city.webp";
+import boston476Img from "@/assets/img/founders-boston-476.webp";
+import bostonImg from "@/assets/img/founders-boston.webp";
 import { siteUrl } from "@/lib/site";
 
 const TITLE = "About GRYT Run Club | Nick & Laura Merich";
@@ -147,7 +150,11 @@ function AboutPage() {
             </p>
           </div>
           <img
-            src={mountainAsset.url}
+            src={mountainImg}
+            srcSet={`${mountain650Img} 650w, ${mountainImg} 1139w`}
+            sizes="(min-width: 768px) 468px, calc(100vw - 48px)"
+            width={1139}
+            height={1400}
             alt="Nick and Laura Merich on a mountain summit"
             className="w-full h-auto object-cover"
             loading="eager"
@@ -180,7 +187,11 @@ function AboutPage() {
             <figcaption className="mt-4 text-sm text-ink/75">Nick Merich, co-founder, GRYT Run Club</figcaption>
           </figure>
           <img
-            src={surfCityAsset.url}
+            src={surfCityImg}
+            srcSet={`${surfCity700Img} 700w, ${surfCityImg} 1198w`}
+            sizes="(min-width: 768px) 720px, calc(100vw - 48px)"
+            width={1198}
+            height={1222}
             alt="Nick and Laura with finisher medals at the Surf City half marathon"
             className="mt-10 w-full h-auto"
             loading="lazy"
@@ -199,7 +210,11 @@ function AboutPage() {
             Two different backgrounds. One shared belief: effort is better together.
           </p>
           <img
-            src={bostonAsset.url}
+            src={bostonImg}
+            srcSet={`${boston476Img} 476w, ${bostonImg} 883w`}
+            sizes="(min-width: 496px) 448px, calc(100vw - 48px)"
+            width={883}
+            height={1176}
             alt="Laura with her 2020 Boston Marathon virtual bib, next to Nick"
             className="mt-10 w-full max-w-md h-auto"
             loading="lazy"

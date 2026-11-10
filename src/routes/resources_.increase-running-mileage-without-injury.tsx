@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 import { ShareButtons } from "@/components/site/ShareButtons";
 import heroAsset from "@/assets/mileage-build-pittsburgh.png.asset.json";
+import hero768Img from "@/assets/img/mileage-build-pittsburgh-768.webp";
+import heroImg from "@/assets/img/mileage-build-pittsburgh.webp";
 
 const SITE = "https://grytrunclub.com";
 const URL = `${SITE}/resources/increase-running-mileage-without-injury`;
@@ -126,7 +128,7 @@ function MileagePage() {
           </p>
 
           <figure className="mt-10 border border-foreground/15">
-            <img src={heroAsset.url} alt="Runner on a Pittsburgh riverfront path at night with the skyline behind and blue bars climbing toward a rising arrow" width={1536} height={1024} loading="eager" style={{ filter: "none" }} className="w-full h-auto" />
+            <img src={heroImg} srcSet={`${hero768Img} 768w, ${heroImg} 1536w`} sizes="(max-width: 808px) 100vw, 760px" alt="Runner on a Pittsburgh riverfront path at night with the skyline behind and blue bars climbing toward a rising arrow" width={1536} height={1024} loading="eager" style={{ filter: "none" }} className="w-full h-auto" />
           </figure>
 
           <nav aria-label="Table of contents" className="mt-10 border border-foreground/15 p-5">
