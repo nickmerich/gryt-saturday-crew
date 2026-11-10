@@ -229,9 +229,9 @@ function ShouldYouJoinPage() {
             </p>
             <Bullets
               items={[
-                "Free community clubs — no dues, no signup, show up when you can. GRYT is one of these.",
-                "Store-affiliated clubs — free to run, but built around a retailer and its calendar.",
-                "Coached or dues-based clubs — a few hundred dollars a season for structured training and a coach.",
+                "Free community clubs: no dues, no membership, show up when you can. GRYT is one of these.",
+                "Store-affiliated clubs: free to run, but built around a retailer and its calendar.",
+                "Coached or dues-based clubs: a few hundred dollars a season for structured training and a coach.",
               ]}
             />
             <p>

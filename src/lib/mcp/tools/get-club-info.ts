@@ -15,13 +15,13 @@ export default defineTool({
       name: "GRYT Run Club",
       mission: "Do hard things together.",
       description:
-        "A Pittsburgh run club for former athletes, busy parents, and comeback runners. No pace requirement, no fee, no signup — just show up.",
+        "A free Pittsburgh run club for former athletes, busy parents, and comeback runners. Walkers welcome, no-drop, no pace requirement, no fee, and no membership required.",
       location: "McMurray, PA (South Hills of Pittsburgh)",
       website: "https://grytrunclub.com",
       strava: "https://www.strava.com/clubs/1708552",
       instagram: "https://www.instagram.com/grytrunclub/",
       howToJoin:
-        "Show up Saturday 7 AM at 212 Valley Brook Road, McMurray, PA. Arrive 10 minutes early and introduce yourself.",
+        "First-timers RSVP at https://grytrunclub.com and sign a short waiver. Then show up Saturday at 7 AM at 212 Valley Brook Road, McMurray, PA. Arrive 10 minutes early and introduce yourself.",
     };
     const payload = guardToolAccess(TOOL_NAME, ctx.isAuthenticated(), info);
     return {

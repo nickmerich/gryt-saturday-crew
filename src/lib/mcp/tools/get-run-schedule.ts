@@ -19,7 +19,8 @@ export default defineTool({
         location: "Montour / Peters Trail, McMurray, PA",
         meetingPoint: "212 Valley Brook Road, McMurray, PA",
         pace: "Easy, conversational. All paces welcome.",
-        notes: "Coffee after. No signup required — just show up.",
+        notes:
+          "Coffee after. Free, no membership required. First-timers RSVP at https://grytrunclub.com and sign a short waiver.",
         nextRunNumber: nextRunNumber(),
         nextRunDate: nextSaturdayISODate(),
         nextRunLabel: nextSaturdayLabel(),
