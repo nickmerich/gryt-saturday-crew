@@ -1,5 +1,5 @@
 import { GrytBear, GrytBrand } from "@/components/site/BrandMarks";
-import runClub4Img from "@/assets/img/run-club-4.webp";
+import latestRunPhoto from "@/assets/photos/gryt-saturday-run-november-2026.jpg.asset.json";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SITE_TITLE, SITE_DESCRIPTION } from "./__root";
 import { useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } from "react";
@@ -57,8 +57,8 @@ import { LastRunStrip } from "@/components/site/LastRunStrip";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 
 const heroImgAsset = photo1;
-// Hero: optimized WebP copy of run-club-4.jpg (294 KB JPG -> WebP). 686x417 intrinsic.
-const heroImg = runClub4Img;
+// Updated crew photo supplied from the latest Saturday run.
+const heroImg = latestRunPhoto.url;
 const circleImg = photo6.url;
 const foundersImg = nickLauraAsset.url;
 
@@ -490,7 +490,7 @@ function Hero() {
         </div>
         <figure className="relative min-w-0">
           <div aria-hidden="true" className="absolute -right-3 -bottom-3 h-full w-full bg-blue" />
-          <img src={heroImg} width={686} height={417} alt="The GRYT crew on the Montour / Peters Trail" className="relative block aspect-[686/417] w-full object-cover" fetchPriority="high" decoding="async" />
+          <img src={heroImg} width={1024} height={768} alt="GRYT runners gathered for a group photo on the autumn trail after a Saturday run" className="relative block aspect-[4/3] w-full object-cover" fetchPriority="high" decoding="async" />
         </figure>
       </div>
     </section>
