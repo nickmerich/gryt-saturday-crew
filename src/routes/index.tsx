@@ -490,7 +490,7 @@ function Hero() {
         </div>
         <figure className="relative min-w-0">
           <div aria-hidden="true" className="absolute -right-3 -bottom-3 h-full w-full bg-blue" />
-          <img src={heroImg} width={1024} height={768} alt="GRYT runners gathered for a group photo on the autumn trail after a Saturday run" className="relative block aspect-[4/3] w-full object-cover" fetchPriority="high" decoding="async" />
+          <img src={heroImg} width={1024} height={768} alt="GRYT runners gathered for a group photo on the autumn trail after a Saturday run" className="relative block aspect-[2/1] w-full object-cover object-bottom" fetchPriority="high" decoding="async" />
         </figure>
       </div>
     </section>
