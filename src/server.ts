@@ -91,14 +91,19 @@ function deprioritizeModulePreloads(response: Response): Response {
 // Only public, non-personalized pages whose HTML doesn't depend on live data are
 // cached, for a short window, keyed by build so deploys never mix versions.
 //
-// Two tiers:
-//   1. Cache API (`caches.default`) when the runtime exposes it (Cloudflare Workers).
-//   2. In-memory fallback (module-scope Map) when it doesn't. Lovable's runtime
-//      runs this fetch handler but has no Cache API, so this tier is what warms
-//      a long-lived instance after its first render of each page.
+// Two tiers, checked in this order:
+//   1. In-memory map (module scope). Always consulted first, because Lovable's
+//      runtime exposes `caches.default` but never serves what is stored in it.
+//      This is what answers repeat requests on an instance that is already warm.
+//   2. Cache API (`caches.default`), for runtimes where it does work.
 // Every response carries `x-gryt-edge-cache: HIT | MISS | BYPASS` so production
 // behaviour is observable from response headers.
 // Anything unexpected (errors in either tier) falls through to normal SSR.
+//
+// What this does NOT fix: a request that lands on a cold instance still pays the
+// instance start-up before this code runs (measured Nov 10, 2026: about 0.3 s
+// warm vs 1.0 to 2.0 s cold, and the same gap on the www redirect, which never
+// renders a page). Only serving HTML without invoking the worker would remove it.
 // ---------------------------------------------------------------------------
 declare const __GRYT_BUILD_ID__: string;
 const BUILD_ID = typeof __GRYT_BUILD_ID__ === "string" ? __GRYT_BUILD_ID__ : "dev";
@@ -175,7 +180,7 @@ function withEdgeHeaders(response: Response, state: EdgeCacheState, cacheable: b
   return out;
 }
 
-// ---- Tier 1: Cache API --------------------------------------------------------
+// ---- Cache API tier ------------------------------------------------------------
 function edgeCache(): Cache | null {
   try {
     const c = (globalThis as unknown as { caches?: { default?: Cache } }).caches;
@@ -189,7 +194,7 @@ function cacheApiKey(url: URL): Request {
   return new Request(`${url.origin}${url.pathname}?__b=${BUILD_ID}`, { method: "GET" });
 }
 
-// ---- Tier 2: in-memory fallback -----------------------------------------------
+// ---- In-memory tier ------------------------------------------------------------
 type MemoryEntry = { status: number; headers: [string, string][]; body: string; expires: number };
 const memoryCache = new Map<string, MemoryEntry>();
 
@@ -243,7 +248,7 @@ async function renderWithEdgeCache(
   const cache = edgeCache();
   const key = memoryKey(url);
 
-  // Tier 2 first: the in-memory map is always authoritative on a warm instance.
+  // Memory tier first: the in-memory map is always authoritative on a warm instance.
   // (Some runtimes expose a Cache API that accepts writes but never serves them,
   // so the memory tier must run regardless of whether `caches.default` exists.)
   const memHit = memoryGet(key);
@@ -251,7 +256,7 @@ async function renderWithEdgeCache(
     return withEdgeHeaders(new Response(memHit.body, { status: memHit.status, headers: memHit.headers }), "HIT", true);
   }
 
-  // Tier 1: Cache API, when it works.
+  // Then the Cache API, when it works.
   if (cache) {
     try {
       const hit = await cache.match(cacheApiKey(url));
