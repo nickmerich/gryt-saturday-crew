@@ -72,20 +72,20 @@ function icsForMonth(year: number, month: number) {
 export const Route = createFileRoute("/calendar")({
   head: () => ({
     meta: [
-      { title: "Run Calendar · Saturdays 7 AM | GRYT Run Club" },
+      { title: "GRYT Run Club Calendar · Saturdays 7 AM, McMurray PA" },
       {
         name: "description",
         content:
-          "Every GRYT Run Club run, month by month. Saturday long runs at 7 AM in McMurray, PA. Free, all paces, add it to your calendar.",
+          "Every GRYT Run Club run, month by month. Free Saturday 7 AM runs on the Montour/Peters Trail in McMurray, PA. All paces. Add the month to your calendar.",
       },
       {
         property: "og:title",
-        content: "Run Calendar · Saturdays 7 AM | GRYT Run Club",
+        content: "GRYT Run Club Calendar · Saturdays 7 AM, McMurray PA",
       },
       {
         property: "og:description",
         content:
-          "The full monthly schedule for GRYT Run Club in the South Hills — Saturday 7 AM long runs.",
+          "The full monthly schedule for GRYT Run Club in Pittsburgh's South Hills. Free Saturday 7 AM runs on the Montour/Peters Trail in McMurray.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://grytrunclub.com/calendar" },
@@ -140,11 +140,16 @@ function CalendarPage() {
             className="text-5xl sm:text-6xl lg:text-7xl uppercase leading-[0.92] tracking-tight"
             style={{ fontFamily: "var(--font-display-condensed)" }}
           >
-            Run Calendar
+            GRYT Run Club Calendar
           </h1>
           <p className="mt-5 max-w-xl text-foreground/70 leading-relaxed">
-            One run a week, same spot, no signup. Saturday mornings we go long.
-            Show up once and you're one of us.
+            GRYT Run Club is a free weekly group run in McMurray, PA. One run a week, same spot: every
+            Saturday at 7 AM on the Montour/Peters Trail, about 4 miles out and back, all paces. No
+            membership required. First-timers{" "}
+            <Link to="/" hash="join" className="text-foreground underline underline-offset-4">
+              RSVP
+            </Link>{" "}
+            and sign a short waiver. Show up once and you're one of us.
           </p>
 
           <div className="mt-8">
