@@ -8,14 +8,15 @@ import { submitMtRsvp } from '@/lib/events/music-tectonics.functions'
 const TITLE = 'GRYT Morning Run + Walk | Music Tectonics 2026'
 const DESC = 'Run or walk the Santa Monica beach path with GRYT on Day 3 of Music Tectonics. Every pace welcome.'
 const OG = 'https://grytrunclub.com/og-resources.jpg'
+const URL_SELF = 'https://grytrunclub.com/music-tectonics'
 
 export const Route = createFileRoute('/music-tectonics')({
   head: () => ({ meta: [
     { title: TITLE }, { name: 'description', content: DESC },
     { property: 'og:title', content: TITLE }, { property: 'og:description', content: DESC },
-    { property: 'og:type', content: 'website' }, { property: 'og:image', content: OG },
+    { property: 'og:type', content: 'website' }, { property: 'og:url', content: URL_SELF }, { property: 'og:image', content: OG },
     { name: 'twitter:card', content: 'summary_large_image' }, { name: 'twitter:image', content: OG },
-  ] }),
+  ], links: [{ rel: 'canonical', href: URL_SELF }] }),
   component: Page,
 })
 
