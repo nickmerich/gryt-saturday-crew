@@ -20,7 +20,6 @@ import { Route as InquireRouteImport } from './routes/inquire'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as MembersRouteImport } from './routes/members'
 import { Route as MilestonesRouteImport } from './routes/milestones'
-import { Route as MusicTectonicsRouteImport } from './routes/music-tectonics'
 import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as PlanRouteImport } from './routes/plan'
 import { Route as PressRouteImport } from './routes/press'
@@ -157,11 +156,6 @@ const MembersRoute = MembersRouteImport.update({
 const MilestonesRoute = MilestonesRouteImport.update({
   id: '/milestones',
   path: '/milestones',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MusicTectonicsRoute = MusicTectonicsRouteImport.update({
-  id: '/music-tectonics',
-  path: '/music-tectonics',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PartnersRoute = PartnersRouteImport.update({
@@ -610,7 +604,6 @@ export interface FileRoutesByFullPath {
   '/mcp': typeof McpRoute
   '/members': typeof MembersRouteWithChildren
   '/milestones': typeof MilestonesRoute
-  '/music-tectonics': typeof MusicTectonicsRoute
   '/partners': typeof PartnersRoute
   '/plan': typeof PlanRoute
   '/press': typeof PressRoute
@@ -706,7 +699,6 @@ export interface FileRoutesByTo {
   '/mcp': typeof McpRoute
   '/members': typeof MembersRouteWithChildren
   '/milestones': typeof MilestonesRoute
-  '/music-tectonics': typeof MusicTectonicsRoute
   '/partners': typeof PartnersRoute
   '/plan': typeof PlanRoute
   '/press': typeof PressRoute
@@ -803,7 +795,6 @@ export interface FileRoutesById {
   '/mcp': typeof McpRoute
   '/members': typeof MembersRouteWithChildren
   '/milestones': typeof MilestonesRoute
-  '/music-tectonics': typeof MusicTectonicsRoute
   '/partners': typeof PartnersRoute
   '/plan': typeof PlanRoute
   '/press': typeof PressRoute
@@ -901,7 +892,6 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/members'
     | '/milestones'
-    | '/music-tectonics'
     | '/partners'
     | '/plan'
     | '/press'
@@ -997,7 +987,6 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/members'
     | '/milestones'
-    | '/music-tectonics'
     | '/partners'
     | '/plan'
     | '/press'
@@ -1093,7 +1082,6 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/members'
     | '/milestones'
-    | '/music-tectonics'
     | '/partners'
     | '/plan'
     | '/press'
@@ -1190,7 +1178,6 @@ export interface RootRouteChildren {
   McpRoute: typeof McpRoute
   MembersRoute: typeof MembersRouteWithChildren
   MilestonesRoute: typeof MilestonesRoute
-  MusicTectonicsRoute: typeof MusicTectonicsRoute
   PartnersRoute: typeof PartnersRoute
   PlanRoute: typeof PlanRoute
   PressRoute: typeof PressRoute
@@ -1351,13 +1338,6 @@ declare module '@tanstack/react-router' {
       path: '/milestones'
       fullPath: '/milestones'
       preLoaderRoute: typeof MilestonesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/music-tectonics': {
-      id: '/music-tectonics'
-      path: '/music-tectonics'
-      fullPath: '/music-tectonics'
-      preLoaderRoute: typeof MusicTectonicsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/partners': {
@@ -1960,7 +1940,6 @@ const rootRouteChildren: RootRouteChildren = {
   McpRoute: McpRoute,
   MembersRoute: MembersRouteWithChildren,
   MilestonesRoute: MilestonesRoute,
-  MusicTectonicsRoute: MusicTectonicsRoute,
   PartnersRoute: PartnersRoute,
   PlanRoute: PlanRoute,
   PressRoute: PressRoute,
