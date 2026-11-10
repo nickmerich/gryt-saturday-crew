@@ -310,7 +310,7 @@ export const LIBRARY: LibraryEntry[] = [
     topic: "community",
     kind: "guide",
     minutes: 8,
-    updated: "2026-09-01",
+    updated: "2026-11-10",
   },
   {
     id: "pittsburgh-clubs",
@@ -320,7 +320,7 @@ export const LIBRARY: LibraryEntry[] = [
     topic: "community",
     kind: "guide",
     minutes: 9,
-    updated: "2026-01-20",
+    updated: "2026-11-10",
   },
   {
     id: "fleet-feet-vs-independent",
@@ -331,7 +331,7 @@ export const LIBRARY: LibraryEntry[] = [
     topic: "community",
     kind: "guide",
     minutes: 9,
-    updated: "2026-02-03",
+    updated: "2026-11-10",
   },
   {
     id: "start-a-club",

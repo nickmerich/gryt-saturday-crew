@@ -20,7 +20,7 @@ const ABOUT_FAQS = [
   },
   {
     q: "I live in Peters Township and run for fun. Is there a club close to me?",
-    a: "Yes, GRYT is in Peters Township. We meet every Saturday at 7 AM at 212 Valley Brook Road in McMurray, next to Upper St. Clair and Bethel Park. It's free, every pace is welcome, walkers included, and the run is no-drop. If you also want a weeknight, City of Bridges Run Club hosts a Thursday 6:30 PM South Hills run at rotating spots, and Fleet Feet Pittsburgh has a Tuesday 6:30 PM pub run from Arthur's Korner Pub in Mt. Lebanon.",
+    a: "Yes, GRYT is in Peters Township. We meet every Saturday at 7 AM at 212 Valley Brook Road in McMurray, next to Upper St. Clair and Bethel Park. It's free, every pace is welcome, walkers included, and the run is no-drop. If you also want a weeknight, City of Bridges Run Club hosts a Thursday 6:30 PM South Hills run at rotating spots, and Canonsburg Run Club meets Mondays at 6 PM in Canonsburg.",
   },
   {
     q: "How does GRYT help people stay motivated?",

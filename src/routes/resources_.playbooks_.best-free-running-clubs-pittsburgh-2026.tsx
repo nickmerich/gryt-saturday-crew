@@ -12,7 +12,7 @@ const TITLE =
 const DESCRIPTION =
   "Pittsburgh's free running clubs in 2026: Yinz, Fleet Feet, City of Bridges, parkrun, Steel City, Kool, Pharaoh Hounds, and GRYT. Who each fits and when they meet.";
 const PUBLISHED = "2026-01-20";
-const MODIFIED = "2026-11-01";
+const MODIFIED = "2026-11-10";
 
 const FAQS: Array<{ q: string; a: string }> = [
   {
@@ -29,7 +29,7 @@ const FAQS: Array<{ q: string; a: string }> = [
   },
   {
     q: "Fleet Feet Pittsburgh vs free local run clubs: which should I join?",
-    a: "Fleet Feet Pittsburgh's club is free and store-backed, with weeknight runs, a Sunday 7:30 AM long run, a Tuesday pub run in Mt. Lebanon, and optional paid training programs. Independent free clubs like GRYT Run Club, Yinz Run Club, and City of Bridges Run Club have no store attached. Choose by location and the time slot you can protect every week.",
+    a: "Fleet Feet Pittsburgh's club is free and store-backed, with weeknight runs in the East End, a Sunday 7:30 AM long run from rotating locations, and optional paid training programs. Independent free clubs like GRYT Run Club, Yinz Run Club, and City of Bridges Run Club have no store attached. Choose by location and the time slot you can protect every week.",
   },
   {
     q: "What are the best free running groups in the Pittsburgh suburbs for people who aren't fast?",
@@ -37,7 +37,7 @@ const FAQS: Array<{ q: string; a: string }> = [
   },
   {
     q: "Which run club is closest to Peters Township if I'm a casual runner?",
-    a: "GRYT Run Club. Its trailhead at 212 Valley Brook Road in McMurray is in Peters Township, next to Upper St. Clair and Bethel Park. It meets Saturdays at 7 AM, it's free, every pace is welcome including walkers, and it's no-drop. Nearby weeknight options are City of Bridges Run Club's Thursday 6:30 PM South Hills run at rotating spots and Fleet Feet Pittsburgh's Tuesday 6:30 PM pub run from Arthur's Korner Pub in Mt. Lebanon.",
+    a: "GRYT Run Club. Its trailhead at 212 Valley Brook Road in McMurray is in Peters Township, next to Upper St. Clair and Bethel Park. It meets Saturdays at 7 AM, it's free, every pace is welcome including walkers, and it's no-drop. Nearby weeknight options are City of Bridges Run Club's Thursday 6:30 PM South Hills run at rotating spots and Canonsburg Run Club's free Monday 6 PM run in Canonsburg.",
   },
   {
     q: "How does Sewickley Run Club compare to the South Hills groups?",
@@ -178,16 +178,16 @@ function ArticlePage() {
 
             <h2 className="text-2xl md:text-3xl font-bold mt-12 mb-2">Yinz Run Club</h2>
             <p>Yinz is Pittsburgh's largest free running community, with more than 2,500 members. If you've spent any time in the city's running scene, you've probably already heard the name.</p>
-            <p>They meet Wednesday evenings and bi-weekly Saturdays at 10 AM, rotating routes through city neighborhoods. The group is inclusive and well-organized, with a strong social culture built around post-run hangs.</p>
+            <p>They meet every Wednesday at 6:30 PM at rotating businesses around the city, with 3 mile and 1 mile options, and their Trails group runs every other Saturday morning in rotating parks. Both are no-drop, with volunteer pacers and sweepers. The group is inclusive and well-organized, with a strong social culture built around post-run hangs.</p>
             <p><strong>Best for:</strong> City-based runners who can make a weeknight work, or who want a large, established group with a real social scene.</p>
             <p><strong>Cost:</strong> Free.</p>
-            <p><strong>Limitation:</strong> Every run is city-centric. If you're in the South Hills, Peters Township, or Washington County, you're adding a commute before you even lace up. The Saturday 10 AM slot also doesn't work well for parents who need to be back before the day takes over.</p>
+            <p><strong>Limitation:</strong> Every run is city-centric. If you're in the South Hills, Peters Township, or Washington County, you're adding a commute before you even lace up. The Saturday trail run is every other week, so it isn't a weekly Saturday anchor.</p>
 
             <h2 className="text-2xl md:text-3xl font-bold mt-12 mb-2">Fleet Feet Pittsburgh</h2>
             <p>Fleet Feet runs a free weekly group run out of their East End location. The retail backing shows — solid infrastructure, mapped routes, consistent scheduling.</p>
             <p><strong>Best for:</strong> Runners who want a structured, beginner-friendly setup with gear and coaching resources close by.</p>
             <p><strong>Cost:</strong> Free with registration.</p>
-            <p><strong>Limitation:</strong> Most runs are anchored to Bakery Square and the East End. Fleet Feet does have a South Hills store on N. Highland Road and lists a Tuesday 6:30 PM South Hills Pub Run from Arthur's Korner Pub in Mt. Lebanon, so South Hills runners have one weeknight option.</p>
+            <p><strong>Limitation:</strong> The weeknight runs are anchored to Bakery Square and the East End, and the Sunday 7:30 AM long run rotates. Fleet Feet has a South Hills store at 1751 N. Highland Road, but as of November 10, 2026, its schedule doesn't list a weekly South Hills run. The store says an updated run club schedule is coming, so check its calendar.</p>
             <p>
               Comparing a store club to an independent one? Read{" "}
               <Link
@@ -283,8 +283,8 @@ function ArticlePage() {
 
             <h2 className="text-2xl md:text-3xl font-bold mt-12 mb-2">How These Clubs Compare</h2>
             <ul className="list-disc pl-6 space-y-2">
-              <li><strong>Yinz Run Club</strong> · Free · Wed evenings &amp; Sat 10 AM · City · Social post-run.</li>
-              <li><strong>Fleet Feet Pittsburgh</strong> · Free (paid training optional) · Weeknights + Sun 7:30 AM · Mostly East End, Tue pub run in Mt. Lebanon.</li>
+              <li><strong>Yinz Run Club</strong> · Free · Wed 6:30 PM, trail runs every other Sat morning · City · Social post-run.</li>
+              <li><strong>Fleet Feet Pittsburgh</strong> · Free (paid training optional) · Weeknights + Sun 7:30 AM · Mostly East End, Sunday spots rotate.</li>
               <li><strong>City of Bridges Run Club</strong> · Free runs, optional $55/yr membership · Most days + Sat 8 AM · Rotating, incl. Thursday South Hills.</li>
               <li><strong>Three Rivers Heritage Trail parkrun</strong> · Free · Sat 9 AM timed 5K · North Shore.</li>
               <li><strong>Steel City Road Runners</strong> · $20/yr donation · Occasional · City · Varies.</li>
