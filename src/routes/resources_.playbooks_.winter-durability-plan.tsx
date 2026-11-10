@@ -2,7 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 import { ShareButtons } from "@/components/site/ShareButtons";
-import crewTrail from "@/assets/photos/manifesto/crew-trail.jpg.asset.json";
+import crewTrail800Img from "@/assets/img/crew-trail-800.webp";
+import crewTrailImg from "@/assets/img/crew-trail.webp";
 import { siteUrl } from "@/lib/site";
 
 const URL = siteUrl("/resources/playbooks/winter-durability-plan");
@@ -119,7 +120,9 @@ function WinterPlanPage() {
       <article className="border-b border-foreground/15">
         <header className="relative overflow-hidden">
           <img
-            src={crewTrail.url}
+            src={crewTrailImg}
+            srcSet={`${crewTrail800Img} 800w, ${crewTrailImg} 1594w`}
+            sizes="100vw"
             alt="GRYT runners heading down the trail together"
             className="absolute inset-0 h-full w-full object-cover"
           />

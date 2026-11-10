@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 import { ShareButtons } from "@/components/site/ShareButtons";
 import heroAsset from "@/assets/cross-training-runners.png.asset.json";
+import hero768Img from "@/assets/img/cross-training-runners-768.webp";
+import heroImg from "@/assets/img/cross-training-runners.webp";
 
 const SITE = "https://grytrunclub.com";
 const URL = `${SITE}/resources/cross-training-for-runners`;
@@ -196,7 +198,9 @@ function CrossTrainingPage() {
 
           <figure className="mt-10 border border-foreground/15">
             <img
-              src={heroAsset.url}
+              src={heroImg}
+              srcSet={`${hero768Img} 768w, ${heroImg} 1536w`}
+              sizes="(max-width: 808px) 100vw, 760px"
               alt="Composite of a runner, cyclist, swimmer, rower, and lifter training at night with the Pittsburgh skyline behind them"
               width={1536}
               height={1024}

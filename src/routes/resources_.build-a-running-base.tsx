@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 import { ShareButtons } from "@/components/site/ShareButtons";
 import heroAsset from "@/assets/running-base-pittsburgh.png.asset.json";
+import hero768Img from "@/assets/img/running-base-pittsburgh-768.webp";
+import heroImg from "@/assets/img/running-base-pittsburgh.webp";
 
 const SITE = "https://grytrunclub.com";
 const URL = `${SITE}/resources/build-a-running-base`;
@@ -159,7 +161,9 @@ function RunningBasePage() {
 
           <figure className="mt-10 border border-foreground/15">
             <img
-              src={heroAsset.url}
+              src={heroImg}
+              srcSet={`${hero768Img} 768w, ${heroImg} 1536w`}
+              sizes="(max-width: 808px) 100vw, 760px"
               alt="Runner on a Pittsburgh road at dawn with the city skyline behind and a blue arrow climbing ahead"
               width={1536}
               height={1024}

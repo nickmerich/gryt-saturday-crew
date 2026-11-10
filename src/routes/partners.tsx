@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button'
 import { getPartners, sendPartnerInquiry } from '@/lib/partners.functions'
 import { orderPartners, partnerRel, partnerTypes, publicDescription, type PublicPartner } from '@/lib/partners'
 import crew from '@/assets/photos/run-club-bridge.jpg.asset.json'
+import crewImg from '@/assets/img/run-club-bridge.webp'
 
 const partnersQuery = queryOptions({ queryKey: ['partners','all'], queryFn: () => getPartners({ data: {} }), staleTime: 60000 })
 const title = 'Partners | GRYT Run Club'
@@ -60,7 +61,7 @@ function PartnersPage() {
   const { data } = useSuspenseQuery(partnersQuery)
   return <main className="bg-background text-foreground"><SiteNav/>
     <header className="relative overflow-hidden border-b border-foreground/15">
-      <img src={crew.url} alt="GRYT runners on the trail bridge" className="absolute inset-0 h-full w-full object-cover"/>
+      <img src={crewImg} alt="GRYT runners on the trail bridge" className="absolute inset-0 h-full w-full object-cover"/>
       <div className="absolute inset-0 bg-background/75"/>
       <div className="relative mx-auto max-w-[1180px] px-6 py-16 sm:px-12 md:py-24">
         <p className="eyebrow text-foreground">GRYT Run Club</p><h1 className="mt-5 font-condensed text-5xl sm:text-7xl uppercase leading-none">Our partners</h1>

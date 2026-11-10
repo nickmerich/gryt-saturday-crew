@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 import { ShareButtons } from "@/components/site/ShareButtons";
 import heroAsset from "@/assets/pre-run-nutrition.png.asset.json";
+import hero768Img from "@/assets/img/pre-run-nutrition-768.webp";
+import heroImg from "@/assets/img/pre-run-nutrition.webp";
 
 const SITE = "https://grytrunclub.com";
 const URL = `${SITE}/resources/what-to-eat-before-a-run`;
@@ -169,7 +171,9 @@ function PreRunNutritionPage() {
           </p>
 
           <img
-            src={heroAsset.url}
+            src={heroImg}
+            srcSet={`${hero768Img} 768w, ${heroImg} 1536w`}
+            sizes="(max-width: 808px) 100vw, 760px"
             alt="Runner heading toward the Pittsburgh skyline surrounded by pre-run foods: banana, toast with peanut butter, rice and chicken, energy bar, dates and chews"
             width={1536}
             height={1024}

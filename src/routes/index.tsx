@@ -1,5 +1,10 @@
 import { GrytBear, GrytBrand } from "@/components/site/BrandMarks";
 import latestRunPhoto from "@/assets/photos/gryt-saturday-run-november-2026.jpg.asset.json";
+import heroPhoto640 from "@/assets/img/gryt-saturday-run-november-2026-640.webp";
+import heroPhoto768 from "@/assets/img/gryt-saturday-run-november-2026-768.webp";
+import heroPhoto1100 from "@/assets/img/gryt-saturday-run-november-2026-1100.webp";
+import heroPhoto1536 from "@/assets/img/gryt-saturday-run-november-2026.webp";
+import nickLauraImg from "@/assets/img/nick-laura.webp";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SITE_TITLE, SITE_DESCRIPTION } from "./__root";
 import { useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } from "react";
@@ -48,7 +53,6 @@ import photo6 from "@/assets/photos/run-club-6.jpg.asset.json";
 import photoBridge from "@/assets/photos/run-club-bridge.jpg.asset.json";
 import photo7 from "@/assets/photos/run-club-7.jpg.asset.json";
 import photo8 from "@/assets/photos/run-club-8.jpg.asset.json";
-import nickLauraAsset from "@/assets/photos/nick-laura.jpg.asset.json";
 import insuranceAsset from "@/assets/certificate-of-insurance.pdf.asset.json";
 import { SupportBlock } from "@/components/SupportBlock";
 import { LearnDoorway } from "@/components/site/LearnDoorway";
@@ -57,10 +61,14 @@ import { LastRunStrip } from "@/components/site/LastRunStrip";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 
 const heroImgAsset = photo1;
-// Updated crew photo supplied from the latest Saturday run.
-const heroImg = latestRunPhoto.url;
+// Crew photo from the latest Saturday run. The upload is a 1 MB JPEG, so the page
+// serves resized WebP copies and keeps the original for social previews.
+const heroImg = heroPhoto1536;
+const HERO_SRCSET = `${heroPhoto640} 640w, ${heroPhoto768} 768w, ${heroPhoto1100} 1100w, ${heroPhoto1536} 1536w`;
+// The photo column is 613 px wide on desktop; below that it spans the viewport minus the section padding.
+const HERO_SIZES = "(min-width: 1024px) 613px, (min-width: 640px) calc(100vw - 96px), calc(100vw - 48px)";
 const circleImg = photo6.url;
-const foundersImg = nickLauraAsset.url;
+const foundersImg = nickLauraImg;
 
 function PhotoColorToggle() {
   const [color, setColor] = useState(false);
@@ -113,7 +121,8 @@ import {
 } from "@/lib/club-stats";
 
 const SITE_URL = "https://grytrunclub.com";
-const ABS_HERO_IMG = heroImg.startsWith("http") ? heroImg : `${SITE_URL}${heroImg}`;
+const SHARE_IMG = latestRunPhoto.url;
+const ABS_HERO_IMG = SHARE_IMG.startsWith("http") ? SHARE_IMG : `${SITE_URL}${SHARE_IMG}`;
 
 // Computed per request: server clocks can read zero at startup, which froze
 // these at Jan 1970 on the live site.
@@ -147,7 +156,6 @@ export const Route = createFileRoute("/")({
     ],
     links: [
       { rel: "canonical", href: SITE_URL },
-      { rel: "preload", as: "image", href: heroImg, fetchPriority: "high" } as any,
     ],
     scripts: [
       {
@@ -490,7 +498,7 @@ function Hero() {
         </div>
         <figure className="relative min-w-0">
           <div aria-hidden="true" className="absolute -right-3 -bottom-3 h-full w-full bg-blue" />
-          <img src={heroImg} width={1024} height={768} alt="GRYT runners gathered for a group photo on the autumn trail after a Saturday run" className="relative block aspect-[2/1] w-full object-cover object-bottom" fetchPriority="high" decoding="async" />
+          <img src={heroImg} srcSet={HERO_SRCSET} sizes={HERO_SIZES} width={1536} height={1152} alt="GRYT runners gathered for a group photo on the autumn trail after a Saturday run" className="relative block aspect-[2/1] w-full object-cover object-bottom" fetchPriority="high" decoding="async" />
         </figure>
       </div>
     </section>
@@ -1401,7 +1409,7 @@ function RunnerHighlights() {
                 <p className="mt-3 text-base leading-relaxed text-foreground/85">Photo unavailable. Their runner highlights and full stories are below.</p>
               </div>
             ) : (
-              <img src={nickLauraAsset.url} width={571} height={755} decoding="async" alt="Nick Merich and Laura wearing race medals in front of a Pittsburgh Marathon backdrop" loading="lazy" onError={() => setPhotoFailed(true)} className="aspect-[4/3] w-full object-cover md:aspect-[4/5]" />
+              <img src={foundersImg} width={571} height={755} decoding="async" alt="Nick Merich and Laura wearing race medals in front of a Pittsburgh Marathon backdrop" loading="lazy" onError={() => setPhotoFailed(true)} className="aspect-[4/3] w-full object-cover md:aspect-[4/5]" />
             )}
             <figcaption className="mt-3 text-sm text-foreground/80">Nick and Laura. More than miles.</figcaption>
           </figure>
