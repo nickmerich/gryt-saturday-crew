@@ -1,10 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { ChevronDown } from "lucide-react";
 import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 import insuranceAsset from "@/assets/certificate-of-insurance.pdf.asset.json";
 
@@ -153,21 +148,30 @@ function FaqPage() {
           </div>
 
           <h2 className="sr-only">Frequently asked questions</h2>
-          <Accordion type="single" collapsible className="border-t border-ink/15">
+          {/* Native <details> keeps every answer in the server HTML, so search
+              engines and AI crawlers that do not run JavaScript can read it.
+              The shared name opens one answer at a time. */}
+          <div className="border-t border-ink/15">
             {FAQS.map((f, i) => (
-              <AccordionItem
+              <details
                 key={i}
-                value={`item-${i}`}
-                className="border-b border-ink/15"
+                name="gryt-faq"
+                className="faq-item group border-b border-ink/15"
               >
-                <AccordionTrigger
-                  className="text-left text-lg sm:text-xl py-5 hover:no-underline"
-                  style={{ fontFamily: "var(--font-body)" }}
-                >
-                  {f.q}
-                </AccordionTrigger>
-                <AccordionContent
-                  className="text-base text-ink/80 leading-relaxed pb-5"
+                <summary className="block cursor-pointer [&::-webkit-details-marker]:hidden">
+                  <h3
+                    className="flex items-center justify-between py-5 text-left text-lg font-medium sm:text-xl"
+                    style={{ fontFamily: "var(--font-body)" }}
+                  >
+                    {f.q}
+                    <ChevronDown
+                      aria-hidden="true"
+                      className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200 group-open:rotate-180"
+                    />
+                  </h3>
+                </summary>
+                <div
+                  className="pb-5 text-base leading-relaxed text-ink/80"
                   style={{ fontFamily: "var(--font-body)" }}
                 >
                   {f.a}
@@ -184,10 +188,10 @@ function FaqPage() {
                       </a>
                     </>
                   ) : null}
-                </AccordionContent>
-              </AccordionItem>
+                </div>
+              </details>
             ))}
-          </Accordion>
+          </div>
 
           <div className="mt-14 border border-ink/15 p-6 sm:p-8 bg-background/[0.02]">
             <div
