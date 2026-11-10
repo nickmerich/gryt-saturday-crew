@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { ARTICLES } from "@/lib/articles-index";
+import { PLAYBOOK_LASTMOD } from "@/lib/sitemap-dates";
 
 const BASE_URL = "https://grytrunclub.com";
 
@@ -8,7 +9,13 @@ interface SitemapEntry {
   path: string;
   changefreq?: "always" | "hourly" | "daily" | "weekly" | "monthly" | "yearly" | "never";
   priority?: string;
+  /** YYYY-MM-DD. Only set where it matches the modified date in the page's own schema. */
+  lastmod?: string;
 }
+
+// Newest article date, so the article index reports when it last gained or
+// refreshed an entry.
+const ARTICLES_LASTMOD = ARTICLES.reduce((latest, a) => (a.updated > latest ? a.updated : latest), "");
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
@@ -45,16 +52,21 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/milestones", changefreq: "weekly", priority: "0.7" },
           { path: "/resources/what-to-wear-running", changefreq: "weekly", priority: "0.8" },
           { path: "/resources/runs", changefreq: "monthly", priority: "0.6" },
-          { path: "/resources/playbooks/best-free-run-clubs-south-hills-2026", changefreq: "monthly", priority: "0.6" },
-          { path: "/resources/playbooks/best-free-running-clubs-pittsburgh-2026", changefreq: "monthly", priority: "0.6" },
-          { path: "/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs", changefreq: "monthly", priority: "0.6" },
-          { path: "/resources/playbooks/gryt-vs-yinz-run-club", changefreq: "monthly", priority: "0.6" },
-          { path: "/resources/playbooks/gryt-vs-parkrun-pittsburgh", changefreq: "monthly", priority: "0.6" },
-          { path: "/resources/playbooks/gryt-vs-city-of-bridges-run-club", changefreq: "monthly", priority: "0.6" },
+          { path: "/resources/playbooks/best-free-run-clubs-south-hills-2026", changefreq: "monthly", priority: "0.6", lastmod: PLAYBOOK_LASTMOD["best-free-run-clubs-south-hills-2026"] },
+          { path: "/resources/playbooks/best-free-running-clubs-pittsburgh-2026", changefreq: "monthly", priority: "0.6", lastmod: PLAYBOOK_LASTMOD["best-free-running-clubs-pittsburgh-2026"] },
+          { path: "/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs", changefreq: "monthly", priority: "0.6", lastmod: PLAYBOOK_LASTMOD["fleet-feet-pittsburgh-vs-independent-run-clubs"] },
+          { path: "/resources/playbooks/gryt-vs-yinz-run-club", changefreq: "monthly", priority: "0.6", lastmod: PLAYBOOK_LASTMOD["gryt-vs-yinz-run-club"] },
+          { path: "/resources/playbooks/gryt-vs-parkrun-pittsburgh", changefreq: "monthly", priority: "0.6", lastmod: PLAYBOOK_LASTMOD["gryt-vs-parkrun-pittsburgh"] },
+          { path: "/resources/playbooks/gryt-vs-city-of-bridges-run-club", changefreq: "monthly", priority: "0.6", lastmod: PLAYBOOK_LASTMOD["gryt-vs-city-of-bridges-run-club"] },
           { path: "/resources/playbooks/saturday-runs-what-to-expect", changefreq: "monthly", priority: "0.6" },
           { path: "/resources/playbooks/winter-durability-plan", changefreq: "monthly", priority: "0.7" },
-          { path: "/resources/articles", changefreq: "weekly", priority: "0.7" },
-          ...ARTICLES.map((a) => ({ path: `/resources/articles/${a.slug}`, changefreq: "monthly" as const, priority: "0.6" })),
+          { path: "/resources/articles", changefreq: "weekly", priority: "0.7", lastmod: ARTICLES_LASTMOD || undefined },
+          ...ARTICLES.map((a) => ({
+            path: `/resources/articles/${a.slug}`,
+            changefreq: "monthly" as const,
+            priority: "0.6",
+            lastmod: a.updated,
+          })),
           // /register is retired (paid run entry removed) and is noindex — not listed here.
           { path: "/privacy", changefreq: "yearly", priority: "0.3" },
           { path: "/terms", changefreq: "yearly", priority: "0.3" },
@@ -64,6 +76,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           [
             `  <url>`,
             `    <loc>${BASE_URL}${e.path}</loc>`,
+            e.lastmod ? `    <lastmod>${e.lastmod}</lastmod>` : null,
             e.changefreq ? `    <changefreq>${e.changefreq}</changefreq>` : null,
             e.priority ? `    <priority>${e.priority}</priority>` : null,
             `  </url>`,
