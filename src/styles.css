@@ -308,3 +308,21 @@ body.photos-color .photo-hover:hover {
   color: #111 !important;
   border-color: rgba(137, 207, 240, 0.45) !important;
 }
+
+/* FAQ answers sit in native <details>, so they are in the page HTML without
+   JavaScript. Browsers that can animate to an auto height ease the answer
+   open and closed; the rest open it instantly. */
+@supports (interpolate-size: allow-keywords) {
+  @media (prefers-reduced-motion: no-preference) {
+    .faq-item { interpolate-size: allow-keywords; }
+    .faq-item::details-content {
+      block-size: 0;
+      overflow-y: clip;
+      transition-property: block-size, content-visibility;
+      transition-duration: 200ms;
+      transition-timing-function: ease-out;
+      transition-behavior: allow-discrete;
+    }
+    .faq-item[open]::details-content { block-size: auto; }
+  }
+}
