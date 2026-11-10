@@ -12,7 +12,8 @@ export const Route = createFileRoute('/review')({
     meta: [
       { title: TITLE }, { name: 'description', content: DESC },
       { property: 'og:title', content: TITLE }, { property: 'og:description', content: DESC },
-      { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary' },
+      { property: 'og:type', content: 'website' }, { property: 'og:url', content: 'https://grytrunclub.com/review' },
+      { name: 'twitter:card', content: 'summary' },
     ],
     links: [{ rel: 'canonical', href: 'https://grytrunclub.com/review' }],
   }),

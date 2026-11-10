@@ -14,9 +14,12 @@ import crewImg from '@/assets/img/run-club-bridge.webp'
 const partnersQuery = queryOptions({ queryKey: ['partners','all'], queryFn: () => getPartners({ data: {} }), staleTime: 60000 })
 const title = 'Partners | GRYT Run Club'
 const description = 'The brands, local businesses, and places that partner with GRYT Run Club to run creator-led physical events.'
+const pageUrl = 'https://grytrunclub.com/partners'
+// Share tags need absolute URLs; the uploaded asset path is site-relative.
+const shareImage = crew.url.startsWith('http') ? crew.url : `https://grytrunclub.com${crew.url}`
 export const Route = createFileRoute('/partners')({
   loader: ({ context }) => context.queryClient.ensureQueryData(partnersQuery),
-  head: () => ({ meta: [{ title }, { name: 'description', content: description }, { property: 'og:title', content: title }, { property: 'og:description', content: description }, { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary_large_image' }, { property: 'og:image', content: crew.url }, { name: 'twitter:image', content: crew.url }], links: [{ rel: 'canonical', href: 'https://grytrunclub.com/partners' }] }),
+  head: () => ({ meta: [{ title }, { name: 'description', content: description }, { property: 'og:title', content: title }, { property: 'og:description', content: description }, { property: 'og:type', content: 'website' }, { property: 'og:url', content: pageUrl }, { name: 'twitter:card', content: 'summary_large_image' }, { property: 'og:image', content: shareImage }, { name: 'twitter:image', content: shareImage }], links: [{ rel: 'canonical', href: pageUrl }] }),
   component: PartnersPage,
 })
 const inputClass = 'mt-2 w-full min-w-0 border border-foreground/25 bg-background px-3 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-blue'
