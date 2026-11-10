@@ -3887,14 +3887,29 @@ function AboutGrytText() {
             <p>
               No pace requirement, a no-drop rule, walkers welcome, an out-and-back route so you can turn
               early, and coffee after so there's a reason to stay. GRYT offers all five every Saturday. In the
-              South Hills, City of Bridges Run Club's Thursday 6:30 PM run (free with registration, pace groups)
-              and Fleet Feet Pittsburgh's Tuesday 6:30 PM pub run from Arthur's Korner Pub in Mt. Lebanon are
-              good weeknight options for casual runners too. Staying motivated gets easier when the time never
-              changes and someone expects you, which is why the Saturday 7 AM start is fixed and the Milestone
-              Club counts walking.
+              South Hills, City of Bridges Run Club's Thursday 6:30 PM run (free with registration, 3 and 5
+              mile options, and a run/walk leader) is a good weeknight option for casual runners too. Staying
+              motivated gets easier when the time never changes and someone expects you, which is why the
+              Saturday 7 AM start is fixed and the Milestone Club counts walking.
             </p>
           </div>
           <div className="space-y-4">
+            <h3 className="text-foreground font-bold text-[18px]">Which running groups meet on the Montour Trail?</h3>
+            <p>
+              GRYT Run Club does, every week: Saturdays at 7 AM from 212 Valley Brook Road in McMurray, on the
+              paved Peters Township stretch of the Montour Trail. As of November 2026, it's the only weekly
+              group run we could find on a public schedule that starts on the trail itself. Pittsburgh's bigger
+              clubs meet in the city or at rotating spots, and the Montour Trail Council's calendar is mostly
+              races, walks, and trail work. Our guide to{" "}
+              <Link
+                to="/resources/articles/$slug"
+                params={{ slug: "montour-trail-running-groups" }}
+                className="text-foreground underline underline-offset-4 hover:text-foreground"
+              >
+                running groups on the Montour Trail
+              </Link>{" "}
+              lists who runs on and near it, with days, costs, and sources.
+            </p>
             <h3 className="text-foreground font-bold text-[18px]">Comparing free run clubs in Pittsburgh?</h3>
             <p>
               Pittsburgh has good free options, and the right one is the one you'll keep showing up to. These
@@ -3929,6 +3944,14 @@ function AboutGrytText() {
             </ul>
             <p>
               Coming back after a long break? Start with{" "}
+              <Link
+                to="/resources/articles/$slug"
+                params={{ slug: "start-running-again-after-a-long-break" }}
+                className="text-foreground underline underline-offset-4 hover:text-foreground"
+              >
+                how to start running again after a long break
+              </Link>
+              , then read{" "}
               <Link to="/resources/should-you-join-a-running-club" className="text-foreground underline underline-offset-4 hover:text-foreground">
                 should you join a running club
               </Link>{" "}

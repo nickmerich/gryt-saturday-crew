@@ -91,14 +91,19 @@ function deprioritizeModulePreloads(response: Response): Response {
 // Only public, non-personalized pages whose HTML doesn't depend on live data are
 // cached, for a short window, keyed by build so deploys never mix versions.
 //
-// Two tiers:
-//   1. Cache API (`caches.default`) when the runtime exposes it (Cloudflare Workers).
-//   2. In-memory fallback (module-scope Map) when it doesn't. Lovable's runtime
-//      runs this fetch handler but has no Cache API, so this tier is what warms
-//      a long-lived instance after its first render of each page.
+// Two tiers, checked in this order:
+//   1. In-memory map (module scope). Always consulted first, because Lovable's
+//      runtime exposes `caches.default` but never serves what is stored in it.
+//      This is what answers repeat requests on an instance that is already warm.
+//   2. Cache API (`caches.default`), for runtimes where it does work.
 // Every response carries `x-gryt-edge-cache: HIT | MISS | BYPASS` so production
 // behaviour is observable from response headers.
 // Anything unexpected (errors in either tier) falls through to normal SSR.
+//
+// What this does NOT fix: a request that lands on a cold instance still pays the
+// instance start-up before this code runs (measured Nov 10, 2026: about 0.3 s
+// warm vs 1.0 to 2.0 s cold, and the same gap on the www redirect, which never
+// renders a page). Only serving HTML without invoking the worker would remove it.
 // ---------------------------------------------------------------------------
 declare const __GRYT_BUILD_ID__: string;
 const BUILD_ID = typeof __GRYT_BUILD_ID__ === "string" ? __GRYT_BUILD_ID__ : "dev";
@@ -175,7 +180,7 @@ function withEdgeHeaders(response: Response, state: EdgeCacheState, cacheable: b
   return out;
 }
 
-// ---- Tier 1: Cache API --------------------------------------------------------
+// ---- Cache API tier ------------------------------------------------------------
 function edgeCache(): Cache | null {
   try {
     const c = (globalThis as unknown as { caches?: { default?: Cache } }).caches;
@@ -189,7 +194,7 @@ function cacheApiKey(url: URL): Request {
   return new Request(`${url.origin}${url.pathname}?__b=${BUILD_ID}`, { method: "GET" });
 }
 
-// ---- Tier 2: in-memory fallback -----------------------------------------------
+// ---- In-memory tier ------------------------------------------------------------
 type MemoryEntry = { status: number; headers: [string, string][]; body: string; expires: number };
 const memoryCache = new Map<string, MemoryEntry>();
 
@@ -241,46 +246,48 @@ async function renderWithEdgeCache(
 
   const wctx = ctx as WaitUntilCtx | undefined;
   const cache = edgeCache();
-
-  if (cache) {
-    const key = cacheApiKey(url);
-    try {
-      const hit = await cache.match(key);
-      if (hit) return withEdgeHeaders(hit, "HIT", true);
-    } catch {
-      // fall through to render; treat as a miss
-    }
-    const response = await render();
-    if (!isStorable(response)) return withEdgeHeaders(response, "BYPASS", false);
-    try {
-      const toStore = new Response(response.clone().body, response);
-      toStore.headers.delete("x-gryt-edge-cache");
-      toStore.headers.set("cache-control", `public, s-maxage=${EDGE_TTL_SECONDS}, max-age=${EDGE_TTL_SECONDS}`);
-      const put = cache.put(key, toStore).catch(() => undefined);
-      if (wctx?.waitUntil) wctx.waitUntil(put);
-    } catch {
-      // ignore cache write failures
-    }
-    return withEdgeHeaders(response, "MISS", true);
-  }
-
-  // No Cache API: in-memory tier.
   const key = memoryKey(url);
-  const hit = memoryGet(key);
-  if (hit) {
-    return withEdgeHeaders(new Response(hit.body, { status: hit.status, headers: hit.headers }), "HIT", true);
+
+  // Memory tier first: the in-memory map is always authoritative on a warm instance.
+  // (Some runtimes expose a Cache API that accepts writes but never serves them,
+  // so the memory tier must run regardless of whether `caches.default` exists.)
+  const memHit = memoryGet(key);
+  if (memHit) {
+    return withEdgeHeaders(new Response(memHit.body, { status: memHit.status, headers: memHit.headers }), "HIT", true);
   }
+
+  // Then the Cache API, when it works.
+  if (cache) {
+    try {
+      const hit = await cache.match(cacheApiKey(url));
+      if (hit) {
+        const body = await hit.text();
+        memoryPut(key, { status: hit.status, headers: headersToStore(hit.headers), body, expires: Date.now() + EDGE_TTL_SECONDS * 1000 });
+        return withEdgeHeaders(new Response(body, { status: hit.status, headers: hit.headers }), "HIT", true);
+      }
+    } catch {
+      // treat as a miss
+    }
+  }
+
   const response = await render();
   if (!isStorable(response) || !response.body) return withEdgeHeaders(response, "BYPASS", false);
   try {
-    // Stream to the client while a second branch buffers the HTML for the cache,
+    // Stream to the client while a second branch buffers the HTML for the caches,
     // so the MISS path keeps TanStack's streaming SSR behaviour.
     const [toClient, toStore] = response.body.tee();
     const status = response.status;
     const headers = headersToStore(response.headers);
     const store = new Response(toStore)
       .text()
-      .then((body) => memoryPut(key, { status, headers, body, expires: Date.now() + EDGE_TTL_SECONDS * 1000 }))
+      .then(async (body) => {
+        memoryPut(key, { status, headers, body, expires: Date.now() + EDGE_TTL_SECONDS * 1000 });
+        if (cache) {
+          const h = new Headers(headers);
+          h.set("cache-control", `public, s-maxage=${EDGE_TTL_SECONDS}, max-age=${EDGE_TTL_SECONDS}`);
+          await cache.put(cacheApiKey(url), new Response(body, { status, headers: h })).catch(() => undefined);
+        }
+      })
       .catch(() => undefined);
     if (wctx?.waitUntil) wctx.waitUntil(store);
     return withEdgeHeaders(new Response(toClient, response), "MISS", true);

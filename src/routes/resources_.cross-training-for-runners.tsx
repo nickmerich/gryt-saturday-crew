@@ -490,7 +490,8 @@ function CrossTrainingPage() {
               like, or you want to run with people who aren't going to drop you
               for being slower than you were five years ago, GRYT Run Club meets
               every Saturday at 7 AM on the Montour/Peters Trail in McMurray. No
-              fees. No pace requirement. Just show up.
+              fees. No pace requirement. First-timers RSVP and sign a short
+              waiver.
             </p>
 
             <H2 id="faqs">Frequently asked questions</H2>

@@ -25,11 +25,11 @@ const FAQS: FAQ[] = [
   },
   {
     q: "How much does it cost?",
-    a: "It's free. There are no dues, no membership fees, and no signup required. Donations keep the coffee and swag going — you can chip in from the Support GRYT block on the homepage, but it's optional.",
+    a: "It's free. There are no dues or membership fees, and no membership is required. Donations keep the coffee and swag going. You can chip in from the Support GRYT block on the homepage, but it's optional.",
   },
   {
     q: "Do I need to RSVP or just show up?",
-    a: "Just show up. Meet at 212 Valley Brook Road in McMurray, Peters Township at 7:00 AM Saturday. Parking is free. Look for the group near the trail sign — if you're new, come 10 minutes early and someone will say hey.",
+    a: "If it's your first time, RSVP on the homepage and sign the short waiver so a founder or regular can find you before the start. Then meet at 212 Valley Brook Road in McMurray, Peters Township at 7:00 AM Saturday. Parking is free. Look for the group near the trail sign. If you're new, come 10 minutes early and someone will say hey.",
   },
   {
     q: "Is there a waiver?",
@@ -138,7 +138,7 @@ function FaqPage() {
               className="text-5xl sm:text-6xl lg:text-7xl uppercase leading-[0.92] tracking-tight"
               style={{ fontFamily: "var(--font-display-condensed)" }}
             >
-              South Hills run club
+              South Hills run club{" "}
               <br />
               FAQ.
             </h1>

@@ -14,10 +14,10 @@ const CONFIG: ComparisonConfig = {
   description:
     "GRYT Run Club vs Three Rivers Heritage Trail parkrun: a no-drop group run in McMurray at 7 AM or a free timed 5K on the North Shore at 9 AM. Who each one fits.",
   published: "2026-10-29",
-  modified: "2026-10-29",
+  modified: "2026-11-10",
   readTime: "6 MIN READ",
   keywords:
-    "GRYT Run Club vs parkrun, parkrun Pittsburgh, Three Rivers Heritage Trail parkrun, free Saturday run Pittsburgh, free 5K Pittsburgh, South Hills run club, McMurray run club, no-drop run club Pittsburgh",
+    "GRYT Run Club vs parkrun, parkrun Pittsburgh, Three Rivers Heritage Trail parkrun, free Saturday run Pittsburgh, free 5K Pittsburgh, Montour Trail running groups, South Hills run club, McMurray run club, no-drop run club Pittsburgh",
   about: ["GRYT Run Club", "parkrun", "Three Rivers Heritage Trail parkrun", "Pittsburgh running"],
   breadcrumb: "GRYT Run Club vs parkrun Pittsburgh",
   faqs: [
@@ -28,6 +28,10 @@ const CONFIG: ComparisonConfig = {
     {
       q: "What's the difference between GRYT Run Club and parkrun?",
       a: "parkrun is a free timed 5K event run by volunteers. GRYT Run Club is a free weekly group run, not a timed event. GRYT meets Saturdays at 7 AM in McMurray on the Montour/Peters Trail, runs roughly four miles out and back, is no-drop, and ends with coffee in the parking lot.",
+    },
+    {
+      q: "Is there a parkrun on the Montour Trail?",
+      a: "No. As of November 10, 2026, parkrun's event map lists one event in the Pittsburgh area, Three Rivers Heritage Trail parkrun on the North Shore. The free weekly group run on the Montour Trail is GRYT Run Club, every Saturday at 7 AM at 212 Valley Brook Road in McMurray. It's the only weekly group run we could find on a public schedule that starts on the trail.",
     },
     {
       q: "Can I do GRYT and parkrun on the same Saturday?",
@@ -52,6 +56,7 @@ const SECTIONS = [
   { id: "parkrun", label: "What parkrun Pittsburgh Is" },
   { id: "gryt", label: "What GRYT Run Club Is" },
   { id: "compare", label: "Side-by-Side" },
+  { id: "montour", label: "Free Saturday Runs on the Montour Trail" },
   { id: "who-parkrun", label: "Who Should Choose parkrun" },
   { id: "who-gryt", label: "Who Should Choose GRYT" },
   { id: "both", label: "Doing Both" },
@@ -82,8 +87,8 @@ function Page() {
       }
       sourcesNote={
         <>
-          parkrun details come from the Three Rivers Heritage Trail parkrun event and course pages on parkrun.us,
-          checked October 29, 2026. Confirm on parkrun's site before you go.
+          parkrun details come from the Three Rivers Heritage Trail parkrun event and course pages on parkrun.us
+          and parkrun's event map, last verified November 10, 2026. Confirm on parkrun's site before you go.
         </>
       }
     >
@@ -138,9 +143,29 @@ function Page() {
           ["Pace policy", "Run or walk at your pace", "No-drop: the group waits"],
           ["Sign-up", "Register once with parkrun", "RSVP + waiver before your first run"],
           ["Organized by", "Volunteers", "Founders Laura and Nick Merich and the crew"],
-          ["After", "Suggested coffee at PA Market, Strip District", "Coffee in the parking lot"],
+          ["After", "Coffee at De Fer in Troy Hill", "Coffee in the parking lot"],
         ]}
       />
+
+      <PH2 id="montour">Free Saturday Runs on the Montour Trail</PH2>
+      <p>
+        There's no parkrun on the Montour Trail. As of November 10, 2026, parkrun's event map lists one event in
+        the Pittsburgh area, and it's the North Shore 5K described above. If you want a free Saturday run on the
+        Montour Trail itself, that's GRYT: every week at 7 AM from 212 Valley Brook Road in McMurray, on the flat,
+        paved Peters Township section. It's the only weekly group run we could find on a public schedule that
+        starts on the trail.
+      </p>
+      <p>
+        Our{" "}
+        <Link
+          to="/resources/articles/$slug"
+          params={{ slug: "montour-trail-running-groups" }}
+          className="underline hover:text-foreground/70"
+        >
+          guide to running groups on the Montour Trail
+        </Link>{" "}
+        covers the other clubs that run nearby, plus the trail's races and walks.
+      </p>
 
       <PH2 id="who-parkrun">Who Should Choose parkrun</PH2>
       <ul className="list-disc pl-6 space-y-1">

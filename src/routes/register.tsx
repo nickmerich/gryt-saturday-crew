@@ -12,14 +12,14 @@ import { siteUrl } from '@/lib/site';
 export const Route = createFileRoute('/register')({
   head: () => ({
     meta: [
-      { title: 'GRYT runs are free — no registration fee' },
+      { title: 'GRYT Run Club runs are free · No registration fee' },
       {
         name: 'description',
         content:
           'GRYT Run Club Saturday runs are free. There is no entry fee and no paid registration. RSVP on the homepage and show up at the trailhead.',
       },
       { name: 'robots', content: 'noindex, follow' },
-      { property: 'og:title', content: 'GRYT runs are free — no registration fee' },
+      { property: 'og:title', content: 'GRYT Run Club runs are free · No registration fee' },
       {
         property: 'og:description',
         content: 'No entry fee, no paid registration. RSVP free for Saturday 7 AM in McMurray, PA.',
@@ -48,7 +48,7 @@ function RegisterRetiredPage() {
             No entry fee
           </div>
           <h1 className="mt-3 font-display text-4xl md:text-6xl uppercase leading-[0.95]">
-            GRYT runs are free.
+            GRYT Run Club runs are free.
           </h1>
           <p className="mt-5 text-lg text-ink/75">
             There is no registration fee, no paid entry, and nothing to buy to run with

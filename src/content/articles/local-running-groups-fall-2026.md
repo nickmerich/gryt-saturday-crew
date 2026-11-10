@@ -3,7 +3,8 @@ title: "7 Local Running Groups Worth Joining This Fall 2026"
 description: "Seven local running groups worth joining this fall 2026, from free parkrun 5Ks to big city crews, plus how to find a local running group near you today."
 slug: "local-running-groups-fall-2026"
 status: checked
-updated: 2026-10-29
+published: 2026-10-29
+updated: 2026-11-10
 ---
 
 Local running groups range from free, drop-in Saturday crews to structured programs with coached workouts. The seven groups below include a few specific clubs and a few national networks you can find in many cities, so you can compare options by location, pace, meeting day, and cost this fall.
@@ -60,7 +61,7 @@ Black Girls RUN! has local groups in cities across the country, each organized t
 
 ## 6. Running Store Run Clubs, Many Cities
 
-Many specialty running stores host free weekly group runs. Fleet Feet stores, for example, often list [free social runs where every pace is welcome](https://www.fleetfeet.com/s/mountpleasant/fleet-feet-running-club/MondayRunday), sometimes with shorter and longer route options. In the Pittsburgh area, Fleet Feet Pittsburgh runs a Tuesday 6:30 PM South Hills Pub Run from Arthur's Korner Pub in Mt. Lebanon and a Sunday 7:30 AM long run. For a comparison of store clubs and independent clubs, see [Fleet Feet Pittsburgh vs independent run clubs](/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs).
+Many specialty running stores host free weekly group runs. Fleet Feet stores, for example, often list [free social runs where every pace is welcome](https://www.fleetfeet.com/s/mountpleasant/fleet-feet-running-club/MondayRunday), sometimes with shorter and longer route options. In the Pittsburgh area, [Fleet Feet Pittsburgh](https://www.fleetfeet.com/s/pittsburgh/training) lists free weeknight runs in the East End and a Sunday 7:30 AM long run from rotating locations. For a comparison of store clubs and independent clubs, see [Fleet Feet Pittsburgh vs independent run clubs](/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs).
 
 ## 7. GRYT Run Club, McMurray, PA
 

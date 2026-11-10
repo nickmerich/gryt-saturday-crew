@@ -11,13 +11,14 @@ const TITLE =
 const DESCRIPTION =
   "Free run clubs in Pittsburgh's South Hills for 2026: GRYT in McMurray, City of Bridges, Fleet Feet and more. Cost, schedule, and drop policy compared.";
 const PUBLISHED = "2026-09-01";
-const MODIFIED = "2026-11-01";
+const MODIFIED = "2026-11-10";
 const HERO = `${SITE}/img/south-hills-run-clubs-og.jpg`;
 
 const SECTIONS: Array<{ id: string; label: string }> = [
   { id: "gryt", label: "GRYT Run Club: The South Hills Anchor" },
   { id: "others", label: "Other Options Worth Knowing" },
   { id: "compare", label: "Side-by-Side Comparison" },
+  { id: "montour", label: "Running Groups on the Montour Trail" },
   { id: "beginners", label: "Which South Hills Clubs Work for Beginners" },
   { id: "motivation", label: "How to Stay Motivated With a Free Group" },
   { id: "first-run", label: "What to Expect at Your First GRYT Run" },
@@ -27,11 +28,11 @@ const SECTIONS: Array<{ id: string; label: string }> = [
 const FAQS: Array<{ q: string; a: string }> = [
   {
     q: "Is there a free running club in Pittsburgh's South Hills?",
-    a: "Yes. GRYT Run Club is a free, weekly running group based in McMurray, PA. It meets Saturday mornings at 7 AM at the Valley Brook Road trailhead on the Montour/Peters Trail. No membership fee, no pace requirement, no registration required.",
+    a: "Yes. GRYT Run Club is a free, weekly running group based in McMurray, PA. It meets Saturday mornings at 7 AM at the Valley Brook Road trailhead on the Montour/Peters Trail. There's no membership fee and no pace requirement. First-timers RSVP on grytrunclub.com and sign a short waiver.",
   },
   {
     q: "What is a no-drop run club?",
-    a: "A no-drop run club means no runner gets left behind. Regardless of pace, the group waits for everyone. Faster runners loop back or slow down, and the run ends when the last person finishes — not the first.",
+    a: "A no-drop run club means no runner gets left behind. Regardless of pace, the group waits for everyone. Faster runners loop back or slow down, and the run ends when the last person finishes, not the first.",
   },
   {
     q: "Do I need to sign up before showing up to GRYT Run Club?",
@@ -47,7 +48,7 @@ const FAQS: Array<{ q: string; a: string }> = [
   },
   {
     q: "What's the difference between GRYT Run Club and Yinz Run Club?",
-    a: "GRYT is South Hills-based, runs weekly on a fixed Saturday schedule, and operates as a free drop-in group. Yinz Run Club is larger, city-adjacent, and runs biweekly. Both are free. GRYT is the better fit if you live in the South Hills and want a consistent weekly group close to home.",
+    a: "GRYT is based in the South Hills and runs every Saturday at 7 AM from the same trailhead in McMurray. Yinz Run Club runs every Wednesday at 6:30 PM from rotating businesses around the city, plus trail runs every other Saturday morning in rotating parks. Both are free and no-drop. GRYT is the better fit if you live in the South Hills and want one fixed weekly run close to home.",
   },
   {
     q: "How do you stay motivated running with a free community group in Pittsburgh?",
@@ -55,7 +56,15 @@ const FAQS: Array<{ q: string; a: string }> = [
   },
   {
     q: "Is there a run club near Peters Township for casual runners?",
-    a: "Yes. GRYT Run Club meets every Saturday at 7 AM at 212 Valley Brook Road in McMurray, which is in Peters Township. It's free, open to all paces, walkers are welcome, and it's no-drop, so nobody finishes alone. For a weeknight option nearby, City of Bridges Run Club hosts a Thursday 6:30 PM South Hills run at rotating spots, and Fleet Feet Pittsburgh has a Tuesday 6:30 PM pub run from Arthur's Korner Pub in Mt. Lebanon.",
+    a: "Yes. GRYT Run Club meets every Saturday at 7 AM at 212 Valley Brook Road in McMurray, which is in Peters Township. It's free, open to all paces, walkers are welcome, and it's no-drop, so nobody finishes alone. For a weeknight option nearby, City of Bridges Run Club hosts a Thursday 6:30 PM South Hills run at rotating spots, and Canonsburg Run Club meets Mondays at 6 PM in Canonsburg.",
+  },
+  {
+    q: "Which running groups meet on the Montour Trail?",
+    a: "GRYT Run Club meets on the Montour Trail every Saturday at 7 AM at 212 Valley Brook Road in McMurray, on the paved Peters Township section. As of November 10, 2026, it's the only weekly group run we could find on a public schedule that starts on the trail. The Greater Pittsburgh Road Runners Club held one 2026 event there, and the Montour Trail Council hosts races and walks.",
+  },
+  {
+    q: "What are the best run clubs in the South Hills for beginners?",
+    a: "Look for a no-drop rule, walkers welcome, and a route you can cut short. GRYT Run Club is no-drop on a flat, paved out-and-back every Saturday at 7 AM in McMurray. City of Bridges Run Club's Thursday 6:30 PM South Hills run has a dedicated run/walk leader with 3 and 5 mile options. Canonsburg Run Club starts with a one-mile loop on Mondays at 6 PM. All three are free.",
   },
   {
     q: "How does Sewickley Run Club compare to running groups in the South Hills?",
@@ -78,26 +87,33 @@ const COMPARISON: Array<{
     club: "GRYT Run Club",
     proximity: "McMurray / Peters Township (home base)",
     cost: "Free",
-    schedule: "Weekly — Saturday 7 AM",
+    schedule: "Weekly, Saturday 7 AM",
     drop: "No-drop",
   },
   {
     club: "Yinz Run Club",
-    proximity: "City-adjacent, occasional South Hills",
+    proximity: "Rotating city neighborhoods and parks",
     cost: "Free",
-    schedule: "Biweekly",
-    drop: "Varies by run",
+    schedule: "Wednesday 6:30 PM weekly; trail runs every other Saturday morning",
+    drop: "No-drop, with pacers and sweepers",
   },
   {
     club: "City of Bridges Run Club",
     proximity: "Thursday South Hills run at rotating spots; Saturdays in the city",
     cost: "Runs free (register); optional $55/yr membership",
     schedule: "Weeknights 6:30 PM + Saturday 8 AM",
-    drop: "Pace groups",
+    drop: "Run/walk leader on Thursdays; pace groups on Saturdays",
+  },
+  {
+    club: "Canonsburg Run Club",
+    proximity: "Canonsburg, Washington County",
+    cost: "Free",
+    schedule: "Weekly, Monday 6 PM",
+    drop: "Go at your own pace; one-mile loop with an optional two more",
   },
   {
     club: "Fleet Feet Pittsburgh",
-    proximity: "Tuesday pub run in Mt. Lebanon; most runs east end",
+    proximity: "South Hills store; weekly runs mostly in the East End",
     cost: "Free club; paid training programs optional",
     schedule: "Weeknights + Sunday 7:30 AM",
     drop: "Team leads by pace",
@@ -121,7 +137,7 @@ export const Route = createFileRoute(
       {
         name: "keywords",
         content:
-          "free run clubs South Hills, South Hills running club, McMurray run club, Peters Township running group, Montour Trail run club, Pittsburgh no-drop run club, Yinz Run Club, City of Bridges Run Club, Fleet Feet South Hills pub run, stay motivated running Pittsburgh",
+          "free run clubs South Hills, South Hills running club, McMurray run club, Peters Township running group, Montour Trail run club, Montour Trail running groups, South Hills run clubs for beginners, Pittsburgh no-drop run club, Yinz Run Club, City of Bridges Run Club, Canonsburg Run Club, Fleet Feet Pittsburgh run club, stay motivated running Pittsburgh",
       },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
@@ -130,6 +146,7 @@ export const Route = createFileRoute(
       { property: "og:site_name", content: "gryt run club" },
       { property: "og:image", content: HERO },
       { property: "article:published_time", content: PUBLISHED },
+      { property: "article:modified_time", content: MODIFIED },
       { property: "article:author", content: "Nick Merich" },
       { property: "article:section", content: "Community" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -161,6 +178,7 @@ export const Route = createFileRoute(
             "Yinz Run Club",
             "City of Bridges Run Club",
             "Fleet Feet Pittsburgh",
+            "Canonsburg Run Club",
             "Sewickley Run Club",
             "Strava",
           ],
@@ -283,8 +301,13 @@ function SouthHillsPage() {
               If you've searched for free run clubs in Pittsburgh's South Hills
               and ended up on a Strava page or a generic city-wide list, you're
               not alone. The South Hills has real, weekly running groups worth
-              knowing about — and one of them meets specifically in McMurray, on
+              knowing about, and one of them meets specifically in McMurray, on
               the Montour/Peters Trail, every Saturday morning at 7 AM.
+            </p>
+            <p className="text-foreground/70 text-[14px]">
+              Updated November 10, 2026. Other clubs' schedules were last
+              verified that day on each club's own site or local news
+              coverage. They change, so confirm before you go.
             </p>
             <p>
               Here's what you actually want to know: which clubs exist, what
@@ -293,10 +316,11 @@ function SouthHillsPage() {
 
             <H2 id="gryt">GRYT Run Club: The South Hills Anchor</H2>
             <p>
-              GRYT Run Club is the only free, fixed-schedule running group based
-              specifically in the South Hills. Organized by Laura and Nick
-              Merich, the club runs year-round — no membership fee, no pace
-              requirement, and a strict no-drop policy.
+              GRYT Run Club is a free running group based in the South Hills
+              that meets at the same trailhead at the same time every week.
+              Organized by Laura and Nick Merich, the club runs year-round,
+              with no membership fee, no pace requirement, and a strict
+              no-drop policy.
             </p>
             <p>
               Home base is 212 Valley Brook Road in McMurray, which sits in
@@ -305,7 +329,7 @@ function SouthHillsPage() {
               trailhead is a short drive, not a trip into the city.
             </p>
             <p className="border-l-2 border-blue pl-5">
-              <strong className="text-foreground">Saturday mornings — 7 AM.</strong>{" "}
+              <strong className="text-foreground">Saturday mornings, 7 AM.</strong>{" "}
               Meet at the Valley Brook Road trailhead in McMurray for a run on
               the Montour/Peters Trail. Distance is flexible. The time is not.
               Show up at 7 AM and you'll find people.
@@ -318,9 +342,8 @@ function SouthHillsPage() {
               in the group are usually the ones waiting at the turnaround.
             </p>
             <p>
-              Looking for a target? The EQT Pittsburgh 10 Miler is November 8,
-              2026, the Thanksgiving 5Ks follow on November 26, and the 2027
-              Pittsburgh Marathon is May 2, 2027. The{" "}
+              Looking for a target? The Thanksgiving 5Ks are November 26,
+              2026, and the 2027 Pittsburgh Marathon is May 2, 2027. The{" "}
               <Link to="/races" className="underline hover:text-foreground/70">
                 GRYT races page
               </Link>{" "}
@@ -335,16 +358,17 @@ function SouthHillsPage() {
               Yinz Run Club
             </h3>
             <p>
-              Yinz is Pittsburgh's most visible running group. They run trails,
-              they're active on social, and they draw a crowd. Their runs tend
-              to be city-adjacent rather than South Hills-based, and they run
-              biweekly rather than weekly. If you want variety and a larger
-              group and don't mind driving toward the city, Yinz is worth
-              following. Free to join.
+              Yinz is one of Pittsburgh's most visible running groups. Its Run
+              Crew meets every Wednesday at 6:30 PM at rotating businesses
+              around the city, with 3 mile and 1 mile options, and its Trails
+              group runs every other Saturday morning in rotating parks. Both
+              are free and no-drop, with volunteer pacers and sweepers. If you
+              want variety and a larger group and don't mind driving toward the
+              city, Yinz is worth following.
             </p>
             <p>
-              The tradeoff: the schedule is less predictable if you want a fixed
-              weekly ritual, and the South Hills isn't their home base.
+              The tradeoff: the location changes from run to run, and the
+              South Hills isn't their home base.
             </p>
 
             <h3 className="text-xl md:text-2xl font-bold mt-10 mb-1">
@@ -356,9 +380,10 @@ function SouthHillsPage() {
               open to everyone, and it asks runners to register for each one.
               An optional adult membership is $55 a year and adds a shirt,
               race discounts, and training plans. CBRC runs a Thursday 6:30 PM
-              South Hills group run from rotating spots in Mt. Lebanon, Castle
-              Shannon, and Carnegie, plus a Saturday 8 AM run that moves around
-              the city with posted pace groups.
+              South Hills group run from rotating spots such as Mt. Lebanon,
+              Castle Shannon, Brookline, and Carnegie, with 3 and 5 mile
+              options and a dedicated run/walk leader. It also has a Saturday
+              8 AM run that moves around the city with posted pace groups.
             </p>
             <p>
               The tradeoff: the South Hills run is a weeknight, and Saturdays
@@ -377,10 +402,13 @@ function SouthHillsPage() {
               Fleet Feet Pittsburgh
             </h3>
             <p>
-              The running store's club is free to join. It has a South Hills
-              store on N. Highland Road and lists a Tuesday 6:30 PM South Hills
-              Pub Run from Arthur's Korner Pub in Mt. Lebanon, with most other
-              club runs based at Bakery Square. Read the full{" "}
+              The running store's club is free to join. Fleet Feet has a South
+              Hills store at 1751 N. Highland Road, but as of November 10,
+              2026, its schedule doesn't list a weekly South Hills run. The
+              weeknight runs start from Bakery Square and Schenley Oval in the
+              East End, and the Sunday 7:30 AM long run rotates. Fleet Feet
+              says an updated run club schedule is coming, so check its
+              calendar. Read the full{" "}
               <Link
                 to="/resources/playbooks/fleet-feet-pittsburgh-vs-independent-run-clubs"
                 className="underline hover:text-foreground/70"
@@ -390,12 +418,48 @@ function SouthHillsPage() {
               .
             </p>
 
+            <h3 className="text-xl md:text-2xl font-bold mt-10 mb-1">
+              Canonsburg Run Club
+            </h3>
+            <p>
+              Canonsburg Run Club is a newer free group in Washington County.
+              According to the{" "}
+              <a
+                href="https://www.observer-reporter.com/living/2026/oct/09/canonsburg-run-club-bringing-people-together-through-fitness/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-foreground/70"
+              >
+                Observer-Reporter
+              </a>
+              , it meets every Monday at 6 PM in the parking lot across from
+              The Spineasy Cycle Lounge for a one-mile loop, with the option to
+              add two more miles. It's open to all ages and fitness levels,
+              and everyone goes at their own pace.
+            </p>
+            <p>
+              The tradeoff: it's a short weeknight loop. If Monday evening
+              works better for you than Saturday morning, start there.
+            </p>
+
+            <h3 className="text-xl md:text-2xl font-bold mt-10 mb-1">
+              Pittsburgh Rogue Runners &amp; Walkers
+            </h3>
+            <p>
+              This one isn't free, but it belongs on the list if you want
+              run/walk intervals. Rogue is an RRCA member club listed in Bethel
+              Park that specializes in the run/walk method and has a walker
+              division. It meets at rotating coffee shops and breweries around
+              the Pittsburgh area and posts its schedule weekly. You can try
+              one event, and after that the club asks you to become a member.
+            </p>
+
             <h3 className="text-xl md:text-2xl font-bold mt-10 mb-1">Strava</h3>
             <p>
               It comes up constantly in search results, so it's worth addressing
               directly: Strava is a GPS tracking app and social platform. It is
               not a run club. You can follow local athletes, explore routes, and
-              see what people are running in your area — all useful. But it
+              see what people are running in your area. All useful. But it
               doesn't put a real person at the trailhead waiting for you on a
               cold Saturday in October. A Strava account and a local run club
               serve different purposes. One complements the other.
@@ -437,6 +501,29 @@ function SouthHillsPage() {
               </table>
             </div>
 
+            <H2 id="montour">Running Groups on the Montour Trail</H2>
+            <p>
+              If you want a group that runs on the Montour Trail itself, GRYT
+              is the weekly one: every Saturday at 7 AM from 212 Valley Brook
+              Road in McMurray, on the flat, paved Peters Township section. As
+              of November 10, 2026, it's the only weekly group run we could
+              find on a public schedule that starts on the trail.
+            </p>
+            <p>
+              The other clubs on this page start from rotating businesses or
+              from the city. The Greater Pittsburgh Road Runners Club held one
+              2026 event on the trail, and the Montour Trail Council hosts
+              races and walks through the year. Our{" "}
+              <Link
+                to="/resources/articles/$slug"
+                params={{ slug: "montour-trail-running-groups" }}
+                className="underline hover:text-foreground/70"
+              >
+                guide to running groups on the Montour Trail
+              </Link>{" "}
+              lists them all, with days, costs, and sources.
+            </p>
+
             <H2 id="beginners">Which South Hills Clubs Work for Beginners and Casual Runners</H2>
             <p>
               A beginner-friendly club comes down to a few things: no pace
@@ -455,16 +542,24 @@ function SouthHillsPage() {
               </li>
               <li>
                 <strong className="text-foreground">City of Bridges Run Club</strong>{" "}
-                posts pace groups, so you can find your speed. Runs are free
-                with registration, membership is an optional $55 a year, and
-                the Thursday 6:30 PM South Hills run rotates spots. Saturdays
-                are 8 AM in the city.
+                has a dedicated run/walk leader on its Thursday 6:30 PM South
+                Hills run, with 3 and 5 mile options at rotating spots. Runs
+                are free with registration, and membership is an optional $55
+                a year. Saturdays are 8 AM in the city, with posted pace
+                groups.
+              </li>
+              <li>
+                <strong className="text-foreground">Canonsburg Run Club</strong>{" "}
+                is free and meets Mondays at 6 PM in Canonsburg. The route is
+                a one-mile loop with an optional two more, and everyone goes
+                at their own pace.
               </li>
               <li>
                 <strong className="text-foreground">Fleet Feet Pittsburgh</strong>{" "}
-                is free and store-backed. The Tuesday 6:30 PM South Hills Pub
-                Run leaves from Arthur's Korner Pub in Mt. Lebanon; the Sunday
-                7:30 AM long run and most other routes are in the East End.
+                is free and store-backed. Its weeknight runs are in the East
+                End. The Sunday 7:30 AM long run rotates locations and lists
+                team leads down to walk/jog intervals, plus a walking
+                division.
               </li>
               <li>
                 <strong className="text-foreground">parkrun</strong> is a free,
@@ -473,6 +568,18 @@ function SouthHillsPage() {
                 time on the clock, which some beginners love and some don't.
               </li>
             </ul>
+            <p>
+              Coming back after time off? Our guide on{" "}
+              <Link
+                to="/resources/articles/$slug"
+                params={{ slug: "start-running-again-after-a-long-break" }}
+                className="underline hover:text-foreground/70"
+              >
+                how to start running again after a long break
+              </Link>{" "}
+              has a six-week walk-run plan you can bring to any of these
+              groups.
+            </p>
 
             <H2 id="motivation">How to Stay Motivated Running With a Free Group in Pittsburgh</H2>
             <p>
@@ -537,7 +644,7 @@ function SouthHillsPage() {
             <p>
               The group will not leave you. That's the whole point of no-drop.
               If you're slower on a given day, someone will run back to meet
-              you. If you haven't run in six months, that's fine — the trail
+              you. If you haven't run in six months, that's fine. The trail
               doesn't know that, and neither does the crew.
             </p>
 

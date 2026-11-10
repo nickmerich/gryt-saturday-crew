@@ -11,8 +11,8 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
-export const SITE_TITLE =
-  "Do Hard Things Together · Pittsburgh Running Group · South Hills Run Club · gryt";
+// Kept under 60 characters so the brand and the place both survive in search results.
+export const SITE_TITLE = "GRYT Run Club · Free Pittsburgh Running Group, South Hills";
 
 // Self-hosted web fonts (see public/fonts.css). Attached after the first painted
 // frame so the woff2 downloads never compete with the render-blocking CSS.

@@ -48,7 +48,7 @@ An AI that can't answer "when does GRYT run?" is useless for discovery.
 | `location`     | General route area                                |
 | `meetingPoint` | Street address of the meet-up (already on homepage) |
 | `pace`         | Pace description                                  |
-| `notes`        | Public notes ("coffee after", "no signup")        |
+| `notes`        | Public notes ("coffee after", "no membership")    |
 | `runs`         | Array wrapper of the above per scheduled run      |
 
 ### `get_club_info`
@@ -67,7 +67,7 @@ information the club actively wants indexed and shared by AI assistants.
 | `website`     | https://grytrunclub.com                      |
 | `strava`      | Public Strava club URL                       |
 | `instagram`   | Public Instagram handle                      |
-| `howToJoin`   | Public "just show up" instructions           |
+| `howToJoin`   | Public RSVP and show-up instructions         |
 
 ## Explicitly NOT public
 

@@ -179,8 +179,8 @@ export const ARTICLES: ArticleMeta[] = [
     "title": "Group Fitness Pittsburgh: Free Run Clubs and Outdoor Options",
     "description": "Group fitness in Pittsburgh compared: free run clubs, optional memberships, parkrun, and South Hills options, with schedules, costs, and how to choose one.",
     "topic": "community",
-    "minutes": 7,
-    "updated": "2026-11-01",
+    "minutes": 12,
+    "updated": "2026-11-10",
     "published": "2026-10-29"
   },
   {
@@ -243,7 +243,7 @@ export const ARTICLES: ArticleMeta[] = [
     "description": "Seven local running groups worth joining this fall 2026, from free parkrun 5Ks to big city crews, plus how to find a local running group near you today.",
     "topic": "community",
     "minutes": 6,
-    "updated": "2026-10-29",
+    "updated": "2026-11-10",
     "published": "2026-10-29"
   },
   {
@@ -263,6 +263,15 @@ export const ARTICLES: ArticleMeta[] = [
     "minutes": 6,
     "updated": "2026-10-29",
     "published": "2026-10-29"
+  },
+  {
+    "slug": "montour-trail-running-groups",
+    "title": "Montour Trail Running Groups: Pittsburgh 2026 Guide",
+    "description": "Which running groups meet on the Montour Trail in 2026: GRYT's free Saturday 7 AM run in McMurray, nearby South Hills clubs, trail races, and how to pick.",
+    "topic": "community",
+    "minutes": 8,
+    "updated": "2026-11-10",
+    "published": "2026-11-10"
   },
   {
     "slug": "morning-run-routine",
@@ -369,8 +378,17 @@ export const ARTICLES: ArticleMeta[] = [
     "description": "Trail running in Pittsburgh's South Hills: a guide to the Montour Trail, Arrowhead Trail, Bethel Park Branch, Panhandle Trail, and South Park paths.",
     "topic": "community",
     "minutes": 6,
-    "updated": "2026-10-29",
+    "updated": "2026-11-10",
     "published": "2026-10-29"
+  },
+  {
+    "slug": "start-running-again-after-a-long-break",
+    "title": "How to Start Running Again After a Long Break (With a Group)",
+    "description": "Start running again after a long break: a 6-week walk-run plan, which aches are OK, and how to find a no-drop group that won't judge your pace.",
+    "topic": "first-run",
+    "minutes": 9,
+    "updated": "2026-11-10",
+    "published": "2026-11-10"
   },
   {
     "slug": "strava-review-casual-runners",

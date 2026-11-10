@@ -14,10 +14,10 @@ const CONFIG: ComparisonConfig = {
   description:
     "GRYT Run Club vs City of Bridges Run Club: schedules, cost, South Hills runs, pace groups, and how to stay motivated with a free Pittsburgh run club.",
   published: "2026-10-29",
-  modified: "2026-11-01",
+  modified: "2026-11-10",
   readTime: "7 MIN READ",
   keywords:
-    "GRYT Run Club vs City of Bridges Run Club, City of Bridges Run Club, CBRC Pittsburgh, CBRC South Hills group run, free run club Pittsburgh, South Hills run club, McMurray run club, stay motivated running Pittsburgh",
+    "GRYT Run Club vs City of Bridges Run Club, City of Bridges Run Club, CBRC Pittsburgh, CBRC South Hills group run, free run club Pittsburgh, South Hills run club for beginners, Montour Trail running groups, McMurray run club, stay motivated running Pittsburgh",
   about: ["GRYT Run Club", "City of Bridges Run Club", "Pittsburgh running"],
   breadcrumb: "GRYT Run Club vs City of Bridges Run Club",
   faqs: [
@@ -27,7 +27,15 @@ const CONFIG: ComparisonConfig = {
     },
     {
       q: "Does City of Bridges Run Club run in the South Hills?",
-      a: "Yes. CBRC lists a Thursday 6:30 PM South Hills Group Run that rotates between spots such as Mt. Lebanon, Castle Shannon, the Galleria, and Carnegie. Its Saturday 8 AM run rotates around city neighborhoods.",
+      a: "Yes. CBRC lists a Thursday 6:30 PM South Hills Group Run with 3 and 5 mile options that rotates between spots such as Mt. Lebanon, Castle Shannon, Brookline, the Galleria, and Carnegie. The club's FAQ says the run includes a dedicated run/walk leader. Its Saturday 8 AM run rotates around city neighborhoods.",
+    },
+    {
+      q: "Which running groups meet on the Montour Trail?",
+      a: "GRYT Run Club meets on the Montour Trail every Saturday at 7 AM at 212 Valley Brook Road in McMurray, on the paved Peters Township section. As of November 10, 2026, it's the only weekly group run we could find on a public schedule that starts on the trail. CBRC's calendar lists the business or park where each run starts and doesn't name the Montour Trail.",
+    },
+    {
+      q: "Which is better for beginners in the South Hills, CBRC or GRYT?",
+      a: "Both work for beginners. GRYT is no-drop on a flat, paved out-and-back, so you can walk, turn around early, and still finish with the group on Saturday at 7 AM. CBRC's Thursday South Hills run offers 3 and 5 miles, and the club says it includes a dedicated run/walk leader. Pick GRYT for a fixed Saturday morning and CBRC for a weeknight.",
     },
     {
       q: "What's the difference between GRYT Run Club and City of Bridges Run Club?",
@@ -52,6 +60,8 @@ const SECTIONS = [
   { id: "cbrc", label: "What City of Bridges Run Club Is" },
   { id: "gryt", label: "What GRYT Run Club Is" },
   { id: "compare", label: "Side-by-Side" },
+  { id: "montour", label: "Running Groups on the Montour Trail" },
+  { id: "beginners", label: "Which Is Better for Beginners?" },
   { id: "motivation", label: "Staying Motivated With a Free Club" },
   { id: "who", label: "Who Each Club Fits" },
   { id: "both", label: "Running With Both" },
@@ -83,8 +93,9 @@ function Page() {
       }
       sourcesNote={
         <>
-          City of Bridges details come from cityofbridgesrunclub.com (home, Join, and Group Runs pages), checked
-          October 29, 2026. Locations rotate, so check CBRC's calendar before you go.
+          City of Bridges details come from cityofbridgesrunclub.com (home, Join, FAQs, Group Runs, and Saturday
+          Route Info pages), last verified November 10, 2026. Locations rotate, so check CBRC's calendar before
+          you go.
         </>
       }
     >
@@ -103,14 +114,18 @@ function Page() {
       <p>The weekly lineup on CBRC's Group Runs page looks like this:</p>
       <ul className="list-disc pl-6 space-y-1">
         <li>Monday Track Attack, Schenley Oval, 6:30 PM</li>
-        <li>Tuesday Robinson Group Run, rotating spots, 6:30 PM</li>
+        <li>Tuesday Robinson Group Run, rotating spots in the Robinson and Sewickley areas, 6:30 PM</li>
         <li>Wednesday City Area Run, rotating neighborhoods, 6:30 PM</li>
-        <li>Thursday South Hills Group Run, rotating spots like Mt. Lebanon, Castle Shannon, and Carnegie, 6:30 PM</li>
-        <li>Saturday Group Run, rotating city locations, 8:00 AM</li>
+        <li>
+          Thursday South Hills Group Run, 3 and 5 miles with a dedicated run/walk leader, rotating spots like Mt.
+          Lebanon, Castle Shannon, Brookline, and Carnegie, 6:30 PM
+        </li>
+        <li>Saturday Group Run, rotating city locations with at least three distances, 8:00 AM</li>
       </ul>
       <p>
-        CBRC says all runs are free and open to all, and asks you to register. The optional $55 adult membership
-        adds a shirt, race and business discounts, coach access, and training plans.
+        CBRC says all runs are free and open to all, and asks you to register and acknowledge its event waiver.
+        The optional $55 adult membership adds a shirt, race and business discounts, coach access, and training
+        plans.
       </p>
 
       <PH2 id="gryt">What GRYT Run Club Is</PH2>
@@ -134,12 +149,70 @@ function Page() {
           ["Cost", "Runs free (register); optional $55/yr membership", "Free, no membership"],
           ["Schedule", "Mon to Thu evenings + Saturday 8 AM", "Saturday 7 AM, every week"],
           ["Location", "Rotates around the city and suburbs", "Same place: 212 Valley Brook Rd, McMurray"],
-          ["South Hills", "Thursday 6:30 PM, rotating spots", "Home base every Saturday"],
-          ["Pace", "Pace groups on bigger runs", "No-drop, walkers welcome"],
+          ["South Hills", "Thursday 6:30 PM, rotating spots, 3 and 5 miles", "Home base every Saturday"],
+          ["Montour Trail", "Not named on its run calendar", "Every Saturday, on the paved Peters Township section"],
+          [
+            "Pace",
+            "Run/walk leader on Thursdays; Saturday pace groups from 7:30 per mile to run/walk",
+            "No-drop, walkers welcome",
+          ],
+          ["First visit", "Register for the run and acknowledge the event waiver", "RSVP on the site and sign a short waiver"],
           ["Coaching", "RRCA/USATF-certified coaches, training plans for members", "Peer-led, no coaching program"],
           ["Organization", "All-volunteer 501(c)(3), RRCA member", "Founder-led community club"],
         ]}
       />
+
+      <PH2 id="montour">Running Groups on the Montour Trail</PH2>
+      <p>
+        If the Montour Trail is the reason you're looking, GRYT is the club that meets on it every week: Saturday
+        at 7 AM at 212 Valley Brook Road in McMurray, on the flat, paved Peters Township section. As of November
+        10, 2026, it's the only weekly group run we could find on a public schedule that starts on the trail.
+      </p>
+      <p>
+        CBRC's calendar lists the business or park where each run starts, such as a Mt. Lebanon restaurant or a
+        Castle Shannon pizza shop, and it doesn't name the Montour Trail. If trail miles matter to you, ask the
+        club which weeks get close. Our{" "}
+        <Link
+          to="/resources/articles/$slug"
+          params={{ slug: "montour-trail-running-groups" }}
+          className="underline hover:text-foreground/70"
+        >
+          guide to running groups on the Montour Trail
+        </Link>{" "}
+        lists every group we could verify, plus the trail's races and walks.
+      </p>
+
+      <PH2 id="beginners">Which Is Better for Beginners?</PH2>
+      <p>Both clubs say slower paces are welcome. They handle it in different ways:</p>
+      <ul className="list-disc pl-6 space-y-2">
+        <li>
+          <strong className="text-foreground">GRYT on Saturdays:</strong> No-drop on a flat, paved out-and-back. You
+          can walk the whole thing, turn around whenever you want, and still finish in the same parking lot as
+          everyone else. There's one route and no pace group to pick.
+        </li>
+        <li>
+          <strong className="text-foreground">CBRC on Thursdays:</strong> The South Hills run offers 3 and 5 miles,
+          and the club's FAQ says it includes a dedicated run/walk leader.
+        </li>
+        <li>
+          <strong className="text-foreground">CBRC on Saturdays:</strong> Pace groups run from 7:30 per mile to
+          run/walk, with at least three distances. That's a good fit once you know your pace and want to build
+          mileage.
+        </li>
+      </ul>
+      <p>
+        New to running, or coming back after time off? Start with the day you can protect. If that's Saturday
+        morning, come to GRYT and walk as much as you need. If it's a weeknight, CBRC's Thursday run/walk group is
+        a solid first step. Our guide on{" "}
+        <Link
+          to="/resources/articles/$slug"
+          params={{ slug: "start-running-again-after-a-long-break" }}
+          className="underline hover:text-foreground/70"
+        >
+          how to start running again after a long break
+        </Link>{" "}
+        has a six-week walk-run plan that works with either club.
+      </p>
 
       <PH2 id="motivation">Staying Motivated With a Free Club</PH2>
       <p>

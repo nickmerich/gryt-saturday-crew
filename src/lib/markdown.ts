@@ -68,6 +68,65 @@ function cells(row: string) {
 
 export type Heading = { id: string; text: string; level: 2 | 3 };
 
+export type Faq = { q: string; a: string };
+
+/** Inline markdown to plain text, for structured data. */
+function plain(src: string): string {
+  return src
+    .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, "$1")
+    .replace(/`([^`]+)`/g, "$1")
+    .replace(/\*\*([^*]+)\*\*/g, "$1")
+    .replace(/(^|[^*\w])\*([^*\n]+)\*(?!\w)/g, "$1$2")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+/**
+ * Question and answer pairs from an article's FAQ section, used for FAQPage
+ * JSON-LD so the structured data always matches the visible copy.
+ *
+ * Reads the last h2 that starts with "FAQs" or "Frequently Asked Questions"
+ * and stops at the next h2. A question is a bold line ending in "?" or an h3
+ * ending in "?". The answer is the single paragraph that follows it, so a
+ * closing paragraph after the last answer is never swallowed.
+ */
+export function extractFaqs(md: string): Faq[] {
+  const lines = md.replace(/\r\n/g, "\n").split("\n");
+  let start = -1;
+  for (let i = 0; i < lines.length; i++) {
+    if (/^##\s+(FAQs?\b|Frequently Asked Questions)/i.test(lines[i].trim())) start = i;
+  }
+  if (start < 0) return [];
+
+  const faqs: Faq[] = [];
+  let i = start + 1;
+  while (i < lines.length) {
+    const t = lines[i].trim();
+    if (/^#{1,2}\s/.test(t)) break;
+    const bold = t.match(/^\*\*(.+\?)\*\*\s*(.*)$/);
+    const h3 = bold ? null : t.match(/^#{3,4}\s+(.+\?)\s*$/);
+    const rawQuestion = bold ? bold[1] : h3 ? h3[1] : "";
+    if (!rawQuestion) {
+      i++;
+      continue;
+    }
+    const q = plain(rawQuestion);
+    const parts: string[] = [];
+    if (bold && bold[2]) parts.push(bold[2]);
+    i++;
+    while (i < lines.length && !parts.length && !lines[i].trim()) i++;
+    while (i < lines.length) {
+      const l = lines[i].trim();
+      if (!l || /^#{1,4}\s/.test(l) || /^\*\*.+\?\*\*/.test(l)) break;
+      parts.push(l);
+      i++;
+    }
+    const a = plain(parts.join(" "));
+    if (q && a) faqs.push({ q, a });
+  }
+  return faqs;
+}
+
 export function renderMarkdown(md: string): { html: string; headings: Heading[]; words: number } {
   const lines = md.replace(/\r\n/g, "\n").split("\n");
   const out: string[] = [];

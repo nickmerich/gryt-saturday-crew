@@ -12,6 +12,7 @@ const TITLE =
 const DESCRIPTION =
   "An honest comparison of Yinz Run Club and GRYT Run Club: location, schedule, group size, and post-run culture. Figure out which Pittsburgh run club actually fits your life.";
 const PUBLISHED = "2026-01-27";
+const MODIFIED = "2026-11-10";
 
 const SECTIONS: Array<{ id: string; label: string }> = [
   { id: "what-yinz-is", label: "What Yinz Run Club Is" },
@@ -30,11 +31,11 @@ const SECTIONS: Array<{ id: string; label: string }> = [
 const FAQS: Array<{ q: string; a: string }> = [
   {
     q: "Is there a Yinz Run Club in the South Hills?",
-    a: "No. Yinz Run Club is Pittsburgh's largest free run club, but their runs are city-centric with no consistent South Hills presence. Their Wednesday evening runs and biweekly Saturday runs take place in Pittsburgh neighborhoods — not in McMurray, Peters Township, Upper St. Clair, or Bethel Park.",
+    a: "No. Yinz Run Club is Pittsburgh's largest free run club, but their runs are city-centric with no consistent South Hills presence. Its Wednesday evening runs rotate between businesses in city neighborhoods, and its trail runs rotate between parks every other Saturday morning, so there's no fixed weekly run in McMurray, Peters Township, Upper St. Clair, or Bethel Park.",
   },
   {
     q: "What are good alternatives to Yinz Run Club in Pittsburgh's South Hills?",
-    a: "GRYT Run Club is the only free, weekly run club currently operating in the McMurray and Peters Township area. It meets every Saturday at 7 AM on the Montour / Peters Trail. Always free, no pace requirements.",
+    a: "GRYT Run Club is a free, weekly run club based in McMurray, in Peters Township. It meets every Saturday at 7 AM on the Montour / Peters Trail. Always free, no pace requirements. For a weeknight, City of Bridges Run Club has a free Thursday 6:30 PM South Hills run at rotating spots, and Canonsburg Run Club meets Mondays at 6 PM.",
   },
   {
     q: "Is GRYT Run Club free like Yinz?",
@@ -79,6 +80,7 @@ export const Route = createFileRoute(
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
       { property: "article:published_time", content: PUBLISHED },
+      { property: "article:modified_time", content: MODIFIED },
       { property: "article:author", content: "Nick Merich" },
       { property: "article:section", content: "Community" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -97,7 +99,7 @@ export const Route = createFileRoute(
             "GRYT vs Yinz Run Club: Which Pittsburgh Run Club Is Right for You?",
           description: DESCRIPTION,
           datePublished: PUBLISHED,
-          dateModified: PUBLISHED,
+          dateModified: MODIFIED,
           author: { "@type": "Person", name: "Nick Merich" },
           publisher: {
             "@type": "Organization",
@@ -185,9 +187,9 @@ function ArticlePage() {
             <p>Both clubs are free. Both are genuinely welcoming. But they serve different people, at different times, in different parts of Pittsburgh. Here's an honest look at each so you can figure out which one actually fits your life right now.</p>
 
             <h2 id="what-yinz-is" className="text-2xl md:text-3xl font-bold mt-12 mb-2 scroll-mt-24">What Yinz Run Club Is</h2>
-            <p>Yinz Run Club is Pittsburgh's largest free running community — over 2,500 members. They've built something real: a consistent Wednesday evening run at 6:30 PM with 3-mile and 1-mile options at rotating locations across the city, plus biweekly Saturday runs at 10 AM.</p>
+            <p>Yinz Run Club is Pittsburgh's largest free running community, with over 2,500 members. They've built something real: a consistent Wednesday evening run at 6:30 PM with 3-mile and 1-mile options at rotating locations across the city, plus trail runs every other Saturday morning in rotating parks. Both are no-drop, with volunteer pacers and sweepers. As of November 10, 2026, Yinz's site lists the Saturday start as 9:00 AM on one page and 10:00 AM on another, so check before you go.</p>
             <p>If you live in or near Pittsburgh proper, work a standard schedule, and want a big energetic group run with a social scene attached, Yinz delivers. The size alone means you'll find someone running your pace. Rotating locations keep things fresh. The community is active and it shows.</p>
-            <p>The honest limitation is geography and timing. Yinz is a city club. Their runs happen in Pittsburgh neighborhoods. If you're coming from McMurray, Peters Township, Upper St. Clair, or Bethel Park, a Wednesday 6:30 PM run in the city means fighting traffic, arriving rushed, and getting home late. Their Saturday runs start at 10 AM — which, if you have kids, is already halfway through the morning.</p>
+            <p>The honest limitation is geography and timing. Yinz is a city club. Their runs happen in Pittsburgh neighborhoods. If you're coming from McMurray, Peters Township, Upper St. Clair, or Bethel Park, a Wednesday 6:30 PM run in the city means fighting traffic, arriving rushed, and getting home late. Their Saturday trail runs are every other week in rotating parks, so they aren't a fixed weekly anchor.</p>
             <p>None of that is a knock on Yinz. It's just the reality of where they run and when.</p>
 
             <h2 id="what-gryt-is" className="text-2xl md:text-3xl font-bold mt-12 mb-2 scroll-mt-24">What GRYT Run Club Is</h2>
@@ -203,7 +205,7 @@ function ArticlePage() {
             <p>For anyone searching "Yinz Run Club South Hills" or "run club McMurray PA," this matters more than anything else on this list.</p>
 
             <h3 id="day-and-time" className="text-xl md:text-2xl font-bold mt-8 mb-1 scroll-mt-24">Day and Time</h3>
-            <p>Yinz runs Wednesday evenings at 6:30 PM and biweekly Saturdays at 10 AM. GRYT runs every Saturday at 7 AM, every week.</p>
+            <p>Yinz runs Wednesday evenings at 6:30 PM and trail runs every other Saturday morning. GRYT runs every Saturday at 7 AM, every week.</p>
             <p>Wednesday evenings work well if you don't have kids or your schedule is flexible. For parents, 6:30 PM is often the hardest hour of the day — dinner, homework, bedtime. Getting out the door consistently at that time is hard to sustain.</p>
             <p>Saturday at 7 AM is different. The kids aren't up yet. The day hasn't started. You can run four miles, drink coffee in a parking lot with people you actually like, and still be home before 9.</p>
 

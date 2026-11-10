@@ -3,7 +3,7 @@ import { SiteNav, SiteFooter } from "@/components/site/Chrome";
 import { ShareButtons } from "@/components/site/ShareButtons";
 import { ARTICLES } from "@/lib/articles-index";
 import { TOPICS } from "@/lib/library";
-import { parseFrontmatter, renderMarkdown } from "@/lib/markdown";
+import { extractFaqs, parseFrontmatter, renderMarkdown } from "@/lib/markdown";
 import ogImage from "@/assets/og-playbooks.jpg";
 
 const SITE = "https://grytrunclub.com";
@@ -21,11 +21,15 @@ export const Route = createFileRoute("/resources_/articles_/$slug")({
     const raw = await load();
     const { body } = parseFrontmatter(raw);
     const { html, headings } = renderMarkdown(body);
-    return { meta, html, headings };
+    // Built from the same markdown as the visible FAQ section, so the
+    // FAQPage structured data can never drift from what readers see.
+    const faqs = extractFaqs(body);
+    return { meta, html, headings, faqs };
   },
   head: ({ loaderData }) => {
     if (!loaderData) return { meta: [{ title: "Article not found · gryt" }, { name: "robots", content: "noindex" }] };
     const a = loaderData.meta;
+    const faqs = loaderData.faqs ?? [];
     const url = `${SITE}/resources/articles/${a.slug}`;
     const image = `${SITE}${ogImage}`;
     const title = `${a.title} · gryt`;
@@ -76,6 +80,22 @@ export const Route = createFileRoute("/resources_/articles_/$slug")({
             ],
           }),
         },
+        ...(faqs.length
+          ? [
+              {
+                type: "application/ld+json",
+                children: JSON.stringify({
+                  "@context": "https://schema.org",
+                  "@type": "FAQPage",
+                  mainEntity: faqs.map((f) => ({
+                    "@type": "Question",
+                    name: f.q,
+                    acceptedAnswer: { "@type": "Answer", text: f.a },
+                  })),
+                }),
+              },
+            ]
+          : []),
       ],
     };
   },

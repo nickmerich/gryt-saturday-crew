@@ -3,7 +3,8 @@ title: "Trail Running Pittsburgh: Best Rail Trails in the South Hills"
 description: "Trail running in Pittsburgh's South Hills: a guide to the Montour Trail, Arrowhead Trail, Bethel Park Branch, Panhandle Trail, and South Park paths."
 slug: "south-hills-rail-trails-running"
 status: checked
-updated: 2026-10-29
+published: 2026-10-29
+updated: 2026-11-10
 ---
 
 If you live in McMurray, Peters Township, Bethel Park, or Canonsburg, you don't need to drive into the city to find a good place to run. The South Hills sits right on one of the region's best rail trail networks, and plenty of people who live here have never used it.
@@ -63,6 +64,8 @@ South Park, spread across Bethel Park and South Park Township, isn't a rail trai
 If you want to run in McMurray with other people on a regular schedule, [GRYT Run Club](/) meets every Saturday at 7:00 AM at 212 Valley Brook Road in McMurray. The group runs about 4 miles out and back on the flat, paved Montour/Peters Trail, and you can turn around early.
 
 Laura and Nick Merich started GRYT for South Hills runners who want consistent community without driving into the city. The format is simple: walk, jog, or run, and the run is no-drop, meaning it ends when the last person finishes and faster runners loop back. It's free, with no membership or pace requirement. First-timers RSVP on grytrunclub.com and sign a short liability waiver, and there's coffee in the parking lot after.
+
+Looking for other groups on or near the trail? Our guide to [running groups on the Montour Trail](/resources/articles/montour-trail-running-groups) lists them with days, costs, and sources.
 
 ## What to Bring on a South Hills Rail Trail Run
 
