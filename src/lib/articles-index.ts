@@ -270,7 +270,7 @@ export const ARTICLES: ArticleMeta[] = [
     "description": "Which running groups meet on the Montour Trail in 2026: GRYT's free Saturday 7 AM run in McMurray, nearby South Hills clubs, trail races, and how to pick.",
     "topic": "community",
     "minutes": 8,
-    "updated": "2026-11-10",
+    "updated": "2026-11-16",
     "published": "2026-11-10"
   },
   {
@@ -387,7 +387,7 @@ export const ARTICLES: ArticleMeta[] = [
     "description": "Start running again after a long break: a 6-week walk-run plan, which aches are OK, and how to find a no-drop group that won't judge your pace.",
     "topic": "first-run",
     "minutes": 9,
-    "updated": "2026-11-10",
+    "updated": "2026-11-16",
     "published": "2026-11-10"
   },
   {

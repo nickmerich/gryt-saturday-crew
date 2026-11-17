@@ -12,8 +12,8 @@
 export const PLAYBOOK_LASTMOD: Record<string, string> = {
   "best-free-run-clubs-south-hills-2026": "2026-11-10",
   "best-free-running-clubs-pittsburgh-2026": "2026-11-10",
-  "fleet-feet-pittsburgh-vs-independent-run-clubs": "2026-11-10",
+  "fleet-feet-pittsburgh-vs-independent-run-clubs": "2026-11-16",
   "gryt-vs-yinz-run-club": "2026-11-10",
   "gryt-vs-parkrun-pittsburgh": "2026-11-10",
-  "gryt-vs-city-of-bridges-run-club": "2026-11-10",
+  "gryt-vs-city-of-bridges-run-club": "2026-11-16",
 };

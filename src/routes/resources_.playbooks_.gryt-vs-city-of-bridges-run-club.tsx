@@ -14,7 +14,7 @@ const CONFIG: ComparisonConfig = {
   description:
     "GRYT Run Club vs City of Bridges Run Club: schedules, cost, South Hills runs, pace groups, and how to stay motivated with a free Pittsburgh run club.",
   published: "2026-10-29",
-  modified: "2026-11-10",
+  modified: "2026-11-16",
   readTime: "7 MIN READ",
   keywords:
     "GRYT Run Club vs City of Bridges Run Club, City of Bridges Run Club, CBRC Pittsburgh, CBRC South Hills group run, free run club Pittsburgh, South Hills run club for beginners, Montour Trail running groups, McMurray run club, stay motivated running Pittsburgh",
@@ -80,7 +80,8 @@ function Page() {
       quickAnswer={
         <>
           <p>
-            Both are free to run with. City of Bridges Run Club (CBRC) is a volunteer nonprofit with runs most days
+            Looking for a City of Bridges Run Club alternative in Pittsburgh's South Hills? GRYT is the fixed
+            Saturday morning option in McMurray. Both clubs are free to run with. CBRC is a volunteer nonprofit with runs most days
             of the week at rotating Pittsburgh spots, pace groups, certified coaches, and an optional $55 yearly
             membership. GRYT Run Club is one run, every Saturday at 7 AM, at the same trailhead in McMurray, with a
             no-drop rule and coffee after.

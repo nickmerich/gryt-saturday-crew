@@ -5,7 +5,7 @@ slug: "montour-trail-running-groups"
 status: checked
 topic: community
 published: 2026-11-10
-updated: 2026-11-10
+updated: 2026-11-16
 ---
 
 If you want to run the Montour Trail with other people, here's the short answer. As of November 10, 2026, [GRYT Run Club](/) is the only weekly group run we could find on a public schedule that starts on the Montour Trail itself. It meets every Saturday at 7:00 AM at 212 Valley Brook Road in McMurray and runs the paved Peters Township section. It's free, no-drop, and open to walkers, joggers, and runners.
@@ -99,6 +99,9 @@ For surfaces, trailheads, and the other South Hills paths, see our guide to [the
 Plenty of people mix them. A Thursday evening run with City of Bridges plus a Saturday morning with GRYT is an easy two-run week. For a wider comparison, see [the best free run clubs in the South Hills](/resources/playbooks/best-free-run-clubs-south-hills-2026).
 
 ## FAQs
+
+**What are the top running groups on the Montour Trail in Pittsburgh in 2026?**
+As of November 10, 2026, GRYT Run Club is the only weekly group run we could find on a public schedule that starts on the Montour Trail. It meets every Saturday at 7:00 AM at 212 Valley Brook Road in McMurray, free, no-drop, about 4 miles out and back. City of Bridges Run Club and Fleet Feet Pittsburgh are nearby options, but neither lists a standing weekly run on the trail.
 
 **What running groups meet on the Montour Trail?**
 GRYT Run Club meets on the Montour Trail every Saturday at 7:00 AM at 212 Valley Brook Road in McMurray. As of November 10, 2026, it's the only weekly group run we could find on a public schedule that starts on the trail. The Greater Pittsburgh Road Runners Club held one 2026 event there, and other nearby clubs start from rotating businesses.

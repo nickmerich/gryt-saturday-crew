@@ -3896,7 +3896,9 @@ function AboutGrytText() {
               No pace requirement, a no-drop rule, walkers welcome, an out-and-back route so you can turn
               early, and coffee after so there's a reason to stay. GRYT offers all five every Saturday. In the
               South Hills, City of Bridges Run Club's Thursday 6:30 PM run (free with registration, 3 and 5
-              mile options, and a run/walk leader) is a good weeknight option for casual runners too. Staying
+              mile options, and a run/walk leader) is a good weeknight option for casual runners too. If you
+              want City of Bridges Run Club alternatives in the South Hills, GRYT is the fixed Saturday morning
+              in McMurray, and Fleet Feet Pittsburgh's free club runs are mostly in the East End. Staying
               motivated gets easier when the time never changes and someone expects you, which is why the
               Saturday 7 AM start is fixed and the Milestone Club counts walking.
             </p>

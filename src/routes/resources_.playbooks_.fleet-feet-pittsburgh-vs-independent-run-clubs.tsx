@@ -12,7 +12,7 @@ const TITLE =
 const DESCRIPTION =
   "GRYT Run Club vs Fleet Feet Pittsburgh: schedules, cost, locations, and who each free run club fits, plus how a store run club differs from an independent one.";
 const PUBLISHED = "2026-02-03";
-const MODIFIED = "2026-11-10";
+const MODIFIED = "2026-11-16";
 
 const SECTIONS: Array<{ id: string; label: string }> = [
   { id: "fleet-feet-offers", label: "What Fleet Feet Pittsburgh's Running Group Offers" },
@@ -203,16 +203,16 @@ function ArticlePage() {
 
           <div className="mt-12 space-y-5 text-foreground/85 text-[16px] md:text-[17px] leading-[1.7]">
             <p>You're standing in a parking lot at 6:58 AM, coffee still at home, wondering if you picked the right group. It's a fair question. Pittsburgh has options now: retail-backed clubs, free independents, city runs, trail runs. And if you're in the South Hills, a lot of those options are 45 minutes away before you've even tied your shoes.</p>
-            <p>Here's a straight breakdown of what Fleet Feet Pittsburgh's running group offers, what independent clubs offer, and where GRYT Run Club fits if you're a South Hills or Washington County runner who wants community without the commute.</p>
+            <p>This is the GRYT Run Club vs Fleet Feet comparison for South Hills runners, including people looking at City of Bridges Run Club alternatives. Here's a straight breakdown of what Fleet Feet Pittsburgh's running group offers, what independent clubs offer, and where GRYT fits if you want community without the commute.</p>
             <div className="border-l-2 border-blue pl-5">
               <p className="font-bold text-foreground">Quick answer: GRYT Run Club vs Fleet Feet Pittsburgh</p>
               <p className="mt-2">Both are free to run with. Fleet Feet Pittsburgh is a store-backed club with weeknight runs in the East End, a Sunday 7:30 AM long run from rotating spots, and optional paid training programs. GRYT Run Club is independent, meets one time every week (Saturday at 7 AM on the Montour/Peters Trail in McMurray), welcomes walkers, and never drops anyone. If you live near the East End and want several runs a week, start with Fleet Feet. If you want a Saturday morning ritual in the South Hills, start with GRYT. Plenty of people do both.</p>
               <p className="mt-2 text-foreground/75 text-[14px]">
-                Updated November 10, 2026. Fleet Feet details come from Fleet Feet Pittsburgh's{" "}
+                Updated November 16, 2026. Fleet Feet details come from Fleet Feet Pittsburgh's{" "}
                 <a href="https://www.fleetfeet.com/s/pittsburgh/training" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-4">Run With Us</a>,{" "}
                 <a href="https://www.fleetfeet.com/s/pittsburgh/news" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-4">news</a>, and{" "}
                 <a href="https://www.finalsurge.com/coach/fleetfeetpittsburgh/training/programs" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-4">training program</a>{" "}
-                pages, last verified November 10, 2026. Fleet Feet says an updated run club schedule is coming, so
+                pages. The standing schedule was re-checked November 16, 2026. Program prices were last verified November 10, 2026. Fleet Feet says an updated run club schedule is coming, so
                 confirm times on its calendar before you go.
               </p>
             </div>
