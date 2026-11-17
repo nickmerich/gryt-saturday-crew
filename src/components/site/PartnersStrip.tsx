@@ -19,7 +19,7 @@ function Item({ p, dup }: { p: P; dup?: boolean }) {
   const [failed, setFailed] = useState(false)
   return <li aria-hidden={dup || undefined} className={`${dup ? 'motion-reduce:hidden ' : ''}flex w-60 shrink-0 flex-col items-center gap-4 border-r border-ink/15 px-6 md:w-72 md:px-8`}>
     <span className="flex h-28 w-full items-center justify-center bg-paper px-5 py-4 md:h-32">
-      {logo && !failed ? <img src={logo} alt="" width={200} height={96} loading="eager" decoding="async" onError={() => setFailed(true)} className={`max-h-full max-w-full object-contain [filter:none]!${p.name.trim().toLowerCase() === 'perplexity' ? ' translate-y-[2.7%]' : ''}`} /> : <span className="text-center font-condensed text-3xl font-semibold uppercase leading-tight text-ink">{p.name}</span>}
+      {logo && !failed ? <img src={logo} alt="" width={200} height={96} loading="eager" decoding="async" onError={() => setFailed(true)} className={`max-h-full max-w-full object-scale-down${p.name.trim().toLowerCase() === 'perplexity' ? ' translate-y-[2.7%]' : ''}`} /> : <span className="text-center font-condensed text-3xl font-semibold uppercase leading-tight text-ink">{p.name}</span>}
     </span>
     <span className="flex min-h-10 items-center justify-center text-center font-body text-sm font-semibold uppercase leading-snug tracking-normal text-ink">{p.name}</span>
   </li>
