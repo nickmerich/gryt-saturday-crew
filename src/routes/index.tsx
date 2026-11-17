@@ -445,7 +445,7 @@ function Nav() {
             className="bg-blue text-ink px-4 sm:px-5 py-3 text-xs font-bold uppercase tracking-[0.1em] hover:bg-foreground hover:text-background transition-colors"
             style={{ fontFamily: "var(--font-body)" }}
           >
-            RSVP Saturday
+            {Date.now() < Date.UTC(2026, 10, 20, 2) ? "RSVP This Thursday" : "RSVP Saturday"}
           </a>
           <button
             type="button"
@@ -497,7 +497,7 @@ function Hero() {
           <p className="display-condensed mt-4 text-[28px] leading-[1.05] md:text-[40px]"><span className="hl">Do hard things together.</span></p>
           <p className="mt-6 max-w-[440px] text-[17px] leading-relaxed text-foreground/85">Free Saturday miles on the Montour / Peters Trail. Walk, jog, or run. Come as you are.</p>
           <div className="mt-8 flex flex-wrap items-center gap-5">
-            <a href="#join" className="btn-primary">RSVP This Saturday →</a>
+            <a href="#join" className="btn-primary">{Date.now() < Date.UTC(2026, 10, 20, 2) ? "RSVP This Thursday" : "RSVP This Saturday"} →</a>
             <a href="#first" className="text-sm font-medium text-foreground underline underline-offset-4 decoration-blue decoration-2 hover:text-foreground/70">First time?</a>
           </div>
           <p className="mt-6 text-sm text-foreground/75">Next: {nextSaturdayLabelLong()}</p>
@@ -2350,7 +2350,7 @@ function Community() {
 
         <div className="flex flex-wrap gap-3.5 mt-9">
           <a href="/#join" className="btn-primary">
-            RSVP This Saturday →
+            {Date.now() < Date.UTC(2026, 10, 20, 2) ? "RSVP This Thursday" : "RSVP This Saturday"} →
           </a>
           <a href={STRAVA_CLUB} target="_blank" rel="noopener" className="btn-ghost">
             Join the Strava club
@@ -2540,7 +2540,7 @@ function FinalCTA() {
         </p>
         <div className="flex gap-3.5 justify-center flex-wrap">
           <a href="/#join" className="btn-primary">
-            RSVP This Saturday →
+            {Date.now() < Date.UTC(2026, 10, 20, 2) ? "RSVP This Thursday" : "RSVP This Saturday"} →
           </a>
           <a href={STRAVA_CLUB} target="_blank" rel="noopener" className="btn-ghost">
             Join the Strava club
@@ -3010,7 +3010,7 @@ function WeeklyRhythm() {
                   href="#join-sat"
                   className="inline-flex items-center justify-center h-11 px-5 text-[12px] font-bold uppercase tracking-[0.12em] bg-blue text-ink hover:bg-ink hover:text-white transition-colors"
                 >
-                  RSVP This Saturday →
+                  {Date.now() < Date.UTC(2026, 10, 20, 2) ? "RSVP This Thursday" : "RSVP This Saturday"} →
                 </a>
                 <a
                   href={satCal}

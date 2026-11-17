@@ -90,7 +90,7 @@ export function SiteNav() {
             className="bg-blue text-ink px-4 sm:px-5 py-3 text-xs font-bold uppercase tracking-[0.1em] hover:bg-foreground hover:text-background transition-colors whitespace-nowrap"
             style={{ fontFamily: "var(--font-body)" }}
           >
-            RSVP Saturday
+            {Date.now() < Date.UTC(2026, 10, 20, 2) ? "RSVP This Thursday" : "RSVP Saturday"}
           </a>
           <button
             type="button"
