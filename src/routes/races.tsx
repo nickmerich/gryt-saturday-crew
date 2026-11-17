@@ -169,7 +169,12 @@ export const Route = createFileRoute("/races")({
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESCRIPTION },
     ],
-    links: [{ rel: "canonical", href: URL }],
+    links: [
+      { rel: "canonical", href: URL },
+      // Preload the display font used by the LCP h1; the font-display:swap fallback
+      // in fonts.css already shows text immediately, but this narrows the swap window.
+      { rel: "preload", as: "font", type: "font/woff2", href: "/fonts/oswald-latin.woff2", crossOrigin: "anonymous" },
+    ],
     scripts: [
       {
         type: "application/ld+json",
