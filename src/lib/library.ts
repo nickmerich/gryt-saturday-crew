@@ -302,6 +302,50 @@ export const LIBRARY: LibraryEntry[] = [
     updated: "2026-07-27",
   },
   {
+    id: "saturday-distance",
+    title: "How Far Should You Run From the McMurray Lot?",
+    summary:
+      "Out-and-back math from Valley Brook Road: 2, 3, and 4 miles, the saved 4.2-mile route, and when the pavement ends.",
+    to: "/resources/articles/saturday-distance-from-mcmurray",
+    topic: "community",
+    kind: "guide",
+    minutes: 5,
+    updated: "2026-11-17",
+  },
+  {
+    id: "montour-winter",
+    title: "Winter Saturdays on the Montour Trail in McMurray",
+    summary:
+      "Darkness, limestone, the paved Peters section, and the only weather that cancels a Saturday.",
+    to: "/resources/articles/montour-winter-saturday",
+    topic: "safety",
+    kind: "guide",
+    minutes: 5,
+    updated: "2026-11-17",
+  },
+  {
+    id: "bring-someone",
+    title: "How to Bring Someone to Their First Saturday",
+    summary:
+      "The text to send, what to do at 6:50 AM, and how to keep a first Saturday from feeling like a tryout.",
+    to: "/resources/articles/bring-someone-saturday",
+    topic: "community",
+    kind: "guide",
+    minutes: 4,
+    updated: "2026-11-17",
+  },
+  {
+    id: "tunnel-closure",
+    title: "Planning a Long Montour Run While the National Tunnel Is Closed",
+    summary:
+      "Mile marker 25 is closed indefinitely. What that changes, and what it does not change about Saturday in McMurray.",
+    to: "/resources/articles/long-montour-run-tunnel-closure",
+    topic: "community",
+    kind: "guide",
+    minutes: 4,
+    updated: "2026-11-17",
+  },
+  {
     id: "pittsburgh-strava-routes",
     title: "10 Pittsburgh Running Routes Worth Saving on Strava",
     summary:

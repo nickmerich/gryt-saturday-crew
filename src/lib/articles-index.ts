@@ -104,6 +104,15 @@ export const ARTICLES: ArticleMeta[] = [
     "published": "2026-10-29"
   },
   {
+    "slug": "bring-someone-saturday",
+    "title": "How to Bring Someone to Their First Saturday",
+    "description": "The text to send, what to do at 6:50 AM, and how to keep a first Saturday from feeling like a tryout. Written for the person doing the inviting.",
+    "topic": "community",
+    "minutes": 4,
+    "updated": "2026-11-17",
+    "published": "2026-11-17"
+  },
+  {
     "slug": "compression-socks-for-running",
     "title": "Compression Socks for Running: Do They Actually Help Recovery?",
     "description": "Do compression socks for running help? What recent research says about performance and recovery, which mmHg to pick, how to size them, and who should skip.",
@@ -248,6 +257,15 @@ export const ARTICLES: ArticleMeta[] = [
     "published": "2026-10-29"
   },
   {
+    "slug": "long-montour-run-tunnel-closure",
+    "title": "Planning a Long Montour Run While the National Tunnel Is Closed",
+    "description": "The National Tunnel at mile marker 25 is closed indefinitely. What that changes, what it does not change about Saturday in McMurray, and how to plan a longer day without an unsafe road detour.",
+    "topic": "community",
+    "minutes": 4,
+    "updated": "2026-11-17",
+    "published": "2026-11-17"
+  },
+  {
     "slug": "mapmyrun-vs-strava",
     "title": "MapMyRun vs Strava: Which App Fits a Community Runner Best",
     "description": "MapMyRun vs Strava for community runners: compare social features, clubs, route tools, gear tracking, and 2026 subscription prices to pick the right app.",
@@ -273,6 +291,15 @@ export const ARTICLES: ArticleMeta[] = [
     "minutes": 8,
     "updated": "2026-11-16",
     "published": "2026-11-10"
+  },
+  {
+    "slug": "montour-winter-saturday",
+    "title": "Winter Saturdays on the Montour Trail in McMurray",
+    "description": "What actually changes on a winter Saturday from the Valley Brook lot: surface, darkness, water, and the only weather that cancels the run.",
+    "topic": "safety",
+    "minutes": 5,
+    "updated": "2026-11-17",
+    "published": "2026-11-17"
   },
   {
     "slug": "morning-run-routine",
@@ -364,6 +391,15 @@ export const ARTICLES: ArticleMeta[] = [
     "minutes": 7,
     "updated": "2026-10-29",
     "published": "2026-10-29"
+  },
+  {
+    "slug": "saturday-distance-from-mcmurray",
+    "title": "How Far Should You Run From the McMurray Lot?",
+    "description": "A practical distance guide for the Valley Brook trailhead: how out-and-back math works, what 2, 3, and 4 miles look like, and when to keep going on the paved Peters section.",
+    "topic": "community",
+    "minutes": 5,
+    "updated": "2026-11-17",
+    "published": "2026-11-17"
   },
   {
     "slug": "slow-run-club",
