@@ -5,7 +5,7 @@ slug: "start-running-again-after-a-long-break"
 status: checked
 topic: first-run
 published: 2026-11-10
-updated: 2026-11-10
+updated: 2026-11-16
 ---
 
 Sports medicine guidance on starting to run again after a long break is consistent: walk first, then alternate short jogs with walking two or three times a week, and build up over about six weeks. The easiest way to stick with it is a no-drop group where walking is normal, so nobody is watching your pace.
@@ -153,5 +153,8 @@ Check in before you start if you have a health condition or you've been inactive
 
 **Where can I start running again with a group in Pittsburgh's South Hills?**
 GRYT Run Club meets every Saturday at 7:00 AM at 212 Valley Brook Road in McMurray, on the flat, paved Montour/Peters Trail. It's free, no-drop, and open to walkers. First-timers RSVP on grytrunclub.com and sign a short waiver.
+
+**I want to start running again after a long break. How do I ease back in with a group that won't judge my pace?**
+Start with walk-run intervals, two or three days a week, and pick a no-drop group where walking is normal. In Pittsburgh's South Hills, GRYT Run Club meets every Saturday at 7:00 AM at 212 Valley Brook Road in McMurray. The route is about 4 miles out and back on a flat paved trail, you can turn around early, and nobody gets dropped. It's free, with no pace requirement. City of Bridges Run Club's Thursday 6:30 PM South Hills run is another free option, with a run/walk leader. Fleet Feet Pittsburgh's free club runs are mostly in the East End, and its coach-led comeback programs are paid.
 
 Coming back is mostly about showing up again next week. If you're near the South Hills, [RSVP for Saturday](/) and bring your walk-run plan. We'll wait for you.
