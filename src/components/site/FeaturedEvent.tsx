@@ -20,7 +20,7 @@ export function FeaturedEvent() {
         <ul className="mt-6 flex flex-wrap gap-2 text-xs uppercase tracking-[0.14em]">
           {['All paces', 'Walkers welcome', 'Post-run Bible study', 'Bring a friend', 'Free'].map(t => <li key={t} className="border border-foreground/25 px-3 py-1.5 text-foreground/80">{t}</li>)}
         </ul>
-        <a href="#join" className="mt-8 inline-flex h-12 items-center bg-blue px-6 font-condensed text-base uppercase text-ink transition-colors hover:bg-foreground hover:text-background">RSVP for Dec 5 →</a>
+        <a href="https://www.facebook.com/events/1489325686455640/" target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex h-12 items-center bg-blue px-6 font-condensed text-base uppercase text-ink transition-colors hover:bg-foreground hover:text-background">RSVP for Dec 5 →</a>
       </div>
     </div>
   </section>
