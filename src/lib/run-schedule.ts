@@ -208,7 +208,13 @@ export interface RunOccurrence {
 export const RUN_EXCEPTIONS: Record<
   string,
   { status: RunStatus; version?: number; note?: string; localStartTime?: string }
-> = {};
+> = {
+  "2026-11-21": {
+    status: "cancelled",
+    version: 2,
+    note: "No Saturday run this week. Join us Thursday, Nov 19 at 6 PM at Fleet Feet South Hills instead.",
+  },
+};
 
 /** Offset of America/New_York from UTC, in minutes, at a given instant. */
 function nyOffsetMinutes(instant: Date): number {

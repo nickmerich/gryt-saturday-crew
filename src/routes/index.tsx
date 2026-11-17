@@ -486,6 +486,12 @@ function Hero() {
     <section id="top" className="bg-background text-foreground px-6 pt-10 pb-14 sm:px-12 md:pt-16 md:pb-20 lg:px-24">
       <div className="mx-auto grid max-w-[1180px] items-center gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-14">
         <div className="min-w-0">
+          {Date.now() < Date.UTC(2026, 10, 20, 2) ? (
+            <div className="mb-6 border-2 border-foreground bg-blue/20 px-4 py-3 text-[15px] leading-[1.5] text-foreground">
+              <span className="eyebrow block mb-1">This week only · No Saturday run</span>
+              <strong>Thursday, Nov 19 · 6:00 PM · Fleet Feet South Hills.</strong> 3-mile run, all paces. First 20 runners get $10 off from GRYT, plus 15% off from Fleet Feet. Saturday runs return Nov 28.
+            </div>
+          ) : null}
           <p className="eyebrow text-foreground mb-5">McMurray · Saturdays · 7 AM</p>
           <h1 className="display-condensed text-[72px] leading-[0.92] sm:text-[104px] lg:text-[120px]">GRYT Run Club</h1>
           <p className="display-condensed mt-4 text-[28px] leading-[1.05] md:text-[40px]"><span className="hl">Do hard things together.</span></p>
