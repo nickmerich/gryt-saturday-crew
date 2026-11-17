@@ -4,7 +4,7 @@ export const RUN_ANCHOR_MS = Date.UTC(2026, 8, 5);
 export const RUN_ANCHOR_NUMBER = 18;
 
 /** Saturdays with no GRYT club run (YYYY-MM-DD). Numbering is unaffected. */
-export const SKIPPED_RUN_DATES: string[] = [];
+export const SKIPPED_RUN_DATES: string[] = ["2026-11-21"];
 
 function toYMD(d: Date): string {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;

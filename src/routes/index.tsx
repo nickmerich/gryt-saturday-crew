@@ -831,7 +831,7 @@ function RSVP() {
             <div className="mb-5 border border-brand/60 bg-brand/10 px-4 py-3 text-[15px] leading-[1.5] text-foreground">
               <span className="eyebrow eyebrow-blue block mb-1">Run cancelled</span>
               {skippedThisWeek()!.note ?? "This Saturday's run is off."} Next run:{" "}
-              {canonicalOccurrence().localDate}, 7:00 AM.
+              {new Date(canonicalOccurrence().localDate + "T12:00:00Z").toLocaleDateString("en-US", { weekday: "long", month: "short", day: "numeric", timeZone: "UTC" })}, 7:00 AM.
             </div>
           ) : null}
 
