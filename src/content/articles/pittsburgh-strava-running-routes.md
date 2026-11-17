@@ -74,7 +74,7 @@ Wikipedia says the trail goes five miles upriver from Station Square to a point 
 
 ## North Park Lake Trail
 
-[North Park's Wikipedia page](https://en.wikipedia.org/wiki/North_Park_(Pittsburgh)) calls the Lake Trail a 5-mile loop shared by walkers, joggers, and cyclists. It follows the roads around the lake in Allison Park. This is the loop people use when they want a real long run without drawing one. Two laps is 10.
+[North Park's Wikipedia page](https://en.wikipedia.org/wiki/North_Park_%28Pittsburgh%29) calls the Lake Trail a 5-mile loop shared by walkers, joggers, and cyclists. It follows the roads around the lake in Allison Park. This is the loop people use when they want a real long run without drawing one. Two laps is 10.
 
 ## Highland Park reservoir
 
