@@ -129,6 +129,15 @@ function ArticlesIndex() {
                 params={{ slug: a.slug }}
                 className="group flex flex-col h-full p-6 md:p-7 hover:bg-blue hover:text-ink transition-colors"
               >
+                {a.image ? (
+                  <img
+                    src={a.image}
+                    alt="Saturday route map, 4.2 miles on the Montour Trail"
+                    width={1400}
+                    height={868}
+                    className="mb-5 w-full aspect-[3/2] object-cover object-left-top border border-foreground/15"
+                  />
+                ) : null}
                 <span className="flex items-center justify-between gap-3">
                   <span className="text-[11px] tracking-[0.2em] uppercase text-foreground group-hover:text-ink" style={mono}>
                     {a.minutes} min read

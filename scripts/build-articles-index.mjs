@@ -36,7 +36,7 @@ const entries = files.map((f) => {
   const slug = f.replace(/\.md$/, "");
   if (data.slug && data.slug !== slug) throw new Error(`${f}: slug ${data.slug} does not match filename`);
   const words = body.split(/\s+/).filter(Boolean).length;
-  return {
+  const entry = {
     slug,
     title: data.title,
     description: data.description,
@@ -45,6 +45,8 @@ const entries = files.map((f) => {
     updated: data.updated || "2026-10-29",
     published: data.published || data.updated || "2026-10-29",
   };
+  if (data.image && data.image.startsWith("/")) entry.image = data.image;
+  return entry;
 });
 
 for (const e of entries) {
@@ -62,6 +64,7 @@ export type ArticleMeta = {
   minutes: number;
   updated: string;
   published: string;
+  image?: string;
 };
 
 export const ARTICLES: ArticleMeta[] = ${JSON.stringify(entries, null, 2)};

@@ -302,6 +302,17 @@ export const LIBRARY: LibraryEntry[] = [
     updated: "2026-07-27",
   },
   {
+    id: "pittsburgh-strava-routes",
+    title: "10 Pittsburgh Running Routes Worth Saving on Strava",
+    summary:
+      "The Saturday route we run in McMurray, plus nine other places Pittsburgh runners actually use. Not an official Strava ranking.",
+    to: "/resources/articles/pittsburgh-strava-running-routes",
+    topic: "community",
+    kind: "guide",
+    minutes: 6,
+    updated: "2026-11-17",
+  },
+  {
     id: "south-hills-clubs",
     title: "Best Free Run Clubs in the South Hills (2026)",
     summary:

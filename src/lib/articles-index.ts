@@ -9,6 +9,7 @@ export type ArticleMeta = {
   minutes: number;
   updated: string;
   published: string;
+  image?: string;
 };
 
 export const ARTICLES: ArticleMeta[] = [
@@ -290,6 +291,16 @@ export const ARTICLES: ArticleMeta[] = [
     "minutes": 6,
     "updated": "2026-10-29",
     "published": "2026-10-29"
+  },
+  {
+    "slug": "pittsburgh-strava-running-routes",
+    "title": "10 Pittsburgh Running Routes Worth Saving on Strava",
+    "description": "Ten routes Pittsburgh runners actually use, from the Saturday Montour Trail run in McMurray to the North Shore, with distances from the trail pages. Not an official Strava ranking.",
+    "topic": "community",
+    "minutes": 6,
+    "updated": "2026-11-17",
+    "published": "2026-11-17",
+    "image": "/articles/gryt-saturday-route.jpg"
   },
   {
     "slug": "race-day-checklist-first-timers",

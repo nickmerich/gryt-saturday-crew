@@ -31,7 +31,7 @@ export const Route = createFileRoute("/resources_/articles_/$slug")({
     const a = loaderData.meta;
     const faqs = loaderData.faqs ?? [];
     const url = `${SITE}/resources/articles/${a.slug}`;
-    const image = `${SITE}${ogImage}`;
+    const image = a.image ? `${SITE}${a.image}` : `${SITE}${ogImage}`;
     const title = `${a.title} · gryt`;
     return {
       meta: [
@@ -159,6 +159,21 @@ function ArticlePage() {
           <p className="mt-5 text-foreground/70 text-[13px]">
             By Nick Merich · Updated <time dateTime={meta.updated}>{fmtDate(meta.updated)}</time>
           </p>
+
+          {meta.image ? (
+            <figure className="mt-10">
+              <img
+                src={meta.image}
+                alt="Strava map of the GRYT Saturday route, 4.2 miles and 81 feet on the Montour Trail from Valley Brook Road in McMurray"
+                width={1400}
+                height={868}
+                className="w-full border border-foreground/15"
+              />
+              <figcaption className="mt-3 text-[13px] leading-[1.5] text-foreground/70">
+                The Saturday route, from the map on the homepage. 4.2 miles, 81 feet, out and back.
+              </figcaption>
+            </figure>
+          ) : null}
 
           {toc.length >= 3 ? (
             <nav aria-label="Table of contents" className="mt-10 border border-foreground/15 p-5">
