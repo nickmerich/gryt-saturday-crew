@@ -202,29 +202,31 @@ export const Route = createFileRoute('/api/public/rsvp')({
           }
         }
 
-        // 4. Notion sync — best-effort, log on failure
+        // 4. Make writes Notion. The old Lovable Notion sync is retired.
         try {
-          const { syncRsvpToNotion } = await import('@/lib/notion/sync.server')
-          const { memberPageId, attendancePageId } = await syncRsvpToNotion({
+          const { sendRsvpToMake } = await import('@/lib/make/rsvp-webhook.server')
+          await sendRsvpToMake({
             name,
             contact,
             source: source ?? null,
+            firstTimer,
             eventLabel: resolvedEventLabel,
-            submittedAt,
+            eventId: occurrence.id,
+            runNumber: occurrence.runNumber,
+            runDate: occurrence.localDate,
+            rsvpId,
           })
           await supabase
             .from('rsvps')
             .update({
               notion_synced: true,
-              notion_member_page_id: memberPageId,
-              notion_attendance_page_id: attendancePageId,
               notion_synced_at: new Date().toISOString(),
               notion_last_error: null,
             })
             .eq('id', rsvpId)
         } catch (err) {
           const msg = err instanceof Error ? err.message : String(err)
-          console.error('Notion sync failed', { rsvpId, error: msg })
+          console.error('Make RSVP handoff failed', { rsvpId, error: msg })
           await supabase
             .from('rsvps')
             .update({ notion_last_error: msg.slice(0, 1000) })

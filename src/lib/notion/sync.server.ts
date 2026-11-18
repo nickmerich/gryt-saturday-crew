@@ -1,4 +1,5 @@
-// Server-only helpers for syncing RSVPs into Notion (Members + Attendance).
+// Retired. RSVP no longer calls this. Make is the only Notion writer.
+// Left in place so a bad deploy can be compared, not so a route can import it.
 
 const GATEWAY = 'https://connector-gateway.lovable.dev/notion/v1'
 
