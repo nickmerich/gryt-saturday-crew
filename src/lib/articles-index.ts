@@ -176,6 +176,17 @@ export const ARTICLES: ArticleMeta[] = [
     "published": "2026-10-29"
   },
   {
+    "slug": "free-fitness-community-for-beginners",
+    "title": "Free Fitness Community: 7 Best Options for Beginners",
+    "description": "Find a free fitness community that fits your life. Compare 7 beginner friendly options, in person and online, with what free really means for each.",
+    "topic": "community",
+    "minutes": 10,
+    "updated": "2026-11-18",
+    "published": "2026-11-18",
+    "image": "/articles/free-fitness-community-for-beginners.png",
+    "imageAlt": "Beginners of mixed paces jogging and walking together on a trail during a free community run group on a Saturday morning"
+  },
+  {
     "slug": "garmin-vs-apple-watch-running",
     "title": "Garmin vs Apple Watch for Running: Which Fits Everyday Runners?",
     "description": "Garmin vs Apple Watch for running in 2026: battery life, GPS, running metrics, phone compatibility, and price, compared for everyday runners.",

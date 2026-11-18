@@ -46,6 +46,7 @@ const entries = files.map((f) => {
     published: data.published || data.updated || "2026-10-29",
   };
   if (data.image && data.image.startsWith("/")) entry.image = data.image;
+  if (entry.image && data.imageAlt) entry.imageAlt = data.imageAlt;
   return entry;
 });
 
