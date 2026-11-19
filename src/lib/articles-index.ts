@@ -366,6 +366,16 @@ export const ARTICLES: ArticleMeta[] = [
     "published": "2026-10-29"
   },
   {
+    "slug": "running-group-no-training-plan-needed",
+    "title": "Running Group No Training Plan Needed: How to Join One",
+    "description": "Find a running group, no training plan required. Learn how to spot a no-drop, all-paces club, what to ask organizers, and how to show up for your first run.",
+    "topic": "community",
+    "minutes": 10,
+    "updated": "2026-11-19",
+    "published": "2026-11-19",
+    "image": "/articles/running-group-no-training-plan-needed.png"
+  },
+  {
     "slug": "running-shoes-for-wide-feet",
     "title": "Running Shoes for Wide Feet: Finding the Right Fit in 2026",
     "description": "How to find running shoes for wide feet: what width codes like 2E and 4E mean, why toe box shape matters, fit tests to try in the store, and lacing tricks.",
