@@ -320,6 +320,16 @@ export const ARTICLES: ArticleMeta[] = [
     "published": "2026-10-29"
   },
   {
+    "slug": "no-commitment-running-group",
+    "title": "No Commitment Running Group: Show Up Whenever You Can",
+    "description": "Find a no commitment running group near you with no fees or signup. Learn where to search, how to vet a crew, and how to find your pace on your first run.",
+    "topic": "community",
+    "minutes": 11,
+    "updated": "2026-11-21",
+    "published": "2026-11-21",
+    "image": "/articles/no-commitment-running-group.png"
+  },
+  {
     "slug": "pittsburgh-strava-running-routes",
     "title": "10 Pittsburgh Running Routes Worth Saving on Strava",
     "description": "Ten routes Pittsburgh runners actually use, from the Saturday Montour Trail run in McMurray to the North Shore, with distances from the trail pages. Not an official Strava ranking.",
