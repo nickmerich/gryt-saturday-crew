@@ -339,6 +339,16 @@ export const ARTICLES: ArticleMeta[] = [
     "published": "2026-10-29"
   },
   {
+    "slug": "run-club-for-making-friends",
+    "title": "Run Club for Making Friends: How to Meet People Fast",
+    "description": "Use a run club for making friends: pick a social pace, introduce yourself, stay for coffee, and show up weekly to turn strangers into real friends.",
+    "topic": "community",
+    "minutes": 11,
+    "updated": "2026-11-22",
+    "published": "2026-11-22",
+    "image": "/articles/run-club-for-making-friends.png"
+  },
+  {
     "slug": "run-club-near-me",
     "title": "Run Club Near Me: How to Find a Group That Fits Your Life",
     "description": "Searching for a run club near me? Here's how to judge location, pace policy, cost, and group size, where to look, and what to ask before your first run.",
