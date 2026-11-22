@@ -164,14 +164,16 @@ function ArticlePage() {
             <figure className="mt-10">
               <img
                 src={meta.image}
-                alt="Strava map of the GRYT Saturday route, 4.2 miles and 81 feet on the Montour Trail from Valley Brook Road in McMurray"
+                alt={meta.slug === "pittsburgh-strava-running-routes" ? "Strava map of the GRYT Saturday route, 4.2 miles and 81 feet on the Montour Trail from Valley Brook Road in McMurray" : "A group of runners chatting and smiling together on a trail at a weekend social run club meetup"}
                 width={1400}
                 height={868}
                 className="w-full border border-foreground/15"
               />
-              <figcaption className="mt-3 text-[13px] leading-[1.5] text-foreground/70">
-                The Saturday route, from the map on the homepage. 4.2 miles, 81 feet, out and back.
-              </figcaption>
+              {meta.slug === "pittsburgh-strava-running-routes" ? (
+                <figcaption className="mt-3 text-[13px] leading-[1.5] text-foreground/70">
+                  The Saturday route, from the map on the homepage. 4.2 miles, 81 feet, out and back.
+                </figcaption>
+              ) : null}
             </figure>
           ) : null}
 
