@@ -10,6 +10,7 @@ export type ArticleMeta = {
   updated: string;
   published: string;
   image?: string;
+  imageAlt?: string;
 };
 
 export const ARTICLES: ArticleMeta[] = [
@@ -481,6 +482,17 @@ export const ARTICLES: ArticleMeta[] = [
     "minutes": 10,
     "updated": "2026-10-29",
     "published": "2026-10-29"
+  },
+  {
+    "slug": "washington-county-pa-running-group",
+    "title": "Washington County PA Running Group: Where to Run Together",
+    "description": "Find a Washington County PA running group: compare free Saturday runs on the Montour Trail with clubs by schedule, cost, and pace, plus how to start.",
+    "topic": "community",
+    "minutes": 10,
+    "updated": "2026-11-23",
+    "published": "2026-11-23",
+    "image": "/articles/washington-county-pa-running-group.png",
+    "imageAlt": "Runners gather on the Montour Trail in McMurray for a Saturday morning group run"
   },
   {
     "slug": "whoop-vs-garmin-for-runners",
