@@ -46,6 +46,7 @@ const entries = files.map((f) => {
     published: data.published || data.updated || "2026-10-29",
   };
   if (data.image && data.image.startsWith("/")) entry.image = data.image;
+  if (data.imageAlt) entry.imageAlt = data.imageAlt;
   return entry;
 });
 
@@ -65,6 +66,7 @@ export type ArticleMeta = {
   updated: string;
   published: string;
   image?: string;
+  imageAlt?: string;
 };
 
 export const ARTICLES: ArticleMeta[] = ${JSON.stringify(entries, null, 2)};
