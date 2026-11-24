@@ -149,6 +149,16 @@ export const ARTICLES: ArticleMeta[] = [
     "published": "2026-10-29"
   },
   {
+    "slug": "early-morning-run-club",
+    "title": "Early Morning Run Club: 7 Reasons to Join a Sunrise Group",
+    "description": "Join an early morning run club for built-in accountability, safer pre-dawn miles, friends on your schedule, and a coffee ritual that makes the habit stick.",
+    "topic": "community",
+    "minutes": 10,
+    "updated": "2026-11-24",
+    "published": "2026-11-24",
+    "image": "/articles/early-morning-run-club.png"
+  },
+  {
     "slug": "easy-run-pace",
     "title": "Easy Run Pace: How to Tell If You're Running Too Hard",
     "description": "Easy run pace explained: the signs you're running your easy days too hard, why it happens, and simple ways to slow down so easy runs actually do their job.",
