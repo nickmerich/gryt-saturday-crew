@@ -493,7 +493,10 @@ function Hero() {
             </div>
           ) : null}
           <p className="eyebrow text-foreground mb-5">McMurray · Saturdays · 7 AM</p>
-          <h1 className="display-condensed text-[72px] leading-[0.92] sm:text-[104px] lg:text-[120px]">GRYT Run Club</h1>
+          <h1>
+            <span className="display-condensed block text-[72px] leading-[0.92] sm:text-[104px] lg:text-[120px]">GRYT Run Club</span>
+            <span className="mt-3 block max-w-[14em] font-condensed text-[26px] font-bold uppercase leading-[0.95] tracking-normal sm:text-[32px]">A free Pittsburgh run club.</span>
+          </h1>
           <p className="display-condensed mt-4 text-[28px] leading-[1.05] md:text-[40px]"><span className="hl">Do hard things together.</span></p>
           <p className="mt-6 max-w-[440px] text-[17px] leading-relaxed text-foreground/85">Free Saturday miles on the Montour / Peters Trail. Walk, jog, or run. Come as you are.</p>
           <div className="mt-8 flex flex-wrap items-center gap-5">
