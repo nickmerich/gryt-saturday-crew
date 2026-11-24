@@ -23,6 +23,16 @@ export const ARTICLES: ArticleMeta[] = [
     "published": "2026-10-29"
   },
   {
+    "slug": "5k-run-near-me",
+    "title": "5K Run Near Me: How to Find the Right Race for You",
+    "description": "Searching for a 5K run near me? Use a race calendar like RunSignup, filter by ZIP code, date and terrain, and confirm details before you register.",
+    "topic": "racing",
+    "minutes": 10,
+    "updated": "2026-11-24",
+    "published": "2026-11-24",
+    "image": "/articles/5k-run-near-me.png"
+  },
+  {
     "slug": "5k-speed-workouts",
     "title": "Speed Workouts for a 5K: 4 Sessions That Make Race Pace Familiar",
     "description": "Four speed workouts for 5K training: 400m repeats, tempo intervals, a ladder, and mile repeats, plus how to set target pace and fit them in.",
