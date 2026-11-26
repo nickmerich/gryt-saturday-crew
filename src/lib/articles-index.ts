@@ -483,6 +483,15 @@ export const ARTICLES: ArticleMeta[] = [
     "published": "2026-10-29"
   },
   {
+    "slug": "unlisted-run-club",
+    "title": "Unlisted Run Club: 7 Ways to Find Hidden Local Groups",
+    "description": "Find an unlisted run club near you with 7 proven steps, from running store staff to RRCA listings, Strava, and parkrun, plus how to vet each group.",
+    "topic": "community",
+    "minutes": 10,
+    "updated": "2026-11-26",
+    "published": "2026-11-26"
+  },
+  {
     "slug": "whoop-vs-garmin-for-runners",
     "title": "Whoop vs Garmin: Which Tracker Is Worth It for Runners",
     "description": "Whoop vs Garmin for runners: compare recovery, sleep, GPS, training load, and 2026 membership and Connect+ prices to pick the tracker that fits you.",
