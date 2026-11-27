@@ -483,6 +483,16 @@ export const ARTICLES: ArticleMeta[] = [
     "published": "2026-10-29"
   },
   {
+    "slug": "walkers-and-runners-group",
+    "title": "Walkers and Runners Group: Joining Without Being Left Behind",
+    "description": "Find a walkers and runners group that welcomes every pace. Get the exact questions to ask, what no-drop means, and how to start without being left behind.",
+    "topic": "community",
+    "minutes": 11,
+    "updated": "2026-11-27",
+    "published": "2026-11-27",
+    "image": "/articles/walkers-and-runners-group.webp"
+  },
+  {
     "slug": "whoop-vs-garmin-for-runners",
     "title": "Whoop vs Garmin: Which Tracker Is Worth It for Runners",
     "description": "Whoop vs Garmin for runners: compare recovery, sleep, GPS, training load, and 2026 membership and Connect+ prices to pick the tracker that fits you.",
